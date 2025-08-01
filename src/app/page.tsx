@@ -3,6 +3,15 @@ import EventCard from '@/components/EventCard';
 import styles from '@/styles/Home.module.css';
 import { getUpcomingEvents } from '@/lib/contentful-queries';
 import { FlatEvent } from '@/types/types';
+import { LogoCarousel, Logo } from '@/components/LogoCarousel';
+
+const partners: Logo[] = [
+  { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
+  { src: '/images/na.png', alt: 'Nigerian Army' },
+  { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
+  { src: '/images/nn.png', alt: 'Nigerian Navy' },
+  { src: '/images/nsa.png', alt: 'Office of the National Security Adviser' },
+];
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -55,7 +64,9 @@ export default async function HomePage() {
         </p>
         <p className='montserrat'>– The National Geospatial-Intelligence Agency</p>
       </section>
-
+      <div>
+        <LogoCarousel logos={partners}  />
+      </div>
       <section className={styles.membership}>
         <div>
           <h3 className='bellota'>Become a GIFON Member</h3>

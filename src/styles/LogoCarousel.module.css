@@ -1,0 +1,38 @@
+/* components/ContinuousLogoCarousel.module.css */
+.carousel {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding: 5rem 1rem;
+  }
+  
+  .track {
+    display: flex;
+    width: calc(100%);     /* two sets side by side */
+    animation: scroll var(--duration) linear infinite;
+    gap: 10rem;
+  }
+  
+  .item {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  
+  .item img {
+    max-height: 100px;
+    object-fit: contain;
+  }
+  
+  /* keyframes move left by exactly one set (50% of the 200% width) */
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  
