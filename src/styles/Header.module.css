@@ -1,0 +1,94 @@
+/* --- Base Header Styles --- */
+.header {
+  background-color: #fff;
+  color: #003F21;
+  font-size: 1rem;
+  font-weight: 500;
+  position: sticky;
+  z-index: 1000;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 1rem;
+  color: #fff;
+  background: #003F21;
+}
+
+.topBar a {
+  color: #fff;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  position: relative;
+}
+
+.logo {
+  max-width: 10rem;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.navLinks a {
+  color: #003F21;
+  text-decoration: none;
+}
+
+/* --- Menu Button --- */
+.menuToggle {
+  display: none;
+  background: none;
+  color: #003F21;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* --- Offcanvas Mobile Nav --- */
+@media (max-width: 768px) {
+  .header {
+    position: static;
+  }
+  .navLinks {
+    flex-direction: column;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 250px;
+    padding: 2rem 1rem;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    z-index: 1001;
+  }
+
+  .show {
+    right: 0;
+  }
+
+  .menuToggle {
+    display: block;
+    z-index: 2;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+  }
+}

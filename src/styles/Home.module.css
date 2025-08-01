@@ -1,0 +1,132 @@
+.upcomingEvents {
+  padding: 5rem 2rem;
+  background-image: url('/bg.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.upcomingEvents h2 {
+  margin-bottom: 1rem;
+  font-size: 3rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.eventsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.viewAll {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.viewAll button {
+  background: #fff;
+  color: #056839;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: .5rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.viewAll button:hover {
+  background: #056839;
+  color: #fff;
+}
+
+.about {
+  padding: 5rem 2rem;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.about p {
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: justify;
+  max-width: 800px;
+  margin-bottom: 1.5rem;
+}
+
+.membership {
+  background: #f7f7f7;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.membership div {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #056839;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.membership h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.membership p {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.membership button {
+  background: #000;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.membership button:hover {
+  background: #056839;
+  color: #fff;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .eventsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .upcomingEvents h2 {
+    font-size: 2.2rem;
+  }
+
+  .membership h3,
+  .about h2 {
+    font-size: 1.5rem;
+  }
+
+  .membership p,
+  .about p {
+    font-size: 0.95rem;
+  }
+}

@@ -1,0 +1,82 @@
+.card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+  .card h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .card p {
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+.eventDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  text-align: justify;
+  width: 100%;
+  padding: 0px 1rem;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  max-width: 20rem;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.info {
+  padding: 0rem 1rem;
+  max-width: fit-content;
+  text-align: end;
+  text-wrap: nowrap;
+}
+
+.meta {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 1rem;
+  font-weight: 300;
+  margin-top: 1rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+  }
+
+  .image {
+    max-width: 100%;
+  }
+
+  .info {
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+
+  .card h3 {
+    font-size: 1.5rem;
+    text-align: justify;
+  }
+
+  .card p,
+  .meta {
+    font-size: 0.95rem;
+    text-align: justify;
+  }
+}
