@@ -11,8 +11,7 @@ type Event = {
 export function EventListing({ events }: { events: Event[] }) {
   return (
     <section className="w-full mt-16 px-4 sm:px-6 lg:px-8 py-12 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <h3 className="text-2xl font-bold mb-6 text-center">Upcoming Events</h3>
+      <div className="max-w-7xl mx-auto">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {events.map((event, i) => {
             const fullText = documentToPlainTextString(event.description);

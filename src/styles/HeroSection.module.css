@@ -9,7 +9,7 @@
 }
 
 .overlay {
-  background-color: rgba(0, 0, 0, 0.5); /* dark overlay for text readability */
+  background-color: #003f21b4;
   color: #fff;
   text-align: center;
   padding: 2rem;

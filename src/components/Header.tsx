@@ -101,12 +101,6 @@ const menuItems = [
   {
     label: 'Contact Us',
     href: '/contact',
-    children: [
-      { label: 'Contact Information', anchor: 'contact-info' },
-      { label: 'Office Location', anchor: 'office-location' },
-      { label: 'Online Contact Form', anchor: 'online-form' },
-      { label: 'Social Media Links', anchor: 'social-media' },
-    ],
   },
   // {
   //   label: 'Donate X Support',

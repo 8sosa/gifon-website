@@ -6,7 +6,7 @@ export default function JournalPage() {
       <HeroSection
         title="Journal - Eyes on Location"
         description="Explore our journal content, editorial board, and submission guidelines."
-        backgroundImage="/ph.svg"
+        backgroundImage="/bg/d.JPG"
       />
 
       <main className="w-full">

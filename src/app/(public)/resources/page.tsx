@@ -6,7 +6,7 @@ export default function ResourcesPage() {
       <HeroSection
         title="Resources"
         description="Access tools, datasets, training materials, and downloadables to support your geospatial projects."
-        backgroundImage="/ph.svg"
+        backgroundImage="/bg/d.JPG"
       />
 
       <main className="w-full">

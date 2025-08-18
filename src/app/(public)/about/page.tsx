@@ -1,21 +1,25 @@
 import HeroSection from '@/components/HeroSection';
 import FoundationDetailsSection from './FoundationDetailsSection';
-// import { TeamGrid } from '@/components/TeamGrid';
+import { TeamGrid } from '@/components/TeamGrid';
 import { JobListing } from '@/components/JobListing';
+import {getTeamMembers, getJobListings } from '@/lib/contentful-queries';
+import { FlatMember, Job } from '@/types/types';
+import { LogoCarousel, Logo } from '@/components/LogoCarousel';
 
-import {
-  //  getTeamMembers, 
-  getJobListings } from '@/lib/contentful-queries';
-import { 
-  // FlatMember,
-   Job } from '@/types/types';
+const partners: Logo[] = [
+  { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
+  { src: '/images/na.png', alt: 'Nigerian Army' },
+  { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
+  { src: '/images/nn.png', alt: 'Nigerian Navy' },
+  { src: '/images/nsa.png', alt: 'Office of the National Security Adviser' },
+];
 
-// function mapMembersByCategory(members: FlatMember[], category: string): FlatMember[] {
-//   return members.filter(member => member.category === category);
-// }
+function mapMembersByCategory(members: FlatMember[], category: string): FlatMember[] {
+  return members.filter(member => member.category === category);
+}
 
 export default async function AboutPage() {
-  // const members: FlatMember[] = await getTeamMembers();
+  const members: FlatMember[] = await getTeamMembers();
   const jobs: Job[] = await getJobListings();
 
   return (
@@ -23,18 +27,42 @@ export default async function AboutPage() {
       <HeroSection
         title="Geospatial Intelligence Foundation of Nigeria (GIFON)"
         description="Advancing geospatial intelligence to support Nigeria’s security, development, and decision-making."
-        backgroundImage="/ph.svg"
+        backgroundImage="/bg/c.JPG"
       />
 
-      <FoundationDetailsSection />
+      {/* <FoundationDetailsSection /> */}
 
       {/* --- Additional Static Sections with Dummy Content --- */}
       <section id="our-story" className="py-16 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-semibold mb-4">Our Story</h2>
           <p className="text-gray-700 leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
+              The Geospatial Intelligence Foundation of Nigeria (GIFON) is a GEOINT organization
+              dedicated to leveraging cutting-edge geospatial technologies and intelligence to
+              transform Nigeria’s future. Our mission is to enhance national development, promote
+              security, improve public services, and empower professional communities through the
+              strategic use of geospatial data.
+            </p>
+            <p className="text-gray-700 leading-relaxed mt-4">
+              Founded to bridge the gap between innovative geospatial technologies and national
+              decision-making, GIFON serves as a catalyst for change across sectors such as defence,
+              intelligence, security, urban planning, agriculture, disaster management, transportation,
+              health, and environmental protection. We work alongside government institutions, donors,
+              private sector partners, academia, and civil society organizations to ensure that
+              accurate, timely, and actionable spatial data becomes an integral part of policy and
+              development strategies at all levels.
+            </p>
+            <p className="text-gray-700 leading-relaxed mt-4">
+              Our initiatives include capacity building, training programs, and policy advocacy aimed
+              at creating a skilled workforce of geospatial professionals and enhancing the understanding
+              of geospatial intelligence as a tool for effective governance and sustainable development.
+              We believe that location intelligence is the cornerstone of informed decision-making and
+              a more resilient, inclusive Nigeria.
+            </p>
+            <p className="text-gray-700 leading-relaxed mt-4">
+              Through collaboration, innovation, and shared expertise, GIFON is committed to improving
+              lives, driving socio-economic growth, and fostering a data-driven future for all.
+            </p>
         </div>
       </section>
 
@@ -42,16 +70,21 @@ export default async function AboutPage() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-semibold mb-4">Our Vision</h2>
           <p className="text-gray-700 leading-relaxed">
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            To be Nigeria’s leading catalyst for geospatial innovation, empowering national development through actionable intelligence, spatial data excellence, and sustainable technological advancement.
           </p>
         </div>
       </section>
 
       <section id="our-mandate" className="py-16 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-4">Our Mandate</h2>
+          <h2 className="text-3xl font-semibold mb-4">Our Mission Statement</h2>
           <p className="text-gray-700 leading-relaxed">
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              The Geospatial Intelligence Foundation of Nigeria (GIFON) is dedicated to advancing
+              the understanding, development, and responsible application of geospatial intelligence
+              (GEOINT) to support national security, economic development, humanitarian efforts, and
+              informed decision-making. We foster collaboration between government, industry, and
+              academia to drive innovation, build a skilled workforce, and promote the ethical use
+              of geospatial data and technologies.
           </p>
         </div>
       </section>
@@ -60,7 +93,12 @@ export default async function AboutPage() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-semibold mb-4">Message from Founder</h2>
           <blockquote className="italic text-gray-800">
-            &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;
+            &quot;The Geospatial Intelligence Foundation of Nigeria (GIFON) is dedicated to advancing
+              the understanding, development, and responsible application of geospatial intelligence
+              (GEOINT) to support national security, economic development, humanitarian efforts, and
+              informed decision-making. We foster collaboration between government, industry, and
+              academia to drive innovation, build a skilled workforce, and promote the ethical use
+              of geospatial data and technologies.&quot;
           </blockquote>
         </div>
       </section>
@@ -68,37 +106,29 @@ export default async function AboutPage() {
       <section id="board-trustees" className="py-16 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-semibold mb-4">Board of Trustees</h2>
-          <p className="text-gray-700 leading-relaxed">
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+          <TeamGrid members={mapMembersByCategory(members, "Board")} />
         </div>
       </section>
 
       <section id="executive-leadership" className="py-16 px-4 bg-gray-50">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-semibold mb-4">Executive Leadership</h2>
-          <p className="text-gray-700 leading-relaxed">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
-          </p>
+          <TeamGrid members={mapMembersByCategory(members, "Advisory")} />
         </div>
       </section>
 
       <section id="our-partners" className="py-16 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-semibold mb-4">Our Partners</h2>
-          <ul className="list-disc list-inside text-gray-700">
-            <li>Partner A</li>
-            <li>Partner B</li>
-            <li>Partner C</li>
-          </ul>
+          <LogoCarousel logos={partners}  />
         </div>
       </section>
 
       {/* --- End of Static Sections --- */}
 
-      {/* <TeamGrid title="Board of Directors" members={mapMembersByCategory(members, "Board")} />
-      <TeamGrid title="Advisory Committee" members={mapMembersByCategory(members, "Advisory")} />
-      <TeamGrid title="Our Team" members={mapMembersByCategory(members, "Team")} /> */}
+      {/* 
+      <TeamGrid title="Our Team" members={mapMembersByCategory(members, "Team")} />
+       */}
       <JobListing jobs={jobs} />
     </>
   );

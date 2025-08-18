@@ -18,11 +18,22 @@ export default async function EventsPage() {
       {/* --- Static Sections with Dummy Content --- */}
       <main className="w-full">
         <section id="upcoming-events" className="py-16 px-4 bg-white">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl font-semibold mb-4 text-center">Upcoming Events</h2>
-            <p className="text-gray-700 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur suscipit suscipit tellus.
-            </p>
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-semibold mb-8 text-center">Upcoming Events</h2>
+            <div className="flex flex-col gap-8">
+              {events.map((e) => (
+                <EventCard
+                  key={e.id}
+                  title={e.title}
+                  startDate={e.startDate}
+                  endDate={e.endDate}
+                  image={e.image}
+                  description={e.description}
+                  location={e.location}
+                  link={e.link}
+                />
+              ))}
+            </div>
           </div>
         </section>
 
@@ -47,9 +58,17 @@ export default async function EventsPage() {
         <section id="past-events" className="py-16 px-4 bg-gray-50">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-semibold mb-4 text-center">Past Events</h2>
-            <p className="text-gray-700 leading-relaxed">
-              Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vestibulum ac diam sit amet quam vehicula.
-            </p>
+            <EventListing
+              events={events.map((e) => ({
+                title: e.title,
+                description: e.description,
+                startDate: e.startDate,
+                endDate: e.endDate,
+                location: e.location,
+                link: e.link,
+                image: e.image,
+              }))}
+            />
           </div>
         </section>
 
@@ -61,37 +80,6 @@ export default async function EventsPage() {
             </p>
           </div>
         </section>
-
-        {/* --- Dynamic Event List --- */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <h1 className="text-3xl font-bold mb-8 text-center">Events</h1>
-          <div className="flex flex-col gap-8">
-            {events.map((e) => (
-              <EventCard
-                key={e.id}
-                title={e.title}
-                startDate={e.startDate}
-                endDate={e.endDate}
-                image={e.image}
-                description={e.description}
-                location={e.location}
-                link={e.link}
-              />
-            ))}
-          </div>
-        </section>
-
-        <EventListing
-          events={events.map((e) => ({
-            title: e.title,
-            description: e.description,
-            startDate: e.startDate,
-            endDate: e.endDate,
-            location: e.location,
-            link: e.link,
-            image: e.image,
-          }))}
-        />
       </main>
     </>
   );

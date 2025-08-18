@@ -1,4 +1,13 @@
 import HeroSection from '@/components/HeroSection';
+import { LogoCarousel, Logo } from '@/components/LogoCarousel';
+
+const partners: Logo[] = [
+  { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
+  { src: '/images/na.png', alt: 'Nigerian Army' },
+  { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
+  { src: '/images/nn.png', alt: 'Nigerian Navy' },
+  { src: '/images/nsa.png', alt: 'Office of the National Security Adviser' },
+];
 
 export default function PartnershipsPage() {
   return (
@@ -6,7 +15,7 @@ export default function PartnershipsPage() {
       <HeroSection
         title="Partnerships & Sponsors"
         description="Collaborate with us to advance geospatial intelligence and innovation."
-        backgroundImage="/ph.svg"
+        backgroundImage="/bg/d.JPG"
       />
 
       <main className="w-full">
@@ -41,11 +50,7 @@ export default function PartnershipsPage() {
         <section id="past-partners" className="py-16 px-4 bg-gray-50">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-semibold mb-4 text-center">Past & Current Partners</h2>
-            <ul className="list-disc list-inside text-gray-700">
-              <li>Partner A</li>
-              <li>Partner B</li>
-              <li>Partner C</li>
-            </ul>
+              <LogoCarousel logos={partners}  />
           </div>
         </section>
       </main>

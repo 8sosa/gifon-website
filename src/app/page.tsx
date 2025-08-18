@@ -31,7 +31,7 @@ export default async function HomePage() {
       <HeroSection
         title="Where our national security begins..."
         description=""
-        backgroundImage="/ph.svg"
+        backgroundImage="/bg/b.JPG"
       />
 
       <section className={styles.upcomingEvents}>

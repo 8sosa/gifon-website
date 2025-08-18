@@ -1,4 +1,3 @@
-// components/LogoCarousel.tsx
 'use client';
 
 import { CSSProperties, useMemo } from 'react';

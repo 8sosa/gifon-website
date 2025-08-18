@@ -6,7 +6,7 @@ export default function PublicationsPage() {
       <HeroSection
         title="Publications & Media"
         description="Access our latest research articles, policy briefs, journals, and more."
-        backgroundImage="/ph.svg"
+        backgroundImage="/bg/d.JPG"
       />
 
       <main className="w-full">

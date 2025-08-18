@@ -23,7 +23,7 @@ export default function LoginPage() {
               <input type="password" id="password" name="password" className="mt-1 w-full border rounded p-3" placeholder="********" />
             </div>
 
-            <button type="submit" className="w-full bg-primary text-white px-6 py-3 rounded hover:bg-opacity-90 transition">Log In</button>
+            <button type="submit" className="w-full bg-green-700 text-white px-6 py-3 rounded hover:bg-opacity-90 transition">Log In</button>
           </form>
 
           <div className="mt-6 text-center">
