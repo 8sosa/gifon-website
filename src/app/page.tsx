@@ -29,7 +29,7 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection
-        title="Where our national security begins..."
+        title="Where our national security reslarc..."
         description=""
         backgroundImage="/bg/b.JPG"
       />
