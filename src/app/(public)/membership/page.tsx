@@ -9,181 +9,104 @@ export default function MembershipPage() {
                 description="Join our growing network of geospatial professionals and unlock exclusive benefits."
                 backgroundImage="/bg/d.JPG"
             />
-            <section className="py-16 px-4 bg-white">
-                <div className="max-w-5xl mx-auto text-center">
-                    <h1 className="text-4xl font-bold mb-6 text-primary">
-                        Membership Benefits for New Members of GIFON
-                    </h1>
 
-                    <p className="mb-6 text-gray-700 leading-relaxed text-justify">
-                        Becoming a member of the Geospatial Intelligence Foundation of Nigeria not only offers invaluable
-                        professional and personal growth opportunities but also allows you to contribute to the development
-                        of Nigeria’s geospatial intelligence landscape. Through the foundation, you will connect with
-                        like-minded professionals, contribute to groundbreaking initiatives, and gain the skills, knowledge,
-                        and network necessary to thrive in an ever-evolving industry.
-                    </p>
+            <main className="w-full">
+                {/* --- Membership Page Sections --- */}
 
-                    <p className="mb-10 text-gray-700 leading-relaxed">
-                        These benefits aim to provide members with access to not only technical resources but also career
-                        growth opportunities, global networking, and the chance to make a real impact in their professional
-                        and personal lives. By becoming a member, individuals and organizations can contribute to the broader
-                        mission of advancing geospatial intelligence in Nigeria.
-                    </p>
-                </div>
-            </section>
-
-            <section id="why-join" className="py-16">
-                <div className="max-w-5xl mx-auto text-center mb-8">
-                    <h2 className="text-3xl font-semibold mb-4">Why Join</h2>
-                    <p className="text-gray-700 leading-relaxed text-justify">
-                        Joining GIFON connects you to a transformative movement in geospatial intelligence. 
-                        You’ll gain access to training, resources, and networking opportunities that support 
-                        your career growth while contributing to the advancement of Nigeria’s GeoINT industry. 
-                        Members influence policy, drive innovation, and collaborate with professionals locally 
-                        and globally to address pressing challenges in national development, security, and sustainability.
-                    </p>
-                </div>
-            </section>
-
-            <section id="categories" className="py-16 bg-gray-50">
-                <div className="max-w-5xl mx-auto text-center mb-8 p-8">
-                    <h2 className="text-3xl font-semibold mb-4">Membership Categories</h2>
-                    <ul className="list-disc list-inside text-gray-700 text-justify">
-                        <li>Individual Membership</li>
-                        <li>Corporate Membership</li>
-                        <li>Student Membership</li>
-                        <li>Institutional Membership</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section id="benefits" className="py-16">
-                <div className="max-w-5xl mx-auto text-center mb-8">
-                    <h2 className="text-3xl font-semibold mb-8">Membership Benefits</h2>
-
-                    <div className="space-y-12 text-justify p-8">
-                        <BenefitSection
-                            title="1. Professional Development Opportunities"
-                            points={[
-                                "Exclusive training sessions, workshops, and webinars on GeoINT, GIS, remote sensing, and spatial data analysis.",
-                                "Opportunities to earn certifications and credentials recognized by the industry.",
-                                "Masterclasses with renowned GeoINT experts and thought leaders."
-                            ]}
-                        />
-
-                        <BenefitSection
-                            title="2. Networking and Collaborative Engagement"
-                            points={[
-                                "Invitation to members-only networking events, conferences, and meet-ups.",
-                                "Access to online forums and dedicated digital platforms for professional networking.",
-                                "Opportunities to collaborate with regional and international GeoINT professionals, NGOs, and agencies."
-                            ]}
-                        />
-
-                        <BenefitSection
-                            title="3. Access to Industry Resources"
-                            points={[
-                                "Free access to cutting-edge research papers, publications, and reports.",
-                                "Exclusive access to geospatial datasets, maps, and data repositories.",
-                                "Discounts on GeoINT tools, GIS software, and satellite data through partners."
-                            ]}
-                        />
-
-                        <BenefitSection
-                            title="4. Career Growth and Job Opportunities"
-                            points={[
-                                "Exclusive access to a job portal with high-quality job and internship listings.",
-                                "Mentorship programs with senior professionals for career guidance.",
-                                "Resume-building workshops, interview prep, and career coaching tailored for GeoINT."
-                            ]}
-                        />
-
-                        <BenefitSection
-                            title="5. Research & Innovation Support"
-                            points={[
-                                "Access to research grants, funding, and support for innovative GeoINT projects.",
-                                "Opportunities to participate in collaborative research addressing real-world challenges.",
-                                "Platforms to showcase your projects at GIFON-hosted events."
-                            ]}
-                        />
-
-                        <BenefitSection
-                            title="6. Policy Advocacy and Thought Leadership"
-                            points={[
-                                "Engage with policymakers to shape GeoINT integration in national development.",
-                                "Publish articles and research in GIFON newsletters and reports.",
-                                "Leadership training programs to prepare for senior roles in industry or academia."
-                            ]}
-                        />
-
-                        <BenefitSection
-                            title="7. Enhanced Recognition and Credibility"
-                            points={[
-                                "Professional recognition within the GeoINT community.",
-                                "Spotlight features for member achievements and projects.",
-                                "Exclusive GIFON membership badges for LinkedIn, CVs, and profiles."
-                            ]}
-                        />
-
-                        <BenefitSection
-                            title="8. Community Engagement and Social Impact"
-                            points={[
-                                "Volunteer opportunities using GeoINT for social good (e.g. disaster response, conservation).",
-                                "Collaborate on social impact initiatives in education, healthcare, and sustainability.",
-                                "Participate in programs focused on gender and youth empowerment in the geospatial sector."
-                            ]}
-                        />
-
-                        <BenefitSection
-                            title="9. Exclusive Access to Events and Conferences"
-                            points={[
-                                "VIP access to the Annual GIFON GeoINT Summit.",
-                                "Discounted or free passes to international GeoINT conferences.",
-                                "Participation in members-only webinars, online masterclasses, and e-learning."
-                            ]}
-                        />
-
-                        <BenefitSection
-                            title="10. Discounts and Perks"
-                            points={[
-                                "Discounts on admission fees to GIFON events, workshops, and conferences.",
-                                "Special partnership deals with GeoINT software and hardware providers.",
-                                "Reduced rates on travel and accommodations for GIFON events."
-                            ]}
-                        />
+                <section id="why-join" className="py-16 px-4 bg-white">
+                    <div className="max-w-5xl mx-auto">
+                        <h2 className="text-3xl font-semibold mb-4 text-center">Why Join GIFON</h2>
+                        <p className="text-gray-700 leading-relaxed">
+                        Joining GIFON means becoming part of a global community committed to advancing geospatial intelligence 
+                        (GEOINT) and geospatial security. As threats evolve and global challenges become increasingly complex, 
+                        collaboration across disciplines has never been more vital. Membership provides you with access to a 
+                        trusted network of professionals, researchers, and innovators who are shaping the future of GEOINT. 
+                        By joining, you not only gain exclusive access to resources and events but also demonstrate your 
+                        commitment to supporting the responsible use of geospatial technology for security, humanitarian response, 
+                        and sustainable development. It is more than membership—it is a partnership in advancing global resilience.
+                        </p>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section id="how-to-join" className="py-16 bg-gray-50">
-                <div className="max-w-5xl mx-auto text-center mb-8">
-                    <h2 className="text-3xl font-semibold mb-4">How to Join</h2>
-                    <ol className="list-decimal list-inside text-gray-700 space-y-2 text-justify p-8">
-                        <li>Complete the online application form.</li>
-                        <li>Submit required documents and payment.</li>
-                        <li>Receive confirmation email with membership details.</li>
-                    </ol>
-                </div>
-            </section>
+                <section id="benefits" className="py-16 px-4 bg-gray-50">
+                    <div className="max-w-5xl mx-auto">
+                        <h2 className="text-3xl font-semibold mb-4 text-center">Membership Benefits</h2>
+                        <p className="text-gray-700 leading-relaxed">
+                        GIFON members enjoy a wide range of benefits designed to enhance their knowledge, visibility, and influence 
+                        in the field of geospatial intelligence. Members gain access to exclusive research publications, 
+                        policy briefs, and cutting-edge technical insights that are not publicly available. Networking opportunities 
+                        at international conferences, workshops, and forums allow members to engage with leading experts and 
+                        decision-makers. Additionally, membership provides discounts on event participation, access to training 
+                        programs, career development opportunities, and recognition within the global GEOINT community. These 
+                        benefits equip members to remain at the forefront of technological innovation and policy development, 
+                        while also contributing meaningfully to collective security and resilience efforts.
+                        </p>
+                    </div>
+                </section>
 
-            <section id="member-login" className="py-16">
-                <div className="max-w-5xl mx-auto text-center mb-8">
-                    <h2 className="text-3xl font-semibold mb-4">Member Login</h2>
-                    <p className="text-gray-700 leading-relaxed">
-                        Already a member? <a href="/login" className="text-primary underline">Log in here</a> to access
-                        exclusive resources and member-only content.
-                    </p>
-                </div>
-            </section>
+                <section id="talent" className="py-16 px-4 bg-white">
+                    <div className="max-w-5xl mx-auto">
+                        <h2 className="text-3xl font-semibold mb-4 text-center">Talent Development</h2>
+                        <p className="text-gray-700 leading-relaxed">
+                        At GIFON, we believe that nurturing talent is essential for the growth and sustainability of the geospatial 
+                        intelligence sector. Our talent development initiatives focus on equipping students, early-career professionals, 
+                        and mid-career practitioners with the skills needed to thrive in the rapidly evolving GEOINT landscape. 
+                        From mentorship programs to specialized workshops and scholarships, we aim to bridge the gap between academic 
+                        learning and real-world application. Members also gain access to internship and fellowship opportunities, 
+                        ensuring that new talent is continuously cultivated and integrated into critical projects. By fostering talent, 
+                        GIFON ensures that the global GEOINT community remains innovative, resilient, and prepared for future challenges.
+                        </p>
+                    </div>
+                </section>
 
-            <div className="mt-16">
-                <a
-                    href="/membership.pdf"
-                    className="inline-block bg-primary text-white px-6 py-3 rounded hover:bg-opacity-90 transition"
-                >
-                    Download Membership Application PDF
-                </a>
-            </div>
+                <section id="categories" className="py-16 px-4 bg-gray-50">
+                    <div className="max-w-5xl mx-auto">
+                        <h2 className="text-3xl font-semibold mb-4 text-center">Membership Categories</h2>
+                        <p className="text-gray-700 leading-relaxed">
+                        We offer a diverse range of membership categories to ensure inclusivity and representation across all 
+                        sectors of the geospatial intelligence community. Individual memberships are available for professionals, 
+                        researchers, and students seeking personal engagement. Corporate memberships allow organizations to 
+                        showcase their leadership in GEOINT innovation while benefiting from strategic collaborations and 
+                        visibility. Institutional memberships are tailored for universities, research centers, and government 
+                        agencies, ensuring knowledge sharing and capacity building at scale. By offering multiple categories, 
+                        GIFON provides pathways for every stakeholder—whether individual or organizational—to play an active role 
+                        in advancing geospatial intelligence and enhancing global security.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="portal" className="py-16 px-4 bg-white">
+                    <div className="max-w-5xl mx-auto">
+                        <h2 className="text-3xl font-semibold mb-4 text-center">Membership Portal (Apply & Renew)</h2>
+                        <p className="text-gray-700 leading-relaxed">
+                        Our membership portal is designed to make the process of applying, managing, and renewing your membership 
+                        simple and efficient. Prospective members can submit applications online, track their status, and explore 
+                        available categories that best suit their needs. Current members can renew their subscriptions, update 
+                        personal or organizational profiles, and access member-only resources in one secure location. The portal 
+                        also features exclusive content, event registration, and networking opportunities, enabling members to 
+                        maximize the value of their membership. With a streamlined digital experience, staying connected to GIFON 
+                        and the global GEOINT community has never been easier.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="opportunities" className="py-16 px-4 bg-gray-50">
+                    <div className="max-w-5xl mx-auto">
+                        <h2 className="text-3xl font-semibold mb-4 text-center">Volunteer Opportunities</h2>
+                        <p className="text-gray-700 leading-relaxed">
+                        Volunteering with GIFON offers members the chance to actively contribute to the advancement of geospatial 
+                        intelligence while building leadership skills and professional networks. Opportunities include serving on 
+                        committees, mentoring students and young professionals, assisting with event planning, or contributing 
+                        expertise to working groups on pressing GEOINT challenges. Volunteers play a critical role in driving 
+                        initiatives forward, from supporting humanitarian mapping projects to shaping policy recommendations. 
+                        By volunteering, members not only give back to the community but also enhance their own professional 
+                        development and visibility. Participation fosters collaboration, strengthens networks, and helps ensure 
+                        that the global GEOINT community remains vibrant, inclusive, and forward-looking.
+                        </p>
+                    </div>
+                </section>
+            </main>
+
         </>
     );
 }

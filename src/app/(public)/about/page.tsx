@@ -30,12 +30,9 @@ export default async function AboutPage() {
         backgroundImage="/bg/c.JPG"
       />
 
-      {/* <FoundationDetailsSection /> */}
-
-      {/* --- Additional Static Sections with Dummy Content --- */}
-      <section id="our-story" className="py-16 px-4 bg-white">
+      <section id="aim" className="py-16 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-4">Our Story</h2>
+          <h2 className="text-3xl font-semibold mb-4">Our Aim</h2>
           <p className="text-gray-700 leading-relaxed">
               The Geospatial Intelligence Foundation of Nigeria (GIFON) is a GEOINT organization
               dedicated to leveraging cutting-edge geospatial technologies and intelligence to
@@ -66,16 +63,16 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section id="our-vision" className="py-16 px-4 bg-gray-50">
+      <section id="objectives" className="py-16 px-4 bg-gray-50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-4">Our Vision</h2>
+          <h2 className="text-3xl font-semibold mb-4">Our Objectives</h2>
           <p className="text-gray-700 leading-relaxed">
             To be Nigeria’s leading catalyst for geospatial innovation, empowering national development through actionable intelligence, spatial data excellence, and sustainable technological advancement.
           </p>
         </div>
       </section>
 
-      <section id="our-mandate" className="py-16 px-4 bg-white">
+      <section id="mission" className="py-16 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-semibold mb-4">Our Mission Statement</h2>
           <p className="text-gray-700 leading-relaxed">
@@ -89,31 +86,28 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section id="message-founder" className="py-16 px-4 bg-gray-50">
+      <section id="vision" className="py-16 px-4 bg-gray-50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-4">Message from Founder</h2>
+          <h2 className="text-3xl font-semibold mb-4">Our Vision</h2>
           <blockquote className="italic text-gray-800">
-            &quot;The Geospatial Intelligence Foundation of Nigeria (GIFON) is dedicated to advancing
-              the understanding, development, and responsible application of geospatial intelligence
-              (GEOINT) to support national security, economic development, humanitarian efforts, and
-              informed decision-making. We foster collaboration between government, industry, and
-              academia to drive innovation, build a skilled workforce, and promote the ethical use
-              of geospatial data and technologies.&quot;
+            To be Nigeria’s leading catalyst for geospatial innovation, empowering national development through actionable intelligence, spatial data excellence, and sustainable technological advancement.
+          </blockquote>
+        </div>
+      </section>
+      
+      <section id="core-values" className="py-16 px-4 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-semibold mb-4">Our Vision</h2>
+          <blockquote className="italic text-gray-800">
+            To be Nigeria’s leading catalyst for geospatial innovation, empowering national development through actionable intelligence, spatial data excellence, and sustainable technological advancement.
           </blockquote>
         </div>
       </section>
 
-      <section id="board-trustees" className="py-16 px-4 bg-white">
+      <section id="board-directors" className="py-16 px-4 bg-gray-50">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-semibold mb-4">Board of Trustees</h2>
           <TeamGrid members={mapMembersByCategory(members, "Board")} />
-        </div>
-      </section>
-
-      <section id="executive-leadership" className="py-16 px-4 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-4">Executive Leadership</h2>
-          <TeamGrid members={mapMembersByCategory(members, "Advisory")} />
         </div>
       </section>
 
@@ -124,12 +118,15 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* --- End of Static Sections --- */}
-
-      {/* 
-      <TeamGrid title="Our Team" members={mapMembersByCategory(members, "Team")} />
-       */}
-      <JobListing jobs={jobs} />
+      <section id="contact" className="py-16 px-4 bg-gray-50">
+        <h1>Contact Us</h1>
+        <p className="text-gray-700 leading-relaxed">
+          For inquiries, please reach out to us at:
+          <br />
+            <p className="text-gray-700 leading-relaxed">Email: info@gifon.org</p>
+            <p className="text-gray-700 leading-relaxed">Phone: +234 800 000 0000</p>
+        </p>
+      </section>
     </>
   );
 }
