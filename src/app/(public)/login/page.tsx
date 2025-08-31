@@ -31,7 +31,7 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-4 text-center">
-            <p className="text-gray-600">Don&apos;t have an account? <a href="#" className="text-primary underline">Sign Up</a></p>
+            <p className="text-gray-600">Don&apos;t have an account? <a href="/register" className="text-primary underline">Register</a></p>
           </div>
         </div>
       </main>
