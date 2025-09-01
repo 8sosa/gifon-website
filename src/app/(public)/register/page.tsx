@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import HeroSection from "@/components/HeroSection";
+import CountryStateSelect, { CountryStateValue } from "@/components/CountryStateSelect";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   registerIndividualMembership,
@@ -23,6 +24,8 @@ import {
 type FormState = "idle" | "loading" | "verify" | "error";
 
 export default function RegisterPage() {
+  const [individualLocation, setIndividualLocation] = useState<CountryStateValue>({ country: null, state: null });
+  const [organizationLocation, setOrganizationLocation] = useState<CountryStateValue>({ country: null, state: null });
   const [membershipType, setMembershipType] = useState<
     "individual" | "corporate"
   >("individual");
@@ -81,9 +84,9 @@ export default function RegisterPage() {
         phoneNumber: formData.get("phoneNumber")?.toString() ?? "",
         altPhoneNumber: formData.get("altPhoneNumber")?.toString() ?? "",
         homeAddress: formData.get("homeAddress")?.toString() ?? "",
-        country: formData.get("country")?.toString() ?? "Nigeria",
+        country: individualLocation.country?.label ?? "Nigeria",
         city: formData.get("city")?.toString() ?? "",
-        state: formData.get("state")?.toString() ?? "",
+        state: individualLocation.state?.label ?? "",
         postalCode: formData.get("postalCode")?.toString() ?? "",
         linkedinProfile: formData.get("linkedinProfile")?.toString() ?? undefined,
         twitterHandle: formData.get("twitterHandle")?.toString() ?? undefined,
@@ -142,7 +145,6 @@ export default function RegisterPage() {
         positionTitle: formData.get("positionTitle")?.toString() ?? "",
         organizationAddress: formData.get("organizationAddress")?.toString() ?? "",
         city: formData.get("city")?.toString() ?? "",
-        state: formData.get("state")?.toString() ?? "",
         postalCode: formData.get("postalCode")?.toString() ?? "",
         organizationWebsite: formData.get("organizationWebsite")?.toString() ?? undefined,
         facebookHandle: formData.get("facebookHandle")?.toString() ?? undefined,
@@ -152,7 +154,8 @@ export default function RegisterPage() {
         numberOfEmployees: Number(formData.get("numberOfEmployees") ?? 0),
         contribution: formData.get("contribution")?.toString() ?? "",
         membershipDuration: membershipDurationStr as MembershipDuration,
-        country: formData.get("country")?.toString() ?? "Nigeria",
+        country: organizationLocation.country?.label ?? "Nigeria",
+        state: organizationLocation.state?.label ?? "",
         password: passwordFromForm,
         amount: Number(formData.get("amount") ?? 0),
       };
@@ -256,9 +259,7 @@ export default function RegisterPage() {
                     <a href="/login" className="inline-block mt-2 text-sm underline text-green-700">
                       Go to Login
                     </a>
-                    
-                    or 
-                    
+                   <br/>
                     <a href="/verify-email" className="inline-block mt-2 text-sm underline text-green-700">
                       Verify Email with token
                     </a>
@@ -305,15 +306,17 @@ export default function RegisterPage() {
                               required
                             />
                           </div>
-
-                          <input name="country" className="border p-3 rounded w-full" placeholder="Country" required />
+                          <div className="border p-3 rounded w-full col-span-2">
+                            <CountryStateSelect onChange={setIndividualLocation} />
+                          </div>
+                          {/* <input name="country" className="border p-3 rounded w-full" placeholder="Country" required /> */}
                           <input name="nationality" className="border p-3 rounded w-full" placeholder="Nationality" required />
                           <input type="email" name="email" className="border p-3 rounded w-full" placeholder="Email Address" required />
                           <input name="phoneNumber" className="border p-3 rounded w-full" placeholder="Phone Number" required />
                           <input name="altPhoneNumber" className="border p-3 rounded w-full" placeholder="Alternative Phone Number" />
                           <input name="homeAddress" className="border p-3 rounded w-full" placeholder="Home Address" />
                           <input name="city" className="border p-3 rounded w-full" placeholder="City" aria-label="City"/>
-                          <input name="state" className="border p-3 rounded w-full" placeholder="State" />
+                          {/* <input name="state" className="border p-3 rounded w-full" placeholder="State" /> */}
                           <input name="postalCode" className="border p-3 rounded w-full" placeholder="Postal Code" />
                           <input name="linkedinProfile" className="border p-3 rounded w-full" placeholder="LinkedIn Profile" />
                           <input name="twitterHandle" className="border p-3 rounded w-full" placeholder="Twitter Handle" />
@@ -465,9 +468,12 @@ export default function RegisterPage() {
                           <input name="positionTitle" className="border p-3 rounded w-full" placeholder="Position/Title" />
                           <input type="email" name="email" className="border p-3 rounded w-full col-span-2" placeholder="Contact Email" required />
                           <input name="organizationWebsite" className="border p-3 rounded w-full col-span-2" placeholder="Organization Website" />
-                          <input name="organizationAddress" className="border p-3 rounded w-full col-span-2" placeholder="Organization Address" />
+                          <div className="border p-3 rounded w-full col-span-2">
+                            <CountryStateSelect onChange={setOrganizationLocation} />
+                          </div>
+                          <input name="organizationAddress" className="border p-3 rounded w-full" placeholder="Organization Address" />
                           <input name="city" className="border p-3 rounded w-full" placeholder="City" />
-                          <input name="state" className="border p-3 rounded w-full" placeholder="State" />
+                          {/* <input name="state" className="border p-3 rounded w-full" placeholder="State" /> */}
                           <input name="postalCode" className="border p-3 rounded w-full" placeholder="Postal Code" />
                           <input name="facebookHandle" className="border p-3 rounded w-full" placeholder="Facebook" />
                           <input name="twitterHandle" className="border p-3 rounded w-full" placeholder="Twitter" />
