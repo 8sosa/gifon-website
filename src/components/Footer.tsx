@@ -10,12 +10,7 @@ export default function Footer() {
           <Image src="/logo.png" alt="GIFON Logo" width={160} height={40} />
         </div>
 
-        <div className={styles.navLinks}>
-          <Link href="/about">About</Link>
-          <Link href="/membership">Membership</Link>
-          <Link href="/events">Events</Link>
-          <Link href="/news">News</Link>
-        </div>
+        
       </div>
 
       <div className={styles.bottom}>
