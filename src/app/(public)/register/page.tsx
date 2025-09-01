@@ -256,7 +256,9 @@ export default function RegisterPage() {
                     <a href="/login" className="inline-block mt-2 text-sm underline text-green-700">
                       Go to Login
                     </a>
+                    
                     or 
+                    
                     <a href="/verify-email" className="inline-block mt-2 text-sm underline text-green-700">
                       Verify Email with token
                     </a>
