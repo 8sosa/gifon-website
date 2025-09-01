@@ -33,3 +33,43 @@ html, body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
 }
+
+/* Homepage animations & helpers (move from styled-jsx into globals.css) */
+
+/* Fade in up */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fadeInUp { animation: fadeInUp 520ms ease both; }
+
+/* Staggered card animation */
+.card-appear { animation: fadeInUp 480ms ease both; }
+
+/* Reveal on scroll (simple reveal) */
+.reveal-on-scroll { opacity: 0; transform: translateY(8px); animation: fadeInUp 560ms ease both; }
+
+/* Marquee logos */
+.marquee { animation: marquee 14s linear infinite; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* Pulses on map */
+.pulse { position: absolute; width: 18px; height: 18px; border-radius: 9999px; background: rgba(59,130,246,0.95); left: 50%; top: 28%; transform: translate(-50%, -50%); box-shadow: 0 8px 24px rgba(59,130,246,0.15); }
+.pulse::after { content: ''; position: absolute; inset: 0; border-radius: inherit; animation: pulseOuter 2200ms ease-out infinite; }
+@keyframes pulseOuter { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(3.2); opacity: 0; } }
+.pulse-1 { left: 38%; top: 36%; }
+.pulse-2 { left: 60%; top: 44%; background: rgba(236,72,153,0.9); }
+.pulse-3 { left: 74%; top: 22%; background: rgba(16,185,129,0.95); }
+
+/* Horizontal snap scroll helper */
+.scroll-snap-x { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fadeInUp,
+  .card-appear,
+  .reveal-on-scroll,
+  .marquee,
+  .pulse {
+    animation: none !important;
+  }
+}

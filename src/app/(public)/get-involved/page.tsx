@@ -1,5 +1,4 @@
 import HeroSection from '@/components/HeroSection';
-import { Col, Row } from 'react-bootstrap';
 
 export default function GetInvolvedPage() {
   return (
@@ -7,7 +6,14 @@ export default function GetInvolvedPage() {
       <HeroSection
         title="Contact Us"
         description="Get in touch with the Geospatial Intelligence Foundation of Nigeria."
-        backgroundImage="/bg/d.JPG"
+        backgroundImages = {[
+          "/bg/e.jpeg",
+          "/bg/a.JPG",
+          "/bg/b.JPG",
+          "/bg/c.JPG",
+          "/bg/d.JPG",
+          "/ph.svg",
+        ]}
       />
 
       <main className="w-full">

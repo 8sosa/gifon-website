@@ -1,4 +1,3 @@
-import BenefitSection from "@/components/BenefitSection";
 import HeroSection from '@/components/HeroSection';
 
 export default function MembershipPage() {
@@ -7,7 +6,14 @@ export default function MembershipPage() {
             <HeroSection
                 title="The GIFON Community"
                 description="Join our growing network of geospatial professionals and unlock exclusive benefits."
-                backgroundImage="/bg/d.JPG"
+                backgroundImages = {[
+          "/bg/e.jpeg",
+          "/bg/a.JPG",
+          "/bg/b.JPG",
+          "/bg/c.JPG",
+          "/bg/d.JPG",
+          "/ph.svg",
+        ]}
             />
 
             <main className="w-full">
@@ -76,7 +82,7 @@ export default function MembershipPage() {
                 </section>
 
                 <section id="portal" className="py-16 px-4 bg-white">
-                    <div className="max-w-5xl mx-auto">
+                    <div className="max-w-5xl mx-auto flex flex-col items-center">
                         <h2 className="text-3xl font-semibold mb-4 text-center">Membership Portal (Apply & Renew)</h2>
                         <p className="text-gray-700 leading-relaxed">
                         Our membership portal is designed to make the process of applying, managing, and renewing your membership 
@@ -87,6 +93,7 @@ export default function MembershipPage() {
                         maximize the value of their membership. With a streamlined digital experience, staying connected to GIFON 
                         and the global GEOINT community has never been easier.
                         </p>
+                        <a href="/login" className="mt-4 inline-block bg-green-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition"> login to the portal</a>
                     </div>
                 </section>
 

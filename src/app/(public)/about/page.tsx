@@ -1,9 +1,7 @@
 import HeroSection from '@/components/HeroSection';
-import FoundationDetailsSection from './FoundationDetailsSection';
 import { TeamGrid } from '@/components/TeamGrid';
-import { JobListing } from '@/components/JobListing';
-import {getTeamMembers, getJobListings } from '@/lib/contentful-queries';
-import { FlatMember, Job } from '@/types/types';
+import {getTeamMembers } from '@/lib/contentful-queries';
+import { FlatMember } from '@/types/types';
 import { LogoCarousel, Logo } from '@/components/LogoCarousel';
 
 const partners: Logo[] = [
@@ -20,14 +18,20 @@ function mapMembersByCategory(members: FlatMember[], category: string): FlatMemb
 
 export default async function AboutPage() {
   const members: FlatMember[] = await getTeamMembers();
-  const jobs: Job[] = await getJobListings();
 
   return (
     <>
       <HeroSection
         title="Geospatial Intelligence Foundation of Nigeria (GIFON)"
         description="Advancing geospatial intelligence to support Nigeria’s security, development, and decision-making."
-        backgroundImage="/bg/c.JPG"
+        backgroundImages = {[
+          "/bg/e.jpeg",
+          "/bg/a.JPG",
+          "/bg/b.JPG",
+          "/bg/c.JPG",
+          "/bg/d.JPG",
+          "/ph.svg",
+        ]}
       />
 
       <section id="aim" className="py-16 px-4 bg-white">

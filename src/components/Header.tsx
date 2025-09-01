@@ -151,7 +151,7 @@ const menuItems = [
   },
 ];
 
-const topBarItems = [
+const topBarItemsBase = [
   {
     label: 'Resources',
     href: '/resources',
@@ -184,23 +184,34 @@ export default function Header() {
   const [topOpen, setTopOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openTopDropdown, setOpenTopDropdown] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   // Toggle handlers
   const toggleMenu = () => setMenuOpen(prev => !prev);
   const toggleTop = () => setTopOpen(prev => !prev);
-  const handleDropdown = (label: string) => {
-    setOpenDropdown(prev => (prev === label ? null : label));
-  };
-  const handleTopDropdown = (label: string) => {
-    setOpenTopDropdown(prev => (prev === label ? null : label));
-  };
+  
   const closeAll = () => {
     setMenuOpen(false);
     setTopOpen(false);
     setOpenDropdown(null);
     setOpenTopDropdown(null);
   };
+
+   // Check for JWT on mount
+   useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const topBarItems = [...topBarItemsBase];
+  if (isLoggedIn) {
+    // Replace Login with Profile
+    const idx = topBarItems.findIndex(item => item.label === 'Login');
+    if (idx !== -1) {
+      topBarItems[idx] = { label: 'Profile', href: '/profile' };
+    }
+  }
 
   // Click outside to close menus
   useEffect(() => {
@@ -221,19 +232,25 @@ export default function Header() {
         <button className={styles.topToggle} onClick={toggleTop} aria-label="Toggle top menu">
           ☰
         </button>
-        <div className={`${styles.topMenu} ${topOpen ? styles.show : ''}`}>  
+        <div className={`${styles.topMenu} ${topOpen ? styles.show : ''}`}>
           {topBarItems.map(item => (
-            <div key={item.label} className={styles.navItem}>
+            <div
+              key={item.label}
+              className={styles.navItem}
+              onMouseEnter={() => setOpenTopDropdown(item.label)}
+              onMouseLeave={() => setOpenTopDropdown(null)}
+            >
               {item.children ? (
-                <>  
-                  <button
-                    className={styles.topNavLink}
-                    onClick={() => handleTopDropdown(item.label)}
-                    aria-expanded={openTopDropdown === item.label}
-                  >
+                <>
+                  {/* Parent now links to page */}
+                  <Link href={item.href} className={styles.topNavLink} onClick={closeAll}>
                     {item.label}
-                  </button>
-                  <ul className={`${styles.dropdownMenu} ${openTopDropdown === item.label ? styles.showDropdown : ''}`}>  
+                  </Link>
+                  <ul
+                    className={`${styles.dropdownMenu} ${
+                      openTopDropdown === item.label ? styles.showDropdown : ''
+                    }`}
+                  >
                     {item.children.map(child => (
                       <li key={child.anchor} className={styles.dropdownItem}>
                         <Link href={`${item.href}#${child.anchor}`} onClick={closeAll}>
@@ -261,19 +278,21 @@ export default function Header() {
         <button className={styles.menuToggle} onClick={toggleMenu} aria-label="Toggle menu">
           ☰
         </button>
-        <nav className={`${styles.navLinks} ${menuOpen ? styles.show : ''}`}>  
+        <nav className={`${styles.navLinks} ${menuOpen ? styles.show : ''}`}>
           {menuItems.map(item => (
-            <div key={item.label} className={styles.navItem}>
+            <div
+              key={item.label}
+              className={styles.navItem}
+              onMouseEnter={() => setOpenDropdown(item.label)}
+              onMouseLeave={() => setOpenDropdown(null)}
+            >
               {item.children ? (
-                <>  
-                  <button
-                    className={styles.navLinkButton}
-                    onClick={() => handleDropdown(item.label)}
-                    aria-expanded={openDropdown === item.label}
-                  >
+                <>
+                  {/* Parent now links to page */}
+                  <Link href={item.href} className={styles.navLink} onClick={closeAll}>
                     {item.label}
-                  </button>
-                  <ul className={`${styles.dropdownMenu} ${openDropdown === item.label ? styles.showDropdown : ''}`}>  
+                  </Link>
+                  <ul className={`${styles.dropdownMenu} ${openDropdown === item.label ? styles.showDropdown : ''}`}>
                     {item.children.map(child => (
                       <li key={child.anchor} className={styles.dropdownItem}>
                         <Link href={`${item.href}#${child.anchor}`} onClick={closeAll}>

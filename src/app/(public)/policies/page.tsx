@@ -6,7 +6,14 @@ export default function PoliciesPage() {
       <HeroSection
         title="Policies"
         description=""
-        backgroundImage="/bg/d.JPG"
+        backgroundImages = {[
+          "/bg/e.jpeg",
+          "/bg/a.JPG",
+          "/bg/b.JPG",
+          "/bg/c.JPG",
+          "/bg/d.JPG",
+          "/ph.svg",
+        ]}
       />
 
       <main className="w-full">

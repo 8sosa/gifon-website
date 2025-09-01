@@ -6,7 +6,14 @@ export default function ProgramsPage() {
       <HeroSection
         title="Programmes & Initiatives"
         description="Explore our diverse programmes and initiatives driving geospatial capacity and innovation."
-        backgroundImage="/bg/d.JPG"
+        backgroundImages = {[
+          "/bg/e.jpeg",
+          "/bg/a.JPG",
+          "/bg/b.JPG",
+          "/bg/c.JPG",
+          "/bg/d.JPG",
+          "/ph.svg",
+        ]}
       />
 
       <main className="w-full">

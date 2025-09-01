@@ -21,10 +21,91 @@
   justify-content: center;
 }
   .overlay h1 {
-    font-size: 2.5rem;
+    font-size: 5rem;
     font-weight: 700;
+    text-wrap: pretty;
+    max-width: 100%;
     margin-bottom: 1rem;
   }
+  .description {
+    font-size: 1.5rem;
+    font-weight: 300;
+    max-width: 600px;
+  }
+
+  /* typing-specific styles */
+.title {
+  white-space: nowrap; /* keep text on one line while typing */
+  overflow: hidden;
+  display: inline-block;
+  /* optional: you can set max-width or font-size here if needed */
+}
+
+/* blinking cursor */
+.cursor {
+  display: inline-block;
+  margin-left: 6px;
+  width: 0.6ch;
+  animation: hero-cursor-blink 1s steps(1) infinite;
+  color: inherit;
+  opacity: 1;
+}
+
+@keyframes hero-cursor-blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* optional: small responsive tweak so very long titles wrap nicely on small screens */
+@media (max-width: 480px) {
+  .title {
+    white-space: normal;
+  }
+  .cursor {
+    display: none; /* cursor may look odd if title wraps — hide on tiny screens */
+  }
+}
+
+.hero {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bgImage {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.bgImage.active {
+  opacity: 1;
+}
+
+.overlay {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 
 @media (max-width: 768px) {
   .hero {

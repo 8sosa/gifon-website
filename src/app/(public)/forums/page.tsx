@@ -6,7 +6,14 @@ export default function ForumsPage() {
       <HeroSection
         title="Groups & Forums"
         description="Explore our journal content, editorial board, and submission guidelines."
-        backgroundImage="/bg/d.JPG"
+        backgroundImages = {[
+          "/bg/e.jpeg",
+          "/bg/a.JPG",
+          "/bg/b.JPG",
+          "/bg/c.JPG",
+          "/bg/d.JPG",
+          "/ph.svg",
+        ]}
       />
 
       <main className="w-full">

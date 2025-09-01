@@ -6,7 +6,14 @@ export default function InfrastructurePage() {
       <HeroSection
         title="Critical Infrastructure Support"
         description="Each subsection explains GIFON’s role in using GEOINT to secure vital infrastructure"
-        backgroundImage="/bg/d.JPG"
+        backgroundImages = {[
+          "/bg/e.jpeg",
+          "/bg/a.JPG",
+          "/bg/b.JPG",
+          "/bg/c.JPG",
+          "/bg/d.JPG",
+          "/ph.svg",
+        ]}
       />
 
 <main className="w-full">

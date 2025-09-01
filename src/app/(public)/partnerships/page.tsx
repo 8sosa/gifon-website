@@ -15,7 +15,14 @@ export default function PartnershipsPage() {
       <HeroSection
         title="Partnerships & Sponsors"
         description="Collaborate with us to advance geospatial intelligence and innovation."
-        backgroundImage="/bg/d.JPG"
+        backgroundImages = {[
+          "/bg/e.jpeg",
+          "/bg/a.JPG",
+          "/bg/b.JPG",
+          "/bg/c.JPG",
+          "/bg/d.JPG",
+          "/ph.svg",
+        ]}
       />
 
       <main className="w-full">

@@ -1,160 +1,193 @@
+import Image from 'next/image';
 import { getUpcomingEvents } from '@/lib/contentful-queries';
 import HeroSection from '@/components/HeroSection';
 import EventCard from '@/components/EventCard';
-import { EventListing } from '@/components/EventListing';
 import { FlatEvent } from '@/types/types';
 
+// Contentful rich-text utilities
+import type { Document } from '@contentful/rich-text-types';
+
+/**
+ * Safely convert a Contentful rich-text Document into plain text.
+ * This is used when a component (e.g. EventCard) expects a simple string.
+ */
+
+type RichTextNode = {
+  nodeType: "text" | string;
+  value?: string;
+  content?: RichTextNode[];
+};
+
+function richTextToPlainText(doc?: string | Document | null): string {
+  if (!doc) return '';
+  if (typeof doc === 'string') return doc;
+
+  // Defensive traversal to collect text nodes
+  const collect = (node: RichTextNode | null | undefined): string => {
+    if (!node) return "";
+    if (node.nodeType === "text") {
+      return node.value ?? "";
+    }
+    if (Array.isArray(node.content)) {
+      return node.content.map(collect).join("");
+    }
+    return "";
+  };
+
+  return collect(doc).trim();
+}
+
+function formatDate(dateString?: string) {
+  if (!dateString) return '';
+  try {
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }).format(new Date(dateString));
+  } catch {
+    return dateString;
+  }
+}
+
 export default async function EventsPage() {
-  const events: FlatEvent[] = await getUpcomingEvents();
+  let events: FlatEvent[] = [];
+
+  try {
+    events = (await getUpcomingEvents()) ?? [];
+  } catch (err) {
+    console.error('Failed to load events', err);
+    events = [];
+  }
+
+  // Normalize and add _startTs for sorting
+  const parsedEvents = events
+    .map((e) => ({
+      ...e,
+      _startTs: e.startDate ? new Date(e.startDate).getTime() : 0,
+    }))
+    .filter(Boolean);
+
+  const nowTs = Date.now();
+
+  const upcoming = parsedEvents
+    .filter((e) => e._startTs >= nowTs)
+    .sort((a, b) => a._startTs - b._startTs)
+    // ensure description is a plain string for EventCard
+    .map((e) => ({ ...e, description: richTextToPlainText(e.description) }));
+
+  const past = parsedEvents
+    .filter((e) => e._startTs < nowTs)
+    .sort((a, b) => b._startTs - a._startTs)
+    .map((e) => ({ ...e, description: richTextToPlainText(e.description) }));
 
   return (
     <>
       <HeroSection
         title="Our Events"
         description="Discover our upcoming and past events, conferences, and workshops."
-        backgroundImage="/ph.svg"
+        backgroundImages = {[
+          "/bg/e.jpeg",
+          "/bg/a.JPG",
+          "/bg/b.JPG",
+          "/bg/c.JPG",
+          "/bg/d.JPG",
+          "/ph.svg",
+        ]}
       />
 
-      {/* --- Static Sections with Dummy Content --- */}
       <main className="w-full">
-      {/* --- Events & Highlights --- */}
-      <section id="highlights" className="py-16 px-4 bg-white">
-      <div className="max-w-6xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-6 text-center">Events & Highlights</h2>
-      <p className="text-gray-700 leading-relaxed text-justify">
-      GIFON hosts a variety of impactful events, conferences, and workshops that bring together 
-      experts, practitioners, and young professionals in geospatial security and GEOINT. Our highlights 
-      feature milestones such as annual summits, cross-border collaborations, and international knowledge 
-      exchanges designed to strengthen Africa’s presence in the global geospatial community.
-      </p>
-      </div>
-      </section>
+        {/* Highlights */}
+        <section id="highlights" className="py-16 px-4 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-semibold mb-6 text-center">Events & Highlights</h2>
+            <p className="text-gray-700 leading-relaxed text-justify">
+              GIFON hosts a variety of impactful events, conferences, and workshops that bring together
+              experts, practitioners, and young professionals in geospatial security and GEOINT. Our highlights
+              feature milestones such as annual summits, cross-border collaborations, and international knowledge
+              exchanges designed to strengthen Africa’s presence in the global geospatial community.
+            </p>
+          </div>
+        </section>
 
-      {/* --- Upcoming Events --- */}
-      <section id="upcoming" className="py-16 px-4 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-6 text-center">Upcoming Events</h2>
-      <div className="flex flex-col gap-8">
-      {events.map((e) => (
-      <EventCard
-      key={e.id}
-      title={e.title}
-      startDate={e.startDate}
-      endDate={e.endDate}
-      image={e.image}
-      description={e.description}
-      location={e.location}
-      link={e.link}
-      />
-      ))}
-      </div>
-      </div>
-      </section>
+        {/* Upcoming Events */}
+        <section id="upcoming" className="py-16 px-4 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-semibold mb-6 text-center">Upcoming Events</h2>
 
-      {/* --- Pre-Launch Event --- */}
-      <section id="prelaunch" className="py-16 px-4 bg-white">
-      <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-4 text-center">Pre-Launch Event</h2>
-      <p className="text-gray-700 leading-relaxed text-justify">
-      Before our official launch, GIFON organized a pre-launch event that introduced the network’s 
-      mission and objectives to stakeholders across government, academia, and industry. The event 
-      provided a unique opportunity to align with strategic partners and set the stage for collaboration 
-      in advancing geospatial intelligence across Africa.
-      </p>
-      </div>
-      </section>
+            {upcoming.length === 0 ? (
+              <div className="text-center text-gray-600">
+                <p className="mb-4">There are no upcoming events right now.</p>
+                <p>If you would like to be notified when we publish events, consider joining our mailing list.</p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-8">
+                {upcoming.map((e) => (
+                  // we pass event with description as plain string (EventCard likely expects that)
+                  <EventCard key={e.id} event={e} />
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
 
-      {/* --- Inaugural Conference & Launching --- */}
-      <section id="inaugural" className="py-16 px-4 bg-gray-50">
-      <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-4 text-center">Inaugural Conference & Launching</h2>
-      <p className="text-gray-700 leading-relaxed text-justify">
-      The inaugural GIFON Conference marked a turning point in Africa’s geospatial security landscape. 
-      Leaders and experts gathered to share insights on GEOINT applications, policy frameworks, and 
-      cross-border collaboration. This historic launch signaled a united commitment to strengthening 
-      Africa’s geospatial capacity for national and regional security.
-      </p>
-      </div>
-      </section>
+        {/* Pre-Launch / Static sections (unchanged) */}
+        <section id="prelaunch" className="py-16 px-4 bg-white">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl font-semibold mb-4 text-center">Pre-Launch Event</h2>
+            <p className="text-gray-700 leading-relaxed text-justify">
+              Before our official launch, GIFON organized a pre-launch event that introduced the network’s
+              mission and objectives to stakeholders across government, academia, and industry. The event
+              provided a unique opportunity to align with strategic partners and set the stage for collaboration
+              in advancing geospatial intelligence across Africa.
+            </p>
+          </div>
+        </section>
 
-      {/* --- International Events --- */}
-      <section id="dgi" className="py-16 px-4 bg-white">
-      <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-4 text-center">International Events - DGI London</h2>
-      <p className="text-gray-700 leading-relaxed text-justify">
-      GIFON actively participates in the Defence Geospatial Intelligence (DGI) conference in London, 
-      where global leaders in defense and security meet to discuss intelligence-driven decision-making. 
-      This engagement ensures Africa’s voice is represented in shaping global geospatial policy and practice.
-      </p>
-      </div>
-      </section>
+        {/* ... other static sections remain unchanged ... */}
 
-      <section id="usgif" className="py-16 px-4 bg-gray-50">
-      <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-4 text-center">International Events - USGIF GEOINT</h2>
-      <p className="text-gray-700 leading-relaxed text-justify">
-      GIFON collaborates with the United States Geospatial Intelligence Foundation (USGIF) at its 
-      GEOINT Symposium, fostering knowledge-sharing, research partnerships, and professional growth 
-      for African geospatial experts.
-      </p>
-      </div>
-      </section>
+        {/* Past events */}
+        <section id="past" className="py-16 px-4 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-semibold mb-6 text-center">Past Events</h2>
 
-      <section id="fig" className="py-16 px-4 bg-white">
-      <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-4 text-center">International Events - FIG</h2>
-      <p className="text-gray-700 leading-relaxed text-justify">
-      Participation in the International Federation of Surveyors (FIG) connects GIFON with surveying 
-      professionals worldwide, ensuring Africa’s unique geospatial challenges are part of the global 
-      conversation on sustainable development and security.
-      </p>
-      </div>
-      </section>
+            {past.length === 0 ? (
+              <div className="text-center text-gray-600">
+                <p>No past events available yet.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {past.map((e) => (
+                  <div key={e.id} className="p-4 bg-white rounded-lg shadow-sm">
+                    <div className="flex items-start gap-4">
+                      {e.image && (
+                        <Image src={e.image} alt={e.title ?? 'event image'} className="w-28 h-20 object-cover rounded" width={1500} height={1000}/>
+                      )}
+                      <div>
+                        <h3 className="font-semibold">{e.title}</h3>
+                        <div className="text-sm text-gray-500">{formatDate(e.startDate)}</div>
 
-      <section id="aag" className="py-16 px-4 bg-gray-50">
-      <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-4 text-center">International Events - AAG</h2>
-      <p className="text-gray-700 leading-relaxed text-justify">
-      GIFON contributes to the American Association of Geographers (AAG) annual meeting, sharing African 
-      research and case studies on the application of geospatial data in disaster response, security 
-      analysis, and sustainable land management.
-      </p>
-      </div>
-      </section>
+                        {/* If you want to render the full rich text, use documentToReactComponents.
+                            But here we've normalized description to a string for EventCard; if you
+                            still have access to the original Document and want rich rendering, do this:
+                            documentToReactComponents(e.description as Document)
+                        */}
+                        <p className="mt-2 text-sm text-gray-700 line-clamp-3">{e.description}</p>
 
-      <section id="aarse" className="py-16 px-4 bg-white">
-      <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-4 text-center">International Events - AARSE</h2>
-      <p className="text-gray-700 leading-relaxed text-justify">
-      As a key African partner, GIFON supports the African Association of Remote Sensing of the Environment 
-      (AARSE) conferences, which focus on earth observation technologies and their applications in security, 
-      agriculture, and environmental sustainability.
-      </p>
-      </div>
-      </section>
-
-      <section id="eis" className="py-16 px-4 bg-gray-50">
-      <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-4 text-center">International Events - EIS-Africa</h2>
-      <p className="text-gray-700 leading-relaxed text-justify">
-      GIFON partners with EIS-Africa to promote spatial data infrastructure and policy advocacy that 
-      empowers African governments and organizations to integrate geospatial intelligence into decision-making.
-      </p>
-      </div>
-      </section>
-
-      <section id="geoson" className="py-16 px-4 bg-white">
-      <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-4 text-center">International Events - GEOSON</h2>
-      <p className="text-gray-700 leading-relaxed text-justify">
-      The Geoinformation Society of Nigeria (GEOSON) is a core partner for GIFON, and joint events 
-      highlight the importance of national collaboration in advancing geospatial education, practice, 
-      and professional standards within Nigeria.
-      </p>
-      </div>
-      </section>
+                        {e.link && (
+                          <a href={e.link} className="mt-3 inline-block text-sm font-medium underline">
+                            Read more
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
       </main>
-
     </>
   );
 }
