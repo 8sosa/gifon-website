@@ -65,6 +65,7 @@ export default function ProfilePage() {
           setError(data.message || "Failed to fetch profile.");
         } else {
           setProfile(data.data);
+          setLoading(false);
         }
       } catch (err: unknown) {
         if (err instanceof Error) {
