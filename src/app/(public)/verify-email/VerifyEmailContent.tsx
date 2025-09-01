@@ -12,6 +12,10 @@ export default function VerifyEmailContent() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
+  const [resendLoading, setResendLoading] = useState(false);
+  const [resendMessage, setResendMessage] = useState<string | null>(null);
+  const [showResendForm, setShowResendForm] = useState(false);
+
   const verify = useCallback(
     async (t: string) => {
       setError(null);
@@ -58,6 +62,38 @@ export default function VerifyEmailContent() {
     if (token) verify(token);
   };
 
+  const handleResend = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setResendMessage(null);
+    setResendLoading(true);
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      const email = formData.get("email");
+
+      const resp = await fetch(
+        "https://gifon.onrender.com/api/v1/auth/resend-verification-link",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      const data = await resp.json();
+
+      if (!resp.ok || data.status === "fail") {
+        setResendMessage(data.message || "Failed to resend verification link.");
+      } else {
+        setResendMessage("📧 Verification link sent! Please check your email.");
+      }
+    } catch (err: unknown) {
+      setResendMessage(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setResendLoading(false);
+    }
+  };
+
   return (
     <main className="w-full py-16 px-4 bg-gray-50">
       <div className="max-w-md mx-auto bg-white p-8 rounded shadow">
@@ -77,7 +113,7 @@ export default function VerifyEmailContent() {
         )}
 
         {!searchParams.get("token") && (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4 mb-6">
             <div>
               <label
                 htmlFor="token"
@@ -106,6 +142,49 @@ export default function VerifyEmailContent() {
             </button>
           </form>
         )}
+
+        {/* Collapsible Resend Section */}
+        <div className="border-t pt-6 mt-6 text-center">
+          {!showResendForm ? (
+            <button
+              type="button"
+              onClick={() => setShowResendForm(true)}
+              className="text-blue-600 underline"
+            >
+              Didn’t get the email? Resend verification link
+            </button>
+          ) : (
+            <form onSubmit={handleResend} className="space-y-4">
+              <input
+                type="email"
+                name="email"
+                className="w-full border rounded p-3"
+                placeholder="Enter your email"
+                required
+              />
+              <button
+                type="submit"
+                disabled={resendLoading}
+                className="w-full bg-blue-600 text-white px-6 py-3 rounded hover:bg-opacity-90 transition disabled:opacity-60"
+              >
+                {resendLoading ? "Sending..." : "Resend Verification Link"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowResendForm(false)}
+                className="block mx-auto mt-2 text-sm text-gray-600 underline"
+              >
+                Cancel
+              </button>
+            </form>
+          )}
+
+          {resendMessage && (
+            <p className="mt-4 text-center text-sm text-gray-700">
+              {resendMessage}
+            </p>
+          )}
+        </div>
       </div>
     </main>
   );
