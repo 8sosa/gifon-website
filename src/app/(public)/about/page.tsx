@@ -9,7 +9,7 @@ const partners: Logo[] = [
   { src: '/images/na.png', alt: 'Nigerian Army' },
   { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
   { src: '/images/nn.png', alt: 'Nigerian Navy' },
-  { src: '/images/nsa.png', alt: 'Office of the National Security Adviser' },
+  // { src: '/images/nsa.png', alt: 'Office of the National Security Adviser' },
 ];
 
 function mapMembersByCategory(members: FlatMember[], category: string): FlatMember[] {

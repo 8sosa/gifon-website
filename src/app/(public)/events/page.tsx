@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from "next/link";
 import { getUpcomingEvents } from '@/lib/contentful-queries';
 import HeroSection from '@/components/HeroSection';
 import EventCard from '@/components/EventCard';
@@ -158,30 +159,26 @@ export default async function EventsPage() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {past.map((e) => (
-                  <div key={e.id} className="p-4 bg-white rounded-lg shadow-sm">
-                    <div className="flex items-start gap-4">
-                      {e.image && (
-                        <Image src={e.image} alt={e.title ?? 'event image'} className="w-28 h-20 object-cover rounded" width={1500} height={1000}/>
-                      )}
-                      <div>
-                        <h3 className="font-semibold">{e.title}</h3>
-                        <div className="text-sm text-gray-500">{formatDate(e.startDate)}</div>
-
-                        {/* If you want to render the full rich text, use documentToReactComponents.
-                            But here we've normalized description to a string for EventCard; if you
-                            still have access to the original Document and want rich rendering, do this:
-                            documentToReactComponents(e.description as Document)
-                        */}
-                        <p className="mt-2 text-sm text-gray-700 line-clamp-3">{e.description}</p>
-
-                        {e.link && (
-                          <a href={e.link} className="mt-3 inline-block text-sm font-medium underline">
-                            Read more
-                          </a>
+                  <Link key={e.id} href={`/events/${e.id}`}>
+                    <div className="p-4 bg-white rounded-lg shadow-sm">
+                      <div className="flex items-start gap-4">
+                        {e.image && (
+                          <Image src={e.image} alt={e.title ?? 'event image'} className="w-28 h-20 object-cover rounded" width={1500} height={1000}/>
                         )}
+                        <div>
+                          <h3 className="font-semibold">{e.title}</h3>
+                          <div className="text-sm text-gray-500">{formatDate(e.startDate)}</div>
+
+                          {/* If you want to render the full rich text, use documentToReactComponents.
+                              But here we've normalized description to a string for EventCard; if you
+                              still have access to the original Document and want rich rendering, do this:
+                              documentToReactComponents(e.description as Document)
+                          */}
+                          <p className="mt-2 text-sm text-gray-700 line-clamp-3">{e.description}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}
