@@ -12,8 +12,7 @@ const menuItems = [
     children: [
       { label: 'Aim', anchor: 'aim' },
       { label: 'Objectives', anchor: 'objectives' },
-      { label: 'Mission', anchor: 'mission' },
-      { label: 'Vision', anchor: 'vision' },
+      { label: 'Mission', anchor: 'mission-vision' },
       { label: 'Core Values', anchor: 'core-values' },
       { label: 'Board of Directors', anchor: 'board-directors' },
       { label: 'Our Partners', anchor: 'our-partners' },
