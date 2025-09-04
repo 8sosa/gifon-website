@@ -374,7 +374,6 @@ export default function RegisterPage() {
 
                         <select name="individualMembershipType" className="border p-3 rounded w-full" required>
                           <option value="">Membership Type</option>
-                          <option value="FreeTier">Free Tier</option>
                           <option value="Professional">Professional</option>
                           <option value="Student">Student</option>
                           <option value="Honorary">Honorary</option>

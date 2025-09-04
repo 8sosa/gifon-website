@@ -4,9 +4,17 @@ import HeroSection from '@/components/HeroSection';
 import AnimatedStats from "@/components/home/AnimatedStats";
 import MapPreview from "@/components/home/MapPreview";
 import CaseCarousel from "@/components/home/CaseCarousel";
-import MarqueeLogos from "@/components/home/MarqueeLogos";
+import { LogoCarousel, Logo } from '@/components/LogoCarousel';
 // import SubscribeForm from "@/components/SubscribeForm";
 import RevealProvider from "@/components/ui/RevealProvider";
+
+
+const partners: Logo[] = [
+  { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
+  { src: '/images/na.png', alt: 'Nigerian Army' },
+  { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
+  { src: '/images/nn.png', alt: 'Nigerian Navy' },
+];
 
 export default function HomePage() {
   return (
@@ -100,9 +108,11 @@ export default function HomePage() {
         </section>
 
         {/* Partners */}
-        <section className="mt-12">
-          <h4 className="text-sm font-semibold text-gray-600">Trusted by</h4>
-          <MarqueeLogos />
+        <section id="our-partners" className="py-20 px-6 bg-white">
+          <div className="max-w-6xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-8">Trusted By</h2>
+            <LogoCarousel logos={partners} />
+          </div>
         </section>
 
         {/* CTA */}
