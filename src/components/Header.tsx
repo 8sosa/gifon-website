@@ -21,7 +21,7 @@ const menuItems = [
       { label: 'Objectives', anchor: 'objectives' },
       { label: 'Mission', anchor: 'mission-vision' },
       { label: 'Core Values', anchor: 'core-values' },
-      { label: 'Board of Directors', anchor: 'board-directors' },
+      { label: 'Leadership & History', link: 'leadership' },
       { label: 'Our Partners', anchor: 'our-partners' },
       { label: 'Contact Us', anchor: 'contact' },
     ],
@@ -295,7 +295,7 @@ export default function Header() {
                   <ul className={`${styles.dropdownMenu} ${openDropdown === item.label ? styles.showDropdown : ''}`}>
                     {item.children.map(child => (
                       <li key={child.anchor} className={styles.dropdownItem}>
-                        <Link href={`${item.href}#${child.anchor}`} onClick={closeAll}>
+                        <Link href={child.link ?? `${item.href}#${child.anchor}`} onClick={closeAll}>
                           {child.label}
                         </Link>
                       </li>

@@ -4,6 +4,7 @@ import HeroSection from '@/components/HeroSection';
 // import { FlatMember } from '@/types/types';
 // import { LogoCarousel, Logo } from '@/components/LogoCarousel';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // import MotionDiv from "@/components/MotionDiv"; 
 // import MotionImg from "@/components/MotionImg";
@@ -76,9 +77,11 @@ export default async function AboutPage() {
             nonprofit 501(c)3 association incorporated in 1966. Moving forward,
             URISA will be doing business as the Geospatial Professional Network.
           </p>
+          <Link href={"/leadership"}>
           <button className="mt-6 bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition">
             leadership & History
           </button>
+          </Link>
         </div>
       </section>
 

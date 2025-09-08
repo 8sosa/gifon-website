@@ -1,7 +1,26 @@
-// app/membership/page.tsx
+"use client"
+
 import Link from "next/link";
+import { useState } from "react";
 
 export default function MembershipPage() {
+    const [selected, setSelected] = useState("");
+
+  const categories = [
+    "Professional",
+    "Young Professional",
+    "Student",
+    "Government Agency",
+    "Educational Institution",
+    "Platinum Corporate Partner",
+    "Gold Corporate Partner",
+    "Silver Corporate Partner",
+    "Bronze Corporate Partner",
+    "Start-up and Small Business Partner",
+    "Retired",
+    "Unemployed",
+  ];
+
   return (
     <>
         <div className="pageHead"/>
@@ -45,31 +64,40 @@ export default function MembershipPage() {
             <li><b>Partners:</b> Platinum to Start-Up/Small Business tiers with marketing benefits.</li>
             </ul>
 
-            <p>Select your category of membership below:</p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-blue-700 underline">
-            {[
-                "Professional",
-                "Young Professional",
-                "Student",
-                "Government Agency",
-                "Educational Institution",
-                "Platinum Corporate Partner",
-                "Gold Corporate Partner",
-                "Silver Corporate Partner",
-                "Bronze Corporate Partner",
-                "Start-up and Small Business Partner",
-                "Retired",
-                "Unemployed",
-            ].map((item) => (
-                <Link key={item} href="#" className="hover:text-blue-500">
-                {item}
-                </Link>
-            ))}
-            </div>
+            <div className="max-w-xl">
+                <p className="mb-4 text-gray-800 font-medium">
+                    Select your category of membership below:
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {categories.map((item) => (
+                    <label
+                        key={item}
+                        className="flex items-center gap-2 cursor-pointer border border-gray-300 rounded-lg px-3 py-2 hover:border-blue-500"
+                    >
+                        <input
+                        type="radio"
+                        name="membership"
+                        value={item}
+                        checked={selected === item}
+                        onChange={(e) => setSelected(e.target.value)}
+                        className="text-blue-600 focus:ring-blue-500"
+                        />
+                        <span className="text-gray-700">{item}</span>
+                    </label>
+                    ))}
+                </div>
 
+                {selected && (
+                    <p className="mt-4 text-sm text-gray-600">
+                    You selected: <span className="font-semibold">{selected}</span>
+                    </p>
+                )}
+                </div>
+            <Link href="/register" >
             <button className="mt-6 bg-blue-700 text-white px-6 py-2 rounded">
             CONTINUE »
             </button>
+            </Link>
         </section>
 
         {/* Sidebar */}

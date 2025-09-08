@@ -331,7 +331,7 @@ export default function RegisterPage() {
                           <input name="occupation" className="border p-3 rounded w-full" placeholder="Current Occupation" />
                           <input name="organization" className="border p-3 rounded w-full" placeholder="Organization/Institution" />
                           <input name="jobTitle" className="border p-3 rounded w-full" placeholder="Job Title/Role" />
-                          <input name="yearsExperience" className="border p-3 rounded w-full" placeholder="Years of Experience in GeoINT" />
+                          {/* <input name="yearsExperience" className="border p-3 rounded w-full" placeholder="Years of Experience in GeoINT" /> */}
                         </div>
 
                         <div className="mt-4">
@@ -390,13 +390,13 @@ export default function RegisterPage() {
                         <select name="howDidYouHearAboutGifon" className="border p-3 rounded w-full mt-3">
                           <option value="">How did you hear about GIFON?</option>
                           <option value="Online">Online</option>
-                          <option value="WordOfMouth">Word of Mouth</option>
+                          {/* <option value="WordOfMouth">Word of Mouth</option> */}
                           <option value="EventConference">Event/Conference</option>
                           <option value="Referral">Referral</option>
                           <option value="Other">Other</option>
                         </select>
 
-                        <input type="password" name="password" placeholder="Choose a password" className="border p-3 rounded w-full mt-3" required />
+                        {/* <input type="password" name="password" placeholder="Choose a password" className="border p-3 rounded w-full mt-3" required /> */}
                       </div>
 
                       {/* Declaration */}
@@ -422,7 +422,7 @@ export default function RegisterPage() {
                               <Spinner /> Submitting...
                             </>
                           ) : (
-                            "Register"
+                            "Submit"
                           )}
                         </button>
                       </div>
