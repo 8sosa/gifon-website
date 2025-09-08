@@ -155,7 +155,7 @@ export default function ProfilePage() {
     <>
       <HeroSection
         title="My Profile"
-        description="View and manage your GIFON membership information."
+        // description="View and manage your GIFON membership information."
         backgroundImages={["/bg/e.jpeg", "/bg/a.JPG", "/bg/b.JPG"]}
       />
 

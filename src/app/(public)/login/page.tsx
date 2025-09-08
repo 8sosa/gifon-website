@@ -61,7 +61,7 @@ export default function LoginPage() {
     <>
       <HeroSection
         title="Member Login"
-        description="Access your account to view exclusive resources and manage your membership."
+        // description="Access your account to view exclusive resources and manage your membership."
         backgroundImages={[
           "/bg/e.jpeg",
           "/bg/a.JPG",

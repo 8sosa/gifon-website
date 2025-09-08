@@ -9,7 +9,7 @@ export default function VerifyEmailPage() {
     <>
       <HeroSection
         title="Verify Your Email"
-        description="Confirm your account to access exclusive member resources."
+        // description="Confirm your account to access exclusive member resources."
         backgroundImages={[
           "/bg/e.jpeg",
           "/bg/a.JPG",

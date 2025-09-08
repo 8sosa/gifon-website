@@ -1,25 +1,103 @@
 import styles from '@/styles/Footer.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
+import { FaXTwitter, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
+
 
 export default function Footer() {
+  const menuItems = [
+    // {
+    //   label: 'Home',
+    //   href: '/',
+    // },
+    {
+      label: 'About Us',
+      href: '/about'
+    },
+    {
+      label: 'Programs',
+      href: '/programs'
+    },
+    // {
+    //   label: 'Critical Infrastructure Support',
+    //   href: '/infrastructure'
+    // },
+    // {
+    //   label: 'Policies',
+    //   href: '/policies'
+    // },
+    // {
+    //   label: 'Groups & Forums',
+    //   href: '/forums'
+    // },
+    {
+      label: 'Publications',
+      href: '/publications'
+    },
+    {
+      label: 'Membership',
+      href: '/membership'
+    },
+    // {
+    //   label: 'Media Resources',
+    //   href: '/media'
+    // },
+    // {
+    //   label: 'Events',
+    //   href: '/events'
+    // },
+    {
+      label: 'Get Involved',
+      href: '/get-involved'
+    },
+  ];
+
   return (
     <footer className={styles.footer}>
       <div className={styles.top}>
-        <div className={styles.logoSection}>
+        {/* Column 1 (spans half width) */}
+        <div className={styles.col1}>
           <Image src="/logo.png" alt="GIFON Logo" width={160} height={40} />
         </div>
+        <div className={styles.footerRight}>
+          {/* Column 2 */}
+          <div className={styles.col}>
+            <h4>Contact Us</h4>
+            <ul>
+              <li>12 Richard Clapperton</li>
+              <li>Abuja, Nigeria</li>
+              <li>08012345678</li>
+            </ul>
+          </div>
 
-        
+          {/* Column 3 */}
+          <div className={styles.col}>
+            <h4>Quick Links</h4>
+            <ul>
+            {menuItems.map(item => (
+              <li key={item.label}>
+                <Link href={item.href} className={styles.navLink}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+            </ul>
+          </div>
+
+          {/* Column 4 */}
+          <div className={styles.col}>
+            <h4>Connect With Us</h4>
+            <ul className='flex flex-row justify-between'>
+              <li><a href="#"><FaXTwitter size={16}/></a></li>
+              <li><a href="#"><FaLinkedinIn size={16}/></a></li>
+              <li><a href="#"><FaFacebookF size={16}/></a></li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <div className={styles.bottom}>
-        <p>&copy; {new Date().getFullYear()} GIFON.</p>
-        <p>All rights reserved.</p>
-        {/* Optional: Social icons */}
-        {/* <div className={styles.socials}>
-          <a href="#"><img src="/icons/twitter.svg" alt="Twitter" /></a>
-          <a href="#"><img src="/icons/linkedin.svg" alt="LinkedIn" /></a>
-        </div> */}
+        <p>&copy; {new Date().getFullYear()} GIFON. All rights reserved.</p>
       </div>
     </footer>
   );

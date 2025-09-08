@@ -5,7 +5,7 @@ export default function DonatePage() {
     <>
       <HeroSection
         title="Donate & Support"
-        description="Help us advance geospatial intelligence and innovation in Nigeria through your support."
+        // description="Help us advance geospatial intelligence and innovation in Nigeria through your support."
         backgroundImages = {[
           "/bg/e.jpeg",
           "/bg/a.JPG",

@@ -5,7 +5,7 @@ export default function PublicationsPage() {
     <>
       <HeroSection
         title="Publications & Media"
-        description="Access our latest research articles, policy briefs, journals, and more."
+        // description="Access our latest research articles, policy briefs, journals, and more."
         backgroundImages = {[
           "/bg/e.jpeg",
           "/bg/a.JPG",

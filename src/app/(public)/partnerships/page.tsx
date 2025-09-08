@@ -14,7 +14,7 @@ export default function PartnershipsPage() {
     <>
       <HeroSection
         title="Partnerships & Sponsors"
-        description="Collaborate with us to advance geospatial intelligence and innovation."
+        // description="Collaborate with us to advance geospatial intelligence and innovation."
         backgroundImages = {[
           "/bg/e.jpeg",
           "/bg/a.JPG",

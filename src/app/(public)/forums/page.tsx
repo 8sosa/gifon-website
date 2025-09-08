@@ -5,7 +5,7 @@ export default function ForumsPage() {
     <>
       <HeroSection
         title="Groups & Forums"
-        description="Explore our journal content, editorial board, and submission guidelines."
+        // description="Explore our journal content, editorial board, and submission guidelines."
         backgroundImages = {[
           "/bg/e.jpeg",
           "/bg/a.JPG",

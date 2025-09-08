@@ -5,7 +5,7 @@ export default function GetInvolvedPage() {
     <>
       <HeroSection
         title="Contact Us"
-        description="Get in touch with the Geospatial Intelligence Foundation of Nigeria."
+        // description="Get in touch with the Geospatial Intelligence Foundation of Nigeria."
         backgroundImages = {[
           "/bg/e.jpeg",
           "/bg/a.JPG",
