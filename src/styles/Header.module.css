@@ -45,6 +45,136 @@
   color: #fff;
   gap: 1rem;
 }
+/* Dropdown menus */
+.dropdownWrapper {
+  position: relative;
+  z-index: 1400;
+  overflow: visible; /* allow subDropdown to render outside */
+}
+
+/* dropdown itself is absolute so it doesn't take layout space */
+.dropdownMenu {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* when wrapper has the showDropdown class, reveal the menu */
+.dropdownWrapper.showDropdown > .dropdownMenu,
+.dropdownMenu.showDropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* item and link */
+.dropdownItem {
+  position: relative;
+  overflow: visible;
+}
+
+.dropdownLinkRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdownLink {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #003F21;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dropdownLink:hover {
+  background: #f5f5f5;
+}
+
+/* nested sub-dropdown (desktop: to the right) */
+/* nested sub-dropdown (desktop: to the right, flush overlap to avoid cursor gap) */
+.subDropdown {
+  position: absolute;
+  top: 0;
+  left: calc(100% - 2px); /* overlap parent edge by 2px -> prevents hover gap */
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(6px); /* subtle animation */
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+  z-index: 1600; /* above top-level dropdown */
+  overflow: visible;
+}
+
+/* show nested submenu when its parent item is hovered OR when JS adds class */
+.subDropdown.showDropdown,
+.dropdownItem:hover > .subDropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* caret toggle (only visible on mobile via media query) */
+.dropdownToggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.4rem;
+  line-height: 1;
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+  overflow: visible; 
+}
+/* Ensure the inner dropdown <ul> that lives inside a visible .subDropdown is displayed */
+.subDropdown > .dropdownMenu {
+  position: static;            /* render the inner list stacked inside the subDropdown */
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  padding: 0.5rem 0;           /* same vertical padding as top-level list */
+  min-width: 100%;             /* allow it to fill the subDropdown container */
+}
+
+/* Extra: allow JS-driven state on the <li> to open its subDropdown reliably */
+.dropdownItem[data-open="true"] > .subDropdown,
+.dropdownItem:hover > .subDropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  pointer-events: auto;
+}
 
 /* Offcanvas initial state for mobile */
 @media (max-width: 768px) {
@@ -107,6 +237,7 @@
 
 .navItem {
   position: relative;
+  overflow: visible;
 }
 
 .navLink,
@@ -119,42 +250,6 @@
   text-decoration: none;
   padding: 0.5rem;
   position: relative;
-}
-
-/* Dropdown menus */
-.dropdownMenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem 0;
-  min-width: 200px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(0.5rem);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 1000;
-}
-
-.showDropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.dropdownItem a {
-  display: block;
-  padding: 0.5rem 1rem;
-  color: #003F21;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.dropdownItem a:hover {
-  background: #f0f0f0;
 }
 
 /* Menu Button */
@@ -170,6 +265,35 @@
 
 /* Offcanvas Mobile Nav */
 @media (max-width: 768px) {
+  .dropdownWrapper { position: static; }
+  .dropdownMenu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    max-height: 0;
+    overflow: hidden;
+    pointer-events: auto;
+    transition: max-height 0.28s ease, padding 0.18s;
+    padding-left: 0;
+  }
+  .dropdownMenu.showDropdown { max-height: 900px; padding: 0.25rem 0; }
+
+  .subDropdown {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease;
+  }
+  .subDropdown.showDropdown { max-height: 900px; }
+
+  .dropdownToggle { display: inline-block; }
+
+  .dropdownLink { padding: 0.5rem 0.75rem; }
+ 
   .topToggle, .menuToggle {
     display: block;
   }

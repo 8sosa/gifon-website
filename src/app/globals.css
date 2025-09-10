@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Bellota+Text:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Cooper";
+  src: url("/fonts/COOPBL.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* better for performance */
+}
 
 :root {
   --background: #ffffff;
@@ -26,6 +33,10 @@ html, body {
 .pageHead {
   margin-top: 8rem;
 }
+.cooper {
+  font-family: "Cooper", sans-serif;
+  font-optical-sizing: auto;
+}
 .bellota {
   font-family: "Bellota Text", sans-serif;
   font-optical-sizing: auto;
@@ -38,7 +49,13 @@ html, body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
 }
-
+.fullSect {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 /* Homepage animations & helpers (move from styled-jsx into globals.css) */
 
 /* Fade in up */

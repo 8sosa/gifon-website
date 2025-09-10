@@ -1,7 +1,7 @@
 import styles from '@/styles/Footer.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaXTwitter, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
+import { FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaXTwitter } from "react-icons/fa6";
 
 
 export default function Footer() {
@@ -64,9 +64,13 @@ export default function Footer() {
           <div className={styles.col}>
             <h4>Contact Us</h4>
             <ul>
-              <li>12 Richard Clapperton</li>
-              <li>Abuja, Nigeria</li>
-              <li>08012345678</li>
+              <li>12 RICHARD CLAPPERTON,</li>
+              <li>OFF MAMAN NASIR, ASOKORO DISTRICT,</li>
+              <li>FCT, ABUJA NIGERIA.</li>
+              <li>Director General: +234 707 739 6612</li>
+              <li>Membership/Outreach: +234 707 726 9829</li>
+              <li>Secretariat: +234 707 721 1243</li>
+              <li>Email: secretariat@gifon.org.ng</li>
             </ul>
           </div>
 
@@ -91,6 +95,8 @@ export default function Footer() {
               <li><a href="#"><FaXTwitter size={16}/></a></li>
               <li><a href="#"><FaLinkedinIn size={16}/></a></li>
               <li><a href="#"><FaFacebookF size={16}/></a></li>
+              <li><a href="#"><FaYoutube size={16}/></a></li>
+              <li><a href="#"><FaInstagram size={16}/></a></li>
             </ul>
           </div>
         </div>

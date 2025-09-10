@@ -1,14 +1,21 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styles from '@/styles/Header.module.css';
-import { FaXTwitter, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
-import { FaSearch } from "react-icons/fa";
-import { useCallback } from 'react';
+import { FaXTwitter, FaLinkedinIn, FaFacebookF } from 'react-icons/fa6';
+import { FaSearch } from 'react-icons/fa';
+
+interface MenuItem {
+  label: string;
+  href?: string;
+  anchor?: string;
+  link?: string;
+  children?: MenuItem[];
+}
 
 // Define menu structure
-const menuItems = [
+const menuItems: MenuItem[] = [
   {
     label: 'Home',
     href: '/'
@@ -20,8 +27,9 @@ const menuItems = [
       { label: 'Aim', anchor: 'aim' },
       { label: 'Objectives', anchor: 'objectives' },
       { label: 'Mission', anchor: 'mission-vision' },
+      { label: 'Vission', anchor: 'mission-vision' },
       { label: 'Core Values', anchor: 'core-values' },
-      { label: 'Leadership & History', link: 'leadership' },
+      { label: 'Board of Directors', link: 'leadership' },
       { label: 'Our Partners', anchor: 'our-partners' },
       { label: 'Contact Us', anchor: 'contact' },
     ],
@@ -106,9 +114,9 @@ const menuItems = [
     children: [
       { label: 'Why Join GIFON', anchor: 'why-join' },
       { label: 'Membership Benefits', anchor: 'benefits' },
-      { label: 'Talent Development', anchor: 'talent' },
       { label: 'Membership Categories', anchor: 'categories' },
       { label: 'Membership Portal (Apply & Renew)', anchor: 'portal' },
+      { label: 'Talent Development', anchor: 'talent' },
       { label: 'Volunteer Opportunities', anchor: 'opportunities' },
     ],
   },
@@ -116,66 +124,113 @@ const menuItems = [
     label: 'Education',
     href: '/education',
     children: [
-      { label: 'Why Join GIFON', anchor: 'why-join' },
-      { label: 'Membership Benefits', anchor: 'benefits' },
-      { label: 'Talent Development', anchor: 'talent' },
-      { label: 'Membership Categories', anchor: 'categories' },
-      { label: 'Membership Portal (Apply & Renew)', anchor: 'portal' },
-      { label: 'Volunteer Opportunities', anchor: 'opportunities' },
+      { label: 'Training', anchor: 'C-T' },
+      { label: 'Programmes', anchor: 'C-T', children: [
+            { label: 'Youth Empowerment & Talent Acceleration', anchor: 'youth-empowerment' },
+            { label: 'Women in GEOINT (WINGS)', anchor: 'wings' },
+            { label: 'Geoinnovation & Tech Incubation', anchor: 'geoinnovation' },
+            { label: 'National Geospatial Security & Intelligence Hub', anchor: 'geospatial-hub' },
+            { label: 'Community Mapping for Development', anchor: 'community-mapping' },
+            { label: 'Open Data & Research', anchor: 'open-data' },
+            { label: 'Conferences, Workshops & Masterclasses', anchor: 'conferences' },
+            { label: 'Training & Certification', anchor: 'training' },
+          ],
+       },
+      { label: 'Events & Highlights', anchor: 'C-T' ,
+        children: [
+          { label: 'Upcoming Events', anchor: 'upcoming-events', 
+            children: [
+              { label: 'DGI London', anchor: 'dgi-london' },
+              { label: 'USGIF', anchor: 'usgif' },
+              { label: 'FIG', anchor: 'fig' },
+              { label: 'AAG', anchor: 'aag' },
+              { label: 'AARSE', anchor: 'aarse' },
+              { label: 'EIS-Africa', anchor: 'eis-africa' },
+              { label: 'GEOSON', anchor: 'geoson' },
+              { label: 'GIFON Pre-Launch', anchor: 'geoson' },
+            ]  
+          },
+          { label: 'Past Events', anchor: 'past-events', 
+            children: [
+              { label: 'DGI London', anchor: 'dgi-london' },
+              { label: 'USGIF', anchor: 'usgif' },
+              { label: 'FIG', anchor: 'fig' },
+              { label: 'AAG', anchor: 'aag' },
+              { label: 'AARSE', anchor: 'aarse' },
+              { label: 'EIS-Africa', anchor: 'eis-africa' },
+              { label: 'GEOSON', anchor: 'geoson' },
+              { label: 'GIFON Pre-Launch', anchor: 'geoson' },
+            ]  
+          },
+        ]
+    },
+
+      // { label: 'Membership Benefits', anchor: 'benefits' },
+      // { label: 'Talent Development', anchor: 'talent' },
+      // { label: 'Membership Categories', anchor: 'categories' },
+      // { label: 'Membership Portal (Apply & Renew)', anchor: 'portal' },
+      // { label: 'Volunteer Opportunities', anchor: 'opportunities' },
     ],
   },
   {
     label: 'Resources',
-    href: '/resources'
-  },
-  // {
-  //   label: 'Media Resources',
-  //   href: '/media',
-  //   children: [
-  //     { label: 'News & Media', anchor: 'news' },
-  //     { label: 'Press Releases', anchor: 'press' },
-  //     { label: 'Publication Archive', anchor: 'archive' },
-  //     { label: 'Resource Materials', anchor: 'resources' },
-  //     { label: 'Events & Highlights', anchor: 'events' },
-  //     { label: 'Podcasts & Webinars', anchor: 'podcasts' },
-  //     { label: 'Photo & Video Gallery', anchor: 'gallery' },
-  //     { label: 'Downloads', anchor: 'downloads' },
-  //   ],
-  // },
-  // {
-  //   label: 'Events',
-  //   href: '/events',
-  //   children: [
-  //     { label: 'Events & Highlights', anchor: 'highlights' },
-  //     { label: 'Upcoming Events', anchor: 'upcoming' },
-  //     { label: 'Pre-Launch Event', anchor: 'prelaunch' },
-  //     { label: 'Inaugural Conference & Launching', anchor: 'inaugural' },
-  //     { label: 'International Events - DGI London', anchor: 'dgi' },
-  //     { label: 'International Events - USGIF GEOINT', anchor: 'usgif' },
-  //     { label: 'International Events - FIG', anchor: 'fig' },
-  //     { label: 'International Events - AAG', anchor: 'aag' },
-  //     { label: 'International Events - AARSE', anchor: 'aarse' },
-  //     { label: 'International Events - EIS-Africa', anchor: 'eis' },
-  //     { label: 'International Events - GEOSON', anchor: 'geoson' },
-  //   ],
-  // },
-  // {
-  //   label: 'Get Involved',
-  //   href: '/get-involved',
-  //   children: [
-  //     { label: 'Membership', anchor: 'membership' },
-  //     { label: 'Volunteer', anchor: 'volunteer' },
-  //     { label: 'Scholarships & Fellowships', anchor: 'scholarships' },
-  //     { label: 'Partnerships', anchor: 'partnerships' },
-  //     { label: 'Careers & Internships', anchor: 'careers' },
-  //     { label: 'Support GIFON', anchor: 'support' },
-  //   ],
-  // },
+    href: '/resources',
+    children: [
+      { label: 'Media Resources', anchor: 'C-T' ,
+        children: [
+              { label: 'New & Media ', anchor: 'dgi-london' },
+              { label: 'Press Releases', anchor: 'usgif' },
+              { label: 'Publication Archive', anchor: 'fig' },
+              { label: 'Podcast and Webinar Series', anchor: 'aag' },
+              { label: 'Photo & Video Gallery', anchor: 'aarse' },
+              { label: 'Downloads', anchor: 'eis-africa' },
+            ]  
+          },
+          { label: 'Policies', anchor: 'C-T' ,
+            children: [
+              { label: 'Code of Ethics', anchor: 'dgi-london' },
+              { label: 'Anti-Corruption', anchor: 'usgif' },
+              { label: 'Fund Raising', anchor: 'fig' },
+              { label: 'Anti-Modern-Day Slavery', anchor: 'aag' },
+              { label: 'Volunteer & Internship', anchor: 'aarse' },
+            ]
+          },
+          { label: 'Publications', anchor: 'C-T' ,
+            children: [
+              { label: 'Eyes on Location- The Journal of GeoINSIGHT', anchor: 'dgi-london' },
+              { label: 'Eyes on Location- The GeoINSIGHT Bulletin', anchor: 'usgif' },
+              { label: 'Conference & Workshop Proceedings', anchor: 'fig' },
+              { label: 'Policy Briefs & White Paper', anchor: 'aag' },
+              { label: 'Research Reports', anchor: 'aarse' },
+            ]  
+          },
+          {
+            label: 'Critical Infrastructure Support',
+            href: '/infrastructure',
+            children: [
+              { label: 'Energy Security & Development', anchor: 'energy' },
+              { label: 'Transportation', anchor: 'transportation' },
+              { label: 'Communication', anchor: 'communication' },
+              { label: 'Water & Environment', anchor: 'water' },
+              { label: 'Health', anchor: 'health' },
+              { label: 'Finance', anchor: 'finance' },
+              { label: 'Government Facilities', anchor: 'government' },
+              { label: 'Food Security & Agriculture', anchor: 'food' },
+              { label: 'Defence & Security', anchor: 'defence' },
+              { label: 'Information Technology', anchor: 'it' },
+              { label: 'Industrial Systems', anchor: 'industrial' },
+              { label: 'Emergency Services', anchor: 'emergency' },
+              { label: 'Manufacturing', anchor: 'manufacturing' },
+              { label: 'Space & Satellite Systems', anchor: 'space' },
+            ],
+          },
+        ]
+    },
   {
-    label: 'Contribute',
-    href: '/#'
+    label: 'Donate',
+    href: '/donate'
   },
-];
+  ]
 
 const topBarItemsBase = [
   {
@@ -192,49 +247,137 @@ const topBarItemsBase = [
   },
 ];
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    setIsMobile(mq.matches);
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else mq.addListener(onChange);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', onChange);
+      else mq.removeListener(onChange);
+    };
+  }, [breakpoint]);
+  return isMobile;
+}
+
+
+function Dropdown({
+  items,
+  parentHref,
+  closeAll,
+  depth = 0,
+}: {
+  items: MenuItem[];
+  parentHref: string;
+  closeAll: () => void;
+  depth?: number;
+}) {
+  const isMobile = useIsMobile();
+  const [openChild, setOpenChild] = useState<string | null>(null);
+
+  return (
+    <ul className={styles.dropdownMenu} data-depth={depth}>
+      {items.map((child, idx) => {
+        const hasChildren = Boolean(child.children && child.children.length);
+        const isOpen = openChild === child.label;
+
+        return (
+          <li
+          key={`${child.label}-${idx}`}
+          className={styles.dropdownItem}
+          data-open={isOpen ? "true" : "false"}   // <-- new attribute
+          onMouseEnter={() => { if (!isMobile) setOpenChild(child.label); }}
+          onMouseLeave={() => { if (!isMobile) setOpenChild(prev => (prev === child.label ? null : prev)); }}
+          onFocus={() => { if (!isMobile) setOpenChild(child.label); }}
+          onBlur={() => { if (!isMobile) setOpenChild(prev => (prev === child.label ? null : prev)); }}
+        >
+            <div className={styles.dropdownLinkRow}>
+              <Link
+                href={child.link ?? `${parentHref}#${child.anchor ?? ''}`}
+                onClick={(e) => {
+                  if (isMobile && hasChildren) {
+                    // on mobile, tapping a parent with children should toggle
+                    e.preventDefault();
+                    setOpenChild(prev => (prev === child.label ? null : child.label));
+                    return;
+                  }
+                  closeAll();
+                }}
+                className={styles.dropdownLink}
+              >
+                {child.label}
+              </Link>
+
+              {hasChildren && (
+                <button
+                  aria-expanded={isOpen}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenChild(prev => (prev === child.label ? null : child.label));
+                  }}
+                  className={styles.dropdownToggle}
+                >
+                  ▸
+                </button>
+              )}
+            </div>
+
+            {hasChildren && (
+              <div className={`${styles.subDropdown} ${isOpen ? ' ' + styles.showDropdown : ''}`}>
+                <Dropdown
+                  items={child.children!}
+                  parentHref={parentHref}
+                  closeAll={closeAll}
+                  depth={depth + 1}
+                />
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [topOpen, setTopOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [openTopDropdown, setOpenTopDropdown] = useState<string | null>(null);
+  // const [openTopDropdown, setOpenTopDropdown] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
-  
+  const navRef = useRef<HTMLElement | null>(null);
+  const isMobile = useIsMobile();
 
   // Toggle handlers
   const toggleMenu = () => setMenuOpen(prev => !prev);
   const toggleTop = () => setTopOpen(prev => !prev);
-  
+
   const closeAll = useCallback(() => {
     setMenuOpen(false);
     setTopOpen(false);
     setOpenDropdown(null);
-    setOpenTopDropdown(null);
-    console.log(openTopDropdown);
-  }, [openTopDropdown]);
-
-   // Check for JWT on mount
-   useEffect(() => {
-    const token = localStorage.getItem('jwt');
+  }, []);
+  
+  useEffect(() => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('jwt') : null;
     setIsLoggedIn(!!token);
   }, []);
 
   const topBarItems = [...topBarItemsBase];
   if (isLoggedIn) {
-    // Replace Login with Profile
     const idx = topBarItems.findIndex(item => item.label === 'Login');
-    if (idx !== -1) {
-      topBarItems[idx] = { label: 'Profile', href: '/profile' };
-    }
+    if (idx !== -1) topBarItems[idx] = { label: 'Profile', href: '/profile' };
   }
 
-  // Click outside to close menus
+  // click outside to close
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        closeAll();
-      }
+      if (navRef.current && !navRef.current.contains(event.target as Node)) closeAll();
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -247,69 +390,71 @@ export default function Header() {
         <Link href="/" className={styles.logo} onClick={closeAll}>
           <Image src="/logo.png" alt="Gifon" width={1000} height={1000} />
         </Link>
+
         <div className={`${styles.topMenu} ${topOpen ? styles.show : ''}`}>
           {topBarItems.map(item => (
             <div
               key={item.label}
               className={styles.navItem}
-              onMouseEnter={() => setOpenTopDropdown(item.label)}
-              onMouseLeave={() => setOpenTopDropdown(null)}
             >
-                <Link href={item.href} onClick={closeAll} className={styles.topNavLink}>
-                  {item.label}
-                </Link>
+              <Link href={item.href!} onClick={closeAll} className={styles.topNavLink}>
+                {item.label}
+              </Link>
             </div>
           ))}
-            <div className='flex flex-row gap-3 green'>
+          <div className='flex flex-row gap-3 green'>
             <FaSearch size={16}/>
             <FaXTwitter size={16}/>
             <FaLinkedinIn size={16}/>
             <FaFacebookF size={16}/>
-            </div>
+          </div>
         </div>
 
-        <button className={styles.menuToggle} onClick={toggleMenu} aria-label="Toggle menu">
-          ☰
-        </button>
+        <button className={styles.menuToggle} onClick={toggleMenu} aria-label="Toggle menu">☰</button>
       </div>
 
-      {/* bottom Bar */}
+      {/* Bottom Nav */}
       <div className={styles.topBar}>
-        <button className={styles.topToggle} onClick={toggleTop} aria-label="Toggle top menu">
-          ☰
-        </button>
+        <button className={styles.topToggle} onClick={toggleTop} aria-label="Toggle top menu">☰</button>
+
         <nav className={`${styles.navLinks} ${menuOpen ? styles.show : ''}`}>
           {menuItems.map(item => (
             <div
               key={item.label}
               className={styles.navItem}
-              onMouseEnter={() => setOpenDropdown(item.label)}
-              onMouseLeave={() => setOpenDropdown(null)}
+              onMouseEnter={() => { if (!isMobile) setOpenDropdown(item.label); }}
+              onMouseLeave={() => { if (!isMobile) setOpenDropdown(null); }}
             >
               {item.children ? (
                 <>
-                  {/* Parent now links to page */}
-                  <Link href={item.href} className={styles.navLink} onClick={closeAll}>
+                  <Link
+                    href={item.href ?? '#'}
+                    className={styles.navLink}
+                    onClick={(e) => {
+                      if (isMobile) {
+                        e.preventDefault();
+                        setOpenDropdown(prev => (prev === item.label ? null : item.label));
+                        return;
+                      }
+                      closeAll();
+                    }}
+                  >
                     {item.label}
                   </Link>
-                  <ul className={`${styles.dropdownMenu} ${openDropdown === item.label ? styles.showDropdown : ''}`}>
-                    {item.children.map(child => (
-                      <li key={child.anchor} className={styles.dropdownItem}>
-                        <Link href={child.link ?? `${item.href}#${child.anchor}`} onClick={closeAll}>
-                          {child.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+
+                  <div className={`${styles.dropdownWrapper} ${openDropdown === item.label ? styles.showDropdown : ''}`}>
+                    <Dropdown items={item.children} parentHref={item.href ?? '#'} closeAll={closeAll} />
+                  </div>
                 </>
               ) : (
-                <Link href={item.href} onClick={closeAll} className={styles.navLink}>
+                <Link href={item.href ?? '#'} onClick={closeAll} className={styles.navLink}>
                   {item.label}
                 </Link>
               )}
             </div>
           ))}
         </nav>
+
         {menuOpen && <div className={styles.overlay} onClick={closeAll} />}
       </div>
     </header>

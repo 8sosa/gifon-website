@@ -28,23 +28,27 @@ export default function MembershipPage() {
                         desc: "Committed to the next generation of GIS leaders through scholarships and opportunities. Discounted membership for professionals 35 years and younger.",
                     },
                     {
-                        title: "Individual - Young Professional",
+                        title: "Individual - Young Professionals Group",
                         desc: "Full-time students (9+ graduate credits or 12+ undergraduate credits) qualify for discounted membership.",
                     },
                     {
-                        title: "Individual - Student",
+                        title: "Individual - Women in GEOINT Group ",
                         desc: "Government agency membership allows multiple individuals to participate with cost savings.",
                     },
                     {
-                        title: "Organization - Government Agency",
+                        title: "Individual - Student Member ",
                         desc: "Raise your company’s visibility, exchange ideas, and build relationships with industry leaders.",
                     },
                     {
-                        title: "Organization - Partner",
+                        title: "Organization - Academia & Research Collaboration",
                         desc: "Institutional membership includes benefits for faculty and students.",
                     },
                     {
-                        title: "Organization - Educational Institution",
+                        title: "Organization - Policy, Governance & Ethics Forum",
+                        desc: "Outreach to community colleges and universities to support future GIS professionals.",
+                    },
+                    {
+                        title: "Organization - Industry & Private Sector Forum",
                         desc: "Outreach to community colleges and universities to support future GIS professionals.",
                     },
                     ].map((item, idx) => (
@@ -67,8 +71,20 @@ export default function MembershipPage() {
                 </div>
             </section>
 
+            <div className='h-32' id="why-join"/>
+            <section  className="pt-16 py-16 px-4 bg-white">
+                    <div className="max-w-5xl mx-auto">
+                        <h2 className="text-3xl font-semibold mb-4 text-center">Why Join GIFON?</h2>
+                        <p className="text-gray-700 leading-relaxed">
+                        As a member of the Geospatial Intelligence Foundation of Nigeria (GIFON) community, you will stay ahead of the curve, gaining insights from the best minds in the field and contributing to shaping the future of geospatial intelligence
+The Geospatial Intelligence Foundation of Nigeria (GIFON) is the only organization dedicated to promoting the geospatial intelligence tradecraft and building a stronger community of interest across industry, academia, government, professional organizations, and individual stakeholders, who develop and apply geospatial intelligence to address national development and security challenges. GIFON achieves its mission through various programs and events, building the GEOINT community, advancing the GEOINT tradecraft, and accelerating innovation in Nigeria.
+                        </p>
+                    </div>
+                </section>
+
             {/* Benefits of Membership */}
-            <section className="max-w-5xl mx-auto px-6 py-12 space-y-8">
+            <div className='h-32' id="benefits"/>
+            <section className="max-w-5xl mx-auto px-6 py-16 space-y-8">
                 <div className="inline-block mb-6 text-left">
                     <h2 className="text-green-600 text-2xl font-semibold">
                         Benefits of Membership
@@ -76,12 +92,38 @@ export default function MembershipPage() {
                     {/* Short underline */}
                     <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
                 </div>
-                <p>Connect and gain access to a supportive community of GIS professionals spanning all career stages. Whether you&apos;re looking to advance your career or enhance your organization&apos;s GIS capabilities, GPN provides a welcoming and supportive environment for growth and collaboration.</p>
-                <span className="text-gray-600 underline-offset-8">Download the GPN Brochure</span>
+                <p>Connect and gain access to a supportive community of GIS professionals spanning all career stages. Whether you&apos;re looking to advance your career or enhance your organization&apos;s GIS capabilities, GIFON provides a welcoming and supportive environment for growth and collaboration.</p>
+                <ul className="list-disc list-inside text-gray-700">
+                    <li>
+                        Certified (GEOINT) Professional Certificate
+                    </li>
+                    <li>
+                        Access to Members Only World GEOINT Events
+                    </li>
+                    <li>
+                        Stay informed about the latest industry trends, best practices, as well as ongoing customer and mission demands.
+                    </li>
+                    <li>
+                        Connect with fellow professionals, GEOINT practitioners, and broaden your professional connections.
+                    </li>
+                    <li>
+                        Significant discounts provided at all GIFON events
+                    </li>
+                    <li>
+                        Access to members-only events
+                    </li>
+                    <li>
+                        Participate in GIFON Working Groups
+                    </li>
+                    <li>
+                        Early notification of GIFON events & initiatives
+                    </li>
+                </ul>
+                <span className="text-gray-600 underline-offset-8">Download the GIFON Brochure</span>
                 <div className='mt-14'/>
                 <div className="inline-block mb-6 text-left">
                     <h2 className="text-green-600 text-2xl font-semibold">
-                    Why Professional Involvement Matters: Elevate Your Career with GPN
+                    Why Professional Involvement Matters: Elevate Your Career with GIFON
                     </h2>
                     {/* Short underline */}
                     <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
@@ -89,7 +131,7 @@ export default function MembershipPage() {
                 <div className='bg-green-300 text-black flex flex-col items-center p-16'>
                     <Image
                         src="/logo.png" // replace with your file
-                        alt="GIS Corps GPN"
+                        alt="GIS Corps GIFON"
                         width={150}
                         height={80}
                     />
@@ -97,13 +139,13 @@ export default function MembershipPage() {
                         Join a Community That Empowers You to Make a Difference
                     </h1>
                     <p>
-                        By becoming a member of GPN, you join a vibrant community of GIS professionals who are passionate about leveraging geospatial technology for positive change. Our members actively contribute to humanitarian efforts, environmental conservation, disaster response, and more. Through collaboration and shared expertise, GPN members amplify their impact and drive meaningful outcomes in communities worldwide.
+                        By becoming a member of GIFON, you join a vibrant community of GIS professionals who are passionate about leveraging geospatial technology for positive change. Our members actively contribute to humanitarian efforts, environmental conservation, disaster response, and more. Through collaboration and shared expertise, GIFON members amplify their impact and drive meaningful outcomes in communities worldwide.
                     </p>
                     <h4 className="text-xl font-semibold mt-4 text-center">
                         Together, We Can Create a Better World Through GIS
                     </h4>
                     <p>
-                        Membership in GPN provides access to a wealth of resources, including exclusive webinars, workshops, and networking events. Members also benefit from professional development opportunities, mentorship programs, and access to cutting-edge GIS tools and technologies. Whether you&apos;re a seasoned professional or just starting your career, GPN offers the support and resources you need to succeed in the dynamic field of geospatial technology.
+                        Membership in GIFON provides access to a wealth of resources, including exclusive webinars, workshops, and networking events. Members also benefit from professional development opportunities, mentorship programs, and access to cutting-edge GIS tools and technologies. Whether you&apos;re a seasoned professional or just starting your career, GIFON offers the support and resources you need to succeed in the dynamic field of geospatial technology.
                     </p>
                 </div>
 
@@ -118,26 +160,47 @@ export default function MembershipPage() {
 
                 <div className="grid md:grid-cols-2 gap-6 text-gray-700">
                 {[
-                    "Professional Education & Training",
-                    "Access to Resources",
-                    "Meaningful Connections",
-                    "Mentoring",
-                    "Professional Development & Contribution",
-                    "Visibility (for You & Your Organization)",
-                    "New Perspectives",
+                    {
+                        title:"Professional Education & Training",
+                        src: "/images/A.jpeg"
+                    },
+                    {
+                        title:"Access to Resources",
+                        src: "/images/B.jpeg"
+                    },
+                    {
+                        title:"Meaningful Connections",
+                        src: "/images/C.jpeg"
+                    },
+                    {
+                        title:"Mentoring",
+                        src: "/images/D.jpeg"
+                    },
+                    {
+                        title:"Professional Development & Contribution",
+                        src: "/images/E.jpeg"
+                    },
+                    {
+                        title:"Visibility (for You & Your Organization)",
+                        src: "/images/F.jpeg"
+                    },
+                    {
+                        title:"New Perspectives",
+                        src: "/images/G.jpeg"
+                    },
                 ].map((benefit, idx) => (
                     <div
                     key={idx}
                     className=" rounded-lg p-4 bg-gray-50 hover:bg-gray-100 flex flex-row items-center space-x-4 w-full"
                     >
                         <Image
-                            src="/ph.svg" // replace with your file
-                            alt="GIS Corps GPN"
+                            src={`${benefit.src}` }// replace with your file
+                            alt="GIS Corps GIFON"
                             width={150}
                             height={80}
                         />
                         <div>
-                            <h3 className="text-lg font-semibold mb-2 text-green-600"> {benefit.split(" ")[0]} </h3>
+                            <h3 className="text-lg font-semibold mb-2 text-green-600"> {benefit.title} </h3>
                             <p>
                                 random text about the benefit to fill up space and make it look like a real paragraph. This is just placeholder text.
                             </p>
@@ -147,58 +210,7 @@ export default function MembershipPage() {
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="text-center space-y-6 flex flex-row bg-green-100 p-16 px-80">
-                <div>
-                    <Image
-                        src="/ph.svg" // replace with your file
-                        alt="GIS Corps GPN"
-                        width={300}
-                        height={100}
-                    />
-                </div>
-                <div className='flex flex-col items-start px-4'>
-                    <div className="inline-block mb-6 text-left">
-                        <h2 className="text-green-600 text-2xl font-semibold">
-                            Ready to Join?
-                        </h2>
-                        {/* Short underline */}
-                        <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
-                    </div>
-                    <p className="text-gray-600 max-w-2xl mx-auto text-left mb-4">
-                    Join as an individual or secure an organizational membership. Membership dues
-                    are pro-rated for the first year based on your join date.
-                    </p>
-                    <Link
-                    href="#"
-                    className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700"
-                    >
-                    Apply Today
-                    </Link>
-                </div>
-            </section>
-            {/* </main> */}
-            
-            
-            {/* <main className="w-full"> */}
-                {/* --- Membership Page Sections --- */}
-
-                {/* <section id="why-join" className="py-16 px-4 bg-white">
-                    <div className="max-w-5xl mx-auto">
-                        <h2 className="text-3xl font-semibold mb-4 text-center">Why Join GIFON</h2>
-                        <p className="text-gray-700 leading-relaxed">
-                        Joining GIFON means becoming part of a global community committed to advancing geospatial intelligence 
-                        (GEOINT) and geospatial security. As threats evolve and global challenges become increasingly complex, 
-                        collaboration across disciplines has never been more vital. Membership provides you with access to a 
-                        trusted network of professionals, researchers, and innovators who are shaping the future of GEOINT. 
-                        By joining, you not only gain exclusive access to resources and events but also demonstrate your 
-                        commitment to supporting the responsible use of geospatial technology for security, humanitarian response, 
-                        and sustainable development. It is more than membership—it is a partnership in advancing global resilience.
-                        </p>
-                    </div>
-                </section>
-
-                <section id="benefits" className="py-16 px-4 bg-gray-50">
+            {/* <section  className="py-16 px-4 bg-gray-50">
                     <div className="max-w-5xl mx-auto">
                         <h2 className="text-3xl font-semibold mb-4 text-center">Membership Benefits</h2>
                         <p className="text-gray-700 leading-relaxed">
@@ -212,9 +224,9 @@ export default function MembershipPage() {
                         while also contributing meaningfully to collective security and resilience efforts.
                         </p>
                     </div>
-                </section>
-
-                <section id="talent" className="py-16 px-4 bg-white">
+                </section> */}
+                <div className='h-32' id="talent"/>
+                <section className="py-16 px-4 bg-white">
                     <div className="max-w-5xl mx-auto">
                         <h2 className="text-3xl font-semibold mb-4 text-center">Talent Development</h2>
                         <p className="text-gray-700 leading-relaxed">
@@ -229,7 +241,8 @@ export default function MembershipPage() {
                     </div>
                 </section>
 
-                <section id="categories" className="py-16 px-4 bg-gray-50">
+                <div className='h-32' id="categories"/>
+                <section className="py-16 px-4 bg-gray-50">
                     <div className="max-w-5xl mx-auto">
                         <h2 className="text-3xl font-semibold mb-4 text-center">Membership Categories</h2>
                         <p className="text-gray-700 leading-relaxed">
@@ -245,7 +258,8 @@ export default function MembershipPage() {
                     </div>
                 </section>
 
-                <section id="portal" className="py-16 px-4 bg-white">
+                <div className='h-32' id="portal"/>
+                <section className="py-16 px-4 bg-white">
                     <div className="max-w-5xl mx-auto flex flex-col items-center">
                         <h2 className="text-3xl font-semibold mb-4 text-center">Membership Portal (Apply & Renew)</h2>
                         <p className="text-gray-700 leading-relaxed">
@@ -275,7 +289,50 @@ export default function MembershipPage() {
                         that the global GEOINT community remains vibrant, inclusive, and forward-looking.
                         </p>
                     </div>
-                </section> */}
+                </section> 
+
+            {/* CTA */}
+            <section className="text-center space-y-6 flex flex-row bg-green-100 p-16 px-80">
+                <div>
+                    <Image
+                        src="/ph.svg" // replace with your file
+                        alt="GIS Corps GIFON"
+                        width={300}
+                        height={100}
+                    />
+                </div>
+                <div className='flex flex-col items-start px-4'>
+                    <div className="inline-block mb-6 text-left">
+                        <h2 className="text-green-600 text-2xl font-semibold">
+                            Ready to Join?
+                        </h2>
+                        {/* Short underline */}
+                        <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
+                    </div>
+                    <p className="text-gray-600 max-w-2xl mx-auto text-left mb-4">
+                    Join as an individual or secure an organizational membership. Membership dues
+                    are pro-rated for the first year based on your join date.
+                    </p>
+                    <Link
+                    href="#"
+                    className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700"
+                    >
+                    Apply Today
+                    </Link>
+                </div>
+            </section>
+
+            {/* </main> */}
+            
+            
+            {/* <main className="w-full"> */}
+                {/* --- Membership Page Sections --- */}
+
+                {/* 
+                
+
+                
+                */}
             {/* </main> */}
         </>
     );

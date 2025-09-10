@@ -75,7 +75,7 @@ export default function HeroSection({
 
       <div className={styles.overlay}>
         {/* Title static */}
-        <h1 className={`bellota ${styles.title}`}>{title}</h1>
+        <h1 className={`cooper ${styles.title}`}>{title}</h1>
 
         {/* Animated description */}
         {/* <p

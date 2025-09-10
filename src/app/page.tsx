@@ -14,7 +14,7 @@ const partners: Logo[] = [
   { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
   { src: '/images/na.png', alt: 'Nigerian Army' },
   { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
-  { src: '/images/nn.png', alt: 'Nigerian Navy' },
+  { src: '/images/dgi.jpeg', alt: 'DGI London' },
 ];
 
 export default function HomePage() {
@@ -86,7 +86,7 @@ export default function HomePage() {
       />
       <div className="cardGroup">
         <div className="homeCard">
-          <div><Image src="/ph.svg" alt="item" width={1500} height={1000}/></div>
+          <div><Image src="/space.jpg" alt="item" width={1500} height={1000}/></div>
           <div className="caption">
             <h4>Membership</h4>
             <p>You are invited to join GPN as an individual or as part of an organization.</p>
@@ -94,7 +94,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="homeCard">
-          <div><Image src="/ph.svg" alt="item" width={1500} height={1000}/></div>
+          <div><Image src="/space.jpg" alt="item" width={1500} height={1000}/></div>
           <div className="caption">
             <h4>Education</h4>
             <p>GPN is committed to supporting GIS professionals at all stages of their careers with essential education and training.</p>
@@ -102,7 +102,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="homeCard">
-          <div><Image src="/ph.svg" alt="item" width={1500} height={1000}/></div>
+          <div><Image src="/space.jpg" alt="item" width={1500} height={1000}/></div>
           <div className="caption">
             <h4>Resources</h4>
             <p>Learn from our vast library of research and papers, publications, FAQs, and podcasts.</p>
@@ -157,7 +157,18 @@ export default function HomePage() {
         {/* home sign in */}
         <div className="gradient-container">
           <div className="plugged flex flex-row gap-4 items-start">
-            <Image src="/ph.svg" alt="item" width={1500} height={1000} className='pluggedImg'/>
+            <div className="relative w-full h-0 pb-[56.25%]">
+              <video src={"/vids/vid1.mp4"} autoPlay loop muted className="absolute top-0 left-0 w-full h-full rounded shadow object-cover"/>
+              {/* <iframe
+                src="https://www.youtube.com/embed/Zrv_Cp8bLRM?si=4-0YJd7cTP0TLCKF"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                className="absolute top-0 left-0 w-full h-full rounded shadow"
+              /> */}
+            </div>
             <div className="flex flex-col">
               <h3 className="text-2xl font-bold bellota text-nowrap">Get Plugged In</h3>
               <p className="mt-2 montserrat max-w-xl bg-white p-2 rounded-2xl shadow nowrap text-bold green text-center">Learn More</p>
@@ -263,7 +274,7 @@ export default function HomePage() {
                   href="#"
                   className="text-sky-700 hover:underline"
                 >
-                  Follow GPN on Bluesky
+                  Follow GIFON on Facebook
                 </a>
               </li>
               <li>
@@ -271,7 +282,31 @@ export default function HomePage() {
                   href="#"
                   className="text-sky-700 hover:underline"
                 >
-                  Follow GPN on LinkedIn
+                  Follow GIFON on LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-sky-700 hover:underline"
+                >
+                  Follow GIFON on Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-sky-700 hover:underline"
+                >
+                  Follow GIFON on Youtube
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-sky-700 hover:underline"
+                >
+                  Follow GIFON on X formerlly Twitter
                 </a>
               </li>
             </ul>
@@ -355,22 +390,22 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:space-x-8">
-            {/* Left: Image */}
+            {/* Left: image */}
             <div className="flex-1 mb-6 md:mb-0">
               <Image
-                src="/ph.svg" 
+                src="/sm.jpeg" 
                 alt="Featured StoryMap"
                 width={600}
                 height={300}
                 className="max-h-80 rounded shadow"
-              />
+                />
             </div>
 
             {/* Right: Text + Button */}
             <div className="flex-1 text-left">
               <p className="mb-4 text-gray-700">
                 We are looking forward to featuring a member&apos;s StoryMap each
-                month in this section. The first one celebrates URISA&apos;s GIS
+                month in this section. The first one celebrates GIFON&apos;s GIS
                 Hall of Fame inductees.
               </p>
               <button className="bg-green-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-600 transition">
@@ -401,6 +436,7 @@ export default function HomePage() {
             />
           </div>
         </section>
+
         {/* Features */}
         {/* <section className="mt-10 grid gap-6 lg:grid-cols-3">
           <article className="rounded-2xl p-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 text-white shadow-lg reveal">
