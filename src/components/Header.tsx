@@ -1,10 +1,10 @@
-'use client';
-import Link from 'next/link';
-import Image from 'next/image';
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import styles from '@/styles/Header.module.css';
-import { FaXTwitter, FaLinkedinIn, FaFacebookF } from 'react-icons/fa6';
-import { FaSearch } from 'react-icons/fa';
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import styles from "@/styles/Header.module.css";
+import { FaXTwitter, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
+import { FaSearch } from "react-icons/fa";
 
 interface MenuItem {
   label: string;
@@ -27,7 +27,7 @@ const menuItems: MenuItem[] = [
       { label: 'Aim', anchor: 'aim' },
       { label: 'Objectives', anchor: 'objectives' },
       { label: 'Mission', anchor: 'mission-vision' },
-      { label: 'Vission', anchor: 'mission-vision' },
+      { label: 'Vision', anchor: 'mission-vision' },
       { label: 'Core Values', anchor: 'core-values' },
       { label: 'Board of Directors', link: 'leadership' },
       { label: 'Our Partners', anchor: 'our-partners' },
@@ -136,34 +136,6 @@ const menuItems: MenuItem[] = [
             { label: 'Training & Certification', anchor: 'training' },
           ],
        },
-      { label: 'Events & Highlights', anchor: 'C-T' ,
-        children: [
-          { label: 'Upcoming Events', anchor: 'upcoming-events', 
-            children: [
-              { label: 'DGI London', anchor: 'dgi-london' },
-              { label: 'USGIF', anchor: 'usgif' },
-              { label: 'FIG', anchor: 'fig' },
-              { label: 'AAG', anchor: 'aag' },
-              { label: 'AARSE', anchor: 'aarse' },
-              { label: 'EIS-Africa', anchor: 'eis-africa' },
-              { label: 'GEOSON', anchor: 'geoson' },
-              { label: 'GIFON Pre-Launch', anchor: 'geoson' },
-            ]  
-          },
-          { label: 'Past Events', anchor: 'past-events', 
-            children: [
-              { label: 'DGI London', anchor: 'dgi-london' },
-              { label: 'USGIF', anchor: 'usgif' },
-              { label: 'FIG', anchor: 'fig' },
-              { label: 'AAG', anchor: 'aag' },
-              { label: 'AARSE', anchor: 'aarse' },
-              { label: 'EIS-Africa', anchor: 'eis-africa' },
-              { label: 'GEOSON', anchor: 'geoson' },
-              { label: 'GIFON Pre-Launch', anchor: 'geoson' },
-            ]  
-          },
-        ]
-    },
 
       // { label: 'Membership Benefits', anchor: 'benefits' },
       // { label: 'Talent Development', anchor: 'talent' },
@@ -171,6 +143,36 @@ const menuItems: MenuItem[] = [
       // { label: 'Membership Portal (Apply & Renew)', anchor: 'portal' },
       // { label: 'Volunteer Opportunities', anchor: 'opportunities' },
     ],
+  },
+  { 
+    label: 'Events', 
+    anchor: 'C-T' ,
+    children: [
+      { label: 'Upcoming Events', anchor: 'upcoming-events', 
+        children: [
+          { label: 'DGI London', anchor: 'dgi-london' },
+          { label: 'USGIF', anchor: 'usgif' },
+          { label: 'FIG', anchor: 'fig' },
+          { label: 'AAG', anchor: 'aag' },
+          { label: 'AARSE', anchor: 'aarse' },
+          { label: 'EIS-Africa', anchor: 'eis-africa' },
+          { label: 'GEOSON', anchor: 'geoson' },
+          { label: 'GIFON Pre-Launch', anchor: 'geoson' },
+        ]  
+      },
+      { label: 'Past Events', anchor: 'past-events', 
+        children: [
+          { label: 'DGI London', anchor: 'dgi-london' },
+          { label: 'USGIF', anchor: 'usgif' },
+          { label: 'FIG', anchor: 'fig' },
+          { label: 'AAG', anchor: 'aag' },
+          { label: 'AARSE', anchor: 'aarse' },
+          { label: 'EIS-Africa', anchor: 'eis-africa' },
+          { label: 'GEOSON', anchor: 'geoson' },
+          { label: 'GIFON Pre-Launch', anchor: 'geoson' },
+        ]  
+      },
+    ]
   },
   {
     label: 'Resources',
@@ -180,20 +182,11 @@ const menuItems: MenuItem[] = [
         children: [
               { label: 'New & Media ', anchor: 'dgi-london' },
               { label: 'Press Releases', anchor: 'usgif' },
-              { label: 'Publication Archive', anchor: 'fig' },
               { label: 'Podcast and Webinar Series', anchor: 'aag' },
+              { label: 'Publication Archive', anchor: 'fig' },
               { label: 'Photo & Video Gallery', anchor: 'aarse' },
               { label: 'Downloads', anchor: 'eis-africa' },
             ]  
-          },
-          { label: 'Policies', anchor: 'C-T' ,
-            children: [
-              { label: 'Code of Ethics', anchor: 'dgi-london' },
-              { label: 'Anti-Corruption', anchor: 'usgif' },
-              { label: 'Fund Raising', anchor: 'fig' },
-              { label: 'Anti-Modern-Day Slavery', anchor: 'aag' },
-              { label: 'Volunteer & Internship', anchor: 'aarse' },
-            ]
           },
           { label: 'Publications', anchor: 'C-T' ,
             children: [
@@ -225,7 +218,16 @@ const menuItems: MenuItem[] = [
             ],
           },
         ]
-    },
+  },
+  { label: 'Policies', anchor: 'C-T' ,
+    children: [
+      { label: 'Code of Ethics', anchor: 'dgi-london' },
+      { label: 'Anti-Corruption', anchor: 'usgif' },
+      { label: 'Fund Raising', anchor: 'fig' },
+      { label: 'Anti-Modern-Day Slavery', anchor: 'aag' },
+      { label: 'Volunteer & Internship', anchor: 'aarse' },
+    ]
+  },
   {
     label: 'Donate',
     href: '/donate'
@@ -248,22 +250,22 @@ const topBarItemsBase = [
 ];
 
 function useIsMobile(breakpoint = 768) {
+  // Same mobile detection hook
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
     const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
     const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     setIsMobile(mq.matches);
-    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    if (mq.addEventListener) mq.addEventListener("change", onChange);
     else mq.addListener(onChange);
     return () => {
-      if (mq.removeEventListener) mq.removeEventListener('change', onChange);
+      if (mq.removeEventListener) mq.removeEventListener("change", onChange);
       else mq.removeListener(onChange);
     };
   }, [breakpoint]);
   return isMobile;
 }
-
 
 function Dropdown({
   items,
@@ -282,27 +284,41 @@ function Dropdown({
   return (
     <ul className={styles.dropdownMenu} data-depth={depth}>
       {items.map((child, idx) => {
-        const hasChildren = Boolean(child.children && child.children.length);
+        const hasChildren = Boolean(child.children?.length);
         const isOpen = openChild === child.label;
-
         return (
           <li
-          key={`${child.label}-${idx}`}
-          className={styles.dropdownItem}
-          data-open={isOpen ? "true" : "false"}   // <-- new attribute
-          onMouseEnter={() => { if (!isMobile) setOpenChild(child.label); }}
-          onMouseLeave={() => { if (!isMobile) setOpenChild(prev => (prev === child.label ? null : prev)); }}
-          onFocus={() => { if (!isMobile) setOpenChild(child.label); }}
-          onBlur={() => { if (!isMobile) setOpenChild(prev => (prev === child.label ? null : prev)); }}
-        >
+            key={`${child.label}-${idx}`}
+            className={styles.dropdownItem}
+            data-open={isOpen ? "true" : "false"}
+            onMouseEnter={() => {
+              if (!isMobile) setOpenChild(child.label);
+            }}
+            onMouseLeave={() => {
+              if (!isMobile)
+                setOpenChild((prev) =>
+                  prev === child.label ? null : prev
+                );
+            }}
+            onFocus={() => {
+              if (!isMobile) setOpenChild(child.label);
+            }}
+            onBlur={() => {
+              if (!isMobile)
+                setOpenChild((prev) =>
+                  prev === child.label ? null : prev
+                );
+            }}
+          >
             <div className={styles.dropdownLinkRow}>
               <Link
-                href={child.link ?? `${parentHref}#${child.anchor ?? ''}`}
+                href={child.link ?? `${parentHref}#${child.anchor ?? ""}`}
                 onClick={(e) => {
                   if (isMobile && hasChildren) {
-                    // on mobile, tapping a parent with children should toggle
                     e.preventDefault();
-                    setOpenChild(prev => (prev === child.label ? null : child.label));
+                    setOpenChild((prev) =>
+                      prev === child.label ? null : child.label
+                    );
                     return;
                   }
                   closeAll();
@@ -311,13 +327,14 @@ function Dropdown({
               >
                 {child.label}
               </Link>
-
               {hasChildren && (
                 <button
                   aria-expanded={isOpen}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setOpenChild(prev => (prev === child.label ? null : child.label));
+                    setOpenChild((prev) =>
+                      prev === child.label ? null : child.label
+                    );
                   }}
                   className={styles.dropdownToggle}
                 >
@@ -325,9 +342,12 @@ function Dropdown({
                 </button>
               )}
             </div>
-
             {hasChildren && (
-              <div className={`${styles.subDropdown} ${isOpen ? ' ' + styles.showDropdown : ''}`}>
+              <div
+                className={`${styles.subDropdown} ${
+                  isOpen ? " " + styles.showDropdown : ""
+                }`}
+              >
                 <Dropdown
                   items={child.children!}
                   parentHref={parentHref}
@@ -343,119 +363,172 @@ function Dropdown({
   );
 }
 
-
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [topOpen, setTopOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  // const [openTopDropdown, setOpenTopDropdown] = useState<string | null>(null);
+  const [hoveredRoot, setHoveredRoot] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
+  const NAV_TOLERANCE = 6;
 
-  // Toggle handlers
-  const toggleMenu = () => setMenuOpen(prev => !prev);
-  const toggleTop = () => setTopOpen(prev => !prev);
-
+  const toggleMenu = () => setMenuOpen((p) => !p);
+  const toggleTop = () => setTopOpen((p) => !p);
   const closeAll = useCallback(() => {
     setMenuOpen(false);
     setTopOpen(false);
     setOpenDropdown(null);
   }, []);
-  
+
   useEffect(() => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('jwt') : null;
+    const token =
+      typeof window !== "undefined"
+        ? localStorage.getItem("jwt")
+        : null;
     setIsLoggedIn(!!token);
   }, []);
 
   const topBarItems = [...topBarItemsBase];
   if (isLoggedIn) {
-    const idx = topBarItems.findIndex(item => item.label === 'Login');
-    if (idx !== -1) topBarItems[idx] = { label: 'Profile', href: '/profile' };
+    const idx = topBarItems.findIndex((i) => i.label === "Login");
+    if (idx !== -1)
+      topBarItems[idx] = { label: "Profile", href: "/profile" };
   }
 
-  // click outside to close
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) closeAll();
+      if (navRef.current && !navRef.current.contains(event.target as Node))
+        closeAll();
     }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, [closeAll]);
+
+  function handleRootEnter(
+    e: React.MouseEvent,
+    label: string,
+    hasChildren: boolean
+  ) {
+    if (!hasChildren) return;
+    const nav = navRef.current;
+    if (!nav) return;
+    const rect = nav.getBoundingClientRect();
+    if (e.clientY <= rect.bottom + NAV_TOLERANCE) {
+      setHoveredRoot(label);
+      if (!isMobile) setOpenDropdown(label);
+    }
+  }
+
+  function handleRootLeave() {
+    setHoveredRoot(null);
+    if (!isMobile) setOpenDropdown(null);
+  }
 
   return (
     <header className={styles.header} ref={navRef}>
       {/* Main Navbar */}
       <div className={styles.navbar}>
         <Link href="/" className={styles.logo} onClick={closeAll}>
-          <Image src="/logo.png" alt="Gifon" width={1000} height={1000} />
+          <Image
+            src="/logo.png"
+            alt="Gifon"
+            width={1000}
+            height={1000}
+          />
         </Link>
 
-        <div className={`${styles.topMenu} ${topOpen ? styles.show : ''}`}>
-          {topBarItems.map(item => (
-            <div
-              key={item.label}
-              className={styles.navItem}
-            >
-              <Link href={item.href!} onClick={closeAll} className={styles.topNavLink}>
+        <div className={`${styles.topMenu} ${topOpen ? styles.show : ""}`}>
+          {topBarItems.map((item) => (
+            <div key={item.label} className={styles.navItem}>
+              <Link
+                href={item.href!}
+                onClick={closeAll}
+                className={styles.topNavLink}
+              >
                 {item.label}
               </Link>
             </div>
           ))}
-          <div className='flex flex-row gap-3 green'>
-            <FaSearch size={16}/>
-            <FaXTwitter size={16}/>
-            <FaLinkedinIn size={16}/>
-            <FaFacebookF size={16}/>
+          <div className="flex flex-row gap-3 green">
+            <FaSearch size={16} />
+            <FaXTwitter size={16} />
+            <FaLinkedinIn size={16} />
+            <FaFacebookF size={16} />
           </div>
         </div>
 
-        <button className={styles.menuToggle} onClick={toggleMenu} aria-label="Toggle menu">☰</button>
+        <button
+          className={styles.menuToggle}
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          ☰
+        </button>
       </div>
 
       {/* Bottom Nav */}
       <div className={styles.topBar}>
-        <button className={styles.topToggle} onClick={toggleTop} aria-label="Toggle top menu">☰</button>
+        <button
+          className={styles.topToggle}
+          onClick={toggleTop}
+          aria-label="Toggle top menu"
+        >
+          ☰
+        </button>
 
-        <nav className={`${styles.navLinks} ${menuOpen ? styles.show : ''}`}>
-          {menuItems.map(item => (
-            <div
-              key={item.label}
-              className={styles.navItem}
-              onMouseEnter={() => { if (!isMobile) setOpenDropdown(item.label); }}
-              onMouseLeave={() => { if (!isMobile) setOpenDropdown(null); }}
-            >
-              {item.children ? (
-                <>
-                  <Link
-                    href={item.href ?? '#'}
-                    className={styles.navLink}
-                    onClick={(e) => {
-                      if (isMobile) {
-                        e.preventDefault();
-                        setOpenDropdown(prev => (prev === item.label ? null : item.label));
-                        return;
-                      }
-                      closeAll();
-                    }}
-                  >
-                    {item.label}
-                  </Link>
+        <nav
+          className={`${styles.navLinks} ${menuOpen ? styles.show : ""}`}
+        >
+          {menuItems.map((item) => {
+            const hasChildren = Boolean(item.children?.length);
+            const isOpen =
+              openDropdown === item.label &&
+              hoveredRoot === item.label;
 
-                  <div className={`${styles.dropdownWrapper} ${openDropdown === item.label ? styles.showDropdown : ''}`}>
-                    <Dropdown items={item.children} parentHref={item.href ?? '#'} closeAll={closeAll} />
-                  </div>
-                </>
-              ) : (
-                <Link href={item.href ?? '#'} onClick={closeAll} className={styles.navLink}>
+            return (
+              <div key={item.label} className={styles.navItem}>
+                <Link
+                  href={item.href ?? "#"}
+                  className={styles.navLink}
+                  onMouseEnter={(e) =>
+                    handleRootEnter(e, item.label, hasChildren)
+                  }
+                  onMouseLeave={handleRootLeave}
+                  onClick={(e) => {
+                    if (isMobile && hasChildren) {
+                      e.preventDefault();
+                      setOpenDropdown((prev) =>
+                        prev === item.label ? null : item.label
+                      );
+                      return;
+                    }
+                    closeAll();
+                  }}
+                >
                   {item.label}
                 </Link>
-              )}
-            </div>
-          ))}
+
+                {hasChildren && isOpen && (
+                   <div
+                   className={`${styles.dropdownWrapper} ${styles.showDropdown}`}
+                   onMouseEnter={(e) =>
+                    handleRootEnter(e, item.label, hasChildren)
+                  } // Keep open when hovering here
+                   onMouseLeave={handleRootLeave}
+                 >
+                   <Dropdown items={item.children ?? []} parentHref={item.href ?? "#"} closeAll={closeAll} />
+                 </div>
+                )}
+              </div>
+            );
+          })}
         </nav>
 
-        {menuOpen && <div className={styles.overlay} onClick={closeAll} />}
+        {menuOpen && (
+          <div className={styles.overlay} onClick={closeAll} />
+        )}
       </div>
     </header>
   );

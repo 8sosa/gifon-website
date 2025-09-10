@@ -21,10 +21,9 @@
   justify-content: center;
 }
   .overlay h1 {
-    font-size: 5rem;
+    font-size: 3rem;
     font-weight: 700;
     text-wrap: pretty;
-    max-width: 100%;
     margin-bottom: 1rem;
   }
   .description {
@@ -35,9 +34,9 @@
 
   /* typing-specific styles */
 .title {
-  white-space: nowrap; /* keep text on one line while typing */
-  overflow: hidden;
+  overflow: wrap; /* allow wrapping if needed */
   display: inline-block;
+  max-width: 50rem;
   /* optional: you can set max-width or font-size here if needed */
 }
 
