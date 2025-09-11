@@ -14,9 +14,9 @@ import {
   IndustrySector,
   GeospatialExpertise,
   AreaOfInterest,
-  MembershipDuration,
+  // MembershipDuration,
   ReferralSource,
-  IndividualMembershipType,
+  // IndividualMembershipType,
   IndividualMembershipRequestBody,
   OrganizationMembershipRequestBody,
 } from "@/types/types";
@@ -70,9 +70,9 @@ export default function RegisterPage() {
       const expertiseStrings = formData.getAll("geospatialExpertise").map((v) => v.toString());
       const interestStrings = formData.getAll("areasOfInterest").map((v) => v.toString());
   
-      const membershipDurationStr = formData.get("membershipDuration")?.toString() ?? "OneYear";
+      // const membershipDurationStr = formData.get("membershipDuration")?.toString() ?? "OneYear";
       const referralStr = formData.get("howDidYouHearAboutGifon")?.toString() ?? "Online";
-      const individualMembershipTypeStr = formData.get("individualMembershipType")?.toString() ?? "Professional";
+      // const individualMembershipTypeStr = formData.get("individualMembershipType")?.toString() ?? "Professional";
       const passwordFromForm = formData.get("password")?.toString() ?? "";
   
       const payload: IndividualMembershipRequestBody = {
@@ -98,8 +98,8 @@ export default function RegisterPage() {
         geospatialExpertise: expertiseStrings as GeospatialExpertise[],
         professionalQualifications: formData.get("professionalQualifications")?.toString() ?? "",
         areasOfInterest: interestStrings as AreaOfInterest[],
-        individualMembershipType: individualMembershipTypeStr as IndividualMembershipType,
-        membershipDuration: membershipDurationStr as MembershipDuration,
+        // individualMembershipType: individualMembershipTypeStr as IndividualMembershipType,
+        // membershipDuration: membershipDurationStr as MembershipDuration,
         howDidYouHearAboutGifon: referralStr as ReferralSource,
         password: passwordFromForm,
         amount: Number(formData.get("amount") ?? 0),
@@ -135,7 +135,7 @@ export default function RegisterPage() {
   
     try {
       const industrySectorStr = formData.get("industrySector")?.toString() ?? "Other";
-      const membershipDurationStr = formData.get("membershipDuration")?.toString() ?? "OneYear";
+      // const membershipDurationStr = formData.get("membershipDuration")?.toString() ?? "OneYear";
       const passwordFromForm = formData.get("password")?.toString() ?? "";
   
       const payload: OrganizationMembershipRequestBody = {
@@ -153,7 +153,7 @@ export default function RegisterPage() {
         industrySector: industrySectorStr as IndustrySector,
         numberOfEmployees: Number(formData.get("numberOfEmployees") ?? 0),
         contribution: formData.get("contribution")?.toString() ?? "",
-        membershipDuration: membershipDurationStr as MembershipDuration,
+        // membershipDuration: membershipDurationStr as MembershipDuration,
         country: organizationLocation.country?.label ?? "Nigeria",
         state: organizationLocation.state?.label ?? "",
         password: passwordFromForm,
@@ -370,7 +370,7 @@ export default function RegisterPage() {
 
                       {/* Membership Info */}
                       <div>
-                        <h3 className="font-bold text-lg mb-2">Membership Details</h3>
+                        {/* <h3 className="font-bold text-lg mb-2">Membership Details</h3>
 
                         <select name="individualMembershipType" className="border p-3 rounded w-full" required>
                           <option value="">Membership Type</option>
@@ -385,7 +385,7 @@ export default function RegisterPage() {
                           <option value="TwoYears">2 Years</option>
                           <option value="ThreeYears">3 Years</option>
                           <option value="Lifetime">Lifetime</option>
-                        </select>
+                        </select> */}
 
                         <select name="howDidYouHearAboutGifon" className="border p-3 rounded w-full mt-3">
                           <option value="">How did you hear about GIFON?</option>
@@ -497,7 +497,7 @@ export default function RegisterPage() {
                       </div>
 
                       {/* Membership Info */}
-                      <div>
+                      {/* <div>
                         <h3 className="font-bold text-lg mb-2">Membership Details</h3>
                         <select name="membershipDuration" className="border p-3 rounded w-full" required>
                           <option value="">Membership Duration</option>
@@ -506,7 +506,7 @@ export default function RegisterPage() {
                           <option value="ThreeYears">3 Years</option>
                           <option value="Lifetime">Lifetime</option>
                         </select>
-                      </div>
+                      </div> */}
 
                       <div>
                         {organizationState === "error" && serverMessage && (

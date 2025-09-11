@@ -121,8 +121,8 @@ export interface IndividualMembershipRequestBody {
   geospatialExpertise: GeospatialExpertise[];
   professionalQualifications: string;
   areasOfInterest: AreaOfInterest[];
-  individualMembershipType: IndividualMembershipType;
-  membershipDuration: MembershipDuration;
+  // individualMembershipType: IndividualMembershipType;
+  // membershipDuration: MembershipDuration;
   howDidYouHearAboutGifon: ReferralSource;
   password: string;
   amount: number
@@ -172,7 +172,7 @@ export interface OrganizationMembershipRequestBody {
   industrySector: IndustrySector;
   numberOfEmployees?: number;
   contribution: string;
-  membershipDuration: MembershipDuration;
+  // membershipDuration: MembershipDuration;
   country: string;
   password: string;
   amount: number;
