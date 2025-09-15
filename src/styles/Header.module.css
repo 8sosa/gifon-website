@@ -1,220 +1,18 @@
+/* =====================
+   HEADER & NAVBAR
+===================== */
 .header {
-  background-color: #fff;
+  background: #fff;
   color: #003F21;
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 500;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 9999;
-  background: #fff;
-  width: 100%;
   z-index: 1200;
-}
-.topBar {
-  display: flex;
-  font-size: 1rem;
-  justify-content: space-between;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  color: #fff;
-  background: #003F21;
-  position: relative;
-}
-
-.topBar span {
-  flex: 1;
-}
-
-.topToggle {
-  display: none;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.2rem;
-  cursor: pointer;
-  z-index: 1100;
-}
-
-.topMenu {
-  display: flex;
-  position: relative;
-  align-items: center;
-  color: #fff;
-  gap: 1rem;
-}
-/* Dropdown menus */
-.dropdownWrapper {
-  position: relative;
-  z-index: 1400;
-  overflow: visible; /* allow subDropdown to render outside */
-}
-
-/* dropdown itself is absolute so it doesn't take layout space */
-.dropdownMenu {
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem 0;
-  min-width: 200px;
-  background: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-
-  position: absolute;
-  top: 100%;
-  left: 0;
-
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(4px);
-  transition: opacity 0.18s ease, transform 0.18s ease;
-  pointer-events: none;
-  overflow: visible;
-}
-
-/* when wrapper has the showDropdown class, reveal the menu */
-.dropdownWrapper.showDropdown > .dropdownMenu,
-.dropdownMenu.showDropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-/* item and link */
-.dropdownItem {
-  position: relative;
-  overflow: visible;
-}
-
-.dropdownLinkRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.dropdownLink {
-  display: block;
-  padding: 0.5rem 1rem;
-  color: #003F21;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.dropdownLink:hover {
-  background: #f5f5f5;
-}
-
-/* nested sub-dropdown (desktop: to the right) */
-/* nested sub-dropdown (desktop: to the right, flush overlap to avoid cursor gap) */
-.subDropdown {
-  position: absolute;
-  top: 0;
-  left: calc(100% - 2px); /* overlap parent edge by 2px -> prevents hover gap */
-  min-width: 220px;
-  background: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(6px); /* subtle animation */
-  transition: opacity 0.18s ease, transform 0.18s ease;
-  pointer-events: none;
-  z-index: 1600; /* above top-level dropdown */
-  overflow: visible;
-}
-
-/* show nested submenu when its parent item is hovered OR when JS adds class */
-.subDropdown.showDropdown,
-.dropdownItem:hover > .subDropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
-  pointer-events: auto;
-}
-
-/* caret toggle (only visible on mobile via media query) */
-.dropdownToggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 0.25rem 0.4rem;
-  line-height: 1;
-  position: absolute;
-  top: 100%;
-  left: 0;
-
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(4px);
-  transition: opacity 0.18s ease, transform 0.18s ease;
-  pointer-events: none;
-  overflow: visible; 
-}
-/* Ensure the inner dropdown <ul> that lives inside a visible .subDropdown is displayed */
-.subDropdown > .dropdownMenu {
-  position: static;            /* render the inner list stacked inside the subDropdown */
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-  pointer-events: auto;
-  padding: 0.5rem 0;           /* same vertical padding as top-level list */
-  min-width: 100%;             /* allow it to fill the subDropdown container */
-}
-
-/* Extra: allow JS-driven state on the <li> to open its subDropdown reliably */
-.dropdownItem[data-open="true"] > .subDropdown,
-.dropdownItem:hover > .subDropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
-  pointer-events: auto;
-}
-
-/* Offcanvas initial state for mobile */
-@media (max-width: 768px) {
-  .topMenu {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 250px;
-    height: 100vh;
-    padding: 4rem 1rem;
-    background: #003F21;
-    flex-direction: column;
-    gap: 1rem;
-    transition: right 0.3s ease-in-out;
-    z-index: 1002;
-  }
-
-  .topMenu.show {
-    right: 0;
-    display: flex;
-  }
-}
-
-.topMenu.show {
-  right: 0;
-}
-
-.topNavLink {
-  background: none;
-  border: none;
-  color: #003F21;
-  font: inherit;
-  font-size: 1rem;
-  cursor: pointer;
-  text-decoration: none;
-  padding: 0.5rem 0;
   width: 100%;
-  text-align: left;
-  position: relative;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
 .navbar {
@@ -240,69 +38,232 @@
   overflow: visible;
 }
 
-.navLink,
-.navLinkButton {
-  background: none;
-  border: none;
+/* =====================
+   TOP BAR
+===================== */
+.topBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
   color: #fff;
-  font: inherit;
-  cursor: pointer;
-  text-decoration: none;
-  padding: 0.5rem;
+  background: #003F21;
   position: relative;
 }
 
-/* Menu Button */
-.menuToggle {
+.topBar span {
+  flex: 1;
+}
+
+/* =====================
+   MENU TOGGLE BUTTONS
+===================== */
+.menuToggle,
+.topToggle {
   display: none;
   background: none;
+  border: none;
   color: #003F21;
   font-size: 1.5rem;
-  border: none;
   cursor: pointer;
   z-index: 1100;
 }
 
-/* Offcanvas Mobile Nav */
-@media (max-width: 768px) {
-  .dropdownWrapper { position: static; }
-  .dropdownMenu {
-    position: static;
+.topToggle {
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+/* =====================
+   TOP MENU
+===================== */
+.topMenu {
+  display: flex;
+  gap: 1rem;
+}
+
+.topMenu.show {
+  display: flex;
+}
+
+.topNavLink {
+  background: none;
+  border: none;
+  color: #003F21;
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  text-wrap: nowrap;
+}
+
+.topNavLink:hover {
+  background: #f5f5f5;
+}
+
+/* =====================
+   OVERLAY FOR OFFCANVAS
+===================== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+/* =====================
+   DROPDOWN STYLES (Shared)
+===================== */
+.dropdownWrapper,
+.subDropdown {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s ease, visibility 0.2s ease, max-height 0.3s ease;
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+  .dropdownWrapper {
+    position: absolute;
+    top: 100%; /* appear below parent */
+    left: 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .dropdownWrapper.showDropdown {
     opacity: 1;
     visibility: visible;
-    transform: none;
-    max-height: 0;
-    overflow: hidden;
-    pointer-events: auto;
-    transition: max-height 0.28s ease, padding 0.18s;
-    padding-left: 0;
   }
-  .dropdownMenu.showDropdown { max-height: 900px; padding: 0.25rem 0; }
+
+  .dropdownMenu {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+
+  .dropdownLink {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #003F21;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .dropdownLink:hover {
+    background: #f5f5f5;
+  }
+
+  /* Nested (flyout) */
+  .subDropdown {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .subDropdown.showDropdown {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 1023px) {
+  .dropdownWrapper {
+    position: static; /* sit inside flow */
+    box-shadow: none;
+    overflow: hidden;
+    max-height: 0; /* collapsed */
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .dropdownWrapper.showDropdown {
+    max-height: 500px; /* expand */
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dropdownMenu {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+
+  .dropdownLink {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #003F21;
+    text-decoration: none;
+    font-size: 1rem;
+  }
 
   .subDropdown {
     position: static;
-    transform: none;
+    box-shadow: none;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .subDropdown.showDropdown {
+    max-height: 500px;
     opacity: 1;
     visibility: visible;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.28s ease;
   }
-  .subDropdown.showDropdown { max-height: 900px; }
+}
 
-  .dropdownToggle { display: inline-block; }
+/* =====================
+   RESPONSIVE STYLES
+===================== */
 
-  .dropdownLink { padding: 0.5rem 0.75rem; }
- 
-  .topToggle, .menuToggle {
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .menuToggle,
+  .topToggle {
     display: block;
   }
-  .topMenu {
-    display: flex;
+
+  .menuToggle1 {
+    color: #fff;
   }
+
+  .topBar {
+    justify-content: flex-end;
+  }
+
+  .topMenu {
+    flex-direction: column;
+    gap: 1rem;
+    position: fixed;
+    top: 0;
+    right: -100%; /* hidden off screen */
+    width: 250px;
+    height: 100vh;
+    padding: 4rem 1rem;
+    background: #fff;
+    transition: right 0.3s ease-in-out;
+    z-index: 2002;
+  }
+
+  .topMenu.show {
+    right: 0; /* slide into view */
+  }
+
   .navLinks {
     flex-direction: column;
-    background: #fff;
+    background: #003F21;
     position: fixed;
     top: 0;
     right: -100%;
@@ -311,43 +272,21 @@
     padding: 4rem 1rem;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
     transition: right 0.3s ease-in-out;
-    z-index: 1001;
+    z-index: 2001;
     overflow-y: auto;
   }
-  .show {
+
+  .navLinks.show {
     right: 0;
   }
+
   .navItem {
     width: 100%;
+    color: #fff;
   }
-  /* Dropdowns remain hidden until triggered */
-  .dropdownMenu {
-    position: static;
-    opacity: 0;
-    visibility: hidden;
-    transform: none;
-    box-shadow: none;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    padding: 0;
-  }
-  .showDropdown {
-    opacity: 1;
-    visibility: visible;
-    max-height: 500px;
-    padding: 0.5rem 0 0.5rem 1rem;
-  }
-  .dropdownItem a {
-    padding: 0.5rem 0;
-  }
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 1000;
+
+  .topNavLink {
+    color: #003F21;
   }
 }
+

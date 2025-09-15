@@ -34,80 +34,6 @@ const menuItems: MenuItem[] = [
       { label: 'Contact Us', anchor: 'contact' },
     ],
   },
-  // {
-  //   label: 'Programs',
-  //   href: '/programs',
-  //   children: [
-  //     { label: 'Youth Empowerment & Talent Acceleration', anchor: 'youth-empowerment' },
-  //     { label: 'Women in GEOINT (WINGS)', anchor: 'wings' },
-  //     { label: 'Geoinnovation & Tech Incubation', anchor: 'geoinnovation' },
-  //     { label: 'National Geospatial Security & Intelligence Hub', anchor: 'geospatial-hub' },
-  //     { label: 'Community Mapping for Development', anchor: 'community-mapping' },
-  //     { label: 'Open Data & Research', anchor: 'open-data' },
-  //     { label: 'Conferences, Workshops & Masterclasses', anchor: 'conferences' },
-  //     { label: 'Training & Certification', anchor: 'training' },
-  //   ],
-  // },
-  // {
-  //   label: 'Critical Infrastructure Support',
-  //   href: '/infrastructure',
-  //   children: [
-  //     { label: 'Energy Security & Development', anchor: 'energy' },
-  //     { label: 'Transportation', anchor: 'transportation' },
-  //     { label: 'Communication', anchor: 'communication' },
-  //     { label: 'Water & Environment', anchor: 'water' },
-  //     { label: 'Health', anchor: 'health' },
-  //     { label: 'Finance', anchor: 'finance' },
-  //     { label: 'Government Facilities', anchor: 'government' },
-  //     { label: 'Food Security & Agriculture', anchor: 'food' },
-  //     { label: 'Defence & Security', anchor: 'defence' },
-  //     { label: 'Information Technology', anchor: 'it' },
-  //     { label: 'Industrial Systems', anchor: 'industrial' },
-  //     { label: 'Emergency Services', anchor: 'emergency' },
-  //     { label: 'Manufacturing', anchor: 'manufacturing' },
-  //     { label: 'Space & Satellite Systems', anchor: 'space' },
-  //   ],
-  // },
-  // {
-  //   label: 'Policies',
-  //   href: '/policies',
-  //   children: [
-  //     { label: 'Code of Ethics', anchor: 'ethics' },
-  //     { label: 'Anti-Corruption', anchor: 'anti-corruption' },
-  //     { label: 'Fund Raising', anchor: 'fund-raising' },
-  //     { label: 'Anti-Modern-Day Slavery', anchor: 'slavery' },
-  //     { label: 'Volunteer & Internship', anchor: 'volunteer' },
-  //   ],
-  // },
-  // {
-  //   label: 'Groups & Forums',
-  //   href: '/forums',
-  //   children: [
-  //     { label: 'Young Professionals Forum', anchor: 'young-professionals' },
-  //     { label: 'Women in GEOINT Forum', anchor: 'women' },
-  //     { label: 'Industry & Private Sector Forum', anchor: 'industry' },
-  //     { label: 'Policy, Governance & Ethics Forum', anchor: 'policy' },
-  //     { label: 'Academia & Research Collaboration', anchor: 'academia' },
-  //   ],
-  // },
-  // {
-  //   label: 'Publications',
-  //   href: '/publications',
-  //   children: [
-  //     { label: 'Eyes on Location - Journal of GeoINSIGHT', anchor: 'journal' },
-  //     { label: 'GeoINSIGHT Bulletin', anchor: 'bulletin' },
-  //     { label: 'Conference & Workshop Proceedings', anchor: 'proceedings' },
-  //     { label: 'Policy Briefs & White Papers', anchor: 'policy-briefs' },
-  //     { label: 'Research Reports', anchor: 'reports' },
-  //     // merged journal sub-links
-  //     { label: 'About The Journal', anchor: 'about-journal' },
-  //     { label: 'Editorial Board', anchor: 'editorial-board' },
-  //     { label: 'Author Guidelines', anchor: 'author-guidelines' },
-  //     { label: 'Submit a Paper', anchor: 'submit-paper' },
-  //     { label: 'Read Articles', anchor: 'read-articles' },
-  //     { label: 'Call for Papers', anchor: 'call-for-papers' },
-  //   ],
-  // },
   {
     label: 'Membership',
     href: '/membership',
@@ -136,12 +62,6 @@ const menuItems: MenuItem[] = [
             { label: 'Training & Certification', anchor: 'training' },
           ],
        },
-
-      // { label: 'Membership Benefits', anchor: 'benefits' },
-      // { label: 'Talent Development', anchor: 'talent' },
-      // { label: 'Membership Categories', anchor: 'categories' },
-      // { label: 'Membership Portal (Apply & Renew)', anchor: 'portal' },
-      // { label: 'Volunteer Opportunities', anchor: 'opportunities' },
     ],
   },
   { 
@@ -180,7 +100,7 @@ const menuItems: MenuItem[] = [
     children: [
       { label: 'Media Resources', anchor: 'C-T' ,
         children: [
-              { label: 'New & Media ', anchor: 'dgi-london' },
+              { label: 'News & Media ', anchor: 'dgi-london' },
               { label: 'Press Releases', anchor: 'usgif' },
               { label: 'Podcast and Webinar Series', anchor: 'aag' },
               { label: 'Publication Archive', anchor: 'fig' },
@@ -232,7 +152,7 @@ const menuItems: MenuItem[] = [
     label: 'Donate',
     href: '/donate'
   },
-  ]
+];
 
 const topBarItemsBase = [
   {
@@ -246,6 +166,22 @@ const topBarItemsBase = [
   {
     label: 'Register',
     href: '/sign-up',
+  },
+  {
+    label: <FaSearch />,
+    href: '/#'
+  },
+  {
+    label: <FaXTwitter />,
+    href: '/#'
+  },
+  {
+    label: <FaFacebookF />,
+    href: '/#'
+  },
+  {
+    label: <FaLinkedinIn />,
+    href: '/#'
   },
 ];
 
@@ -364,84 +300,81 @@ function Dropdown({
 }
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [topOpen, setTopOpen] = useState(false);
+  const [topMenuOpen, setTopMenuOpen] = useState(false);
+  const [bottomMenuOpen, setBottomMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [hoveredRoot, setHoveredRoot] = useState<string | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const NAV_TOLERANCE = 6;
   const navRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
-  const NAV_TOLERANCE = 6;
-
-  const toggleMenu = () => setMenuOpen((p) => !p);
-  const toggleTop = () => setTopOpen((p) => !p);
   const closeAll = useCallback(() => {
-    setMenuOpen(false);
-    setTopOpen(false);
+    setTopMenuOpen(false);
+    setBottomMenuOpen(false);
     setOpenDropdown(null);
   }, []);
 
-  useEffect(() => {
-    const token =
-      typeof window !== "undefined"
-        ? localStorage.getItem("jwt")
-        : null;
-    setIsLoggedIn(!!token);
-  }, []);
+  const toggleTopMenu = () => setTopMenuOpen(prev => !prev);
+  const toggleBottomMenu = () => setBottomMenuOpen(prev => !prev);
+  const [hoveredRoot, setHoveredRoot] = useState<string | null>(null);
 
-  const topBarItems = [...topBarItemsBase];
-  if (isLoggedIn) {
-    const idx = topBarItems.findIndex((i) => i.label === "Login");
-    if (idx !== -1)
-      topBarItems[idx] = { label: "Profile", href: "/profile" };
+useEffect(() => {
+  function handleClickOutside(event: MouseEvent) {
+    if (navRef.current && !navRef.current.contains(event.target as Node))
+      closeAll();
   }
+  document.addEventListener("mousedown", handleClickOutside);
+  return () =>
+    document.removeEventListener("mousedown", handleClickOutside);
+}, [closeAll]);
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (navRef.current && !navRef.current.contains(event.target as Node))
-        closeAll();
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
-  }, [closeAll]);
-
-  function handleRootEnter(
-    e: React.MouseEvent,
-    label: string,
-    hasChildren: boolean
-  ) {
-    if (!hasChildren) return;
-    const nav = navRef.current;
-    if (!nav) return;
-    const rect = nav.getBoundingClientRect();
-    if (e.clientY <= rect.bottom + NAV_TOLERANCE) {
-      setHoveredRoot(label);
-      if (!isMobile) setOpenDropdown(label);
-    }
+function handleRootEnter(
+  e: React.MouseEvent,
+  label: string,
+  hasChildren: boolean
+) {
+  if (!hasChildren) return;
+  const nav = navRef.current;
+  if (!nav) return;
+  const rect = nav.getBoundingClientRect();
+  if (e.clientY <= rect.bottom + NAV_TOLERANCE) {
+    setHoveredRoot(label);
+    if (!isMobile) setOpenDropdown(label);
   }
+}
 
-  function handleRootLeave() {
-    setHoveredRoot(null);
-    if (!isMobile) setOpenDropdown(null);
-  }
+function handleRootLeave() {
+  setHoveredRoot(null);
+  if (!isMobile) setOpenDropdown(null);
+}
+
+  // useEffect(() => {
+  //   const token =
+  //     typeof window !== "undefined"
+  //       ? localStorage.getItem("jwt")
+  //       : null;
+  //   setIsLoggedIn(!!token);
+  // }, []);
 
   return (
     <header className={styles.header} ref={navRef}>
       {/* Main Navbar */}
       <div className={styles.navbar}>
         <Link href="/" className={styles.logo} onClick={closeAll}>
-          <Image
-            src="/logo.png"
-            alt="Gifon"
-            width={1000}
-            height={1000}
-          />
+          <Image src="/logo.png" alt="Gifon" width={1000} height={1000} />
         </Link>
 
-        <div className={`${styles.topMenu} ${topOpen ? styles.show : ""}`}>
-          {topBarItems.map((item) => (
-            <div key={item.label} className={styles.navItem}>
+        {/* Top Menu Offcanvas */}
+        <button
+          className={styles.menuToggle}
+          onClick={toggleTopMenu}
+          aria-label="Toggle top menu"
+        >
+          ☰
+        </button>
+
+        <nav className={`${styles.topMenu} ${topMenuOpen ? styles.show : ""}`}>
+          {topBarItemsBase.map((item, idx) => (
+            <div key={idx} className={styles.navItem}>
               <Link
                 href={item.href!}
                 onClick={closeAll}
@@ -451,57 +384,35 @@ export default function Header() {
               </Link>
             </div>
           ))}
-          <div className="flex flex-row gap-3 green">
-            <FaSearch size={16} />
-            <FaXTwitter size={16} />
-            <FaLinkedinIn size={16} />
-            <FaFacebookF size={16} />
-          </div>
-        </div>
-
-        <button
-          className={styles.menuToggle}
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          ☰
-        </button>
+        </nav>
       </div>
-
-      {/* Bottom Nav */}
+      {/* Bottom Menu Offcanvas */}
       <div className={styles.topBar}>
         <button
-          className={styles.topToggle}
-          onClick={toggleTop}
-          aria-label="Toggle top menu"
+          className={`${styles.menuToggle1} ${styles.menuToggle}`}
+          onClick={toggleBottomMenu}
+          aria-label="Toggle bottom menu"
         >
           ☰
         </button>
 
-        <nav
-          className={`${styles.navLinks} ${menuOpen ? styles.show : ""}`}
-        >
+        <nav className={`${styles.navLinks} ${bottomMenuOpen ? styles.show : ""}`}>
           {menuItems.map((item) => {
             const hasChildren = Boolean(item.children?.length);
             const isOpen =
-              openDropdown === item.label &&
-              hoveredRoot === item.label;
+              openDropdown === item.label && hoveredRoot === item.label;
 
             return (
               <div key={item.label} className={styles.navItem}>
                 <Link
                   href={item.href ?? "#"}
                   className={styles.navLink}
-                  onMouseEnter={(e) =>
-                    handleRootEnter(e, item.label, hasChildren)
-                  }
+                  onMouseEnter={(e) => handleRootEnter(e, item.label, hasChildren)}
                   onMouseLeave={handleRootLeave}
                   onClick={(e) => {
                     if (isMobile && hasChildren) {
                       e.preventDefault();
-                      setOpenDropdown((prev) =>
-                        prev === item.label ? null : item.label
-                      );
+                      setOpenDropdown((prev) => (prev === item.label ? null : item.label));
                       return;
                     }
                     closeAll();
@@ -511,24 +422,18 @@ export default function Header() {
                 </Link>
 
                 {hasChildren && isOpen && (
-                   <div
-                   className={`${styles.dropdownWrapper} ${styles.showDropdown}`}
-                   onMouseEnter={(e) =>
-                    handleRootEnter(e, item.label, hasChildren)
-                  } // Keep open when hovering here
-                   onMouseLeave={handleRootLeave}
-                 >
-                   <Dropdown items={item.children ?? []} parentHref={item.href ?? "#"} closeAll={closeAll} />
-                 </div>
+                  <div
+                    className={`${styles.dropdownWrapper} ${styles.showDropdown}`}
+                    onMouseEnter={(e) => handleRootEnter(e, item.label, hasChildren)}
+                    onMouseLeave={handleRootLeave}
+                  >
+                    <Dropdown items={item.children ?? []} parentHref={item.href ?? "#"} closeAll={closeAll} />
+                  </div>
                 )}
               </div>
             );
           })}
         </nav>
-
-        {menuOpen && (
-          <div className={styles.overlay} onClick={closeAll} />
-        )}
       </div>
     </header>
   );

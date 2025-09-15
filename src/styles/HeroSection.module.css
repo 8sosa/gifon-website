@@ -1,114 +1,131 @@
-.hero {
-  background-size: cover;
-  background-position: center;
-  height: 75vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.overlay {
-  background-color: #003f21b4;
-  color: #fff;
-  text-align: center;
-  padding: 2rem;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+/* ===========================
+   HERO SECTION
+   =========================== */
+   .hero {
+    position: relative;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  /* Background images with smooth transitions */
+  .bgImage {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+  }
+  .bgImage.active {
+    opacity: 1;
+  }
+  
+  /* ===========================
+     OVERLAY
+     =========================== */
+  .overlay {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 63, 33, 0.7);
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
   .overlay h1 {
     font-size: 3rem;
     font-weight: 700;
-    text-wrap: pretty;
     margin-bottom: 1rem;
+    text-wrap: pretty;
   }
+  
   .description {
     font-size: 1.5rem;
     font-weight: 300;
     max-width: 600px;
+    margin: 0 auto;
   }
-
-  /* typing-specific styles */
-.title {
-  overflow: wrap; /* allow wrapping if needed */
-  display: inline-block;
-  max-width: 50rem;
-  /* optional: you can set max-width or font-size here if needed */
-}
-
-/* blinking cursor */
-.cursor {
-  display: inline-block;
-  margin-left: 6px;
-  width: 0.6ch;
-  animation: hero-cursor-blink 1s steps(1) infinite;
-  color: inherit;
-  opacity: 1;
-}
-
-@keyframes hero-cursor-blink {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-/* optional: small responsive tweak so very long titles wrap nicely on small screens */
-@media (max-width: 480px) {
+  
+  /* ===========================
+     TYPING & CURSOR
+     =========================== */
   .title {
-    white-space: normal;
+    display: inline-block;
+    max-width: 50rem;
+    overflow-wrap: break-word; /* Ensures text wraps properly */
   }
+  
   .cursor {
-    display: none; /* cursor may look odd if title wraps — hide on tiny screens */
+    display: inline-block;
+    margin-left: 6px;
+    width: 0.6ch;
+    color: inherit;
+    opacity: 1;
+    animation: blink 1s step-start infinite;
   }
-}
-
-.hero {
-  position: relative;
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.bgImage {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 1.2s ease-in-out;
-}
-
-.bgImage.active {
-  opacity: 1;
-}
-
-.overlay {
-  position: relative;
-  text-align: center;
-  color: white;
-}
-
-.cursor {
-  display: inline-block;
-  animation: blink 1s step-start infinite;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
+  
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
   }
-}
-
-
-@media (max-width: 768px) {
-  .hero {
-    height: 40vh;
+  
+  /* ===========================
+     RESPONSIVE STYLES
+     =========================== */
+  
+  /* Tablet: reduce height and font sizes */
+  @media (max-width: 1024px) {
+    .overlay h1 {
+      font-size: 2.5rem;
+    }
+  
+    .description {
+      font-size: 1.2rem;
+      max-width: 500px;
+    }
   }
-}
+  
+  /* Mobile: smaller heights, fonts, wrap text better */
+  @media (max-width: 768px) {
+    .hero {
+      height: 25vh;
+    }
+  
+    .overlay h1 {
+      font-size: 2rem;
+    }
+  
+    .description {
+      font-size: 1rem;
+      max-width: 90%;
+    }
+  }
+  
+  /* Small mobile: hide cursor if text wraps */
+  @media (max-width: 480px) {
+    .hero {
+      height: 20vh;
+    }
+  
+    .overlay h1 {
+      font-size: 1.6rem;
+    }
+  
+    .description {
+      font-size: 0.9rem;
+    }
+  
+    .cursor {
+      display: none;
+    }
+  }
   

@@ -2,6 +2,7 @@ import styles from '@/styles/Footer.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaXTwitter } from "react-icons/fa6";
+import { IoShareSocial } from "react-icons/io5";
 
 
 export default function Footer() {
@@ -91,13 +92,49 @@ export default function Footer() {
           {/* Column 4 */}
           <div className={styles.col}>
             <h4>Connect With Us</h4>
-            <ul className='flex flex-row justify-between'>
-              <li><a href="#"><FaXTwitter size={16}/></a></li>
-              <li><a href="#"><FaLinkedinIn size={16}/></a></li>
-              <li><a href="#"><FaFacebookF size={16}/></a></li>
-              <li><a href="#"><FaYoutube size={16}/></a></li>
-              <li><a href="#"><FaInstagram size={16}/></a></li>
+            <ul className='flex flex-col justify-between'>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaXTwitter size={16}/>
+                    <h2>X</h2>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaLinkedinIn size={16}/>
+                    <h2>LinkedIn</h2>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaFacebookF size={16}/>
+                    <h2>Facebook</h2>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaYoutube size={16}/>
+                    <h2>Youtube</h2>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaInstagram size={16}/>
+                    <h2>Instagram</h2>
+                  </div>
+                </a>
+              </li>
             </ul>
+            <button className={styles.shareBtn}><IoShareSocial /> SHARE THIS PAGE</button>
           </div>
         </div>
       </div>
