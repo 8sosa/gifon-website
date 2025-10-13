@@ -91,7 +91,7 @@ export default function PoliciesPage() {
                   setSelectedPolicy(policy);
                   setOpen(true);
                 }}
-                className="bg-blue-600 text-white hover:bg-blue-700 transition"
+                className="bg-green-600 text-white hover:bg-green-700 transition"
               >
                 Read More
               </Button>
@@ -108,7 +108,7 @@ export default function PoliciesPage() {
                 <a
                   href={selectedPolicy.file}
                   download
-                  className="text-blue-600 hover:underline flex items-center gap-1"
+                  className="text-green-600 hover:underline flex items-center gap-1"
                 >
                   <FileDown className="w-5 h-5" />
                   Download

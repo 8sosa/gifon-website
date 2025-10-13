@@ -143,11 +143,11 @@ const menuItems: MenuItem[] = [
     label: 'Policies',
     href: '/policies',
     children: [
-      { label: 'Code of Ethics', anchor: 'dgi-london' },
-      { label: 'Anti-Corruption', anchor: 'usgif' },
-      { label: 'Fund Raising', anchor: 'fig' },
-      { label: 'Anti-Modern-Day Slavery', anchor: 'aag' },
-      { label: 'Volunteer & Internship', anchor: 'aarse' },
+      { label: 'Code of Ethics', anchor: 'ethics' },
+      { label: 'Anti-Corruption', anchor: 'anti-corruption' },
+      { label: 'Fund Raising', anchor: 'fund-raising' },
+      { label: 'Anti-Modern-Day Slavery', anchor: 'slavery' },
+      { label: 'Volunteer & Internship', anchor: 'volunteer' },
     ]
   },
   {
