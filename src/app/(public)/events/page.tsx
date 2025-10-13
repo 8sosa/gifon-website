@@ -101,7 +101,33 @@ export default async function EventsPage() {
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-semibold mb-6 text-center">Events & Highlights</h2>
             <p className="text-gray-700 leading-relaxed text-justify">
-              GIFON hosts a variety of impactful events, conferences, and workshops…
+              The Geospatial Intelligence Foundation of Nigeria (GIFON) actively convenes and participates in events that drive dialogue, innovation, and collaboration in the field of geospatial intelligence and national development.
+            </p>
+            <p className="text-gray-700 leading-relaxed text-justify pt-4">
+              Our Events & Highlights section provides a showcase of key milestones and activities, capturing how GIFON is shaping policy, research, and practice across Nigeria and beyond.
+            </p>
+            <p className="text-gray-700 leading-relaxed text-justify pt-4">
+              Here, visitors can explore:
+            </p>
+            <ol className="text-gray-700 leading-relaxed text-justify p-4 list-disc">
+              <li>
+                Major Conferences & Summits – high-level platforms where national and international stakeholders engage on geospatial intelligence and critical infrastructure.
+              </li>
+              <li>
+                Workshops & Trainings – capacity-building sessions that strengthen technical expertise and knowledge-sharing.
+              </li>
+              <li>
+                National Engagements – GIFON’s contributions to government initiatives, defence and security dialogues, and development programs.
+              </li>
+              <li>
+                International Participation – highlights from global events where GIFON represents Nigeria’s voice in the GEOINT community.
+              </li>
+              <li>
+                Community Initiatives – youth empowerment, academic partnerships, and innovation-driven outreach projects.
+              </li>
+            </ol>
+            <p className="text-gray-700 leading-relaxed text-justify">
+              By documenting these highlights, GIFON provides transparency, builds public awareness, and ensures that the outcomes of our engagements extend beyond the venue to influence policy, strengthen institutions, and inspire innovation. Through Events & Highlights, we celebrate our role in mapping the future and empowering the nation.
             </p>
           </div>
         </section>

@@ -66,7 +66,7 @@ const menuItems: MenuItem[] = [
   },
   { 
     label: 'Events', 
-    anchor: 'C-T' ,
+    href: '/events',
     children: [
       { label: 'Upcoming Events', anchor: 'upcoming-events', 
         children: [
@@ -139,7 +139,9 @@ const menuItems: MenuItem[] = [
           },
         ]
   },
-  { label: 'Policies', anchor: 'C-T' ,
+  { 
+    label: 'Policies',
+    href: '/policies',
     children: [
       { label: 'Code of Ethics', anchor: 'dgi-london' },
       { label: 'Anti-Corruption', anchor: 'usgif' },
