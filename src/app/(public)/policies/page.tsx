@@ -13,7 +13,7 @@ export default function PoliciesPage() {
     {
       id: "ethics",
       title: "Code of Ethics",
-      file: "/docs/code.docx",
+      file: "/docs/Code of Ethics and Professional Conduct.docx",
       bg: "bg-white",
       description: `Our Code of Ethics establishes the guiding principles that ensure all research,
       analysis, and dissemination of geospatial intelligence (GEOINT) are conducted
@@ -26,7 +26,7 @@ export default function PoliciesPage() {
     {
       id: "anti-corruption",
       title: "Anti-Corruption",
-      file: "/docs/anti-corruption.pdf",
+      file: "/docs/GIFON ANTI CORRUPTION POLICY.docx",
       bg: "bg-gray-50",
       description: `Transparency and accountability are essential in the field of geospatial
       security, where funding, research, and operations intersect with critical
@@ -37,7 +37,7 @@ export default function PoliciesPage() {
     {
       id: "fund-raising",
       title: "Fund Raising",
-      file: "/docs/fund-raising.pdf",
+      file: "/docs/GIFON FUND RAISING AND GRANTS POLICY.docx",
       bg: "bg-white",
       description: `Our Fund Raising policy emphasizes ethical and transparent methods of
       generating financial support for geospatial research, education, and
@@ -47,7 +47,7 @@ export default function PoliciesPage() {
     {
       id: "slavery",
       title: "Anti-Modern-Day Slavery",
-      file: "/docs/anti-slavery.pdf",
+      file: "/docs/GIFON ANTI MODERN DAY SLAVERY.docx",
       bg: "bg-gray-50",
       description: `Modern slavery, in the form of forced labor and human trafficking, presents
       complex global challenges that intersect with security and development. Our
@@ -57,7 +57,7 @@ export default function PoliciesPage() {
     {
       id: "volunteer",
       title: "Volunteer & Internship",
-      file: "/docs/volunteer-internship.pdf",
+      file: "/docs/VOLUNTEER AND INTERNSHIP POLICY.docx",
       bg: "bg-white",
       description: `Volunteers and interns are the backbone of innovation in geospatial research,
       bringing fresh perspectives and energy to critical projects. Our policy ensures
