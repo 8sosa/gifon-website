@@ -271,23 +271,70 @@ The Geospatial Intelligence Foundation of Nigeria (GIFON) is the only organizati
                         maximize the value of their membership. With a streamlined digital experience, staying connected to GIFON 
                         and the global GEOINT community has never been easier.
                         </p>
-                        <a href="/login" className="mt-4 inline-block bg-green-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition"> login to the portal</a>
+                        <a href="/login" className="mt-4 inline-block bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition"> login to the portal</a>
+                    </div>
+                </section>
+                <section className="mt-16 bg-green-100 p-20">
+                    <div className="max-w-5xl mx-auto flex flex-col items-center">
+                        <div>
+                            <section className="">
+                                <div className="inline-block mb-6 text-left">
+                                    <h2 className="text-green-600 text-2xl font-semibold">
+                                    Become a Member
+                                    </h2>
+                                    {/* Short underline */}
+                                    <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
+                                </div>
+                            </section>
+                            <p className="mb-6">
+                            Join our growing community of geospatial experts, researchers, innovators, and advocates.
+                            </p>
+                            <ul className="list-disc list-inside mb-6">
+                            <li>
+                                Access exclusive knowledge resources.
+                            </li>
+                            <li>
+                                Network with leaders in government, academia, and industry.
+                            </li>
+                            <li>
+                                Participate in specialized working groups and policy forums.
+                            </li>
+                            </ul>
+                        </div>
+                        <a
+                        href="/register"
+                        className="bg-green-600 text-white px-8 py-3 rounded font-semibold hover:bg-green-700 transition"
+                        >
+                        Learn More & Apply
+                        </a>
                     </div>
                 </section>
 
                 <section id="opportunities" className="py-16 px-4 bg-gray-50">
-                    <div className="max-w-5xl mx-auto">
-                        <h2 className="text-3xl font-semibold mb-4 text-center">Volunteer Opportunities</h2>
-                        <p className="text-gray-700 leading-relaxed">
-                        Volunteering with GIFON offers members the chance to actively contribute to the advancement of geospatial 
-                        intelligence while building leadership skills and professional networks. Opportunities include serving on 
-                        committees, mentoring students and young professionals, assisting with event planning, or contributing 
-                        expertise to working groups on pressing GEOINT challenges. Volunteers play a critical role in driving 
-                        initiatives forward, from supporting humanitarian mapping projects to shaping policy recommendations. 
-                        By volunteering, members not only give back to the community but also enhance their own professional 
-                        development and visibility. Participation fosters collaboration, strengthens networks, and helps ensure 
-                        that the global GEOINT community remains vibrant, inclusive, and forward-looking.
-                        </p>
+                    <div className="max-w-5xl mx-auto flex flex-col items-center">
+                        <h2 className="text-3xl font-semibold mb-4 text-center">Volunteer With Us</h2>
+                        <div>
+                            <p className="text-gray-700 leading-relaxed">
+                                Contribute your time and expertise to advance geospatial awareness, training, and community projects.
+                            </p>
+                            <ul className="list-disc list-inside mb-6">
+                                <li>
+                                    Support local mapping initiatives.
+                                </li>
+                                <li>
+                                    Mentor students and young professionals.
+                                </li>
+                                <li>
+                                    Assist with events, workshops, and research.
+                                </li>
+                            </ul>
+                        </div>
+                        <a
+                        href="/register"
+                        className="bg-green-600 text-white px-8 py-3 rounded font-semibold hover:bg-green-700 transition"
+                        >
+                            Sign Up to Volunteer
+                        </a>
                     </div>
                 </section> 
 

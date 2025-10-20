@@ -341,13 +341,24 @@ export default async function AboutPage() {
           </div>
         </section>
         <p className="mb-6">
-          Make the decision to actively engage with your peers and participate in your profession. You are welcome here!
+          Join our growing community of geospatial experts, researchers, innovators, and advocates.
         </p>
+        <ul className="list-disc list-inside mb-6">
+          <li>
+            Access exclusive knowledge resources.
+          </li>
+          <li>
+            Network with leaders in government, academia, and industry.
+          </li>
+          <li>
+            Participate in specialized working groups and policy forums.
+          </li>
+        </ul>
         <a
           href="/register"
           className="bg-sky-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-sky-700 transition"
         >
-          Join Now
+          Learn More & Apply
         </a>
       </section>
     </>
