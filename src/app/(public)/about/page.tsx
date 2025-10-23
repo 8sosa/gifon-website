@@ -260,7 +260,7 @@ export default async function AboutPage() {
           { title: "Membership", desc: "Publications, fact sheets, podcasts, conference proceedings, peer-reviewed URISA Journal articles, Salary Surveys, and white papers.", link: "#" },
           { title: "Resources", desc: "Countless tools to support your GIS career.", link: "#" },
           { title: "Contributions", desc: "Mentorship, committees, advocacy — lend your voice to the profession.", link: "#" },
-          { title: "Local Chapters", desc: "Discover a local network and get involved. Joining GPN means joining your chapter.", link: "#" },
+          { title: "Local Chapters", desc: "Discover a local network and get involved. Joining GIFON means joining your chapter.", link: "#" },
           { title: "Next Generation", desc: "Opportunities to contribute and shine. The Vanguard Cabinet is an amazing career stepping stone.", link: "#" },
           { title: "Recognition", desc: "From the GIS Hall of Fame to Exemplary Systems Awards, we celebrate Excellence in GIS.", link: "#" },
           { title: "GISCorps", desc: "Volunteers provide GIS expertise worldwide for underdeveloped countries and disaster recovery.", link: "#" },
@@ -274,7 +274,7 @@ export default async function AboutPage() {
             </h3>
             <Image
               src="/space.jpg" // replace with your file
-              alt="GIS Corps GPN"
+              alt="GIS Corps GIFON"
               width={300}
               height={100}
             />
@@ -315,7 +315,7 @@ export default async function AboutPage() {
             </h3>
             <Image
               src="/space.jpg" // replace with your file
-              alt="GIS Corps GPN"
+              alt="GIS Corps GIFON"
               width={300}
               height={100}
             />

@@ -89,16 +89,16 @@ export default function HomePage() {
           <div><Image src="/space.jpg" alt="item" width={1500} height={1000}/></div>
           <div className="caption">
             <h4>Membership</h4>
-            <p>You are invited to join GPN as an individual or as part of an organization.</p>
-            <p>Learn More</p>
+            <p>You are invited to join GIFON as an individual or as part of an organization.</p>
+            <a href="/membership" ><p>Learn More</p></a>
           </div>
         </div>
         <div className="homeCard">
           <div><Image src="/space.jpg" alt="item" width={1500} height={1000}/></div>
           <div className="caption">
             <h4>Education</h4>
-            <p>GPN is committed to supporting GIS professionals at all stages of their careers with essential education and training.</p>
-            <p>Learn More</p>
+            <p>GIFON is committed to supporting GIS professionals at all stages of their careers with essential education and training.</p>
+            <a href="/Education" ><p>Learn More</p></a>
           </div>
         </div>
         <div className="homeCard">
@@ -106,44 +106,45 @@ export default function HomePage() {
           <div className="caption">
             <h4>Resources</h4>
             <p>Learn from our vast library of research and papers, publications, FAQs, and podcasts.</p>
-            <p>Learn More</p>
+            <a href="/Resources"><p>Learn More</p></a>
           </div>
         </div>
       </div>
       <section className="events-section">
-        <h2 className="text-4xl font-bold mb-8 green">Newsletter</h2>
+        <h2 className="text-4xl font-bold mb-5 green">Newsletter</h2>
+        <h4 className="text-3xl font-bold mb-8 text-green-700"></h4>
         <div className="events-container">
           <div className="event-card">
             <div className="icon">📅</div>
-            <h3>GIS-Pro in the Rockies 2025</h3>
-            <p className="location">Denver, Colorado</p>
-            <p className="date">October 6-9, 2025</p>
-            <a href="#">LEARN MORE</a>
+            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+            <p className="location">Vol 1, No. 1 - August 2025</p>
+            <p className="date">GIFON joins the Global GEOINT Stage</p>
+            <a href="#">READ MORE</a>
+          </div>
+
+          {/* <div className="event-card">
+            <div className="icon">📅</div>
+            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+            <p className="location">Vol 2, No. 2 - August 2025</p>
+            <p className="date">GIFON joins the Global GEOINT Stage</p>
+            <a href="#">READ MORE</a>
           </div>
 
           <div className="event-card">
             <div className="icon">📅</div>
-            <h3>GIS Leadership Academy</h3>
-            <p className="location">Hosted Virtually</p>
-            <p className="date">October 27-31, 2025</p>
-            <a href="#">LEARN MORE</a>
+            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+            <p className="location">Vol 2, No. 3 - August 2025</p>
+            <p className="date">GIFON joins the Global GEOINT Stage</p>
+            <a href="#">READ MORE</a>
           </div>
 
           <div className="event-card">
             <div className="icon">📅</div>
-            <h3>GIS Leadership Academy</h3>
-            <p className="location">Savannah, Georgia</p>
-            <p className="date">December 8-12, 2025</p>
-            <a href="#">LEARN MORE</a>
-          </div>
-
-          <div className="event-card">
-            <div className="icon">📅</div>
-            <h3>Advanced GIS Leadership Academy</h3>
-            <p className="location">New Orleans Louisiana</p>
-            <p className="date">November 3-7 2025</p>
-            <a href="#">LEARN MORE</a>
-          </div>
+            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+            <p className="location">Vol 3, No. 1 - August 2025</p>
+            <p className="date">GIFON joins the Global GEOINT Stage</p>
+            <a href="#">READ MORE</a>
+          </div> */}
         </div>
       </section>
 
@@ -318,11 +319,11 @@ export default function HomePage() {
             <h3 className="text-sky-700 border-b-2 border-sky-700 inline-block mb-4 text-3xl font-bold">
               Latest News
             </h3>
-            <ul className="space-y-2">
+            {/* <ul className="space-y-2">
               <li className="flex flex-col">
                 8/20/2025 {" "}
                 <a href="#" className="text-sky-700 hover:underline">
-                  GPN Young Professional Scholarship Winners Introduced
+                  GIFON Young Professional Scholarship Winners Introduced
                 </a>
               </li>
               <li className="flex flex-col">
@@ -343,7 +344,7 @@ export default function HomePage() {
                   URISA Announces Newest Members of the Vanguard Cabinet of Young GIS Professionals
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </div>
 
           {/* Calendar */}
@@ -351,7 +352,7 @@ export default function HomePage() {
             <h3 className="text-sky-700 border-b-2 border-sky-700 inline-block mb-4 text-3xl font-bold">
               Calendar
             </h3>
-            <ul className="space-y-2">
+            {/* <ul className="space-y-2">
               <li className="flex flex-col">
                 8/12/2025 – 9/30/2025 {" "}
                 <a href="#" className="text-sky-700 hover:underline">
@@ -376,7 +377,7 @@ export default function HomePage() {
                   GIS-Pro in the Rockies 2025
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </section>
 
@@ -419,7 +420,7 @@ export default function HomePage() {
           <div className="flex flex-wrap justify-center items-center gap-10 mt-12">
             <Image
               src="/ph.svg" // replace with your file
-              alt="GIS Corps GPN"
+              alt="GIS Corps GIFON"
               width={150}
               height={80}
             />
@@ -431,7 +432,7 @@ export default function HomePage() {
             />
             <Image
               src="/ph.svg" // replace with your file
-              alt="GPN Vanguard Cabinet"
+              alt="GIFON Vanguard Cabinet"
               width={150}
               height={80}
             />

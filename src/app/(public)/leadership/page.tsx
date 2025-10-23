@@ -45,13 +45,13 @@ export default function LeadershipHistoryPage() {
             </h2>
             <div className="flex flex-col space-y-2 text-sm">
               <Link
-                href="https://thegpn.org/resource/resmgr/documents/admin/annual_reports/urisa_annual_report_2023.pdf"
+                href="https://theGIFON.org/resource/resmgr/documents/admin/annual_reports/urisa_annual_report_2023.pdf"
                 className="text-blue-600 hover:underline"
               >
                 2023 Annual Report
               </Link>
               <Link
-                href="https://thegpn.org/resource/resmgr/documents/admin/annual_reports/urisa_annual_report_2022.pdf"
+                href="https://theGIFON.org/resource/resmgr/documents/admin/annual_reports/urisa_annual_report_2022.pdf"
                 className="text-blue-600 hover:underline"
               >
                 2022 Annual Report
@@ -67,7 +67,7 @@ export default function LeadershipHistoryPage() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  href="https://thegpn.org/resource/resmgr/documents/admin/urisa_bylaws_adopted_8_15_22.pdf"
+                  href="https://theGIFON.org/resource/resmgr/documents/admin/urisa_bylaws_adopted_8_15_22.pdf"
                   className="hover:underline text-blue-600"
                 >
                   Bylaws
@@ -75,7 +75,7 @@ export default function LeadershipHistoryPage() {
               </li>
               <li>
                 <Link
-                  href="https://thegpn.org/resource/resmgr/documents/admin/URISA_Policy_Manual_as_of_4_.pdf"
+                  href="https://theGIFON.org/resource/resmgr/documents/admin/URISA_Policy_Manual_as_of_4_.pdf"
                   className="hover:underline text-blue-600"
                 >
                   Policy Manual
@@ -91,7 +91,7 @@ export default function LeadershipHistoryPage() {
               </li>
               <li>
                 <Link
-                  href="https://thegpn.org/resource/resmgr/documents/admin/codeofethics.pdf"
+                  href="https://theGIFON.org/resource/resmgr/documents/admin/codeofethics.pdf"
                   className="hover:underline text-blue-600"
                 >
                   Ethics
@@ -99,7 +99,7 @@ export default function LeadershipHistoryPage() {
               </li>
               <li>
                 <Link
-                  href="https://thegpn.org/resource/resmgr/documents/admin/approvedjuly2025.pdf"
+                  href="https://theGIFON.org/resource/resmgr/documents/admin/approvedjuly2025.pdf"
                   className="hover:underline text-blue-600"
                 >
                   Strategic Plan
@@ -116,7 +116,7 @@ export default function LeadershipHistoryPage() {
             <h1 className="text-3xl font-bold mb-4">Leadership & History</h1>
             <p className="text-gray-700 leading-relaxed">
               We have evolved to become the <strong>Geospatial Professional Network</strong>. 
-              The GPN is a vibrant community uniting emerging and experienced GIS professionals 
+              The GIFON is a vibrant community uniting emerging and experienced GIS professionals 
               through top-tier education, networking, and career development.
             </p>
           </div>
@@ -129,7 +129,7 @@ export default function LeadershipHistoryPage() {
               Southern California, organized by Edgar Horwood and attended by 48 people...
             </p>
             <Link
-              href="https://thegpn.org/resource/resmgr/documents/admin/urisa_timeline.pdf"
+              href="https://theGIFON.org/resource/resmgr/documents/admin/urisa_timeline.pdf"
               className="text-blue-600 hover:underline font-medium"
             >
               View History Timeline →
@@ -189,7 +189,7 @@ export default function LeadershipHistoryPage() {
                 support this inspiring program.
               </p>
               <Link
-                href="https://thegpn.org/donations/"
+                href="https://theGIFON.org/donations/"
                 className="inline-block bg-blue-600 text-white text-sm px-4 py-2 rounded hover:bg-blue-700"
               >
                 Donate
@@ -204,7 +204,7 @@ export default function LeadershipHistoryPage() {
                 education and unmatched networking.
               </p>
               <Link
-                href="https://thegpn.org/donations/"
+                href="https://theGIFON.org/donations/"
                 className="inline-block bg-blue-600 text-white text-sm px-4 py-2 rounded hover:bg-blue-700"
               >
                 Donate

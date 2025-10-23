@@ -195,7 +195,7 @@ export default function ContactPage() {
             <h2 className="text-xl font-semibold mb-3">Latest News</h2>
             <ul className="space-y-2 text-gray-700 text-sm">
                 <li>
-                <span className="font-medium">8/20/2025:</span> GPN Young
+                <span className="font-medium">8/20/2025:</span> GIFON Young
                 Professional Scholarship Winners Introduced
                 </li>
                 <li>

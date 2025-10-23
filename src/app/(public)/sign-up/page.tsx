@@ -108,7 +108,7 @@ export default function MembershipPage() {
                 <li>
                 <span className="text-gray-500">8/20/2025</span><br />
                 <Link href="#" className="text-blue-700 underline">
-                    GPN Young Professional Scholarship Winners Introduced
+                    GIFON Young Professional Scholarship Winners Introduced
                 </Link>
                 </li>
                 <li>

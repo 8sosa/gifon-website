@@ -21,7 +21,7 @@ export default function DonatePage() {
       <main className="bg-green-50">
         <section className='max-w-5xl mx-auto px-6 py-12 space-y-16'>
           <div>
-            <p>To advance in your career, it is critical to keep updating your skills, be open to new ideas and ways of doing things, and take advantage of every opportunity to learn that comes along. You may prefer self-directed learning via online courses or webinars while others learn best through formal lecture or in-person seminars, training, and conferences. GPN has you covered, no matter your experience level, preferred learning method or professional development need! We regularly deliver education and training at in-person events and at virtual events.</p>
+            <p>To advance in your career, it is critical to keep updating your skills, be open to new ideas and ways of doing things, and take advantage of every opportunity to learn that comes along. You may prefer self-directed learning via online courses or webinars while others learn best through formal lecture or in-person seminars, training, and conferences. GIFON has you covered, no matter your experience level, preferred learning method or professional development need! We regularly deliver education and training at in-person events and at virtual events.</p>
             <br />
             <p id='C-T'>Certainly, it takes more effort to gain necessary approvals and arrange to be away from your family and work in order to attend an in-person conference or training event. But that effort typically pays off with insights to improve not only your own performance but also that of your organization. Between educational sessions, exhibitor solutions, and hallway discussions, you are certain to identify better, faster and cheaper ways to get the work done. Getting a variety of viewpoints can help you see where we can change or improve our own ideas and processes.</p>
           </div>
@@ -34,7 +34,7 @@ export default function DonatePage() {
             <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
           </div>
           <p>Every experience, whether it&apos;s a conference, a project, or even a conversation, presents a chance to broaden your knowledge base and stay relevant. By embracing these opportunities, you can enhance your career readiness and become a proactive contributor to your organization and the GIS profession overall.</p>
-          <p>Our educational programs are led by volunteers who have a demonstrated expertise for a particular subject area and a passion for sharing knowledge with their peers. Each committee strives to present a program that is important, timely, and robust. GPN events span various disciplines, are offered in-person and virtually, and often sometimes involve a partner organization as the other part in: GIS &         (Health/Tax Assessment/Public Safety, etc.) What&apos;s the next GIS &         event?</p>
+          <p>Our educational programs are led by volunteers who have a demonstrated expertise for a particular subject area and a passion for sharing knowledge with their peers. Each committee strives to present a program that is important, timely, and robust. GIFON events span various disciplines, are offered in-person and virtually, and often sometimes involve a partner organization as the other part in: GIS &         (Health/Tax Assessment/Public Safety, etc.) What&apos;s the next GIS &         event?</p>
             <div className="flex flex-col gap-6 text-gray-700">
             {[
                     {

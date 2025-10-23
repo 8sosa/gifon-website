@@ -34,13 +34,13 @@ export function LogoCarousel({
         {/** First copy of logos */}
         {logos.map((logo, idx) => (
           <div className={styles.item} key={`1-${idx}`}>
-            <Image width={300} height={300} src={logo.src} alt={logo.alt ?? `Logo ${idx + 1}`} />
+            <Image width={400} height={400} src={logo.src} alt={logo.alt ?? `Logo ${idx + 1}`} />
           </div>
         ))}
         {/** Second copy for seamless looping */}
         {logos.map((logo, idx) => (
           <div className={styles.item} key={`2-${idx}`}>
-            <Image width={300} height={300} src={logo.src} alt={logo.alt ?? `Logo ${idx + 1}`} />
+            <Image width={400} height={400} src={logo.src} alt={logo.alt ?? `Logo ${idx + 1}`} />
           </div>
         ))}
       </div>

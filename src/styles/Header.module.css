@@ -24,7 +24,14 @@
 }
 
 .logo {
-  max-width: 10rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.logoPng {
+  max-width: 4rem;
+  max-height: 4rem;
 }
 
 .navLinks {

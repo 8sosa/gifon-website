@@ -362,7 +362,11 @@ function handleRootLeave() {
       {/* Main Navbar */}
       <div className={styles.navbar}>
         <Link href="/" className={styles.logo} onClick={closeAll}>
-          <Image src="/logo.png" alt="Gifon" width={1000} height={1000} />
+          <Image src="/logo.png" alt="Gifon" width={1000} height={800} className={styles.logoPng}/>
+          <div className="flex flex-col justify-center">
+            <h1 className="text-5xl font-bold green">GIFON</h1>
+            <span className="text-xl font-semibold green">Geospatial Intelligence Foundation of Nigeria</span>
+          </div>
         </Link>
 
         {/* Top Menu Offcanvas */}
