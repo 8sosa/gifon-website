@@ -1,53 +1,31 @@
 "use client";
 
-import React, { useEffect, 
-  // useRef, 
-  useState } from "react";
+import React, { useEffect, useState } from "react";
+import Link from "next/link"; // Import Link for the CTA
 import styles from "@/styles/HeroSection.module.css";
 
+// Make props optional so they don't cause type errors if not passed
 type HeroSectionProps = {
-  title: string;
-  // description: string;
-  backgroundImages: string[]; // multiple images now
-  typingSpeed?: number; // ms per char (optional)
-  cycleInterval?: number; // ms per image (optional)
+  title?: string;
+  description?: string;
+  backgroundImages?: string[];
+  typingSpeed?: number;
+  cycleInterval?: number;
+  ctaText?: string; // <-- Added CTA text prop
+  ctaLink?: string;  // <-- Added CTA link prop
 };
 
 export default function HeroSection({
-  title,
-  // description,
-  backgroundImages,
+  // Provide default values to use when props are not provided
+  title = "",
+  description = "",
+  backgroundImages = [], // Use an empty array as default
   // typingSpeed = 80,
-  cycleInterval = 5000, // default: 5s per image
+  cycleInterval = 5000,
+  ctaText, // No default needed, we'll check if it exists
+  ctaLink, // No default needed, we'll check if it exists
 }: HeroSectionProps) {
-  // const [displayedDesc, setDisplayedDesc] = useState("");
   const [bgIndex, setBgIndex] = useState(0);
-
-  // const indexRef = useRef(0);
-  // const timeoutRef = useRef<number | null>(null);
-
-  // Typewriter effect for description
-  // useEffect(() => {
-  //   indexRef.current = 0;
-  //   setDisplayedDesc("");
-
-  //   const tick = () => {
-  //     const i = indexRef.current;
-  //     if (i <= description.length) {
-  //       setDisplayedDesc(description.slice(0, i));
-  //       indexRef.current = i + 1;
-  //       timeoutRef.current = window.setTimeout(tick, typingSpeed);
-  //     } else {
-  //       timeoutRef.current = null;
-  //     }
-  //   };
-
-  //   timeoutRef.current = window.setTimeout(tick, 120);
-
-  //   return () => {
-  //     if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
-  //   };
-  // }, [description, typingSpeed]);
 
   // Background image cycle
   useEffect(() => {
@@ -76,18 +54,17 @@ export default function HeroSection({
       <div className={styles.overlay}>
         {/* Title static */}
         <h1 className={`cooper ${styles.title}`}>{title}</h1>
+        {/* Description static */}
+        <p className={`cooper ${styles.description}`}>{description}</p>
 
-        {/* Animated description */}
-        {/* <p
-          className={styles.description}
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          <span>{displayedDesc}</span>
-          <span className={styles.cursor} aria-hidden="true">
-            |
-          </span>
-        </p> */}
+        {/* --- Conditionally Rendered CTA Button --- */}
+        {ctaText && ctaLink && (
+          <Link href={ctaLink} className={styles.ctaButton}>
+            {ctaText}
+          </Link>
+        )}
+        {/* ------------------------------------------ */}
+
       </div>
     </section>
   );

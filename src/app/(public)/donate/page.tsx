@@ -21,13 +21,13 @@ export default function DonatePage() {
         <section id="ways-to-support" className="py-16 px-4 bg-white">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-semibold mb-4">GET INVOLVED</h2>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-gray-700 leading-relaxed text-justify">
               At the Geospatial Intelligence Foundation of Nigeria (GIFON), we believe that collective action fuels innovation, strengthens national security, and drives sustainable development. Whether you are a professional, student, partner organization, or supporter, there are many ways to join our mission.
             </p>
           </div>
         </section>
 
-        <section id="opportunities" className="py-16 px-4 bg-white">
+        {/* <section id="opportunities" className="py-16 px-4 bg-white">
           <div className="max-w-5xl mx-auto flex flex-col items-center">
               <h2 className="text-3xl font-semibold mb-4 text-center">Become a Member</h2>
               <div className="min-w-full">
@@ -165,7 +165,7 @@ export default function DonatePage() {
                 View Openings
               </a>
           </div>
-        </section> 
+        </section>  */}
         
         <section id="opportunities" className="py-16 px-4 bg-white">
           <div className="max-w-5xl mx-auto flex flex-col items-center">

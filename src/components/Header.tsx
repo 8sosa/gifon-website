@@ -98,23 +98,23 @@ const menuItems: MenuItem[] = [
     label: 'Resources',
     href: '/resources',
     children: [
-      { label: 'Media Resources', anchor: 'C-T' ,
-        children: [
-              { label: 'News & Media ', anchor: 'dgi-london' },
-              { label: 'Press Releases', anchor: 'usgif' },
-              { label: 'Podcast and Webinar Series', anchor: 'aag' },
-              { label: 'Publication Archive', anchor: 'fig' },
-              { label: 'Photo & Video Gallery', anchor: 'aarse' },
-              { label: 'Downloads', anchor: 'eis-africa' },
-            ]  
+      { label: 'Media Resources', anchor: 'media' ,
+        // children: [
+        //       { label: 'News & Media ', anchor: 'dgi-london' },
+        //       { label: 'Press Releases', anchor: 'usgif' },
+        //       { label: 'Podcast and Webinar Series', anchor: 'aag' },
+        //       { label: 'Publication Archive', anchor: 'fig' },
+        //       { label: 'Photo & Video Gallery', anchor: 'aarse' },
+        //       { label: 'Downloads', anchor: 'eis-africa' },
+        //     ]  
           },
-          { label: 'Publications', anchor: 'C-T' ,
+          { label: 'Publications', anchor: 'publications' ,
             children: [
-              { label: 'Eyes on Location- The Journal of GeoINSIGHT', anchor: 'dgi-london' },
-              { label: 'Eyes on Location- The GeoINSIGHT Bulletin', anchor: 'usgif' },
-              { label: 'Conference & Workshop Proceedings', anchor: 'fig' },
-              { label: 'Policy Briefs & White Paper', anchor: 'aag' },
-              { label: 'Research Reports', anchor: 'aarse' },
+              { label: 'Eyes on Location- The Journal of GeoINSIGHT', anchor: 'GeoINSIGHT' },
+              { label: 'Eyes on Location- The GeoINSIGHT Bulletin', anchor: 'Bulletin' },
+              { label: 'Conference & Workshop Proceedings', anchor: 'Proceedings' },
+              { label: 'Policy Briefs & White Paper', anchor: 'Policy' },
+              { label: 'Research Reports', anchor: 'Research' },
             ]  
           },
           {
@@ -151,7 +151,7 @@ const menuItems: MenuItem[] = [
     ]
   },
   {
-    label: 'Donate',
+    label: 'Donate & Support',
     href: '/donate'
   },
 ];

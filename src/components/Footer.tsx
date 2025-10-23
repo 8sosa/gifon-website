@@ -1,7 +1,7 @@
 import styles from '@/styles/Footer.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaXTwitter } from "react-icons/fa6";
+import { FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
 import { IoShareSocial } from "react-icons/io5";
 
 
@@ -58,19 +58,37 @@ export default function Footer() {
       <div className={styles.top}>
         {/* Column 1 (spans half width) */}
         <div className={styles.col1}>
-          <Image src="/logo.png" alt="GIFON Logo" width={160} height={40} />
+          <Link href="/" className={styles.logo}>
+            <Image src="/logo.png" alt="Gifon" width={600} height={600} className={styles.logoPng}/>
+            <div className="flex flex-col justify-center">
+              <h1 className="text-5xl font-bold green">GIFON</h1>
+              <span className="text-xl font-semibold green">Geospatial Intelligence Foundation of Nigeria</span>
+            </div>
+          </Link>
         </div>
         <div className={styles.footerRight}>
           {/* Column 2 */}
           <div className={styles.col}>
             <h4>Contact Us</h4>
-            <ul>
-              <li>12 RICHARD CLAPPERTON,</li>
-              <li>OFF MAMAN NASIR, ASOKORO DISTRICT,</li>
-              <li>FCT, ABUJA NIGERIA.</li>
-              <li>Director General: +234 707 739 6612</li>
-              <li>Membership/Outreach: +234 707 726 9829</li>
-              <li>Secretariat: +234 707 721 1243</li>
+            <ul className='w-max'>
+              <li>12 RICHARD CLAPPERTON, OFF MAMAN NASIR</li>
+              <li>ASOKORO DISTRICT, FCT, ABUJA NIGERIA.</li>
+              <li className='flex flex-row w-full justify-between'>
+                <p>Director General:</p>
+                <p>+234 707 739 6612</p>
+              </li>
+              <li className='flex flex-row w-full justify-between'>
+                <p>Outreach:</p>
+                <p>+234 707 726 9829</p>
+              </li>
+              <li className='flex flex-row w-full justify-between'>
+                <p>Research:</p>
+                <p>+234 707 739 6196</p>
+              </li>
+              <li className='flex flex-row w-full justify-between'>
+                <p>Secretariat:</p>
+                <p>+234 707 721 1243</p>
+              </li>
               <li>Email: secretariat@gifon.org.ng</li>
             </ul>
           </div>
@@ -130,6 +148,14 @@ export default function Footer() {
                   <div className='flex flex-row justify-start items-center gap-4'> 
                     <FaInstagram size={16}/>
                     <h2>Instagram</h2>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaWhatsapp size={16}/>
+                    <h2>Whatsapp</h2>
                   </div>
                 </a>
               </li>

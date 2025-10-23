@@ -3,7 +3,7 @@
    =========================== */
    .hero {
     position: relative;
-    height: 60vh;
+    height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,11 +48,33 @@
   }
   
   .description {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 300;
     max-width: 600px;
     margin: 0 auto;
   }
+
+  /* Add to HeroSection.module.css */
+
+.ctaButton {
+  display: inline-block;
+  margin-top: 2rem; /* 32px */
+  padding: 0.75rem 2rem; /* 12px 32px */
+  background-color: #16a34a; /* green-600 */
+  color: white;
+  border-radius: 9999px; /* rounded-full */
+  font-weight: 600; /* font-semibold */
+  text-decoration: none;
+  font-size: 1rem;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: #15803d; /* green-700 */
+  transform: translateY(-2px); /* Lifts the button slightly */
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.12);
+}
   
   /* ===========================
      TYPING & CURSOR

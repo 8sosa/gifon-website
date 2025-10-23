@@ -8,6 +8,7 @@ import Link from 'next/link';
 
 import MotionDiv from "@/components/MotionDiv"; 
 import MotionImg from "@/components/MotionImg";
+import { FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
 import { Globe, Shield, Users, Rocket, Sparkles} from 'lucide-react';
 
 const partners: Logo[] = [
@@ -50,7 +51,7 @@ export default async function AboutPage() {
         <div className="flex-1 mb-6 md:mb-0">
           <Image
             src="/ph.svg" 
-            alt="Featured StoryMap"
+            alt="Geospatial Intelligence for Nigeria"
             width={600}
             height={300}
             className="rounded shadow"
@@ -60,26 +61,22 @@ export default async function AboutPage() {
           <div className="inline-block mb-6 text-left">
             <h2 className="text-green-600 text-2xl font-semibold">
               Welcome!
+              {/* Mapping the Future. Empowering the Nation. */}
             </h2>
             {/* Short underline */}
             <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
           </div>
           <p className="max-w-3xl mx-auto mb-4 text-left">
-            The Geospatial Professional Network is a vibrant community uniting
-            emerging and experienced GIS professionals through top-tier education,
-            networking, and career development. We are committed to upholding
-            ethical standards, empowering you to support your organization,
-            advance your career, and shape the future of the geospatial
-            profession.
+            The Geospatial Intelligence Foundation of Nigeria (GIFON) is Nigeria’s first dedicated platform to institutionalize geospatial intelligence. We are a movement bringing together government, military, academia, industry, and international partners to reshape how Nigeria thinks about intelligence, decision-making, and governance.
           </p>
+          {/* --- FIXES ARE IN THIS <p> TAG --- */}
           <p className="max-w-3xl mx-auto text-left">
-            The Urban and Regional Information Systems Association (URISA) is a
-            nonprofit 501(c)3 association incorporated in 1966. Moving forward,
-            URISA will be doing business as the Geospatial Professional Network.
+            Founded by Dr. AA Usman, GIFON&apos;s quest is to ensure Nigeria is no longer &quot;blind in an era where other nations were seeing the world in sharper detail than ever before&quot;. This vision is about embedding GEOINT into the DNA of Nigeria’s governance —a dream once seen as radical, now recognized as indispensable to Nigeria’s survival and Africa’s rise.
           </p>
-          <Link href={"/leadership"}>
+          <Link href={"/docs/THE QUEST BY DR. AA USMAN.docx"}> {/* Assumed path to the file */}
+          {/* --- FIXES ARE IN THIS <button> TAG --- */}
           <button className="mt-6 bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition">
-            leadership & History
+            Read &quot;The Quest&quot; by Dr. AA Usman
           </button>
           </Link>
         </div>
@@ -123,23 +120,77 @@ export default async function AboutPage() {
 
       {/* Objectives as icon cards */}
       <section id="objectives" className="py-20 px-6 bg-gray-50 fullSect">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-12">Our Objectives</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold mb-6 text-center">Our Objectives</h2>
+          <p className="text-lg text-gray-700 mb-12 text-center max-w-4xl mx-auto">
+            The objectives of the Geospatial Intelligence Foundation of Nigeria (GIFON),
+            focuses on building a strong foundation for geospatial intelligence in
+            Nigeria, addressing both technical and strategic goals. They emphasize the
+            importance of education, collaboration, research, and application across
+            sectors, while also aligning with broader national and global development
+            priorities.
+          </p>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: <Globe size={40} />, text: 'Empowering national development through GEOINT' },
-              { icon: <Shield size={40} />, text: 'Strengthening security with actionable intelligence' },
-              { icon: <Users size={40} />, text: 'Building collaboration across sectors' },
+              {
+                title: '1. Advancing Geospatial Technology Adoption',
+                text: 'Promote the widespread adoption of advanced geospatial technologies (e.g., geographic information systems, remote sensing, UAVs, AI) across public and private sectors to support data-driven decision-making processes, enhance national development, and improve service delivery.',
+              },
+              {
+                title: '2. Building Capacity & Skill Development',
+                text: 'Develop and implement educational programs, workshops, and certifications to build local capacity in geospatial intelligence. Empower professionals, government officials, and communities with the skills required to effectively use geospatial data in their respective fields.',
+              },
+              {
+                title: '3. Fostering Public-Private Sector Collaboration',
+                text: 'Facilitate collaboration between the public sector, private enterprises, and academia to create a robust geospatial ecosystem in Nigeria. This includes fostering partnerships to drive innovation, share resources, and enhance the effectiveness of geospatial solutions.',
+              },
+              {
+                title: '4. Enhancing National Security & Safety',
+                text: 'Leverage geospatial intelligence to improve national security and disaster response capabilities. Develop tools and solutions that enhance situational awareness, monitoring, and prediction for military, law enforcement, and emergency response agencies.',
+              },
+              {
+                title: '5. Driving Sustainable Development Initiatives',
+                text: 'Promote the application of geospatial intelligence in tackling critical challenges related to climate change, sustainable urbanization, agriculture, water resources management, and environmental conservation. Support the achievement of Nigeria’s Sustainable Development Goals (SDGs).',
+              },
+              {
+                title: '6. Policy Advocacy & Strategic Influence',
+                text: 'Advocate for the integration of geospatial intelligence into national and local policy frameworks. Engage with government agencies to ensure geospatial data and technologies are recognized and prioritized as critical components of national development and governance.',
+              },
+              {
+                title: '7. Promoting Geospatial Data Accessibility & Transparency',
+                text: 'Enhance the availability and accessibility of geospatial data to all sectors of society, ensuring that information is transparent, accurate, and available to decision-makers, researchers, and the public.',
+              },
+              {
+                title: '8. Research & Development (R&D) in Geospatial Intelligence',
+                text: 'Foster research and innovation in geospatial science and technology, encouraging the development of new methodologies, tools, and applications. Support academic institutions and research centres in Nigeria to contribute to the global geospatial community.',
+              },
+              {
+                title: '9. Raising Public Awareness & Engagement',
+                text: 'Raise awareness about the importance and potential of geospatial intelligence through media campaigns, seminars, and public outreach programs. Ensure that citizens, businesses, and local communities understand the benefits and applications of geospatial data in their everyday lives.',
+              },
+              {
+                title: '11. International Cooperation & Networking',
+                text: 'Position Nigeria as a key player in the global geospatial intelligence community by actively engaging with international organizations, participating in global forums, and contributing to international standards and best practices.',
+              },
+              {
+                title: '11. Data-Driven Decision-Making for Urban Planning & Infrastructure',
+                text: 'Support the use of geospatial intelligence in urban planning, infrastructure development, and resource management. Provide tools and frameworks that help local and national governments make informed decisions about infrastructure projects, land-use planning, and resource allocation.',
+              },
+              {
+                title: '12. Strengthening Geospatial Standards & Governance',
+                text: 'Advocate for the development and implementation of national geospatial data standards and governance frameworks to ensure data quality, interoperability, and consistency across all sectors.',
+              },
             ].map((obj, i) => (
               <MotionDiv
                 key={i}
-                className="p-8 bg-white shadow-lg rounded-2xl flex flex-col items-center space-y-4 hover:shadow-xl transition"
+                className="p-8 bg-white shadow-lg rounded-2xl flex flex-col items-start text-left space-y-4 hover:shadow-xl transition"
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
                 variants={fadeUp}
               >
-                <div className="text-primary">{obj.icon}</div>
+                <h3 className="text-xl font-semibold text-primary">{obj.title}</h3>
                 <p className="text-gray-700">{obj.text}</p>
               </MotionDiv>
             ))}
@@ -157,7 +208,7 @@ export default async function AboutPage() {
             variants={fadeUp}
           >
             <h2 className="text-3xl font-semibold mb-4">Mission</h2>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-gray-700 leading-relaxed text-justify">
               The Geospatial Intelligence Foundation of Nigeria (GIFON) is dedicated to advancing the understanding, development, and responsible application of geospatial intelligence (GEOINT) to support national security, economic development humanitarian efforts, and informed decision-making. We foster collaboration between government, industry, and academia to drive innovation, build a skilled workforce, and promote the ethical use of geospatial data and technologies.
             </p>
           </MotionDiv>
@@ -168,7 +219,7 @@ export default async function AboutPage() {
             variants={fadeUp}
           >
             <h2 className="text-3xl font-semibold mb-4">Vision</h2>
-            <blockquote className="italic text-gray-800">
+            <blockquote className="text-gray-800 text-justify">
               To be Nigeria’s leading catalyst for geospatial innovation, empowering national development through actionable intelligence, spatial data excellence, and sustainable technological advancement.
             </blockquote>
           </MotionDiv>
@@ -185,7 +236,7 @@ export default async function AboutPage() {
               { icon: <Rocket />, title: 'Excellence', desc: `We are committed to the pursuit of excellence in all aspects of our work. From research to practical applications, we deliver high-quality solutions that meet global standards and drive measurable impact for Nigeria's development.` },
               { icon: <Users />, title: 'Collaboration', desc: 'We believe in the power of partnerships. Through collaboration with governments, academia, the private sector, and international stakeholders, we seek to harness collective expertise, resources, and networks to advance the field of geospatial intelligence.' },
               { icon: <Shield />, title: 'Integrity', desc: 'We uphold the highest standards of ethics, transparency, and accountability in everything we do. Trust is the foundation of geospatial intelligence, and we are committed to ensuring that our data, analyses, and partnerships are built on honesty and reliability.' },
-              { icon: <Shield />, title: 'Sustainability', desc: 'We prioritize sustainable practices in our use of geospatial technologies, advocating for long-term solutions that balance economic growth with environmental and social responsibility. Our aim is to ensure that geospatial intelligence supports the sustainable development of Nigeria and the broader African continent.' },
+              { icon: <Globe />, title: 'Sustainability', desc: 'We prioritize sustainable practices in our use of geospatial technologies, advocating for long-term solutions that balance economic growth with environmental and social responsibility. Our aim is to ensure that geospatial intelligence supports the sustainable development of Nigeria and the broader African continent.' },
               { icon: <Shield />, title: 'Accessibility', desc: 'We believe that geospatial intelligence should be accessible to all, from government policymakers to local communities. We are committed to democratizing the use of geospatial data by making it understandable, usable, and impactful for diverse stakeholders across Nigeria.' },
               { icon: <Shield />, title: 'Leadership', desc: 'We strive to be the leaders in the geospatial intelligence community in Nigeria and Africa. We advocate for geospatial technologies in shaping policy, decision-making, and governance, positioning the Foundation as a key player in national and regional development.' },
               { icon: <Shield />, title: 'Commitment to National Development', desc: `Our core mission is to support Nigeria's growth and development through strategic use of geospatial intelligence. Whether in urban planning, disaster management, national security, or agriculture, we are dedicated to improving the quality of life for Nigerians through data-driven insights.` },
@@ -229,35 +280,101 @@ export default async function AboutPage() {
           initial="hidden"
           whileInView="show"
           variants={fadeUp}
-          className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg"
+          className="w-max mx-auto bg-white p-8 rounded-2xl shadow-lg"
         >
           <h2 className="text-3xl font-semibold mb-4">Contact Us</h2>
           <p className="text-gray-700 leading-relaxed">
             For inquiries, please reach out to us at:
           </p>
-          <p className="text-gray-900 font-medium mt-4">📧 secretariat@gifon.org.ng</p>
-          <p className="text-gray-900 font-medium">📞 Director General: +234 707 739 6612</p>
-          <p className="text-gray-900 font-medium">📞 Membership/Outreach: +234 707 726 9829</p>
-          <p className="text-gray-900 font-medium">📞 Secretariat: +234 707 721 1243</p>
+          <div className='flex flex-row justify-between gap-16'>
+            <ul className='w-max text-left'>
+                <li className='flex flex-row w-full justify-between'>
+                  <p>Director General:</p>
+                  <p>+234 707 739 6612</p>
+                </li>
+                <li className='flex flex-row w-full justify-between'>
+                  <p>Outreach:</p>
+                  <p>+234 707 726 9829</p>
+                </li>
+                <li className='flex flex-row w-full justify-between'>
+                  <p>Research:</p>
+                  <p>+234 707 739 6196</p>
+                </li>
+                <li className='flex flex-row w-full justify-between'>
+                  <p>Secretariat:</p>
+                  <p>+234 707 721 1243</p>
+                </li>
+                <li>Email: secretariat@gifon.org.ng</li>
+              </ul>
+              <ul className='flex flex-col justify-between'>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaXTwitter size={16}/>
+                    <h2>X</h2>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaLinkedinIn size={16}/>
+                    <h2>LinkedIn</h2>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaFacebookF size={16}/>
+                    <h2>Facebook</h2>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaYoutube size={16}/>
+                    <h2>Youtube</h2>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaInstagram size={16}/>
+                    <h2>Instagram</h2>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div className='flex flex-row justify-start items-center gap-4'> 
+                    <FaWhatsapp size={16}/>
+                    <h2>Whatsapp</h2>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
         </MotionDiv>
       </section>
 
       {/* Leadership & History */}
-      <section className="p-16 mb-16">
+      {/* <section className="p-16 mb-16">
         <div className="inline-block mb-6 text-left">
           <h2 className="text-green-600 text-2xl font-semibold">
             What We Do
           </h2>
-          {/* Short underline */}
           <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
         </div>
-      </section>
+      </section> */}
 
       {/* Grid of Offerings */}
-      <section className="p-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+      {/* <section className="p-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
         {[
           { title: "Education & Training", desc: "Relevant peer-to-peer interactions, opportunities to advance the profession, newsletters, and career resources.", link: "#" },
-          { title: "Membership", desc: "Publications, fact sheets, podcasts, conference proceedings, peer-reviewed URISA Journal articles, Salary Surveys, and white papers.", link: "#" },
+          { title:A "Membership", desc: "Publications, fact sheets, podcasts, conference proceedings, peer-reviewed URISA Journal articles, Salary Surveys, and white papers.", link: "#" },
           { title: "Resources", desc: "Countless tools to support your GIS career.", link: "#" },
           { title: "Contributions", desc: "Mentorship, committees, advocacy — lend your voice to the profession.", link: "#" },
           { title: "Local Chapters", desc: "Discover a local network and get involved. Joining GIFON means joining your chapter.", link: "#" },
@@ -288,20 +405,19 @@ export default async function AboutPage() {
             </a>
           </div>
         ))}
-      </section>
+      </section> */}
 
-      <section className="p-16 mb-16 mt-16">
+      {/* <section className="p-16 mb-16 mt-16">
         <div className="inline-block mb-6 text-left">
           <h2 className="text-green-600 text-2xl font-semibold">
             Impact
           </h2>
-          {/* Short underline */}
           <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
         </div>
-      </section>
+      </section> */}
 
       {/* Grid of Offerings */}
-      <section className="p-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-center items-center">
+      {/* <section className="p-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-center items-center">
         {[
           { title: "Professional Certification", desc: "Helping GISPs achieve their professional goals with GISCI.", link: "#" },
           { title: "Geospatial Collaboration", desc: "URISA co-founded the Coalition of Geospatial Organizations, focusing on U.S. national geospatial issues.", link: "#" },
@@ -329,41 +445,10 @@ export default async function AboutPage() {
             </a>
           </div>
         ))}
-      </section>
+      </section> */}
 
       {/* CTA */}
     </main>
-      <section className="mt-16 bg-green-100 p-20">
-        <section className="">
-          <div className="inline-block mb-6 text-left">
-            <h2 className="text-green-600 text-2xl font-semibold">
-              Become a Member
-            </h2>
-            {/* Short underline */}
-            <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
-          </div>
-        </section>
-        <p className="mb-6">
-          Join our growing community of geospatial experts, researchers, innovators, and advocates.
-        </p>
-        <ul className="list-disc list-inside mb-6">
-          <li>
-            Access exclusive knowledge resources.
-          </li>
-          <li>
-            Network with leaders in government, academia, and industry.
-          </li>
-          <li>
-            Participate in specialized working groups and policy forums.
-          </li>
-        </ul>
-        <a
-          href="/register"
-          className="bg-sky-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-sky-700 transition"
-        >
-          Learn More & Apply
-        </a>
-      </section>
     </>
   );
 }

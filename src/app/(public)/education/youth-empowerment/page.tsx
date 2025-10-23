@@ -5,7 +5,7 @@ export default function yetaPage() {
     <>
       <HeroSection
         title="GIFON Youth Empowerment & Talent Acceleration Programme (YETAP)"
-        // description="“Empowering Youth. Accelerating Talent. Building Nigeria’s Geospatial Future.”"
+        description="“Empowering Youth. Accelerating Talent. Building Nigeria’s Geospatial Future.”"
         backgroundImages={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
