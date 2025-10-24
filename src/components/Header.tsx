@@ -99,14 +99,14 @@ const menuItems: MenuItem[] = [
     href: '/resources',
     children: [
       { label: 'Media Resources', anchor: 'media' ,
-        // children: [
-        //       { label: 'News & Media ', anchor: 'dgi-london' },
-        //       { label: 'Press Releases', anchor: 'usgif' },
-        //       { label: 'Podcast and Webinar Series', anchor: 'aag' },
-        //       { label: 'Publication Archive', anchor: 'fig' },
-        //       { label: 'Photo & Video Gallery', anchor: 'aarse' },
-        //       { label: 'Downloads', anchor: 'eis-africa' },
-        //     ]  
+        children: [
+              { label: 'News & Media ', anchor: 'dgi-london' },
+              { label: 'Press Releases', anchor: 'usgif' },
+              { label: 'Podcast and Webinar Series', anchor: 'aag' },
+              { label: 'Publication Archive', anchor: 'fig' },
+              { label: 'Photo & Video Gallery', anchor: 'aarse' },
+              { label: 'Downloads', anchor: 'eis-africa' },
+            ]  
           },
           { label: 'Publications', anchor: 'publications' ,
             children: [

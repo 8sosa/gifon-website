@@ -21,9 +21,9 @@ export default function MembershipPage() {
                 "/ph.svg",
                 ]}
             />
-
+            <div id="why-join"></div>
             {/* 2. Membership Overview */}
-            <section id="why-join" className="pt-16 py-16 px-4 bg-white">
+            <section className="pt-16 py-16 px-4 bg-white">
                 <div className="max-w-5xl mx-auto text-center">
                     <h2 className="text-3xl font-semibold mb-4">Why Become a member?</h2>
                     <p className="text-gray-700 leading-relaxed mb-4">
@@ -35,8 +35,9 @@ export default function MembershipPage() {
                 </div>
             </section>
 
+            <div id="categories"></div>
             {/* 3. Membership Categories */}
-            <section id="categories" className="mx-auto px-6 py-12 bg-green-50 flex flex-col items-center">
+            <section className="mx-auto px-6 py-12 bg-green-50 flex flex-col items-center">
                 <h2 className="text-3xl font-semibold mb-12 text-center">Choose Your Category</h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl">
                     {[
@@ -93,8 +94,9 @@ export default function MembershipPage() {
                 </div>
             </section> */}
             
+            <div id="benefits"></div>
             {/* 5. Membership Benefits Comparison */}
-            <section id="benefits" className="max-w-5xl mx-auto px-6 py-16 space-y-8">
+            <section className="max-w-5xl mx-auto px-6 py-16 space-y-8">
                 <div className="inline-block mb-6 text-left">
                     <h2 className="text-green-600 text-2xl font-semibold">
                         Membership Benefits Comparison
@@ -156,8 +158,9 @@ export default function MembershipPage() {
                 </p>
             </section>
 
+            <div id="testimonials"></div>
             {/* 6. Testimonials / Callout Section (Optional) */}
-            <section id="testimonials" className="py-16 px-4 bg-green-50">
+            <section className="py-16 px-4 bg-green-50">
                 <div className="max-w-3xl mx-auto text-center">
                     <blockquote className="text-2xl italic text-gray-800">
                         “GIFON connects us to global geospatial networks while addressing Nigeria’s critical national infrastructure needs.”
@@ -166,8 +169,9 @@ export default function MembershipPage() {
                 </div>
             </section>
             
+            <div id="apply"></div>
             {/* 7. & 8. Membership Application & Form */}
-            <section id="apply" className="py-20 px-6 bg-white">
+            <section className="py-20 px-6 bg-white">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="text-3xl font-bold mb-8 text-center">How to Apply</h2>
                     
@@ -236,8 +240,9 @@ export default function MembershipPage() {
                 </div>
             </section>
             
+            <div id="contact"></div>
             {/* 9. Contact Section (Bottom Banner) */}
-            <section id="contact" className="py-16 px-4 bg-gray-800 text-white">
+            <section className="py-16 px-4 bg-gray-800 text-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-2xl font-semibold mb-4">Have questions about joining GIFON?</h2>
                     <p className="text-lg text-gray-300 mb-6">
