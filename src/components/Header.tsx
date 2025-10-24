@@ -29,7 +29,7 @@ const menuItems: MenuItem[] = [
       { label: 'Mission', anchor: 'mission-vision' },
       { label: 'Vision', anchor: 'mission-vision' },
       { label: 'Core Values', anchor: 'core-values' },
-      { label: 'Board of Directors', link: 'leadership' },
+      { label: 'Board of Directors', anchor: 'board-directors' },
       { label: 'Our Partners', anchor: 'our-partners' },
       { label: 'Contact Us', anchor: 'contact' },
     ],
