@@ -119,7 +119,7 @@ export default function HomePage() {
             <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
             <p className="location">Vol 1, No. 1 - August 2025</p>
             <p className="date">GIFON joins the Global GEOINT Stage</p>
-            <a href="#">READ MORE</a>
+            <a href="/newsletter">READ MORE</a>
           </div>
 
           {/* <div className="event-card">
