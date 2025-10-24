@@ -21,7 +21,7 @@ export default function MembershipPage() {
                 "/ph.svg",
                 ]}
             />
-            <div id="why-join"></div>
+            <div id="why-join" className='pt-8 -z-10'></div>
             {/* 2. Membership Overview */}
             <section className="pt-16 py-16 px-4 bg-white">
                 <div className="max-w-5xl mx-auto text-center">

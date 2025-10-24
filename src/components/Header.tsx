@@ -39,9 +39,9 @@ const menuItems: MenuItem[] = [
     href: '/membership',
     children: [
       { label: 'Why Join GIFON', anchor: 'why-join' },
-      { label: 'Membership Benefits', anchor: 'benefits' },
       { label: 'Membership Categories', anchor: 'categories' },
-      { label: 'Membership Portal (Apply & Renew)', anchor: 'portal' },
+      { label: 'Membership Benefits', anchor: 'benefits' },
+      { label: 'Membership Portal (Apply & Renew)', anchor: 'apply' },
       { label: 'Talent Development', anchor: 'talent' },
       { label: 'Volunteer Opportunities', anchor: 'opportunities' },
     ],
