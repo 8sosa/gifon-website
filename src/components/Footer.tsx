@@ -73,23 +73,27 @@ export default function Footer() {
             <ul className='w-max'>
               <li>12 RICHARD CLAPPERTON, OFF MAMAN NASIR</li>
               <li>ASOKORO DISTRICT, FCT, ABUJA NIGERIA.</li>
-              <li className='flex flex-row w-full justify-between'>
-                <p>Director General:</p>
-                <p>+234 707 739 6612</p>
-              </li>
-              <li className='flex flex-row w-full justify-between'>
-                <p>Outreach:</p>
-                <p>+234 707 726 9829</p>
-              </li>
-              <li className='flex flex-row w-full justify-between'>
-                <p>Research:</p>
-                <p>+234 707 739 6196</p>
-              </li>
-              <li className='flex flex-row w-full justify-between'>
-                <p>Secretariat:</p>
-                <p>+234 707 721 1243</p>
-              </li>
-              <li>Email: secretariat@gifon.org.ng</li>
+                <li className='flex flex-row w-full justify-between pb-4'>
+                  <p>Secretariat:</p>
+                  <div className='flex flex-col'>
+                    <p className='pl-4'>+234 707 721 1243</p>
+                    <p className='pl-4'>Secretariat@gifon.org.ng</p>
+                  </div>
+                </li>
+                <li className='flex flex-row w-full justify-between pb-4'>
+                  <p>Outreach:</p>
+                  <div className='flex flex-col'>
+                    <p className='pl-4'>+234 707 726 9829</p>
+                    <p className='pl-4'>Outreach@gifon.org.ng</p>
+                  </div>
+                </li>
+                <li className='flex flex-row w-full justify-between pb-4'>
+                  <p>Research:</p>
+                  <div className='flex flex-col'>
+                    <p className='pl-4'>+234 707 739 6196</p>
+                    <p className='pl-4'>Research@gifon.org.ng</p>
+                  </div>
+                </li>
             </ul>
           </div>
 
@@ -106,62 +110,63 @@ export default function Footer() {
             ))}
             </ul>
           </div>
+        </div>
+      </div>
 
-          {/* Column 4 */}
-          <div className={styles.col}>
-            <h4>Connect With Us</h4>
-            <ul className='flex flex-col justify-between'>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaXTwitter size={16}/>
-                    <h2>X</h2>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaLinkedinIn size={16}/>
-                    <h2>LinkedIn</h2>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaFacebookF size={16}/>
-                    <h2>Facebook</h2>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaYoutube size={16}/>
-                    <h2>Youtube</h2>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaInstagram size={16}/>
-                    <h2>Instagram</h2>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaWhatsapp size={16}/>
-                    <h2>Whatsapp</h2>
-                  </div>
-                </a>
-              </li>
-            </ul>
-            <button className={styles.shareBtn}><IoShareSocial /> SHARE THIS PAGE</button>
-          </div>
+      <div className="flex flex-col gap-8 p-4 text-center">
+        <h4 className='font-semibold text-lg'>Connect With Us</h4>
+        <div className='flex flex-row justify-around gap-4 items-center'>
+          <ul className='flex flex-row justify-between gap-16'>
+            <li>
+              <a href="#">
+                <div className='flex flex-row justify-start items-center gap-4'> 
+                  <FaXTwitter size={16}/>
+                  <h2>X</h2>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <div className='flex flex-row justify-start items-center gap-4'> 
+                  <FaLinkedinIn size={16}/>
+                  <h2>LinkedIn</h2>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <div className='flex flex-row justify-start items-center gap-4'> 
+                  <FaFacebookF size={16}/>
+                  <h2>Facebook</h2>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <div className='flex flex-row justify-start items-center gap-4'> 
+                  <FaYoutube size={16}/>
+                  <h2>Youtube</h2>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <div className='flex flex-row justify-start items-center gap-4'> 
+                  <FaInstagram size={16}/>
+                  <h2>Instagram</h2>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <div className='flex flex-row justify-start items-center gap-4'> 
+                  <FaWhatsapp size={16}/>
+                  <h2>Whatsapp</h2>
+                </div>
+              </a>
+            </li>
+          </ul>
+          <button className={styles.shareBtn}><IoShareSocial /> SHARE THIS PAGE</button>
         </div>
       </div>
 

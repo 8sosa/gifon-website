@@ -84,7 +84,7 @@ export default function HomePage() {
           '/ph.svg',
         ]}
       />
-      <div className="cardGroup">
+      {/* <div className="cardGroup">
         <div className="homeCard">
           <div><Image src="/space.jpg" alt="item" width={1500} height={1000}/></div>
           <div className="caption">
@@ -109,44 +109,46 @@ export default function HomePage() {
             <a href="/Resources"><p>Learn More</p></a>
           </div>
         </div>
-      </div>
-      <section className="events-section">
-        <h2 className="text-4xl font-bold mb-5 green">Newsletter</h2>
-        <h4 className="text-3xl font-bold mb-8 text-green-700"></h4>
-        <div className="events-container">
-          <div className="event-card">
-            <div className="icon">📅</div>
-            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
-            <p className="location">Vol 1, No. 1 - August 2025</p>
-            <p className="date">GIFON joins the Global GEOINT Stage</p>
-            <a href="/newsletter">READ MORE</a>
-          </div>
+      </div> */}
 
-          {/* <div className="event-card">
-            <div className="icon">📅</div>
-            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
-            <p className="location">Vol 2, No. 2 - August 2025</p>
-            <p className="date">GIFON joins the Global GEOINT Stage</p>
-            <a href="#">READ MORE</a>
-          </div>
+          {/*
+            <section className="events-section">
+              <h2 className="text-4xl font-bold mb-5 green">Newsletter</h2>
+              <h4 className="text-3xl font-bold mb-8 text-green-700"></h4>
+              <div className="events-container">
+                <div className="event-card">
+                  <div className="icon">📅</div>
+                  <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+                  <p className="location">Vol 1, No. 1 - August 2025</p>
+                  <p className="date">GIFON joins the Global GEOINT Stage</p>
+                  <a href="/newsletter">READ MORE</a>
+                </div>
+                <div className="event-card">
+                  <div className="icon">📅</div>
+                  <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+                  <p className="location">Vol 2, No. 2 - August 2025</p>
+                  <p className="date">GIFON joins the Global GEOINT Stage</p>
+                  <a href="#">READ MORE</a>
+                </div>
 
-          <div className="event-card">
-            <div className="icon">📅</div>
-            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
-            <p className="location">Vol 2, No. 3 - August 2025</p>
-            <p className="date">GIFON joins the Global GEOINT Stage</p>
-            <a href="#">READ MORE</a>
-          </div>
+                <div className="event-card">
+                  <div className="icon">📅</div>
+                  <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+                  <p className="location">Vol 2, No. 3 - August 2025</p>
+                  <p className="date">GIFON joins the Global GEOINT Stage</p>
+                  <a href="#">READ MORE</a>
+                </div>
 
-          <div className="event-card">
-            <div className="icon">📅</div>
-            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
-            <p className="location">Vol 3, No. 1 - August 2025</p>
-            <p className="date">GIFON joins the Global GEOINT Stage</p>
-            <a href="#">READ MORE</a>
-          </div> */}
-        </div>
-      </section>
+                <div className="event-card">
+                  <div className="icon">📅</div>
+                  <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+                  <p className="location">Vol 3, No. 1 - August 2025</p>
+                  <p className="date">GIFON joins the Global GEOINT Stage</p>
+                  <a href="#">READ MORE</a>
+                </div> 
+              </div>
+            </section>
+          */}
 
          {/* Partners */}
          <section id="our-partners" className="py-20 px-6 bg-white">
@@ -177,90 +179,91 @@ export default function HomePage() {
             </div>
           </div>
           
-          <div className="plugged">
-            <div className="max-w-md mx-auto max-h-full bg-white p-8 rounded-4xl shadow">
-              <h2 className="text-2xl font-semibold mb-6 text-center green">Login</h2>
+          {/* 
+            <div className="plugged">
+              <div className="max-w-md mx-auto max-h-full bg-white p-8 rounded-4xl shadow">
+                <h2 className="text-2xl font-semibold mb-6 text-center green">Login</h2>
 
-              {/* Show error message */}
-              {error && (
-                <div className="mb-4 p-3 text-sm text-red-700 bg-red-100 rounded">
-                  {error}
-                </div>
-              )}
+                {error && (
+                  <div className="mb-4 p-3 text-sm text-red-700 bg-red-100 rounded">
+                    {error}
+                  </div>
+                )}
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="mt-1 w-full border rounded p-3"
-                    placeholder="you@example.com"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Password
-                  </label>
-                  <div className="relative">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Email
+                    </label>
                     <input
-                      type={showPassword ? "text" : "password"} // 👈 toggle here
-                      id="password"
-                      name="password"
-                      className="mt-1 w-full border rounded p-3 pr-10" // 👈 add right padding
-                      placeholder="password"
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="mt-1 w-full border rounded p-3"
+                      placeholder="you@example.com"
                       required
                     />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((prev) => !prev)}
-                      className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
-                    >
-                      {showPassword ? (
-                        <EyeOff className="w-5 h-5" />
-                      ) : (
-                        <Eye className="w-5 h-5" />
-                      )}
-                    </button>
                   </div>
+
+                  <div>
+                    <label
+                      htmlFor="password"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Password
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"} // 👈 toggle here
+                        id="password"
+                        name="password"
+                        className="mt-1 w-full border rounded p-3 pr-10" // 👈 add right padding
+                        placeholder="password"
+                        required
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
+                      >
+                        {showPassword ? (
+                          <EyeOff className="w-5 h-5" />
+                        ) : (
+                          <Eye className="w-5 h-5" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full bg-green-700 text-white px-6 py-3 rounded hover:bg-opacity-90 transition disabled:opacity-60"
+                  >
+                    {loading ? "Logging in..." : "Log In"}
+                  </button>
+                </form>
+
+                <div className="mt-6 text-center">
+                  <a href="#" className="text-primary underline">
+                    Forgot your password?
+                  </a>
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full bg-green-700 text-white px-6 py-3 rounded hover:bg-opacity-90 transition disabled:opacity-60"
-                >
-                  {loading ? "Logging in..." : "Log In"}
-                </button>
-              </form>
-
-              <div className="mt-6 text-center">
-                <a href="#" className="text-primary underline">
-                  Forgot your password?
-                </a>
-              </div>
-
-              <div className="mt-4 text-center">
-                <p className="text-gray-600">
-                  Don&apos;t have an account?{" "}
-                  <a href="/register" className="text-primary underline">
-                    Register
-                  </a>
-                </p>
-              </div>
-          </div>
-          </div>
+                <div className="mt-4 text-center">
+                  <p className="text-gray-600">
+                    Don&apos;t have an account?{" "}
+                    <a href="/register" className="text-primary underline">
+                      Register
+                    </a>
+                  </p>
+                </div>
+              </div> 
+            </div>
+          */}
         </div>
 
         {/* News Section */}

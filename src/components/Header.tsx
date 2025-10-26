@@ -25,9 +25,9 @@ const menuItems: MenuItem[] = [
     href: '/about',
     children: [
       { label: 'Aim', anchor: 'aim' },
-      { label: 'Objectives', anchor: 'objectives' },
       { label: 'Mission', anchor: 'mission-vision' },
       { label: 'Vision', anchor: 'mission-vision' },
+      { label: 'Objectives', anchor: 'objectives' },
       { label: 'Core Values', anchor: 'core-values' },
       { label: 'Board of Directors', anchor: 'board-directors' },
       { label: 'Our Partners', anchor: 'our-partners' },
@@ -42,8 +42,6 @@ const menuItems: MenuItem[] = [
       { label: 'Membership Categories', anchor: 'categories' },
       { label: 'Membership Benefits', anchor: 'benefits' },
       { label: 'Membership Portal (Apply & Renew)', anchor: 'apply' },
-      { label: 'Talent Development', anchor: 'talent' },
-      { label: 'Volunteer Opportunities', anchor: 'opportunities' },
     ],
   },
   {
@@ -62,6 +60,7 @@ const menuItems: MenuItem[] = [
             { label: 'Training & Certification', link: '/education/training' },
           ],
        },
+       { label: 'Talent Development', anchor: 'talent' },
     ],
   },
   { 
@@ -82,62 +81,62 @@ const menuItems: MenuItem[] = [
       },
       { label: 'Past Events', anchor: 'past-events', 
         children: [
-          { label: 'DGI London', anchor: 'dgi-london' },
-          { label: 'USGIF', anchor: 'usgif' },
-          { label: 'FIG', anchor: 'fig' },
-          { label: 'AAG', anchor: 'aag' },
-          { label: 'AARSE', anchor: 'aarse' },
-          { label: 'EIS-Africa', anchor: 'eis-africa' },
-          { label: 'GEOSON', anchor: 'geoson' },
-          { label: 'GIFON Pre-Launch', anchor: 'geoson' },
+          { label: 'DGI 2024', anchor: 'dgi-london' },
+          { label: 'USGIF 2024', anchor: 'usgif' },
+          { label: 'FIG 2024', anchor: 'fig' },
+          { label: 'AAG 2024', anchor: 'aag' },
+          { label: 'AARSE 2024', anchor: 'aarse' },
+          { label: 'EIS-Africa 2024', anchor: 'eis-africa' },
+          { label: 'GEOSON 2024', anchor: 'geoson' },
         ]  
       },
+      {
+        label: 'Outreach',
+        anchor: 'outreach'
+      }
     ]
   },
   {
-    label: 'Resources',
+    label: 'Media Resources',
     href: '/resources',
     children: [
-      { label: 'Media Resources', anchor: 'media' ,
-        children: [
-              { label: 'News & Media ', anchor: 'dgi-london' },
-              { label: 'Press Releases', anchor: 'usgif' },
-              { label: 'Podcast and Webinar Series', anchor: 'aag' },
-              { label: 'Publication Archive', anchor: 'fig' },
-              { label: 'Photo & Video Gallery', anchor: 'aarse' },
-              { label: 'Downloads', anchor: 'eis-africa' },
-            ]  
-          },
-          { label: 'Publications', anchor: 'publications' ,
-            children: [
-              { label: 'Eyes on Location- The Journal of GeoINSIGHT', anchor: 'GeoINSIGHT' },
-              { label: 'Eyes on Location- The GeoINSIGHT Bulletin', anchor: 'Bulletin' },
-              { label: 'Conference & Workshop Proceedings', anchor: 'Proceedings' },
-              { label: 'Policy Briefs & White Paper', anchor: 'Policy' },
-              { label: 'Research Reports', anchor: 'Research' },
-            ]  
-          },
-          {
-            label: 'Critical Infrastructure Support',
-            href: '/infrastructure',
-            children: [
-              { label: 'Energy Security & Development', anchor: 'energy' },
-              { label: 'Transportation', anchor: 'transportation' },
-              { label: 'Communication', anchor: 'communication' },
-              { label: 'Water & Environment', anchor: 'water' },
-              { label: 'Health', anchor: 'health' },
-              { label: 'Finance', anchor: 'finance' },
-              { label: 'Government Facilities', anchor: 'government' },
-              { label: 'Food Security & Agriculture', anchor: 'food' },
-              { label: 'Defence & Security', anchor: 'defence' },
-              { label: 'Information Technology', anchor: 'it' },
-              { label: 'Industrial Systems', anchor: 'industrial' },
-              { label: 'Emergency Services', anchor: 'emergency' },
-              { label: 'Manufacturing', anchor: 'manufacturing' },
-              { label: 'Space & Satellite Systems', anchor: 'space' },
-            ],
-          },
-        ]
+      { label: 'News', anchor: 'News' },
+      { label: 'Press Releases', anchor: 'Press' },
+      { label: 'Podcast', anchor: 'Podcast' },
+      { label: 'Webinar', anchor: 'Webinar' },
+      { label: 'Publication Archive', link: '/newsletter' },
+      { label: 'Photo & Video Gallery', anchor: 'Gallery' },
+      { label: 'Downloads', anchor: 'Downloads' },
+    ]  
+  },
+  // { label: 'Publications', anchor: 'publications' ,
+  //   children: [
+  //     { label: 'Eyes on Location- The Journal of GeoINSIGHT', anchor: 'GeoINSIGHT' },
+  //     { label: 'Eyes on Location- The GeoINSIGHT Bulletin', anchor: 'Bulletin' },
+  //     { label: 'Conference & Workshop Proceedings', anchor: 'Proceedings' },
+  //     { label: 'Policy Briefs & White Paper', anchor: 'Policy' },
+  //     { label: 'Research Reports', anchor: 'Research' },
+  //   ]  
+  // },
+  {
+    label: 'Critical Infrastructure Support',
+    href: '/infrastructure',
+    children: [
+      { label: 'Energy Security & Development', anchor: 'energy' },
+      { label: 'Transportation', anchor: 'transportation' },
+      { label: 'Communication', anchor: 'communication' },
+      { label: 'Water & Environment', anchor: 'water' },
+      { label: 'Health', anchor: 'health' },
+      { label: 'Finance', anchor: 'finance' },
+      { label: 'Government Facilities', anchor: 'government' },
+      { label: 'Food Security & Agriculture', anchor: 'food' },
+      { label: 'Defence & Security', anchor: 'defence' },
+      { label: 'Information Technology', anchor: 'it' },
+      { label: 'Industrial Systems', anchor: 'industrial' },
+      { label: 'Emergency Services', anchor: 'emergency' },
+      { label: 'Manufacturing', anchor: 'manufacturing' },
+      { label: 'Space & Satellite Systems', anchor: 'space' },
+    ],
   },
   { 
     label: 'Policies',
@@ -151,8 +150,11 @@ const menuItems: MenuItem[] = [
     ]
   },
   {
-    label: 'Donate & Support',
-    href: '/donate'
+    label: 'Get Involved',
+    href: '/donate',
+    children: [
+    { label: 'Volunteer Opportunities', anchor: 'opportunities' },
+    ]
   },
 ];
 

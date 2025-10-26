@@ -8,7 +8,17 @@ import Link from 'next/link';
 
 import MotionDiv from "@/components/MotionDiv"; 
 import MotionImg from "@/components/MotionImg";
-import { FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
+import {
+  FaXTwitter,
+  FaLinkedinIn,
+  FaFacebookF,
+  FaYoutube,
+  FaInstagram,
+  FaWhatsapp,
+  FaPhone,    // Added
+  FaEnvelope,    // Added
+} from 'react-icons/fa6';
+// import { fadeUp } from './animations';
 import { Globe, Shield, Users, Rocket, Sparkles} from 'lucide-react';
 
 const partners: Logo[] = [
@@ -26,6 +36,15 @@ const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
+
+const socialLinks = [
+  { name: 'X', icon: <FaXTwitter size={20} />, href: '#' },
+  { name: 'LinkedIn', icon: <FaLinkedinIn size={20} />, href: '#' },
+  { name: 'Facebook', icon: <FaFacebookF size={20} />, href: '#' },
+  { name: 'Youtube', icon: <FaYoutube size={20} />, href: '#' },
+  { name: 'Instagram', icon: <FaInstagram size={20} />, href: '#' },
+  { name: 'Whatsapp', icon: <FaWhatsapp size={20} />, href: '#' },
+];
 
 export default async function AboutPage() {
   const members: FlatMember[] = await getTeamMembers();
@@ -118,6 +137,34 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* Mission + Vision split */}
+      <section id="mission-vision" className="py-20 px-6 bg-white fullSect">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
+          <MotionDiv
+            className="bg-gray-50 p-8 rounded-2xl shadow-md"
+            initial="hidden"
+            whileInView="show"
+            variants={fadeUp}
+          >
+            <h2 className="text-3xl font-semibold mb-4">Mission</h2>
+            <p className="text-gray-700 leading-relaxed text-justify">
+              The Geospatial Intelligence Foundation of Nigeria (GIFON) is dedicated to advancing the understanding, development, and responsible application of geospatial intelligence (GEOINT) to support national security, economic development humanitarian efforts, and informed decision-making. We foster collaboration between government, industry, and academia to drive innovation, build a skilled workforce, and promote the ethical use of geospatial data and technologies.
+            </p>
+          </MotionDiv>
+          <MotionDiv
+            className="bg-gray-50 p-8 rounded-2xl shadow-md"
+            initial="hidden"
+            whileInView="show"
+            variants={fadeUp}
+          >
+            <h2 className="text-3xl font-semibold mb-4">Vision</h2>
+            <blockquote className="text-gray-800 text-justify">
+              To be Nigeria’s leading catalyst for geospatial innovation, empowering national development through actionable intelligence, spatial data excellence, and sustainable technological advancement.
+            </blockquote>
+          </MotionDiv>
+        </div>
+      </section>
+
       {/* Objectives as icon cards */}
       <section id="objectives" className="py-20 px-6 bg-gray-50 fullSect">
         <div className="max-w-6xl mx-auto">
@@ -198,39 +245,11 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Mission + Vision split */}
-      <section id="mission-vision" className="py-20 px-6 bg-white fullSect">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-          <MotionDiv
-            className="bg-gray-50 p-8 rounded-2xl shadow-md"
-            initial="hidden"
-            whileInView="show"
-            variants={fadeUp}
-          >
-            <h2 className="text-3xl font-semibold mb-4">Mission</h2>
-            <p className="text-gray-700 leading-relaxed text-justify">
-              The Geospatial Intelligence Foundation of Nigeria (GIFON) is dedicated to advancing the understanding, development, and responsible application of geospatial intelligence (GEOINT) to support national security, economic development humanitarian efforts, and informed decision-making. We foster collaboration between government, industry, and academia to drive innovation, build a skilled workforce, and promote the ethical use of geospatial data and technologies.
-            </p>
-          </MotionDiv>
-          <MotionDiv
-            className="bg-gray-50 p-8 rounded-2xl shadow-md"
-            initial="hidden"
-            whileInView="show"
-            variants={fadeUp}
-          >
-            <h2 className="text-3xl font-semibold mb-4">Vision</h2>
-            <blockquote className="text-gray-800 text-justify">
-              To be Nigeria’s leading catalyst for geospatial innovation, empowering national development through actionable intelligence, spatial data excellence, and sustainable technological advancement.
-            </blockquote>
-          </MotionDiv>
-        </div>
-      </section>
-
       {/* Core Values with futuristic gradient cards */}
       <section id="core-values" className="py-20 px-6 bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white fullSect">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-12">Our Core Values</h2>
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { icon: <Sparkles />, title: 'Innovation', desc: 'We are at the forefront of technological advancements in geospatial intelligence. By fostering a culture of creativity and continuous learning, we strive to pioneer new ways of utilizing geospatial data to solve the complex challenges facing Nigeria.' },
               { icon: <Rocket />, title: 'Excellence', desc: `We are committed to the pursuit of excellence in all aspects of our work. From research to practical applications, we deliver high-quality solutions that meet global standards and drive measurable impact for Nigeria's development.` },
@@ -275,87 +294,111 @@ export default async function AboutPage() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-20 px-6 bg-gray-50 text-center fullSect">
+      <section id="contact" className="py-20 px-4 bg-gray-50 fullSect">
         <MotionDiv
           initial="hidden"
           whileInView="show"
           variants={fadeUp}
-          className="w-max mx-auto bg-white p-8 rounded-2xl shadow-lg"
+          className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg"
         >
-          <h2 className="text-3xl font-semibold mb-4">Contact Us</h2>
-          <p className="text-gray-700 leading-relaxed">
-            For inquiries, please reach out to us at:
+          <h2 className="text-3xl font-semibold mb-4 text-center">Contact Us</h2>
+          <p className="text-gray-700 leading-relaxed pb-8 text-center">
+            For inquiries, please reach out to us.
           </p>
-          <div className='flex flex-row justify-between gap-16'>
-            <ul className='w-max text-left'>
-                <li className='flex flex-row w-full justify-between'>
-                  <p>Director General:</p>
-                  <p>+234 707 739 6612</p>
-                </li>
-                <li className='flex flex-row w-full justify-between'>
-                  <p>Outreach:</p>
-                  <p>+234 707 726 9829</p>
-                </li>
-                <li className='flex flex-row w-full justify-between'>
-                  <p>Research:</p>
-                  <p>+234 707 739 6196</p>
-                </li>
-                <li className='flex flex-row w-full justify-between'>
-                  <p>Secretariat:</p>
-                  <p>+234 707 721 1243</p>
-                </li>
-                <li>Email: secretariat@gifon.org.ng</li>
+
+          {/* Responsive Grid: 1 col on mobile, 2 cols on desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            
+            {/* --- Column 1: Contact Details --- */}
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold text-green-700 border-b border-gray-200 pb-2">
+                Our Departments
+              </h3>
+              
+              {/* Secretariat */}
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Secretariat</p>
+                <div className="mt-2 space-y-2">
+                  <a 
+                    href="tel:+2347077211243" 
+                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+                  >
+                    <FaPhone size={14} className="text-gray-400" />
+                    <span>+234 707 721 1243</span>
+                  </a>
+                  <a 
+                    href="mailto:Secretariat@gifon.org.ng" 
+                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+                  >
+                    <FaEnvelope size={14} className="text-gray-400" />
+                    <span>Secretariat@gifon.org.ng</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Outreach */}
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Outreach</p>
+                <div className="mt-2 space-y-2">
+                  <a 
+                    href="tel:+2347077269829" 
+                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+                  >
+                    <FaPhone size={14} className="text-gray-400" />
+                    <span>+234 707 726 9829</span>
+                  </a>
+                  <a 
+                    href="mailto:Outreach@gifon.org.ng" 
+                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+                  >
+                    <FaEnvelope size={14} className="text-gray-400" />
+                    <span>Outreach@gifon.org.ng</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Research */}
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Research</p>
+                <div className="mt-2 space-y-2">
+                  <a 
+                    href="tel:+2347077396196" 
+                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+                  >
+                    <FaPhone size={14} className="text-gray-400" />
+                    <span>+234 707 739 6196</span>
+                  </a>
+                  <a 
+                    href="mailto:Research@gifon.org.ng" 
+                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+                  >
+                    <FaEnvelope size={14} className="text-gray-400" />
+                    <span>Research@gifon.org.ng</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* --- Column 2: Social Media --- */}
+            <div className="md:pl-12 md:border-l md:border-gray-200">
+              <h3 className="text-xl font-semibold text-green-700 border-b border-gray-200 pb-2">
+                Follow Us
+              </h3>
+              <ul className="space-y-2 mt-6">
+                {socialLinks.map((link) => (
+                  <li key={link.name}>
+                    <a 
+                      href={link.href}
+                      className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 text-gray-700 hover:text-green-600 transition-all"
+                    >
+                      <span className="text-green-600">{link.icon}</span>
+                      <span className="font-medium">{link.name}</span>
+                    </a>
+                  </li>
+                ))}
               </ul>
-              <ul className='flex flex-col justify-between'>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaXTwitter size={16}/>
-                    <h2>X</h2>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaLinkedinIn size={16}/>
-                    <h2>LinkedIn</h2>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaFacebookF size={16}/>
-                    <h2>Facebook</h2>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaYoutube size={16}/>
-                    <h2>Youtube</h2>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaInstagram size={16}/>
-                    <h2>Instagram</h2>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div className='flex flex-row justify-start items-center gap-4'> 
-                    <FaWhatsapp size={16}/>
-                    <h2>Whatsapp</h2>
-                  </div>
-                </a>
-              </li>
-            </ul>
+            </div>
+
           </div>
         </MotionDiv>
       </section>
