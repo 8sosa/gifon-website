@@ -132,7 +132,7 @@ export default function HomePage() {
             <p className="date">GIFON joins the Global GEOINT Stage</p>
             <a href="/newsletter">READ MORE</a>
           </div>
-          <div className="event-card">
+          {/* <div className="event-card">
             <div className="icon">📅</div>
             <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
             <p className="location">Vol 2, No. 2 - August 2025</p>
@@ -154,7 +154,7 @@ export default function HomePage() {
             <p className="location">Vol 3, No. 1 - August 2025</p>
             <p className="date">GIFON joins the Global GEOINT Stage</p>
             <a href="#">READ MORE</a>
-          </div> 
+          </div>  */}
         </div>
       </section>
 
