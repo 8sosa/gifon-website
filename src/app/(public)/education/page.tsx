@@ -9,49 +9,49 @@ export default function DonatePage() {
       title: 'Youth Empowerment & Talent Acceleration',
       src: "/images/A.jpeg", // Using placeholder images from your code
       link: '/education/youth-empowerment',
-      description: 'An initiative to identify, train, and mentor the next generation of Nigerian innovators, analysts, and leaders in GEOINT. This programme provides a structured pathway for youth to acquire technical skills, career opportunities, and entrepreneurial support in geospatial intelligence, remote sensing, AI, and data science.'
+      description: 'The Youth Empowerment & Talent Acceleration Programme (YETAP) is an initiative of the Geospatial Intelligence Foundation of Nigeria (GIFON) to identify, train, and mentor the next generation of Nigerian innovators, analysts, and leaders in the field of geospatial intelligence (GEOINT) and its applications to national development and security...'
     },
     {
       title: 'Women in GEOINT (WINGS)',
       src: "/images/B.jpeg",
       link: '/education/wings',
-      description: 'The GEOINT sector plays a critical role in national security and development, but women remain significantly underrepresented. This program is designed to close the gender gap in STEM and security, enhancing national security by empowering women and leveraging diverse perspectives to address complex challenges.'
+      description: 'The Geospatial Intelligence Foundation of Nigeria Women in GeoINT (GI-NGW) is a forum dedicated to empowering women in the field of geospatial and Geospatial intelligence (GeoINT) by providing a platform for collaboration, professional development, mentorship, and advocacy...'
     },
     {
       title: 'Geoinnovation & Tech Incubation',
       src: "/images/C.jpeg",
       link: '/education/geoinnovation',
-      description: 'A signature initiative aimed at nurturing young innovators, startups, and entrepreneurs who are building solutions at the intersection of geospatial intelligence and technology. This programme serves as a talent-to-enterprise pipeline, providing access to training, mentorship, incubation, and seed funding.'
+      description: 'The Y-GeoInnovation & Tech Incubation Programme (Y-GITI) is a signature initiative of the Geospatial Intelligence Foundation of Nigeria (GIFON) aimed at nurturing young innovators, startups, and entrepreneurs who are building solutions at the intersection of geospatial intelligence, technology, and national development...'
     },
     {
       title: 'National Geospatial Security & Intelligence Hub',
       src: "/images/D.jpeg",
       link: '/education/geospatial-hub',
-      description: 'This initiative serves as the nation’s premier center for geospatial intelligence innovation, data integration, and strategic decision support. It is designed as a secure, collaborative environment where government, industry, and academia can leverage GEOINT to safeguard national interests.'
+      description: 'The National Geospatial Security & Intelligence Hub (NGSIH) is an initiative of the Geospatial Intelligence Foundation of Nigeria (GIFON) to serve as the nation’s premier center for geospatial intelligence innovation, data integration, and strategic decision support...'
     },
     {
       title: 'Community Mapping for Development',
       src: "/images/E.jpeg",
       link: '/education/community-mapping',
-      description: 'A grassroots initiative designed to empower communities with geospatial tools, data, and participatory mapping to drive local development and resilience. This ensures that data-driven decision-making reaches the last mile, supporting social services, infrastructure, and disaster risk reduction.'
+      description: 'The Community Mapping for Development (CMD) Programme is a grassroots initiative of the Geospatial Intelligence Foundation of Nigeria (GIFON) designed to empower communities with geospatial tools, data, and participatory mapping to drive local development, resilience, and inclusive planning...'
     },
     {
       title: 'Open Data & Research',
       src: "/images/F.jpeg",
       link: '/education/open-data',
-      description: 'A flagship initiative aimed at promoting data accessibility, research collaboration, and evidence-based policy development. The programme seeks to make geospatial data openly available, ethically managed, and widely used for national development, security, innovation, and academic advancement.'
+      description: 'The Open Data & Research Programme (ODRP) is a flagship initiative of the Geospatial Intelligence Foundation of Nigeria (GIFON) aimed at promoting data accessibility, research collaboration, and evidence-based policy development in Nigeria’s geospatial intelligence ecosystem...'
     },
     {
       title: 'Conferences, Workshops & Masterclasses',
       src: "/images/G.jpeg",
       link: '/education/conferences',
-      description: 'GIFON recognizes the value of knowledge-sharing and continuous learning. Through conferences, workshops, technical symposia, and roundtables, we create platforms where policymakers, security agencies, industry leaders, and researchers converge to discuss pressing issues.'
+      description: 'The Geospatial Intelligence Foundation of Nigeria (GIFON) recognizes the value of knowledge-sharing, collaboration, and continuous learning in advancing the geospatial intelligence ecosystem...'
     },
     {
       title: 'Training & Certification',
       src: "/images/H.jpeg", // Added an extra placeholder
       link: '/education/training',
-      description: 'These programmes are designed to provide standardized, high-quality, and industry-recognized certifications in geospatial intelligence, data science, and related technologies. They strengthen the national workforce, build institutional capacity, and align Nigerian expertise with global GEOINT standards.'
+      description: 'The Training & Certification Programmes (TCP) of the Geospatial Intelligence Foundation of Nigeria (GIFON) are designed to provide standardized, high-quality, and industry-recognized certifications in geospatial intelligence, data science, and related technologies...'
     },
   ];
 
@@ -80,7 +80,7 @@ export default function DonatePage() {
           </div>
 
           {/* --- Section Title --- */}
-          <div className="inline-block mb-6 text-left">
+          <div className="inline-block mb-6 text-left" id='programs'>
             <h2 className="text-green-600 text-2xl font-semibold">
               Our Programmes
             </h2>
@@ -120,6 +120,51 @@ export default function DonatePage() {
               </div>
             ))}
           </div>
+
+          {/* === NEW TALENT DEVELOPMENT SECTION === */}
+          <div id="talent"> {/* This is the anchor */}
+            {/* --- Section Title --- */}
+            <div className="inline-block mb-6 text-left">
+              <h2 className="text-green-600 text-2xl font-semibold">
+                Talent Development
+              </h2>
+              <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
+            </div>
+            
+            {/* --- Descriptive Text --- */}
+            <div className="space-y-4 text-gray-700 leading-relaxed">
+              <p>
+                Beyond specific programmes, GIFON is dedicated to the holistic development of geospatial talent in Nigeria. We believe in nurturing skills at every career stage, from the curious student to the seasoned professional.
+              </p>
+              <p>
+                Our Talent Development initiatives focus on:
+              </p>
+              <ul className="list-disc list-inside pl-4 space-y-2">
+                <li>
+                  <span className="font-semibold">Mentorship Matching:</span> Connecting emerging professionals with experienced leaders in the field.
+                </li>
+                <li>
+                  <span className="font-semibold">Career Services:</span> Providing resources for job seekers, including resume workshops and interview preparation.
+                </li>
+                <li>
+                  <span className="font-semibold">Professional Networking:</span> Creating formal and informal opportunities for members to connect, collaborate, and grow.
+                </li>
+              </ul>
+              <p>
+                We are building a robust pipeline of GEOINT professionals ready to meet the challenges of today and tomorrow.
+              </p>
+              
+              {/* --- Call to Action Button --- */}
+              <Link
+                href="/membership#apply" // Links to the membership/apply section
+                className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 w-fit mt-4"
+              >
+                Join Our Talent Network
+              </Link>
+            </div>
+          </div>
+          {/* === END OF NEW SECTION === */}
+
         </section>
       </main>
     </>

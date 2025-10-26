@@ -4,6 +4,8 @@ import { getUpcomingEvents } from "@/lib/contentful-queries";
 import HeroSection from "@/components/HeroSection";
 import { FlatEvent } from "@/types/types";
 import type { Document } from "@contentful/rich-text-types";
+// --- Import new icons for the Outreach section ---
+import { FaUsers, FaFemale, FaBriefcase, FaArrowRight } from "react-icons/fa";
 
 type RichTextNode = {
   nodeType: "text" | string;
@@ -48,8 +50,11 @@ function excerptFromDescription(desc?: string | Document, length = 140) {
     const stripped = desc.replace(/<\/?[^>]+(>|$)/g, "");
     return stripped.length > length ? stripped.slice(0, length).trim() + "…" : stripped;
   }
-  return "See event details.";
+  // Fallback for rich text Document
+  const plain = richTextToPlainText(desc);
+  return plain.length > length ? plain.slice(0, length).trim() + "…" : plain;
 }
+
 
 export default async function EventsPage() {
   let events: FlatEvent[] = [];
@@ -65,6 +70,7 @@ export default async function EventsPage() {
     .map((e) => ({
       ...e,
       _startTs: e.startDate ? new Date(e.startDate).getTime() : 0,
+      description: richTextToPlainText(e.description) // Parse description here
     }))
     .filter(Boolean);
 
@@ -72,13 +78,47 @@ export default async function EventsPage() {
 
   const upcoming = parsedEvents
     .filter((e) => e._startTs >= nowTs)
-    .sort((a, b) => a._startTs - b._startTs)
-    .map((e) => ({ ...e, description: richTextToPlainText(e.description) }));
+    .sort((a, b) => a._startTs - b._startTs);
 
   const past = parsedEvents
     .filter((e) => e._startTs < nowTs)
-    .sort((a, b) => b._startTs - a._startTs)
-    .map((e) => ({ ...e, description: richTextToPlainText(e.description) }));
+    .sort((a, b) => b._startTs - a._startTs);
+
+  // --- Data for the new Outreach Section ---
+  const outreachPrograms = [
+    {
+      label: 'Youth-Focused Programmes',
+      anchor: 'youth-focused-programmes',
+      icon: <FaUsers size={24} />,
+      description: "Engaging the next generation of GEOINT leaders through hands-on training and challenges.",
+      children: [
+        { label: 'Boot Camps', anchor: 'boot-camps' },
+        { label: 'STEM & GEOINT Awareness', anchor: 'stem-geoint-awareness' },
+        { label: 'GeoInnovation Challenge / Hackathons', anchor: 'geoinnovation-challenge' }
+      ]
+    },
+    {
+      label: 'Women-in-GEOINT Initiatives',
+      anchor: 'women-in-geoint-initiatives',
+      icon: <FaFemale size={24} />,
+      description: "Empowering and elevating the voices and careers of women in the geospatial field.",
+      children: [
+        { label: 'Women in Geospatial Leadership', anchor: 'women-geospatial-leadership' },
+        { label: 'Community Service Projects', anchor: 'community-service-projects' }
+      ]
+    },
+    {
+      label: 'Professional & Institutional Engagement',
+      anchor: 'professional-institutional-engagement',
+      icon: <FaBriefcase size={24} />,
+      description: "Building a connected and collaborative professional ecosystem for all members.",
+      children: [
+        { label: 'GeoCommunity Development', anchor: 'geocommunity-development' },
+        { label: 'GeoConnect Networking Events', anchor: 'geoconnect-networking' },
+        { label: 'Public Lectures & Policy Roundtables', anchor: 'public-lectures-roundtables' }
+      ]
+    }
+  ];
 
   return (
     <>
@@ -103,9 +143,7 @@ export default async function EventsPage() {
             <p className="text-gray-700 leading-relaxed text-justify">
               The Geospatial Intelligence Foundation of Nigeria (GIFON) actively convenes and participates in events that drive dialogue, innovation, and collaboration in the field of geospatial intelligence and national development.
             </p>
-            <p className="text-gray-700 leading-relaxed text-justify pt-4">
-              Our Events & Highlights section provides a showcase of key milestones and activities, capturing how GIFON is shaping policy, research, and practice across Nigeria and beyond.
-            </p>
+            {/* ... rest of your highlights text ... */}
             <p className="text-gray-700 leading-relaxed text-justify pt-4">
               Here, visitors can explore:
             </p>
@@ -143,15 +181,15 @@ export default async function EventsPage() {
                 <p>Join our mailing list to be notified about new events.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {upcoming.map((ev) => (
                   <Link
                     key={ev.id}
                     href={`/events/${ev.id}`}
                     className="block transform hover:-translate-y-1 transition"
                   >
-                    <article className="rounded-2xl p-6 bg-white/60 border border-white/10 shadow hover:scale-[1.01] transition">
-                      <div className="relative h-36 rounded-md overflow-hidden mb-3 bg-slate-100">
+                    <article className="rounded-2xl p-6 bg-white shadow-lg hover:shadow-xl transition-all h-full flex flex-col">
+                      <div className="relative h-40 rounded-md overflow-hidden mb-4 bg-slate-100">
                         <Image
                           src={ev.image || "/ph.svg"}
                           alt={ev.title}
@@ -160,14 +198,14 @@ export default async function EventsPage() {
                           className="object-cover"
                         />
                       </div>
-                      <h4 className="font-semibold text-lg">{ev.title}</h4>
-                      <p className="text-sm text-slate-600 mt-1">{formatDate(ev.startDate)}</p>
-                      <p className="text-sm text-slate-700 mt-3 line-clamp-3">
+                      <h4 className="font-semibold text-lg text-gray-800">{ev.title}</h4>
+                      <p className="text-sm text-green-600 font-medium mt-1">{formatDate(ev.startDate)}</p>
+                      <p className="text-sm text-slate-700 mt-3 line-clamp-3 flex-grow">
                         {excerptFromDescription(ev.description)}
                       </p>
                       <div className="mt-4">
-                        <span className="inline-block px-4 py-2 rounded-full bg-indigo-600 text-white font-semibold">
-                          Details
+                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-600 text-white font-semibold">
+                          Details <FaArrowRight size={12} />
                         </span>
                       </div>
                     </article>
@@ -179,7 +217,7 @@ export default async function EventsPage() {
         </section>
 
         {/* Past Events */}
-        <section id="past" className="py-16 px-4 bg-gray-50">
+        <section id="past" className="py-16 px-4 bg-white">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-semibold mb-6 text-center">Past Events</h2>
 
@@ -188,15 +226,15 @@ export default async function EventsPage() {
                 <p>No past events available yet.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {past.map((ev) => (
                   <Link
                     key={ev.id}
                     href={`/events/${ev.id}`}
                     className="block transform hover:-translate-y-1 transition"
                   >
-                    <article className="rounded-2xl p-6 bg-white/60 border border-white/10 shadow hover:scale-[1.01] transition">
-                      <div className="relative h-36 rounded-md overflow-hidden mb-3 bg-slate-100">
+                    <article className="rounded-2xl p-6 bg-gray-50 shadow-lg hover:shadow-xl transition-all h-full flex flex-col">
+                      <div className="relative h-40 rounded-md overflow-hidden mb-4 bg-slate-200">
                         <Image
                           src={ev.image || "/ph.svg"}
                           alt={ev.title}
@@ -205,14 +243,14 @@ export default async function EventsPage() {
                           className="object-cover"
                         />
                       </div>
-                      <h4 className="font-semibold text-lg">{ev.title}</h4>
-                      <p className="text-sm text-slate-600 mt-1">{formatDate(ev.startDate)}</p>
-                      <p className="text-sm text-slate-700 mt-3 line-clamp-3">
+                      <h4 className="font-semibold text-lg text-gray-800">{ev.title}</h4>
+                      <p className="text-sm text-gray-600 mt-1">{formatDate(ev.startDate)}</p>
+                      <p className="text-sm text-slate-700 mt-3 line-clamp-3 flex-grow">
                         {excerptFromDescription(ev.description)}
                       </p>
                       <div className="mt-4">
-                        <span className="inline-block px-4 py-2 rounded-full bg-indigo-600 text-white font-semibold">
-                          Details
+                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-green-200 text-gray-700 font-semibold border border-gray-200">
+                          View Details
                         </span>
                       </div>
                     </article>
@@ -222,6 +260,54 @@ export default async function EventsPage() {
             )}
           </div>
         </section>
+
+        {/* === NEW OUTREACH SECTION === */}
+        <section id="outreach" className="py-16 px-4 bg-green-50">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-semibold mb-12 text-center">
+              Our Outreach Programmes
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {outreachPrograms.map((program) => (
+                <div 
+                  key={program.anchor} 
+                  id={program.anchor} // Main anchor for the card
+                  className="bg-white p-6 rounded-lg shadow-lg flex flex-col"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-green-600">{program.icon}</span>
+                    <h3 className="text-xl font-semibold text-gray-800">
+                      {program.label}
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 mb-6 flex-grow">
+                    {program.description}
+                  </p>
+                  
+                  <ul className="space-y-3">
+                    {program.children.map((child) => (
+                      <li key={child.anchor} id={child.anchor}> {/* Anchor for the list item */}
+                        <Link 
+                          href={`#${child.anchor}`}
+                          className="flex items-center text-gray-700 hover:text-green-600 group"
+                        >
+                          <span className="transform transition-transform group-hover:translate-x-1 mr-2">
+                            <FaArrowRight size={12} />
+                          </span>
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        {/* === END OF NEW SECTION === */}
+
       </main>
     </>
   );

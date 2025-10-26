@@ -49,7 +49,7 @@ const menuItems: MenuItem[] = [
     href: '/education',
     children: [
       { label: 'Training', anchor: 'C-T' },
-      { label: 'Programmes', anchor: 'C-T', children: [
+      { label: 'Programmes', anchor: 'programs', children: [
             { label: 'Youth Empowerment & Talent Acceleration', link: '/education/youth-empowerment' },
             { label: 'Women in GEOINT (WINGS)', link: '/education/wings' },
             { label: 'Geoinnovation & Tech Incubation', link: '/education/geoinnovation' },
@@ -92,7 +92,35 @@ const menuItems: MenuItem[] = [
       },
       {
         label: 'Outreach',
-        anchor: 'outreach'
+        anchor: 'outreach',
+        children: [
+          {
+            label: 'Youth-Focused Programmes',
+            anchor: 'youth-focused-programmes',
+            children: [
+              { label: 'Boot Camps', anchor: 'boot-camps' },
+              { label: 'STEM & GEOINT Awareness Programmes', anchor: 'stem-geoint-awareness' },
+              { label: 'GeoInnovation Challenge / Hackathons', anchor: 'geoinnovation-challenge' }
+            ]
+          },
+          {
+            label: 'Women-in-GEOINT Initiatives',
+            anchor: 'women-in-geoint-initiatives',
+            children: [
+              { label: 'Women in Geospatial Leadership Programmes', anchor: 'women-geospatial-leadership' },
+              { label: 'Community Service & Development Projects', anchor: 'community-service-projects' }
+            ]
+          },
+          {
+            label: 'Professional & Institutional Engagement',
+            anchor: 'professional-institutional-engagement',
+            children: [
+              { label: 'GeoCommunity Development Programmes', anchor: 'geocommunity-development' },
+              { label: 'GeoConnect Networking Events', anchor: 'geoconnect-networking' },
+              { label: 'Public Lectures & Policy Roundtables', anchor: 'public-lectures-roundtables' }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -104,7 +132,7 @@ const menuItems: MenuItem[] = [
       { label: 'Press Releases', anchor: 'Press' },
       { label: 'Podcast', anchor: 'Podcast' },
       { label: 'Webinar', anchor: 'Webinar' },
-      { label: 'Publication Archive', link: '/newsletter' },
+      { label: 'Publication Archive', anchor: 'publications' },
       { label: 'Photo & Video Gallery', anchor: 'Gallery' },
       { label: 'Downloads', anchor: 'Downloads' },
     ]  

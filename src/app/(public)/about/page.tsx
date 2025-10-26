@@ -38,12 +38,48 @@ const fadeUp = {
 };
 
 const socialLinks = [
-  { name: 'X', icon: <FaXTwitter size={20} />, href: '#' },
-  { name: 'LinkedIn', icon: <FaLinkedinIn size={20} />, href: '#' },
-  { name: 'Facebook', icon: <FaFacebookF size={20} />, href: '#' },
-  { name: 'Youtube', icon: <FaYoutube size={20} />, href: '#' },
-  { name: 'Instagram', icon: <FaInstagram size={20} />, href: '#' },
-  { name: 'Whatsapp', icon: <FaWhatsapp size={20} />, href: '#' },
+  { 
+    name: 'X', 
+    icon: <FaXTwitter size={20} />, 
+    href: '#', 
+    colorClass: 'text-black', // X logo color
+    hoverColorClass: 'hover:text-black' 
+  },
+  { 
+    name: 'LinkedIn', 
+    icon: <FaLinkedinIn size={20} />, 
+    href: '#', 
+    colorClass: 'text-blue-700', // LinkedIn blue
+    hoverColorClass: 'hover:text-blue-700' 
+  },
+  { 
+    name: 'Facebook', 
+    icon: <FaFacebookF size={20} />, 
+    href: '#', 
+    colorClass: 'text-blue-600', // Facebook blue
+    hoverColorClass: 'hover:text-blue-600' 
+  },
+  { 
+    name: 'Youtube', 
+    icon: <FaYoutube size={20} />, 
+    href: '#', 
+    colorClass: 'text-red-600', // YouTube red
+    hoverColorClass: 'hover:text-red-600' 
+  },
+  { 
+    name: 'Instagram', 
+    icon: <FaInstagram size={20} />, 
+    href: '#', 
+    colorClass: 'text-pink-600', // Instagram pink/purple
+    hoverColorClass: 'hover:text-pink-600' 
+  },
+  { 
+    name: 'Whatsapp', 
+    icon: <FaWhatsapp size={20} />, 
+    href: '#', 
+    colorClass: 'text-green-500', // WhatsApp green
+    hoverColorClass: 'hover:text-green-500' 
+  },
 ];
 
 export default async function AboutPage() {
@@ -302,9 +338,10 @@ export default async function AboutPage() {
           className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg"
         >
           <h2 className="text-3xl font-semibold mb-4 text-center">Contact Us</h2>
-          <p className="text-gray-700 leading-relaxed pb-8 text-center">
+          <p className="text-gray-700 leading-relaxed text-center">
             For inquiries, please reach out to us.
           </p>
+          <p className='text-gray-700 leading-relaxed pb-8 text-center'>info@gifon.org.ng</p>
 
           {/* Responsive Grid: 1 col on mobile, 2 cols on desktop */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -387,11 +424,13 @@ export default async function AboutPage() {
               <ul className="space-y-2 mt-6">
                 {socialLinks.map((link) => (
                   <li key={link.name}>
-                    <a 
+                    <a
                       href={link.href}
-                      className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 text-gray-700 hover:text-green-600 transition-all"
+                      // UPDATED: Removed hover:text-green-600 and added dynamic hoverColorClass
+                      className={`flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 text-gray-700 ${link.hoverColorClass} transition-all`}
                     >
-                      <span className="text-green-600">{link.icon}</span>
+                      {/* UPDATED: Replaced text-green-600 with dynamic colorClass */}
+                      <span className={`${link.colorClass} transition-colors`}>{link.icon}</span>
                       <span className="font-medium">{link.name}</span>
                     </a>
                   </li>

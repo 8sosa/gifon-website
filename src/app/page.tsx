@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Eye, EyeOff } from "lucide-react";
+// import { useState } from "react";
+// import { useRouter } from "next/navigation";
+// import { Eye, EyeOff } from "lucide-react";
 import HeroSection from '@/components/HeroSection';
 // import MapPreview from "@/components/home/MapPreview";
 // import CaseCarousel from "@/components/home/CaseCarousel";
@@ -19,55 +19,55 @@ const partners: Logo[] = [
 
 export default function HomePage() {
 
-  const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  // const [showPassword, setShowPassword] = useState(false);
+  // const router = useRouter();
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState<string | null>(null);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
+  // async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+  //   setError(null);
+  //   setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
+  //   const formData = new FormData(e.currentTarget);
+  //   const email = formData.get("email");
+  //   const password = formData.get("password");
 
-    try {
-      const resp = await fetch("https://gifon.onrender.com/api/v1/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-        credentials: "include", // keep if backend sets cookies too
-      });
+  //   try {
+  //     const resp = await fetch("https://gifon.onrender.com/api/v1/auth/login", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ email, password }),
+  //       credentials: "include", // keep if backend sets cookies too
+  //     });
     
-      const data = await resp.json();
+  //     const data = await resp.json();
     
-      if (!resp.ok || data.status === "fail") {
-        // backend explicitly says "fail"
-        setError(data.message || "Login failed. Please try again.");
-      } else {
-        // ✅ Save JWT token to localStorage
-        if (data.data?.token) {
-          localStorage.setItem("jwt", data.data.token);
-        }
+  //     if (!resp.ok || data.status === "fail") {
+  //       // backend explicitly says "fail"
+  //       setError(data.message || "Login failed. Please try again.");
+  //     } else {
+  //       // ✅ Save JWT token to localStorage
+  //       if (data.data?.token) {
+  //         localStorage.setItem("jwt", data.data.token);
+  //       }
     
-        // Optionally save userID if needed
-        if (data.userID) {
-          localStorage.setItem("userID", data.userID);
-        }
+  //       // Optionally save userID if needed
+  //       if (data.userID) {
+  //         localStorage.setItem("userID", data.userID);
+  //       }
     
-        // success → navigate to profile
-        router.push("/profile");
-      }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Something went wrong. Please try again.");
-      }
-    }
-  }
+  //       // success → navigate to profile
+  //       router.push("/profile");
+  //     }
+  //   } catch (err: unknown) {
+  //     if (err instanceof Error) {
+  //       setError(err.message);
+  //     } else {
+  //       setError("Something went wrong. Please try again.");
+  //     }
+  //   }
+  // }
 
   return (
     <RevealProvider>
@@ -111,52 +111,52 @@ export default function HomePage() {
         </div>
       </div> */}
 
-          {/*
-            <section className="events-section">
-              <h2 className="text-4xl font-bold mb-5 green">Newsletter</h2>
-              <h4 className="text-3xl font-bold mb-8 text-green-700"></h4>
-              <div className="events-container">
-                <div className="event-card">
-                  <div className="icon">📅</div>
-                  <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
-                  <p className="location">Vol 1, No. 1 - August 2025</p>
-                  <p className="date">GIFON joins the Global GEOINT Stage</p>
-                  <a href="/newsletter">READ MORE</a>
-                </div>
-                <div className="event-card">
-                  <div className="icon">📅</div>
-                  <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
-                  <p className="location">Vol 2, No. 2 - August 2025</p>
-                  <p className="date">GIFON joins the Global GEOINT Stage</p>
-                  <a href="#">READ MORE</a>
-                </div>
+          
 
-                <div className="event-card">
-                  <div className="icon">📅</div>
-                  <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
-                  <p className="location">Vol 2, No. 3 - August 2025</p>
-                  <p className="date">GIFON joins the Global GEOINT Stage</p>
-                  <a href="#">READ MORE</a>
-                </div>
-
-                <div className="event-card">
-                  <div className="icon">📅</div>
-                  <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
-                  <p className="location">Vol 3, No. 1 - August 2025</p>
-                  <p className="date">GIFON joins the Global GEOINT Stage</p>
-                  <a href="#">READ MORE</a>
-                </div> 
-              </div>
-            </section>
-          */}
-
-         {/* Partners */}
-         <section id="our-partners" className="py-20 px-6 bg-white">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-8 green">Partners</h2>
-            <LogoCarousel logos={partners} />
+      {/* Partners */}
+      <section id="our-partners" className="py-20 px-6 bg-white">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-8 green">Partners</h2>
+          <LogoCarousel logos={partners} />
+        </div>
+      </section>
+      
+      <section className="events-section">
+        <h2 className="text-4xl font-bold mb-5 green">Newsletter</h2>
+        <h4 className="text-3xl font-bold mb-8 text-green-700"></h4>
+        <div className="events-container">
+          <div className="event-card">
+            <div className="icon">📅</div>
+            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+            <p className="location">Vol 1, No. 1 - August 2025</p>
+            <p className="date">GIFON joins the Global GEOINT Stage</p>
+            <a href="/newsletter">READ MORE</a>
           </div>
-        </section>
+          <div className="event-card">
+            <div className="icon">📅</div>
+            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+            <p className="location">Vol 2, No. 2 - August 2025</p>
+            <p className="date">GIFON joins the Global GEOINT Stage</p>
+            <a href="#">READ MORE</a>
+          </div>
+
+          <div className="event-card">
+            <div className="icon">📅</div>
+            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+            <p className="location">Vol 2, No. 3 - August 2025</p>
+            <p className="date">GIFON joins the Global GEOINT Stage</p>
+            <a href="#">READ MORE</a>
+          </div>
+
+          <div className="event-card">
+            <div className="icon">📅</div>
+            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+            <p className="location">Vol 3, No. 1 - August 2025</p>
+            <p className="date">GIFON joins the Global GEOINT Stage</p>
+            <a href="#">READ MORE</a>
+          </div> 
+        </div>
+      </section>
 
         {/* home sign in */}
         <div className="gradient-container">

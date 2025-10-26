@@ -4,52 +4,97 @@ import Link from 'next/link';
 import { FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
 import { IoShareSocial } from "react-icons/io5";
 
-
 export default function Footer() {
   const menuItems = [
-    // {
-    //   label: 'Home',
-    //   href: '/',
-    // },
+    {
+      label: 'Home',
+      href: '/',
+    },
     {
       label: 'About Us',
       href: '/about'
     },
     {
-      label: 'Programs',
-      href: '/programs'
-    },
-    // {
-    //   label: 'Critical Infrastructure Support',
-    //   href: '/infrastructure'
-    // },
-    // {
-    //   label: 'Policies',
-    //   href: '/policies'
-    // },
-    // {
-    //   label: 'Groups & Forums',
-    //   href: '/forums'
-    // },
-    {
-      label: 'Publications',
-      href: '/publications'
-    },
-    {
       label: 'Membership',
       href: '/membership'
     },
+    {
+      label: 'Education',
+      href: '/education',
+    },
+    {
+      label: 'Events',
+      href: '/events'
+    },
+    {
+      label: 'Media Resources',
+      href: '/media'
+    },
+    {
+      label: 'Critical Infrastructure Support',
+      href: '/infrastructure'
+    },
+    {
+      label: 'Policies',
+      href: '/policies'
+    },
+    {
+      label: 'Programmes',
+      href: '/education#programs'
+    },
     // {
-    //   label: 'Media Resources',
-    //   href: '/media'
-    // },
-    // {
-    //   label: 'Events',
-    //   href: '/events'
+    //   label: 'Publications',
+    //   href: '/resources#publications'
     // },
     {
       label: 'Get Involved',
-      href: '/get-involved'
+      href: '/donate'
+    },
+  ];
+
+  // --- Data array for social links with brand colors ---
+  const socialLinks = [
+    { 
+      name: 'X', 
+      icon: <FaXTwitter size={16}/>, 
+      href: '#', 
+      colorClass: 'text-gray-500',
+      hoverColorClass: 'hover:text-gray-500' 
+    },
+    { 
+      name: 'LinkedIn', 
+      icon: <FaLinkedinIn size={16}/>, 
+      href: '#', 
+      colorClass: 'text-blue-700',
+      hoverColorClass: 'hover:text-blue-700' 
+    },
+    { 
+      name: 'Facebook', 
+      icon: <FaFacebookF size={16}/>, 
+      href: '#', 
+      colorClass: 'text-blue-600',
+      hoverColorClass: 'hover:text-blue-600' 
+    },
+    { 
+      name: 'Youtube', 
+      icon: <FaYoutube size={16}/>, 
+      href: '#', 
+      colorClass: 'text-red-600',
+      hoverColorClass: 'hover:text-red-600' 
+    },
+    { 
+      name: 'Instagram', 
+      icon: <FaInstagram size={16}/>, 
+      href: '#', 
+      colorClass: 'text-pink-600',
+      hoverColorClass: 'hover:text-pink-600' 
+    },
+    { 
+      name: 'Whatsapp', 
+      icon: <FaWhatsapp size={16}/>, 
+      href: '#', 
+      colorClass: 'text-green-500',
+      hoverColorClass: 'hover:text-green-500' 
     },
   ];
 
@@ -62,7 +107,7 @@ export default function Footer() {
             <Image src="/logo.png" alt="Gifon" width={600} height={600} className={styles.logoPng}/>
             <div className="flex flex-col justify-center">
               <h1 className="text-5xl font-bold green">GIFON</h1>
-              <span className="text-xl font-semibold green">Geospatial Intelligence Foundation of Nigeria</span>
+              <span className="text-lg font-semibold green">Geospatial Intelligence Foundation of Nigeria</span>
             </div>
           </Link>
         </div>
@@ -70,30 +115,31 @@ export default function Footer() {
           {/* Column 2 */}
           <div className={styles.col}>
             <h4>Contact Us</h4>
-            <ul className='w-max'>
+            <ul className='w-max font-thin'>
               <li>12 RICHARD CLAPPERTON, OFF MAMAN NASIR</li>
               <li>ASOKORO DISTRICT, FCT, ABUJA NIGERIA.</li>
-                <li className='flex flex-row w-full justify-between pb-4'>
-                  <p>Secretariat:</p>
-                  <div className='flex flex-col'>
-                    <p className='pl-4'>+234 707 721 1243</p>
-                    <p className='pl-4'>Secretariat@gifon.org.ng</p>
-                  </div>
-                </li>
-                <li className='flex flex-row w-full justify-between pb-4'>
-                  <p>Outreach:</p>
-                  <div className='flex flex-col'>
-                    <p className='pl-4'>+234 707 726 9829</p>
-                    <p className='pl-4'>Outreach@gifon.org.ng</p>
-                  </div>
-                </li>
-                <li className='flex flex-row w-full justify-between pb-4'>
-                  <p>Research:</p>
-                  <div className='flex flex-col'>
-                    <p className='pl-4'>+234 707 739 6196</p>
-                    <p className='pl-4'>Research@gifon.org.ng</p>
-                  </div>
-                </li>
+              <li className='leading-relaxed'>info@gifon.org.ng</li>
+              <li className='flex flex-row w-full justify-between pb-4'>
+                <p>Secretariat:</p>
+                <div className='flex flex-col'>
+                  <p className='pl-4'>+234 707 721 1243</p>
+                  <p className='pl-4'>Secretariat@gifon.org.ng</p>
+                </div>
+              </li>
+              <li className='flex flex-row w-full justify-between pb-4'>
+                <p>Outreach:</p>
+                <div className='flex flex-col'>
+                  <p className='pl-4'>+234 707 726 9829</p>
+                  <p className='pl-4'>Outreach@gifon.org.ng</p>
+                </div>
+              </li>
+              <li className='flex flex-row w-full justify-between pb-4'>
+                <p>Research:</p>
+                <div className='flex flex-col'>
+                  <p className='pl-4'>+234 707 739 6196</p>
+                  <p className='pl-4'>Research@gifon.org.ng</p>
+                </div>
+              </li>
             </ul>
           </div>
 
@@ -113,59 +159,27 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* --- UPDATED SOCIALS SECTION --- */}
       <div className="flex flex-col gap-8 p-4 text-center">
         <h4 className='font-semibold text-lg'>Connect With Us</h4>
-        <div className='flex flex-row justify-around gap-4 items-center'>
-          <ul className='flex flex-row justify-between gap-16'>
-            <li>
-              <a href="#">
-                <div className='flex flex-row justify-start items-center gap-4'> 
-                  <FaXTwitter size={16}/>
-                  <h2>X</h2>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div className='flex flex-row justify-start items-center gap-4'> 
-                  <FaLinkedinIn size={16}/>
-                  <h2>LinkedIn</h2>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div className='flex flex-row justify-start items-center gap-4'> 
-                  <FaFacebookF size={16}/>
-                  <h2>Facebook</h2>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div className='flex flex-row justify-start items-center gap-4'> 
-                  <FaYoutube size={16}/>
-                  <h2>Youtube</h2>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div className='flex flex-row justify-start items-center gap-4'> 
-                  <FaInstagram size={16}/>
-                  <h2>Instagram</h2>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div className='flex flex-row justify-start items-center gap-4'> 
-                  <FaWhatsapp size={16}/>
-                  <h2>Whatsapp</h2>
-                </div>
-              </a>
-            </li>
+        <div className='flex flex-col md:flex-row justify-around gap-8 items-center'>
+          
+          {/* Replaced hardcoded list with a mapped, responsive list */}
+          <ul className='flex flex-row flex-wrap justify-center gap-x-8 gap-y-4'>
+            {socialLinks.map((link) => (
+              <li key={link.name}>
+                <a
+                  href={link.href}
+                  className={`flex flex-row justify-start items-center gap-3 ${link.hoverColorClass} transition-colors`}
+                >
+                  <span className={link.colorClass}>{link.icon}</span>
+                  {/* Fixed semantics: h2 -> span */}
+                  <span className="font-medium">{link.name}</span>
+                </a>
+              </li>
+            ))}
           </ul>
+
           <button className={styles.shareBtn}><IoShareSocial /> SHARE THIS PAGE</button>
         </div>
       </div>
