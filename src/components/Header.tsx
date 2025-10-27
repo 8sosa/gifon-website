@@ -4,14 +4,18 @@ import Image from "next/image";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import styles from "@/styles/Header.module.css";
 import { FaXTwitter, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaTimes } from "react-icons/fa"; // Added FaTimes
 
 interface MenuItem {
-  label: string;
+  // --- CHANGE 1: Allow label to be a string OR a React element ---
+  label: React.ReactNode;
   href?: string;
   anchor?: string;
   link?: string;
   children?: MenuItem[];
+  onClick?: (e: React.MouseEvent) => void; // For search button
+  colorClass?: string; // For social icons
+  hoverColorClass?: string; // For social icons
 }
 
 // Define menu structure
@@ -137,15 +141,6 @@ const menuItems: MenuItem[] = [
       { label: 'Downloads', anchor: 'Downloads' },
     ]  
   },
-  // { label: 'Publications', anchor: 'publications' ,
-  //   children: [
-  //     { label: 'Eyes on Location- The Journal of GeoINSIGHT', anchor: 'GeoINSIGHT' },
-  //     { label: 'Eyes on Location- The GeoINSIGHT Bulletin', anchor: 'Bulletin' },
-  //     { label: 'Conference & Workshop Proceedings', anchor: 'Proceedings' },
-  //     { label: 'Policy Briefs & White Paper', anchor: 'Policy' },
-  //     { label: 'Research Reports', anchor: 'Research' },
-  //   ]  
-  // },
   {
     label: 'Critical Infrastructure Support',
     href: '/infrastructure',
@@ -186,7 +181,8 @@ const menuItems: MenuItem[] = [
   },
 ];
 
-const topBarItemsBase = [
+// --- UPDATED topBarItemsBase ---
+const topBarItemsBase: MenuItem[] = [
   {
     label: 'Contact Us',
     href: '/contact-us'
@@ -201,19 +197,26 @@ const topBarItemsBase = [
   },
   {
     label: <FaSearch />,
-    href: '/#'
+    href: '/#', // Href is now just a placeholder
+    onClick: (e) => { e.preventDefault(); }, // Will be handled by state
   },
   {
     label: <FaXTwitter />,
-    href: '/#'
+    href: '#',
+    colorClass: 'text-black',
+    hoverColorClass: 'hover:text-black'
   },
   {
     label: <FaFacebookF />,
-    href: '/#'
+    href: '#',
+    colorClass: 'text-blue-600',
+    hoverColorClass: 'hover:text-blue-600'
   },
   {
     label: <FaLinkedinIn />,
-    href: '/#'
+    href: '#',
+    colorClass: 'text-blue-700',
+    hoverColorClass: 'hover:text-blue-700'
   },
 ];
 
@@ -260,7 +263,7 @@ function Dropdown({
             className={styles.dropdownItem}
             data-open={isOpen ? "true" : "false"}
             onMouseEnter={() => {
-              if (!isMobile) setOpenChild(child.label);
+              if (!isMobile) setOpenChild(child.label as string);
             }}
             onMouseLeave={() => {
               if (!isMobile)
@@ -269,7 +272,7 @@ function Dropdown({
                 );
             }}
             onFocus={() => {
-              if (!isMobile) setOpenChild(child.label);
+              if (!isMobile) setOpenChild(child.label as string);
             }}
             onBlur={() => {
               if (!isMobile)
@@ -285,7 +288,7 @@ function Dropdown({
                   if (isMobile && hasChildren) {
                     e.preventDefault();
                     setOpenChild((prev) =>
-                      prev === child.label ? null : child.label
+                      prev === child.label ? null : (child.label as string)
                     );
                     return;
                   }
@@ -301,7 +304,7 @@ function Dropdown({
                   onClick={(e) => {
                     e.stopPropagation();
                     setOpenChild((prev) =>
-                      prev === child.label ? null : child.label
+                      prev === child.label ? null : (child.label as string)
                     );
                   }}
                   className={styles.dropdownToggle}
@@ -335,57 +338,66 @@ export default function Header() {
   const [topMenuOpen, setTopMenuOpen] = useState(false);
   const [bottomMenuOpen, setBottomMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  // --- NEW STATE FOR SEARCH ---
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
   const NAV_TOLERANCE = 6;
   const navRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
+  
   const closeAll = useCallback(() => {
     setTopMenuOpen(false);
     setBottomMenuOpen(false);
     setOpenDropdown(null);
+    // Don't close search here, it's independent
   }, []);
+
+  // --- NEW SEARCH HANDLERS ---
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchValue.trim()) {
+      alert(`You searched for: ${searchValue}`);
+      // Implement your search logic here, e.g., router.push(`/search?q=${searchValue}`)
+      setSearchValue("");
+      setIsSearchOpen(false);
+    }
+  };
 
   const toggleTopMenu = () => setTopMenuOpen(prev => !prev);
   const toggleBottomMenu = () => setBottomMenuOpen(prev => !prev);
   const [hoveredRoot, setHoveredRoot] = useState<string | null>(null);
 
-useEffect(() => {
-  function handleClickOutside(event: MouseEvent) {
-    if (navRef.current && !navRef.current.contains(event.target as Node))
-      closeAll();
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(event.target as Node))
+        closeAll();
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, [closeAll]);
+
+  function handleRootEnter(
+    e: React.MouseEvent,
+    label: string,
+    hasChildren: boolean
+  ) {
+    if (!hasChildren) return;
+    const nav = navRef.current;
+    if (!nav) return;
+    const rect = nav.getBoundingClientRect();
+    if (e.clientY <= rect.bottom + NAV_TOLERANCE) {
+      setHoveredRoot(label);
+      if (!isMobile) setOpenDropdown(label);
+    }
   }
-  document.addEventListener("mousedown", handleClickOutside);
-  return () =>
-    document.removeEventListener("mousedown", handleClickOutside);
-}, [closeAll]);
 
-function handleRootEnter(
-  e: React.MouseEvent,
-  label: string,
-  hasChildren: boolean
-) {
-  if (!hasChildren) return;
-  const nav = navRef.current;
-  if (!nav) return;
-  const rect = nav.getBoundingClientRect();
-  if (e.clientY <= rect.bottom + NAV_TOLERANCE) {
-    setHoveredRoot(label);
-    if (!isMobile) setOpenDropdown(label);
+  function handleRootLeave() {
+    setHoveredRoot(null);
+    if (!isMobile) setOpenDropdown(null);
   }
-}
-
-function handleRootLeave() {
-  setHoveredRoot(null);
-  if (!isMobile) setOpenDropdown(null);
-}
-
-  // useEffect(() => {
-  //   const token =
-  //     typeof window !== "undefined"
-  //       ? localStorage.getItem("jwt")
-  //       : null;
-  //   setIsLoggedIn(!!token);
-  // }, []);
 
   return (
     <header className={styles.header} ref={navRef}>
@@ -408,20 +420,43 @@ function handleRootLeave() {
           ☰
         </button>
 
+        {/* --- UPDATED NAVIGATION --- */}
         <nav className={`${styles.topMenu} ${topMenuOpen ? styles.show : ""}`}>
-          {topBarItemsBase.map((item, idx) => (
-            <div key={idx} className={styles.navItem}>
-              <Link
-                href={item.href!}
-                onClick={closeAll}
-                className={styles.topNavLink}
-              >
-                {item.label}
-              </Link>
-            </div>
-          ))}
+          {topBarItemsBase.map((item, idx) => {
+            
+            // --- CHANGE 2: Type-safe way to check for the Search icon ---
+            const isSearch = React.isValidElement(item.label) && item.label.type === FaSearch;
+            
+            // Check if item has a color class (is a social icon)
+            const isSocial = !!item.colorClass;
+
+            const linkClass = isSocial 
+              ? `${styles.topNavIcon} ${item.colorClass} ${item.hoverColorClass}`
+              : isSearch
+              ? styles.topNavIcon // Special class for icons
+              : styles.topNavLink; // Default for text links
+
+            const clickHandler = isSearch
+              ? (e: React.MouseEvent) => { e.preventDefault(); setIsSearchOpen(true); }
+              : item.onClick
+              ? item.onClick
+              : closeAll;
+
+            return (
+              <div key={idx} className={styles.navItem}>
+                <Link
+                  href={item.href!}
+                  onClick={clickHandler}
+                  className={linkClass}
+                >
+                  {item.label}
+                </Link>
+              </div>
+            );
+          })}
         </nav>
       </div>
+      
       {/* Bottom Menu Offcanvas */}
       <div className={styles.topBar}>
         <button
@@ -439,16 +474,16 @@ function handleRootLeave() {
               openDropdown === item.label && hoveredRoot === item.label;
 
             return (
-              <div key={item.label} className={styles.navItem}>
+              <div key={item.label as string} className={styles.navItem}>
                 <Link
                   href={item.href ?? "#"}
                   className={styles.navLink}
-                  onMouseEnter={(e) => handleRootEnter(e, item.label, hasChildren)}
+                  onMouseEnter={(e) => handleRootEnter(e, item.label as string, hasChildren)}
                   onMouseLeave={handleRootLeave}
                   onClick={(e) => {
                     if (isMobile && hasChildren) {
                       e.preventDefault();
-                      setOpenDropdown((prev) => (prev === item.label ? null : item.label));
+                      setOpenDropdown((prev) => (prev === item.label ? null : (item.label as string)));
                       return;
                     }
                     closeAll();
@@ -460,7 +495,7 @@ function handleRootLeave() {
                 {hasChildren && isOpen && (
                   <div
                     className={`${styles.dropdownWrapper} ${styles.showDropdown}`}
-                    onMouseEnter={(e) => handleRootEnter(e, item.label, hasChildren)}
+                    onMouseEnter={(e) => handleRootEnter(e, item.label as string, hasChildren)}
                     onMouseLeave={handleRootLeave}
                   >
                     <Dropdown items={item.children ?? []} parentHref={item.href ?? "#"} closeAll={closeAll} />
@@ -471,6 +506,31 @@ function handleRootLeave() {
           })}
         </nav>
       </div>
+
+      {/* --- NEW SEARCH MODAL --- */}
+      {isSearchOpen && (
+        <div className={styles.searchOverlay} onClick={() => setIsSearchOpen(false)}>
+          <button 
+            className={styles.searchCloseBtn} 
+            onClick={() => setIsSearchOpen(false)}
+            aria-label="Close search"
+          >
+            <FaTimes size={24} />
+          </button>
+          <div className={styles.searchBox} onClick={(e) => e.stopPropagation()}>
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                type="search"
+                autoFocus
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                placeholder="Type to search..."
+                className={styles.searchInput}
+              />
+            </form>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

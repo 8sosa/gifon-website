@@ -32,13 +32,12 @@ export default function ContactPage() {
   return (
     <>
         <div className="pageHead"/>
-        <main className="max-w-6xl mx-auto px-6 py-12 grid lg:grid-cols-3 gap-10">
+        <main className="max-w-6xl mx-auto px-6 py-12">
         {/* Contact Form */}
-        <section className="lg:col-span-2 space-y-6">
+        <section className="gap-10">
             <h1 className="text-3xl font-bold">Contact Us</h1>
             <p className="text-gray-600">
-            If you have any questions about the site, please feel free to contact us. We
-            are always looking for ways to better serve our members - YOU are important
+            If you have any questions feel free to contact us. YOU are important
             to us!
             </p>
 
@@ -154,9 +153,9 @@ export default function ContactPage() {
         </section>
 
         {/* Sidebar */}
-        <aside className="space-y-8">
+        {/* <aside className="space-y-8"> */}
             {/* Sign In */}
-            <div className="border rounded-lg p-6 bg-white shadow-sm">
+            {/* <div className="border rounded-lg p-6 bg-white shadow-sm">
             <h2 className="text-xl font-semibold mb-4">Sign In</h2>
             <form className="space-y-3">
                 <input
@@ -188,10 +187,10 @@ export default function ContactPage() {
                 Haven’t registered yet?
                 </a>
             </div>
-            </div>
+            </div> */}
 
             {/* Latest News */}
-            <div className="border rounded-lg p-6 bg-white shadow-sm">
+            {/* <div className="border rounded-lg p-6 bg-white shadow-sm">
             <h2 className="text-xl font-semibold mb-3">Latest News</h2>
             <ul className="space-y-2 text-gray-700 text-sm">
                 <li>
@@ -203,10 +202,10 @@ export default function ContactPage() {
                 Announced
                 </li>
             </ul>
-            </div>
+            </div> */}
 
             {/* Calendar */}
-            <div className="border rounded-lg p-6 bg-white shadow-sm">
+            {/* <div className="border rounded-lg p-6 bg-white shadow-sm">
             <h2 className="text-xl font-semibold mb-3">Calendar</h2>
             <ul className="space-y-2 text-gray-700 text-sm">
                 <li>8/12/2025 » 9/30/2025: Support U.S. Federal Geospatial Datasets</li>
@@ -216,7 +215,7 @@ export default function ContactPage() {
                 </li>
             </ul>
             </div>
-        </aside>
+        </aside> */}
         </main>
     </>
   );
