@@ -223,8 +223,7 @@ export default function MembershipPage() {
                                     <span className="font-semibold">Fill out the membership form:</span> Provide your details in the form.
                                 </li>
                                 <li className="text-lg">
-                                    <span className="font-semibold">Attach supporting documents:</span> Learn more about the required documents <a href='#' className='underline text-green-600 hover:text-green-800'>here</a>.
-                                </li>
+                                    <span className="font-semibold">Attach supporting documents:</span> Learn more about the required documents <a href="/docs/GIFON_Membership_Supporting_Documents_Checklist.docx" download className="underline text-green-600 hover:text-green-800">here</a>.                                </li>
                                 <li className="text-lg">
                                     <span className="font-semibold">Submit and make payment:</span> Use our secure payment gateway to pay your dues.
                                 </li>
