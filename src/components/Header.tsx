@@ -193,7 +193,7 @@ const topBarItemsBase: MenuItem[] = [
   },
   {
     label: 'Register',
-    href: '/sign-up',
+    href: '/membership',
   },
   {
     label: <FaSearch />,

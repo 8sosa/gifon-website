@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import HeroSection from '@/components/HeroSection';
 import Link from "next/link";
+import { FileDown } from 'lucide-react';
 // Import icons if you have them, e.g., from react-icons
 // import { FaUserGraduate, FaUserTie, FaBuilding, FaGlobe, FaShieldAlt, FaAward } from 'react-icons/fa';
 
@@ -50,6 +51,10 @@ export default function MembershipPage() {
             // icon: <FaAward size={40} />
         },
     ];
+
+    const [isDocModalOpen, setIsDocModalOpen] = useState(false);
+    const docFile = "/docs/GIFON_Membership_Supporting_Documents_Checklist.docx";
+    const docTitle = "Membership Supporting Documents Checklist";
 
     // Function to open the modal
     const handleApplyClick = (category: CategoryItem) => {
@@ -223,7 +228,16 @@ export default function MembershipPage() {
                                     <span className="font-semibold">Fill out the membership form:</span> Provide your details in the form.
                                 </li>
                                 <li className="text-lg">
-                                    <span className="font-semibold">Attach supporting documents:</span> Learn more about the required documents <a href="/docs/GIFON_Membership_Supporting_Documents_Checklist.docx" download className="underline text-green-600 hover:text-green-800">here</a>.                                </li>
+                                    <span className="font-semibold">Attach supporting documents:</span> Learn more about the required documents{' '}
+                                    {/* 4. Change <a> to <button> and add onClick */}
+                                    <button
+                                        onClick={() => setIsDocModalOpen(true)}
+                                        className='underline text-green-600 hover:text-green-800 font-medium'
+                                    >
+                                        here
+                                    </button>
+                                    .
+                                </li>
                                 <li className="text-lg">
                                     <span className="font-semibold">Submit and make payment:</span> Use our secure payment gateway to pay your dues.
                                 </li>
@@ -315,6 +329,41 @@ export default function MembershipPage() {
                         </form>
                     </div>
                 </div>
+            )}
+            {isDocModalOpen && (
+              <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full overflow-hidden relative">
+                  <div className="flex justify-between items-center px-6 py-4 border-b">
+                    <h2 className="text-xl font-semibold">{docTitle}</h2>
+                    <a
+                      href={docFile}
+                      download
+                      className="text-green-600 hover:underline flex items-center gap-1"
+                    >
+                      <FileDown className="w-5 h-5" />
+                      Download
+                    </a>
+                  </div>
+
+                  {/* Embed the .docx viewer using Google Docs Viewer */}
+                  <iframe
+                    src={`https://docs.google.com/gview?url=${encodeURIComponent(
+                      typeof window !== "undefined" ? window.location.origin + docFile : ""
+                    )}&embedded=true`}
+                    className="w-full h-[70vh] border-0"
+                    title={docTitle}
+                  />
+
+                  <div className="p-4 flex justify-end bg-gray-50 border-t">
+                    <button
+                      onClick={() => setIsDocModalOpen(false)}
+                      className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
             )}
         </>
     );
