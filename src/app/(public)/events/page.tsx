@@ -143,6 +143,7 @@ export default async function EventsPage() {
             <p className="text-gray-700 leading-relaxed text-justify">
               The Geospatial Intelligence Foundation of Nigeria (GIFON) actively convenes and participates in events that drive dialogue, innovation, and collaboration in the field of geospatial intelligence and national development.
             </p>
+            <p className="text-gray-700 leading-relaxed text-justify">Our Events & Highlights section provides a showcase of key milestones and activities, capturing how GIFON is shaping policy, research, and practice across Nigeria and beyond.</p>
             {/* ... rest of your highlights text ... */}
             <p className="text-gray-700 leading-relaxed text-justify pt-4">
               Here, visitors can explore:

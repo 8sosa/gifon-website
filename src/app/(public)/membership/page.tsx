@@ -4,6 +4,7 @@ import { useState } from 'react';
 import HeroSection from '@/components/HeroSection';
 import Link from "next/link";
 import { FileDown } from 'lucide-react';
+import Modal from '@/components/Modal';
 // Import icons if you have them, e.g., from react-icons
 // import { FaUserGraduate, FaUserTie, FaBuilding, FaGlobe, FaShieldAlt, FaAward } from 'react-icons/fa';
 
@@ -13,7 +14,69 @@ interface CategoryItem {
     // icon: JSX.Element;
   }
 
+  interface ModalState {
+    isOpen: boolean;
+    content: string | null;
+    title: string | null;
+  }
+
+  const forumContent = {
+    supportingDocuments: `GIFON Membership Registration – Supporting Documents Checklist
+    Student Membership
+    • Valid Student ID Card
+    • Admission Letter or Proof of Enrollment
+    • Recent Passport Photograph
+    • National Identification Number (NIN) Slip or any valid ID
+    • Recommendation Letter (optional, from department or supervisor)
+    Professional Membership
+    • Updated Curriculum Vitae (CV)
+    • Relevant Academic Certificates (Minimum: B.Sc/B.Eng or equivalent)
+    • Professional Certifications (if any – e.g., GIS, Remote Sensing, Data Analysis, etc.)
+    • Valid National ID (NIN, Passport, or Driver’s License)
+    • Passport Photograph
+    Institutional Membership (Universities, Research Institutes, Training Centers)
+    • Institutional Profile or Brochure
+    • Certificate of Establishment / Accreditation (where applicable)
+    • Letter of Intent / Partnership Request on Official Letterhead
+    • Details of Institutional Contact Person
+    • Valid Institutional ID and NIN of Contact Person
+    Corporate Membership (Private Companies, Startups, Consultants)
+    • Certificate of Incorporation (CAC)
+    • Company Profile or Brochure
+    • Tax Identification Number (TIN) or Evidence of Tax Compliance
+    • Letter of Intent on Company Letterhead
+    • Valid ID and NIN of Company Representative
+    • List of Key Technical/Management Staff (with brief profiles)
+    Government / Agency Membership
+    • Official Letter of Application or Endorsement from the Agency Head
+    • Agency Profile or Mandate Summary
+    • Evidence of Government Registration (or enabling law)
+    • Valid ID and NIN of Authorized Representative
+    • Passport Photograph of Authorized Representative
+    Fellow / Honorary Membership
+    • Updated CV / Professional Bio
+    • Evidence of Notable Achievements or Contributions to GEOINT / Geospatial Sector
+    • Copies of Awards, Publications, or Recognitions (if applicable)
+    • Nomination Letter or Endorsement (from GIFON Council or two existing members)
+    • Valid National ID (NIN, Passport, or Driver’s License)
+    • Passport Photograph`
+  }
+
 export default function MembershipPage() {
+    const [modalData, setModalData] = useState<ModalState>({
+        isOpen: false,
+        content: null,
+        title: null,
+      });
+    
+      // Handlers to open/close modal
+      const openModal = (content: string, title: string) => {
+        setModalData({ isOpen: true, content, title });
+      };
+    
+      const closeModal = () => {
+        setModalData({ isOpen: false, content: null, title: null });
+      };
     // State to manage modal visibility
     const [isModalOpen, setIsModalOpen] = useState(false);
     // State to store the currently selected category
@@ -90,11 +153,11 @@ export default function MembershipPage() {
             <section className="pt-16 py-16 px-4 bg-white">
                 <div className="max-w-5xl mx-auto text-center">
                     <h2 className="text-3xl font-semibold mb-4">Why Join GIFON?</h2>
-                    <p className="text-gray-700 leading-relaxed mb-4">
-                        GIFON membership offers access to exclusive knowledge, networking, training, and strategic influence in the fast-growing field of geospatial intelligence.
+                    <p className="text-gray-700 leading-relaxed mb-4 text-justify">
+                        Joining the Geospatial Intelligence Foundation of Nigeria (GIFON) means becoming part of a dynamic community of professionals, innovators, policymakers, and researchers committed to shaping Nigeria’s future through geospatial intelligence. As a member, you are not only advancing your career but also contributing to national development, security, and innovation.
                     </p>
-                    <p className="text-gray-700 leading-relaxed">
-                        Whether you are a student, professional, academic institution, corporate body, or government agency, there is a place for you in GIFON.
+                    <p className="text-gray-700 leading-relaxed text-justify">
+                        GIFON membership provides you with opportunities to network with thought leaders, access exclusive research and publications, attend specialized training and workshops, and participate in shaping policies that strengthen Nigeria’s geospatial ecosystem. Whether you are a student, professional, or institution, your membership positions you at the heart of the conversation driving change across Nigeria’s 13 critical infrastructure sectors.
                     </p>
                 </div>
             </section>
@@ -120,7 +183,7 @@ export default function MembershipPage() {
                             onClick={() => handleApplyClick(item)}
                             className="w-full mt-6 bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition"
                         >
-                            Apply
+                            Apply / Renew
                         </button>
                     </div>
                     ))}
@@ -144,6 +207,30 @@ export default function MembershipPage() {
                     </h2>
                     <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
                 </div>
+                <p className="text-sm text-gray-600 italic">As a GIFON member, you gain:</p>
+                <ul className="text-sm text-gray-600 italic list-decimal">
+                    <li>
+                        Access to exclusive publications, research reports, and policy briefs.
+                    </li>
+                    <li>
+                        Discounted rates for conferences, training, workshops, and certification programs.
+                    </li>
+                    <li>
+                        Networking opportunities with global experts, policymakers, and industry leaders.
+                    </li>
+                    <li>
+                        Eligibility for scholarships, fellowships, and mentorship programs.
+                    </li>
+                    <li>
+                        Opportunities to contribute to national and international research projects.
+                    </li>
+                    <li>
+                        Participation in shaping Nigeria’s geospatial policies and frameworks.
+                    </li>
+                    <li>
+                        Recognition as part of Nigeria’s leading GEOINT community.
+                    </li>
+                </ul>
                 <div className="overflow-x-auto shadow-md rounded-lg">
                         <table className="w-full text-left text-gray-700">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-100">
@@ -231,7 +318,7 @@ export default function MembershipPage() {
                                     <span className="font-semibold">Attach supporting documents:</span> Learn more about the required documents{' '}
                                     {/* 4. Change <a> to <button> and add onClick */}
                                     <button
-                                        onClick={() => setIsDocModalOpen(true)}
+                                        onClick={() => openModal(forumContent.supportingDocuments, "GIFON Membership Registration – Supporting Documents Checklist")}
                                         className='underline text-green-600 hover:text-green-800 font-medium'
                                     >
                                         here
@@ -365,6 +452,12 @@ export default function MembershipPage() {
                 </div>
               </div>
             )}
+            <Modal 
+                isOpen={modalData.isOpen} 
+                onClose={closeModal} 
+                title={modalData.title}
+                content={modalData.content}
+            />
         </>
     );
 }

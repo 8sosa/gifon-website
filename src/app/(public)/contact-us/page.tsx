@@ -35,12 +35,7 @@ export default function ContactPage() {
         <main className="max-w-6xl mx-auto px-6 py-12">
         {/* Contact Form */}
         <section className="gap-10">
-            <h1 className="text-3xl font-bold">Contact Us</h1>
-            <p className="text-gray-600">
-            If you have any questions feel free to contact us. YOU are important
-            to us!
-            </p>
-
+            <h1 className="text-3xl font-bold p-8">Contact Us</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
                 <input

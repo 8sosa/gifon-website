@@ -4,10 +4,21 @@ import { useState } from "react";
 import HeroSection from "@/components/HeroSection";
 import { Button } from "@/components/ui/button";
 import { FileDown } from "lucide-react";
+import Modal from "@/components/Modal"; // Import our reusable modal
+
+// Define the type for the modal's state
+interface ModalState {
+  isOpen: boolean;
+  title: string | null;
+  file: string | null;
+}
 
 export default function PoliciesPage() {
-  const [open, setOpen] = useState(false);
-  const [selectedPolicy, setSelectedPolicy] = useState<{ title: string; file: string } | null>(null);
+  const [modalData, setModalData] = useState<ModalState>({
+    isOpen: false,
+    title: null,
+    file: null,
+  });
 
   const policies = [
     {
@@ -47,6 +58,18 @@ export default function PoliciesPage() {
     },
   ];
 
+  // Handlers to open/close modal
+  const openModal = (policy: { title: string; file: string }) => {
+    setModalData({ isOpen: true, title: policy.title, file: policy.file });
+  };
+
+  const closeModal = () => {
+    setModalData({ isOpen: false, title: null, file: null });
+  };
+
+  // Get the base URL for the iframe
+  const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
+
   return (
     <>
       <HeroSection
@@ -68,10 +91,7 @@ export default function PoliciesPage() {
               <h2 className="text-3xl font-semibold mb-4">{policy.title}</h2>
               <p className="text-gray-700 leading-relaxed mb-6 text-justify">{policy.description}</p>
               <Button
-                onClick={() => {
-                  setSelectedPolicy(policy);
-                  setOpen(true);
-                }}
+                onClick={() => openModal(policy)}
                 className="bg-green-600 text-white hover:bg-green-700 transition"
               >
                 Read More
@@ -81,13 +101,18 @@ export default function PoliciesPage() {
         ))}
 
         {/* Modal for document viewer */}
-        {open && selectedPolicy && (
-          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-lg max-w-4xl w-full overflow-hidden relative">
-              <div className="flex justify-between items-center px-6 py-4 border-b">
-                <h2 className="text-xl font-semibold">{selectedPolicy.title}</h2>
+        <Modal
+          isOpen={modalData.isOpen}
+          onClose={closeModal}
+          title={modalData.title}
+        >
+          {/* This content is passed as 'children' to the Modal */}
+          {modalData.file && (
+            <div>
+              {/* Custom Header for Download Link */}
+              <div className="flex justify-end px-6 py-4 border-b">
                 <a
-                  href={selectedPolicy.file}
+                  href={modalData.file}
                   download
                   className="text-green-600 hover:underline flex items-center gap-1"
                 >
@@ -99,23 +124,24 @@ export default function PoliciesPage() {
               {/* Embed the .docx viewer using Google Docs Viewer */}
               <iframe
                 src={`https://docs.google.com/gview?url=${encodeURIComponent(
-                  typeof window !== "undefined" ? window.location.origin + selectedPolicy.file : ""
+                  baseUrl + modalData.file
                 )}&embedded=true`}
                 className="w-full h-[70vh] border-0"
-                title={selectedPolicy.title}
+                title={modalData.title || "Policy Document"}
               />
-
-              <div className="p-4 flex justify-end">
-                <button
-                  onClick={() => setOpen(false)}
-                  className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md"
+              
+              {/* Custom Footer for Close Button */}
+              <div className="p-4 flex justify-end border-t">
+                <Button
+                  onClick={closeModal}
+                  variant="outline"
                 >
                   Close
-                </button>
+                </Button>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </Modal>
       </main>
     </>
   );

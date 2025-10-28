@@ -162,6 +162,17 @@ const menuItems: MenuItem[] = [
     ],
   },
   { 
+    label: 'Groups & Forums',
+    href: '/forums',
+    children: [
+      { label: 'Young Professions Forum', anchor: 'ethics' },
+      { label: 'Women in GEOINT Forum', anchor: 'anti-corruption' },
+      { label: 'Industry & Private Sector Forum', anchor: 'fund-raising' },
+      { label: 'Policy Briefs & white Paper ', anchor: 'slavery' },
+      { label: 'Research Reports', anchor: 'volunteer' },
+    ]
+  },
+  { 
     label: 'Policies',
     href: '/policies',
     children: [
@@ -175,9 +186,6 @@ const menuItems: MenuItem[] = [
   {
     label: 'Get Involved',
     href: '/donate',
-    children: [
-    { label: 'Volunteer Opportunities', anchor: 'opportunities' },
-    ]
   },
 ];
 

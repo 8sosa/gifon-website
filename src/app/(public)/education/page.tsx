@@ -1,6 +1,6 @@
 import HeroSection from '@/components/HeroSection';
 import Image from 'next/image';
-import Link from 'next/link'; // Uncommented to use for buttons
+import Link from 'next/link'; 
 
 export default function DonatePage() {
   // Data array created from your documents and link list
@@ -72,56 +72,78 @@ export default function DonatePage() {
 
       <main className="bg-green-50">
         <section className='max-w-5xl mx-auto px-6 py-12 space-y-16'>
-          {/* --- Introductory Text --- */}
-          <div>
-            <p>To advance in your career, it is critical to keep updating your skills, be open to new ideas and ways of doing things, and take advantage of every opportunity to learn that comes along. You may prefer self-directed learning via online courses or webinars while others learn best through formal lecture or in-person seminars, training, and conferences. GIFON has you covered, no matter your experience level, preferred learning method or professional development need! We regularly deliver education and training at in-person events and at virtual events.</p>
-            <br />
-            <p id='C-T'>Certainly, it takes more effort to gain necessary approvals and arrange to be away from your family and work in order to attend an in-person conference or training event. But that effort typically pays off with insights to improve not only your own performance but also that of your organization. Between educational sessions, exhibitor solutions, and hallway discussions, you are certain to identify better, faster and cheaper ways to get the work done. Getting a variety of viewpoints can help you see where we can change or improve our own ideas and processes.</p>
-          </div>
-
-          {/* --- Section Title --- */}
-          <div className="inline-block mb-6 text-left" id='programs'>
-            <h2 className="text-green-600 text-2xl font-semibold">
-              Our Programmes
-            </h2>
-            {/* Short underline */}
-            <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
-          </div>
-          <p>Every experience, whether it&apos;s a conference, a project, or even a conversation, presents a chance to broaden your knowledge base and stay relevant. By embracing these opportunities, you can enhance your career readiness and become a proactive contributor to your organization and the GIS profession overall.</p>
           
-          {/* --- Dynamic Programmes List --- */}
-          <div className="flex flex-col gap-8 text-gray-700">
-            {educationPrograms.map((program, idx) => (
-              <div
-                key={idx}
-                className="rounded-lg p-6 bg-white shadow-lg hover:shadow-xl transition-shadow flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 w-full"
-              >
-                <Image
-                  src={program.src} // Using placeholder images
-                  alt={program.title}
-                  width={200} // Increased size for better layout
-                  height={120}
-                  className="rounded-md object-cover"
-                />
-                <div className="flex-1 flex flex-col items-start">
-                  <h3 className="text-xl font-semibold mb-2 text-green-600">
-                    {program.title}
-                  </h3>
-                  <p className="mb-4">
-                    {program.description}
-                  </p>
-                  <Link
-                    href={program.link}
-                    className="mt-auto inline-block text-blue-600 font-medium hover:underline"
-                  >
-                    Learn More →
-                  </Link>
-                </div>
-              </div>
-            ))}
+          {/* --- Introductory Text --- */}
+          <div className="text-gray-700 leading-relaxed">
+            <p>To advance in your career, it is critical to keep updating your skills, be open to new ideas and ways of doing things, and take advantage of every opportunity to learn that comes along. You may prefer self-directed learning via online courses or webinars while others learn best through formal lecture or in-person seminars, training, and conferences. GIFON has you covered, no matter your experience level, preferred learning method or professional development need! We regularly deliver education and training at in-person events and at virtual events.</p>
           </div>
 
-          {/* === NEW TALENT DEVELOPMENT SECTION === */}
+          {/* === NEW TRAINING SECTION === */}
+          <div id="C-T"> {/* This is the anchor */}
+            {/* --- Section Title --- */}
+            <div className="inline-block mb-6 text-left">
+              <h2 className="text-green-600 text-2xl font-semibold">
+                Training
+              </h2>
+              <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
+            </div>
+            
+            {/* --- Descriptive Text --- */}
+            <div className="space-y-4 text-gray-700 leading-relaxed">
+              <p>
+                Certainly, it takes more effort to gain necessary approvals and arrange to be away from your family and work in order to attend an in-person conference or training event. But that effort typically pays off with insights to improve not only your own performance but also that of your organization. Between educational sessions, exhibitor solutions, and hallway discussions, you are certain to identify better, faster and cheaper ways to get the work done. Getting a variety of viewpoints can help you see where we can change or improve our own ideas and processes.
+              </p>
+            </div>
+          </div>
+          {/* === END OF NEW SECTION === */}
+
+
+          {/* --- PROGRAMMES Section --- */}
+          <div id="programs">
+            {/* --- Section Title --- */}
+            <div className="inline-block mb-6 text-left">
+              <h2 className="text-green-600 text-2xl font-semibold">
+                Our Programmes
+              </h2>
+              {/* Short underline */}
+              <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
+            </div>
+            <p className="text-gray-700 leading-relaxed">Every experience, whether it&apos;s a conference, a project, or even a conversation, presents a chance to broaden your knowledge base and stay relevant. By embracing these opportunities, you can enhance your career readiness and become a proactive contributor to your organization and the GIS profession overall.</p>
+            
+            {/* --- Dynamic Programmes List --- */}
+            <div className="flex flex-col gap-8 text-gray-700 mt-8"> {/* Added mt-8 for spacing */}
+              {educationPrograms.map((program, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-lg p-6 bg-white shadow-lg hover:shadow-xl transition-shadow flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 w-full"
+                >
+                  <Image
+                    src={program.src} // Using placeholder images
+                    alt={program.title}
+                    width={200} // Increased size for better layout
+                    height={120}
+                    className="rounded-md object-cover"
+                  />
+                  <div className="flex-1 flex flex-col items-start">
+                    <h3 className="text-xl font-semibold mb-2 text-green-600">
+                      {program.title}
+                    </h3>
+                    <p className="mb-4">
+                      {program.description}
+                    </p>
+                    <Link
+                      href={program.link}
+                      className="mt-auto inline-block text-blue-600 font-medium hover:underline"
+                    >
+                      Learn More →
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* === TALENT DEVELOPMENT SECTION === */}
           <div id="talent"> {/* This is the anchor */}
             {/* --- Section Title --- */}
             <div className="inline-block mb-6 text-left">
@@ -163,7 +185,7 @@ export default function DonatePage() {
               </Link>
             </div>
           </div>
-          {/* === END OF NEW SECTION === */}
+          {/* === END OF SECTION === */}
 
         </section>
       </main>
