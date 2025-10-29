@@ -77,9 +77,9 @@ export default function DonatePage() {
           <div className="text-gray-700 leading-relaxed">
             <p>To advance in your career, it is critical to keep updating your skills, be open to new ideas and ways of doing things, and take advantage of every opportunity to learn that comes along. You may prefer self-directed learning via online courses or webinars while others learn best through formal lecture or in-person seminars, training, and conferences. GIFON has you covered, no matter your experience level, preferred learning method or professional development need! We regularly deliver education and training at in-person events and at virtual events.</p>
           </div>
-
+          <div className="pt-4" id="C-T"></div>
           {/* === NEW TRAINING SECTION === */}
-          <div id="C-T"> {/* This is the anchor */}
+          <div> {/* This is the anchor */}
             {/* --- Section Title --- */}
             <div className="inline-block mb-6 text-left">
               <h2 className="text-green-600 text-2xl font-semibold">
@@ -99,7 +99,9 @@ export default function DonatePage() {
 
 
           {/* --- PROGRAMMES Section --- */}
-          <div id="programs">
+          <div className="pt-4" id="programs"></div>
+
+          <div>
             {/* --- Section Title --- */}
             <div className="inline-block mb-6 text-left">
               <h2 className="text-green-600 text-2xl font-semibold">
@@ -144,7 +146,9 @@ export default function DonatePage() {
           </div>
 
           {/* === TALENT DEVELOPMENT SECTION === */}
-          <div id="talent"> {/* This is the anchor */}
+          <div className="pt-4" id="talent"></div>
+
+          <div> {/* This is the anchor */}
             {/* --- Section Title --- */}
             <div className="inline-block mb-6 text-left">
               <h2 className="text-green-600 text-2xl font-semibold">

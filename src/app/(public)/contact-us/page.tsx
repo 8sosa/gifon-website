@@ -92,15 +92,6 @@ export default function ContactPage() {
 
             <input
                 type="text"
-                name="location"
-                placeholder="Location"
-                className="border p-3 rounded w-full"
-                value={formData.location}
-                onChange={handleChange}
-            />
-
-            <input
-                type="text"
                 name="postalCode"
                 placeholder="Postal Code"
                 className="border p-3 rounded w-full"

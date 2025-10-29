@@ -335,8 +335,30 @@ export default function MembershipPage() {
                         </div>
                     </div>
                 </div>
+                <div className='max-w-4xl mx-auto'>
+                    <h2 className="text-3xl font-bold mb-8 mt-32 text-center">Membership Portal (Apply / Renew)</h2>
+
+                    <div className="space-y-6">
+                        <p>  
+                            Our secure membership portal makes it easy to join GIFON, renew your membership, or upgrade to a new category. Through the portal, members can manage their profiles, access resources, register for events, and stay updated on opportunities across the geospatial ecosystem.
+                        </p>
+                        <p>  
+                            Whether you are a student just starting your journey or a senior professional shaping the future, the portal is your entry point into a vibrant community of knowledge, practice, and impact.
+                        </p>
+                    </div>
+                    <div className="text-center mt-8">
+                        <Link
+                            href="/dashboard" // Replace with actual portal link
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
+                        >
+                            Go to Membership Portal
+                        </Link>
+                    </div>
+                </div>
             </section>
-            
+
             <div id="contact"></div>
             {/* 9. Contact Section (Bottom Banner) */}
             <section className="py-16 px-4 bg-gray-800 text-white">
