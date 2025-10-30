@@ -17,12 +17,12 @@ const allForums = [
       <h2 style="font-size: 1.25rem; font-weight: 600;">GIFON YOUNG PROFESSIONALS’ FORUM</h2>
       <p><strong>(GI-MYPN) POLICY DOCUMENT version 1.0</strong></p>
       <br>
-      <h3>1. Introduction</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">1. Introduction</h3>
       <p>The Geospatial Intelligence Foundation of Nigeria Young Professionals (GI-NYPN) is committed to fostering the next generation of geospatial intelligence professionals in Nigeria. As an extension of the Geospatial Intelligence Foundation of Nigeria , GI-NYPN aims to provide a platform for young professionals to connect, learn, innovate, and grow within the GeoINT sector.</p>
       <p>By empowering young talent, GI-NYPN seeks to drive Nigeria’s leadership in the geospatial intelligence landscape and to advance the professional and educational interests of young Nigerians pursuing careers in this field.</p>
       <p>The Geospatial Intelligence Foundation of Nigeria Young Professionals (GI-NYPN) is further committed to nurturing the next generation of leaders in the geospatial intelligence industry. By providing opportunities for education, networking, mentorship, and advocacy, GI-NYPN aims to ensure that young professionals in Nigeria are well-equipped to contribute to global advancements in GeoINT and play a key role in shaping the future of this vital sector</p>
       <br>
-      <h3>2. Policy Statement</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">2. Policy Statement</h3>
       <p>GI-NYPN is dedicated to advancing the careers of young professionals in geospatial intelligence (GeoINT) by:</p>
       <ul>
         <li>Promoting an inclusive and dynamic environment for professional development.</li>
@@ -32,14 +32,14 @@ const allForums = [
       </ul>
       <p>Our foundation’s policy canters on fostering collaboration, education, and mentorship among young professionals while ensuring that they have the tools and opportunities to thrive and lead in the geospatial intelligence field.</p>
       <br>
-      <h3>3. Core Values</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">3. Core Values</h3>
       <p><strong>Collaboration:</strong> Encouraging cooperation and knowledge-sharing among young professionals across various domains of geospatial intelligence.</p>
       <p><strong>Innovation:</strong> Supporting the development and adoption of innovative geospatial technologies, methodologies, and solutions.</p>
       <p><strong>Empowerment:</strong> Providing young professionals with the resources, mentorship, and support to excel in their careers and make meaningful contributions to the sector.</p>
       <p><strong>Integrity:</strong> Upholding high ethical standards and promoting accountability within the community of young professionals.</p>
       <p><strong>Inclusivity:</strong> Ensuring equitable opportunities for all young professionals in the geospatial field, regardless of their background.</p>
       <br>
-      <h3>4. Objectives of the Young Professionals Forum</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">4. Objectives of the Young Professionals Forum</h3>
       <p>GI-NYPN’s objectives are to:</p>
       <h4>Professional Development</h4>
       <ul>
@@ -82,7 +82,7 @@ const allForums = [
         <li>Engage young professionals in social impact projects that use geospatial intelligence to improve communities across Nigeria.</li>
       </ul>
       <br>
-      <h3>5. Membership Criteria</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">5. Membership Criteria</h3>
       <p><strong>Eligibility:</strong> Membership is open to young professionals (21-35 years old) who are actively engaged in or interested in the geospatial intelligence field. This includes students, recent graduates, and early-career professionals.</p>
       <p><strong>Types of Membership:</strong></p>
       <ul>
@@ -97,7 +97,7 @@ const allForums = [
         <li>Career advancement resources, including job boards, mentorship, and industry insights.</li>
       </ul>
       <br>
-      <h3>6. Governance Structure</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">6. Governance Structure</h3>
       <p>GI-NYPN will be governed by an Executive Committee that will include:</p>
       <ul>
         <li><strong>Team Leader:</strong> The Team leader of the forum responsible for providing overall direction and leadership.</li>
@@ -106,7 +106,7 @@ const allForums = [
         <li><strong>Committee Members:</strong> Volunteers who manage specific programs, such as professional development, advocacy, research, and public relations.</li>
       </ul>
       <br>
-      <h3>7. Code of Conduct</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">7. Code of Conduct</h3>
       <p>All members of GI-NYPN are expected to uphold the highest standards of professionalism, ethics, and conduct. This includes:</p>
       <ul>
         <li><strong>Respect:</strong> Treating all members with respect and dignity, regardless of background or experience.</li>
@@ -115,7 +115,7 @@ const allForums = [
         <li><strong>Accountability:</strong> Taking ownership of personal and collective actions, ensuring that the foundation’s activities are carried out ethically and effectively.</li>
       </ul>
       <br>
-      <h3>8. Funding and Sustainability</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">8. Funding and Sustainability</h3>
       <p>GI-NYPN will be supported by:</p>
       <ul>
         <li><strong>Membership Fees:</strong> Small fees that will help sustain the operations and programs of the foundation.</li>
@@ -124,7 +124,7 @@ const allForums = [
       </ul>
       <p>All financial decisions will be made transparently, and regular financial reports will be shared with members.</p>
       <br>
-      <h3>9. Monitoring and Evaluation</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">9. Monitoring and Evaluation</h3>
       <p>The progress and success of GI-NYPN will be regularly assessed through:</p>
       <ul>
         <li>Annual surveys and feedback from members.</li>
@@ -143,15 +143,15 @@ const allForums = [
       <h2 style="font-size: 1.25rem; font-weight: 600;">GIFON WOMEN IN GEOINT FORUM</h2>
       <p><strong>(GI-NGW): POLICY DOCUMENT version1.0</strong></p>
       <br>
-      <h3>1. Introduction</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">1. Introduction</h3>
       <p>The Geospatial Intelligence Foundation of Nigeria Women in GeoINT (GI-NGW) is a forum dedicated to empowering women in the field of geospatial and Geospatial intelligence (GeoINT) by providing a platform for collaboration, professional development, mentorship, and advocacy.</p>
       <p>The foundation seeks to address the gender gap in the geospatial sector in Nigeria and promote the critical role of women in shaping the future of geospatial technologies, innovation, and applications in Nigeria and globally.</p>
       <p>The Geospatial Intelligence Foundation of Nigeria Women in GeoINT is committed to advancing the role of women in the geospatial intelligence sector through education, networking, advocacy, and mentorship. By working together, we can create a more inclusive, innovative, and sustainable geospatial ecosystem.</p>
       <br>
-      <h3>2. Vision</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">2. Vision</h3>
       <p>To create an inclusive and collaborative environment where women in geospatial intelligence thrive, drive technological innovation, and contribute meaningfully to national and global development through GeoINT.</p>
       <br>
-      <h3>3. Mission</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">3. Mission</h3>
       <p>The mission of the GI-NGW is to:</p>
       <ul>
         <li>Promote gender equity and inclusion within the geospatial intelligence sector.</li>
@@ -160,14 +160,14 @@ const allForums = [
         <li>Advocate for policies and initiatives that empower women in the field of geospatial intelligence in Nigeria.</li>
       </ul>
       <br>
-      <h3>4. Core Values of GI-NGW:</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">4. Core Values of GI-NGW:</h3>
       <p><strong>Empowerment:</strong> Fostering professional growth and personal development for women in GeoINT.</p>
       <p><strong>Collaboration:</strong> Encouraging cooperation and partnership among women in the geospatial sector.</p>
       <p><strong>Innovation:</strong> Supporting the use of cutting-edge technology and innovative solutions to address challenges in the GeoINT sector.</p>
       <p><strong>Integrity:</strong> Upholding ethical standards and promoting transparency in all activities.</p>
       <p><strong>Inclusivity:</strong> Creating a welcoming space for women of all backgrounds and experiences in the geospatial field.</p>
       <br>
-      <h3>5. Objectives</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">5. Objectives</h3>
       <p>The GI-NGW will focus on the following key objectives:</p>
       <ul>
         <li><strong>Professional Development:</strong> Organize training programs, workshops, seminars, and webinars to build technical, leadership, and soft skills.</li>
@@ -177,7 +177,7 @@ const allForums = [
         <li><strong>Public Awareness and Engagement:</strong> Raise awareness about the importance of women’s contributions to the geospatial intelligence field through media campaigns, publications, and public events.</li>
       </ul>
       <br>
-      <h3>6. Membership</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">6. Membership</h3>
       <p><strong>Eligibility:</strong> Membership is open to women who are actively working in or are passionate about geospatial intelligence (GeoINT) at any stage of their careers.</p>
       <p><strong>Types of Membership:</strong></p>
       <ul>
@@ -192,7 +192,7 @@ const allForums = [
         <li>Priority access to foundation-led conferences, workshops, and events.</li>
       </ul>
       <br>
-      <h3>7. Governance and Leadership</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">7. Governance and Leadership</h3>
       <p>The GI-NGW will be governed by the Board of Directors of GIFON, supported by the management team of GIFON. The governance structure is designed to ensure transparency, inclusivity, and accountability. The Board of Directors of GIFON will be responsible for overseeing the foundation's strategic direction, ensuring adherence to its mission, and approving key initiatives.</p>
       <ul>
         <li><strong>Team Leader:</strong> The Team Leader will provide overall leadership and direction for the (GI-NGW) Forum.</li>
@@ -200,7 +200,7 @@ const allForums = [
         <li><strong>Secretary:</strong> Responsible for all administrative duties, including communications and record-keeping.</li>
       </ul>
       <br>
-      <h3>8. Code of Conduct</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">8. Code of Conduct</h3>
       <p>All members of the GI-NGW are expected to adhere to the following code of conduct:</p>
       <ul>
         <li><strong>Professionalism:</strong> Maintain a high level of professionalism in all activities related to the foundation.</li>
@@ -208,7 +208,7 @@ const allForums = [
         <li><strong>Ethical Practice:</strong> Uphold ethical standards and integrity in the execution of all projects and engagements.</li>
       </ul>
       <br>
-      <h3>9. Activities and Programs</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">9. Activities and Programs</h3>
       <p>GI-NGW will host a range of activities and programs that align with the mission and objectives of GIFON. These include:</p>
       <ul>
         <li><strong>Annual GeoINT workshop:</strong> A flagship event that brings together women professionals, thought leaders, and academics to discuss trends, challenges, and innovations in GeoINT.</li>
@@ -218,7 +218,7 @@ const allForums = [
         <li><strong>Advocacy Campaigns:</strong> Public-facing campaigns that highlight the importance of women in the geospatial intelligence field and advocate for policies supporting their involvement.</li>
       </ul>
       <br>
-      <h3>10. Funding and Financials</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">10. Funding and Financials</h3>
       <p>The GI-NGW Forum will be funded through:</p>
       <ul>
         <li><strong>Membership Fees:</strong> Membership dues may be established to support the foundation’s programs and activities.</li>
@@ -227,10 +227,10 @@ const allForums = [
       </ul>
       <p>All financial transactions will be carried out transparently, with regular reports provided to members and the Director of Finance of the foundation.</p>
       <br>
-      <h3>11. Monitoring and Evaluation</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">11. Monitoring and Evaluation</h3>
       <p>The foundation will establish clear indicators to monitor the impact of its activities. Evaluation of programs will be conducted regularly to assess whether the objectives are being met, and to make adjustments as necessary to ensure the ongoing relevance and success of the foundation’s initiatives.</p>
       <br>
-      <h3>12. Amendments to the Policy</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">12. Amendments to the Policy</h3>
       <p>This policy document is a living document, and amendments may be made as the foundation grows and evolves. Proposed amendments will be reviewed by the Board of Directors and communicated to members for feedback.</p>
     `
   },
@@ -246,31 +246,31 @@ const allForums = [
       <p>The Geospatial Intelligence Foundation of Nigeria (GIFON) recognizes the critical role of the industry and private sector in driving innovation, investment, and sustainable applications of geospatial intelligence across national development and security priorities.</p>
       <p>The Industry and Private Sector Forum (IPSF) of GIFON serves as a strategic platform to:</p>
       <br>
-      <h3>1. Facilitate Collaboration</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">1. Facilitate Collaboration</h3>
       <ul>
         <li>Strengthen partnerships between GIFON, private enterprises, technology providers, and geospatial service companies.</li>
         <li>Create a shared space for dialogue, knowledge exchange, and co-creation of solutions to Nigeria’s geospatial challenges.</li>
       </ul>
       <br>
-      <h3>2. Promote Innovation and Competitiveness</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">2. Promote Innovation and Competitiveness</h3>
       <ul>
         <li>Encourage research, development, and adoption of emerging technologies (AI, satellite systems, drones, GIS, cyber-geo tools).</li>
         <li>Support Nigerian companies and startups in competing globally in the geospatial and intelligence ecosystem.</li>
       </ul>
       <br>
-      <h3>3. Advance Economic Growth</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">3. Advance Economic Growth</h3>
       <ul>
         <li>Leverage geospatial intelligence as a driver of national productivity across the 13 critical infrastructure sectors (energy, transport, communications, defence, agriculture, water, health, finance, manufacturing, education, etc.).</li>
         <li>Position Nigeria as a regional hub for geospatial innovation, investment, and capacity development.</li>
       </ul>
       <br>
-      <h3>4. Ensure Ethical and Responsible Practice</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">4. Ensure Ethical and Responsible Practice</h3>
       <ul>
         <li>Uphold standards of data protection, privacy, and responsible geospatial intelligence use.</li>
         <li>Promote transparency, accountability, and ethical business conduct in private sector engagements.</li>
       </ul>
       <br>
-      <h3>5. Contribute to National Security and Development</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">5. Contribute to National Security and Development</h3>
       <ul>
         <li>Mobilize private sector expertise and resources in support of Nigeria’s security architecture, resilience planning, disaster risk reduction, and smart infrastructure development.</li>
         <li>Strengthen national geospatial intelligence readiness in alignment with government policies and global best practices.</li>
@@ -290,21 +290,21 @@ const allForums = [
       <br>
       <p>The Policy, Governance & Ethics Working Group (PGE-WG) of the Geospatial Intelligence Foundation of Nigeria (GIFON) is the institutional mechanism established to uphold accountability, integrity, and transparency in all our operations. This working group provides thought leadership, oversight, and policy direction on how geospatial intelligence should be governed, regulated, and ethically applied for national development and security.</p>
       <br>
-      <h3>Core Mandate</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">Core Mandate</h3>
       <p><strong>a. Policy Development:</strong> Drafting, reviewing, and recommending national and institutional policies that guide the responsible use of geospatial data and intelligence.</p>
       <p><strong>b. Governance Frameworks:</strong> Designing effective governance structures to ensure alignment with national security objectives, international standards, and sustainable development goals.</p>
       <p><strong>c. Ethics Oversight:</strong> Promoting ethical practices, preventing misuse of geospatial intelligence, and ensuring compliance with privacy, human rights, and anti-corruption standards.</p>
       <p><strong>d. Regulatory Advisory:</strong> Advising government, industry, and civil society stakeholders on laws, regulations, and international conventions relevant to geospatial intelligence.</p>
       <p><strong>e. Capacity Building:</strong> Building awareness and capacity in policy, ethics, and governance among stakeholders, professionals, and decision-makers.</p>
       <br>
-      <h3>Focus Areas</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">Focus Areas</h3>
       <p><strong>a. Ethical Use of GEOINT:</strong> Safeguarding against abuse, bias, and misuse of sensitive geospatial information.</p>
       <p><strong>b. Data Privacy & Security:</strong> Ensuring that geospatial data handling respects confidentiality, rights, and national interests.</p>
       <p><strong>c. Anti-Corruption & Accountability:</strong> Embedding integrity in all GIFON’s operations and promoting zero-tolerance for misconduct.</p>
       <p><strong>d. Inclusive Governance:</strong> Encouraging the participation of women, youth, academia, and the private sector in shaping GEOINT policy.</p>
       <p><strong>· International Best Practice:</strong> Aligning Nigeria’s GEOINT ecosystem with global standards and conventions.</p>
       <br>
-      <h3>Membership & Composition</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">Membership & Composition</h3>
       <p>The PGE-WG comprises experts drawn from:</p>
       <ul>
         <li>a. Government policy institutions</li>
@@ -314,7 +314,7 @@ const allForums = [
         <li>e. Civil society and ethics specialists</li>
       </ul>
       <br>
-      <h3>Why It Matters</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">Why It Matters</h3>
       <p>Strong governance and ethical foundations are essential for the credibility and sustainability of geospatial intelligence in Nigeria. Through the PGE-WG, GIFON ensures that innovation is balanced with responsibility, security is balanced with human rights, and progress is anchored on integrity.</p>
     `
   },
@@ -327,11 +327,11 @@ const allForums = [
       <h2 style="font-size: 1.25rem; font-weight: 600;">GIFON Academia & Research Collaboration Programme (ARCP)</h2>
       <p><em>“Bridging Knowledge and Practice through Geospatial Intelligence.”</em></p>
       <br>
-      <h3>Overview</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">Overview</h3>
       <p>The Academia & Research Collaboration Programme (ARCP) is an initiative of the Geospatial Intelligence Foundation of Nigeria (GIFON) to foster strong partnerships between universities, research institutions, and GIFON in advancing geospatial intelligence (GEOINT) education, research, and innovation.</p>
       <p>The programme seeks to position Nigeria’s higher institutions and research centers as key knowledge partners in developing local solutions to national and regional security, resilience, and development challenges.</p>
       <br>
-      <h3>Programme Objectives</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">Programme Objectives</h3>
       <ol>
         <li><strong>Strengthen Education:</strong> Integrate GEOINT into academic curricula at undergraduate and postgraduate levels.</li>
         <li><strong>Promote Collaborative Research:</strong> Encourage joint projects on national security, disaster management, climate resilience, and smart development.</li>
@@ -340,7 +340,7 @@ const allForums = [
         <li><strong>Support Policy Impact:</strong> Translate academic research into actionable insights for government and industry.</li>
       </ol>
       <br>
-      <h3>Programme Structure</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">Programme Structure</h3>
       <h4>1. Curriculum Integration & Training</h4>
       <ul>
         <li>Partner with universities to embed Geospatial Intelligence Studies into geography, computer science, engineering, and Defense studies curricula.</li>
@@ -379,7 +379,7 @@ const allForums = [
         <li>Support commercialization of university-based geospatial innovations.</li>
       </ul>
       <br>
-      <h3>Target Beneficiaries</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">Target Beneficiaries</h3>
       <ul>
         <li>Universities and higher institutions.</li>
         <li>Research institutes and think tanks.</li>
@@ -388,7 +388,7 @@ const allForums = [
         <li>Policy institutions seeking evidence-based insights.</li>
       </ul>
       <br>
-      <h3>Expected Outcomes</h3>
+      <h3 style="font-size: 1.25rem; font-weight: 600;">Expected Outcomes</h3>
       <ul>
         <li>Institutionalized Geospatial Intelligence Education in Nigerian universities.</li>
         <li>Increased research output in GEOINT aligned with national needs.</li>

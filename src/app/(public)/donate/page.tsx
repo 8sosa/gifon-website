@@ -1,4 +1,5 @@
 import HeroSection from '@/components/HeroSection';
+import Link from 'next/link';
 
 export default function DonatePage() {
   return (
@@ -26,146 +27,6 @@ export default function DonatePage() {
             </p>
           </div>
         </section>
-
-        {/* <section id="opportunities" className="py-16 px-4 bg-white">
-          <div className="max-w-5xl mx-auto flex flex-col items-center">
-              <h2 className="text-3xl font-semibold mb-4 text-center">Become a Member</h2>
-              <div className="min-w-full">
-                  <p className="text-gray-700 leading-relaxed">
-                    Join our growing community of geospatial experts, researchers, innovators, and advocates.
-                  </p>
-                  <ul className="list-disc list-inside mb-6">
-                      <li>
-                        Access exclusive knowledge resources.
-                      </li>
-                      <li>
-                        Network with leaders in government, academia, and industry.
-                      </li>
-                      <li>
-                        Participate in specialized working groups and policy forums.
-                      </li>
-                  </ul>
-              </div>
-              <a
-              href="/register"
-              className="bg-green-600 text-white px-8 py-3 rounded font-semibold hover:bg-green-700 transition"
-              >
-                Learn More & Apply
-              </a>
-          </div>
-        </section> 
-
-        <section id="opportunities" className="py-16 px-4 bg-white">
-          <div className="max-w-5xl mx-auto flex flex-col items-center">
-              <h2 className="text-3xl font-semibold mb-4 text-center">Volunteer With Us</h2>
-              <div className="min-w-full">
-                  <p className="text-gray-700 leading-relaxed">
-                      Contribute your time and expertise to advance geospatial awareness, training, and community projects.
-                  </p>
-                  <ul className="list-disc list-inside mb-6">
-                      <li>
-                          Support local mapping initiatives.
-                      </li>
-                      <li>
-                          Mentor students and young professionals.
-                      </li>
-                      <li>
-                          Assist with events, workshops, and research.
-                      </li>
-                  </ul>
-              </div>
-              <a
-              href="/register"
-              className="bg-green-600 text-white px-8 py-3 rounded font-semibold hover:bg-green-700 transition"
-              >
-                  Sign Up to Volunteer
-              </a>
-          </div>
-        </section> 
-
-        <section id="opportunities" className="py-16 px-4 bg-gray-50">
-          <div className="max-w-5xl mx-auto flex flex-col items-center">
-              <h2 className="text-3xl font-semibold mb-4 text-center">Scholarships & Fellowships</h2>
-              <div className="min-w-full">
-                  <p className="text-gray-700 leading-relaxed">
-                    GIFON invests in the next generation of geospatial leaders.
-                  </p>
-                  <ul className="list-disc list-inside mb-6">
-                      <li>
-                        Apply for research grants and study opportunities.
-                      </li>
-                      <li>
-                        Join fellowship programs for professional growth.
-                      </li>
-                      <li>
-                        Gain mentorship from global experts.
-                      </li>
-                  </ul>
-              </div>
-              <a
-              href="/register"
-              className="bg-green-600 text-white px-8 py-3 rounded font-semibold hover:bg-green-700 transition"
-              >
-                Explore Opportunities
-              </a>
-          </div>
-        </section> 
-
-        <section id="opportunities" className="py-16 px-4 bg-white">
-          <div className="max-w-5xl mx-auto flex flex-col items-center">
-              <h2 className="text-3xl font-semibold mb-4 text-center">Partner With Us</h2>
-              <div className="min-w-full">
-                  <p className="text-gray-700 leading-relaxed">
-                    We welcome collaborations with organizations across sectors.
-                  </p>
-                  <ul className="list-disc list-inside mb-6">
-                      <li>
-                        Joint research and innovation projects.
-                      </li>
-                      <li>
-                        Public-private partnerships for national development.
-                      </li>
-                      <li>
-                        Sponsorship and donor opportunities.
-                      </li>
-                  </ul>
-              </div>
-              <a
-              href="/register"
-              className="bg-green-600 text-white px-8 py-3 rounded font-semibold hover:bg-green-700 transition"
-              >
-                Partner With GIFON
-              </a>
-          </div>
-        </section> 
-
-        <section id="opportunities" className="py-16 px-4 bg-gray-50">
-          <div className="max-w-5xl mx-auto flex flex-col items-center">
-              <h2 className="text-3xl font-semibold mb-4 text-center">Careers & Internships</h2>
-              <div className="min-w-full">
-                  <p className="text-gray-700 leading-relaxed">
-                    Grow your career with an organization at the forefront of geospatial intelligence in Africa.
-                  </p>
-                  <ul className="list-disc list-inside mb-6">
-                      <li>
-                        Internship placements for students and graduates.
-                      </li>
-                      <li>
-                        Professional roles across technical, research, and policy areas.
-                      </li>
-                      <li>
-                        Equal opportunities for all applicants.
-                      </li>
-                  </ul>
-              </div>
-              <a
-              href="/register"
-              className="bg-green-600 text-white px-8 py-3 rounded font-semibold hover:bg-green-700 transition"
-              >
-                View Openings
-              </a>
-          </div>
-        </section>  */}
         
         <section id="opportunities" className="py-16 px-4 bg-white">
           <div className="max-w-5xl mx-auto flex flex-col items-center">
@@ -192,6 +53,24 @@ export default function DonatePage() {
               >
                 Donate to GIFON
               </a>
+          </div>
+        </section>
+
+        <section id="opportunities" className="py-16 px-4 bg-white">
+          <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+              <h2 className="text-3xl font-semibold mb-4">Volunteer Opportunities</h2>
+              <p className="text-gray-700 leading-relaxed text-justify max-w-3xl mb-4">
+                GIFON thrives on the commitment and passion of volunteers who dedicate their time and skills to advancing geospatial intelligence for national development. As a volunteer, you can contribute to research, event organization, community mapping initiatives, training delivery, and advocacy campaigns.
+              </p>
+              <p className="text-gray-700 leading-relaxed text-justify max-w-3xl mb-8">
+                Volunteering with GIFON not only strengthens your professional profile but also allows you to make a tangible difference in Nigeria’s progress towards a resilient, secure, and data-driven society.
+              </p>
+              <Link
+                href="/contact-us" // Links to the contact page to inquire
+                className="bg-green-600 text-white px-8 py-3 rounded font-semibold hover:bg-green-700 transition"
+              >
+                Volunteer Now
+              </Link>
           </div>
         </section>
       </main>

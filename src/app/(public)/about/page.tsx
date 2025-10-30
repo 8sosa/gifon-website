@@ -20,6 +20,7 @@ import {
 } from 'react-icons/fa6';
 // import { fadeUp } from './animations';
 import { Globe, Shield, Users, Rocket, Sparkles} from 'lucide-react';
+import { FaMapMarkerAlt } from 'react-icons/fa';
 
 const partners: Logo[] = [
   { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
@@ -330,206 +331,164 @@ export default async function AboutPage() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-20 px-4 bg-gray-50 fullSect">
-        <MotionDiv
-          initial="hidden"
-          whileInView="show"
-          variants={fadeUp}
-          className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg"
-        >
-          <h2 className="text-3xl font-semibold mb-4 text-center">Contact Us</h2>
-          <p className="text-gray-700 leading-relaxed text-center">
-            For inquiries, please reach out to us.
-          </p>
-          <p className='text-gray-700 leading-relaxed pb-8 text-center'>info@gifon.org.ng</p>
 
-          {/* Responsive Grid: 1 col on mobile, 2 cols on desktop */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            
-            {/* --- Column 1: Contact Details --- */}
-            <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-green-700 border-b border-gray-200 pb-2">
-                Our Departments
-              </h3>
-              
-              {/* Secretariat */}
-              <div>
-                <p className="text-lg font-semibold text-gray-800">Secretariat</p>
-                <div className="mt-2 space-y-2">
-                  <a 
-                    href="tel:+2347077211243" 
-                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
-                  >
-                    <FaPhone size={14} className="text-gray-400" />
-                    <span>+234 707 721 1243</span>
-                  </a>
-                  <a 
-                    href="mailto:Secretariat@gifon.org.ng" 
-                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
-                  >
-                    <FaEnvelope size={14} className="text-gray-400" />
-                    <span>Secretariat@gifon.org.ng</span>
-                  </a>
-                </div>
-              </div>
+<section id="contact" className="py-20 px-4 bg-gray-50 fullSect">
+  <MotionDiv
+    initial="hidden"
+    whileInView="show"
+    variants={fadeUp}
+    className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg"
+  >
+    <h2 className="text-3xl font-semibold mb-4 text-center">Contact Us</h2>
+    <p className="text-gray-700 leading-relaxed text-center">
+      For general inquiries, please reach out to us.
+    </p>
+    {/* General Inquiries Email */}
+    <p className='text-gray-700 leading-relaxed pb-8 text-center font-medium'>
+      info@gifon.org.ng
+    </p>
 
-              {/* Outreach */}
-              <div>
-                <p className="text-lg font-semibold text-gray-800">Outreach</p>
-                <div className="mt-2 space-y-2">
-                  <a 
-                    href="tel:+2347077269829" 
-                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
-                  >
-                    <FaPhone size={14} className="text-gray-400" />
-                    <span>+234 707 726 9829</span>
-                  </a>
-                  <a 
-                    href="mailto:Outreach@gifon.org.ng" 
-                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
-                  >
-                    <FaEnvelope size={14} className="text-gray-400" />
-                    <span>Outreach@gifon.org.ng</span>
-                  </a>
-                </div>
-              </div>
+    {/* Responsive Grid: 1 col on mobile, 2 cols on desktop */}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+      
+      {/* --- Column 1: Contact Details --- */}
+      <div className="space-y-6">
 
-              {/* Research */}
-              <div>
-                <p className="text-lg font-semibold text-gray-800">Research</p>
-                <div className="mt-2 space-y-2">
-                  <a 
-                    href="tel:+2347077396196" 
-                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
-                  >
-                    <FaPhone size={14} className="text-gray-400" />
-                    <span>+234 707 739 6196</span>
-                  </a>
-                  <a 
-                    href="mailto:Research@gifon.org.ng" 
-                    className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
-                  >
-                    <FaEnvelope size={14} className="text-gray-400" />
-                    <span>Research@gifon.org.ng</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* --- Column 2: Social Media --- */}
-            <div className="md:pl-12 md:border-l md:border-gray-200">
-              <h3 className="text-xl font-semibold text-green-700 border-b border-gray-200 pb-2">
-                Follow Us
-              </h3>
-              <ul className="space-y-2 mt-6">
-                {socialLinks.map((link) => (
-                  <li key={link.name}>
-                    <a
-                      href={link.href}
-                      // UPDATED: Removed hover:text-green-600 and added dynamic hoverColorClass
-                      className={`flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 text-gray-700 ${link.hoverColorClass} transition-all`}
-                    >
-                      {/* UPDATED: Replaced text-green-600 with dynamic colorClass */}
-                      <span className={`${link.colorClass} transition-colors`}>{link.icon}</span>
-                      <span className="font-medium">{link.name}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-          </div>
-        </MotionDiv>
-      </section>
-
-      {/* Leadership & History */}
-      {/* <section className="p-16 mb-16">
-        <div className="inline-block mb-6 text-left">
-          <h2 className="text-green-600 text-2xl font-semibold">
-            What We Do
-          </h2>
-          <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
-        </div>
-      </section> */}
-
-      {/* Grid of Offerings */}
-      {/* <section className="p-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
-        {[
-          { title: "Education & Training", desc: "Relevant peer-to-peer interactions, opportunities to advance the profession, newsletters, and career resources.", link: "#" },
-          { title:A "Membership", desc: "Publications, fact sheets, podcasts, conference proceedings, peer-reviewed URISA Journal articles, Salary Surveys, and white papers.", link: "#" },
-          { title: "Resources", desc: "Countless tools to support your GIS career.", link: "#" },
-          { title: "Contributions", desc: "Mentorship, committees, advocacy — lend your voice to the profession.", link: "#" },
-          { title: "Local Chapters", desc: "Discover a local network and get involved. Joining GIFON means joining your chapter.", link: "#" },
-          { title: "Next Generation", desc: "Opportunities to contribute and shine. The Vanguard Cabinet is an amazing career stepping stone.", link: "#" },
-          { title: "Recognition", desc: "From the GIS Hall of Fame to Exemplary Systems Awards, we celebrate Excellence in GIS.", link: "#" },
-          { title: "GISCorps", desc: "Volunteers provide GIS expertise worldwide for underdeveloped countries and disaster recovery.", link: "#" },
-          ].map((item, idx) => (
-          <div
-            key={idx}
-            className="p-6 rounded-lg shadow-sm hover:shadow-md transition items-center flex flex-col gap-1"
-          >
-            <h3 className="text-xl font-semibold text-sky-700 mb-2">
-              {item.title}
-            </h3>
-            <Image
-              src="/space.jpg" // replace with your file
-              alt="GIS Corps GIFON"
-              width={300}
-              height={100}
-            />
-            <p className="text-gray-600 mb-4">{item.desc}</p>
-            <a
-              href={item.link}
-              target="_blank"
-              className="text-sky-600 font-semibold hover:underline"
+        {/* --- Address --- */}
+        <div>
+          <h3 className="text-xl font-semibold text-green-700 border-b border-gray-200 pb-2">
+            Our Address
+          </h3>
+          <div className="mt-2 space-y-2">
+            <a 
+              href="https://maps.google.com/?q=12+Richard+Clapperton+Street,+Asokoro,+Abuja" // Google Maps link
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-start gap-3 text-gray-600 hover:text-green-600 transition-colors"
             >
-              Learn More
+              <FaMapMarkerAlt size={14} className="text-gray-400 mt-1 flex-shrink-0" />
+              <span>
+                12 Richard Clapperton Street, <br />
+                Off Maman Nasir Road, <br />
+                Asokoro District, FCT, Abuja, Nigeria
+              </span>
             </a>
           </div>
-        ))}
-      </section> */}
-
-      {/* <section className="p-16 mb-16 mt-16">
-        <div className="inline-block mb-6 text-left">
-          <h2 className="text-green-600 text-2xl font-semibold">
-            Impact
-          </h2>
-          <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
         </div>
-      </section> */}
 
-      {/* Grid of Offerings */}
-      {/* <section className="p-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-center items-center">
-        {[
-          { title: "Professional Certification", desc: "Helping GISPs achieve their professional goals with GISCI.", link: "#" },
-          { title: "Geospatial Collaboration", desc: "URISA co-founded the Coalition of Geospatial Organizations, focusing on U.S. national geospatial issues.", link: "#" },
-        ].map((item, idx) => (
-          <div
-            key={idx}
-            className="p-6 rounded-lg shadow-sm hover:shadow-md transition items-center flex flex-col gap-1"
-          >
-            <h3 className="text-xl font-semibold text-sky-700 mb-2">
-              {item.title}
-            </h3>
-            <Image
-              src="/space.jpg" // replace with your file
-              alt="GIS Corps GIFON"
-              width={300}
-              height={100}
-            />
-            <p className="text-gray-600 mb-4">{item.desc}</p>
-            <a
-              href={item.link}
-              target="_blank"
-              className="text-sky-600 font-semibold hover:underline"
+        {/* --- Departments --- */}
+        <h3 className="text-xl font-semibold text-green-700 border-b border-gray-200 pb-2">
+          Our Departments
+        </h3>
+        
+        {/* Secretariat */}
+        <div>
+          <p className="text-lg font-semibold text-gray-800">Secretariat</p>
+          <div className="mt-2 space-y-2">
+            <a 
+              href="tel:+2347077211243" 
+              className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
             >
-              Learn More
+              <FaPhone size={14} className="text-gray-400" />
+              <span>+234 707 721 1243</span>
+            </a>
+            <a 
+              href="mailto:secretariat@gifon.org.ng" 
+              className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+            >
+              <FaEnvelope size={14} className="text-gray-400" />
+              <span>secretariat@gifon.org.ng</span>
             </a>
           </div>
-        ))}
-      </section> */}
+        </div>
 
-      {/* CTA */}
+        {/* Outreach */}
+        <div>
+          <p className="text-lg font-semibold text-gray-800">Outreach</p>
+          <div className="mt-2 space-y-2">
+            <a 
+              href="tel:+2347077269829" 
+              className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+            >
+              <FaPhone size={14} className="text-gray-400" />
+              <span>+234 707 726 9829</span>
+            </a>
+            <a 
+              href="mailto:outreach@gifon.org.ng" 
+              className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+            >
+              <FaEnvelope size={14} className="text-gray-400" />
+              <span>outreach@gifon.org.ng</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Education & Membership (NEW) */}
+        <div>
+          <p className="text-lg font-semibold text-gray-800">Education & Membership</p>
+          <div className="mt-2 space-y-2">
+            <a 
+              href="tel:+2347077211243" 
+              className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+            >
+              <FaPhone size={14} className="text-gray-400" />
+              <span>+234 707 721 1243</span>
+            </a>
+            <a 
+              href="mailto:membership@gifon.org.ng" 
+              className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+            >
+              <FaEnvelope size={14} className="text-gray-400" />
+              <span>membership@gifon.org.ng</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Research */}
+        <div>
+          <p className="text-lg font-semibold text-gray-800">Research</p>
+          <div className="mt-2 space-y-2">
+            <a 
+              href="tel:+2347077396196" 
+              className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+            >
+              <FaPhone size={14} className="text-gray-400" />
+              <span>+234 707 739 6196</span>
+            </a>
+            <a 
+              href="mailto:research@gifon.org.ng" 
+              className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+            >
+              <FaEnvelope size={14} className="text-gray-400" />
+              <span>research@gifon.org.ng</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* --- Column 2: Social Media (Unchanged) --- */}
+      <div className="md:pl-12 md:border-l md:border-gray-200">
+        <h3 className="text-xl font-semibold text-green-700 border-b border-gray-200 pb-2">
+          Follow Us
+        </h3>
+        <ul className="space-y-2 mt-6">
+          {socialLinks.map((link) => (
+            <li key={link.name}>
+              <a
+                href={link.href}
+                className={`flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 text-gray-700 ${link.hoverColorClass} transition-all`}
+              >
+                <span className={`${link.colorClass} transition-colors`}>{link.icon}</span>
+                <span className="font-medium">{link.name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </MotionDiv>
+</section>
     </main>
     </>
   );

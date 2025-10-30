@@ -165,7 +165,7 @@ const menuItems: MenuItem[] = [
     label: 'Groups & Forums',
     href: '/forums',
     children: [
-      { label: 'Young Professions Forum', anchor: 'ethics' },
+      { label: 'Young Professionals Forum', anchor: 'ethics' },
       { label: 'Women in GEOINT Forum', anchor: 'anti-corruption' },
       { label: 'Industry & Private Sector Forum', anchor: 'fund-raising' },
       { label: 'Policy Briefs & white Paper ', anchor: 'slavery' },
@@ -186,6 +186,9 @@ const menuItems: MenuItem[] = [
   {
     label: 'Get Involved',
     href: '/donate',
+    children: [
+      { label: `Volunteer opportunities`, anchor: `opportunities`}
+    ]
   },
 ];
 

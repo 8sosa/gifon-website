@@ -116,28 +116,46 @@ export default function Footer() {
           <div className={styles.col}>
             <h4>Contact Us</h4>
             <ul className='w-max font-thin'>
-              <li>12 RICHARD CLAPPERTON, OFF MAMAN NASIR</li>
-              <li>ASOKORO DISTRICT, FCT, ABUJA NIGERIA.</li>
-              <li className='leading-relaxed'>info@gifon.org.ng</li>
-              <li className='flex flex-row w-full justify-between pb-4'>
+              {/* Updated Address */}
+              <li>12 Richard Clapperton Street, Off Maman Nasir Road</li>
+              <li>Asokoro District, FCT, Abuja, Nigeria</li>
+              
+              {/* General Inquiries Email */}
+              <li className='leading-relaxed pt-2'>info@gifon.org.ng</li>
+              
+              {/* Updated Secretariat */}
+              <li className='flex flex-row w-full justify-between pt-4 pb-4'>
                 <p>Secretariat:</p>
                 <div className='flex flex-col'>
                   <p className='pl-4'>+234 707 721 1243</p>
-                  <p className='pl-4'>Secretariat@gifon.org.ng</p>
+                  <p className='pl-4'>secretariat@gifon.org.ng</p>
                 </div>
               </li>
+              
+              {/* Updated Outreach */}
               <li className='flex flex-row w-full justify-between pb-4'>
                 <p>Outreach:</p>
                 <div className='flex flex-col'>
                   <p className='pl-4'>+234 707 726 9829</p>
-                  <p className='pl-4'>Outreach@gifon.org.ng</p>
+                  <p className='pl-4'>outreach@gifon.org.ng</p>
                 </div>
               </li>
+
+              {/* NEW Education & Membership */}
+              <li className='flex flex-row w-full justify-between pb-4'>
+                <p>Education & Membership:</p>
+                <div className='flex flex-col'>
+                  <p className='pl-4'>+234 707 721 1243</p>
+                  <p className='pl-4'>membership@gifon.org.ng</p>
+                </div>
+              </li>
+
+              {/* Updated Research */}
               <li className='flex flex-row w-full justify-between pb-4'>
                 <p>Research:</p>
                 <div className='flex flex-col'>
                   <p className='pl-4'>+234 707 739 6196</p>
-                  <p className='pl-4'>Research@gifon.org.ng</p>
+                  <p className='pl-4'>research@gifon.org.ng</p>
                 </div>
               </li>
             </ul>

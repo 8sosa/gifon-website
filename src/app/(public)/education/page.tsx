@@ -110,7 +110,7 @@ export default function DonatePage() {
               {/* Short underline */}
               <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
             </div>
-            <p className="text-gray-700 leading-relaxed">Every experience, whether it&apos;s a conference, a project, or even a conversation, presents a chance to broaden your knowledge base and stay relevant. By embracing these opportunities, you can enhance your career readiness and become a proactive contributor to your organization and the GIS profession overall.</p>
+            {/* <p className="text-gray-700 leading-relaxed">Every experience, whether it&apos;s a conference, a project, or even a conversation, presents a chance to broaden your knowledge base and stay relevant. By embracing these opportunities, you can enhance your career readiness and become a proactive contributor to your organization and the GIS profession overall.</p> */}
             
             {/* --- Dynamic Programmes List --- */}
             <div className="flex flex-col gap-8 text-gray-700 mt-8"> {/* Added mt-8 for spacing */}
