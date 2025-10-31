@@ -91,7 +91,13 @@ export default function DonatePage() {
             {/* --- Descriptive Text --- */}
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                Certainly, it takes more effort to gain necessary approvals and arrange to be away from your family and work in order to attend an in-person conference or training event. But that effort typically pays off with insights to improve not only your own performance but also that of your organization. Between educational sessions, exhibitor solutions, and hallway discussions, you are certain to identify better, faster and cheaper ways to get the work done. Getting a variety of viewpoints can help you see where we can change or improve our own ideas and processes.
+                The Geospatial Intelligence Foundation of Nigeria (GIFON) provides modular, competency-based training designed to build technical and analytical GEOINT capacity across sectors. Courses range from beginner to advanced levels in remote sensing, GIS, data analytics, and policy.
+              </p>
+              <p>
+                GIFON’s training serves students, early-career professionals, and government and private sector practitioners. Each module integrates core components such as GIS foundations, Earth Observation (EO) for security and environment, and GEOINT for decision support. 
+              </p>
+              <p>
+                  Assessments are project-based, producing capstone deliverables, badges, and certificates
               </p>
             </div>
           </div>

@@ -4,8 +4,19 @@ import { getUpcomingEvents } from "@/lib/contentful-queries";
 import HeroSection from "@/components/HeroSection";
 import { FlatEvent } from "@/types/types";
 import type { Document } from "@contentful/rich-text-types";
-// --- Import new icons for the Outreach section ---
-import { FaUsers, FaFemale, FaBriefcase, FaArrowRight } from "react-icons/fa";
+// --- Import ALL icons for the Outreach section ---
+import { 
+  FaUsers, 
+  FaFemale, 
+  FaBriefcase, 
+  FaArrowRight,
+  FaLaptopCode, 
+  FaRocket, 
+  FaMapMarkedAlt, 
+  FaNetworkWired, 
+  FaComments,
+  FaChalkboardTeacher
+} from "react-icons/fa";
 
 type RichTextNode = {
   nodeType: "text" | string;
@@ -13,24 +24,20 @@ type RichTextNode = {
   content?: RichTextNode[];
 };
 
+// ... (richTextToPlainText function remains the same) ...
 function richTextToPlainText(doc?: string | Document | null): string {
   if (!doc) return "";
   if (typeof doc === "string") return doc;
-
   const collect = (node: RichTextNode | null | undefined): string => {
     if (!node) return "";
-    if (node.nodeType === "text") {
-      return node.value ?? "";
-    }
-    if (Array.isArray(node.content)) {
-      return node.content.map(collect).join("");
-    }
+    if (node.nodeType === "text") return node.value ?? "";
+    if (Array.isArray(node.content)) return node.content.map(collect).join("");
     return "";
   };
-
   return collect(doc).trim();
 }
 
+// ... (formatDate function remains the same) ...
 function formatDate(dateString?: string) {
   if (!dateString) return "";
   try {
@@ -44,13 +51,13 @@ function formatDate(dateString?: string) {
   }
 }
 
+// ... (excerptFromDescription function remains the same) ...
 function excerptFromDescription(desc?: string | Document, length = 140) {
   if (!desc) return "";
   if (typeof desc === "string") {
     const stripped = desc.replace(/<\/?[^>]+(>|$)/g, "");
     return stripped.length > length ? stripped.slice(0, length).trim() + "…" : stripped;
   }
-  // Fallback for rich text Document
   const plain = richTextToPlainText(desc);
   return plain.length > length ? plain.slice(0, length).trim() + "…" : plain;
 }
@@ -84,38 +91,78 @@ export default async function EventsPage() {
     .filter((e) => e._startTs < nowTs)
     .sort((a, b) => b._startTs - a._startTs);
 
-  // --- Data for the new Outreach Section ---
-  const outreachPrograms = [
+  // --- UPDATED: Data for the grouped Outreach Section ---
+  const outreachGroups = [
     {
-      label: 'Youth-Focused Programmes',
-      anchor: 'youth-focused-programmes',
-      icon: <FaUsers size={24} />,
-      description: "Engaging the next generation of GEOINT leaders through hands-on training and challenges.",
-      children: [
-        { label: 'Boot Camps', anchor: 'boot-camps' },
-        { label: 'STEM & GEOINT Awareness', anchor: 'stem-geoint-awareness' },
-        { label: 'GeoInnovation Challenge / Hackathons', anchor: 'geoinnovation-challenge' }
+      groupTitle: 'Youth-Focused Programmes',
+      groupIcon: <FaUsers size={28} />,
+      groupAnchor: 'youth-focused-programmes',
+      groupDescription: "Engaging the next generation of GEOINT leaders through hands-on training and challenges.",
+      programs: [
+        {
+          title: 'Boot Camps',
+          icon: <FaLaptopCode size={24} className="text-green-600" />,
+          anchor: 'boot-camps',
+          description: 'Intensive upskilling sprints to fast-track job readiness for graduates and early professionals.'
+        },
+        {
+          title: 'STEM & GEOINT Awareness',
+          icon: <FaRocket size={24} className="text-green-600" />,
+          anchor: 'stem-geoint-awareness',
+          description: 'Integrating geospatial literacy into school and tertiary STEM education via outreach and student clubs.'
+        },
+        {
+          title: 'GeoInnovation Challenge / Hackathons',
+          icon: <FaUsers size={24} className="text-green-600" />,
+          anchor: 'geoinnovation-challenge',
+          description: 'Crowdsourcing practical geo-solutions for national issues, engaging developers, analysts, and startups.'
+        },
       ]
     },
     {
-      label: 'Women-in-GEOINT Initiatives',
-      anchor: 'women-in-geoint-initiatives',
-      icon: <FaFemale size={24} />,
-      description: "Empowering and elevating the voices and careers of women in the geospatial field.",
-      children: [
-        { label: 'Women in Geospatial Leadership', anchor: 'women-geospatial-leadership' },
-        { label: 'Community Service Projects', anchor: 'community-service-projects' }
+      groupTitle: 'Women-in-GEOINT Initiatives',
+      groupIcon: <FaFemale size={28} />,
+      groupAnchor: 'women-in-geoint-initiatives',
+      groupDescription: "Empowering and elevating the voices and careers of women in the geospatial field.",
+      programs: [
+        {
+          title: 'Women in Geospatial Leadership',
+          icon: <FaFemale size={24} className="text-green-600" />,
+          anchor: 'women-geospatial-leadership',
+          description: 'Advancing gender inclusion through capacity building, mentorship, and leadership development.'
+        },
+        {
+          title: 'Community Service Projects',
+          icon: <FaMapMarkedAlt size={24} className="text-green-600" />,
+          anchor: 'community-service-projects',
+          description: 'Using geospatial intelligence to address community challenges, such as Clean City Mapping Drives.'
+        },
       ]
     },
     {
-      label: 'Professional & Institutional Engagement',
-      anchor: 'professional-institutional-engagement',
-      icon: <FaBriefcase size={24} />,
-      description: "Building a connected and collaborative professional ecosystem for all members.",
-      children: [
-        { label: 'GeoCommunity Development', anchor: 'geocommunity-development' },
-        { label: 'GeoConnect Networking Events', anchor: 'geoconnect-networking' },
-        { label: 'Public Lectures & Policy Roundtables', anchor: 'public-lectures-roundtables' }
+      groupTitle: 'Professional & Institutional Engagement',
+      groupIcon: <FaBriefcase size={28} />,
+      groupAnchor: 'professional-institutional-engagement',
+      groupDescription: "Building a connected and collaborative professional ecosystem for all members.",
+      programs: [
+        {
+          title: 'GeoCommunity Development',
+          icon: <FaNetworkWired size={24} className="text-green-600" />,
+          anchor: 'geocommunity-development',
+          description: 'Building strong local and regional networks for collaboration via quarterly meetups and peer mentoring.'
+        },
+        {
+          title: 'GeoConnect Networking Events',
+          icon: <FaComments size={24} className="text-green-600" />,
+          anchor: 'geoconnect-networking',
+          description: 'Curated networking sessions and mixers to foster dialogue between government, academia, and industry.'
+        },
+        {
+          title: 'Public Lectures & Policy Roundtables',
+          icon: <FaChalkboardTeacher size={24} className="text-green-600" />,
+          anchor: 'public-lectures-roundtables',
+          description: 'A neutral platform for experts and policymakers to discuss security, infrastructure, and GEOINT applications.'
+        },
       ]
     }
   ];
@@ -138,17 +185,17 @@ export default async function EventsPage() {
       <main className="w-full">
         {/* Highlights */}
         <section id="highlights" className="py-16 px-4 bg-white">
-          <div className="max-w-6xl mx-auto">
+          {/* ... (Highlights section remains the same) ... */}
+           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-semibold mb-6 text-center">Events & Highlights</h2>
             <p className="text-gray-700 leading-relaxed text-justify">
               The Geospatial Intelligence Foundation of Nigeria (GIFON) actively convenes and participates in events that drive dialogue, innovation, and collaboration in the field of geospatial intelligence and national development.
             </p>
-            <p className="text-gray-700 leading-relaxed text-justify">Our Events & Highlights section provides a showcase of key milestones and activities, capturing how GIFON is shaping policy, research, and practice across Nigeria and beyond.</p>
-            {/* ... rest of your highlights text ... */}
+            <p className="text-gray-700 leading-relaxed text-justify pt-2">Our Events & Highlights section provides a showcase of key milestones and activities, capturing how GIFON is shaping policy, research, and practice across Nigeria and beyond.</p>
             <p className="text-gray-700 leading-relaxed text-justify pt-4">
               Here, visitors can explore:
             </p>
-            <ol className="text-gray-700 leading-relaxed text-justify p-4 list-disc">
+            <ol className="text-gray-700 leading-relaxed text-justify p-4 list-disc list-inside space-y-1">
               <li>
                 Major Conferences & Summits – high-level platforms where national and international stakeholders engage on geospatial intelligence and critical infrastructure.
               </li>
@@ -173,9 +220,9 @@ export default async function EventsPage() {
 
         {/* Upcoming Events */}
         <section id="upcoming" className="py-16 px-4 bg-gray-50">
+          {/* ... (Upcoming Events section remains the same) ... */}
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-semibold mb-6 text-center">Upcoming Events</h2>
-
             {upcoming.length === 0 ? (
               <div className="text-center text-gray-600">
                 <p className="mb-4">There are no upcoming events right now.</p>
@@ -219,9 +266,9 @@ export default async function EventsPage() {
 
         {/* Past Events */}
         <section id="past" className="py-16 px-4 bg-white">
+          {/* ... (Past Events section remains the same) ... */}
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-semibold mb-6 text-center">Past Events</h2>
-
             {past.length === 0 ? (
               <div className="text-center text-gray-600">
                 <p>No past events available yet.</p>
@@ -250,7 +297,7 @@ export default async function EventsPage() {
                         {excerptFromDescription(ev.description)}
                       </p>
                       <div className="mt-4">
-                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-green-200 text-gray-700 font-semibold border border-gray-200">
+                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-green-100 text-gray-700 font-semibold border border-gray-200">
                           View Details
                         </span>
                       </div>
@@ -262,52 +309,65 @@ export default async function EventsPage() {
           </div>
         </section>
 
-        {/* === NEW OUTREACH SECTION === */}
+        {/* === UPDATED OUTREACH SECTION (3 Groups with 8 Cards) === */}
         <section id="outreach" className="py-16 px-4 bg-green-50">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-semibold mb-12 text-center">
               Our Outreach Programmes
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {outreachPrograms.map((program) => (
-                <div 
-                  key={program.anchor} 
-                  id={program.anchor} // Main anchor for the card
-                  className="bg-white p-6 rounded-lg shadow-lg flex flex-col"
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-green-600">{program.icon}</span>
-                    <h3 className="text-xl font-semibold text-gray-800">
-                      {program.label}
+            {/* Main container for the 3 groups */}
+            <div className="space-y-16">
+              
+              {outreachGroups.map((group) => (
+                <div key={group.groupAnchor} id={group.groupAnchor}>
+                  {/* Group Header */}
+                  <div className="flex flex-col items-center text-center mb-8">
+                    <span className="text-green-600">{group.groupIcon}</span>
+                    <h3 className="text-2xl font-semibold text-gray-800 mt-2">
+                      {group.groupTitle}
                     </h3>
+                    <p className="text-gray-600 mt-2 max-w-2xl">
+                      {group.groupDescription}
+                    </p>
                   </div>
-                  <p className="text-gray-600 mb-6 flex-grow">
-                    {program.description}
-                  </p>
                   
-                  <ul className="space-y-3">
-                    {program.children.map((child) => (
-                      <li key={child.anchor} id={child.anchor}> {/* Anchor for the list item */}
+                  {/* Grid for the child program cards */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {group.programs.map((program) => (
+                      <div 
+                        key={program.anchor} 
+                        id={program.anchor}
+                        className="bg-white p-6 rounded-lg shadow-lg flex flex-col"
+                      >
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="text-green-600 flex-shrink-0">{program.icon}</span>
+                          <h4 className="text-lg font-semibold text-gray-800">
+                            {program.title}
+                          </h4>
+                        </div>
+                        <p className="text-gray-600 text-sm mb-6 flex-grow">
+                          {program.description}
+                        </p>
                         <Link 
-                          href={`#${child.anchor}`}
-                          className="flex items-center text-gray-700 hover:text-green-600 group"
+                          href={`/education#${program.anchor}`} // Links to Education page anchor
+                          className="inline-flex items-center gap-2 text-sm text-green-600 font-semibold hover:underline group"
                         >
-                          <span className="transform transition-transform group-hover:translate-x-1 mr-2">
+                          Learn More
+                          <span className="transform transition-transform group-hover:translate-x-1">
                             <FaArrowRight size={12} />
                           </span>
-                          {child.label}
                         </Link>
-                      </li>
+                      </div>
                     ))}
-                  </ul>
-
+                  </div>
                 </div>
               ))}
+              
             </div>
           </div>
         </section>
-        {/* === END OF NEW SECTION === */}
+        {/* === END OF UPDATED SECTION === */}
 
       </main>
     </>
