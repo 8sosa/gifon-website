@@ -148,10 +148,19 @@ export default function Header() {
   const navRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
   
-  const handleLogout = (e: React.MouseEvent) => {
+  const handleLogout = async (e: React.MouseEvent) => {
     e.preventDefault();
-    localStorage.removeItem('jwt'); // Clear the token
-    setIsLoggedIn(false); // Update the state
+    
+    // Call our new API endpoint
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch (error) {
+      console.error("Logout API call failed", error);
+    }
+    
+    // Do this regardless of API success, to log the user out on the client
+    localStorage.removeItem('user'); // Remove user data
+    setIsLoggedIn(false);
     router.push('/'); // Redirect to home
     closeAll();
   };
@@ -190,8 +199,8 @@ export default function Header() {
 
   useEffect(() => {
     // This runs only on the client, after the component mounts
-    const token = localStorage.getItem('jwt');
-    if (token) {
+    const user = localStorage.getItem('user');
+    if (user) {
       setIsLoggedIn(true);
     }
   }, []);

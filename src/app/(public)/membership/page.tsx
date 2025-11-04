@@ -148,53 +148,68 @@ export default function MembershipPage() {
 
 
     // --- 3. NEW handler for modal form submission ---
-    const handleModalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault(); // Stop the page from reloading
-        setIsLoading(true);
-        setError(null);
+  const handleModalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
-        // 1. Get all form data
-        const formData = new FormData(e.currentTarget);
-        const data = Object.fromEntries(formData.entries());
+    // 1. Get the form element itself
+    const form = e.currentTarget;
+    
+    // 2. Grab the file from the input
+    const fileInput = form.elements.namedItem('upload') as HTMLInputElement;
+    const file = fileInput.files ? fileInput.files[0] : null;
 
-        // 2. IMPORTANT: Remove the file.
-        // Our /api/apply endpoint only accepts JSON right now.
-        // Handling file uploads requires a different backend setup.
-        delete data.upload;
+    // 3. (Optional but recommended) Basic file validation
+    if (!file) {
+      setError('A file upload is required for the application.');
+      setIsLoading(false);
+      return;
+    }
+    if (file.size > 1024 * 1024 * 5) { // 5MB limit
+      setError('File is too large. Please upload a file under 5MB.');
+      setIsLoading(false);
+      return;
+    }
 
-        try {
-            // 3. Send the data to our API endpoint
-            const res = await fetch('/api/auth/apply', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
+    // 4. Create a FormData object
+    // This is the *only* way to send a file
+    const formData = new FormData(form);
+    
+    // No need to append fields one-by-one, FormData(form) does it!
+    // It automatically gets 'name', 'email', 'phone', 'organization', 'category', and 'upload'
+    // *because they have a 'name' attribute in the HTML*.
 
-            const result = await res.json();
+    try {
+      // 5. Send the FormData
+      const res = await fetch('/api/apply', {
+        method: 'POST',
+        // --- DO NOT SET Content-Type ---
+        // The browser automatically sets it to multipart/form-data
+        // with the correct boundary when it sees a FormData body.
+        body: formData, 
+      });
 
-            if (!res.ok) {
-                // If the API returns an error (like "User already exists"), show it
-                throw new Error(result.message || 'Something went wrong');
-            }
+      const result = await res.json();
 
-            // 4. Success! Show the "Thank You" screen
-            console.log('Application successful:', result);
-            setIsModalSubmitted(true);
+      if (!res.ok) {
+        throw new Error(result.message || 'Something went wrong');
+      }
 
-        } catch (err: unknown) {
-            if (err instanceof Error) {
-                // Specific error from our API
-                setError(err.message);
-            } else {
-                setError('An unknown error occurred');
-            }
-        } finally {
-            // 6. Stop the loading spinner
-            setIsLoading(false);
-        }
-    };
+      // Success!
+      console.log('Application successful:', result);
+      setIsModalSubmitted(true); // Your existing success state
+
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
     return (
         <>

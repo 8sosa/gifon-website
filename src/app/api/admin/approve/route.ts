@@ -69,6 +69,7 @@ export async function POST(req: NextRequest) {
       phone: application.phone,
       organization: application.organization,
       category: application.category,
+      role: 'user',
       createdAt: new Date(),
       // You might want a 'role' field here
       // role: 'user', 

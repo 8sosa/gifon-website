@@ -78,53 +78,55 @@ export default function MembershipPortalPage() {
 
   // --- 3. Add useEffect to fetch data on load ---
   useEffect(() => {
-    const fetchUserData = async () => {
-      // Get the token from localStorage
-      const token = localStorage.getItem('jwt');
+    
+    // Optimistic load for fast UX
+    // Load the user data we saved during login
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setIsLoading(false); // We have *some* data, so stop loading
+    }
 
-      if (!token) {
-        // If no token, redirect to login page
-        setError('No authorization token found.');
-        router.push('/login'); // Redirect to your login page
-        return;
-      }
-
+    const fetchFreshUserData = async () => {
       try {
-        // Fetch data from our new '/api/users/me' endpoint
+        // Fetch data from our '/api/users/me' endpoint
+        // No headers needed! The browser sends the httpOnly cookie automatically.
         const res = await fetch('/api/users/me', {
           method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
         });
 
         if (!res.ok) {
-          // Handle errors like expired tokens
-          localStorage.removeItem('jwt'); // Clear the bad token
+          // If the cookie is invalid/expired, our API will send a 401
+          // which the middleware *should* have caught, but we'll catch it here too.
+          localStorage.removeItem('user'); // Clear the bad data
           throw new Error('Session expired or invalid. Please log in again.');
         }
 
         const data = await res.json();
-        setUser(data.user); // Set the user state
+        setUser(data.user); // Set the fresh user state
+        
+        // Re-sync localStorage with the fresh data
+        localStorage.setItem('user', JSON.stringify(data.user)); 
 
       } catch (err: unknown) {
-        if (err instanceof Error) { // <--- Step 2: Check if it's an Error
+        if (err instanceof Error) {
           setError(err.message);
-          // Redirect to login if there's an auth error
           if (err.message.includes('Session expired')) {
             router.push('/login');
-          }// <--- Step 3: Now it's safe to use
+          }
         } else {
-          setError('An unknown error occurred');
+          setError('An unknown error occurred.');
         }
       } finally {
-        setIsLoading(false); // Stop loading
+        // Only set loading to false if we didn't have storedUser
+        if (!storedUser) {
+          setIsLoading(false);
+        }
       }
     };
 
-    fetchUserData();
+    fetchFreshUserData();
   }, [router]); // Add router to dependency array
-
   // --- 4. Add Loading and Error states ---
   if (isLoading) {
     return (

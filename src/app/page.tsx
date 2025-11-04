@@ -71,7 +71,6 @@ export default function HomePage() {
 
   return (
     <RevealProvider>
-      <div className="pageHead"/>
       <HeroSection
         title="Geospatial Intelligence Foundation of Nigeria (GIFON)"
         // description="MAPPING THE FUTURE — EMPOWERING NATIONS"

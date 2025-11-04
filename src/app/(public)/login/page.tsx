@@ -11,56 +11,50 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Replace your existing handleSubmit function with this one
-
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
-    setLoading(true); // Loader starts
+    setLoading(true);
 
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");
 
     try {
-      // TWEAK 1: Point to our local API endpoint
       const resp = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
-        // TWEAK 2: Removed 'credentials: "include"' (we're using localStorage tokens, not cookies)
       });
     
       const data = await resp.json();
     
-      // TWEAK 3: Simplified the error check. Our API signals failure with !resp.ok
-      // and provides the error in 'data.message'.
       if (!resp.ok) {
         setError(data.message || "Login failed. Please try again.");
       } else {
-        // ✅ Success!
-        
-        // TWEAK 4: Get the token directly from 'data.token' (not 'data.data.token')
-        if (data.token) {
-          localStorage.setItem("jwt", data.token);
+        // --- NEW LOGIC ---
+        // We no longer get a token. We get a user object.
+        if (data.user) {
+          // Save the user data to localStorage
+          localStorage.setItem('user', JSON.stringify(data.user));
+        } else {
+          // This shouldn't happen, but just in case
+          throw new Error("Login succeeded but did not return user data.");
         }
-    
-        // TWEAK 5: Removed 'data.userID' logic. Our token contains the user info,
-        // and our endpoint doesn't send a separate userID.
-    
+        
+        // Clear old, insecure token if it exists
+        localStorage.removeItem('jwt');
+
         // success → navigate to profile
-        router.push("/dashboard");
+        router.push("/dashboard"); // Or wherever your portal page is
       }
     } catch (err: unknown) {
-      // This catch block is perfectly fine
       if (err instanceof Error) {
         setError(err.message);
       } else {
         setError("Something went wrong. Please try again.");
       }
     } finally {
-      // TWEAK 6: Added a 'finally' block to ensure the loader
-      // stops even if an error occurs.
       setLoading(false);
     }
   }
@@ -150,7 +144,7 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-6 text-center">
-            <a href="#" className="text-primary underline">
+            <a href="/forgot-password" className="text-primary underline">
               Forgot your password?
             </a>
           </div>
