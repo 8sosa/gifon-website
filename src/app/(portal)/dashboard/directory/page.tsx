@@ -100,9 +100,9 @@ const allForums = [
     title: "Industry & Private Sector Forum",
     description: "This forum recognizes the critical role of the industry and private sector in driving innovation, investment, and sustainable applications of geospatial intelligence across national development and security priorities...",
     policyContent: `GIFON INDUSTRY AND PRIVATE SECTOR FORUM
-POLICY STATEMENT
-... (full policy text from your example) ...
-`
+      POLICY STATEMENT
+      ... (full policy text from your example) ...
+      `
   },
   {
     id: 'policy',
@@ -110,8 +110,8 @@ POLICY STATEMENT
     title: "Policy, Governance & Ethics Group",
     description: "The PGE-WG is the institutional mechanism established to uphold accountability, integrity, and transparency. It provides thought leadership, oversight, and policy direction on how geospatial intelligence should be governed...",
     policyContent: `POLICY, GOVERNANCE & ETHICS WORKING GROUP
-... (full policy text from your example) ...
-`
+    ... (full policy text from your example) ...
+    `
   },
   {
     id: 'academia',
@@ -119,8 +119,8 @@ POLICY STATEMENT
     title: "Academia & Research Collaboration",
     description: "The ARCP fosters strong partnerships between universities, research institutions, and GIFON to advance GEOINT education, research, and innovation, positioning Nigeria’s higher institutions as key knowledge partners...",
     policyContent: `GIFON Academia & Research Collaboration Programme (ARCP)
-... (full policy text from your example) ...
-`
+    ... (full policy text from your example) ...
+    `
   }
 ];
 

@@ -12,9 +12,9 @@ export async function GET() {
   //   This route is protected by your middleware's 'matcher'
   //   (e.g., '/admin/:path*'), so we're good to go.
   // -----------------------------------------------------------------
-  console.warn(
-    'SECURITY WARNING: The /api/admin/applications/approved endpoint is not protected.'
-  );
+  // console.warn(
+  //   'SECURITY WARNING: The /api/admin/applications/approved endpoint is not protected.'
+  // );
 
   try {
     const client = await clientPromise;
