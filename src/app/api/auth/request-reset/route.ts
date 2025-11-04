@@ -56,8 +56,8 @@ export async function POST(req: NextRequest) {
     );
 
     // 7. Create the reset URL (frontend link)
-    // !! CHANGE 'https://https://gifon.netlify.app' to your actual website domain
-    const resetUrl = `https://https://gifon.netlify.app/reset-password?token=${resetToken}`;
+    // !! CHANGE 'https://gifon.netlify.app' to your actual website domain
+    const resetUrl = `https://gifon.netlify.app/reset-password?token=${resetToken}`;
 
     // 8. Send the email
     try {

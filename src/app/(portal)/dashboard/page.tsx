@@ -47,7 +47,7 @@ const memberResources = [
     title: "Member Directory",
     description: "Connect with other GIFON professionals and institutions.",
     icon: <FaUsers size={24} />,
-    href: "/directory", // Example of a portal-only page
+    href: "/dashboard/directory", // Example of a portal-only page
   },
   {
     title: "Downloadable Toolkits",
@@ -59,13 +59,13 @@ const memberResources = [
     title: "Submit a Paper",
     description: "Submit your research for the next GeoINSIGHT Journal.",
     icon: <FaFileUpload size={24} />,
-    href: "/submit",
+    href: "/dashboard/submit",
   },
   {
     title: "Account Settings",
     description: "Update your profile, password, and contact information.",
     icon: <FaCogs size={24} />,
-    href: "/settings",
+    href: "/dashboard/settings",
   },
 ];
 
@@ -194,7 +194,7 @@ export default function MembershipPortalPage() {
               <p className="text-sm text-gray-600">{user.email}</p>
               <p className="text-sm text-gray-600 mt-1">{user.organization}</p>
               <Link
-                href="/settings"
+                href="/dashboard/settings"
                 className="mt-4 inline-flex items-center gap-2 text-sm text-green-600 hover:underline"
               >
                 <FaEdit />

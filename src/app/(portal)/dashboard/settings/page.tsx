@@ -38,50 +38,63 @@ export default function SettingsPage() {
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null);
 
- // --- Fetch User Data on Load ---
- useEffect(() => {
-  const fetchUserData = async () => {
-    const token = localStorage.getItem('jwt');
-    if (!token) {
-      router.push('/login');
-      return;
-    }
-
-    try {
-      const res = await fetch('/api/users/me', {
-        headers: { 'Authorization': `Bearer ${token}` },
-      });
-
-      if (!res.ok) {
-        localStorage.removeItem('jwt');
-        throw new Error('Session expired. Please log in again.');
-      }
-
-      const data = await res.json();
-      setUser(data.user);
-      // Pre-fill the profile form with user's current data
+  // --- 3. UPDATED useEffect to use cookies and localStorage 'user' ---
+  useEffect(() => {
+    
+    // Optimistic load for fast UX
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      setUser(user);
+      // Pre-fill the profile form
       setProfile({
-        name: data.user.name,
-        organization: data.user.organization,
+        name: user.name,
+        organization: user.organization,
       });
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        // --- FIX: Use setFetchError here ---
-        setFetchError(err.message);
-        if (err.message.includes('Session expired')) {
-          router.push('/login');
-        }
-      } else {
-        // --- FIX: And use setFetchError here ---
-        setFetchError('An unknown error occurred');
-      }
-    } finally {
-      setIsLoading(false);
     }
-  };
 
-  fetchUserData();
-}, [router]);
+    // Now, fetch the *fresh* data to ensure it's up to date
+    const fetchFreshUserData = async () => {
+      try {
+        // No 'Authorization' header needed.
+        // The browser sends the httpOnly cookie automatically.
+        const res = await fetch('/api/users/me', {
+          method: 'GET',
+        });
+
+        if (!res.ok) {
+          localStorage.removeItem('user'); // Clear stale data
+          throw new Error('Session expired or invalid. Please log in again.');
+        }
+
+        const data = await res.json();
+        setUser(data.user); // Set the fresh user state
+        
+        // Pre-fill the form with the fresh data
+        setProfile({
+            name: data.user.name,
+            organization: data.user.organization,
+        });
+        
+        // Re-sync localStorage with the fresh data
+        localStorage.setItem('user', JSON.stringify(data.user)); 
+
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setFetchError(err.message);
+          if (err.message.includes('Session expired')) {
+            router.push('/login');
+          }
+        } else {
+          setFetchError('An unknown error occurred.');
+        }
+      } finally {
+        setIsLoading(false); // Stop loading
+      }
+    };
+
+    fetchFreshUserData();
+  }, [router]); // Add router to dependency array
 
   // --- Form Input Handlers ---
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,19 +114,12 @@ export default function SettingsPage() {
     setProfileError(null);
     setProfileSuccess(null);
 
-    const token = localStorage.getItem('jwt');
-    if (!token) {
-      setProfileError('Not authenticated. Please log in.');
-      setProfileLoading(false);
-      return;
-    }
-
     try {
       const res = await fetch('/api/users/me', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          // REMOVED: The 'Authorization' header is gone.
         },
         body: JSON.stringify(profile),
       });
@@ -124,9 +130,11 @@ export default function SettingsPage() {
       }
 
       setProfileSuccess('Profile updated successfully!');
-      // Update the user state if you want the header to change
+      // Update the user state so the name changes on the page
       if (user) {
         setUser(prev => ({ ...prev!, name: profile.name, organization: profile.organization }));
+        // And update localStorage so it's fresh for next page load
+        localStorage.setItem('user', JSON.stringify({ ...user, name: profile.name, organization: profile.organization }));
       }
 
     } catch (err: unknown) {
@@ -151,19 +159,12 @@ export default function SettingsPage() {
     setPasswordError(null);
     setPasswordSuccess(null);
 
-    const token = localStorage.getItem('jwt');
-    if (!token) {
-      setPasswordError('Not authenticated. Please log in.');
-      setPasswordLoading(false);
-      return;
-    }
-
     try {
       const res = await fetch('/api/auth/change-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          // REMOVED: The 'Authorization' header is gone.
         },
         body: JSON.stringify({
           current: password.current,
