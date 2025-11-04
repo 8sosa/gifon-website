@@ -182,7 +182,7 @@ export default function MembershipPage() {
 
     try {
       // 5. Send the FormData
-      const res = await fetch('/api/apply', {
+      const res = await fetch('/api/auth/apply', {
         method: 'POST',
         // --- DO NOT SET Content-Type ---
         // The browser automatically sets it to multipart/form-data
