@@ -1,8 +1,11 @@
-"use client"; // Portals are client-side by nature, managing user state
+// src/app/profile/page.tsx (or wherever your portal page is)
 
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation'; // Import useRouter
 import { 
   FaBookOpen, 
   FaChalkboardTeacher, 
@@ -15,27 +18,18 @@ import {
   FaIdBadge
 } from 'react-icons/fa';
 
-// --- Mock Data ---
-// In a real app, you would get this from a user session or API
-const mockUser = {
-  name: "Dr. Fatima Bello",
-  email: "fatima.bello@example.com",
-  organization: "Federal Ministry of Science",
-  avatar: "/ph.svg", // Placeholder for user's profile picture
-  membership: {
-    type: "Professional Member",
-    id: "GIFON-PRO-001234",
-    status: "Active",
-    expires: "December 31, 2026",
-  },
-  forumsJoined: [
-    'youngProfessionals', 
-    'womenInGeoint',
-    'policy'
-  ], 
+// --- 1. Define a type for our User data ---
+// This should match the data in your 'users' collection
+type User = {
+  _id: string;
+  name: string;
+  email: string;
+  organization: string;
+  avatar?: string; // Make avatar optional
+  category: string; // This is the 'membership.type'
+  // Add any other fields you need, e.g., phone
 };
 
-// Resources available to this member
 const memberResources = [
   {
     title: "Publications Archive",
@@ -74,17 +68,103 @@ const memberResources = [
     href: "/settings",
   },
 ];
-// --- End Mock Data ---
-
 
 export default function MembershipPortalPage() {
+  // --- 2. Add state for user, loading, and errors ---
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+
+  // --- 3. Add useEffect to fetch data on load ---
+  useEffect(() => {
+    const fetchUserData = async () => {
+      // Get the token from localStorage
+      const token = localStorage.getItem('jwt');
+
+      if (!token) {
+        // If no token, redirect to login page
+        setError('No authorization token found.');
+        router.push('/login'); // Redirect to your login page
+        return;
+      }
+
+      try {
+        // Fetch data from our new '/api/users/me' endpoint
+        const res = await fetch('/api/users/me', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) {
+          // Handle errors like expired tokens
+          localStorage.removeItem('jwt'); // Clear the bad token
+          throw new Error('Session expired or invalid. Please log in again.');
+        }
+
+        const data = await res.json();
+        setUser(data.user); // Set the user state
+
+      } catch (err: unknown) {
+        if (err instanceof Error) { // <--- Step 2: Check if it's an Error
+          setError(err.message);
+          // Redirect to login if there's an auth error
+          if (err.message.includes('Session expired')) {
+            router.push('/login');
+          }// <--- Step 3: Now it's safe to use
+        } else {
+          setError('An unknown error occurred');
+        }
+      } finally {
+        setIsLoading(false); // Stop loading
+      }
+    };
+
+    fetchUserData();
+  }, [router]); // Add router to dependency array
+
+  // --- 4. Add Loading and Error states ---
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-xl">Loading your dashboard...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen text-center">
+        <p className="text-xl text-red-600">Error: {error}</p>
+        <Link href="/login" className="mt-4 text-green-600 underline">
+          Go to Login
+        </Link>
+      </div>
+    );
+  }
+  
+  // This state is in case fetching succeeds but user is null for some reason
+  if (!user) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen text-center">
+        <p className="text-xl text-red-600">Could not load user data.</p>
+        <Link href="/login" className="mt-4 text-green-600 underline">
+          Go to Login
+        </Link>
+      </div>
+    );
+  }
+
+  // --- 5. Render the page with REAL data ---
   return (
     <>
       {/* 1. Welcome Header (Replaces HeroSection for a portal) */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold leading-tight text-gray-900">
-            Welcome, {mockUser.name}!
+            Welcome, {user.name}!
           </h1>
           <p className="text-gray-600 mt-1">
             This is your personal member dashboard.
@@ -102,15 +182,15 @@ export default function MembershipPortalPage() {
             {/* Profile Card */}
             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
               <Image
-                src={mockUser.avatar}
+                src={user.avatar || "/ph.svg"} // Use placeholder if no avatar
                 alt="Profile Picture"
                 width={100}
                 height={100}
                 className="rounded-full mx-auto mb-4 border-4 border-green-200"
               />
-              <h2 className="text-xl font-semibold text-gray-800">{mockUser.name}</h2>
-              <p className="text-sm text-gray-600">{mockUser.email}</p>
-              <p className="text-sm text-gray-600 mt-1">{mockUser.organization}</p>
+              <h2 className="text-xl font-semibold text-gray-800">{user.name}</h2>
+              <p className="text-sm text-gray-600">{user.email}</p>
+              <p className="text-sm text-gray-600 mt-1">{user.organization}</p>
               <Link
                 href="/settings"
                 className="mt-4 inline-flex items-center gap-2 text-sm text-green-600 hover:underline"
@@ -129,21 +209,23 @@ export default function MembershipPortalPage() {
               <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex justify-between">
                   <span className="font-semibold">Level:</span>
-                  <span>{mockUser.membership.type}</span>
+                  <span>{user.category}</span>
                 </li>
                 <li className="flex justify-between">
                   <span className="font-semibold">Member ID:</span>
-                  <span>{mockUser.membership.id}</span>
+                  {/* We're using the MongoDB _id for now. You could create a custom one. */}
+                  <span>...{user._id.slice(-10)}</span>
                 </li>
                 <li className="flex justify-between">
                   <span className="font-semibold">Status:</span>
                   <span className="font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
-                    {mockUser.membership.status}
+                    Active
                   </span>
                 </li>
                 <li className="flex justify-between">
                   <span className="font-semibold">Expires:</span>
-                  <span>{mockUser.membership.expires}</span>
+                  {/* You'll need to add this field to your user model to show it */}
+                  <span>TBD</span>
                 </li>
               </ul>
               <Link

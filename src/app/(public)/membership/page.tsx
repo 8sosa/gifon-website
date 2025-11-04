@@ -79,6 +79,8 @@ const forumContent = {
 }
 
 export default function MembershipPage() {
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     // State for the document viewer modal
     const [modalData, setModalData] = useState<ModalState>({
         isOpen: false,
@@ -140,14 +142,58 @@ export default function MembershipPage() {
         setIsModalOpen(false);
         setSelectedCategory(null);
         setIsModalSubmitted(false); // Reset modal submission state on close
+        setIsLoading(false);
+        setError(null);
     };
 
 
     // --- 3. NEW handler for modal form submission ---
-    const handleModalSubmit = (e: React.FormEvent) => {
-        e.preventDefault(); // This stops the reload!
-        console.log("Modal form submitted!");
-        setIsModalSubmitted(true);
+    const handleModalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault(); // Stop the page from reloading
+        setIsLoading(true);
+        setError(null);
+
+        // 1. Get all form data
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData.entries());
+
+        // 2. IMPORTANT: Remove the file.
+        // Our /api/apply endpoint only accepts JSON right now.
+        // Handling file uploads requires a different backend setup.
+        delete data.upload;
+
+        try {
+            // 3. Send the data to our API endpoint
+            const res = await fetch('/api/auth/apply', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await res.json();
+
+            if (!res.ok) {
+                // If the API returns an error (like "User already exists"), show it
+                throw new Error(result.message || 'Something went wrong');
+            }
+
+            // 4. Success! Show the "Thank You" screen
+            console.log('Application successful:', result);
+            setIsModalSubmitted(true);
+
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                // Specific error from our API
+                setError(err.message);
+            } else {
+                setError('An unknown error occurred');
+            }
+        } finally {
+            // 6. Stop the loading spinner
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -456,9 +502,20 @@ export default function MembershipPage() {
                                         <label htmlFor="upload" className="block text-sm font-medium text-gray-700">Upload ID/Supporting Document</label>
                                         <input type="file" id="upload" name="upload" className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"/>
                                     </div>
+                                    {/* --- ADD ERROR MESSAGE DISPLAY --- */}
+                                    {error && (
+                                        <div className="text-red-700 text-sm bg-red-100 p-3 rounded-md border border-red-300">
+                                            <strong>Error:</strong> {error}
+                                        </div>
+                                    )}
                                     
-                                    <button type="submit" className="w-full mt-6 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
-                                        Apply Now
+                                    {/* --- UPDATE BUTTON FOR LOADING STATE --- */}
+                                    <button 
+                                        type="submit" 
+                                        disabled={isLoading}
+                                        className="w-full mt-6 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+                                    >
+                                        {isLoading ? 'Submitting...' : 'Apply Now'}
                                     </button>
                                 </form>
                             </>

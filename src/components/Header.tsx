@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import styles from "@/styles/Header.module.css";
 import { FaXTwitter, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
@@ -17,219 +18,6 @@ interface MenuItem {
   colorClass?: string; // For social icons
   hoverColorClass?: string; // For social icons
 }
-
-// Define menu structure
-const menuItems: MenuItem[] = [
-  {
-    label: 'Home',
-    href: '/'
-  },
-  {
-    label: 'About Us',
-    href: '/about',
-    children: [
-      { label: 'Aim', anchor: 'aim' },
-      { label: 'Mission', anchor: 'mission-vision' },
-      { label: 'Vision', anchor: 'mission-vision' },
-      { label: 'Objectives', anchor: 'objectives' },
-      { label: 'Core Values', anchor: 'core-values' },
-      { label: 'Board of Directors', anchor: 'board-directors' },
-      { label: 'Our Partners', anchor: 'our-partners' },
-      { label: 'Contact Us', anchor: 'contact' },
-    ],
-  },
-  {
-    label: 'Membership',
-    href: '/membership',
-    children: [
-      { label: 'Why Join GIFON', anchor: 'why-join' },
-      { label: 'Membership Categories', anchor: 'categories' },
-      { label: 'Membership Benefits', anchor: 'benefits' },
-      { label: 'Membership Portal (Apply & Renew)', anchor: 'apply' },
-    ],
-  },
-  {
-    label: 'Education',
-    href: '/education',
-    children: [
-      { label: 'Training', anchor: 'C-T' },
-      { label: 'Programmes', anchor: 'programs', children: [
-            { label: 'Youth Empowerment & Talent Acceleration', link: '/education/youth-empowerment' },
-            { label: 'Women in GEOINT (WINGS)', link: '/education/wings' },
-            { label: 'Geoinnovation & Tech Incubation', link: '/education/geoinnovation' },
-            { label: 'National Geospatial Security & Intelligence Hub', link: '/education/geospatial-hub' },
-            { label: 'Community Mapping for Development', link: '/education/community-mapping' },
-            { label: 'Open Data & Research', link: '/education/open-data' },
-            { label: 'Conferences, Workshops & Masterclasses', link: '/education/conferences' },
-            { label: 'Training & Certification', link: '/education/training' },
-          ],
-       },
-       { label: 'Talent Development', anchor: 'talent' },
-    ],
-  },
-  { 
-    label: 'Events', 
-    href: '/events',
-    children: [
-      { label: 'Upcoming Events', anchor: 'upcoming-events', 
-        children: [
-          { label: 'DGI London', anchor: 'dgi-london' },
-          { label: 'USGIF', anchor: 'usgif' },
-          { label: 'FIG', anchor: 'fig' },
-          { label: 'AAG', anchor: 'aag' },
-          { label: 'AARSE', anchor: 'aarse' },
-          { label: 'EIS-Africa', anchor: 'eis-africa' },
-          { label: 'GEOSON', anchor: 'geoson' },
-          { label: 'GIFON Pre-Launch', anchor: 'geoson' },
-        ]  
-      },
-      { label: 'Past Events', anchor: 'past-events', 
-        children: [
-          { label: 'DGI 2024', anchor: 'dgi-london' },
-          { label: 'USGIF 2024', anchor: 'usgif' },
-          { label: 'FIG 2024', anchor: 'fig' },
-          { label: 'AAG 2024', anchor: 'aag' },
-          { label: 'AARSE 2024', anchor: 'aarse' },
-          { label: 'EIS-Africa 2024', anchor: 'eis-africa' },
-          { label: 'GEOSON 2024', anchor: 'geoson' },
-        ]  
-      },
-      {
-        label: 'Outreach',
-        anchor: 'outreach',
-        children: [
-          {
-            label: 'Youth-Focused Programmes',
-            anchor: 'youth-focused-programmes',
-            children: [
-              { label: 'Boot Camps', anchor: 'boot-camps' },
-              { label: 'STEM & GEOINT Awareness Programmes', anchor: 'stem-geoint-awareness' },
-              { label: 'GeoInnovation Challenge / Hackathons', anchor: 'geoinnovation-challenge' }
-            ]
-          },
-          {
-            label: 'Women-in-GEOINT Initiatives',
-            anchor: 'women-in-geoint-initiatives',
-            children: [
-              { label: 'Women in Geospatial Leadership Programmes', anchor: 'women-geospatial-leadership' },
-              { label: 'Community Service & Development Projects', anchor: 'community-service-projects' }
-            ]
-          },
-          {
-            label: 'Professional & Institutional Engagement',
-            anchor: 'professional-institutional-engagement',
-            children: [
-              { label: 'GeoCommunity Development Programmes', anchor: 'geocommunity-development' },
-              { label: 'GeoConnect Networking Events', anchor: 'geoconnect-networking' },
-              { label: 'Public Lectures & Policy Roundtables', anchor: 'public-lectures-roundtables' }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    label: 'Media Resources',
-    href: '/resources',
-    children: [
-      { label: 'News', anchor: 'News' },
-      { label: 'Press Releases', anchor: 'Press' },
-      { label: 'Podcast', anchor: 'Podcast' },
-      { label: 'Webinar', anchor: 'Webinar' },
-      { label: 'Publication Archive', anchor: 'publications' },
-      { label: 'Photo & Video Gallery', anchor: 'Gallery' },
-      { label: 'Downloads', anchor: 'Downloads' },
-    ]  
-  },
-  {
-    label: 'Critical Infrastructure Support',
-    href: '/infrastructure',
-    children: [
-      { label: 'Energy Security & Development', anchor: 'energy' },
-      { label: 'Transportation', anchor: 'transportation' },
-      { label: 'Communication', anchor: 'communication' },
-      { label: 'Water & Environment', anchor: 'water' },
-      { label: 'Health', anchor: 'health' },
-      { label: 'Finance', anchor: 'finance' },
-      { label: 'Government Facilities', anchor: 'government' },
-      { label: 'Food Security & Agriculture', anchor: 'food' },
-      { label: 'Defence & Security', anchor: 'defence' },
-      { label: 'Information Technology', anchor: 'it' },
-      { label: 'Industrial Systems', anchor: 'industrial' },
-      { label: 'Emergency Services', anchor: 'emergency' },
-      { label: 'Manufacturing', anchor: 'manufacturing' },
-      { label: 'Space & Satellite Systems', anchor: 'space' },
-    ],
-  },
-  { 
-    label: 'Groups & Forums',
-    href: '/forums',
-    children: [
-      { label: 'Young Professionals Forum', anchor: 'ethics' },
-      { label: 'Women in GEOINT Forum', anchor: 'anti-corruption' },
-      { label: 'Industry & Private Sector Forum', anchor: 'fund-raising' },
-      { label: 'Policy Briefs & white Paper ', anchor: 'slavery' },
-      { label: 'Research Reports', anchor: 'volunteer' },
-    ]
-  },
-  { 
-    label: 'Policies',
-    href: '/policies',
-    children: [
-      { label: 'Code of Ethics', anchor: 'ethics' },
-      { label: 'Anti-Corruption', anchor: 'anti-corruption' },
-      { label: 'Fund Raising', anchor: 'fund-raising' },
-      { label: 'Anti-Modern-Day Slavery', anchor: 'slavery' },
-      { label: 'Volunteer & Internship', anchor: 'volunteer' },
-    ]
-  },
-  {
-    label: 'Get Involved',
-    href: '/donate',
-    children: [
-      { label: `Volunteer opportunities`, anchor: `opportunities`}
-    ]
-  },
-];
-
-// --- UPDATED topBarItemsBase ---
-const topBarItemsBase: MenuItem[] = [
-  {
-    label: 'Contact Us',
-    href: '/contact-us'
-  },
-  {
-    label: 'Sign In',
-    href: '/login'
-  },
-  {
-    label: 'Register',
-    href: '/membership',
-  },
-  {
-    label: <FaSearch />,
-    href: '/#', // Href is now just a placeholder
-    onClick: (e) => { e.preventDefault(); }, // Will be handled by state
-  },
-  {
-    label: <FaXTwitter />,
-    href: '#',
-    colorClass: 'text-black',
-    hoverColorClass: 'hover:text-black'
-  },
-  {
-    label: <FaFacebookF />,
-    href: '#',
-    colorClass: 'text-blue-600',
-    hoverColorClass: 'hover:text-blue-600'
-  },
-  {
-    label: <FaLinkedinIn />,
-    href: '#',
-    colorClass: 'text-blue-700',
-    hoverColorClass: 'hover:text-blue-700'
-  },
-];
 
 function useIsMobile(breakpoint = 768) {
   // Same mobile detection hook
@@ -349,6 +137,8 @@ export default function Header() {
   const [topMenuOpen, setTopMenuOpen] = useState(false);
   const [bottomMenuOpen, setBottomMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
   
   // --- NEW STATE FOR SEARCH ---
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -358,6 +148,14 @@ export default function Header() {
   const navRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
   
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    localStorage.removeItem('jwt'); // Clear the token
+    setIsLoggedIn(false); // Update the state
+    router.push('/'); // Redirect to home
+    closeAll();
+  };
+
   const closeAll = useCallback(() => {
     setTopMenuOpen(false);
     setBottomMenuOpen(false);
@@ -390,6 +188,14 @@ export default function Header() {
       document.removeEventListener("mousedown", handleClickOutside);
   }, [closeAll]);
 
+  useEffect(() => {
+    // This runs only on the client, after the component mounts
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   function handleRootEnter(
     e: React.MouseEvent,
     label: string,
@@ -410,6 +216,233 @@ export default function Header() {
     if (!isMobile) setOpenDropdown(null);
   }
 
+  // Define menu structure
+  const menuItems: MenuItem[] = [
+    {
+      label: 'Home',
+      href: '/'
+    },
+    {
+      label: 'About Us',
+      href: '/about',
+      children: [
+        { label: 'Aim', anchor: 'aim' },
+        { label: 'Mission', anchor: 'mission-vision' },
+        { label: 'Vision', anchor: 'mission-vision' },
+        { label: 'Objectives', anchor: 'objectives' },
+        { label: 'Core Values', anchor: 'core-values' },
+        { label: 'Board of Directors', anchor: 'board-directors' },
+        { label: 'Our Partners', anchor: 'our-partners' },
+        { label: 'Contact Us', anchor: 'contact' },
+      ],
+    },
+    {
+      label: 'Membership',
+      href: '/membership',
+      children: [
+        { label: 'Why Join GIFON', anchor: 'why-join' },
+        { label: 'Membership Categories', anchor: 'categories' },
+        { label: 'Membership Benefits', anchor: 'benefits' },
+        { label: 'Membership Portal (Apply & Renew)', anchor: 'apply' },
+      ],
+    },
+    {
+      label: 'Education',
+      href: '/education',
+      children: [
+        { label: 'Training', anchor: 'C-T' },
+        { label: 'Programmes', anchor: 'programs', children: [
+              { label: 'Youth Empowerment & Talent Acceleration', link: '/education/youth-empowerment' },
+              { label: 'Women in GEOINT (WINGS)', link: '/education/wings' },
+              { label: 'Geoinnovation & Tech Incubation', link: '/education/geoinnovation' },
+              { label: 'National Geospatial Security & Intelligence Hub', link: '/education/geospatial-hub' },
+              { label: 'Community Mapping for Development', link: '/education/community-mapping' },
+              { label: 'Open Data & Research', link: '/education/open-data' },
+              { label: 'Conferences, Workshops & Masterclasses', link: '/education/conferences' },
+              { label: 'Training & Certification', link: '/education/training' },
+            ],
+        },
+        { label: 'Talent Development', anchor: 'talent' },
+      ],
+    },
+    { 
+      label: 'Events', 
+      href: '/events',
+      children: [
+        { label: 'Upcoming Events', anchor: 'upcoming-events', 
+          children: [
+            { label: 'DGI London', anchor: 'dgi-london' },
+            { label: 'USGIF', anchor: 'usgif' },
+            { label: 'FIG', anchor: 'fig' },
+            { label: 'AAG', anchor: 'aag' },
+            { label: 'AARSE', anchor: 'aarse' },
+            { label: 'EIS-Africa', anchor: 'eis-africa' },
+            { label: 'GEOSON', anchor: 'geoson' },
+            { label: 'GIFON Pre-Launch', anchor: 'geoson' },
+          ]  
+        },
+        { label: 'Past Events', anchor: 'past-events', 
+          children: [
+            { label: 'DGI 2024', anchor: 'dgi-london' },
+            { label: 'USGIF 2024', anchor: 'usgif' },
+            { label: 'FIG 2024', anchor: 'fig' },
+            { label: 'AAG 2024', anchor: 'aag' },
+            { label: 'AARSE 2024', anchor: 'aarse' },
+            { label: 'EIS-Africa 2024', anchor: 'eis-africa' },
+            { label: 'GEOSON 2024', anchor: 'geoson' },
+          ]  
+        },
+        {
+          label: 'Outreach',
+          anchor: 'outreach',
+          children: [
+            {
+              label: 'Youth-Focused Programmes',
+              anchor: 'youth-focused-programmes',
+              children: [
+                { label: 'Boot Camps', anchor: 'boot-camps' },
+                { label: 'STEM & GEOINT Awareness Programmes', anchor: 'stem-geoint-awareness' },
+                { label: 'GeoInnovation Challenge / Hackathons', anchor: 'geoinnovation-challenge' }
+              ]
+            },
+            {
+              label: 'Women-in-GEOINT Initiatives',
+              anchor: 'women-in-geoint-initiatives',
+              children: [
+                { label: 'Women in Geospatial Leadership Programmes', anchor: 'women-geospatial-leadership' },
+                { label: 'Community Service & Development Projects', anchor: 'community-service-projects' }
+              ]
+            },
+            {
+              label: 'Professional & Institutional Engagement',
+              anchor: 'professional-institutional-engagement',
+              children: [
+                { label: 'GeoCommunity Development Programmes', anchor: 'geocommunity-development' },
+                { label: 'GeoConnect Networking Events', anchor: 'geoconnect-networking' },
+                { label: 'Public Lectures & Policy Roundtables', anchor: 'public-lectures-roundtables' }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      label: 'Media Resources',
+      href: '/resources',
+      children: [
+        { label: 'News', anchor: 'News' },
+        { label: 'Press Releases', anchor: 'Press' },
+        { label: 'Podcast', anchor: 'Podcast' },
+        { label: 'Webinar', anchor: 'Webinar' },
+        { label: 'Publication Archive', anchor: 'publications' },
+        { label: 'Photo & Video Gallery', anchor: 'Gallery' },
+        { label: 'Downloads', anchor: 'Downloads' },
+      ]  
+    },
+    {
+      label: 'Critical Infrastructure Support',
+      href: '/infrastructure',
+      children: [
+        { label: 'Energy Security & Development', anchor: 'energy' },
+        { label: 'Transportation', anchor: 'transportation' },
+        { label: 'Communication', anchor: 'communication' },
+        { label: 'Water & Environment', anchor: 'water' },
+        { label: 'Health', anchor: 'health' },
+        { label: 'Finance', anchor: 'finance' },
+        { label: 'Government Facilities', anchor: 'government' },
+        { label: 'Food Security & Agriculture', anchor: 'food' },
+        { label: 'Defence & Security', anchor: 'defence' },
+        { label: 'Information Technology', anchor: 'it' },
+        { label: 'Industrial Systems', anchor: 'industrial' },
+        { label: 'Emergency Services', anchor: 'emergency' },
+        { label: 'Manufacturing', anchor: 'manufacturing' },
+        { label: 'Space & Satellite Systems', anchor: 'space' },
+      ],
+    },
+    { 
+      label: 'Groups & Forums',
+      href: '/forums',
+      children: [
+        { label: 'Young Professionals Forum', anchor: 'ethics' },
+        { label: 'Women in GEOINT Forum', anchor: 'anti-corruption' },
+        { label: 'Industry & Private Sector Forum', anchor: 'fund-raising' },
+        { label: 'Policy Briefs & white Paper ', anchor: 'slavery' },
+        { label: 'Research Reports', anchor: 'volunteer' },
+      ]
+    },
+    { 
+      label: 'Policies',
+      href: '/policies',
+      children: [
+        { label: 'Code of Ethics', anchor: 'ethics' },
+        { label: 'Anti-Corruption', anchor: 'anti-corruption' },
+        { label: 'Fund Raising', anchor: 'fund-raising' },
+        { label: 'Anti-Modern-Day Slavery', anchor: 'slavery' },
+        { label: 'Volunteer & Internship', anchor: 'volunteer' },
+      ]
+    },
+    {
+      label: 'Get Involved',
+      href: '/donate',
+      children: [
+        { label: `Volunteer opportunities`, anchor: `opportunities`}
+      ]
+    },
+  ];
+
+  // --- UPDATED topBarItemsBase ---
+  const topBarItemsBase: MenuItem[] = [
+    {
+      label: 'Contact Us',
+      href: '/contact-us'
+    },
+    ...(isLoggedIn
+      ? [ // If logged in...
+          {
+            label: 'Dashboard',
+            href: '/dashboard' // Or '/admin/dashboard', etc.
+          },
+          {
+            label: 'Log Out',
+            href: '#', // href is just a placeholder
+            onClick: handleLogout
+          }
+        ]
+      : [ // If logged out...
+          {
+            label: 'Sign In',
+            href: '/login'
+          },
+          {
+            label: 'Register',
+            href: '/membership',
+          },
+        ]
+    ),
+    {
+      label: <FaSearch />,
+      href: '/#', // Href is now just a placeholder
+      onClick: (e) => { e.preventDefault(); }, // Will be handled by state
+    },
+    {
+      label: <FaXTwitter />,
+      href: '#',
+      colorClass: 'text-black',
+      hoverColorClass: 'hover:text-black'
+    },
+    {
+      label: <FaFacebookF />,
+      href: '#',
+      colorClass: 'text-blue-600',
+      hoverColorClass: 'hover:text-blue-600'
+    },
+    {
+      label: <FaLinkedinIn />,
+      href: '#',
+      colorClass: 'text-blue-700',
+      hoverColorClass: 'hover:text-blue-700'
+    },
+  ];
   return (
     <header className={styles.header} ref={navRef}>
       {/* Main Navbar */}

@@ -11,48 +11,57 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Replace your existing handleSubmit function with this one
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
-    setLoading(true);
+    setLoading(true); // Loader starts
 
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");
 
     try {
-      const resp = await fetch("https://gifon.onrender.com/api/v1/auth/login", {
+      // TWEAK 1: Point to our local API endpoint
+      const resp = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
-        credentials: "include", // keep if backend sets cookies too
+        // TWEAK 2: Removed 'credentials: "include"' (we're using localStorage tokens, not cookies)
       });
     
       const data = await resp.json();
     
-      if (!resp.ok || data.status === "fail") {
-        // backend explicitly says "fail"
+      // TWEAK 3: Simplified the error check. Our API signals failure with !resp.ok
+      // and provides the error in 'data.message'.
+      if (!resp.ok) {
         setError(data.message || "Login failed. Please try again.");
       } else {
-        // ✅ Save JWT token to localStorage
-        if (data.data?.token) {
-          localStorage.setItem("jwt", data.data.token);
+        // ✅ Success!
+        
+        // TWEAK 4: Get the token directly from 'data.token' (not 'data.data.token')
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
         }
     
-        // Optionally save userID if needed
-        if (data.userID) {
-          localStorage.setItem("userID", data.userID);
-        }
+        // TWEAK 5: Removed 'data.userID' logic. Our token contains the user info,
+        // and our endpoint doesn't send a separate userID.
     
         // success → navigate to profile
-        router.push("/profile");
+        router.push("/dashboard");
       }
     } catch (err: unknown) {
+      // This catch block is perfectly fine
       if (err instanceof Error) {
         setError(err.message);
       } else {
         setError("Something went wrong. Please try again.");
       }
+    } finally {
+      // TWEAK 6: Added a 'finally' block to ensure the loader
+      // stops even if an error occurs.
+      setLoading(false);
     }
   }
     

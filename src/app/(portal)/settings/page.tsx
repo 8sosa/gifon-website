@@ -1,35 +1,89 @@
-"use client"; // Required for form state
+// src/app/settings/page.tsx (or wherever this page is)
 
-import { useState } from 'react';
+"use client";
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FaIdBadge, FaSave, FaLock } from 'react-icons/fa';
 
-// --- Mock Data ---
-// In a real app, this would come from your user session
-const mockUser = {
-  name: "Dr. Fatima Bello",
-  email: "fatima.bello@example.com",
-  organization: "Federal Ministry of Science",
-  membership: {
-    type: "Professional Member",
-    status: "Active",
-    expires: "December 31, 2026",
-  }
+// Define the User type again
+type User = {
+  _id: string;
+  name: string;
+  email: string;
+  organization: string;
+  category: string;
+  // Add other fields like 'expires' if you store them
 };
-// --- End Mock Data ---
 
 export default function SettingsPage() {
-  // State for forms
-  const [profile, setProfile] = useState({
-    name: mockUser.name,
-    organization: mockUser.organization,
-  });
-  const [password, setPassword] = useState({
-    current: '',
-    new: '',
-    confirm: '',
-  });
+  const router = useRouter();
+  // const [error, setError] = useState<string | null>(null);
 
+  // --- State for Data Fetching ---
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true); // Page load
+  const [fetchError, setFetchError] = useState<string | null>(null);
+
+  // --- State for Profile Form ---
+  const [profile, setProfile] = useState({ name: '', organization: '' });
+  const [profileLoading, setProfileLoading] = useState(false);
+  const [profileError, setProfileError] = useState<string | null>(null);
+  const [profileSuccess, setProfileSuccess] = useState<string | null>(null);
+
+  // --- State for Password Form ---
+  const [password, setPassword] = useState({ current: '', new: '', confirm: '' });
+  const [passwordLoading, setPasswordLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null);
+
+ // --- Fetch User Data on Load ---
+ useEffect(() => {
+  const fetchUserData = async () => {
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      router.push('/login');
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/users/me', {
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+
+      if (!res.ok) {
+        localStorage.removeItem('jwt');
+        throw new Error('Session expired. Please log in again.');
+      }
+
+      const data = await res.json();
+      setUser(data.user);
+      // Pre-fill the profile form with user's current data
+      setProfile({
+        name: data.user.name,
+        organization: data.user.organization,
+      });
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        // --- FIX: Use setFetchError here ---
+        setFetchError(err.message);
+        if (err.message.includes('Session expired')) {
+          router.push('/login');
+        }
+      } else {
+        // --- FIX: And use setFetchError here ---
+        setFetchError('An unknown error occurred');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  fetchUserData();
+}, [router]);
+
+  // --- Form Input Handlers ---
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setProfile(prev => ({ ...prev, [name]: value }));
@@ -40,23 +94,112 @@ export default function SettingsPage() {
     setPassword(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleProfileSubmit = (e: React.FormEvent) => {
+  // --- Form Submit Handlers ---
+  const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Add API call to update profile
-    alert("Profile Updated: " + JSON.stringify(profile));
-  };
+    setProfileLoading(true);
+    setProfileError(null);
+    setProfileSuccess(null);
 
-  const handlePasswordSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Add API call to update password
-    if (password.new !== password.confirm) {
-      alert("New passwords do not match.");
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      setProfileError('Not authenticated. Please log in.');
+      setProfileLoading(false);
       return;
     }
-    alert("Password change request submitted.");
-    setPassword({ current: '', new: '', confirm: '' });
+
+    try {
+      const res = await fetch('/api/users/me', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(profile),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to update profile');
+      }
+
+      setProfileSuccess('Profile updated successfully!');
+      // Update the user state if you want the header to change
+      if (user) {
+        setUser(prev => ({ ...prev!, name: profile.name, organization: profile.organization }));
+      }
+
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+      setProfileError(err.message);
+    } else {
+      setProfileError('An unknown error occurred');
+    }
+    } finally {
+      setProfileLoading(false);
+    }
   };
 
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password.new !== password.confirm) {
+      setPasswordError('New passwords do not match.');
+      return;
+    }
+
+    setPasswordLoading(true);
+    setPasswordError(null);
+    setPasswordSuccess(null);
+
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      setPasswordError('Not authenticated. Please log in.');
+      setPasswordLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/auth/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          current: password.current,
+          newPassword: password.new,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        // This will catch "Incorrect current password"
+        throw new Error(data.message || 'Failed to change password');
+      }
+
+      setPasswordSuccess('Password changed successfully!');
+      setPassword({ current: '', new: '', confirm: '' }); // Clear fields
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+      setPasswordError(err.message);
+    } else {
+      setPasswordError('An unknown error occurred');
+    }
+    } finally {
+      setPasswordLoading(false);
+    }
+  };
+
+  // --- Page Render Logic ---
+  if (isLoading) {
+    return <div className="h-screen w-full flex items-center justify-center">Loading settings...</div>;
+  }
+
+  if (fetchError || !user) {
+    return <div className="h-screen w-full flex items-center justify-center text-red-600">
+      Error: {fetchError || "Could not load user data."}
+    </div>;
+  }
 
   return (
     <>
@@ -82,6 +225,8 @@ export default function SettingsPage() {
               Profile Information
             </h2>
             <form onSubmit={handleProfileSubmit} className="space-y-4">
+              {profileError && <div className="text-red-600 bg-red-100 p-3 rounded">{profileError}</div>}
+              {profileSuccess && <div className="text-green-700 bg-green-100 p-3 rounded">{profileSuccess}</div>}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                   Full Name
@@ -116,7 +261,7 @@ export default function SettingsPage() {
                   type="email"
                   id="email"
                   name="email"
-                  value={mockUser.email}
+                  value={user.email} // From fetched data
                   disabled
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
                 />
@@ -124,10 +269,11 @@ export default function SettingsPage() {
               <div className="text-right">
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition"
+                  disabled={profileLoading}
+                  className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition disabled:bg-gray-400"
                 >
                   <FaSave />
-                  Save Changes
+                  {profileLoading ? 'Saving...' : 'Save Changes'}
                 </button>
               </div>
             </form>
@@ -139,6 +285,8 @@ export default function SettingsPage() {
               Change Password
             </h2>
             <form onSubmit={handlePasswordSubmit} className="space-y-4">
+              {passwordError && <div className="text-red-600 bg-red-100 p-3 rounded">{passwordError}</div>}
+              {passwordSuccess && <div className="text-green-700 bg-green-100 p-3 rounded">{passwordSuccess}</div>}
               <div>
                 <label htmlFor="current" className="block text-sm font-medium text-gray-700">
                   Current Password
@@ -181,10 +329,11 @@ export default function SettingsPage() {
               <div className="text-right">
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition"
+                  disabled={passwordLoading}
+                  className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition disabled:bg-gray-400"
                 >
                   <FaLock />
-                  Change Password
+                  {passwordLoading ? 'Changing...' : 'Change Password'}
                 </button>
               </div>
             </form>
@@ -200,16 +349,16 @@ export default function SettingsPage() {
               <div className="flex justify-between">
                 <span className="font-medium text-gray-700">Status:</span>
                 <span className="font-bold text-green-700 bg-green-100 px-3 py-1 rounded-full">
-                  {mockUser.membership.status}
+                  Active
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="font-medium text-gray-700">Level:</span>
-                <span className="text-gray-800">{mockUser.membership.type}</span>
+                <span className="text-gray-800">{user.category}</span>
               </div>
               <div className="flex justify-between">
                 <span className="font-medium text-gray-700">Expires:</span>
-                <span className="text-gray-800">{mockUser.membership.expires}</span>
+                <span className="text-gray-800">TBD</span>
               </div>
               <div className="pt-4 text-right">
                 <Link
