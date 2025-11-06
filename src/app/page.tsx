@@ -113,7 +113,7 @@ export default function HomePage() {
           
 
       {/* Partners */}
-      <section id="our-partners" className="py-20 px-6 bg-white">
+      <section id="our-partners" className="py-20 px-6 bg-green-300">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-8 green">Partners</h2>
           <LogoCarousel logos={partners} />
@@ -161,7 +161,7 @@ export default function HomePage() {
         <div className="gradient-container">
           <div className="plugged flex flex-row gap-4 items-start">
             <div className="relative w-full h-16 pb-[56.25%]">
-              <video src={"/vids/vid1.mp4"} autoPlay loop muted className="absolute top-0 left-0 w-full h-full rounded shadow object-cover"/>
+              <video src={"/vids/vid1.mp4"} autoPlay loop muted className="absolute top-0 left-0 w-full h-full rounded shadow object-contain"/>
               {/* <iframe
                 src="https://www.youtube.com/embed/Zrv_Cp8bLRM?si=4-0YJd7cTP0TLCKF"
                 title="YouTube video player"

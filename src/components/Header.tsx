@@ -372,7 +372,7 @@ export default function Header() {
       label: 'Groups & Forums',
       href: '/forums',
       children: [
-        { label: 'Young Professionals Forum', anchor: 'ethics' },
+        { label: 'Young Professionals Forum', anchor: 'young-professionals' },
         { label: 'Women in GEOINT Forum', anchor: 'anti-corruption' },
         { label: 'Industry & Private Sector Forum', anchor: 'fund-raising' },
         { label: 'Policy Briefs & white Paper ', anchor: 'slavery' },
@@ -458,9 +458,9 @@ export default function Header() {
       <div className={styles.navbar}>
         <Link href="/" className={styles.logo} onClick={closeAll}>
           <Image src="/logo.png" alt="Gifon" width={1000} height={800} className={styles.logoPng}/>
-          <div className="flex flex-col justify-center">
-            <h1 className="text-5xl font-bold green">GIFON</h1>
-            <span className="text-xl font-semibold green">Geospatial Intelligence Foundation of Nigeria</span>
+          <div className="flex flex-col justify-center cooper">
+            <h1 className="text-8xl font-bold green">GIFON</h1>
+            <span className="text-md pl-6 font-md green">Geospatial Intelligence Foundation of Nigeria</span>
           </div>
         </Link>
 
@@ -474,7 +474,7 @@ export default function Header() {
         </button>
 
         {/* --- UPDATED NAVIGATION --- */}
-        <nav className={`${styles.topMenu} ${topMenuOpen ? styles.show : ""}`}>
+        <nav className={`cooper ${styles.topMenu} ${topMenuOpen ? styles.show : ""}`}>
           {topBarItemsBase.map((item, idx) => {
             
             // --- CHANGE 2: Type-safe way to check for the Search icon ---
@@ -520,7 +520,7 @@ export default function Header() {
           ☰
         </button>
 
-        <nav className={`${styles.navLinks} ${bottomMenuOpen ? styles.show : ""}`}>
+        <nav className={`cooper ${styles.navLinks} ${bottomMenuOpen ? styles.show : ""}`}>
           {menuItems.map((item) => {
             const hasChildren = Boolean(item.children?.length);
             const isOpen =

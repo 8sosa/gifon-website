@@ -70,7 +70,7 @@ export default function DonatePage() {
         ]}
       />
 
-      <main className="bg-green-50">
+      <main className="bg-green-50 text-justify">
         <section className='max-w-5xl mx-auto px-6 py-12 space-y-16'>
           
           {/* --- Introductory Text --- */}

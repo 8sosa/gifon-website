@@ -1,12 +1,12 @@
 // src/app/api/forums/categories/route.ts
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 
 const DB_NAME = 'test-db';
 const CATEGORIES_COLLECTION = 'forumCategories';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const client = await clientPromise;
     const db = client.db(DB_NAME);

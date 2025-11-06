@@ -122,11 +122,11 @@ export default async function AboutPage() {
             {/* Short underline */}
             <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
           </div>
-          <p className="max-w-3xl mx-auto mb-4 text-left">
+          <p className="max-w-3xl mx-auto mb-4 text-justify">
             The Geospatial Intelligence Foundation of Nigeria (GIFON) is Nigeria’s first dedicated platform to institutionalize geospatial intelligence. We are a movement bringing together government, military, academia, industry, and international partners to reshape how Nigeria thinks about intelligence, decision-making, and governance.
           </p>
           {/* --- FIXES ARE IN THIS <p> TAG --- */}
-          <p className="max-w-3xl mx-auto text-left">
+          <p className="max-w-3xl mx-auto text-justify">
             Founded by Dr. AA Usman, GIFON&apos;s quest is to ensure Nigeria is no longer &quot;blind in an era where other nations were seeing the world in sharper detail than ever before&quot;. This vision is about embedding GEOINT into the DNA of Nigeria’s governance —a dream once seen as radical, now recognized as indispensable to Nigeria’s survival and Africa’s rise.
           </p>
           <Link href={"/docs/THE QUEST BY DR. AA USMAN.docx"}> {/* Assumed path to the file */}
@@ -148,7 +148,7 @@ export default async function AboutPage() {
             variants={fadeUp}
           >
             <h2 className="text-4xl font-bold mb-6">Our Aim</h2>
-            <p className="text-gray-700 leading-relaxed mb-4">
+            <p className="text-gray-700 leading-relaxed mb-4 text-justify">
               The aim of the Geospatial Intelligence Foundation of Nigeria (GIFON) is to harness the power of geospatial data and technology to drive sustainable development, enhance national security, and empower decision-making across all sectors in Nigeria. Through innovation, education, collaboration, and policy frameworks, the Foundation strives to position Nigeria as a leader in the global geospatial intelligence community, ensuring that geospatial solutions contribute to the nation’s socio-economic progress, environmental sustainability, and resilience to future challenges. This aim emphasizes the Foundation’s commitment to Nigeria’s growth, security, and leadership in the geospatial sector, while focusing on the broad impact of geospatial intelligence on governance, development, advancing sustainable development and global cooperation.
             </p>
             {/* <p className="text-gray-700 leading-relaxed mb-4">
@@ -206,7 +206,7 @@ export default async function AboutPage() {
       <section id="objectives" className="py-20 px-6 bg-gray-50 fullSect">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-6 text-center">Our Objectives</h2>
-          <p className="text-lg text-gray-700 mb-12 text-center max-w-4xl mx-auto">
+          <p className="text-lg text-gray-700 mb-12 text-justify max-w-4xl mx-auto">
             The objectives of the Geospatial Intelligence Foundation of Nigeria (GIFON),
             focuses on building a strong foundation for geospatial intelligence in
             Nigeria, addressing both technical and strategic goals. They emphasize the
@@ -275,7 +275,7 @@ export default async function AboutPage() {
                 variants={fadeUp}
               >
                 <h3 className="text-xl font-semibold text-primary">{obj.title}</h3>
-                <p className="text-gray-700">{obj.text}</p>
+                <p className="text-gray-700 text-justify">{obj.text}</p>
               </MotionDiv>
             ))}
           </div>
@@ -340,22 +340,17 @@ export default async function AboutPage() {
     className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg"
   >
     <h2 className="text-3xl font-semibold mb-4 text-center">Contact Us</h2>
-    <p className="text-gray-700 leading-relaxed text-center">
-      For general inquiries, please reach out to us.
-    </p>
-    {/* General Inquiries Email */}
-    <p className='text-gray-700 leading-relaxed pb-8 text-center font-medium'>
-      info@gifon.org.ng
-    </p>
+    
 
     {/* Responsive Grid: 1 col on mobile, 2 cols on desktop */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
       
       {/* --- Column 1: Contact Details --- */}
       <div className="space-y-6">
 
+
         {/* --- Address --- */}
-        <div>
+        <div className='pb-4 border-b border-gray-200'>
           <h3 className="text-xl font-semibold text-green-700 border-b border-gray-200 pb-2">
             Our Address
           </h3>
@@ -370,12 +365,41 @@ export default async function AboutPage() {
               <span>
                 12 Richard Clapperton Street, <br />
                 Off Maman Nasir Road, <br />
-                Asokoro District, FCT, Abuja, Nigeria
+                Asokoro District,<br />
+                Abuja, Nigeria
               </span>
             </a>
           </div>
         </div>
+        <p className="text-gray-700 leading-relaxed text-left">
+          For general inquiries, please reach out to us.
+        </p>
+        <div>
+          <p className="text-lg font-semibold text-gray-800">General Inquiries</p>
+          <div className="mt-2 space-y-2">
+            {/* <a 
+              href="tel:+2347077211243" 
+              className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+            >
+              <FaPhone size={14} className="text-gray-400" />
+              <span>+234 707 721 1243</span>
+            </a> */}
+            <a 
+              href="mailto:info@gifon.org.ng" 
+              className="flex items-center gap-3 text-gray-600 hover:text-green-600 transition-colors"
+            >
+              <FaEnvelope size={14} className="text-gray-400" />
+              <span>info@gifon.org.ng</span>
+            </a>
+          </div>
+        </div>
+        {/* General Inquiries Email */}
+        {/* <p className='text-gray-700 leading-relaxed pb-8 text-left font-medium'>
+        General info: info@gifon.org.ng
+        </p> */}
+      </div>
 
+      <div>
         {/* --- Departments --- */}
         <h3 className="text-xl font-semibold text-green-700 border-b border-gray-200 pb-2">
           Our Departments
@@ -383,7 +407,7 @@ export default async function AboutPage() {
         
         {/* Secretariat */}
         <div>
-          <p className="text-lg font-semibold text-gray-800">Secretariat</p>
+          <p className="text-lg font-semibold text-gray-800">International Secretariat</p>
           <div className="mt-2 space-y-2">
             <a 
               href="tel:+2347077211243" 
