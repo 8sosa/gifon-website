@@ -252,6 +252,7 @@ export default function Header() {
         { label: 'Why Join GIFON', anchor: 'why-join' },
         { label: 'Membership Categories', anchor: 'categories' },
         { label: 'Membership Benefits', anchor: 'benefits' },
+        { label: 'Pioneer Members', anchor: 'pioneer' },
         { label: 'Membership Portal (Apply & Renew)', anchor: 'apply' },
       ],
     },

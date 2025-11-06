@@ -362,7 +362,7 @@ export default function MembershipPage({ children }: { children: React.ReactNode
                 {/* ... (Testimonial content) ... */}
                  <div className="max-w-3xl mx-auto text-center">
                     <blockquote className="text-2xl italic text-gray-800">
-                        “GIFON connects us to global geospatial networks while addressing Nigeria’s critical national infrastructure needs.”
+                        “<span className='cooper'>GIFON</span> connects us to global geospatial networks while addressing Nigeria’s critical national infrastructure needs.”
                     </blockquote>
                     <p className="mt-4 text-lg font-semibold">- Dr AA Usman / Founding Member</p>
                 </div>

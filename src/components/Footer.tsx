@@ -105,9 +105,9 @@ export default function Footer() {
         <div className={styles.col1}>
           <Link href="/" className={styles.logo}>
             <Image src="/logo.png" alt="Gifon" width={600} height={600} className={styles.logoPng}/>
-            <div className="flex flex-col justify-center">
-              <h1 className="text-5xl font-bold green">GIFON</h1>
-              <span className="text-lg font-semibold green">Geospatial Intelligence Foundation of Nigeria</span>
+            <div className="flex flex-col justify-center cooper">
+              <h1 className="text-8xl font-bold green">GIFON</h1>
+              <span className="text-md pl-4 font-md green">Geospatial Intelligence Foundation of Nigeria</span>
             </div>
           </Link>
         </div>
@@ -121,41 +121,45 @@ export default function Footer() {
               <li>Asokoro District, FCT, Abuja, Nigeria</li>
               
               {/* General Inquiries Email */}
-              <li className='leading-relaxed pt-2'>info@gifon.org.ng</li>
-              
+              <li className='flex flex-row w-full justify-between'>
+                <p>General Information:</p>
+                <div className='flex flex-col text-end'>
+                  <p className='pl-2'>info@gifon.org.ng</p>
+                </div>
+              </li>
               {/* Updated Secretariat */}
-              <li className='flex flex-row w-full justify-between pt-4 pb-4'>
-                <p>Secretariat:</p>
-                <div className='flex flex-col'>
-                  <p className='pl-4'>+234 707 721 1243</p>
-                  <p className='pl-4'>secretariat@gifon.org.ng</p>
+              <li className='flex flex-row w-full justify-between'>
+                <p>International Secretariat:</p>
+                <div className='flex flex-col text-end'>
+                  <p className='pl-2'>+234 707 721 1243</p>
+                  <p className='pl-2'>secretariat@gifon.org.ng</p>
                 </div>
               </li>
               
               {/* Updated Outreach */}
-              <li className='flex flex-row w-full justify-between pb-4'>
+              <li className='flex flex-row w-full justify-between'>
                 <p>Outreach:</p>
-                <div className='flex flex-col'>
-                  <p className='pl-4'>+234 707 726 9829</p>
-                  <p className='pl-4'>outreach@gifon.org.ng</p>
+                <div className='flex flex-col text-end'>
+                  <p className='pl-2'>+234 707 726 9829</p>
+                  <p className='pl-2'>outreach@gifon.org.ng</p>
                 </div>
               </li>
 
               {/* NEW Education & Membership */}
-              <li className='flex flex-row w-full justify-between pb-4'>
+              <li className='flex flex-row w-full justify-between'>
                 <p>Education & Membership:</p>
-                <div className='flex flex-col'>
-                  <p className='pl-4'>+234 707 721 1243</p>
-                  <p className='pl-4'>membership@gifon.org.ng</p>
+                <div className='flex flex-col text-end'>
+                  <p className='pl-2'>+234 707 721 1243</p>
+                  <p className='pl-2'>membership@gifon.org.ng</p>
                 </div>
               </li>
 
               {/* Updated Research */}
-              <li className='flex flex-row w-full justify-between pb-4'>
+              <li className='flex flex-row w-full justify-between'>
                 <p>Research:</p>
-                <div className='flex flex-col'>
-                  <p className='pl-4'>+234 707 739 6196</p>
-                  <p className='pl-4'>research@gifon.org.ng</p>
+                <div className='flex flex-col text-end'>
+                  <p className='pl-2'>+234 707 739 6196</p>
+                  <p className='pl-2'>research@gifon.org.ng</p>
                 </div>
               </li>
             </ul>

@@ -266,9 +266,9 @@ export default function HomePage() {
         </div>
 
         {/* News Section */}
-        <section className="background flex flex-col md:flex-row justify-between p-8 font-sans">
+        <section className="background flex flex-col md:flex-row justify-between p-8 cooper">
           {/* Social Media */}
-          <div className="flex-1 p-4">
+          <div className="flex-1 p-4 ">
             <h3 className="text-sky-700 border-b-2 border-sky-700 inline-block mb-4 text-3xl font-bold">
               Social Media
             </h3>

@@ -364,7 +364,7 @@ export default async function AboutPage() {
               <FaMapMarkerAlt size={14} className="text-gray-400 mt-1 flex-shrink-0" />
               <span>
                 12 Richard Clapperton Street, <br />
-                Off Maman Nasir Road, <br />
+                Off Maman Nasir Street, <br />
                 Asokoro District,<br />
                 Abuja, Nigeria
               </span>
