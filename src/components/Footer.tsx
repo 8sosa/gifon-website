@@ -117,8 +117,10 @@ export default function Footer() {
             <h4>Contact Us</h4>
             <ul className='w-max font-thin'>
               {/* Updated Address */}
-              <li>12 Richard Clapperton Street, Off Maman Nasir Road</li>
-              <li>Asokoro District, FCT, Abuja, Nigeria</li>
+              <li>12 Richard Clapperton Street,</li>
+              <li>Off Maman Nasir Street,</li>
+              <li>Asokoro District,</li>
+              <li>Abuja, Nigeria.</li>
               
               {/* General Inquiries Email */}
               <li className='flex flex-row w-full justify-between'>
