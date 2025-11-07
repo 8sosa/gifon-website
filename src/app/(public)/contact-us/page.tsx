@@ -345,10 +345,10 @@ export default function ContactPage() {
           >
             <FaMapMarkerAlt className="mt-1 text-green-600 flex-shrink-0" />
             <span className="leading-relaxed">
-              12 RICHARD CLAPPERTON, <br/>
-              OFF MAMAN NASIR, <br/>
+              12 RICHARD CLAPPERTON STREET, <br/>
+              OFF MAMAN NASIR STREET, <br/>
               ASOKORO DISTRICT, <br/>
-              FCT, ABUJA NIGERIA.
+              ABUJA - NIGERIA.
             </span>
           </a>
           </div>

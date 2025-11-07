@@ -168,14 +168,11 @@
   text-decoration: none;
   padding: 0.5rem; /* Use symmetrical padding for icons */
   width: 100%;
+  min-width: 1rem;
   text-align: left;
   position: relative;
   transition: color 0.2s ease, background-color 0.2s ease;
   line-height: 1; /* Aligns icon better */
-}
-
-.topNavIcon:hover {
-  background: #f5f5f5;
 }
 
 

@@ -323,7 +323,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Partners */}
-      <section id="our-partners" className="py-20 px-6 bg-white fullSect">
+      <section id="our-partners" className="py-20 px-6 bg-green-300 fullSect">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-8">Our Partners</h2>
           <LogoCarousel logos={partners} />

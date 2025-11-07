@@ -93,9 +93,9 @@ export default function Modal({ isOpen, onClose, title, content, children }: Mod
           {/* The logo <Link> was here, but it was a mistake. Removed. */}
           <Link href="#" className="flex flex-row mx-auto max-w-4xl">
             <Image src="/logo.png" alt="Gifon" width={1000} height={800} className={styles.logoPng}/>
-            <div className="flex flex-col justify-center">
-              <h1 className="text-5xl font-bold green">GIFON</h1>
-              <span className="text-xl font-semibold green">Geospatial Intelligence Foundation of Nigeria</span>
+            <div className="flex flex-col justify-center cooper">
+              <h1 className="text-8xl font-bold green">GIFON</h1>
+              <span className="text-md pl-6 font-md green">Geospatial Intelligence Foundation of Nigeria</span>
             </div>
           </Link>
           {content ? (

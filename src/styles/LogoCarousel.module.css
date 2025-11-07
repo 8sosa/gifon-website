@@ -8,9 +8,9 @@
   
   .track {
     display: flex;
-    width: calc(100%);     /* two sets side by side */
+    width: calc(200%);     /* two sets side by side */
     animation: scroll var(--duration) linear infinite;
-    gap: 10rem;
+    gap: 2rem;
   }
   
   .item {

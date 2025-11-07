@@ -54,7 +54,7 @@ export default function PartnershipsPage() {
           </div>
         </section>
 
-        <section id="past-partners" className="py-16 px-4 bg-gray-50">
+        <section id="past-partners" className="py-16 px-4  bg-green-300">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-semibold mb-4 text-center">Past & Current Partners</h2>
               <LogoCarousel logos={partners}  />
