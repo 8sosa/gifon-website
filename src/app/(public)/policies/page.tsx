@@ -4,7 +4,7 @@ import { useState } from "react";
 import HeroSection from "@/components/HeroSection";
 import { Button } from "@/components/ui/button";
 import { FileDown } from "lucide-react";
-import Modal from "@/components/Modal"; // Import our reusable modal
+import Modal from "@/components/Modal copy"; // Import our reusable modal
 
 // Define the type for the modal's state
 interface ModalState {
