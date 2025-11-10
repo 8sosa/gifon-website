@@ -106,8 +106,10 @@ export default function Footer() {
           <Link href="/" className={styles.logo}>
             <Image src="/logo.png" alt="Gifon" width={600} height={600} className={styles.logoPng}/>
             <div className="flex flex-col justify-center cooper">
-              <h1 className="text-8xl font-bold green">GIFON</h1>
-              <span className="text-md pl-4 font-md green">Geospatial Intelligence Foundation of Nigeria</span>
+              <h1 className="text-7xl lg:text-8xl font-bold green">GIFON</h1>
+              <span className="text-xs lg:text-md pl-2 lg:pl-6 font-md green">
+                Geospatial Intelligence Foundation of Nigeria
+              </span>
             </div>
           </Link>
         </div>

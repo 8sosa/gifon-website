@@ -460,8 +460,10 @@ export default function Header() {
         <Link href="/" className={styles.logo} onClick={closeAll}>
           <Image src="/logo.png" alt="Gifon" width={1000} height={800} className={styles.logoPng}/>
           <div className="flex flex-col justify-center cooper">
-            <h1 className="text-8xl font-bold green">GIFON</h1>
-            <span className="text-md pl-6 font-md green">Geospatial Intelligence Foundation of Nigeria</span>
+            <h1 className="text-7xl lg:text-8xl font-bold green">GIFON</h1>
+            <span className="text-xs lg:text-md pl-2 lg:pl-6 font-md green">
+              Geospatial Intelligence Foundation of Nigeria
+            </span>
           </div>
         </Link>
 
@@ -584,6 +586,9 @@ export default function Header() {
             </form>
           </div>
         </div>
+      )}
+      {(topMenuOpen || bottomMenuOpen) && (
+        <div className={styles.overlay} onClick={closeAll} />
       )}
     </header>
   );
