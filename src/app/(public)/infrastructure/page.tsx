@@ -44,7 +44,7 @@ const infrastructureSectors = [
     id: 'transportation',
     title: 'Transportation Systems',
     icon: <FaCar size={24} />,
-    image: '/ph.svg',
+    image: '/media/aviation.jpg',
     description:
       'Provide spatial analysis for air, road, rail, and maritime networks. Optimize traffic management, logistics, and accident prevention. Support secure navigation and border monitoring for aviation and maritime safety.',
   },
@@ -142,12 +142,8 @@ export default function InfrastructurePage() {
         title="Critical Infrastructure Support"
         description="Mapping Nigeria’s Critical Assets for Security, Resilience, and Sustainable Growth."
         backgroundImages={[
-          '/bg/e.jpeg',
-          '/bg/a.JPG',
-          '/bg/b.JPG',
-          '/bg/c.JPG',
-          '/bg/d.JPG',
-          '/ph.svg',
+          '/media/criticalinfrastructuresupport.jpg',
+          '/media/criticalinfrastructuresupport.jpg',
         ]}
       />
 

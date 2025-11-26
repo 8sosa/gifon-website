@@ -288,9 +288,9 @@ export default function ResourcesPage() {
               </div>
             </div>
             <div className="text-center mt-8">
-              <Link href="#" className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700">
+              {/* <Link href="#" className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700">
                 View All on Flickr
-              </Link>
+              </Link> */}
             </div>
           </div>
         </section>
