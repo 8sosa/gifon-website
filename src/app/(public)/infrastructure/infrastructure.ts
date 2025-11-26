@@ -5,7 +5,7 @@ export const sections = {
       summary:
         'Geospatial intelligence supports monitoring, siting and resilience for power grids, pipelines and renewables.',
       description: `Geospatial intelligence plays a critical role in energy security by providing real-time monitoring and analysis of power infrastructure. From mapping renewable energy resources to assessing vulnerabilities in oil pipelines and power grids, GEOINT allows decision-makers to predict, prevent, and respond to disruptions. As the global demand for sustainable energy rises, geospatial tools help identify optimal sites for solar, wind, and hydroelectric facilities, while also enabling risk assessments for natural disasters or cyber threats. Ensuring energy security means safeguarding not just the supply but also the strategic systems that keep nations powered and resilient.`,
-      image: '/bg/e.jpeg',
+      image: '/media/energy.jpg',
       highlights: [
         'Grid vulnerability mapping',
         'Renewable site selection',
@@ -17,7 +17,7 @@ export const sections = {
       title: 'Transportation',
       summary: 'Smart mobility and secure supply chains with satellite & sensor fusion.',
       description: `The transportation sector relies heavily on geospatial intelligence for planning, operations, and threat mitigation. By integrating satellite imagery, GPS data, and predictive analytics, GEOINT enhances the efficiency and security of supply chains, shipping lanes, and air traffic routes...`,
-      image: '/bg/a.JPG',
+      image: '/media/aviation.jpg',
       highlights: ['Chokepoint monitoring', 'Route optimization', 'Incident response'],
     },
     communication: {
@@ -25,7 +25,7 @@ export const sections = {
       title: 'Communication',
       summary: 'Mapping comms infrastructure to improve resilience and response.',
       description: `Communication networks form the backbone of modern society, and geospatial intelligence ensures their resilience against physical and cyber threats...`,
-      image: '/bg/b.JPG',
+      image: '/media/Communication.jpg',
       highlights: ['Tower & fiber mapping', 'Disaster recovery', 'Threat surface analysis'],
     },
     water: {
@@ -34,7 +34,7 @@ export const sections = {
       summary:
         'Hydrology, contamination detection and climate-informed resource planning.',
       description: `Water security is increasingly intertwined with environmental stability, and geospatial intelligence provides the tools to safeguard both...`,
-      image: '/bg/c.JPG',
+      image: '/media/water and environment.jpg',
       highlights: ['Reservoir monitoring', 'Flood modelling', 'Pollution tracing'],
     },
     health: {
@@ -67,7 +67,7 @@ export const sections = {
       title: 'Food Security & Agriculture',
       summary: 'Precision agriculture and resilient food supply chains with GEOINT.',
       description: `Food security is a cornerstone of national stability, and geospatial intelligence provides critical insights for sustainable agriculture and resource management...`,
-      image: '/bg/c.jpg',
+      image: '/media/Food Security (1).jpg',
       highlights: ['Crop yield optimization', 'Supply chain risk mapping', 'Disaster response'],
     },
     defence: {
@@ -84,7 +84,7 @@ export const sections = {
       title: 'Information Technology',
       summary: 'Mapping digital infrastructure and enhancing cybersecurity resilience.',
       description: `The IT sector underpins nearly every aspect of modern infrastructure, and geospatial intelligence enhances its security and efficiency...`,
-      image: '/bg/a.jpg',
+      image: '/media/ict.jpg',
       highlights: ['Data center mapping', 'Geographic redundancy planning', 'Cyber-physical threat analysis'],
     },
     industrial: {

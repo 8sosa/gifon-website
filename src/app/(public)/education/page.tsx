@@ -7,13 +7,13 @@ export default function DonatePage() {
   const educationPrograms = [
     {
       title: 'Youth Empowerment & Talent Acceleration',
-      src: "/images/A.jpeg", // Using placeholder images from your code
+      src: '/media/ye.jpg',
       link: '/education/youth-empowerment',
       description: 'The Youth Empowerment & Talent Acceleration Programme (YETAP) is an initiative of the Geospatial Intelligence Foundation of Nigeria (GIFON) to identify, train, and mentor the next generation of Nigerian innovators, analysts, and leaders in the field of geospatial intelligence (GEOINT) and its applications to national development and security...'
     },
     {
       title: 'Women in GEOINT (WINGS)',
-      src: "/images/B.jpeg",
+      src: '/media/wing.jpg',
       link: '/education/wings',
       description: 'The Geospatial Intelligence Foundation of Nigeria Women in GeoINT (GI-NGW) is a forum dedicated to empowering women in the field of geospatial and Geospatial intelligence (GeoINT) by providing a platform for collaboration, professional development, mentorship, and advocacy...'
     },

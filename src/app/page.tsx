@@ -120,7 +120,7 @@ export default function HomePage() {
         </div>
       </section>
       
-      <section className="events-section">
+      {/* <section className="events-section">
         <h2 className="text-4xl font-bold mb-5 green">Newsletter</h2>
         <h4 className="text-3xl font-bold mb-8 text-green-700"></h4>
         <div className="events-container">
@@ -131,29 +131,38 @@ export default function HomePage() {
             <p className="date">GIFON joins the Global GEOINT Stage</p>
             <a href="/newsletter">READ MORE</a>
           </div>
-          {/* <div className="event-card">
-            <div className="icon">📅</div>
-            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
-            <p className="location">Vol 2, No. 2 - August 2025</p>
-            <p className="date">GIFON joins the Global GEOINT Stage</p>
-            <a href="#">READ MORE</a>
-          </div>
+        </div>
+      </section> */}
 
-          <div className="event-card">
-            <div className="icon">📅</div>
-            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
-            <p className="location">Vol 2, No. 3 - August 2025</p>
-            <p className="date">GIFON joins the Global GEOINT Stage</p>
-            <a href="#">READ MORE</a>
-          </div>
+      <section className="newsketter-section">
+        {/* 1. The Video Background */}
+        <video 
+          className="video-bg" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+        >
+          {/* Replace with your actual video path */}
+          <source src="/media/WebGIF.mp4" type="video/mp4" />
+        </video>
 
-          <div className="event-card">
-            <div className="icon">📅</div>
-            <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
-            <p className="location">Vol 3, No. 1 - August 2025</p>
-            <p className="date">GIFON joins the Global GEOINT Stage</p>
-            <a href="#">READ MORE</a>
-          </div>  */}
+        {/* 2. Optional: Overlay to darken video so text pops */}
+        <div className="video-overlay"></div>
+
+        {/* 3. Your Original Content (Wrapped to ensure it sits on top) */}
+        <div className="content-wrapper">
+          <h2 className="text-4xl font-bold mb-5 text-green-400">Newsletter</h2>
+          {/* <h4 className="text-3xl font-bold mb-8 text-green-700"></h4> */}
+          <div className="events-container">
+            <div className="event-card">
+              <div className="icon">📅</div>
+              <h3>Eyes on Location - The GeoINSIGHT Bulletin</h3>
+              <p className="location">Vol 1, No. 1 - August 2025</p>
+              <p className="date">GIFON joins the Global GEOINT Stage</p>
+              <a href="/newsletter">READ MORE</a>
+            </div>
+          </div>
         </div>
       </section>
 

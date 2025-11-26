@@ -93,12 +93,8 @@ export default async function AboutPage() {
         title="About Us"
         // description=""
         backgroundImages={[
-          '/bg/e.jpeg',
-          '/bg/a.JPG',
-          '/bg/b.JPG',
-          '/bg/c.JPG',
-          '/bg/d.JPG',
-          '/ph.svg',
+          '/media/abt.jpg',
+          '/media/abt.jpg',
         ]}
       />
     <main className="py-12 font-sans text-gray-800">

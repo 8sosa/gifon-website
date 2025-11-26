@@ -36,6 +36,7 @@ const infrastructureSectors = [
     id: 'energy',
     title: 'Energy',
     icon: <FaBolt size={24} />,
+    image: '/media/energy.jpg',
     description:
       'Apply GEOINT for mapping and monitoring of power grids, oil and gas pipelines, and renewable energy assets. Support early warning for vandalism, illegal tapping, and sabotage. Enhance site planning for future energy infrastructure and off-grid solutions.',
   },
@@ -43,6 +44,7 @@ const infrastructureSectors = [
     id: 'transportation',
     title: 'Transportation Systems',
     icon: <FaCar size={24} />,
+    image: '/ph.svg',
     description:
       'Provide spatial analysis for air, road, rail, and maritime networks. Optimize traffic management, logistics, and accident prevention. Support secure navigation and border monitoring for aviation and maritime safety.',
   },
@@ -50,6 +52,7 @@ const infrastructureSectors = [
     id: 'communication',
     title: 'Communications',
     icon: <FaBroadcastTower size={24} />,
+    image: '/media/Comunication.jpg',
     description:
       'Use geospatial data for siting and protection of telecom towers, fibre networks, and ICT hubs. Support redundancy planning to avoid single points of failure. Enable location-based intelligence to secure cyber and physical communication assets.',
   },
@@ -57,6 +60,7 @@ const infrastructureSectors = [
     id: 'defence',
     title: 'Defense Industrial Base',
     icon: <FaShieldAlt size={24} />,
+    image: '/media/defence.jpg',
     description:
       'Provide advanced mapping and terrain analysis for military logistics and operations. Support secure defence manufacturing zones through geospatial risk assessment. Contribute to defence readiness with real-time intelligence for operational planning.',
   },
@@ -64,19 +68,19 @@ const infrastructureSectors = [
     id: 'food',
     title: 'Agriculture and Food Security',
     icon: <FaTractor size={24} />,
-    description:
-      'Use earth observation for crop monitoring, yield forecasting, and climate adaptation. Strengthen food security through land use analysis and supply chain visibility. Detect and prevent illegal land grabs and encroachment on agricultural reserves.',
-  },
+    description: `Food security is a cornerstone of national stability, and geospatial intelligence provides critical insights for sustainable agriculture and resource management...`,
+    image: '/media/Food Security (1).jpg',},
   {
     id: 'water',
-    title: 'Water and Dams',
+    title: 'Water and Environment',      
+    image: '/media/water and environment.jpg',
     icon: <FaWater size={24} />,
-    description:
-      'Map and monitor rivers, dams, and irrigation systems. Provide flood risk modelling and disaster preparedness solutions. Enhance water quality monitoring and equitable access through spatial intelligence.',
+    description: `Water security is increasingly intertwined with environmental stability, and geospatial intelligence provides the tools to safeguard both...`,
   },
   {
     id: 'health',
     title: 'Public Health and Healthcare',
+    image: '/ph.svg',
     icon: <FaHeartbeat size={24} />,
     description:
       'Use GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns. Support healthcare infrastructure planning and accessibility analysis. Provide real-time data for emergency response and disaster medicine.',
@@ -84,6 +88,7 @@ const infrastructureSectors = [
   {
     id: 'finance',
     title: 'Finance and Banking',
+    image: '/ph.svg',
     icon: <FaUniversity size={24} />,
     description:
       'Strengthen financial security through location-based intelligence for ATM and branch siting. Support anti-fraud operations by tracking geospatial patterns of illicit transactions. Map financial inclusion gaps to guide policy and private investment.',
@@ -91,6 +96,7 @@ const infrastructureSectors = [
   {
     id: 'manufacturing',
     title: 'Manufacturing',
+    image: '/ph.svg',
     icon: <FaGears size={24} />,
     description:
       'Use geospatial intelligence for supply chain risk management. Provide location analytics for industrial park planning and monitoring. Support resilience of manufacturing assets against natural and man-made hazards.',
@@ -98,6 +104,7 @@ const infrastructureSectors = [
   {
     id: 'education',
     title: 'Education',
+    image: '/media/education.jpg',
     icon: <FaGraduationCap size={24} />,
     description:
       'Support planning and equitable distribution of schools and research centers. Use spatial data to strengthen STEM and geospatial education programs. Facilitate research collaborations with academia and global geospatial partners.',
@@ -105,6 +112,7 @@ const infrastructureSectors = [
   {
     id: 'emergency',
     title: 'Emergency Services',
+    image: '/ph.svg',
     icon: <FaFirstAid size={24} />,
     description:
       'Provide real-time situational awareness for disaster response and recovery. Optimize deployment of fire, rescue, and law enforcement services. Support search and rescue missions with satellite and drone imagery.',
@@ -112,6 +120,7 @@ const infrastructureSectors = [
   {
     id: 'industrial',
     title: 'Critical Manufacturing & Industrial Processes',
+    image: '/ph.svg',
     icon: <FaIndustry size={24} />,
     description:
       'Monitor chemical, pharmaceutical, and heavy industry facilities for safety and compliance. Provide GEOINT for early detection of industrial hazards and environmental risks. Strengthen resilience of production hubs through geospatial risk modeling.',
@@ -119,6 +128,7 @@ const infrastructureSectors = [
   {
     id: 'government',
     title: 'Government Facilities & National Monuments',
+    image: '/ph.svg',
     icon: <FaLandmark size={24} />,
     description:
       'Map, monitor, and secure federal/state government facilities. Support continuity of government planning using spatial risk assessments. Provide GEOINT for the protection of national monuments, heritage sites, and strategic assets.',
@@ -210,7 +220,7 @@ export default function InfrastructurePage() {
                   {/* Image Content */}
                   <div className={`md:col-span-2 ${imageOrder}`}>
                     <Image
-                      src="/ph.svg" // Use your placeholder
+                      src={sector.image} // Use your placeholder
                       alt={sector.title}
                       width={1500} height={1000}
                       className="rounded-lg shadow-lg object-cover w-full h-64"
