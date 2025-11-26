@@ -2,10 +2,12 @@ import Image from 'next/image';
 import type { FlatMember } from '@/types/types';
 
 export function TeamGrid({ members }: { members: FlatMember[]; }) {
+  const sortedMembers = [...members].reverse();
+
   return (
     <section className="py-12 px-4 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-center">
-        {members.map((m, i) => (
+        {sortedMembers.map((m, i) => (
           <div key={i} className="text-center">
             <Image
               src={m.photo}
