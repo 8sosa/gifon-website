@@ -57,7 +57,7 @@ function Dropdown({
       className={`
         ${isMobile 
           ? "pl-4 border-l border-gray-100 space-y-2 mt-2" 
-          : "absolute top-full left-0 bg-white shadow-xl min-w-[240px] border-t-4 border-green-600 rounded-b-lg py-2"
+          : "absolute top-full left-0 bg-white shadow-xl min-w-60 border-t-4 border-green-600 rounded-b-lg py-2"
         } 
         ${!isMobile && depth > 0 ? "top-0 left-full -mt-2 ml-1" : ""}
       `}
@@ -342,9 +342,9 @@ export default function Header() {
         { label: 'Emergency Services', anchor: 'emergency' },
         { label: 'Critical Manufacturing', anchor: 'industrial' },
         { label: 'Govt. Facilities', anchor: 'government' },
-        // // Optional extras from codebase
-        // { label: 'IT', anchor: 'it' },
-        // { label: 'Space Systems', anchor: 'space' },
+        // Optional extras from codebase
+        { label: 'IT', anchor: 'it' },
+        { label: 'Space Systems', anchor: 'space' },
       ],
     },
     { 
@@ -550,7 +550,7 @@ export default function Header() {
                                <div className="flex justify-between items-center">
                                    <Link 
                                        href={item.href ?? "#"} 
-                                       className="text-base font-bold text-gray-800 py-2 block flex-grow hover:text-green-700"
+                                       className="text-base font-bold text-gray-800 py-2 block grow hover:text-green-700"
                                        onClick={(e) => {
                                            if(hasChildren) {
                                                e.preventDefault();
@@ -622,7 +622,7 @@ export default function Header() {
 
       {/* 4. SEARCH OVERLAY (Full Screen) */}
       {isSearchOpen && (
-        <div className="fixed inset-0 z-[60] bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center p-4 animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-60 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center p-4 animate-in fade-in duration-200">
             <button 
                 className="absolute top-6 right-6 text-gray-500 hover:text-red-500 transition-colors"
                 onClick={() => setIsSearchOpen(false)}

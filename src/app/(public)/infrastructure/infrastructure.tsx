@@ -200,24 +200,24 @@ export const sections: Record<string, Sector> = {
   },
   // Kept IT and Space as they are often required for app logic, 
   // but they are not in the top 13 list provided in the text.
-  // it: {
-  //   id: 'it',
-  //   title: 'Information Technology',
-  //   icon: <FaNetworkWired size={24} />,
-  //   summary: 'Mapping digital infrastructure and enhancing cybersecurity resilience.',
-  //   description: `The IT sector underpins nearly every aspect of modern infrastructure, and geospatial intelligence enhances its security and efficiency. Mapping data centers, fiber routes, and internet exchange points helps identifying physical vulnerabilities that could impact digital connectivity.`,
-  //   image: '/media/ict.jpg',
-  //   highlights: ['Data center mapping', 'Geographic redundancy planning', 'Cyber-physical threat analysis'],
-  // },
-  // space: {
-  //   id: 'space',
-  //   title: 'Space & Satellite Systems',
-  //   icon: <FaSatellite size={24} />,
-  //   summary: 'Protecting satellites and advancing space-based GEOINT capabilities.',
-  //   description: `Space and satellite systems form the foundation of modern geospatial intelligence, enabling global navigation, communication, and earth observation. Monitoring orbital assets and space weather is essential to maintaining the integrity of the GEOINT infrastructure itself.`,
-  //   image: '/bg/a.jpg',
-  //   highlights: ['Satellite monitoring', 'Orbital debris tracking', 'Space weather resilience'],
-  // },
+  it: {
+    id: 'it',
+    title: 'Information Technology',
+    icon: <FaNetworkWired size={24} />,
+    summary: 'Mapping digital infrastructure and enhancing cybersecurity resilience.',
+    description: `The IT sector underpins nearly every aspect of modern infrastructure, and geospatial intelligence enhances its security and efficiency. Mapping data centers, fiber routes, and internet exchange points helps identifying physical vulnerabilities that could impact digital connectivity.`,
+    image: '/media/ict.jpg',
+    highlights: ['Data center mapping', 'Geographic redundancy planning', 'Cyber-physical threat analysis'],
+  },
+  space: {
+    id: 'space',
+    title: 'Space & Satellite Systems',
+    icon: <FaSatellite size={24} />,
+    summary: 'Protecting satellites and advancing space-based GEOINT capabilities.',
+    description: `Space and satellite systems form the foundation of modern geospatial intelligence, enabling global navigation, communication, and earth observation. Monitoring orbital assets and space weather is essential to maintaining the integrity of the GEOINT infrastructure itself.`,
+    image: '/bg/a.jpg',
+    highlights: ['Satellite monitoring', 'Orbital debris tracking', 'Space weather resilience'],
+  },
 } as const;
 
 export type SectionId = keyof typeof sections;
