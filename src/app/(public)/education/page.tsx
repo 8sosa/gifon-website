@@ -62,7 +62,7 @@ export default function EducationPage() {
       <HeroSection
         title="Education & Programmes"
         backgroundMedia = {[
-          "/bg/e.jpeg", "/bg/a.JPG", "/bg/b.JPG", "/bg/c.JPG", "/bg/d.JPG", "/ph.svg",
+          "/media/Education Background.jpg",
         ]}
       />
 

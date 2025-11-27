@@ -35,7 +35,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaBolt size={24} />,
     summary: 'Mapping and monitoring of power grids, oil and gas pipelines, and renewable energy assets.',
     description: `Apply GEOINT for mapping and monitoring of power grids, oil and gas pipelines, and renewable energy assets. Support early warning for vandalism, illegal tapping, and sabotage. Enhance site planning for future energy infrastructure and off-grid solutions.`,
-    image: '/media/energy.jpg',
+    image: '/media/Energy.jpg',
     highlights: [
       'Power grid & pipeline monitoring',
       'Early warning for sabotage',
@@ -48,7 +48,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaCar size={24} />,
     summary: 'Spatial analysis for air, road, rail, and maritime networks and logistics.',
     description: `Provide spatial analysis for air, road, rail, and maritime networks. Optimize traffic management, logistics, and accident prevention. Support secure navigation and border monitoring for aviation and maritime safety.`,
-    image: '/media/aviation.jpg',
+    image: '/media/Transportation.jpg',
     highlights: [
       'Traffic management & logistics',
       'Accident prevention analysis',
@@ -74,7 +74,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaShieldAlt size={24} />,
     summary: 'Advanced mapping and terrain analysis for military logistics and operations.',
     description: `Provide advanced mapping and terrain analysis for military logistics and operations. Support secure defence manufacturing zones through geospatial risk assessment. Contribute to defence readiness with real-time intelligence for operational planning.`,
-    image: '/media/defence.jpg',
+    image: '/media/Defence new.jpg',
     highlights: [
       'Military logistics mapping',
       'Secure manufacturing zones',
@@ -109,11 +109,11 @@ export const sections: Record<string, Sector> = {
   },
   health: {
     id: 'health',
-    title: 'Public Health and Healthcare',
+    title: ' Health and Healthcare',
     icon: <FaHeartbeat size={24} />,
     summary: 'GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns.',
     description: `Use GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns. Support healthcare infrastructure planning and accessibility analysis. Provide real-time data for emergency response and disaster medicine.`,
-    image: '/bg/d.jpg',
+    image: '/media/HealthCare.jpg',
     highlights: [
       'Disease outbreak mapping',
       'Healthcare accessibility analysis',
@@ -126,7 +126,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaUniversity size={24} />,
     summary: 'Location-based intelligence for ATM siting and tracking illicit transactions.',
     description: `Strengthen financial security through location-based intelligence for ATM and branch siting. Support anti-fraud operations by tracking geospatial patterns of illicit transactions. Map financial inclusion gaps to guide policy and private investment.`,
-    image: '/bg/a.jpg',
+    image: '/media/Finance.jpg',
     highlights: [
       'ATM & branch siting',
       'Anti-fraud transaction tracking',
@@ -139,7 +139,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaGears size={24} />,
     summary: 'Supply chain risk management and industrial park planning analytics.',
     description: `Use geospatial intelligence for supply chain risk management. Provide location analytics for industrial park planning and monitoring. Support resilience of manufacturing assets against natural and man-made hazards.`,
-    image: '/bg/d.jpg',
+    image: '/media/Manufacturing 1.jpg',
     highlights: [
       'Supply chain risk management',
       'Industrial park planning',
@@ -152,7 +152,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaGraduationCap size={24} />,
     summary: 'Planning equitable distribution of schools and strengthening STEM programs.',
     description: `Support planning and equitable distribution of schools and research centers. Use spatial data to strengthen STEM and geospatial education programs. Facilitate research collaborations with academia and global geospatial partners.`,
-    image: '/media/education.jpg',
+    image: '/media/Education (2).jpg',
     highlights: [
       'School distribution planning',
       'STEM & Geospatial programs',
@@ -165,7 +165,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaFirstAid size={24} />,
     summary: 'Real-time situational awareness for disaster response and recovery.',
     description: `Provide real-time situational awareness for disaster response and recovery. Optimize deployment of fire, rescue, and law enforcement services. Support search and rescue missions with satellite and drone imagery.`,
-    image: '/bg/c.jpg',
+    image: '/media/Emergency.jpg',
     highlights: [
       'Disaster response awareness',
       'Deployment optimization',
@@ -178,7 +178,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaIndustry size={24} />,
     summary: 'Monitoring chemical, pharmaceutical, and heavy industry facilities.',
     description: `Monitor chemical, pharmaceutical, and heavy industry facilities for safety and compliance. Provide GEOINT for early detection of industrial hazards and environmental risks. Strengthen resilience of production hubs through geospatial risk modeling.`,
-    image: '/bg/b.jpg',
+    image: '/media/industrial systems.jpg',
     highlights: [
       'Heavy industry monitoring',
       'Hazard & environmental risk detection',
@@ -206,7 +206,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaNetworkWired size={24} />,
     summary: 'Mapping digital infrastructure and enhancing cybersecurity resilience.',
     description: `The IT sector underpins nearly every aspect of modern infrastructure, and geospatial intelligence enhances its security and efficiency. Mapping data centers, fiber routes, and internet exchange points helps identifying physical vulnerabilities that could impact digital connectivity.`,
-    image: '/media/ict.jpg',
+    image: '/media/Information Tech.JPG',
     highlights: ['Data center mapping', 'Geographic redundancy planning', 'Cyber-physical threat analysis'],
   },
   space: {
@@ -215,7 +215,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaSatellite size={24} />,
     summary: 'Protecting satellites and advancing space-based GEOINT capabilities.',
     description: `Space and satellite systems form the foundation of modern geospatial intelligence, enabling global navigation, communication, and earth observation. Monitoring orbital assets and space weather is essential to maintaining the integrity of the GEOINT infrastructure itself.`,
-    image: '/bg/a.jpg',
+    image: '/media/Space and Satellite.jpg',
     highlights: ['Satellite monitoring', 'Orbital debris tracking', 'Space weather resilience'],
   },
 } as const;

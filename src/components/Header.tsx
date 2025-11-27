@@ -371,7 +371,7 @@ export default function Header() {
     },
     {
       label: 'Get Involved',
-      href: '/donate',
+      href: '/get-involved',
       children: [
         { label: `Volunteer opportunities`, anchor: `opportunities`}
       ]

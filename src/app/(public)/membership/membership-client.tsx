@@ -163,7 +163,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 title="Join the Geospatial Intelligence Movement"
                 description="Connect with a powerful network of professionals, institutions, and agencies shaping Nigeria’s geospatial future."
                 backgroundMedia = {[
-                    "/bg/e.jpeg", "/bg/a.JPG", "/bg/b.JPG", "/bg/c.JPG", "/bg/d.JPG", "/ph.svg",
+                    "/media/Membership background.jpg",
                 ]}
             />
             
@@ -194,7 +194,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                         key={idx}
                         className="rounded-xl p-6 shadow-md bg-white flex flex-col justify-between hover:shadow-lg transition-shadow duration-300"
                     >
-                        <div className="flex-grow mb-6">
+                        <div className="grow mb-6">
                             <h3 className="text-lg md:text-xl font-bold mb-3 text-gray-800">{item.title}</h3>
                             <p className="text-gray-600 text-sm md:text-base leading-relaxed">{item.desc}</p>
                         </div>
@@ -362,7 +362,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             <section className="py-16 px-4 md:px-6 bg-gray-900 text-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-2xl md:text-3xl font-semibold mb-4">Have questions about joining GIFON?</h2>
-                    <p className="text-base md:text-lg text-gray-400 mb-8 break-words">
+                    <p className="text-base md:text-lg text-gray-400 mb-8 wrap-break-word">
                         Contact our membership team at membership@gifon.org.ng or call +234 707 721 1243.
                     </p>
                     <Link

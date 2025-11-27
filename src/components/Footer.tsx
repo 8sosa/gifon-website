@@ -16,7 +16,7 @@ export default function Footer() {
     { label: 'Critical Infrastructure Support', href: '/infrastructure' },
     { label: 'Policies', href: '/policies' },
     { label: 'Programmes', href: '/education#programs' },
-    { label: 'Get Involved', href: '/donate' },
+    { label: 'Get Involved', href: '/get-involved' },
   ];
 
   const socialLinks = [

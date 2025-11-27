@@ -400,10 +400,6 @@ const allForums = [
   }
 ];
 
-// --- Rest of your component code ---
-// interface ModalState { ... }
-// export default function DirectoryForumsPage() { ... }
-
 interface ModalState {
   isOpen: boolean;
   content: string | null;
@@ -433,12 +429,7 @@ export default function ForumsPage() {
         title="Groups & Forums"
         // description="Explore our journal content, editorial board, and submission guidelines."
         backgroundMedia = {[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
-          "/bg/b.JPG",
-          "/bg/c.JPG",
-          "/bg/d.JPG",
-          "/ph.svg",
+          "/media/Background Groups and forums.jpg",
         ]}
       />
 
