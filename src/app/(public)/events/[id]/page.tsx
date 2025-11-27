@@ -46,7 +46,7 @@ export default async function EventDetailPage({ params }: Props) {
       <HeroSection
         title={event?.title}
         // description="Join us for an unforgettable experience blending technology, innovation, and community."
-        backgroundImages={[
+        backgroundMedia={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

@@ -67,7 +67,7 @@ export default function SubmitPage() {
       <HeroSection
         title="Submit Your Work"
         description="Share your research with the GEOINT community. Submit your paper for review for the next GeoINSIGHT Journal."
-        backgroundImages={["/bg/a.JPG"]} // Use any of your cool backgrounds
+        backgroundMedia={["/bg/a.JPG"]} // Use any of your cool backgrounds
       />
 
       <main className="w-full py-20 px-4 bg-gray-50 flex items-center justify-center">

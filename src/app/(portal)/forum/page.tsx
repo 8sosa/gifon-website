@@ -16,7 +16,7 @@ export default async function ForumsPage() {
       <HeroSection
         title="GIFON Forums"
         description="Connect with the community, share insights, and discuss the future of GEOINT in Nigeria."
-        backgroundImages={["/bg/c.JPG"]} // Use one of your cool backgrounds
+        backgroundMedia={["/bg/c.JPG"]} // Use one of your cool backgrounds
       />
 
       <main className="w-full max-w-5xl mx-auto py-16 px-4">

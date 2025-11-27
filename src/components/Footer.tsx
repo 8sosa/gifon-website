@@ -1,4 +1,5 @@
-import styles from '@/styles/Footer.module.css';
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
@@ -6,53 +7,18 @@ import { IoShareSocial } from "react-icons/io5";
 
 export default function Footer() {
   const menuItems = [
-    {
-      label: 'Home',
-      href: '/',
-    },
-    {
-      label: 'About Us',
-      href: '/about'
-    },
-    {
-      label: 'Membership',
-      href: '/membership'
-    },
-    {
-      label: 'Education',
-      href: '/education',
-    },
-    {
-      label: 'Events',
-      href: '/events'
-    },
-    {
-      label: 'Media Resources',
-      href: '/media'
-    },
-    {
-      label: 'Critical Infrastructure Support',
-      href: '/infrastructure'
-    },
-    {
-      label: 'Policies',
-      href: '/policies'
-    },
-    {
-      label: 'Programmes',
-      href: '/education#programs'
-    },
-    // {
-    //   label: 'Publications',
-    //   href: '/resources#publications'
-    // },
-    {
-      label: 'Get Involved',
-      href: '/donate'
-    },
+    { label: 'Home', href: '/' },
+    { label: 'About Us', href: '/about' },
+    { label: 'Membership', href: '/membership' },
+    { label: 'Education', href: '/education' },
+    { label: 'Events', href: '/events' },
+    { label: 'Media Resources', href: '/media' },
+    { label: 'Critical Infrastructure Support', href: '/infrastructure' },
+    { label: 'Policies', href: '/policies' },
+    { label: 'Programmes', href: '/education#programs' },
+    { label: 'Get Involved', href: '/donate' },
   ];
 
-  // --- Data array for social links with brand colors ---
   const socialLinks = [
     { 
       name: 'X', 
@@ -99,83 +65,92 @@ export default function Footer() {
   ];
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.top}>
-        {/* Column 1 (spans half width) */}
-        <div className={styles.col1}>
-          <Link href="/" className={styles.logo}>
-            <Image src="/logo.png" alt="Gifon" width={600} height={600} className={styles.logoPng}/>
-            <div className="flex flex-col justify-center cooper">
-              <h1 className="text-7xl lg:text-8xl font-bold green">GIFON</h1>
-              <span className="text-xs lg:text-md pl-2 lg:pl-6 font-md green">
-                Geospatial Intelligence Foundation of Nigeria
-              </span>
-            </div>
-          </Link>
-        </div>
-        <div className={styles.footerRight}>
-          {/* Column 2 */}
-          <div className={styles.col}>
-            <h4>Contact Us</h4>
-            <ul className='w-max font-thin'>
-              {/* Updated Address */}
-              <li>12 Richard Clapperton Street,</li>
-              <li>Off Maman Nasir Street,</li>
-              <li>Asokoro District,</li>
-              <li>Abuja, Nigeria.</li>
-              
-              {/* General Inquiries Email */}
-              <li className='flex flex-row w-full justify-between'>
-                <p>General Information:</p>
-                <div className='flex flex-col text-end'>
-                  <p className='pl-2'>info@gifon.org.ng</p>
+    <footer className="bg-black pt-16 pb-8 border-t border-green-200 text-gray-100 font-sans">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        {/* --- Top Section: Grid Layout --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12">
+          
+          {/* 1. Logo Section (Takes 5 columns on desktop) */}
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <Link href="/" className="group">
+                <div className="relative w-32 h-32 lg:w-40 lg:h-40 mx-auto lg:mx-0 mb-4 transition-transform group-hover:scale-105">
+                    <Image 
+                        src="/logo.png" 
+                        alt="Gifon" 
+                        fill 
+                        className="object-contain"
+                    />
                 </div>
-              </li>
-              {/* Updated Secretariat */}
-              <li className='flex flex-row w-full justify-between'>
-                <p>International Secretariat:</p>
-                <div className='flex flex-col text-end'>
-                  <p className='pl-2'>+234 707 721 1243</p>
-                  <p className='pl-2'>secretariat@gifon.org.ng</p>
+                <div className="flex flex-col cooper">
+                    {/* Responsive text size: 5xl on mobile -> 8xl on desktop */}
+                    <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold text-green-700 leading-none">GIFON</h1>
+                    <span className="text-sm md:text-base lg:text-lg font-medium text-green-800 mt-2">
+                        Geospatial Intelligence Foundation of Nigeria
+                    </span>
                 </div>
+            </Link>
+          </div>
+
+          {/* 2. Contact Section (Takes 4 columns on desktop) */}
+          <div className="lg:col-span-4">
+            <h4 className="text-xl font-bold mb-6 text-green-700 border-b-2 border-green-200 inline-block">Contact Us</h4>
+            <ul className='space-y-4 text-sm md:text-base font-medium text-gray-200'>
+              {/* Address */}
+              <li className="leading-relaxed">
+                12 Richard Clapperton Street,<br />
+                Off Maman Nasir Street,<br />
+                Asokoro District,<br />
+                Abuja, Nigeria.
               </li>
               
-              {/* Updated Outreach */}
-              <li className='flex flex-row w-full justify-between'>
-                <p>Outreach:</p>
-                <div className='flex flex-col text-end'>
-                  <p className='pl-2'>+234 707 726 9829</p>
-                  <p className='pl-2'>outreach@gifon.org.ng</p>
+              {/* Contacts Items - Stack on mobile, Row on larger screens */}
+              <li className='flex flex-col sm:flex-row justify-between border-b border-dashed border-gray-200 pb-2'>
+                <p className="font-bold text-gray-300">General Info:</p>
+                <a href="mailto:info@gifon.org.ng" className='sm:text-right hover:text-green-600 transition-colors'>info@gifon.org.ng</a>
+              </li>
+
+              <li className='flex flex-col sm:flex-row justify-between border-b border-dashed border-gray-200 pb-2'>
+                <p className="font-bold text-gray-300">Secretariat:</p>
+                <div className='flex flex-col sm:text-right'>
+                  <a href="tel:+2347077211243" className="hover:text-green-600">+234 707 721 1243</a>
+                  <a href="mailto:secretariat@gifon.org.ng" className="hover:text-green-600">secretariat@gifon.org.ng</a>
+                </div>
+              </li>
+              
+              <li className='flex flex-col sm:flex-row justify-between border-b border-dashed border-gray-200 pb-2'>
+                <p className="font-bold text-gray-300">Outreach:</p>
+                <div className='flex flex-col sm:text-right'>
+                  <a href="tel:+2347077269829" className="hover:text-green-600">+234 707 726 9829</a>
+                  <a href="mailto:outreach@gifon.org.ng" className="hover:text-green-600">outreach@gifon.org.ng</a>
                 </div>
               </li>
 
-              {/* NEW Education & Membership */}
-              <li className='flex flex-row w-full justify-between'>
-                <p>Education & Membership:</p>
-                <div className='flex flex-col text-end'>
-                  <p className='pl-2'>+234 707 721 1243</p>
-                  <p className='pl-2'>membership@gifon.org.ng</p>
+              <li className='flex flex-col sm:flex-row justify-between border-b border-dashed border-gray-200 pb-2'>
+                <p className="font-bold text-gray-300">Education & Membership:</p>
+                <div className='flex flex-col sm:text-right'>
+                  <a href="tel:+2347077211243" className="hover:text-green-600">+234 707 721 1243</a>
+                  <a href="mailto:membership@gifon.org.ng" className="hover:text-green-600">membership@gifon.org.ng</a>
                 </div>
               </li>
 
-              {/* Updated Research */}
-              <li className='flex flex-row w-full justify-between'>
-                <p>Research:</p>
-                <div className='flex flex-col text-end'>
-                  <p className='pl-2'>+234 707 739 6196</p>
-                  <p className='pl-2'>research@gifon.org.ng</p>
+              <li className='flex flex-col sm:flex-row justify-between pb-2'>
+                <p className="font-bold text-gray-300">Research:</p>
+                <div className='flex flex-col sm:text-right'>
+                  <a href="tel:+2347077396196" className="hover:text-green-600">+234 707 739 6196</a>
+                  <a href="mailto:research@gifon.org.ng" className="hover:text-green-600">research@gifon.org.ng</a>
                 </div>
               </li>
             </ul>
           </div>
 
-          {/* Column 3 */}
-          <div className={styles.col}>
-            <h4>Quick Links</h4>
-            <ul>
+          {/* 3. Quick Links (Takes 3 columns on desktop) */}
+          <div className="lg:col-span-3">
+            <h4 className="text-xl font-bold mb-6 text-green-700 border-b-2 border-green-200 inline-block">Quick Links</h4>
+            <ul className="space-y-3">
             {menuItems.map(item => (
               <li key={item.label}>
-                <Link href={item.href} className={styles.navLink}>
+                <Link href={item.href} className="block text-gray-200 hover:text-green-700 hover:translate-x-1 transition-all duration-300">
                   {item.label}
                 </Link>
               </li>
@@ -183,35 +158,43 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-      </div>
 
-      {/* --- UPDATED SOCIALS SECTION --- */}
-      <div className="flex flex-col gap-8 p-4 text-center">
-        <h4 className='font-semibold text-lg'>Connect With Us</h4>
-        <div className='flex flex-col md:flex-row justify-around gap-8 items-center'>
+        {/* --- Socials & Share Section --- */}
+        <div className="border-t border-gray-200 py-8 flex flex-col items-center text-center">
+          <h4 className='font-semibold text-xl mb-6 text-gray-200'>Connect With Us</h4>
           
-          {/* Replaced hardcoded list with a mapped, responsive list */}
-          <ul className='flex flex-row flex-wrap justify-center gap-x-8 gap-y-4'>
-            {socialLinks.map((link) => (
-              <li key={link.name}>
-                <a
-                  href={link.href}
-                  className={`flex flex-row justify-start items-center gap-3 ${link.hoverColorClass} transition-colors`}
-                >
-                  <span className={link.colorClass}>{link.icon}</span>
-                  {/* Fixed semantics: h2 -> span */}
-                  <span className="font-medium">{link.name}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className='flex flex-col md:flex-row justify-center gap-8 items-center w-full'>
+            {/* Social Icons - Flex Wrap for Mobile */}
+            <ul className='flex flex-wrap justify-center gap-6 md:gap-8'>
+              {socialLinks.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    className={`flex items-center gap-2 group ${link.hoverColorClass} transition-colors`}
+                  >
+                    <span className={`${link.colorClass} group-hover:scale-110 transition-transform`}>{link.icon}</span>
+                    <span className="font-medium text-gray-200 group-hover:text-inherit">{link.name}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-          <button className={styles.shareBtn}><IoShareSocial /> SHARE THIS PAGE</button>
+            {/* Share Button 
+
+[Image of social share icon]
+ */}
+            <button className="flex items-center gap-2 px-6 py-2 bg-green-100 text-green-800 rounded-full font-semibold hover:bg-green-200 transition-colors shadow-sm">
+                <IoShareSocial className="text-lg" /> 
+                SHARE THIS PAGE
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className={styles.bottom}>
-        <p>&copy; {new Date().getFullYear()} GIFON. All rights reserved.</p>
+        {/* --- Bottom Copyright --- */}
+        <div className="text-center text-sm text-gray-200 pt-8 border-t border-gray-200">
+          <p>&copy; {new Date().getFullYear()} GIFON. All rights reserved.</p>
+        </div>
+
       </div>
     </footer>
   );

@@ -1,70 +1,120 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link"; // Import Link for the CTA
-import styles from "@/styles/HeroSection.module.css";
+import Link from "next/link";
+import Image from "next/image";
 
-// Make props optional so they don't cause type errors if not passed
 type HeroSectionProps = {
   title?: string;
   description?: string;
-  backgroundImages?: string[];
-  typingSpeed?: number;
+  // Now accepts a single string OR an array of strings
+  backgroundMedia?: string | string[]; 
   cycleInterval?: number;
-  ctaText?: string; // <-- Added CTA text prop
-  ctaLink?: string;  // <-- Added CTA link prop
+  ctaText?: string;
+  ctaLink?: string;
+};
+
+// Helper to check if a file is a video based on extension
+const isVideo = (src: string) => {
+  return src.match(/\.(mp4|webm|ogg|mov)$/i);
 };
 
 export default function HeroSection({
-  // Provide default values to use when props are not provided
   title = "",
   description = "",
-  backgroundImages = [], // Use an empty array as default
-  // typingSpeed = 80,
+  backgroundMedia = [], // Default empty
   cycleInterval = 5000,
-  ctaText, // No default needed, we'll check if it exists
-  ctaLink, // No default needed, we'll check if it exists
+  ctaText,
+  ctaLink,
 }: HeroSectionProps) {
-  const [bgIndex, setBgIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Background image cycle
+  // Normalize data: Ensure we always work with an array, even if a single string is passed
+  const mediaItems = Array.isArray(backgroundMedia) ? backgroundMedia : [backgroundMedia];
+
+  // Cycle Logic
   useEffect(() => {
-    if (backgroundImages.length <= 1) return; // nothing to cycle
+    // If there is only 1 or 0 items, don't set up an interval
+    if (mediaItems.length <= 1) return;
 
     const interval = setInterval(() => {
-      setBgIndex((prev) => (prev + 1) % backgroundImages.length);
+      setCurrentIndex((prev) => (prev + 1) % mediaItems.length);
     }, cycleInterval);
 
     return () => clearInterval(interval);
-  }, [backgroundImages, cycleInterval]);
+  }, [mediaItems.length, cycleInterval]);
+
+  // Don't render if no media provided (optional safety)
+  if (mediaItems.length === 0) return null;
 
   return (
-    <section className={styles.hero}>
-      {/* Background slideshow layers */}
-      {backgroundImages.map((img, i) => (
-        <div
-          key={i}
-          className={`${styles.bgImage} ${
-            i === bgIndex ? styles.active : ""
-          }`}
-          style={{ backgroundImage: `url(${img})` }}
-        />
-      ))}
+    <section className="relative w-full h-[50vh] min-h-[500px] md:h-[75vh] overflow-hidden bg-black">
+      
+      {/* --- BACKGROUND LAYER --- */}
+      {mediaItems.map((src, index) => {
+        const isActive = index === currentIndex;
+        const isMediaVideo = isVideo(src);
 
-      <div className={styles.overlay}>
-        {/* Title static */}
-        <h1 className={`cooper ${styles.title}`}>{title}</h1>
-        {/* Description static */}
-        <p className={`cooper ${styles.description}`}>{description}</p>
+        return (
+          <div
+            key={index}
+            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+              isActive ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+          >
+            {isMediaVideo ? (
+              <video
+                src={src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute top-0 left-0 w-full h-full object-cover"
+              />
+            ) : (
+              // Using standard img tag with object-cover for background behavior
+              // You can use Next/Image here too, but standard img is often smoother for crossfading backgrounds
+              <Image
+                src={src}
+                alt={`Slide ${index}`}
+                width={1000}
+                height={1000}
+                className="absolute top-0 left-0 w-full h-full object-cover"
+              />
+            )}
+            
+            {/* Optional: Dark Overlay to make text pop */}
+            <div className="absolute inset-0 bg-[rgba(0,63,33,0.7)]"></div>
+          </div>
+        );
+      })}
 
-        {/* --- Conditionally Rendered CTA Button --- */}
+      {/* --- CONTENT LAYER (Z-Index higher than background) --- */}
+      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto">
+        
+        {/* Title: Scales from text-4xl (mobile) to text-7xl (desktop) */}
+        {title && (
+          <h1 className="cooper text-white font-bold mb-4 drop-shadow-lg text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
+            {title}
+          </h1>
+        )}
+
+        {/* Description: Scales text size */}
+        {description && (
+          <p className="cooper text-gray-200 text-lg sm:text-xl md:text-2xl font-light max-w-3xl mb-8 drop-shadow-md">
+            {description}
+          </p>
+        )}
+
+        {/* CTA Button */}
         {ctaText && ctaLink && (
-          <Link href={ctaLink} className={styles.ctaButton}>
+          <Link 
+            href={ctaLink} 
+            className="bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition transform hover:scale-105 shadow-lg"
+          >
             {ctaText}
           </Link>
         )}
-        {/* ------------------------------------------ */}
-
       </div>
     </section>
   );

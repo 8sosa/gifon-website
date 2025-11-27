@@ -6,7 +6,7 @@ export default function ConferencesProceedingsPage() {
       <HeroSection
         title="Conferences & Workshop Proceedings"
         // description="The Geospatial Intelligence Foundation of Nigeria (GIFON) recognizes the value of knowledge-sharing, collaboration, and continuous learning in advancing the geospatial intelligence ecosystem."
-        backgroundImages={[
+        backgroundMedia={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

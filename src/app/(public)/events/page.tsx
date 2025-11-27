@@ -172,7 +172,7 @@ export default async function EventsPage() {
       <HeroSection
         title="Our Events"
         // description="Discover our upcoming and past events, conferences, and workshops."
-        backgroundImages={[
+        backgroundMedia={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

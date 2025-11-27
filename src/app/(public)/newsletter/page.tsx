@@ -13,7 +13,7 @@ export default function PublicationsPage() {
                 description="Stay informed with GIFON&apos;s flagship publication, balancing deep insights on policy and technology with engaging updates from our community."
                 ctaText="Read the Latest Issue"
                 ctaLink="#latest-issue" // Scrolls down to the issues
-                backgroundImages = {[
+                backgroundMedia = {[
                 "/bg/e.jpeg",
                 "/bg/a.JPG",
                 "/bg/b.JPG",

@@ -6,7 +6,7 @@ export default function TrainingCertificationPage() {
       <HeroSection
         title="GIFON Training & Certification Programmes (TCP)"
         // description="“Building Skills. Certifying Excellence. Advancing GEOINT for Nigeria and Beyond.”"
-        backgroundImages={[
+        backgroundMedia={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

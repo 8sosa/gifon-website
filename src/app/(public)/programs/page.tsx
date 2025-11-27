@@ -67,7 +67,7 @@ export default function ProgramsPage() {
       <HeroSection
         title="Programmes & Initiatives"
         // description="Explore our diverse programmes and initiatives driving geospatial capacity and innovation."
-        backgroundImages={[
+        backgroundMedia={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

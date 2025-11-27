@@ -10,7 +10,7 @@ export default function LeadershipHistoryPage() {
     <HeroSection
       title="Professional Resources"
       // description="Access tools, datasets, training materials, and downloadables to support your geospatial projects."
-      backgroundImages = {[
+      backgroundMedia = {[
         "/bg/e.jpeg",
         "/bg/a.JPG",
         "/bg/b.JPG",

@@ -64,7 +64,7 @@ export default function ContactPage() {
       <HeroSection
         title="Contact Us"
         description="We'd love to hear from you. Reach out with any questions, partnership inquiries, or comments."
-        backgroundImages={["/bg/d.JPG", "/bg/c.JPG"]} // Example images
+        backgroundMedia={["/bg/d.JPG", "/bg/c.JPG"]} // Example images
       />
       
       <main className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">

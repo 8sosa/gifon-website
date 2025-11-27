@@ -18,7 +18,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
             />
             <h4 className="text-lg font-semibold">{m.name}</h4>
             <p className="text-sm">{m.role}</p>
-            {m.email && <p className="text-sm">{m.email}</p>}
+            {/* {m.email && <p className="text-sm">{m.email}</p>} */}
           </div>
         ))}
       </div>

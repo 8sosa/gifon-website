@@ -74,7 +74,7 @@ export default function PoliciesPage() {
     <>
       <HeroSection
         title="Policies"
-        backgroundImages={[
+        backgroundMedia={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

@@ -30,13 +30,8 @@ export default function ResourcesPage() {
       <HeroSection
         title="Resources"
         description="Access tools, datasets, training materials, and downloadables to support your geospatial projects."
-        backgroundImages = {[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
-          "/bg/b.JPG",
-          "/bg/c.JPG",
-          "/bg/d.JPG",
-          "/ph.svg",
+        backgroundMedia = {[
+          "/media/WebGIF.mp4"
         ]}
       />
 
@@ -307,11 +302,11 @@ export default function ResourcesPage() {
                 <span className="ml-auto text-sm text-gray-500">(PDF, 5.2MB)</span>
               </Link>
               {/* Download Item */}
-              <Link href="#" className="p-4 bg-white rounded-lg shadow-md flex items-center gap-4 hover:bg-gray-50 transition">
+              {/* <Link href="#" className="p-4 bg-white rounded-lg shadow-md flex items-center gap-4 hover:bg-gray-50 transition">
                 <FaDownload className="text-green-600 w-5 h-5" />
                 <h3 className="text-lg font-semibold text-gray-800">Membership Application Form</h3>
                 <span className="ml-auto text-sm text-gray-500">(DOCX, 1.1MB)</span>
-              </Link>
+              </Link> */}
               {/* Download Item */}
               <Link href="#" className="p-4 bg-white rounded-lg shadow-md flex items-center gap-4 hover:bg-gray-50 transition">
                 <FaDownload className="text-green-600 w-5 h-5" />

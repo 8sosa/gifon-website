@@ -6,7 +6,7 @@ export default function OpenDataResearchPage() {
       <HeroSection
         title="GIFON Open Data & Research Programme (ODRP)"
         // description="“Open Data. Open Research. Smarter Nigeria.”"
-        backgroundImages={[
+        backgroundMedia={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

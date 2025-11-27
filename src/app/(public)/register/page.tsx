@@ -200,7 +200,7 @@ export default function RegisterPage() {
       <HeroSection
         title="Member Registration"
         // description="Join the Geospatial Intelligence Foundation of Nigeria (GIFON) to be part of a community shaping the future of GeoINT and national security."
-        backgroundImages = {[
+        backgroundMedia = {[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

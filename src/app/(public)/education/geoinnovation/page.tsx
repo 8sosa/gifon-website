@@ -6,7 +6,7 @@ export default function GeoinnovationPage() {
       <HeroSection
         title="GIFON Y-GeoInnovation & Tech Incubation Programme (Y-GITI)"
         // description="“Innovating with Location. Incubating the Future.”"
-        backgroundImages={[
+        backgroundMedia={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

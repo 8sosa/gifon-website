@@ -6,7 +6,7 @@ export default function GeospatialHubPage() {
       <HeroSection
         title="National Geospatial Security & Intelligence Hub"
         // description="“Mapping the Future. Empowering the Nation.”"
-        backgroundImages={[
+        backgroundMedia={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

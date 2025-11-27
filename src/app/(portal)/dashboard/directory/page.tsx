@@ -160,7 +160,7 @@ export default function DirectoryForumsPage() {
       <HeroSection
         title="Member Forums & Groups"
         description="Connect, collaborate, and grow with your specialized member-led forums."
-        backgroundImages = {[
+        backgroundMedia = {[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

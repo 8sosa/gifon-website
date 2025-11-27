@@ -7,7 +7,7 @@ export default function DonatePage() {
       <HeroSection
         title="GET INVOLVED"
         // description="Help us advance geospatial intelligence and innovation in Nigeria through your support."
-        backgroundImages = {[
+        backgroundMedia = {[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

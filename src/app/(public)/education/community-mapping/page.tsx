@@ -6,7 +6,7 @@ export default function CommunityMappingPage() {
       <HeroSection
         title="Community Mapping for Development (CMD) Programme"
         // description="“Mapping Communities. Driving Development. Empowering People.”"
-        backgroundImages={[
+        backgroundMedia={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
           "/bg/b.JPG",

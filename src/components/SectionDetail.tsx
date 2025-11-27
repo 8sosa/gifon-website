@@ -1,60 +1,109 @@
 "use client";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Sector } from "@/app/(public)/infrastructure/infrastructure"; // Import the shared type
 
-type Section = {
-    id: string;
-    title: string;
-    description: string;
-    image: string;
-    highlights?: readonly string[];
-  };
-  
-
-export default function SectionDetail({ section }: { section: Section }) {
+export default function SectionDetail({ section }: { section: Sector }) {
   return (
-    <section className="max-w-5xl mx-auto py-12 px-6 space-y-8">
-      <div className="grid md:grid-cols-3 gap-8 items-start">
-        <div className="md:col-span-2">
-          <motion.h2
+    <section className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      {/* Layout: 
+        On Desktop: Text Left (3 cols), Visual/Diagram Right (2 cols) 
+        On Mobile: Visual Top, Text Bottom
+      */}
+      <div className="grid lg:grid-cols-5 gap-12 items-start">
+        
+        {/* LEFT COLUMN: Content */}
+        <div className="lg:col-span-3 space-y-8">
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl font-bold"
+            transition={{ duration: 0.5 }}
           >
-            {section.title}
-          </motion.h2>
-          <p className="mt-4 text-slate-700 leading-relaxed">{section.description}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+              {section.title}
+            </h2>
+            <div className="w-20 h-1.5 bg-green-600 mt-4 rounded-full"></div>
+          </motion.div>
 
-          <div className="mt-6 grid sm:grid-cols-2 gap-4">
-            {section.highlights?.map((h, i) => (
-              <div
-                key={i}
-                className="p-4 rounded-xl bg-gradient-to-br from-white/60 to-white/30 border border-white/10 shadow"
-              >
-                {h}
-              </div>
-            ))}
+          {/* Description Text */}
+          <article className="prose prose-lg text-gray-700 text-justify leading-relaxed">
+            <p>{section.description}</p>
+          </article>
+
+          {/* Key Intelligence Highlights */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-600"></span>
+              Key Intelligence Capabilities
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {section.highlights?.map((h, i) => (
+                <div
+                  key={i}
+                  className="p-4 rounded-xl bg-green-50 border border-green-100 shadow-sm flex items-center gap-3"
+                >
+                  <div className="text-green-600">
+                    {/* Simple checkmark icon */}
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-sm font-semibold text-gray-800">{h}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-8 flex items-center gap-4">
-            <a className="inline-block px-6 py-3 rounded-full bg-indigo-600 text-white font-semibold shadow-lg" href="/register">
-              Apply
-            </a>
+          {/* CTAs */}
+          <div className="pt-6 flex flex-wrap items-center gap-4">
             <Link
-              href="/contact"
-              className="inline-block px-6 py-3 rounded-full border border-indigo-600 text-indigo-600 font-semibold"
+              href="/membership"
+              className="px-8 py-3 rounded-full bg-green-600 text-white font-semibold shadow-md hover:bg-green-700 transition transform hover:-translate-y-0.5"
+            >
+              Get Involved
+            </Link>
+            <Link
+              href="/contact-us"
+              className="px-8 py-3 rounded-full border-2 border-green-600 text-green-700 font-semibold hover:bg-green-50 transition"
             >
               Contact Us
             </Link>
           </div>
         </div>
 
-        <aside className="p-4 rounded-2xl bg-white/60 border border-white/10 shadow-lg">
-          <div className="relative h-48 rounded-md overflow-hidden">
-            <Image src={section.image} alt={section.title} fill className="object-cover" />
+        {/* RIGHT COLUMN: Visual / Diagram */}
+        <aside className="lg:col-span-2 space-y-6">
+          <div className="sticky top-24">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+              <Image 
+                src={section.image} 
+                alt={section.title} 
+                fill 
+                className="object-cover hover:scale-105 transition-transform duration-700" 
+              />
+              
+              {/* Overlay for visual flair */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+              <div className="absolute bottom-4 left-4 right-4 text-white text-sm font-medium drop-shadow-md">
+                 {section.summary}
+              </div>
+            </div>
+
+            {/* Optional: Add a 'Related Resources' card below the image if needed */}
+            <div className="mt-6 p-6 bg-gray-50 rounded-2xl border border-gray-100">
+                <h4 className="font-bold text-gray-900 mb-2">Need detailed reports?</h4>
+                <p className="text-sm text-gray-600 mb-4">
+                    Access our secure portal for in-depth datasets regarding {section.title}.
+                </p>
+                <Link href="/resources" className="text-green-700 text-sm font-bold hover:underline">
+                    Visit Resource Center &rarr;
+                </Link>
+            </div>
           </div>
         </aside>
+
       </div>
     </section>
   );
