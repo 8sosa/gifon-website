@@ -1,10 +1,9 @@
 import './globals.css';
-import { Montserrat, Bellota } from 'next/font/google'; // 1. Import fonts
-import localFont from 'next/font/local'; // Used for custom files like Cooper
+import { Montserrat, Bellota } from 'next/font/google';
+import localFont from 'next/font/local';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-// 2. Configure Google Fonts
 const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-montserrat',
@@ -18,20 +17,15 @@ const bellota = Bellota({
   display: 'swap',
 });
 
-// 3. Configure Local Font (Cooper)
-// ONLY uncomment this if you have the file in /public/fonts/
-
 const cooper = localFont({
   src: 'fonts/COOPBL.woff',
   variable: '--font-cooper',
   display: 'swap',
 });
 
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      {/* 4. Add the font variables to the className string below */}
       <body 
         className={`
           ${montserrat.variable} 
@@ -42,7 +36,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <Header />
         
-        <main className="flex-grow min-h-1/2 flex flex-col justify-start">
+        {/* CHANGE 2: Add dynamic top padding (pt) to main.
+           - pt-20 (5rem) for Mobile (matches the h-20 header)
+           - lg:pt-36 (9rem) for Desktop (matches h-24 + green nav bar height)
+        */}
+        <main className="grow min-h-1/2 flex flex-col justify-start pt-20 lg:pt-36">
           {children}
         </main>
         

@@ -97,7 +97,7 @@ export default function PublicationsPage() {
                         <div className="flex flex-col items-center">
                             <Link href="#" className="block mb-2 shadow-lg hover:shadow-xl transition-shadow w-full">
                                 {/* Use a relative container for Next/Image with fill */}
-                                <div className="relative w-full aspect-[3/4]">
+                                <div className="relative w-full aspect-3/4">
                                     <Image 
                                         src="/ph.svg" 
                                         alt="Cover of Vol. 1, No. 1" 
@@ -115,7 +115,7 @@ export default function PublicationsPage() {
                         {/* Add more issues as needed */}
                          <div className="flex flex-col items-center">
                             <Link href="#" className="block mb-2 shadow-lg hover:shadow-xl transition-shadow w-full">
-                                <div className="relative w-full aspect-[3/4]">
+                                <div className="relative w-full aspect-3/4">
                                     <Image 
                                         src="/ph.svg" 
                                         alt="Cover of Vol. 1, No. 2" 

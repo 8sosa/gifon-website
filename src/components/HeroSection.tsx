@@ -48,7 +48,7 @@ export default function HeroSection({
   if (mediaItems.length === 0) return null;
 
   return (
-    <section className="relative w-full h-[50vh] min-h-[500px] md:h-[75vh] overflow-hidden bg-black">
+    <section className="relative w-full h-[50vh] min-h-[500px] md:h-[80vh] overflow-hidden bg-black">
       
       {/* --- BACKGROUND LAYER --- */}
       {mediaItems.map((src, index) => {
@@ -79,7 +79,7 @@ export default function HeroSection({
                 alt={`Slide ${index}`}
                 width={1000}
                 height={1000}
-                className="absolute top-0 left-0 w-full h-full object-cover"
+                className="absolute top-0 left-0 w-full h-full object-contain"
               />
             )}
             

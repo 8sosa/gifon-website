@@ -2,7 +2,7 @@ import HeroSection from '@/components/HeroSection';
 import { TeamGrid } from '@/components/TeamGrid';
 import { getTeamMembers } from '@/lib/contentful-queries';
 import { FlatMember } from '@/types/types';
-import { LogoCarousel, Logo } from '@/components/LogoCarousel';
+import { LogoCarousel, CarouselItem } from '@/components/LogoCarousel'; // Import updated types
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -21,7 +21,7 @@ import {
 import { FaMapMarkerAlt } from 'react-icons/fa'; // Note: Check if using 'react-icons/fa6' or 'react-icons/fa' based on your install
 import { Globe, Shield, Users, Rocket, Sparkles } from 'lucide-react';
 
-const partners: Logo[] = [
+const partnerLogos: CarouselItem[] = [
   { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
   { src: '/images/na.png', alt: 'Nigerian Army' },
   { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
@@ -265,7 +265,7 @@ export default async function AboutPage() {
         </section>
 
         {/* Core Values */}
-        <section id="core-values" className="py-20 px-6 bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white">
+        <section id="core-values" className="py-20 px-6 bg-linear-to-r from-gray-900 via-black to-gray-800 text-white">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-12">Our Core Values</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -305,13 +305,14 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        {/* Partners */}
-        <section id="our-partners" className="py-16 px-6 bg-green-300">
-          <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-green-900">Our Partners</h2>
-            <LogoCarousel logos={partners} />
-          </div>
-        </section>
+        {/* Partners Section */}
+      <section id="our-partners" className="py-12 md:py-20 px-4 md:px-6 bg-green-300">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-green-900">Our Partners</h2>
+          {/* Ensure LogoCarousel handles its own internal responsiveness, usually by flex-wrap */}
+          <LogoCarousel items={partnerLogos} loopDurationMs={20000} />
+        </div>
+      </section>
 
         {/* Contact Section */}
         <section id="contact" className="py-16 px-4 md:px-6 bg-gray-50">
@@ -338,7 +339,7 @@ export default async function AboutPage() {
                     rel="noopener noreferrer"
                     className="flex items-start gap-3 text-gray-600 hover:text-green-600 transition-colors group"
                   >
-                    <FaMapMarkerAlt size={18} className="text-gray-400 mt-1 flex-shrink-0 group-hover:text-green-600" />
+                    <FaMapMarkerAlt size={18} className="text-gray-400 mt-1 shrink-0 group-hover:text-green-600" />
                     <span className="leading-relaxed">
                       12 Richard Clapperton Street, <br />
                       Off Maman Nasir Street, <br />

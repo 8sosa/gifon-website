@@ -77,10 +77,10 @@ export default function ResourcesPage() {
                 <div className="relative w-full h-40"> {/* Wrapper for Image */}
                   <Image src="/ph.svg" alt="News placeholder" fill className="object-cover"/>
                 </div>
-                <div className="p-4 flex flex-col flex-grow">
+                <div className="p-4 flex flex-col grow">
                   <span className="text-sm text-gray-500 mb-1">Oct 26, 2025</span>
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">GIFON Partners with Ministry of Defence</h3>
-                  <p className="text-gray-600 text-sm flex-grow mb-4">A new MOU is signed to enhance national security through advanced geospatial intelligence...</p>
+                  <p className="text-gray-600 text-sm grow mb-4">A new MOU is signed to enhance national security through advanced geospatial intelligence...</p>
                   <Link href="#" className="text-green-600 hover:underline font-semibold">Read More &rarr;</Link>
                 </div>
               </div>
@@ -89,10 +89,10 @@ export default function ResourcesPage() {
                 <div className="relative w-full h-40"> {/* Wrapper for Image */}
                   <Image src="/ph.svg" alt="News placeholder" fill className="object-cover"/>
                 </div>
-                <div className="p-4 flex flex-col flex-grow">
+                <div className="p-4 flex flex-col grow">
                   <span className="text-sm text-gray-500 mb-1">Oct 22, 2025</span>
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">Youth Empowerment Program Launches</h3>
-                  <p className="text-gray-600 text-sm flex-grow mb-4">The first cohort of the WINGS program begins training, focusing on remote sensing...</p>
+                  <p className="text-gray-600 text-sm grow mb-4">The first cohort of the WINGS program begins training, focusing on remote sensing...</p>
                   <Link href="#" className="text-green-600 hover:underline font-semibold">Read More &rarr;</Link>
                 </div>
               </div>
@@ -101,11 +101,11 @@ export default function ResourcesPage() {
                 <div className="relative w-full h-40"> {/* Wrapper for Image */}
                   <Image src="/ph.svg" alt="News placeholder" fill className="object-cover"/>
                 </div>
-                <div className="p-4 flex flex-col flex-grow">
+                <div className="p-4 flex flex-col grow">
                   <span className="text-sm text-gray-500 mb-1">Oct 18, 2025</span>
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">Annual Conference Dates Announced</h3>
                   {/* FIXED: Unescaped quotes */}
-                  <p className="text-gray-600 text-sm flex-grow mb-4">GeoINSIGHT 2026 will be held in Abuja, focusing on &quot;GEOINT for Critical Infrastructure&quot;...</p>
+                  <p className="text-gray-600 text-sm grow mb-4">GeoINSIGHT 2026 will be held in Abuja, focusing on &quot;GEOINT for Critical Infrastructure&quot;...</p>
                   <Link href="#" className="text-green-600 hover:underline font-semibold">Read More &rarr;</Link>
                 </div>
               </div>
@@ -148,13 +148,13 @@ export default function ResourcesPage() {
             <SectionHeader title="GeoINSIGHT Podcast" icon={<FaMicrophoneAlt size={24} />} />
             <div className="bg-gray-50 rounded-lg shadow-lg p-6 flex flex-col md:flex-row gap-6 items-center">
               {/* Wrapper for Image */}
-              <div className="relative w-full md:w-48 h-48 flex-shrink-0">
+              <div className="relative w-full md:w-48 h-48 shrink-0">
                 <Image src="/ph.svg" alt="Podcast placeholder" fill className="object-cover rounded-md"/>
               </div>
               <div className="flex-1">
                 <span className="text-sm font-semibold text-green-600">LATEST EPISODE</span>
                 {/* FIXED: Unescaped apostrophe */}
-                <h3 className="text-2xl font-bold text-gray-800 mt-1 mb-2">Ep. 12: Mapping Nigeria&apos;s Energy Future</h3>
+                <h3 className="text-2xl font-bold text-gray-800 mt-1 mb-2">Ep. 1: Mapping Nigeria&apos;s Energy Future</h3>
                 <p className="text-gray-600 mb-4">We sit down with Dr. Fatima Bello to discuss how satellite imagery is being used to secure pipelines and identify new renewable energy sites...</p>
                 <Link href="#" className="inline-block bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700">
                   Listen Now
@@ -174,10 +174,10 @@ export default function ResourcesPage() {
                 <div className="relative w-full h-48"> {/* Wrapper for Image */}
                   <Image src="/ph.svg" alt="Webinar placeholder" fill className="object-cover"/>
                 </div>
-                <div className="p-4 flex flex-col flex-grow">
+                <div className="p-4 flex flex-col grow">
                   <span className="text-sm text-gray-500 mb-1">PAST EVENT: SEP 30, 2025</span>
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">Intro to AI/ML in Geospatial Analysis</h3>
-                  <p className="text-gray-600 text-sm flex-grow mb-4">Watch the recording of our 2-hour masterclass on object detection and land use classification.</p>
+                  <p className="text-gray-600 text-sm grow mb-4">Watch the recording of our 2-hour masterclass on object detection and land use classification.</p>
                   <Link href="#" className="inline-block bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 w-fit">
                     Watch Now
                   </Link>
@@ -188,10 +188,10 @@ export default function ResourcesPage() {
                 <div className="relative w-full h-48"> {/* Wrapper for Image */}
                   <Image src="/ph.svg" alt="Webinar placeholder" fill className="object-cover"/>
                 </div>
-                <div className="p-4 flex flex-col flex-grow">
+                <div className="p-4 flex flex-col grow">
                   <span className="text-sm text-red-600 font-semibold mb-1">UPCOMING: NOV 15, 2025</span>
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">Coastal Resilience & Flood Modeling</h3>
-                  <p className="text-gray-600 text-sm flex-grow mb-4">Join our panel of experts as they discuss climate change adaptation strategies for coastal cities.</p>
+                  <p className="text-gray-600 text-sm grow mb-4">Join our panel of experts as they discuss climate change adaptation strategies for coastal cities.</p>
                   <Link href="#" className="inline-block bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 w-fit">
                     Register Now
                   </Link>
@@ -236,7 +236,7 @@ export default function ResourcesPage() {
                         </h2>
                         <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
                       </div>
-                      <p className="flex-grow">{pub.description}</p>
+                      <p className="grow">{pub.description}</p>
                       <Link
                         href="#"
                         className="inline-block bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 w-fit mt-4"

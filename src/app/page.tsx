@@ -1,16 +1,26 @@
 "use client";
 
 import HeroSection from '@/components/HeroSection';
-import { LogoCarousel, Logo } from '@/components/LogoCarousel';
+import { LogoCarousel, CarouselItem } from '@/components/LogoCarousel'; // Import updated types
 import RevealProvider from "@/components/ui/RevealProvider";
+import { sections } from '../app/(public)/infrastructure/infrastructure'; // Ensure path is correct
 import Image from 'next/image';
 
-const partners: Logo[] = [
+// 1. Prepare Partner Logos
+const partnerLogos: CarouselItem[] = [
   { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
   { src: '/images/na.png', alt: 'Nigerian Army' },
   { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
   { src: '/images/dgi.jpeg', alt: 'DGI London' },
 ];
+
+// 2. Prepare Sector/Infrastructure Items
+const sectorItems: CarouselItem[] = Object.values(sections).map((sector) => ({
+  src: sector.image,
+  alt: sector.title,
+  title: sector.title, // passing the title makes the carousel render the text
+  href: `/infrastructure#${sector.id}`, // Link to the sector section
+}));
 
 export default function HomePage() {
   return (
@@ -27,12 +37,23 @@ export default function HomePage() {
         ]}
       />
 
+      {/* Infrastructure Sectors Carousel */}
+      <section id="sectors-carousel" className="py-12 bg-gray-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto mb-8 px-6 text-center">
+           <h2 className="text-3xl font-bold text-green-800">Key Infrastructure Sectors</h2>
+           <p className="text-gray-600 mt-2">Areas where we apply geospatial intelligence</p>
+        </div>
+        
+        {/* We pass the sectorItems here */}
+        <LogoCarousel items={sectorItems} loopDurationMs={40000} />
+      </section>
+
       {/* Partners Section */}
       <section id="our-partners" className="py-12 md:py-20 px-4 md:px-6 bg-green-300">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-green-900">Partners</h2>
           {/* Ensure LogoCarousel handles its own internal responsiveness, usually by flex-wrap */}
-          <LogoCarousel logos={partners} />
+          <LogoCarousel items={partnerLogos} loopDurationMs={20000} />
         </div>
       </section>
 
@@ -58,9 +79,10 @@ export default function HomePage() {
           
           <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl max-w-md mx-auto transform hover:scale-105 transition-transform duration-300">
             <div className="text-4xl mb-2">📅</div>
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Eyes on Location - The GeoINSIGHT Bulletin</h3>
-            <p className="text-gray-200 text-sm mb-1">Vol 1, No. 1 - August 2025</p>
-            <p className="text-gray-100 font-semibold mb-4">GIFON joins the Global GEOINT Stage</p>
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Eyes on Location</h3>
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-2">The GeoINSIGHT Bulletin</h3>
+            {/* <p className="text-gray-200 text-sm mb-1">Vol 1, No. 1 - August 2025</p>
+            <p className="text-gray-100 font-semibold mb-4"><span className="cooper">GIFON</span> joins the Global GEOINT Stage</p> */}
             <a 
               href="/newsletter" 
               className="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-full transition-colors"
@@ -92,10 +114,10 @@ export default function HomePage() {
 
             {/* Text Content */}
             <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left">
-              <h3 className="text-3xl md:text-4xl font-bold bellota text-gray-800 mb-4">
+              <h3 className="text-3xl md:text-4xl font-bold bellota text-gray-300 mb-4">
                 Get Plugged In
               </h3>
-              <p className="text-gray-600 mb-6 text-lg leading-relaxed">
+              <p className="text-gray-200 mb-6 text-lg leading-relaxed">
                 Join a community dedicated to mapping the future. Whether you are an individual or an organization, discover how you can contribute.
               </p>
               <a href="/membership" className="self-center lg:self-start bg-white text-green-700 font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg hover:bg-green-50 transition-all border border-green-100">
@@ -121,7 +143,7 @@ export default function HomePage() {
               {['Facebook', 'LinkedIn', 'Instagram', 'Youtube', 'X formerly Twitter'].map((platform) => (
                 <li key={platform}>
                   <a href="#" className="text-sky-700 hover:text-sky-900 hover:underline flex items-center gap-2 transition-colors">
-                    Follow GIFON on {platform}
+                    Follow <span className="cooper">GIFON</span> on {platform}
                   </a>
                 </li>
               ))}
@@ -178,7 +200,7 @@ export default function HomePage() {
             <div className="w-full md:w-1/2 flex flex-col items-start text-left">
               <p className="mb-6 text-gray-700 text-lg leading-relaxed">
                 We are looking forward to featuring a member&apos;s StoryMap each
-                month in this section. The first one celebrates GIFON&apos;s GIS
+                month in this section. The first one celebrates <span className="cooper">GIFON&apos;s</span> GIS
                 Hall of Fame inductees.
               </p>
               <button className="bg-green-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-green-600 transition shadow-md">

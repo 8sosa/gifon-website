@@ -248,7 +248,7 @@ export default async function EventsPage() {
                       </div>
                       <h4 className="font-semibold text-lg text-gray-800">{ev.title}</h4>
                       <p className="text-sm text-green-600 font-medium mt-1">{formatDate(ev.startDate)}</p>
-                      <p className="text-sm text-slate-700 mt-3 line-clamp-3 flex-grow">
+                      <p className="text-sm text-slate-700 mt-3 line-clamp-3 grow">
                         {excerptFromDescription(ev.description)}
                       </p>
                       <div className="mt-4">
@@ -293,7 +293,7 @@ export default async function EventsPage() {
                       </div>
                       <h4 className="font-semibold text-lg text-gray-800">{ev.title}</h4>
                       <p className="text-sm text-gray-600 mt-1">{formatDate(ev.startDate)}</p>
-                      <p className="text-sm text-slate-700 mt-3 line-clamp-3 flex-grow">
+                      <p className="text-sm text-slate-700 mt-3 line-clamp-3 grow">
                         {excerptFromDescription(ev.description)}
                       </p>
                       <div className="mt-4">
@@ -341,12 +341,12 @@ export default async function EventsPage() {
                         className="bg-white p-6 rounded-lg shadow-lg flex flex-col"
                       >
                         <div className="flex items-center gap-3 mb-4">
-                          <span className="text-green-600 flex-shrink-0">{program.icon}</span>
+                          <span className="text-green-600 shrink-0">{program.icon}</span>
                           <h4 className="text-lg font-semibold text-gray-800">
                             {program.title}
                           </h4>
                         </div>
-                        <p className="text-gray-600 text-sm mb-6 flex-grow">
+                        <p className="text-gray-600 text-sm mb-6 grow">
                           {program.description}
                         </p>
                         <Link 

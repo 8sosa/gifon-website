@@ -292,9 +292,9 @@ export default function ContactPage() {
               </a>
             </div>
 
-            {/* Education & Membership */}
+            {/* Membership */}
             <div>
-              <h3 className="font-semibold text-green-700 text-lg">Education & Membership</h3>
+              <h3 className="font-semibold text-green-700 text-lg">Membership</h3>
               <a 
                 href="tel:+2347077211243" 
                 className="flex items-center gap-3 text-gray-600 mt-2 hover:text-green-600 transition-colors"
@@ -310,7 +310,44 @@ export default function ContactPage() {
                 <span>membership@gifon.org.ng</span>
               </a>
             </div>
+                
+            {/* Education */}
+            <div>
+              <h3 className="font-semibold text-green-700 text-lg">Education & Programmes</h3>
+              <a 
+                href="tel:+2347077396196" 
+                className="flex items-center gap-3 text-gray-600 mt-2 hover:text-green-600 transition-colors"
+              >
+                <FaPhone className="text-gray-400" />
+                <span>+234 707 721 1243</span>
+              </a>
+              <a 
+                href="mailto:Education@gifon.org.ng" 
+                className="flex items-center gap-3 text-gray-600 mt-1 hover:text-green-600 transition-colors"
+              >
+                <FaEnvelope className="text-gray-400" />
+                <span>Education@gifon.org.ng</span>
+              </a>
+            </div>
 
+            {/* Events and Exhibition */}
+            <div>
+              <h3 className="font-semibold text-green-700 text-lg">Events and Exhibition</h3>
+              <a 
+                href="tel:+2347077396196" 
+                className="flex items-center gap-3 text-gray-600 mt-2 hover:text-green-600 transition-colors"
+              >
+                <FaPhone className="text-gray-400" />
+                <span>+234 707 739 6196</span>
+              </a>
+              <a 
+                href="mailto:Events.exhibition@gifon.org.ng" 
+                className="flex items-center gap-3 text-gray-600 mt-1 hover:text-green-600 transition-colors"
+              >
+                <FaEnvelope className="text-gray-400" />
+                <span>Events.exhibition@gifon.org.ng</span>
+              </a>
+            </div>
             {/* Research */}
             <div>
               <h3 className="font-semibold text-green-700 text-lg">Research</h3>
@@ -343,7 +380,7 @@ export default function ContactPage() {
             rel="noopener noreferrer"
             className="flex items-start gap-3 text-gray-600 hover:text-green-600 transition-colors"
           >
-            <FaMapMarkerAlt className="mt-1 text-green-600 flex-shrink-0" />
+            <FaMapMarkerAlt className="mt-1 text-green-600 shrink-0" />
             <span className="leading-relaxed">
               12 RICHARD CLAPPERTON STREET, <br/>
               OFF MAMAN NASIR STREET, <br/>

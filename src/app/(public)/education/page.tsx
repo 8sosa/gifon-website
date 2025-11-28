@@ -61,6 +61,7 @@ export default function EducationPage() {
     <>
       <HeroSection
         title="Education & Programmes"
+        description='To advance in your career, it is critical to keep updating your skills, be open to new ideas, and take advantage of every opportunity to learn. You may prefer self-directed learning via online courses or webinars, while others learn best through formal lectures or in-person seminars. GIFON has you covered, no matter your experience level, preferred learning method, or professional development need! We regularly deliver education and training at in-person and virtual events.'
         backgroundMedia = {[
           "/media/Education Background.jpg",
         ]}
@@ -70,11 +71,11 @@ export default function EducationPage() {
         <section className='max-w-5xl mx-auto px-4 md:px-6 py-12 md:py-16 space-y-12 md:space-y-16'>
           
           {/* --- Introductory Text --- */}
-          <div className="leading-relaxed text-base md:text-lg text-left md:text-justify">
+          {/* <div className="leading-relaxed text-base md:text-lg text-left md:text-justify">
             <p>
-              To advance in your career, it is critical to keep updating your skills, be open to new ideas, and take advantage of every opportunity to learn. You may prefer self-directed learning via online courses or webinars, while others learn best through formal lectures or in-person seminars. GIFON has you covered, no matter your experience level, preferred learning method, or professional development need! We regularly deliver education and training at in-person and virtual events.
+              
             </p>
-          </div>
+          </div> */}
           
           <div className="pt-4" id="C-T"></div>
 

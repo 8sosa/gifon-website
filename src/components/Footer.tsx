@@ -13,186 +13,142 @@ export default function Footer() {
     { label: 'Education', href: '/education' },
     { label: 'Events', href: '/events' },
     { label: 'Media Resources', href: '/media' },
-    { label: 'Critical Infrastructure Support', href: '/infrastructure' },
+    { label: 'Infrastructure Support', href: '/infrastructure' },
     { label: 'Policies', href: '/policies' },
     { label: 'Programmes', href: '/education#programs' },
     { label: 'Get Involved', href: '/get-involved' },
   ];
 
   const socialLinks = [
-    { 
-      name: 'X', 
-      icon: <FaXTwitter size={16}/>, 
-      href: '#', 
-      colorClass: 'text-gray-500',
-      hoverColorClass: 'hover:text-gray-500' 
-    },
-    { 
-      name: 'LinkedIn', 
-      icon: <FaLinkedinIn size={16}/>, 
-      href: '#', 
-      colorClass: 'text-blue-700',
-      hoverColorClass: 'hover:text-blue-700' 
-    },
-    { 
-      name: 'Facebook', 
-      icon: <FaFacebookF size={16}/>, 
-      href: '#', 
-      colorClass: 'text-blue-600',
-      hoverColorClass: 'hover:text-blue-600' 
-    },
-    { 
-      name: 'Youtube', 
-      icon: <FaYoutube size={16}/>, 
-      href: '#', 
-      colorClass: 'text-red-600',
-      hoverColorClass: 'hover:text-red-600' 
-    },
-    { 
-      name: 'Instagram', 
-      icon: <FaInstagram size={16}/>, 
-      href: '#', 
-      colorClass: 'text-pink-600',
-      hoverColorClass: 'hover:text-pink-600' 
-    },
-    { 
-      name: 'Whatsapp', 
-      icon: <FaWhatsapp size={16}/>, 
-      href: '#', 
-      colorClass: 'text-green-500',
-      hoverColorClass: 'hover:text-green-500' 
-    },
+    { name: 'X', icon: <FaXTwitter />, href: '#', hover: 'hover:text-white' },
+    { name: 'LinkedIn', icon: <FaLinkedinIn />, href: '#', hover: 'hover:text-blue-500' },
+    { name: 'Facebook', icon: <FaFacebookF />, href: '#', hover: 'hover:text-blue-600' },
+    { name: 'Youtube', icon: <FaYoutube />, href: '#', hover: 'hover:text-red-600' },
+    { name: 'Instagram', icon: <FaInstagram />, href: '#', hover: 'hover:text-pink-600' },
+    { name: 'Whatsapp', icon: <FaWhatsapp />, href: '#', hover: 'hover:text-green-500' },
   ];
 
   return (
-    <footer className="bg-black pt-16 pb-8 border-t border-green-200 text-gray-100 font-sans">
+    <footer className="bg-black py-10 border-t border-green-900 text-gray-400 font-sans text-sm">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* --- Top Section: Grid Layout --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12">
+        {/* Main Grid: Identity (4) | Links (3) | Contacts (5) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           
-          {/* 1. Logo Section (Takes 5 columns on desktop) */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <Link href="/" className="group">
-                <div className="relative w-32 h-32 lg:w-40 lg:h-40 mx-auto lg:mx-0 mb-4 transition-transform group-hover:scale-105">
-                    <Image 
-                        src="/logo.png" 
-                        alt="Gifon" 
-                        fill 
-                        className="object-contain"
-                    />
+          {/* --- 1. Identity & Socials (Col Span 4) --- */}
+          <div className="lg:col-span-4 flex flex-col items-center justify-center">
+            <Link href="/" className="flex items-center gap-3 group mb-6">
+                <div className="relative w-12 h-12 shrink-0 group-hover:scale-105 transition-transform">
+                    <Image src="/logo.png" alt="Gifon" fill className="object-contain"/>
                 </div>
                 <div className="flex flex-col cooper">
-                    {/* Responsive text size: 5xl on mobile -> 8xl on desktop */}
-                    <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold text-green-700 leading-none">GIFON</h1>
-                    <span className="text-sm md:text-base lg:text-lg font-medium text-green-800 mt-2">
-                        Geospatial Intelligence Foundation of Nigeria
-                    </span>
+                  <h1 className="text-5xl font-extrabold text-green-700 leading-none tracking-widest">
+                    GIFON
+                  </h1>
+                  <span className="text-[10px] font-bold text-green-800 uppercase tracking-wide">
+                    Geospatial Intelligence Foundation
+                  </span>
                 </div>
             </Link>
-          </div>
 
-          {/* 2. Contact Section (Takes 4 columns on desktop) */}
-          <div className="lg:col-span-4">
-            <h4 className="text-xl font-bold mb-6 text-green-700 border-b-2 border-green-200 inline-block">Contact Us</h4>
-            <ul className='space-y-4 text-sm md:text-base font-medium text-gray-200'>
-              {/* Address */}
-              <li className="leading-relaxed">
-                12 Richard Clapperton Street,<br />
-                Off Maman Nasir Street,<br />
-                Asokoro District,<br />
-                Abuja, Nigeria.
-              </li>
-              
-              {/* Contacts Items - Stack on mobile, Row on larger screens */}
-              <li className='flex flex-col sm:flex-row justify-between border-b border-dashed border-gray-200 pb-2'>
-                <p className="font-bold text-gray-300">General Info:</p>
-                <a href="mailto:info@gifon.org.ng" className='sm:text-right hover:text-green-600 transition-colors'>info@gifon.org.ng</a>
-              </li>
+            <div className="flex gap-4 mb-6">
+                {socialLinks.map((link) => (
+                    <a key={link.name} href={link.href} className={`text-lg transition-colors ${link.hover}`}>
+                        {link.icon}
+                    </a>
+                ))}
+            </div>
 
-              <li className='flex flex-col sm:flex-row justify-between border-b border-dashed border-gray-200 pb-2'>
-                <p className="font-bold text-gray-300">Secretariat:</p>
-                <div className='flex flex-col sm:text-right'>
-                  <a href="tel:+2347077211243" className="hover:text-green-600">+234 707 721 1243</a>
-                  <a href="mailto:secretariat@gifon.org.ng" className="hover:text-green-600">secretariat@gifon.org.ng</a>
-                </div>
-              </li>
-              
-              <li className='flex flex-col sm:flex-row justify-between border-b border-dashed border-gray-200 pb-2'>
-                <p className="font-bold text-gray-300">Outreach:</p>
-                <div className='flex flex-col sm:text-right'>
-                  <a href="tel:+2347077269829" className="hover:text-green-600">+234 707 726 9829</a>
-                  <a href="mailto:outreach@gifon.org.ng" className="hover:text-green-600">outreach@gifon.org.ng</a>
-                </div>
-              </li>
-
-              <li className='flex flex-col sm:flex-row justify-between border-b border-dashed border-gray-200 pb-2'>
-                <p className="font-bold text-gray-300">Education & Membership:</p>
-                <div className='flex flex-col sm:text-right'>
-                  <a href="tel:+2347077211243" className="hover:text-green-600">+234 707 721 1243</a>
-                  <a href="mailto:membership@gifon.org.ng" className="hover:text-green-600">membership@gifon.org.ng</a>
-                </div>
-              </li>
-
-              <li className='flex flex-col sm:flex-row justify-between pb-2'>
-                <p className="font-bold text-gray-300">Research:</p>
-                <div className='flex flex-col sm:text-right'>
-                  <a href="tel:+2347077396196" className="hover:text-green-600">+234 707 739 6196</a>
-                  <a href="mailto:research@gifon.org.ng" className="hover:text-green-600">research@gifon.org.ng</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          {/* 3. Quick Links (Takes 3 columns on desktop) */}
-          <div className="lg:col-span-3">
-            <h4 className="text-xl font-bold mb-6 text-green-700 border-b-2 border-green-200 inline-block">Quick Links</h4>
-            <ul className="space-y-3">
-            {menuItems.map(item => (
-              <li key={item.label}>
-                <Link href={item.href} className="block text-gray-200 hover:text-green-700 hover:translate-x-1 transition-all duration-300">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* --- Socials & Share Section --- */}
-        <div className="border-t border-gray-200 py-8 flex flex-col items-center text-center">
-          <h4 className='font-semibold text-xl mb-6 text-gray-200'>Connect With Us</h4>
-          
-          <div className='flex flex-col md:flex-row justify-center gap-8 items-center w-full'>
-            {/* Social Icons - Flex Wrap for Mobile */}
-            <ul className='flex flex-wrap justify-center gap-6 md:gap-8'>
-              {socialLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className={`flex items-center gap-2 group ${link.hoverColorClass} transition-colors`}
-                  >
-                    <span className={`${link.colorClass} group-hover:scale-110 transition-transform`}>{link.icon}</span>
-                    <span className="font-medium text-gray-200 group-hover:text-inherit">{link.name}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            {/* Share Button 
-
-[Image of social share icon]
- */}
-            <button className="flex items-center gap-2 px-6 py-2 bg-green-100 text-green-800 rounded-full font-semibold hover:bg-green-200 transition-colors shadow-sm">
-                <IoShareSocial className="text-lg" /> 
+            <button className="flex items-center gap-2 text-xs font-semibold text-green-700 hover:text-green-500 transition-colors">
+                <IoShareSocial size={14} /> 
                 SHARE THIS PAGE
             </button>
+          </div>
+
+          {/* --- 2. Quick Links (Col Span 3) --- */}
+          <div className="lg:col-span-3">
+            <h4 className="text-white font-bold mb-4 uppercase text-xs tracking-wider">Quick Links</h4>
+            <ul className="space-y-2">
+                {menuItems.map(item => (
+                <li key={item.label}>
+                    <Link href={item.href} className="hover:text-green-500 transition-colors block">
+                    {item.label}
+                    </Link>
+                </li>
+                ))}
+            </ul>
+          </div>
+
+          {/* --- 3. Contact (Col Span 5) --- */}
+          {/* Restored full data but used a dense grid to keep it compact */}
+          <div className="lg:col-span-4">
+            <h4 className="text-white font-bold mb-4 uppercase text-xs tracking-wider">Contact Us</h4>
+            
+            {/* Full Address Restored */}
+            <address className="not-italic mb-6 text-gray-500 leading-snug">
+                12 Richard Clapperton Street,<br />
+                Off Maman Nasir Street, Asokoro District,<br />
+                Abuja, Nigeria.
+            </address>
+            
+            {/* Dense Contact List */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-4 text-md">
+                
+                {/* General */}
+                <div className='col-span-1 sm:col-span-2 border-b border-gray-900 pb-2 mb-1'>
+                    <span className="block font-bold text-gray-300">General Info</span>
+                    <a href="mailto:info@gifon.org.ng" className="hover:text-green-500">info@gifon.org.ng</a>
+                </div>
+
+                {/* Secretariat */}
+                <div>
+                    <span className="block font-bold text-gray-300">Secretariat</span>
+                    <a href="tel:+2347077211243" className="block hover:text-green-500">+234 707 721 1243</a>
+                    <a href="mailto:secretariat@gifon.org.ng" className="block hover:text-green-500 text-gray-500">secretariat@gifon.org.ng</a>
+                </div>
+
+                {/* Outreach */}
+                <div>
+                    <span className="block font-bold text-gray-300">Outreach</span>
+                    <a href="tel:+2347077269829" className="block hover:text-green-500">+234 707 726 9829</a>
+                    <a href="mailto:outreach@gifon.org.ng" className="block hover:text-green-500 text-gray-500">outreach@gifon.org.ng</a>
+                </div>
+
+                {/* Membership */}
+                <div>
+                    <span className="block font-bold text-gray-300">Membership</span>
+                    <a href="tel:+2347077211243" className="block hover:text-green-500">+234 707 721 1243</a>
+                    <a href="mailto:membership@gifon.org.ng" className="block hover:text-green-500 text-gray-500">membership@gifon.org.ng</a>
+                </div>
+
+                {/* Education */}
+                <div>
+                    <span className="block font-bold text-gray-300">Education & Programmes</span>
+                    <a href="tel:+2347077211243" className="block hover:text-green-500">+234 707 721 1243</a>
+                    <a href="mailto:membership@gifon.org.ng" className="block hover:text-green-500 text-gray-500">Education@gifon.org.ng</a>
+                </div>
+
+                {/* Research */}
+                <div>
+                    <span className="block font-bold text-gray-300">Research</span>
+                    <a href="tel:+2347077396196" className="block hover:text-green-500">+234 707 739 6196</a>
+                    <a href="mailto:research@gifon.org.ng" className="block hover:text-green-500 text-gray-500">research@gifon.org.ng</a>
+                </div>
+                
+                {/* Events */}
+                <div>
+                    <span className="block font-bold text-gray-300">Events and Exhibition</span>
+                    <a href="tel:+2347077396196" className="block hover:text-green-500">+234 707 739 6196</a>
+                    <a href="mailto:research@gifon.org.ng" className="block hover:text-green-500 text-gray-500">Events.exhibition@gifon.org.ng</a>
+                </div>
+
+            </div>
           </div>
         </div>
 
         {/* --- Bottom Copyright --- */}
-        <div className="text-center text-sm text-gray-200 pt-8 border-t border-gray-200">
-          <p>&copy; {new Date().getFullYear()} GIFON. All rights reserved.</p>
+        <div className="mt-10 pt-6 border-t border-gray-900 text-center text-xs text-gray-600">
+          <p>&copy; {new Date().getFullYear()} Geospatial Intelligence Foundation of Nigeria. All rights reserved.</p>
         </div>
 
       </div>
