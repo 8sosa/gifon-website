@@ -33,7 +33,7 @@ export default function EducationPage() {
     },
     {
       title: 'Community Mapping for Development',
-      src: "/images/E.jpeg",
+      src: "/media/COMMUNITY MAPPING FOR DEVELOPMENT.jpg",
       link: '/education/community-mapping',
       description: 'The Community Mapping for Development (CMD) Programme is a grassroots initiative designed to empower communities with geospatial tools, data, and participatory mapping to drive local development, resilience, and inclusive planning...'
     },
@@ -45,13 +45,13 @@ export default function EducationPage() {
     },
     {
       title: 'Conferences, Workshops & Masterclasses',
-      src: "/images/G.jpeg",
+      src: "/media/Conference Background.jpg",
       link: '/education/conferences',
       description: 'GIFON recognizes the value of knowledge-sharing, collaboration, and continuous learning in advancing the geospatial intelligence ecosystem through regular events and masterclasses...'
     },
     {
       title: 'Training & Certification',
-      src: "/images/H.jpeg", 
+      src: "/media/TRAINING AND CERTIFICATION.jpg", 
       link: '/education/training',
       description: 'The Training & Certification Programmes (TCP) are designed to provide standardized, high-quality, and industry-recognized certifications in geospatial intelligence, data science, and related technologies...'
     },

@@ -10,6 +10,7 @@ export interface CarouselItem {
   alt?: string;
   title?: string;
   href?: string; // New optional property for links
+  caption?: string;
 }
 
 interface LogoCarouselProps {
@@ -57,6 +58,13 @@ export function LogoCarousel({
               {item.title && (
                 <p className="text-green-900 font-bold text-sm md:text-base text-center max-w-[200px] leading-tight group-hover:text-green-700 transition-colors">
                   {item.title}
+                </p>
+              )}
+              
+              {/* Caption */}
+              {item.caption && (
+                <p className="text-green-900 font-bold text-sm md:text-base text-center max-w-[200px] leading-tight group-hover:text-green-700 transition-colors">
+                  {item.caption}
                 </p>
               )}
             </>

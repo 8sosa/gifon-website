@@ -279,14 +279,14 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20 md:h-24">
             {/* Logo */}
-            <Link href="/" className="flex items-center group" onClick={closeAll}>
-                <div className="relative w-12 h-12 md:w-16 md:h-16 mr-3 transition-transform group-hover:scale-105">
-                    <Image src="/logo.png" alt="Gifon" fill className="object-contain"/>
-                </div>
-                <div className="flex flex-col justify-center cooper">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-green-700 leading-none tracking-[0.2em] lg:tracking-[0.25em]">GIFON</h1>
-                  <span className="text-[0.45rem] md:text-[0.65rem] lg:text-xs font-bold text-green-800 uppercase tracking-tight whitespace-nowrap">Geospatial Intelligence Foundation of Nigeria</span>
-                </div>
+            <Link href="/" className="flex items-center group">
+              <div className="relative w-12 h-12 md:w-16 md:h-16 mr-3 transition-transform group-hover:scale-105">
+                  <Image src="/logo.png" alt="Gifon" fill className="object-contain"/>
+              </div>
+              <div className="flex flex-col justify-center cooper">
+                <h1 className="text-5xl md:text-5xl lg:text-5xl font-extrabold text-green-700 leading-none tracking-[0.2em] lg:tracking-[0.3em]">GIFON</h1>
+                <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.5rem] font-bold text-green-800 uppercase tracking-tight whitespace-nowrap">Geospatial Intelligence Foundation of Nigeria</span>
+              </div>
             </Link>
 
             {/* Desktop Utilities */}

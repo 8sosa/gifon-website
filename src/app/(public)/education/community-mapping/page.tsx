@@ -7,12 +7,7 @@ export default function CommunityMappingPage() {
         title="Community Mapping for Development (CMD) Programme"
         // description="“Mapping Communities. Driving Development. Empowering People.”"
         backgroundMedia={[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
-          "/bg/b.JPG",
-          "/bg/c.JPG",
-          "/bg/d.JPG",
-          "/ph.svg",
+          "/media/COMMUNITY MAPPING FOR DEVELOPMENT.jpg"
         ]}
       />
 

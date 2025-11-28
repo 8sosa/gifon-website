@@ -7,12 +7,7 @@ export default function yetaPage() {
         title="GIFON Youth Empowerment & Talent Acceleration Programme (YETAP)"
         description="“Empowering Youth. Accelerating Talent. Building Nigeria’s Geospatial Future.”"
         backgroundMedia={[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
-          "/bg/b.JPG",
-          "/bg/c.JPG",
-          "/bg/d.JPG",
-          "/ph.svg",
+          "/media/ye.jpg",
         ]}
       />
 

@@ -19,13 +19,13 @@ import {
   FaEnvelope,    // Added
 } from 'react-icons/fa6';
 import { FaMapMarkerAlt } from 'react-icons/fa'; // Note: Check if using 'react-icons/fa6' or 'react-icons/fa' based on your install
-import { Globe, Shield, Users, Rocket, Sparkles } from 'lucide-react';
+// import { Globe, Shield, Users, Rocket, Sparkles } from 'lucide-react';
 
 const partnerLogos: CarouselItem[] = [
   { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
   { src: '/images/na.png', alt: 'Nigerian Army' },
   { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
-  { src: '/images/dgi.jpeg', alt: 'DGI London' },
+  { src: '/images/dgi.jpeg', alt: 'DGI London', caption: 'Media Partners' },
 ];
 
 function mapMembersByCategory(members: FlatMember[], category: string): FlatMember[] {
@@ -90,7 +90,7 @@ export default async function AboutPage() {
       <HeroSection
         title="About Us"
         backgroundMedia={[
-          '/media/abt.jpg'
+          '/media/AIM.jpg'
         ]}
       />
       
@@ -149,7 +149,7 @@ export default async function AboutPage() {
             
             <div className="w-full">
                 <MotionImg
-                src='/bg/c.JPG'
+                src='/media/AIM copy.jpg'
                 alt="Geospatial innovation"
                 className="rounded-2xl shadow-lg w-full h-auto object-cover"
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -268,26 +268,63 @@ export default async function AboutPage() {
         <section id="core-values" className="py-20 px-6 bg-linear-to-r from-gray-900 via-black to-gray-800 text-white">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-12">Our Core Values</h2>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { icon: <Shield size={32} />, title: 'Integrity', desc: 'We uphold the highest standards of ethics, transparency, and accountability in everything we do.' },
-                { icon: <Sparkles size={32} />, title: 'Innovation', desc: 'We are at the forefront of technological advancements, fostering a culture of creativity and continuous learning.' },
-                { icon: <Users size={32} />, title: 'Collaboration', desc: 'We believe in the power of partnerships with governments, academia, and the private sector.' },
-                { icon: <Rocket size={32} />, title: 'Excellence', desc: `We deliver high-quality solutions that meet global standards and drive measurable impact.` },
-                { icon: <Globe size={32} />, title: 'Sustainability', desc: 'We prioritize sustainable practices, advocating for long-term solutions that balance economic growth with environmental responsibility.' },
-                { icon: <Shield size={32} />, title: 'Accessibility', desc: 'We are committed to democratizing the use of geospatial data by making it understandable and usable for all.' },
-                { icon: <Shield size={32} />, title: 'Leadership', desc: 'We strive to be leaders in the geospatial intelligence community in Nigeria and Africa.' },
-                { icon: <Shield size={32} />, title: 'National Development', desc: `Dedicated to improving the quality of life for Nigerians through data-driven insights.` },
-                { icon: <Shield size={32} />, title: 'Inclusivity', desc: 'We ensure that geospatial intelligence is used to empower all Nigerians regardless of background.' },
+                { 
+                  // Case 1: Using an Image
+                  title: 'Integrity', 
+                  img: '/media/INTEGRITY.png', // Add your image path here
+                  desc: 'We uphold the highest standards of ethics, transparency, and accountability.' 
+                },
+                { 
+                  // Case 2: Using a React Icon (Fallback)
+                  title: 'Innovation', 
+                  img: '/media/INNOVATION.png', // Add your image path here
+                  desc: 'We are at the forefront of technological advancements.' 
+                },
+                { 
+                  title: 'Collaboration', 
+                  img: '/media/collaboration.png', // Works with SVGs too
+                  desc: 'We believe in the power of partnerships with governments and academia.' 
+                },
+                { 
+                  title: 'Excellence', 
+                  img: '/media/excellence.png', // Add your image path here
+                  desc: 'We deliver high-quality solutions that meet global standards.' 
+                },
+                { 
+                  title: 'Sustainability',
+                  img: '/media/SUSTAINABILITY.png',
+                  desc: 'We prioritize sustainable practices and balance economic growth.' 
+                },
+                { img: '/media/ACCESS.png', title: 'Accessibility', desc: 'We are committed to democratizing the use of geospatial data by making it understandable and usable for all.' },
+
+                { img: '/media/leadership.png', title: 'Leadership', desc: 'We strive to be leaders in the geospatial intelligence community in Nigeria and Africa.' },
+                
+                { img: '/media/NATIONAL DEVELOPMENT.png', title: 'National Development', desc: `Dedicated to improving the quality of life for Nigerians through data-driven insights.` },
+
+                { img: '/media/INCLUSIVITY.png', title: 'Inclusivity', desc: 'We ensure that geospatial intelligence is used to empower all Nigerians regardless of background.' },
+                // ... add the rest of your items
               ].map((val, i) => (
                 <MotionDiv
                   key={i}
                   className="p-6 bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg hover:bg-white/20 transition flex flex-col items-center space-y-4 border border-white/10"
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }} // Reduced delay for faster mobile feel
+                  transition={{ delay: i * 0.1 }}
                 >
-                  <div className="text-green-400 mb-2">{val.icon}</div>
+                  <div className="mb-2 flex items-center justify-center h-10 w-10">
+                      <div className="relative w-10 h-10">
+                        <Image 
+                          src={val.img} 
+                          alt={val.title} 
+                          fill 
+                          className="object-contain" // Ensures image fits without stretching
+                        />
+                      </div>
+                  </div>
+
                   <h3 className="text-xl font-bold">{val.title}</h3>
                   <p className="italic text-gray-300 text-sm leading-relaxed">{val.desc}</p>
                 </MotionDiv>

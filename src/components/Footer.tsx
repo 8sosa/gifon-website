@@ -37,18 +37,14 @@ export default function Footer() {
           
           {/* --- 1. Identity & Socials (Col Span 4) --- */}
           <div className="lg:col-span-4 flex flex-col items-center justify-center">
-            <Link href="/" className="flex items-center gap-3 group mb-6">
-                <div className="relative w-12 h-12 shrink-0 group-hover:scale-105 transition-transform">
-                    <Image src="/logo.png" alt="Gifon" fill className="object-contain"/>
-                </div>
-                <div className="flex flex-col cooper">
-                  <h1 className="text-5xl font-extrabold text-green-700 leading-none tracking-widest">
-                    GIFON
-                  </h1>
-                  <span className="text-[10px] font-bold text-green-800 uppercase tracking-wide">
-                    Geospatial Intelligence Foundation
-                  </span>
-                </div>
+            <Link href="/" className="flex items-center group">
+              <div className="relative w-12 h-12 md:w-16 md:h-16 mr-3 transition-transform group-hover:scale-105">
+                  <Image src="/logo.png" alt="Gifon" fill className="object-contain"/>
+              </div>
+              <div className="flex flex-col justify-center cooper">
+                <h1 className="text-5xl md:text-5xl lg:text-5xl font-extrabold text-green-700 leading-none tracking-[0.2em] lg:tracking-[0.3em]">GIFON</h1>
+                <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.5rem] font-bold text-green-800 uppercase tracking-tight whitespace-nowrap">Geospatial Intelligence Foundation of Nigeria</span>
+              </div>
             </Link>
 
             <div className="flex gap-4 mb-6">
@@ -95,7 +91,7 @@ export default function Footer() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-4 text-md">
                 
                 {/* General */}
-                <div className='col-span-1 sm:col-span-2 border-b border-gray-900 pb-2 mb-1'>
+                <div className='col-span-2 sm:col-span-2 border-b border-gray-900 pb-2 mb-1 flex flex-col align-center'>
                     <span className="block font-bold text-gray-300">General Info</span>
                     <a href="mailto:info@gifon.org.ng" className="hover:text-green-500">info@gifon.org.ng</a>
                 </div>

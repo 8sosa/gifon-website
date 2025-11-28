@@ -426,8 +426,8 @@ export default function ForumsPage() {
   return (
     <>
       <HeroSection
-        title="Groups & Forums"
-        // description="Explore our journal content, editorial board, and submission guidelines."
+        title="GIFON Groups & Forums"
+        description="Connecting Minds. Advancing GeoINT. Strengthening National Capacity."
         backgroundMedia = {[
           "/media/Background Groups and forums.jpg",
         ]}
@@ -435,6 +435,45 @@ export default function ForumsPage() {
 
       <main className="w-full">
         {/* --- Updated Sections based on your documents and JSON structure --- */}
+        <section className="py-16 px-4 bg-white">
+          <div className='max-w-5xl mx-auto'>
+            {/* <h1 className="text-4xl font-bold text-center my-12">GIFON Forums & Working Groups</h1> */}
+            <p className="text-gray-700 leading-relaxed text-justify mb-8">
+              The Geospatial Intelligence Foundation of Nigeria (GIFON) is committed to building a vibrant, collaborative, and future-focused GeoINT ecosystem for Nigeria. As part of this mission, the GIFON Groups & Forums serve as structured communities of practice where professionals, institutions, researchers, and enthusiasts can learn, engage, and innovate together.
+            </p>
+            
+            <p className="text-gray-700 leading-relaxed text-justify mb-8">
+              GIFON Groups & Forums provide a dynamic platform for dialogue, knowledge exchange, and coordinated action across the diverse pillars of geospatial intelligence. Each group focuses on a strategic area essential to Nigeria’s national development and security, enabling members to explore insights, share expertise, and contribute to practical solutions. These forums are designed to:
+            </p>
+
+            <ul className="list-disc list-inside mb-8 text-gray-700 leading-relaxed text-justify">
+              <li>Foster peer-to-peer learning, mentorship, and professional support.</li>
+              <li>Encourage multi-stakeholder collaboration across government, academia, private sector, defence and security agencies, and development partners.</li>
+              <li>Enable applied research, policy input, and solution development that advance Nigeria’s geospatial capabilities.</li>
+              <li>Strengthen the national pipeline of GeoINT skills, talent, and innovation.</li>
+            </ul>
+            
+            <p className="text-gray-700 leading-relaxed text-justify mb-8">
+              From national security and emergency management to AI/ML in geospatial analytics, land administration, climate resilience, smart cities, and space technologies, the Groups & Forums provide an inclusive environment where ideas meet implementation. Members participate in:
+            </p>
+
+            <ul className="list-disc list-inside mb-8 text-gray-700 leading-relaxed text-justify">
+              <li>Technical discussions and expert roundtables</li>
+              <li>Study groups and working sessions</li>
+              <li>Online community interactions</li>
+              <li>Capacity-building workshops and webinars</li>
+              <li>Joint projects, publications, and innovation challenges</li>
+            </ul>
+            
+            <span className='text-gray-700 leading-relaxed text-justify'>
+              The GIFON Groups & Forums embody our belief that collective intelligence drives national progress. By bringing Nigeria’s brightest geospatial minds together, we are cultivating a strong knowledge community that supports evidence-based decision-making, strengthens institutional capacity, and accelerates the growth of Nigeria’s GeoINT ecosystem.
+
+              Whether you are a seasoned professional, an emerging practitioner, a student, or an organisation seeking to engage in meaningful geo-collaboration, the GIFON Groups & Forums offer you a home to learn, contribute, and thrive.
+
+              Join us as we shape the future of geospatial intelligence in Nigeria, one group, one forum, one idea at a time.
+            </span>
+          </div>
+        </section>
         
         {/* Section 1: Young Professions Forum */}
         <section id="young-professionals" className="py-16 px-4 bg-white">

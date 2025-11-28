@@ -45,12 +45,7 @@ export default function WomenInGeointPage() {
         title="GIFON Women in GEOINT Program"
         description="Empowering women in the field of geospatial intelligence (GeoINT) through collaboration, professional development, mentorship, and advocacy."
         backgroundMedia={[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
-          "/bg/b.JPG",
-          "/bg/c.JPG",
-          "/bg/d.JPG",
-          "/ph.svg",
+          "/media/wing.jpg",
         ]}
       />
 
@@ -94,12 +89,12 @@ export default function WomenInGeointPage() {
                   className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow flex flex-col items-start" // Changed items-center to items-start
                 >
                   <div className="flex items-center gap-3 mb-4"> {/* Container for icon and title */}
-                    <span className="flex-shrink-0">{point.icon}</span>
+                    <span className="shrink-0">{point.icon}</span>
                     <h3 className="text-xl font-semibold text-gray-800 leading-tight"> {/* Removed text-center */}
                       {point.title}
                     </h3>
                   </div>
-                  <p className="text-gray-600 leading-relaxed text-sm flex-grow"> {/* Added flex-grow */}
+                  <p className="text-gray-600 leading-relaxed text-sm grow"> {/* Added flex-grow */}
                     {point.text}
                   </p>
                 </div>

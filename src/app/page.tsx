@@ -11,7 +11,7 @@ const partnerLogos: CarouselItem[] = [
   { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
   { src: '/images/na.png', alt: 'Nigerian Army' },
   { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
-  { src: '/images/dgi.jpeg', alt: 'DGI London' },
+  { src: '/images/dgi.jpeg', alt: 'DGI London', caption: 'Media Partners' },
 ];
 
 // 2. Prepare Sector/Infrastructure Items
@@ -27,6 +27,7 @@ export default function HomePage() {
     <RevealProvider>
       <HeroSection
         title="Geospatial Intelligence Foundation of Nigeria (GIFON)"
+        description='Source, Analyze, Automate & Share'
         backgroundMedia={[
           '/bg/e.jpeg',
           '/bg/a.JPG',
@@ -79,7 +80,7 @@ export default function HomePage() {
           
           <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl max-w-md mx-auto transform hover:scale-105 transition-transform duration-300">
             <div className="text-4xl mb-2">📅</div>
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Eyes on Location</h3>
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-2">-Eyes on Location-</h3>
             <h3 className="text-xl md:text-2xl font-bold text-white mb-2">The GeoINSIGHT Bulletin</h3>
             {/* <p className="text-gray-200 text-sm mb-1">Vol 1, No. 1 - August 2025</p>
             <p className="text-gray-100 font-semibold mb-4"><span className="cooper">GIFON</span> joins the Global GEOINT Stage</p> */}

@@ -7,12 +7,7 @@ export default function TrainingCertificationPage() {
         title="GIFON Training & Certification Programmes (TCP)"
         // description="“Building Skills. Certifying Excellence. Advancing GEOINT for Nigeria and Beyond.”"
         backgroundMedia={[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
-          "/bg/b.JPG",
-          "/bg/c.JPG",
-          "/bg/d.JPG",
-          "/ph.svg",
+          "/media/TRAINING AND CERTIFICATION.jpg",
         ]}
       />
 
