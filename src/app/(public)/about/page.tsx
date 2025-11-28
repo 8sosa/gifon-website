@@ -197,7 +197,7 @@ export default async function AboutPage() {
             </p>
 
             {/* Changed: gap-6 for mobile, gap-8 for larger screens */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {[
                 {
                     title: '1. Advancing Geospatial Technology Adoption',

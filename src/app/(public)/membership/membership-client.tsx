@@ -29,7 +29,7 @@ const forumContent = {
           <li>Valid Student ID Card</li>
           <li>Admission Letter or Proof of Enrollment</li>
           <li>Recent Passport Photograph</li>
-          <li>National Identification Number (NIN) Slip or any valid ID</li>
+          <li>National Identification Number (NIN) Slip or any Valid National ID</li>
           <li>Recommendation Letter (optional)</li>
         </ul>
       </div>
@@ -38,10 +38,10 @@ const forumContent = {
         <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Professional Membership</h3>
         <ul style="list-style-type: disc; padding-left: 1.5rem;">
           <li>Updated Curriculum Vitae (CV)</li>
-          <li>Relevant Academic Certificates (Minimum: B.Sc/B.Eng)</li>
+          <li>Relevant Academic Certificates (Minimum: B.Sc / B.Eng)</li>
           <li>Professional Certifications (if any)</li>
-          <li>Valid National ID</li>
-          <li>Passport Photograph</li>
+          <li>National Identification Number (NIN) Slip or any Valid National ID</li>
+          <li>Recent Passport Photograph</li>
         </ul>
       </div>
 
@@ -50,9 +50,17 @@ const forumContent = {
         <ul style="list-style-type: disc; padding-left: 1.5rem;">
           <li>Institutional Profile or Brochure</li>
           <li>Certificate of Establishment / Accreditation</li>
-          <li>Letter of Intent on Official Letterhead</li>
-          <li>Details of Institutional Contact Person</li>
-          <li>Valid Institutional ID and NIN of Contact Person</li>
+          <li>Letter of Intent on Official Institutional Letterhead</li>
+          <li>
+            Details of Authorized Institutional Contact Person:
+            <ul style="list-style-type: circle; padding-left: 1.5rem; margin-top: 0.25rem;">
+              <li>Name and Designation</li>
+              <li>Official Email & Phone Number</li>
+              <li>Institutional ID Card</li>
+              <li>National Identification Number (NIN) Slip or any Valid National ID</li>
+              <li>Recent Passport Photograph</li>
+            </ul>
+          </li>
         </ul>
       </div>
       
@@ -63,7 +71,9 @@ const forumContent = {
           <li>Company Profile or Brochure</li>
           <li>Tax Identification Number (TIN)</li>
           <li>Letter of Intent on Company Letterhead</li>
-          <li>List of Key Technical/Management Staff</li>
+          <li>List of Key Technical and/or Management Staff (with roles)</li>
+          <li>National Identification Number (NIN) Slip or any Valid National ID for Authorized Company Representative</li>
+          <li>Recent Passport Photograph of Authorized Representative</li>
         </ul>
       </div>
     </div>
