@@ -68,6 +68,7 @@ export default async function EventsPage() {
 
   try {
     events = (await getUpcomingEvents()) ?? [];
+    // console.log("Fetched events:", events.length, events);
   } catch (err) {
     console.error("Failed to load events", err);
     events = [];

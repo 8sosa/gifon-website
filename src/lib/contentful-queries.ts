@@ -8,13 +8,26 @@ import type {
   JobSkeleton,
   MembershipTierSkeleton,
   TeamMemberSkeleton,
-  FlatEvent,
   FlatNewsPost,
   Job,
   MembershipTier,
   FlatMember
 } from '@/types/types';
 import type { Document } from '@contentful/rich-text-types';
+
+/** * UPDATED TYPE DEFINITION 
+ * I moved this here based on your snippet, but ensure it matches your @/types/types file.
+ */
+export type FlatEvent = {
+  id: string;
+  title: string;
+  description?: Document | string;
+  startDate: string;
+  endDate?: string;
+  location: string;
+  link: string;
+  image: string; // CHANGED: Renamed from 'images' to 'image' to match the data structure
+};
 
 /** Helpers narrowing unknown to concrete types */
 function getString(value: unknown): string {
@@ -38,25 +51,35 @@ function getDocument(value: unknown): Document {
  */
 function getAssetUrl(maybeAsset: unknown): string | undefined {
   const asset = maybeAsset as Asset | undefined;
-
-  // Grab the file object (or undefined)
   const file = asset?.fields?.file;
   if (!file) return undefined;
-
-  // Make extra sure `url` is a string
   const url = file.url;
   return typeof url === 'string' ? url : undefined;
 }
+
 /** Fetch & flatten events */
 export async function getUpcomingEvents(): Promise<FlatEvent[]> {
   const entries = await client.getEntries<EventSkeleton>({ content_type: 'event' });
+  // console.log('Fetched events:', entries.items);
 
   return entries.items.map((item) => {
     const f = item.fields;
-    const rawUrl = getAssetUrl(f.image);
+
+    // 1. IMAGE HANDLING
+    // Check if f.images is an array and grab the first one
+    const firstImage = Array.isArray(f.images) ? f.images[0] : undefined;
+    
+    const rawUrl = getAssetUrl(firstImage);
     const image = rawUrl?.startsWith('//')
       ? `https:${rawUrl}`
       : rawUrl ?? '/ph.svg';
+
+    // 2. LOCATION HANDLING
+    // Warning: f.location is currently an object {lat, lon}. 
+    // getString(f.location) will return "".
+    // If you added a text field in Contentful called 'locationName', use that here instead.
+    // For now, this prevents the crash but will be empty.
+    const locationName = getString(f.location); 
 
     return {
       id: item.sys.id,
@@ -64,9 +87,9 @@ export async function getUpcomingEvents(): Promise<FlatEvent[]> {
       description: getDocument(f.description),
       startDate: getString(f.startDate),
       endDate: getString(f.endDate),
-      location: getString(f.location),
+      location: locationName, 
       link: getString(f.link),
-      image,
+      image, // This now matches FlatEvent.image
     };
   });
 }

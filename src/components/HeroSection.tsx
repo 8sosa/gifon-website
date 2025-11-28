@@ -79,7 +79,7 @@ export default function HeroSection({
                 alt={`Slide ${index}`}
                 width={1000}
                 height={1000}
-                className="absolute top-0 left-0 w-full h-full object-contain"
+                className="absolute top-0 left-0 w-full h-full object-cover"
               />
             )}
             

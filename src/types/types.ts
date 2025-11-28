@@ -1,20 +1,22 @@
 import type { Asset } from 'contentful';
 import { Document } from '@contentful/rich-text-types';
+import type { EntryFieldTypes } from 'contentful';
 
 /** Contentful “skeleton” types for getEntries<T> */
-export interface EventSkeleton {
+export type EventSkeleton = {
   contentTypeId: 'event';
   fields: {
-    title: string;
-    description?: Document | string;
-    startDate: string;
-    endDate?: string;
-    location: string;
-    link?: string;
-    image?: Asset;
+    title: EntryFieldTypes.Symbol;
+    // CHANGED: defined as an Array of Assets
+    images: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>; 
+    description: EntryFieldTypes.RichText;
+    startDate: EntryFieldTypes.Symbol;
+    endDate: EntryFieldTypes.Symbol;
+    // CHANGED: explicitly defined as Location
+    location: EntryFieldTypes.Location; 
+    link: EntryFieldTypes.Symbol;
   };
-}
-
+};
 export interface NewsSkeleton {
   contentTypeId: 'newsPost';
   fields: {
