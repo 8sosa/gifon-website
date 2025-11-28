@@ -23,7 +23,7 @@ export default function InfrastructurePage() {
     <>
       <HeroSection
         title="Critical Infrastructure Support"
-        description="From Maps to Mission: Mapping Nigerias Critical Assets for Security Resilience and Sustainable Growth"
+        description="From Maps to Mission: Mapping Nigerias Critical Assets for Security, Resilience, and Sustainable Growth"
         backgroundMedia={[
           '/media/criticalinfrastructuresupport.jpg',
         ]}
