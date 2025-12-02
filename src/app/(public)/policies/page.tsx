@@ -3,8 +3,16 @@
 import { useState } from "react";
 import HeroSection from "@/components/HeroSection";
 import { Button } from "@/components/ui/button";
-import { FileDown } from "lucide-react";
-import Modal from "@/components/Modal copy"; // Import our reusable modal
+// Importing relevant icons for visuals
+import { 
+  ShieldCheck, 
+  Gavel, 
+  Coins, 
+  Link as LinkIcon, 
+  UsersRound,
+  FileText
+} from "lucide-react";
+import Modal from "@/components/Modal copy"; 
 
 // Define the type for the modal's state
 interface ModalState {
@@ -20,45 +28,45 @@ export default function PoliciesPage() {
     file: null,
   });
 
+  // Updated policy data: using PDFs and added icons
   const policies = [
     {
       id: "ethics",
       title: "Code of Ethics",
-      file: "/docs/Code of Ethics and Professional Conduct.docx",
-      bg: "bg-white",
-      description: `This Code establishes the ethical principles and professional standards expected of all members, staff, volunteers, interns, affiliates, and partners of GIFON. It ensures integrity, trust, and accountability in the conduct of geospatial-related activities...`,
+      icon: ShieldCheck,
+      file: "/docs/Code of Ethics and Professional Conduct-20251202163315.pdf", // Changed to .pdf
+      description: `This Code establishes the ethical principles and professional standards expected of all members, staff, and partners to ensure integrity, trust, and accountability.`,
     },
     {
       id: "anti-corruption",
       title: "Anti-Corruption",
-      file: "/docs/GIFON ANTI CORRUPTION POLICY.docx",
-      bg: "bg-gray-50",
-      description: `The Geospatial Intelligence Foundation of Nigeria (GIFON) is committed to the highest standards of integrity, transparency, and accountability in all its operations. Corruption in any form such as bribery, embezzlement, extortion, fraud, abuse of office are strictly prohibited. This policy provides a framework for preventing, detecting, and responding to corrupt practices...`,
+      icon: Gavel,
+      file: "/docs/GIFON ANTI CORRUPTION POLICY-20251202163317.pdf", // Changed to .pdf
+      description: `GIFON is committed to zero tolerance for bribery, embezzlement, extortion, or fraud. This policy provides the framework for preventing and detecting corrupt practices.`,
     },
     {
       id: "fund-raising",
-      title: "Fund Raising",
-      file: "/docs/GIFON FUND RAISING AND GRANTS POLICY.docx",
-      bg: "bg-white",
-      description: `GIFON is committed to the highest standards of ethical, transparent, and effective fundraising and grants management. This policy outlines the principles, structures, and procedures to ensure all fundraising and grant acquisition activities support the Foundation’s mission and strategic objectives...`,
+      title: "Fund Raising & Grants",
+      icon: Coins,
+      file: "/docs/GIFON FUND RAISING AND GRANTS POLICY-20251202163320.pdf", // Changed to .pdf
+      description: `Outlining the principles, structures, and procedures to ensure all fundraising and grant acquisition activities are ethical, transparent, and support our strategic objectives.`,
     },
     {
       id: "slavery",
       title: "Anti-Modern-Day Slavery",
-      file: "/docs/GIFON ANTI MODERN DAY SLAVERY.docx",
-      bg: "bg-gray-50",
-      description: `GIFON is firmly committed to the eradication of all forms of modern slavery and human trafficking in its operations and supply chains. Modern slavery — including forced labour, bonded labour, child labour, servitude, and trafficking — is a gross violation of human rights and has no place in any aspect of our work or partnerships...`,
+      icon: LinkIcon,
+      file: "/docs/GIFON ANTI MODERN DAY SLAVERY-20251202163319.pdf", // Changed to .pdf
+      description: `Our firm commitment to the eradication of all forms of modern slavery, forced labour, and human trafficking in our operations and supply chains.`,
     },
     {
       id: "volunteer",
       title: "Volunteer & Internship",
-      file: "/docs/VOLUNTEER AND INTERNSHIP POLICY.docx",
-      bg: "bg-white",
-      description: `This policy establishes a formal structure for engaging volunteers and interns in meaningful roles that support the objectives of GIFON while providing opportunities for skill development, civic engagement, and professional exposure...`,
+      icon: UsersRound,
+      file: "/docs/VOLUNTEER AND INTERNSHIP POLICY-20251202163322.pdf", // Changed to .pdf
+      description: `Establishing a formal structure for engaging volunteers and interns in meaningful roles that provide skill development and professional exposure.`,
     },
   ];
 
-  // Handlers to open/close modal
   const openModal = (policy: { title: string; file: string }) => {
     setModalData({ isOpen: true, title: policy.title, file: policy.file });
   };
@@ -67,71 +75,86 @@ export default function PoliciesPage() {
     setModalData({ isOpen: false, title: null, file: null });
   };
 
-  // Get the base URL for the iframe
-  const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
-
   return (
     <>
       <HeroSection
-        title="Policies"
+        title="Our Policies"
         backgroundMedia={[
           "/media/POLICIES BACKGROUND.jpg"
         ]}
       />
 
-      <main className="w-full">
-        {policies.map((policy) => (
-          <section key={policy.id} id={policy.id} className={`py-16 px-4 ${policy.bg}`}>
-            <div className="max-w-5xl mx-auto text-center">
-              <h2 className="text-3xl font-semibold mb-4">{policy.title}</h2>
-              <p className="text-gray-700 leading-relaxed mb-6 text-justify">{policy.description}</p>
-              <Button
-                onClick={() => openModal(policy)}
-                className="bg-green-600 text-white hover:bg-green-700 transition"
-              >
-                Read More
-              </Button>
-            </div>
-          </section>
-        ))}
+      <main className="w-full bg-gray-50 py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+           {/* <div className="text-center mb-16 max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Operational Standards</h2>
+              <p className="text-gray-600 text-lg">
+                At GIFON, we are governed by a robust set of policies designed to ensure transparency, ethical conduct, and operational excellence across all our activities.
+              </p>
+            </div> */}
 
-        {/* Modal for document viewer */}
+          {/* Grid layout for Policy Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {policies.map((policy) => {
+              const IconComponent = policy.icon || FileText; // Fallback icon just in case
+              return (
+                <div 
+                  key={policy.id} 
+                  id={policy.id} 
+                  className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group"
+                >
+                  <div className="mb-6 p-4 bg-green-50 text-green-600 rounded-lg w-fit group-hover:bg-green-600 group-hover:text-white transition-colors">
+                    <IconComponent className="w-8 h-8" />
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-700 transition-colors">
+                    {policy.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 leading-relaxed mb-8 grow">
+                    {policy.description}
+                  </p>
+                  
+                  <Button
+                    onClick={() => openModal(policy)}
+                    className="w-full bg-white text-green-600 border-2 border-green-600 hover:bg-green-50 font-semibold transition-colors mt-auto"
+                    variant="outline"
+                  >
+                    Read Full Policy
+                  </Button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Modal for PDF viewer */}
         <Modal
           isOpen={modalData.isOpen}
           onClose={closeModal}
           title={modalData.title}
         >
-          {/* This content is passed as 'children' to the Modal */}
           {modalData.file && (
-            <div>
-              {/* Custom Header for Download Link */}
-              <div className="flex justify-end px-6 py-4 border-b">
-                <a
-                  href={modalData.file}
-                  download
-                  className="text-green-600 hover:underline flex items-center gap-1"
-                >
-                  <FileDown className="w-5 h-5" />
-                  Download
-                </a>
-              </div>
+            <div className="bg-gray-100">
+              {/* Removed the Download Header section here.
+              */}
 
-              {/* Embed the .docx viewer using Google Docs Viewer */}
+              {/* Embed PDF using native browser iframe */}
+              {/* This assumes the files in /public/docs are actually .pdf files */}
               <iframe
-                src={`https://docs.google.com/gview?url=${encodeURIComponent(
-                  baseUrl + modalData.file
-                )}&embedded=true`}
-                className="w-full h-[70vh] border-0"
+                src={modalData.file} 
+                className="w-full h-[75vh] border-0"
                 title={modalData.title || "Policy Document"}
               />
               
               {/* Custom Footer for Close Button */}
-              <div className="p-4 flex justify-end border-t">
+              <div className="p-4 flex justify-end border-t bg-white">
                 <Button
                   onClick={closeModal}
                   variant="outline"
+                  className="border-gray-300 text-gray-700 hover:bg-gray-50"
                 >
-                  Close
+                  Close Viewer
                 </Button>
               </div>
             </div>

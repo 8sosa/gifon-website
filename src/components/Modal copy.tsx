@@ -1,107 +1,82 @@
 // src/components/Modal.tsx
-import React from 'react';
+import React, { useEffect } from 'react';
+import { X } from 'lucide-react'; // Assuming you have lucide-react, or use a text 'x'
 
-// Define the types for the component's props
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string | null;
-  content?: string | null;     // Make content optional
-  children?: React.ReactNode;  // Add children prop
+  content?: string | null;
+  children?: React.ReactNode;
 }
 
-// Apply the prop types
-export default function Modal2({ isOpen, onClose, title, content, children }: ModalProps) {
-  if (!isOpen) {
-    return null;
-  }
+export default function Modal({ isOpen, onClose, title, content, children }: ModalProps) {
+  // Prevent background scrolling when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   return (
-    // Backdrop
+    // Backdrop: Fixed position, fills screen, semi-transparent black
     <div 
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-        padding: '1rem',
-      }}
-      onClick={onClose} // Close on backdrop click
+      className="fixed inset-0 z-100 flex items-center justify-center bg-black/70 p-4 sm:p-6 backdrop-blur-sm transition-opacity"
+      onClick={onClose}
     >
-      {/* Modal Content Box */}
+      {/* Modal Container */}
       <div 
-        style={{
-          marginTop: '10rem',
-          backgroundColor: 'white',
-          borderRadius: '8px',
-          width: '100%',
-          maxWidth: '800px', // Consistent max-width
-          maxHeight: '70vh', // Limit height
-          display: 'flex',
-          flexDirection: 'column',
-          position: 'relative',
-          boxShadow: '0 5px 15px rgba(0,0,0,0.3)',
-        }}
-        onClick={(e) => e.stopPropagation()} 
+        className="
+          relative 
+          w-full 
+          max-w-3xl 
+          max-h-[90vh] 
+          bg-white 
+          rounded-xl 
+          shadow-2xl 
+          flex 
+          flex-col 
+          animate-in 
+          fade-in 
+          zoom-in-95 
+          duration-200
+        "
+        onClick={(e) => e.stopPropagation()} // Prevent click from closing modal
       >
-        {/* Modal Header */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          borderBottom: '1px solid #eee',
-          padding: '1rem 2rem',
-        }}>
-          <h3 style={{
-            fontSize: '1.25rem',
-            fontWeight: 600,
-            margin: 0,
-            color: '#111',
-          }}>
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-gray-100 p-4 md:p-6 shrink-0">
+          <h3 className="text-xl font-semibold text-gray-900 line-clamp-1">
             {title}
           </h3>
           <button 
             onClick={onClose}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              fontSize: '2.5rem',
-              lineHeight: '1',
-              cursor: 'pointer',
-              color: '#555',
-              padding: 0,
-            }}
+            className="rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
             aria-label="Close modal"
           >
-            &times;
+            {/* If you don't have Lucide icons, replace <X /> with <span className="text-2xl">&times;</span> */}
+            <X size={24} />
           </button>
         </div>
         
-        {/* Modal Body: Render content OR children */}
-        <div style={{
-          overflowY: 'auto', // Makes only the body scrollable
-        }}>
+        {/* Body: Scrollable area */}
+        <div className="overflow-y-auto p-4 md:p-6">
           {content ? (
-            // If 'content' prop is used (for HTML)
-            // We replace <pre> with a <div> that renders HTML
+            // For HTML content (Policies, etc.)
             <div 
-              style={{ 
-                padding: '1.5rem 2rem',
-                lineHeight: '1.6',
-                color: '#333'
-              }}
-              // This is the key part:
+              className="prose prose-green max-w-none text-gray-600 leading-relaxed text-sm md:text-base"
               dangerouslySetInnerHTML={{ __html: content }} 
             />
           ) : (
-            // If 'children' are passed (for custom components)
-            <div style={{ padding: '1.5rem 2rem' }}>
+            // For React Children (PDF Viewer, Forms, etc.)
+            // We remove padding from wrapper if needed, or keep it consistent
+            <div className="text-gray-700">
               {children}
             </div>
           )}
