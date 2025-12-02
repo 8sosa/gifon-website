@@ -6,7 +6,7 @@ import { LogoCarousel, CarouselItem } from '@/components/LogoCarousel';
 import Image from 'next/image';
 import Link from 'next/link';
 import { 
-  Target, Eye, Layers, GraduationCap, Users, Shield, Sprout, ScrollText, Database, Microscope, Megaphone, Globe, Building2, FileBadge } from 'lucide-react';
+  ArrowRight, Target, Eye, Layers, GraduationCap, Users, Shield, Sprout, ScrollText, Database, Microscope, Megaphone, Globe, Building2, FileBadge } from 'lucide-react';
 import MotionDiv from "@/components/MotionDiv"; 
 import MotionImg from "@/components/MotionImg";
 
@@ -41,35 +41,50 @@ export default async function AboutPage() {
       <main className="font-sans text-gray-800 bg-white">
         
         {/* Welcome Section */}
-        <section className="px-6 py-12 md:p-16 md:mb-8 lg:max-w-7xl lg:mx-auto flex flex-col lg:flex-row items-center">
-          <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-            <div className="relative w-full h-auto">
+        <section className="relative px-6 py-16 md:py-24 lg:max-w-7xl lg:mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          
+          {/* Background Decorative Blob */}
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-green-50 rounded-full blur-3xl -z-10 opacity-60 pointer-events-none"></div>
+
+          <div className="w-full lg:w-1/2 relative group">
+            <div className="relative w-full h-auto rounded-3xl overflow-hidden shadow-2xl border-[6px] border-white transform transition-transform duration-500 hover:scale-[1.01]">
                 <Image
                 src="/media/Pioneer and quest.jpg" 
                 alt="Geospatial Intelligence for Nigeria"
                 width={600}
                 height={400}
-                className="rounded shadow w-full h-auto object-cover"
+                className="w-full h-auto object-cover"
                 />
             </div>
+            {/* Decorative Offset Border */}
+            <div className="absolute -bottom-4 -right-4 w-full h-full rounded-3xl border-2 border-green-600/30 -z-10"></div>
           </div>
           
-          <div className='w-full lg:w-1/2 flex flex-col items-start lg:pl-16'>
+          <div className='w-full lg:w-1/2 flex flex-col items-start'>
             <div className="inline-block mb-6 text-left">
-              <h2 className="text-green-600 text-3xl font-semibold">
+              <span className="text-green-600 font-bold tracking-widest uppercase text-sm mb-2 block">Who We Are</span>
+              <h2 className="text-gray-900 text-4xl md:text-5xl font-bold font-cooper">
                 Welcome!
               </h2>
-              <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
+              <div className="w-24 h-1.5 bg-green-600 mt-4 rounded-full"></div>
             </div>
-            <p className="mb-4 text-justify leading-relaxed">
-              The Geospatial Intelligence Foundation of Nigeria (GIFON) is Nigeria&apos;s first dedicated platform to institutionalize geospatial intelligence. We are a movement bringing together government, military, academia, industry, and international partners to reshape how Nigeria thinks about intelligence, decision-making, and governance.
-            </p>
-            <p className="text-justify leading-relaxed">
-              Founded by Dr. AA Usman, GIFON&apos;s quest is to ensure Nigeria is no longer &quot;blind in an era where other nations were seeing the world in sharper detail than ever before&quot;. This vision is about embedding GEOINT into the DNA of Nigeria’s governance —a dream once seen as radical, now recognized as indispensable to Nigeria’s survival and Africa’s rise.
-            </p>
-            <Link href={"/docs/THE QUEST BY DR. AA USMAN.docx"} className="mt-6 w-full md:w-auto"> 
-              <button className="w-full md:w-auto bg-green-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-green-700 transition shadow-md">
-                Read &quot;The Quest&quot; by Dr. AA Usman
+            
+            <div className="prose prose-lg text-gray-600 leading-relaxed text-justify">
+              <p className="mb-6">
+                The Geospatial Intelligence Foundation of Nigeria (<span className="font-cooper text-gray-800">GIFON</span>) is Nigeria&apos;s first dedicated platform to institutionalize geospatial intelligence. We are a movement bringing together government, military, academia, industry, and international partners to reshape how Nigeria thinks about intelligence, decision-making, and governance.
+              </p>
+              <p className="p-6 bg-gray-50 border-l-4 border-green-500 rounded-r-xl italic text-gray-700">
+                Founded by Dr. AA Usman, GIFON&apos;s quest is to ensure Nigeria is no longer &quot;blind in an era where other nations were seeing the world in sharper detail than ever before&quot;.
+              </p>
+              <p className="mt-6">
+                 This vision is about embedding GEOINT into the DNA of Nigeria’s governance —a dream once seen as radical, now recognized as indispensable to Nigeria’s survival and Africa’s rise.
+              </p>
+            </div>
+
+            <Link href={"/docs/THE QUEST BY DR. AA USMAN.docx"} className="mt-8 group"> 
+              <button className="flex items-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-500/30 transform hover:-translate-y-1">
+                <span>Read &quot;The Quest&quot; by Dr. AA Usman</span>
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/>
               </button>
             </Link>
           </div>

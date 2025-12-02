@@ -260,7 +260,7 @@ export default function Header() {
   ];
 
   const topBarItems: MenuItem[] = [
-    { label: 'Contact', href: '/contact-us' },
+    { label: 'Contact Us', href: '/contact-us' },
     ...(isLoggedIn
       ? [ { label: 'Dashboard', href: '/dashboard' }, { label: 'Log Out', href: '#', onClick: handleLogout } ]
       : [ { label: 'Sign In', href: '/login' }, { label: 'Register', href: '/membership' } ]

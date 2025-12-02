@@ -27,7 +27,7 @@ export default function DonatePage() {
               Be a Catalyst for Change
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed mb-8">
-              At the Geospatial Intelligence Foundation of Nigeria (<span className="cooper font-serif font-bold text-green-700">GIFON</span>), 
+              At the Geospatial Intelligence Foundation of Nigeria (<span className="cooper font-serif font-bold">GIFON</span>), 
               we believe that collective action fuels innovation. Whether you are a professional, 
               student, or partner organization, your contribution directly impacts Nigeria&apos;s 
               resilience and technological future.

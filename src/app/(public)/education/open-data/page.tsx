@@ -7,12 +7,7 @@ export default function OpenDataResearchPage() {
         title="GIFON Open Data & Research Programme (ODRP)"
         // description="“Open Data. Open Research. Smarter Nigeria.”"
         backgroundMedia={[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
-          "/bg/b.JPG",
-          "/bg/c.JPG",
-          "/bg/d.JPG",
-          "/ph.svg",
+          "/images/F.jpeg",
         ]}
       />
 

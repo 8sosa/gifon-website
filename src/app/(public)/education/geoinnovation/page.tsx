@@ -7,12 +7,7 @@ export default function GeoinnovationPage() {
         title="GIFON Y-GeoInnovation & Tech Incubation Programme (Y-GITI)"
         // description="“Innovating with Location. Incubating the Future.”"
         backgroundMedia={[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
-          "/bg/b.JPG",
-          "/bg/c.JPG",
-          "/bg/d.JPG",
-          "/ph.svg",
+          "/media/geoino.jpeg",
         ]}
       />
 

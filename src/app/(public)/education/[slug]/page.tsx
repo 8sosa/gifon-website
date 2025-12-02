@@ -292,14 +292,14 @@ export default async function ProgramDetail({ params }: { params: Promise<{ slug
             {/* CTA Box */}
             <div className="bg-linear-to-br from-green-50 to-white p-8 rounded-2xl border border-green-100 text-center shadow-lg">
               <h3 className="text-xl font-bold text-green-900 mb-2">Interested in this program?</h3>
-              <p className="text-green-700 mb-6 text-sm">
+              {/* <p className="text-green-700 mb-6 text-sm">
                 Join us in driving geospatial innovation in Nigeria.
-              </p>
+              </p> */}
               <Link 
-                href="/get-involved"
+                href="/contact-us"
                 className="block w-full bg-green-600 text-white font-bold py-3.5 px-6 rounded-lg hover:bg-green-700 hover:shadow-lg transform hover:-translate-y-0.5 transition-all"
               >
-                Get Involved Now
+                Contact Us
               </Link>
             </div>
 

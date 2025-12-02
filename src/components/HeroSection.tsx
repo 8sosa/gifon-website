@@ -7,7 +7,7 @@ import Image from "next/image";
 type HeroSectionProps = {
   title?: string;
   description?: string;
-  description1?: string;
+  description1?: string | React.ReactNode;
   // Now accepts a single string OR an array of strings
   backgroundMedia?: string | string[]; 
   cycleInterval?: number;

@@ -4,19 +4,20 @@ import { getUpcomingEvents } from "@/lib/contentful-queries";
 import HeroSection from "@/components/HeroSection";
 import { FlatEvent } from "@/types/types";
 import type { Document } from "@contentful/rich-text-types";
-// --- Import ALL icons for the Outreach section ---
 import { 
-  FaUsers, 
-  FaFemale, 
-  FaBriefcase, 
-  FaArrowRight,
-  FaLaptopCode, 
-  FaRocket, 
-  FaMapMarkedAlt, 
-  FaNetworkWired, 
-  FaComments,
-  FaChalkboardTeacher
-} from "react-icons/fa";
+  Calendar, 
+  MapPin, 
+  ArrowRight, 
+  Users, 
+  Mic, 
+  Globe, 
+  Award, 
+  BookOpen,
+  Briefcase,
+  Heart,
+  Lightbulb,
+  Cpu
+} from "lucide-react";
 
 type RichTextNode = {
   nodeType: "text" | string;
@@ -24,7 +25,6 @@ type RichTextNode = {
   content?: RichTextNode[];
 };
 
-// ... (richTextToPlainText function remains the same) ...
 function richTextToPlainText(doc?: string | Document | null): string {
   if (!doc) return "";
   if (typeof doc === "string") return doc;
@@ -37,13 +37,12 @@ function richTextToPlainText(doc?: string | Document | null): string {
   return collect(doc).trim();
 }
 
-// ... (formatDate function remains the same) ...
 function formatDate(dateString?: string) {
   if (!dateString) return "";
   try {
     return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
-      month: "long",
+      month: "short", // Changed to Short (e.g., Aug) for the badge
       day: "numeric",
     }).format(new Date(dateString));
   } catch {
@@ -51,8 +50,17 @@ function formatDate(dateString?: string) {
   }
 }
 
-// ... (excerptFromDescription function remains the same) ...
-function excerptFromDescription(desc?: string | Document, length = 140) {
+// Helper for the date badge splitting
+function getDateParts(dateString?: string) {
+  if (!dateString) return { month: '', day: '' };
+  const date = new Date(dateString);
+  return {
+    month: date.toLocaleString('default', { month: 'short' }),
+    day: date.getDate()
+  };
+}
+
+function excerptFromDescription(desc?: string | Document, length = 120) {
   if (!desc) return "";
   if (typeof desc === "string") {
     const stripped = desc.replace(/<\/?[^>]+(>|$)/g, "");
@@ -62,13 +70,11 @@ function excerptFromDescription(desc?: string | Document, length = 140) {
   return plain.length > length ? plain.slice(0, length).trim() + "…" : plain;
 }
 
-
 export default async function EventsPage() {
   let events: FlatEvent[] = [];
 
   try {
     events = (await getUpcomingEvents()) ?? [];
-    // console.log("Fetched events:", events.length, events);
   } catch (err) {
     console.error("Failed to load events", err);
     events = [];
@@ -78,7 +84,7 @@ export default async function EventsPage() {
     .map((e) => ({
       ...e,
       _startTs: e.startDate ? new Date(e.startDate).getTime() : 0,
-      description: richTextToPlainText(e.description) // Parse description here
+      description: richTextToPlainText(e.description)
     }))
     .filter(Boolean);
 
@@ -92,29 +98,30 @@ export default async function EventsPage() {
     .filter((e) => e._startTs < nowTs)
     .sort((a, b) => b._startTs - a._startTs);
 
-  // --- UPDATED: Data for the grouped Outreach Section ---
+  // --- Outreach Data (With Lucide Icons) ---
   const outreachGroups = [
     {
       groupTitle: 'Youth-Focused Programmes',
-      groupIcon: <FaUsers size={28} />,
+      groupIcon: Users,
+      groupColor: 'text-blue-600 bg-blue-50',
       groupAnchor: 'youth-focused-programmes',
       groupDescription: "Engaging the next generation of GEOINT leaders through hands-on training and challenges.",
       programs: [
         {
           title: 'Boot Camps',
-          icon: <FaLaptopCode size={24} className="text-green-600" />,
+          icon: Cpu,
           anchor: 'boot-camps',
           description: 'Intensive upskilling sprints to fast-track job readiness for graduates and early professionals.'
         },
         {
           title: 'STEM & GEOINT Awareness',
-          icon: <FaRocket size={24} className="text-green-600" />,
+          icon: Lightbulb,
           anchor: 'stem-geoint-awareness',
           description: 'Integrating geospatial literacy into school and tertiary STEM education via outreach and student clubs.'
         },
         {
-          title: 'GeoInnovation Challenge / Hackathons',
-          icon: <FaUsers size={24} className="text-green-600" />,
+          title: 'GeoInnovation Challenge',
+          icon: Award,
           anchor: 'geoinnovation-challenge',
           description: 'Crowdsourcing practical geo-solutions for national issues, engaging developers, analysts, and startups.'
         },
@@ -122,47 +129,49 @@ export default async function EventsPage() {
     },
     {
       groupTitle: 'Women-in-GEOINT Initiatives',
-      groupIcon: <FaFemale size={28} />,
+      groupIcon: Heart, // Using Heart to represent inclusion/care
+      groupColor: 'text-pink-600 bg-pink-50',
       groupAnchor: 'women-in-geoint-initiatives',
       groupDescription: "Empowering and elevating the voices and careers of women in the geospatial field.",
       programs: [
         {
-          title: 'Women in Geospatial Leadership',
-          icon: <FaFemale size={24} className="text-green-600" />,
+          title: 'Women in Leadership',
+          icon: Users,
           anchor: 'women-geospatial-leadership',
           description: 'Advancing gender inclusion through capacity building, mentorship, and leadership development.'
         },
         {
-          title: 'Community Service Projects',
-          icon: <FaMapMarkedAlt size={24} className="text-green-600" />,
+          title: 'Community Projects',
+          icon: MapPin,
           anchor: 'community-service-projects',
           description: 'Using geospatial intelligence to address community challenges, such as Clean City Mapping Drives.'
         },
       ]
     },
     {
-      groupTitle: 'Professional & Institutional Engagement',
-      groupIcon: <FaBriefcase size={28} />,
+      groupTitle: 'Professional Engagement',
+      groupIcon: Briefcase,
+      groupColor: 'text-purple-600 bg-purple-50',
       groupAnchor: 'professional-institutional-engagement',
       groupDescription: "Building a connected and collaborative professional ecosystem for all members.",
       programs: [
         {
-          title: 'GeoCommunity Development',
-          icon: <FaNetworkWired size={24} className="text-green-600" />,
+          title: 'GeoCommunity Dev',
+          icon: Globe,
           anchor: 'geocommunity-development',
-          description: 'Building strong local and regional networks for collaboration via quarterly meetups and peer mentoring.'
+          description: 'Building strong local and regional networks for collaboration via quarterly meetups.'
         },
         {
-          title: 'GeoConnect Networking Events',
-          icon: <FaComments size={24} className="text-green-600" />,
+          title: 'GeoConnect Networking',
+          icon: Users,
           anchor: 'geoconnect-networking',
-          description: 'Curated networking sessions and mixers to foster dialogue between government, academia, and industry.'
+          description: 'Curated networking sessions and mixers to foster dialogue between government and industry.'
         },
         {
-          title: 'Public Lectures & Policy Roundtables',
-          icon: <FaChalkboardTeacher size={24} className="text-green-600" />,
+          title: 'Policy Roundtables',
+          icon: Mic,
           anchor: 'public-lectures-roundtables',
-          description: 'A neutral platform for experts and policymakers to discuss security, infrastructure, and GEOINT applications.'
+          description: 'A neutral platform for experts and policymakers to discuss security and GEOINT applications.'
         },
       ]
     }
@@ -171,8 +180,8 @@ export default async function EventsPage() {
   return (
     <>
       <HeroSection
-        title="Our Events"
-        // description="Discover our upcoming and past events, conferences, and workshops."
+        title="Events & Outreach"
+        description="Connecting the community through conferences, workshops, and development programmes."
         backgroundMedia={[
           "/bg/e.jpeg",
           "/bg/a.JPG",
@@ -183,126 +192,144 @@ export default async function EventsPage() {
         ]}
       />
 
-      <main className="w-full">
-        {/* Highlights */}
-        <section id="highlights" className="py-16 px-4 bg-white">
-          {/* ... (Highlights section remains the same) ... */}
-           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-semibold mb-6 text-center">Events & Highlights</h2>
-            <p className="text-gray-700 leading-relaxed text-justify">
-              The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) actively convenes and participates in events that drive dialogue, innovation, and collaboration in the field of geospatial intelligence and national development.
-            </p>
-            <p className="text-gray-700 leading-relaxed text-justify pt-2">Our Events & Highlights section provides a showcase of key milestones and activities, capturing how GIFON is shaping policy, research, and practice across Nigeria and beyond.</p>
-            <p className="text-gray-700 leading-relaxed text-justify pt-4">
-              Here, visitors can explore:
-            </p>
-            <ol className="text-gray-700 leading-relaxed text-justify p-4 list-disc list-inside space-y-1">
-              <li>
-                Major Conferences & Summits – high-level platforms where national and international stakeholders engage on geospatial intelligence and critical infrastructure.
-              </li>
-              <li>
-                Workshops & Trainings – capacity-building sessions that strengthen technical expertise and knowledge-sharing.
-              </li>
-              <li>
-                National Engagements – <span className="cooper">GIFON</span>’s contributions to government initiatives, defence and security dialogues, and development programs.
-              </li>
-              <li>
-                International Participation – highlights from global events where <span className="cooper">GIFON</span> represents Nigeria’s voice in the GEOINT community.
-              </li>
-              <li>
-                Community Initiatives – youth empowerment, academic partnerships, and innovation-driven outreach projects.
-              </li>
-            </ol>
-            <p className="text-gray-700 leading-relaxed text-justify">
-              By documenting these highlights, GIFON provides transparency, builds public awareness, and ensures that the outcomes of our engagements extend beyond the venue to influence policy, strengthen institutions, and inspire innovation. Through Events & Highlights, we celebrate our role in mapping the future and empowering the nation.
-            </p>
+      <main className="w-full font-sans bg-gray-50">
+        
+        {/* --- HIGHLIGHTS SECTION --- */}
+        <section id="highlights" className="py-20 px-4 md:px-6 bg-white relative overflow-hidden">
+          {/* Decorative Elements */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-green-50 rounded-full blur-3xl z-0 translate-x-1/2 -translate-y-1/2"></div>
+
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="max-w-3xl mx-auto text-center mb-16">
+                <span className="text-green-600 font-bold uppercase tracking-wider text-sm mb-2 block">Our Impact</span>
+                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 font-cooper">Events & Highlights</h2>
+                <p className="text-gray-600 leading-relaxed text-lg">
+                <span className="font-cooper text-gray-800">GIFON</span> actively convenes events that drive dialogue, innovation, and collaboration. We celebrate our role in mapping the future and empowering the nation.
+                </p>
+            </div>
+
+            {/* Feature Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               {[
+                 { icon: Mic, title: "Conferences & Summits", text: "High-level platforms engaging national stakeholders on geospatial intelligence." },
+                 { icon: BookOpen, title: "Workshops & Training", text: "Capacity-building sessions aimed at strengthening technical expertise." },
+                 { icon: Award, title: "National Engagements", text: "Contributions to government initiatives and security dialogues." },
+                 { icon: Globe, title: "Global Participation", text: "Representing Nigeria’s voice in the international GEOINT community." },
+                 { icon: Users, title: "Community Initiatives", text: "Youth empowerment, academic partnerships, and outreach projects." },
+               ].map((item, i) => (
+                 <div key={i} className="flex flex-col items-start p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-green-600 mb-4">
+                        <item.icon size={24} />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{item.text}</p>
+                 </div>
+               ))}
+               
+               {/* Last Card: Call to Action */}
+               <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-green-600 text-white shadow-lg text-center">
+                  <h3 className="text-xl font-bold mb-2">Join the Movement</h3>
+                  <p className="text-green-100 text-sm mb-4">Be part of our next event.</p>
+                  <Link href="/membership" className="px-6 py-2 bg-white text-green-700 font-bold rounded-full hover:bg-gray-100 transition-colors">
+                    Become a Member
+                  </Link>
+               </div>
+            </div>
           </div>
         </section>
 
-        {/* Upcoming Events */}
-        <section id="upcoming" className="py-16 px-4 bg-gray-50">
-          {/* ... (Upcoming Events section remains the same) ... */}
+        {/* --- UPCOMING EVENTS --- */}
+        <section id="upcoming" className="py-20 px-4 md:px-6 bg-gray-50 border-t border-gray-200">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-semibold mb-6 text-center">Upcoming Events</h2>
+            <div className="flex items-center justify-between mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 font-cooper">Upcoming Events</h2>
+                <div className="hidden md:flex items-center gap-2 text-sm text-gray-500">
+                    <Calendar size={16} /> Mark your calendars
+                </div>
+            </div>
+            
             {upcoming.length === 0 ? (
-              <div className="text-center text-gray-600">
-                <p className="mb-4">There are no upcoming events right now.</p>
-                <p>Join our mailing list to be notified about new events.</p>
+              <div className="flex flex-col items-center justify-center py-16 bg-white rounded-3xl border border-dashed border-gray-300">
+                <Calendar className="text-gray-300 w-16 h-16 mb-4" />
+                <p className="text-lg font-medium text-gray-600">No upcoming events scheduled.</p>
+                <p className="text-gray-400">Join our mailing list to stay updated.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {upcoming.map((ev) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {upcoming.map((ev) => {
+                  const { month, day } = getDateParts(ev.startDate);
+                  return (
                   <Link
                     key={ev.id}
                     href={`/events/${ev.id}`}
-                    className="block transform hover:-translate-y-1 transition"
+                    className="group flex flex-col h-full bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
                   >
-                    <article className="rounded-2xl p-6 bg-white shadow-lg hover:shadow-xl transition-all h-full flex flex-col">
-                      <div className="relative h-40 rounded-md overflow-hidden mb-4 bg-slate-100">
-                        <Image
-                          src={ev.image || "/ph.svg"}
-                          alt={ev.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          className="object-cover"
-                        />
+                    {/* Image Area */}
+                    <div className="relative h-56 w-full overflow-hidden bg-gray-200">
+                      <Image
+                        src={ev.image || "/ph.svg"}
+                        alt={ev.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      {/* Date Badge */}
+                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur rounded-xl p-2 text-center shadow-lg min-w-[60px]">
+                        <span className="block text-xs font-bold text-red-500 uppercase tracking-wider">{month}</span>
+                        <span className="block text-2xl font-extrabold text-gray-900 leading-none">{day}</span>
                       </div>
-                      <h4 className="font-semibold text-lg text-gray-800">{ev.title}</h4>
-                      <p className="text-sm text-green-600 font-medium mt-1">{formatDate(ev.startDate)}</p>
-                      <p className="text-sm text-slate-700 mt-3 line-clamp-3 grow">
+                    </div>
+                    
+                    {/* Content Area */}
+                    <div className="p-6 flex flex-col grow">
+                      <h4 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-700 transition-colors line-clamp-2">
+                        {ev.title}
+                      </h4>
+                      <p className="text-gray-500 text-sm line-clamp-3 mb-6 grow leading-relaxed">
                         {excerptFromDescription(ev.description)}
                       </p>
-                      <div className="mt-4">
-                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-600 text-white font-semibold">
-                          Details <FaArrowRight size={12} />
+                      
+                      <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between text-sm">
+                        <span className="font-semibold text-green-600 flex items-center gap-2">
+                          View Details <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                         </span>
                       </div>
-                    </article>
+                    </div>
                   </Link>
-                ))}
+                )})}
               </div>
             )}
           </div>
         </section>
 
-        {/* Past Events */}
-        <section id="past" className="py-16 px-4 bg-white">
-          {/* ... (Past Events section remains the same) ... */}
+        {/* --- PAST EVENTS --- */}
+        <section id="past" className="py-16 px-4 md:px-6 bg-white border-t border-gray-200">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-semibold mb-6 text-center">Past Events</h2>
+            <h2 className="text-2xl font-bold text-gray-400 mb-8 uppercase tracking-widest">Past Events Archive</h2>
+            
             {past.length === 0 ? (
-              <div className="text-center text-gray-600">
-                <p>No past events available yet.</p>
-              </div>
+               <div className="text-gray-400 italic">No past events found.</div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {past.map((ev) => (
                   <Link
                     key={ev.id}
                     href={`/events/${ev.id}`}
-                    className="block transform hover:-translate-y-1 transition"
+                    className="group block bg-gray-50 rounded-2xl overflow-hidden hover:bg-white hover:shadow-xl transition-all duration-300 border border-gray-100"
                   >
-                    <article className="rounded-2xl p-6 bg-gray-50 shadow-lg hover:shadow-xl transition-all h-full flex flex-col">
-                      <div className="relative h-40 rounded-md overflow-hidden mb-4 bg-slate-200">
+                    <div className="relative h-40 w-full overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
                         <Image
                           src={ev.image || "/ph.svg"}
                           alt={ev.title}
                           fill
-                          sizes="(max-width: 768px) 100vw, 33vw"
                           className="object-cover"
                         />
-                      </div>
-                      <h4 className="font-semibold text-lg text-gray-800">{ev.title}</h4>
-                      <p className="text-sm text-gray-600 mt-1">{formatDate(ev.startDate)}</p>
-                      <p className="text-sm text-slate-700 mt-3 line-clamp-3 grow">
-                        {excerptFromDescription(ev.description)}
-                      </p>
-                      <div className="mt-4">
-                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-green-100 text-gray-700 font-semibold border border-gray-200">
-                          View Details
-                        </span>
-                      </div>
-                    </article>
+                    </div>
+                    <div className="p-4">
+                        <p className="text-xs text-green-600 font-bold mb-1">{formatDate(ev.startDate)}</p>
+                        <h4 className="font-bold text-gray-700 group-hover:text-gray-900 line-clamp-2 text-sm">
+                            {ev.title}
+                        </h4>
+                    </div>
                   </Link>
                 ))}
               </div>
@@ -310,65 +337,65 @@ export default async function EventsPage() {
           </div>
         </section>
 
-        {/* === UPDATED OUTREACH SECTION (3 Groups with 8 Cards) === */}
-        <section id="outreach" className="py-16 px-4 bg-green-50">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-semibold mb-12 text-center">
-              Our Outreach Programmes
-            </h2>
+        {/* --- OUTREACH PROGRAMMES --- */}
+        <section id="outreach" className="py-20 px-4 md:px-6 bg-slate-900 text-white relative overflow-hidden">
+           {/* Background Pattern */}
+           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
+           
+           <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-5xl font-bold mb-4 font-cooper">Outreach Programmes</h2>
+                <p className="text-gray-400 max-w-2xl mx-auto">
+                    Extending our impact beyond the boardroom. Discover how we engage, empower, and elevate the community.
+                </p>
+            </div>
             
-            {/* Main container for the 3 groups */}
-            <div className="space-y-16">
-              
-              {outreachGroups.map((group) => (
-                <div key={group.groupAnchor} id={group.groupAnchor}>
+            <div className="space-y-12">
+              {outreachGroups.map((group, idx) => (
+                <div key={idx} id={group.groupAnchor} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-10">
+                  
                   {/* Group Header */}
-                  <div className="flex flex-col items-center text-center mb-8">
-                    <span className="text-green-600">{group.groupIcon}</span>
-                    <h3 className="text-2xl font-semibold text-gray-800 mt-2">
-                      {group.groupTitle}
-                    </h3>
-                    <p className="text-gray-600 mt-2 max-w-2xl">
-                      {group.groupDescription}
-                    </p>
+                  <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b border-white/10 pb-6">
+                    <div className={`p-4 rounded-2xl ${group.groupColor.replace('text-', 'bg-').replace('bg-', 'text-white ')} bg-opacity-20`}>
+                        <group.groupIcon size={32} />
+                    </div>
+                    <div>
+                        <h3 className="text-2xl font-bold text-white mb-2">{group.groupTitle}</h3>
+                        <p className="text-gray-400">{group.groupDescription}</p>
+                    </div>
                   </div>
                   
-                  {/* Grid for the child program cards */}
+                  {/* Cards Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {group.programs.map((program) => (
-                      <div 
-                        key={program.anchor} 
-                        id={program.anchor}
-                        className="bg-white p-6 rounded-lg shadow-lg flex flex-col"
+                    {group.programs.map((program, pIdx) => (
+                      <Link 
+                        key={pIdx} 
+                        href={`/education/${program.anchor}`}
+                        className="group bg-white rounded-xl p-6 text-gray-800 hover:bg-green-50 transition-colors duration-300 flex flex-col h-full"
                       >
                         <div className="flex items-center gap-3 mb-4">
-                          <span className="text-green-600 shrink-0">{program.icon}</span>
-                          <h4 className="text-lg font-semibold text-gray-800">
+                          <div className="p-2 bg-gray-100 rounded-lg text-gray-600 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                            <program.icon size={20} />
+                          </div>
+                          <h4 className="font-bold text-gray-900 text-lg leading-tight group-hover:text-green-700">
                             {program.title}
                           </h4>
                         </div>
-                        <p className="text-gray-600 text-sm mb-6 grow">
+                        <p className="text-sm text-gray-600 leading-relaxed mb-6 grow">
                           {program.description}
                         </p>
-                        <Link 
-                          href={`/education/${program.anchor}`} // Links to Education page anchor
-                          className="inline-flex items-center gap-2 text-sm text-green-600 font-semibold hover:underline group"
-                        >
-                          Learn More
-                          <span className="transform transition-transform group-hover:translate-x-1">
-                            <FaArrowRight size={12} />
-                          </span>
-                        </Link>
-                      </div>
+                        <div className="mt-auto flex items-center text-xs font-bold text-green-600 uppercase tracking-wider">
+                          Learn more <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      </Link>
                     ))}
                   </div>
+
                 </div>
               ))}
-              
             </div>
-          </div>
+           </div>
         </section>
-        {/* === END OF UPDATED SECTION === */}
 
       </main>
     </>
