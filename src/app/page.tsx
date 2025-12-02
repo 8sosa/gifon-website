@@ -28,7 +28,7 @@ export default function HomePage() {
     <RevealProvider>
       <HeroSection
         title="Geospatial Intelligence Foundation of Nigeria (GIFON)"
-        description='Source, Analyze, Automate & Share'
+        description='Source • Analyze • Automate & Share'
         backgroundMedia={[
           '/bg/e.jpeg',
           '/bg/a.JPG',
