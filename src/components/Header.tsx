@@ -284,7 +284,7 @@ export default function Header() {
                   <Image src="/logo.png" alt="Gifon" fill className="object-contain"/>
               </div>
               <div className="flex flex-col justify-center cooper">
-                <h1 className="text-5xl md:text-5xl lg:text-5xl font-extrabold text-green-700 leading-none tracking-[0.2em] lg:tracking-[0.3em]">GIFON</h1>
+                <h1 className="text-5xl md:text-5xl lg:text-[4rem] font-extrabold text-green-700 leading-none">GIFON</h1>
                 <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.5rem] font-bold text-green-800 uppercase tracking-tight whitespace-nowrap">Geospatial Intelligence Foundation of Nigeria</span>
               </div>
             </Link>

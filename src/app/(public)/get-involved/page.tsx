@@ -1,71 +1,180 @@
 import HeroSection from '@/components/HeroSection';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Heart, Briefcase, Cpu, Users, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export default function DonatePage() {
   return (
     <>
       <HeroSection
         title="GET INVOLVED"
-        // description="Help us advance geospatial intelligence and innovation in Nigeria through your support."
-        backgroundMedia = {[
+        // Uncommented and refined for impact
+        description="Join us in advancing geospatial intelligence. Your support fuels innovation, strengthens national security, and drives sustainable development in Nigeria."
+        backgroundMedia={[
           "/media/Get Involved Background.jpg",
         ]}
       />
 
-      <main className="w-full">
-        {/* --- Static Sections for Donate Page --- */}
-        <section id="ways-to-support" className="py-16 px-4 bg-white">
+      <main className="w-full font-sans">
+        
+        {/* --- Section 1: Introduction / Mission Statement --- */}
+        <section className="py-20 px-4 bg-white">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-semibold mb-4">GET INVOLVED</h2>
-            <p className="text-gray-700 leading-relaxed text-justify">
-              At the Geospatial Intelligence Foundation of Nigeria (GIFON), we believe that collective action fuels innovation, strengthens national security, and drives sustainable development. Whether you are a professional, student, partner organization, or supporter, there are many ways to join our mission.
+            <span className="text-green-600 font-bold tracking-wider text-sm uppercase mb-2 block">
+              Our Mission Needs You
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+              Be a Catalyst for Change
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed mb-8">
+              At the Geospatial Intelligence Foundation of Nigeria (<span className="cooper font-serif font-bold text-green-700">GIFON</span>), 
+              we believe that collective action fuels innovation. Whether you are a professional, 
+              student, or partner organization, your contribution directly impacts Nigeria&apos;s 
+              resilience and technological future.
             </p>
+            <div className="h-1 w-24 bg-green-500 mx-auto rounded-full"></div>
           </div>
         </section>
         
-        <section id="opportunities" className="py-16 px-4 bg-white">
-          <div className="max-w-5xl mx-auto flex flex-col items-center">
-              <h2 className="text-3xl font-semibold mb-4 text-center">Support Our Work</h2>
-              <div className="min-w-full">
-                  <p className="text-gray-700 leading-relaxed">
-                    Your support helps us expand programs, empower communities, and strengthen national resilience.
-                  </p>
-                  <ul className="list-disc list-inside mb-6">
-                      <li>
-                        One-time or recurring donations.
-                      </li>
-                      <li>
-                        Corporate sponsorship packages.
-                      </li>
-                      <li>
-                        In-kind support and technology contributions.
-                      </li>
-                  </ul>
+        {/* --- Section 2: Donation / Support Options (Cards) --- */}
+        <section id="donate" className="py-20 px-4 bg-gray-50">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4 text-gray-900">Support Our Work</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Your financial and technical support allows us to expand programs, empower communities, and strengthen national resilience.
+              </p>
+            </div>
+
+            {/* Grid for Support Options */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              {/* Card 1: Individual */}
+              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col items-center text-center">
+                <div className="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6">
+                  <Heart size={28} />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Make a Donation</h3>
+                <p className="text-gray-600 mb-6 grow">
+                  One-time or recurring donations fuel our daily operations and community outreach programs.
+                </p>
               </div>
+
+              {/* Card 2: Corporate */}
+              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col items-center text-center">
+                <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-6">
+                  <Briefcase size={28} />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Corporate Sponsorship</h3>
+                <p className="text-gray-600 mb-6 grow">
+                  Partner with us through sponsorship packages that align your brand with national innovation.
+                </p>
+              </div>
+
+              {/* Card 3: Technology */}
+              <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col items-center text-center">
+                <div className="w-14 h-14 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-6">
+                  <Cpu size={28} />
+                </div>
+                <h3 className="text-xl font-bold mb-3">In-Kind Support</h3>
+                <p className="text-gray-600 mb-6 grow">
+                  Contribute technology, software licenses, or equipment to empower our research labs.
+                </p>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <div className="text-center">
               <a
-              href="#"
-              className="bg-green-600 text-white px-8 py-3 rounded font-semibold hover:bg-green-700 transition"
+                href="#"
+                className="inline-flex items-center justify-center bg-green-600 text-white px-10 py-4 rounded-lg font-semibold text-lg hover:bg-green-700 hover:-translate-y-0.5 transition-all shadow-lg shadow-green-600/20"
               >
-                Donate to GIFON
+                Donate to <span className="cooper ml-1 font-serif">GIFON</span>
+                <ArrowRight className="ml-2 h-5 w-5" />
               </a>
+              <p className="mt-4 text-sm text-gray-500">Secure payment processing via Paystack/Flutterwave</p>
+            </div>
           </div>
         </section>
 
-        <section id="opportunities" className="py-16 px-4 bg-white">
-          <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
-              <h2 className="text-3xl font-semibold mb-4">Volunteer Opportunities</h2>
-              <p className="text-gray-700 leading-relaxed text-justify max-w-3xl mb-4">
-                GIFON thrives on the commitment and passion of volunteers who dedicate their time and skills to advancing geospatial intelligence for national development. As a volunteer, you can contribute to research, event organization, community mapping initiatives, training delivery, and advocacy campaigns.
+        {/* --- Section 3: Volunteer Opportunities (Split Layout) --- */}
+        <section id="volunteer" className="py-20 px-4 bg-white overflow-hidden relative">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            {/* Left Column: Text */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Users className="text-green-600" />
+                <span className="text-green-600 font-bold uppercase tracking-wide">Join the Community</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                Volunteer Your Skills
+              </h2>
+              <p className="text-lg text-gray-600 mb-6">
+                <span className="cooper font-serif font-bold">GIFON</span> thrives on the passion of volunteers. By dedicating your time, you contribute directly to research, event organization, and community mapping initiatives.
               </p>
-              <p className="text-gray-700 leading-relaxed text-justify max-w-3xl mb-8">
-                Volunteering with GIFON not only strengthens your professional profile but also allows you to make a tangible difference in Nigeria’s progress towards a resilient, secure, and data-driven society.
-              </p>
+              
+              <ul className="space-y-3 mb-8">
+                {['Research & Data Analysis', 'Advocacy Campaigns', 'Training Delivery', 'Event Organization'].map((item, index) => (
+                  <li key={index} className="flex items-center text-gray-700">
+                    <CheckCircle2 className="h-5 w-5 text-green-500 mr-3 shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
               <Link
-                href="/contact-us" // Links to the contact page to inquire
-                className="bg-green-600 text-white px-8 py-3 rounded font-semibold hover:bg-green-700 transition"
+                href="/contact-us"
+                className="inline-block bg-gray-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition shadow-lg"
               >
-                Volunteer Now
+                Become a Volunteer
               </Link>
+            </div>
+
+            {/* Right Column: Visual Element */}
+            {/* If you have a real image of volunteers, put it here. Otherwise, this abstract pattern works well. */}
+            {/* Right Column: Visual Element (User's Image Logic Integrated) */}
+            <div className="order-1 lg:order-2 relative h-[400px] lg:h-full min-h-[400px] w-full bg-gray-200 rounded-2xl overflow-hidden shadow-2xl group">
+              <Image
+                src='/media/ye.jpg'
+                alt='Volunteer at GIFON'
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              {/* Optional: Subtle gradient overlay to make image pop */}
+              <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none"></div>
+            </div>
+            {/* <div className="relative">
+              <div className="absolute -inset-4 bg-green-100 rounded-2xl transform rotate-3 -z-10"></div>
+              <div className="bg-gray-100 rounded-2xl p-8 min-h-[400px] flex items-center justify-center border border-gray-200 shadow-inner">
+                 <div className="text-center">
+                    <div className="bg-white p-4 rounded-full inline-block mb-4 shadow-sm">
+                        <Users size={48} className="text-green-600/50" />
+                    </div>
+                    <p className="text-gray-400 text-sm italic">
+                      [Insert Image of Volunteers or Mapping Event Here]
+                    </p>
+                 </div>
+              </div>
+            </div> */}
+
+          </div>
+        </section>
+
+        {/* --- Section 4: Final Call to Action --- */}
+        <section className="py-16 bg-green-900 text-white text-center px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold mb-6">Ready to make a difference?</h2>
+            <p className="text-green-100 mb-8 text-lg">
+              Whether you donate or volunteer, your action helps build a secure, data-driven society.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+               <a href="#donate" className="bg-white text-green-900 px-8 py-3 rounded font-semibold hover:bg-gray-100 transition">
+                 Donate Now
+               </a>
+               <Link href="/contact-us" className="border border-white text-white px-8 py-3 rounded font-semibold hover:bg-white/10 transition">
+                 Contact Us
+               </Link>
+            </div>
           </div>
         </section>
       </main>

@@ -19,14 +19,14 @@ export default function ConferencesProceedingsPage() {
               Advancing the Geospatial Ecosystem
             </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              The Geospatial Intelligence Foundation of Nigeria (GIFON)
+              The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>)
               recognizes the value of knowledge-sharing, collaboration, and
               continuous learning in advancing the geospatial intelligence
               ecosystem.
             </p>
             <p className="text-gray-700 leading-relaxed">
               Through conferences, workshops, technical symposia, and
-              roundtables, GIFON creates platforms where policymakers, security
+              roundtables, <span className="cooper">GIFON</span> creates platforms where policymakers, security
               agencies, industry leaders, researchers, and young innovators
               converge to discuss pressing issues and shape future directions.
             </p>
@@ -76,7 +76,7 @@ export default function ConferencesProceedingsPage() {
               Extending Knowledge Beyond the Venue
             </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              These Proceedings ensure that the outcomes of GIFON’s events
+              These Proceedings ensure that the outcomes of <span className="cooper">GIFON</span>’s events
               extend beyond the venue, serving as a reference for stakeholders
               across Nigeria and globally.
             </p>
@@ -86,7 +86,7 @@ export default function ConferencesProceedingsPage() {
               community.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              By publishing and disseminating these records, GIFON strengthens
+              By publishing and disseminating these records, <span className="cooper">GIFON</span> strengthens
               its mission of building a knowledge-driven society, where every
               dialogue, debate, and discovery contributes to national
               security, sustainable development, and technological advancement.

@@ -45,7 +45,7 @@ export function LogoCarousel({
           const content = (
             <>
               {/* Image Container */}
-              <div className="relative w-48 h-32 md:w-64 md:h-40 rounded-xl overflow-hidden shadow-md border-2 border-white/20 mb-3">
+              <div className="relative w-48 h-32 md:w-64 md:h-40 rounded-xl overflow-hidden shadow-md border-2 border-green-400 mb-3">
                 <Image 
                   fill
                   src={item.src} 

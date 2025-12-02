@@ -4,6 +4,8 @@ import { useState } from 'react';
 import HeroSection from '@/components/HeroSection';
 import Link from "next/link";
 import { CheckCircle, X } from 'lucide-react'; // Added X icon for close button
+import { AiOutlineMail } from "react-icons/ai";
+import { BsVoicemail } from "react-icons/bs";
 import Modal from '@/components/Modal';
 
 // --- Types & Content ---
@@ -21,7 +23,7 @@ interface ModalState {
 const forumContent = {
     supportingDocuments: `
     <div class="space-y-4 text-sm md:text-base">
-      <h2 style="font-size: 1.1rem; font-weight: 700;">GIFON Membership Registration – Supporting Documents Checklist</h2>
+      <h2 style="font-size: 1.1rem; font-weight: 700;"><span className="cooper">GIFON</span> Membership Registration – Supporting Documents Checklist</h2>
       
       <div>
         <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Student Membership</h3>
@@ -181,13 +183,13 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             <div id="why-join" className='pt-8 -z-10'></div>
             <section className="py-12 md:py-16 px-4 md:px-6 bg-white">
                 <div className="max-w-5xl mx-auto text-center">
-                    <h2 className="text-2xl md:text-3xl font-semibold mb-6">Why Join GIFON?</h2>
+                    <h2 className="text-2xl md:text-3xl font-semibold mb-6">Why Join <span className="cooper">GIFON</span>?</h2>
                     <div className="space-y-4 text-left md:text-justify text-gray-700 leading-relaxed">
                         <p>
-                            Joining the Geospatial Intelligence Foundation of Nigeria (GIFON) means becoming part of a dynamic community of professionals, innovators, policymakers, and researchers committed to shaping Nigeria’s future through geospatial intelligence. As a member, you are not only advancing your career but also contributing to national development, security, and innovation.
+                            Joining the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) means becoming part of a dynamic community of professionals, innovators, policymakers, and researchers committed to shaping Nigeria’s future through geospatial intelligence. As a member, you are not only advancing your career but also contributing to national development, security, and innovation.
                         </p>
                         <p>
-                            GIFON membership provides you with opportunities to network with thought leaders, access exclusive research and publications, attend specialized training and workshops, and participate in shaping policies that strengthen Nigeria’s geospatial ecosystem.
+                            <span className="cooper">GIFON</span> membership provides you with opportunities to network with thought leaders, access exclusive research and publications, attend specialized training and workshops, and participate in shaping policies that strengthen Nigeria’s geospatial ecosystem.
                         </p>
                     </div>
                 </div>
@@ -230,7 +232,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                         <div className="w-16 h-1 bg-green-600 mt-2"></div>
                     </div>
                     
-                    <p className="text-lg md:text-xl font-serif mb-4">As a GIFON member, you gain:</p>
+                    <p className="text-lg md:text-xl font-serif mb-4">As a <span className="cooper">GIFON</span> member, you gain:</p>
                     <ul className="text-base md:text-lg font-serif list-disc list-outside ml-5 space-y-2 text-gray-800">
                         <li>Access to exclusive publications, research reports, and policy briefs.</li>
                         <li>Discounted rates for conferences, training, workshops, and certification programs.</li>
@@ -307,10 +309,11 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             <div id="testimonials"></div>
             <section className="py-16 px-4 md:px-6 bg-green-50">
                  <div className="max-w-3xl mx-auto text-center">
-                    <blockquote className="text-xl md:text-2xl italic text-gray-800 leading-relaxed">
-                        “<span className='font-serif font-bold'>GIFON</span> connects us to global geospatial networks while addressing Nigeria’s critical national infrastructure needs.”
+                    <blockquote className="text-xl md:text-2xl text-gray-800 leading-relaxed">
+                        “<span className='font-serif font-bold'><span className="cooper">GIFON</span></span> connects us to global geospatial networks while addressing Nigeria’s critical national infrastructure needs.”
                     </blockquote>
-                    <p className="mt-4 text-base md:text-lg font-semibold text-green-800">- Dr AA Usman / Founding Member</p>
+                    <p className="mt-4 text-base md:text-lg font-semibold text-green-800">- Dr. AA Usman -</p>
+                    <p className="mt-1 text-base md:text-lg font-semibold text-green-800">Founder / Chairman BOT</p>
                 </div>
             </section>
             
@@ -322,7 +325,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                     
                     <div className="space-y-6">
                         <h3 className="text-xl font-semibold">Application Steps</h3>
-                        <ol className="list-decimal list-outside ml-5 space-y-4 text-gray-700 text-base md:text-lg">
+                        <ol className="list-decimal list-outside ml-5 space-y-4 text-base md:text-lg">
                             <li>
                                 <span className="font-semibold">Choose membership category:</span> Review the categories above to find your fit.
                             </li>
@@ -352,7 +355,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                         <h2 className="text-2xl md:text-3xl font-bold mb-6">Membership Portal</h2>
                         <div className="space-y-4 text-gray-600 text-left md:text-center">
                             <p>  
-                                Our secure membership portal makes it easy to join GIFON, renew your membership, or upgrade to a new category.
+                                Our secure membership portal makes it easy to join <span className="cooper">GIFON</span>, renew your membership, or upgrade to a new category.
                             </p>
                         </div>
                         <div className="mt-8">
@@ -371,16 +374,19 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             <div id="contact"></div>
             <section className="py-16 px-4 md:px-6 bg-gray-900 text-white">
                 <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-2xl md:text-3xl font-semibold mb-4">Have questions about joining GIFON?</h2>
-                    <p className="text-base md:text-lg text-gray-400 mb-8 wrap-break-word">
-                        Contact our membership team at membership@gifon.org.ng or call +234 707 721 1243.
-                    </p>
-                    <Link
+                    <h2 className="text-2xl md:text-3xl font-semibold mb-4">Have questions about joining <span className="cooper">GIFON</span>?</h2>
+                    <div className="text-base md:text-lg text-gray-400 mb-8 wrap-break-word flex flex-col items-center">
+                        Contact our membership team at
+                        <div className='flex flex-row items-center gap-1'><AiOutlineMail/> membership@gifon.org.ng</div>
+                        or call 
+                        <div className='flex flex-row items-center gap-1'><BsVoicemail/> +234 707 721 1243.</div>
+                    </div>
+                    {/* <Link
                         href="/contact-us"
                         className="inline-block bg-white text-green-800 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition"
                     >
                         Contact Us
-                    </Link>
+                    </Link> */}
                 </div>
             </section>
 

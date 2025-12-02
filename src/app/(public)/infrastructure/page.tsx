@@ -85,7 +85,15 @@ export default function InfrastructurePage() {
                     />
                     <div className="space-y-4 text-gray-700 leading-relaxed">
                       {/* Split description for readability */}
-                      <p>{sector.description}</p>
+                      {/* <p>{sector.description}</p> */}
+
+                      <ul>
+                        {sector.highlights.map((point, idx) => (
+                          <li key={idx} className="list-disc list-inside mb-2">
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
                       
                       <Link
                         href={`/infrastructure/${sector.id}`} 

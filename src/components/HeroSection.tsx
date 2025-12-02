@@ -7,6 +7,7 @@ import Image from "next/image";
 type HeroSectionProps = {
   title?: string;
   description?: string;
+  description1?: string;
   // Now accepts a single string OR an array of strings
   backgroundMedia?: string | string[]; 
   cycleInterval?: number;
@@ -22,6 +23,7 @@ const isVideo = (src: string) => {
 export default function HeroSection({
   title = "",
   description = "",
+  description1 = "",
   backgroundMedia = [], // Default empty
   cycleInterval = 5000,
   ctaText,
@@ -103,6 +105,13 @@ export default function HeroSection({
         {description && (
           <p className="cooper text-gray-200 text-lg sm:text-xl md:text-2xl font-light max-w-3xl mb-8 drop-shadow-md">
             {description}
+          </p>
+        )}
+        
+        {/* Description: Scales text size */}
+        {description1 && (
+          <p className="bellota text-gray-200 text-lg sm:text-xl md:text-2xl font-light max-w-3xl mb-8 drop-shadow-md">
+            {description1}
           </p>
         )}
 

@@ -24,7 +24,7 @@ export default function OpenDataResearchPage() {
             <p className="text-gray-700 leading-relaxed mb-4">
               The Open Data & Research Programme (ODRP) is a flagship
               initiative of the Geospatial Intelligence Foundation of Nigeria
-              (GIFON) aimed at promoting data accessibility, research
+              (<span className="cooper">GIFON</span>) aimed at promoting data accessibility, research
               collaboration, and evidence-based policy development in
               Nigeria’s geospatial intelligence ecosystem.
             </p>
@@ -84,7 +84,7 @@ export default function OpenDataResearchPage() {
                   1. Open Data Portal Development
                 </h3>
                 <p className="text-gray-700 mb-2">
-                  Build a secure online GIFON Open Data Hub with:
+                  Build a secure online <span className="cooper">GIFON</span> Open Data Hub with:
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Satellite imagery archives</li>
@@ -101,7 +101,7 @@ export default function OpenDataResearchPage() {
                 </h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>
-                    Annual GIFON Research Fellowship for postgraduate and
+                    Annual <span className="cooper">GIFON</span> Research Fellowship for postgraduate and
                     doctoral students.
                   </li>
                   <li>
@@ -123,7 +123,7 @@ export default function OpenDataResearchPage() {
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Annual State of Nigeria’s Geospatial Intelligence Report.</li>
                   <li>
-                    Peer-reviewed GIFON Journal – Eyes on Location: The
+                    Peer-reviewed <span className="cooper">GIFON</span> Journal – Eyes on Location: The
                     Journal of GeoINSIGHT.
                   </li>
                   <li>
@@ -159,7 +159,7 @@ export default function OpenDataResearchPage() {
                     international organizations.
                   </li>
                   <li>
-                    Establish a GIFON Research Network connecting Nigerian and
+                    Establish a <span className="cooper">GIFON</span> Research Network connecting Nigerian and
                     global scholars.
                   </li>
                   <li>

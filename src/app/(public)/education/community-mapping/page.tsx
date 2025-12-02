@@ -19,7 +19,7 @@ export default function CommunityMappingPage() {
             <p className="text-gray-700 leading-relaxed mb-4">
               The Community Mapping for Development (CMD) Programme is a
               grassroots initiative of the Geospatial Intelligence Foundation
-              of Nigeria (GIFON) designed to empower communities with
+              of Nigeria (<span className="cooper">GIFON</span>) designed to empower communities with
               geospatial tools, data, and participatory mapping to drive local
               development, resilience, and inclusive planning.
             </p>
@@ -125,7 +125,7 @@ export default function CommunityMappingPage() {
                     resources.
                   </li>
                   <li>
-                    Integration of community data into GIFON’s National
+                    Integration of community data into <span className="cooper">GIFON</span>’s National
                     Geospatial Hub.
                   </li>
                 </ul>
@@ -157,7 +157,7 @@ export default function CommunityMappingPage() {
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Establish community-based geospatial clubs.</li>
                   <li>
-                    Link trained youth to GIFON’s Certification Programmes and
+                    Link trained youth to <span className="cooper">GIFON</span>’s Certification Programmes and
                     career pathways.
                   </li>
                   <li>Scale successful models to other communities.</li>

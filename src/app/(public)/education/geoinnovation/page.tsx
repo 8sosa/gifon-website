@@ -24,7 +24,7 @@ export default function GeoinnovationPage() {
             <p className="text-gray-700 leading-relaxed mb-4">
               The Y-GeoInnovation & Tech Incubation Programme (Y-GITI) is a
               signature initiative of the Geospatial Intelligence Foundation
-              of Nigeria (GIFON) aimed at nurturing young innovators,
+              of Nigeria (<span className="cooper">GIFON</span>) aimed at nurturing young innovators,
               startups, and entrepreneurs who are building solutions at the
               intersection of geospatial intelligence, technology, and
               national development.
@@ -119,7 +119,7 @@ export default function GeoinnovationPage() {
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>6–12-month incubation support for promising projects.</li>
                   <li>Access to labs and geospatial data resources.</li>
-                  <li>Mentorship from GIFON experts and industry leaders.</li>
+                  <li>Mentorship from <span className="cooper">GIFON</span> experts and industry leaders.</li>
                   <li>Seed funding and grants for prototype development.</li>
                 </ul>
               </div>
@@ -146,7 +146,7 @@ export default function GeoinnovationPage() {
                     Business registration, IP protection, and
                     commercialization support.
                   </li>
-                  <li>Scale-up support through GIFON’s Industry Forum.</li>
+                  <li>Scale-up support through <span className="cooper">GIFON</span>’s Industry Forum.</li>
                   <li>International exposure through GEOINT conferences.</li>
                 </ul>
               </div>

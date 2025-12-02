@@ -42,7 +42,7 @@ export default function Footer() {
                   <Image src="/logo.png" alt="Gifon" fill className="object-contain"/>
               </div>
               <div className="flex flex-col justify-center cooper">
-                <h1 className="text-5xl md:text-5xl lg:text-5xl font-extrabold text-green-700 leading-none tracking-[0.2em] lg:tracking-[0.3em]">GIFON</h1>
+                <h1 className="text-5xl md:text-5xl lg:text-[4rem] font-extrabold text-green-700 leading-none">GIFON</h1>
                 <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.5rem] font-bold text-green-800 uppercase tracking-tight whitespace-nowrap">Geospatial Intelligence Foundation of Nigeria</span>
               </div>
             </Link>
@@ -77,11 +77,11 @@ export default function Footer() {
 
           {/* --- 3. Contact (Col Span 5) --- */}
           {/* Restored full data but used a dense grid to keep it compact */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4 flex flex-col items-center">
             <h4 className="text-white font-bold mb-4 uppercase text-xs tracking-wider">Contact Us</h4>
             
             {/* Full Address Restored */}
-            <address className="not-italic mb-6 text-gray-500 leading-snug">
+            <address className="not-italic mb-6 text-gray-500 leading-snug items-center">
                 12 Richard Clapperton Street,<br />
                 Off Maman Nasir Street, Asokoro District,<br />
                 Abuja, Nigeria.
@@ -91,7 +91,7 @@ export default function Footer() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-4 text-md">
                 
                 {/* General */}
-                <div className='col-span-2 sm:col-span-2 border-b border-gray-900 pb-2 mb-1 flex flex-col align-center'>
+                <div className='col-span-2 border-b border-gray-900 pb-2 mb-1 w-full flex flex-col text-center'>
                     <span className="block font-bold text-gray-300">General Info</span>
                     <a href="mailto:info@gifon.org.ng" className="hover:text-green-500">info@gifon.org.ng</a>
                 </div>

@@ -59,7 +59,7 @@ export default function SectionDetail({ section }: { section: Sector }) {
           {/* CTAs */}
           <div className="pt-6 flex flex-wrap items-center gap-4">
             <Link
-              href="/membership"
+              href="/get-involved"
               className="px-8 py-3 rounded-full bg-green-600 text-white font-semibold shadow-md hover:bg-green-700 transition transform hover:-translate-y-0.5"
             >
               Get Involved
@@ -76,7 +76,7 @@ export default function SectionDetail({ section }: { section: Sector }) {
         {/* RIGHT COLUMN: Visual / Diagram */}
         <aside className="lg:col-span-2 space-y-6">
           <div className="sticky top-24">
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+            <div className="relative aspect-4/3 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
               <Image 
                 src={section.image} 
                 alt={section.title} 
@@ -85,7 +85,7 @@ export default function SectionDetail({ section }: { section: Sector }) {
               />
               
               {/* Overlay for visual flair */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent pointer-events-none"></div>
               <div className="absolute bottom-4 left-4 right-4 text-white text-sm font-medium drop-shadow-md">
                  {section.summary}
               </div>

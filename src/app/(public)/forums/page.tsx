@@ -13,8 +13,7 @@ const allForums = [
     title: "Young Professionals Forum",
     description: "The GI-NYPN is committed to fostering the next generation of geospatial intelligence professionals in Nigeria. This forum provides a platform for young professionals to connect, learn, innovate, and grow within the GeoINT sector...",
     policyContent: `
-      <h2 style="font-size: 1.25rem; font-weight: 600;">GEOSPATIAL INTELLIGENCE FOUNDATION OF NIGERIA (GIFON)</h2>
-      <h2 style="font-size: 1.25rem; font-weight: 600;">GIFON YOUNG PROFESSIONALS’ FORUM</h2>
+      <h2 style="font-size: 1.25rem; font-weight: 600;"><span className="cooper">GIFON</span> YOUNG PROFESSIONALS’ FORUM</h2>
       <p><strong>(GI-MYPN) POLICY DOCUMENT version 1.0</strong></p>
       <br>
       <h3 style="font-size: 1.25rem; font-weight: 600;">1. Introduction</h3>
@@ -139,8 +138,7 @@ const allForums = [
     title: "Women in GEOINT Forum",
     description: "The GI-NGW is a forum dedicated to empowering women in GeoINT by providing a platform for collaboration, professional development, mentorship, and advocacy. It seeks to address the gender gap in the geospatial sector in Nigeria...",
     policyContent: `
-      <h2 style="font-size: 1.25rem; font-weight: 600;">GEOSPATIAL INTELLIGENCE FOUNDATION OF NIGERIA (GIFON)</h2>
-      <h2 style="font-size: 1.25rem; font-weight: 600;">GIFON WOMEN IN GEOINT FORUM</h2>
+      <h2 style="font-size: 1.25rem; font-weight: 600;"><span className="cooper">GIFON</span> WOMEN IN GEOINT FORUM</h2>
       <p><strong>(GI-NGW): POLICY DOCUMENT version1.0</strong></p>
       <br>
       <h3 style="font-size: 1.25rem; font-weight: 600;">1. Introduction</h3>
@@ -193,7 +191,7 @@ const allForums = [
       </ul>
       <br>
       <h3 style="font-size: 1.25rem; font-weight: 600;">7. Governance and Leadership</h3>
-      <p>The GI-NGW will be governed by the Board of Directors of GIFON, supported by the management team of GIFON. The governance structure is designed to ensure transparency, inclusivity, and accountability. The Board of Directors of GIFON will be responsible for overseeing the foundation's strategic direction, ensuring adherence to its mission, and approving key initiatives.</p>
+      <p>The GI-NGW will be governed by the Board of Directors of <span className="cooper">GIFON</span>, supported by the management team of <span className="cooper">GIFON</span>. The governance structure is designed to ensure transparency, inclusivity, and accountability. The Board of Directors of <span className="cooper">GIFON</span> will be responsible for overseeing the foundation's strategic direction, ensuring adherence to its mission, and approving key initiatives.</p>
       <ul>
         <li><strong>Team Leader:</strong> The Team Leader will provide overall leadership and direction for the (GI-NGW) Forum.</li>
         <li><strong>Deputy Team Leader:</strong> The Deputy Team Leader will support the Chairperson in governance and leadership duties.</li>
@@ -209,7 +207,7 @@ const allForums = [
       </ul>
       <br>
       <h3 style="font-size: 1.25rem; font-weight: 600;">9. Activities and Programs</h3>
-      <p>GI-NGW will host a range of activities and programs that align with the mission and objectives of GIFON. These include:</p>
+      <p>GI-NGW will host a range of activities and programs that align with the mission and objectives of <span className="cooper">GIFON</span>. These include:</p>
       <ul>
         <li><strong>Annual GeoINT workshop:</strong> A flagship event that brings together women professionals, thought leaders, and academics to discuss trends, challenges, and innovations in GeoINT.</li>
         <li><strong>Training:</strong> Periodic educational sessions to enhance the technical and leadership skills of members.</li>
@@ -240,15 +238,15 @@ const allForums = [
     title: "Industry & Private Sector Forum",
     description: "This forum recognizes the critical role of the industry and private sector in driving innovation, investment, and sustainable applications of geospatial intelligence across national development and security priorities...",
     policyContent: `
-      <h2 style="font-size: 1.25rem; font-weight: 600;">GIFON INDUSTRY AND PRIVATE SECTOR FORUM</h2>
+      <h2 style="font-size: 1.25rem; font-weight: 600;"><span className="cooper">GIFON</span> INDUSTRY AND PRIVATE SECTOR FORUM</h2>
       <h2 style="font-size: 1.25rem; font-weight: 600;">POLICY STATEMENT</h2>
       <br>
-      <p>The Geospatial Intelligence Foundation of Nigeria (GIFON) recognizes the critical role of the industry and private sector in driving innovation, investment, and sustainable applications of geospatial intelligence across national development and security priorities.</p>
-      <p>The Industry and Private Sector Forum (IPSF) of GIFON serves as a strategic platform to:</p>
+      <p>The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) recognizes the critical role of the industry and private sector in driving innovation, investment, and sustainable applications of geospatial intelligence across national development and security priorities.</p>
+      <p>The Industry and Private Sector Forum (IPSF) of <span className="cooper">GIFON</span> serves as a strategic platform to:</p>
       <br>
       <h3 style="font-size: 1.25rem; font-weight: 600;">1. Facilitate Collaboration</h3>
       <ul>
-        <li>Strengthen partnerships between GIFON, private enterprises, technology providers, and geospatial service companies.</li>
+        <li>Strengthen partnerships between <span className="cooper">GIFON</span>, private enterprises, technology providers, and geospatial service companies.</li>
         <li>Create a shared space for dialogue, knowledge exchange, and co-creation of solutions to Nigeria’s geospatial challenges.</li>
       </ul>
       <br>
@@ -277,7 +275,7 @@ const allForums = [
       </ul>
       <br>
       <p><strong>Policy Commitment:</strong></p>
-      <p>GIFON commits to institutionalizing the Industry and Private Sector Forum as a dynamic and inclusive mechanism for engagement, innovation, and partnership. Through this platform, GIFON will ensure that the private sector is not only a stakeholder but also a key driver of Nigeria’s geospatial future.</p>
+      <p><span className="cooper">GIFON</span> commits to institutionalizing the Industry and Private Sector Forum as a dynamic and inclusive mechanism for engagement, innovation, and partnership. Through this platform, <span className="cooper">GIFON</span> will ensure that the private sector is not only a stakeholder but also a key driver of Nigeria’s geospatial future.</p>
     `
   },
   {
@@ -288,7 +286,7 @@ const allForums = [
     policyContent: `
       <h2 style="font-size: 1.25rem; font-weight: 600;">POLICY, GOVERNANCE & ETHICS WORKING GROUP</h2>
       <br>
-      <p>The Policy, Governance & Ethics Working Group (PGE-WG) of the Geospatial Intelligence Foundation of Nigeria (GIFON) is the institutional mechanism established to uphold accountability, integrity, and transparency in all our operations. This working group provides thought leadership, oversight, and policy direction on how geospatial intelligence should be governed, regulated, and ethically applied for national development and security.</p>
+      <p>The Policy, Governance & Ethics Working Group (PGE-WG) of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is the institutional mechanism established to uphold accountability, integrity, and transparency in all our operations. This working group provides thought leadership, oversight, and policy direction on how geospatial intelligence should be governed, regulated, and ethically applied for national development and security.</p>
       <br>
       <h3 style="font-size: 1.25rem; font-weight: 600;">Core Mandate</h3>
       <p><strong>a. Policy Development:</strong> Drafting, reviewing, and recommending national and institutional policies that guide the responsible use of geospatial data and intelligence.</p>
@@ -300,7 +298,7 @@ const allForums = [
       <h3 style="font-size: 1.25rem; font-weight: 600;">Focus Areas</h3>
       <p><strong>a. Ethical Use of GEOINT:</strong> Safeguarding against abuse, bias, and misuse of sensitive geospatial information.</p>
       <p><strong>b. Data Privacy & Security:</strong> Ensuring that geospatial data handling respects confidentiality, rights, and national interests.</p>
-      <p><strong>c. Anti-Corruption & Accountability:</strong> Embedding integrity in all GIFON’s operations and promoting zero-tolerance for misconduct.</p>
+      <p><strong>c. Anti-Corruption & Accountability:</strong> Embedding integrity in all <span className="cooper">GIFON</span>’s operations and promoting zero-tolerance for misconduct.</p>
       <p><strong>d. Inclusive Governance:</strong> Encouraging the participation of women, youth, academia, and the private sector in shaping GEOINT policy.</p>
       <p><strong>· International Best Practice:</strong> Aligning Nigeria’s GEOINT ecosystem with global standards and conventions.</p>
       <br>
@@ -315,7 +313,7 @@ const allForums = [
       </ul>
       <br>
       <h3 style="font-size: 1.25rem; font-weight: 600;">Why It Matters</h3>
-      <p>Strong governance and ethical foundations are essential for the credibility and sustainability of geospatial intelligence in Nigeria. Through the PGE-WG, GIFON ensures that innovation is balanced with responsibility, security is balanced with human rights, and progress is anchored on integrity.</p>
+      <p>Strong governance and ethical foundations are essential for the credibility and sustainability of geospatial intelligence in Nigeria. Through the PGE-WG, <span className="cooper">GIFON</span> ensures that innovation is balanced with responsibility, security is balanced with human rights, and progress is anchored on integrity.</p>
     `
   },
   {
@@ -324,11 +322,11 @@ const allForums = [
     title: "Academia & Research Collaboration",
     description: "The ARCP fosters strong partnerships between universities, research institutions, and GIFON to advance GEOINT education, research, and innovation, positioning Nigeria’s higher institutions as key knowledge partners...",
     policyContent: `
-      <h2 style="font-size: 1.25rem; font-weight: 600;">GIFON Academia & Research Collaboration Programme (ARCP)</h2>
+      <h2 style="font-size: 1.25rem; font-weight: 600;"><span className="cooper">GIFON</span> Academia & Research Collaboration Programme (ARCP)</h2>
       <p><em>“Bridging Knowledge and Practice through Geospatial Intelligence.”</em></p>
       <br>
       <h3 style="font-size: 1.25rem; font-weight: 600;">Overview</h3>
-      <p>The Academia & Research Collaboration Programme (ARCP) is an initiative of the Geospatial Intelligence Foundation of Nigeria (GIFON) to foster strong partnerships between universities, research institutions, and GIFON in advancing geospatial intelligence (GEOINT) education, research, and innovation.</p>
+      <p>The Academia & Research Collaboration Programme (ARCP) is an initiative of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) to foster strong partnerships between universities, research institutions, and <span className="cooper">GIFON</span> in advancing geospatial intelligence (GEOINT) education, research, and innovation.</p>
       <p>The programme seeks to position Nigeria’s higher institutions and research centers as key knowledge partners in developing local solutions to national and regional security, resilience, and development challenges.</p>
       <br>
       <h3 style="font-size: 1.25rem; font-weight: 600;">Programme Objectives</h3>
@@ -359,23 +357,23 @@ const allForums = [
             <li>AI, drones, and emerging tech in GEOINT</li>
           </ul>
         </li>
-        <li>Annual “GIFON Research Challenge” for young scholars.</li>
+        <li>Annual “<span className="cooper">GIFON</span> Research Challenge” for young scholars.</li>
       </ul>
       <h4>3. Internships, Fellowships & Exchanges</h4>
       <ul>
-        <li>Student internships at GIFON, partner MDAs, and private sector organizations.</li>
+        <li>Student internships at <span className="cooper">GIFON</span>, partner MDAs, and private sector organizations.</li>
         <li>Faculty exchange programmes with global GEOINT institutions.</li>
         <li>Postgraduate fellowships on strategic geospatial studies.</li>
       </ul>
       <h4>4. Knowledge Sharing Platforms</h4>
       <ul>
-        <li>Annual Academia–GIFON Roundtable to align research with policy.</li>
+        <li>Annual Academia–<span className="cooper">GIFON</span> Roundtable to align research with policy.</li>
         <li>Collaborative publication in Eyes on Location: The Journal of GeoINSIGHT.</li>
         <li>National database of geospatial researchers and projects.</li>
       </ul>
       <h4>5. Innovation & Start-Up Support</h4>
       <ul>
-        <li>Link research outputs to GIFON’s Y-GeoInnovation & Tech Incubation Programme.</li>
+        <li>Link research outputs to <span className="cooper">GIFON</span>’s Y-GeoInnovation & Tech Incubation Programme.</li>
         <li>Support commercialization of university-based geospatial innovations.</li>
       </ul>
       <br>
@@ -439,11 +437,11 @@ export default function ForumsPage() {
           <div className='max-w-5xl mx-auto'>
             {/* <h1 className="text-4xl font-bold text-center my-12">GIFON Forums & Working Groups</h1> */}
             <p className="text-gray-700 leading-relaxed text-justify mb-8">
-              The Geospatial Intelligence Foundation of Nigeria (GIFON) is committed to building a vibrant, collaborative, and future-focused GeoINT ecosystem for Nigeria. As part of this mission, the GIFON Groups & Forums serve as structured communities of practice where professionals, institutions, researchers, and enthusiasts can learn, engage, and innovate together.
+              The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is committed to building a vibrant, collaborative, and future-focused GeoINT ecosystem for Nigeria. As part of this mission, the <span className="cooper">GIFON</span> Groups & Forums serve as structured communities of practice where professionals, institutions, researchers, and enthusiasts can learn, engage, and innovate together.
             </p>
             
             <p className="text-gray-700 leading-relaxed text-justify mb-8">
-              GIFON Groups & Forums provide a dynamic platform for dialogue, knowledge exchange, and coordinated action across the diverse pillars of geospatial intelligence. Each group focuses on a strategic area essential to Nigeria’s national development and security, enabling members to explore insights, share expertise, and contribute to practical solutions. These forums are designed to:
+              <span className="cooper">GIFON</span> Groups & Forums provide a dynamic platform for dialogue, knowledge exchange, and coordinated action across the diverse pillars of geospatial intelligence. Each group focuses on a strategic area essential to Nigeria’s national development and security, enabling members to explore insights, share expertise, and contribute to practical solutions. These forums are designed to:
             </p>
 
             <ul className="list-disc list-inside mb-8 text-gray-700 leading-relaxed text-justify">
@@ -466,9 +464,9 @@ export default function ForumsPage() {
             </ul>
             
             <span className='text-gray-700 leading-relaxed text-justify'>
-              The GIFON Groups & Forums embody our belief that collective intelligence drives national progress. By bringing Nigeria’s brightest geospatial minds together, we are cultivating a strong knowledge community that supports evidence-based decision-making, strengthens institutional capacity, and accelerates the growth of Nigeria’s GeoINT ecosystem.
+              The <span className="cooper">GIFON</span> Groups & Forums embody our belief that collective intelligence drives national progress. By bringing Nigeria’s brightest geospatial minds together, we are cultivating a strong knowledge community that supports evidence-based decision-making, strengthens institutional capacity, and accelerates the growth of Nigeria’s GeoINT ecosystem.
 
-              Whether you are a seasoned professional, an emerging practitioner, a student, or an organisation seeking to engage in meaningful geo-collaboration, the GIFON Groups & Forums offer you a home to learn, contribute, and thrive.
+              Whether you are a seasoned professional, an emerging practitioner, a student, or an organisation seeking to engage in meaningful geo-collaboration, the <span className="cooper">GIFON</span> Groups & Forums offer you a home to learn, contribute, and thrive.
 
               Join us as we shape the future of geospatial intelligence in Nigeria, one group, one forum, one idea at a time.
             </span>
@@ -533,7 +531,7 @@ export default function ForumsPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-semibold mb-4 text-center">Industry & Private Sector Forum</h2>
             <p className="text-gray-700 leading-relaxed">
-              The Geospatial Intelligence Foundation of Nigeria (GIFON) recognizes the critical role of the industry and private sector in driving innovation, investment, and sustainable applications of geospatial intelligence across national development and security priorities...
+              The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) recognizes the critical role of the industry and private sector in driving innovation, investment, and sustainable applications of geospatial intelligence across national development and security priorities...
             </p>
             <div className="text-center mt-6">
               <button
@@ -559,7 +557,7 @@ export default function ForumsPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-semibold mb-4 text-center">Policy Briefs & white Paper</h2>
             <p className="text-gray-700 leading-relaxed">
-              The Policy, Governance & Ethics Working Group (PGE-WG) of the Geospatial Intelligence Foundation of Nigeria (GIFON) is the institutional mechanism established to uphold accountability, integrity, and transparency in all our operations. This working group provides thought leadership, oversight, and policy direction on how geospatial intelligence should be governed, regulated, and ethically applied for national development and security...
+              The Policy, Governance & Ethics Working Group (PGE-WG) of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is the institutional mechanism established to uphold accountability, integrity, and transparency in all our operations. This working group provides thought leadership, oversight, and policy direction on how geospatial intelligence should be governed, regulated, and ethically applied for national development and security...
             </p>
             <div className="text-center mt-6">
               <button
@@ -585,7 +583,7 @@ export default function ForumsPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-semibold mb-4 text-center">Research Reports</h2>
             <p className="text-gray-700 leading-relaxed">
-              The Academia & Research Collaboration Programme (ARCP) is an initiative of the Geospatial Intelligence Foundation of Nigeria (GIFON) to foster strong partnerships between universities, research institutions, and GIFON in advancing geospatial intelligence (GEOINT) education, research, and innovation. The programme seeks to position Nigeria’s higher institutions and research centers as key knowledge partners in developing local solutions to national and regional security, resilience, and development challenges...
+              The Academia & Research Collaboration Programme (ARCP) is an initiative of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) to foster strong partnerships between universities, research institutions, and <span className="cooper">GIFON</span> in advancing geospatial intelligence (GEOINT) education, research, and innovation. The programme seeks to position Nigeria’s higher institutions and research centers as key knowledge partners in developing local solutions to national and regional security, resilience, and development challenges...
             </p>
             <div className="text-center mt-6">
               <button

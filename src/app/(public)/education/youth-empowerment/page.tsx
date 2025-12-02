@@ -19,7 +19,7 @@ export default function yetaPage() {
             <p className="text-gray-700 leading-relaxed text-left md:text-center">
               The Youth Empowerment & Talent Acceleration Programme (YETAP) is an
               initiative of the Geospatial Intelligence Foundation of Nigeria
-              (GIFON) to identify, train, and mentor the next generation of
+              (<span className="cooper">GIFON</span>) to identify, train, and mentor the next generation of
               Nigerian innovators, analysts, and leaders in the field of
               geospatial intelligence (GEOINT) and its applications to national
               development and security. This flagship programme provides a
@@ -161,7 +161,7 @@ export default function yetaPage() {
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
                   <li>Certification to increase employability.</li>
                   <li>
-                    Access to job opportunities through GIFON’s Industry &
+                    Access to job opportunities through <span className="cooper">GIFON</span>’s Industry &
                     Private Sector Forum.
                   </li>
                   <li>

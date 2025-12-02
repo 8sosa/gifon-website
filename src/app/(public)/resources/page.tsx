@@ -49,11 +49,11 @@ export default function ResourcesPage() {
             </div>
 
             <div className="space-y-4 text-gray-700 leading-relaxed">
-              <p>The Geospatial Intelligence Foundation of Nigeria (GIFON) is committed to transparency, knowledge-sharing, and stakeholder engagement. Our Media & Resources hub provides open access to GIFON’s communications, publications, and multimedia content, serving as a central knowledge and information gateway for members, partners, and the public.</p>
+              <p>The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is committed to transparency, knowledge-sharing, and stakeholder engagement. Our Media & Resources hub provides open access to <span className="cooper">GIFON</span>’s communications, publications, and multimedia content, serving as a central knowledge and information gateway for members, partners, and the public.</p>
               
               <p>This section offers:</p>
               <ul className="list-disc list-inside pl-4 space-y-2">
-                <li><span className="font-semibold">News & Updates</span> – Timely coverage of GIFON’s activities.</li>
+                <li><span className="font-semibold">News & Updates</span> – Timely coverage of <span className="cooper">GIFON</span>’s activities.</li>
                 <li><span className="font-semibold">Press Releases</span> – Official statements on initiatives and partnerships.</li>
                 <li><span className="font-semibold">Photo & Video Gallery</span> – Visual highlights from our events.</li>
                 <li><span className="font-semibold">Publications Archive</span> – Access to research reports, white papers, and briefs.</li>
@@ -61,7 +61,7 @@ export default function ResourcesPage() {
               </ul>
               
               <p>
-                By consolidating our communication assets, <span className="font-semibold">Media & Resources</span> ensures that stakeholders stay <span className="font-semibold">informed, inspired, and empowered</span> to collaborate with GIFON in shaping Nigeria’s geospatial intelligence future.
+                By consolidating our communication assets, <span className="font-semibold">Media & Resources</span> ensures that stakeholders stay <span className="font-semibold">informed, inspired, and empowered</span> to collaborate with <span className="cooper">GIFON</span> in shaping Nigeria’s geospatial intelligence future.
               </p>
             </div>
           </div>
@@ -79,7 +79,7 @@ export default function ResourcesPage() {
                 </div>
                 <div className="p-4 flex flex-col grow">
                   <span className="text-sm text-gray-500 mb-1">Oct 26, 2025</span>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">GIFON Partners with Ministry of Defence</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2"><span className="cooper">GIFON</span> Partners with Ministry of Defence</h3>
                   <p className="text-gray-600 text-sm grow mb-4">A new MOU is signed to enhance national security through advanced geospatial intelligence...</p>
                   <Link href="#" className="text-green-600 hover:underline font-semibold">Read More &rarr;</Link>
                 </div>
@@ -122,7 +122,7 @@ export default function ResourcesPage() {
               <div className="p-4 bg-white rounded-lg shadow-md flex flex-col md:flex-row justify-between md:items-center">
                 <div>
                   <span className="text-sm text-gray-500">Oct 26, 2025</span>
-                  <h3 className="text-lg font-semibold text-gray-800">Official Statement: GIFON Stance on National Data Sharing Policy</h3>
+                  <h3 className="text-lg font-semibold text-gray-800">Official Statement: <span className="cooper">GIFON</span> Stance on National Data Sharing Policy</h3>
                 </div>
                 <Link href="#" className="mt-2 md:mt-0 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-lg font-semibold hover:bg-green-200 w-fit">
                   Read Statement
@@ -209,7 +209,7 @@ export default function ResourcesPage() {
                 PUBLICATIONS
               </h2>
               <p className="text-lg text-green-100 max-w-3xl mx-auto">
-                At GIFON, knowledge is at the heart of our mission. Through our publications, we document insights, share cutting-edge research, and shape conversations on geospatial intelligence.
+                At <span className="cooper">GIFON</span>, knowledge is at the heart of our mission. Through our publications, we document insights, share cutting-edge research, and shape conversations on geospatial intelligence.
               </p>
             </div>
 
@@ -298,7 +298,7 @@ export default function ResourcesPage() {
               {/* Download Item */}
               <Link href="#" className="p-4 bg-white rounded-lg shadow-md flex items-center gap-4 hover:bg-gray-50 transition">
                 <FaDownload className="text-green-600 w-5 h-5" />
-                <h3 className="text-lg font-semibold text-gray-80cm">GIFON Annual Report 2024</h3>
+                <h3 className="text-lg font-semibold text-gray-80cm"><span className="cooper">GIFON</span> Annual Report 2024</h3>
                 <span className="ml-auto text-sm text-gray-500">(PDF, 5.2MB)</span>
               </Link>
               {/* Download Item */}

@@ -24,7 +24,7 @@ export default function GeospatialHubPage() {
             <p className="text-gray-700 leading-relaxed mb-4">
               The National Geospatial Security & Intelligence Hub (NGSIH) is an
               initiative of the Geospatial Intelligence Foundation of Nigeria
-              (GIFON) to serve as the nation’s premier center for geospatial
+              (<span className="cooper">GIFON</span>) to serve as the nation’s premier center for geospatial
               intelligence innovation, data integration, and strategic
               decision support.
             </p>
@@ -44,7 +44,7 @@ export default function GeospatialHubPage() {
               Core Objectives
             </h2>
             <p className="text-gray-700 leading-relaxed mb-6 text-center">
-              Through the National Geospatial Security & Intelligence Hub, GIFON
+              Through the National Geospatial Security & Intelligence Hub, <span className="cooper">GIFON</span>
               reaffirms its commitment to:
             </p>
             <ul className="list-disc list-inside space-y-3 text-gray-700 max-w-2xl mx-auto">

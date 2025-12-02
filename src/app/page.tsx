@@ -5,6 +5,7 @@ import { LogoCarousel, CarouselItem } from '@/components/LogoCarousel'; // Impor
 import RevealProvider from "@/components/ui/RevealProvider";
 import { sections } from '../app/(public)/infrastructure/infrastructure'; // Ensure path is correct
 import Image from 'next/image';
+import { FaRegNewspaper } from 'react-icons/fa6';
 
 // 1. Prepare Partner Logos
 const partnerLogos: CarouselItem[] = [
@@ -41,8 +42,7 @@ export default function HomePage() {
       {/* Infrastructure Sectors Carousel */}
       <section id="sectors-carousel" className="py-12 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto mb-8 px-6 text-center">
-           <h2 className="text-3xl font-bold text-green-800">Key Infrastructure Sectors</h2>
-           <p className="text-gray-600 mt-2">Areas where we apply geospatial intelligence</p>
+           <h2 className="text-3xl font-bold text-green-800">Critical Infrastructure Support</h2>
         </div>
         
         {/* We pass the sectorItems here */}
@@ -79,7 +79,7 @@ export default function HomePage() {
           <h2 className="text-3xl md:text-4xl font-bold mb-5 text-green-400">Newsletter</h2>
           
           <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl max-w-md mx-auto transform hover:scale-105 transition-transform duration-300">
-            <div className="text-4xl mb-2">📅</div>
+            <div className="text-4xl mb-2 flex w-full items-center justify-center"><FaRegNewspaper /></div>
             <h3 className="text-xl md:text-2xl font-bold text-white mb-2">-Eyes on Location-</h3>
             <h3 className="text-xl md:text-2xl font-bold text-white mb-2">The GeoINSIGHT Bulletin</h3>
             {/* <p className="text-gray-200 text-sm mb-1">Vol 1, No. 1 - August 2025</p>
@@ -88,7 +88,7 @@ export default function HomePage() {
               href="/newsletter" 
               className="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-full transition-colors"
             >
-              READ MORE
+              UNLOCK INSIGHT
             </a>
           </div>
         </div>
@@ -115,14 +115,14 @@ export default function HomePage() {
 
             {/* Text Content */}
             <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left">
-              <h3 className="text-3xl md:text-4xl font-bold bellota text-gray-300 mb-4">
-                Get Plugged In
-              </h3>
+              {/* <h3 className="text-3xl md:text-4xl font-bold bellota text-gray-300 mb-4">
+                Join Us
+              </h3> */}
               <p className="text-gray-200 mb-6 text-lg leading-relaxed">
-                Join a community dedicated to mapping the future. Whether you are an individual or an organization, discover how you can contribute.
+                Join a community dedicated to mapping the future and empowering the nation. Whether you are an individual or an organization, discover how you can contribute.
               </p>
               <a href="/membership" className="self-center lg:self-start bg-white text-green-700 font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg hover:bg-green-50 transition-all border border-green-100">
-                Learn More
+                Join Us
               </a>
             </div>
             

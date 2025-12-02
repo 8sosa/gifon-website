@@ -18,7 +18,7 @@ export default function TrainingCertificationPage() {
             <h2 className="text-3xl font-semibold mb-6">Overview</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
               The Training & Certification Programmes (TCP) of the Geospatial
-              Intelligence Foundation of Nigeria (GIFON) are designed to
+              Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) are designed to
               provide standardized, high-quality, and industry-recognized
               certifications in geospatial intelligence, data science, and
               related technologies.
@@ -138,13 +138,13 @@ export default function TrainingCertificationPage() {
               <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
                 <li>Blended Learning: In-person + online modules.</li>
                 <li>
-                  Accredited Trainers: Drawn from GIFON experts, academia,
+                  Accredited Trainers: Drawn from <span className="cooper">GIFON</span> experts, academia,
                   military, and global partners.
                 </li>
                 <li>Training Labs & Simulations: Practical, scenario-based exercises.</li>
                 <li>
                   Certification Exams: Assessment-based certification aligned
-                  with GIFON standards.
+                  with <span className="cooper">GIFON</span> standards.
                 </li>
                 <li>
                   Continuous Professional Development (CPD): Recertification

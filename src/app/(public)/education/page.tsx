@@ -61,7 +61,7 @@ export default function EducationPage() {
     <>
       <HeroSection
         title="Education & Programmes"
-        description='To advance in your career, it is critical to keep updating your skills, be open to new ideas, and take advantage of every opportunity to learn. You may prefer self-directed learning via online courses or webinars, while others learn best through formal lectures or in-person seminars. GIFON has you covered, no matter your experience level, preferred learning method, or professional development need! We regularly deliver education and training at in-person and virtual events.'
+        description1='To advance in your career, it is critical to keep updating your skills, be open to new ideas, and take advantage of every opportunity to learn. You may prefer self-directed learning via online courses or webinars, while others learn best through formal lectures or in-person seminars. GIFON has you covered, no matter your experience level, preferred learning method, or professional development need! We regularly deliver education and training at in-person and virtual events.'
         backgroundMedia = {[
           "/media/Education Background.jpg",
         ]}
@@ -92,10 +92,10 @@ export default function EducationPage() {
             {/* --- Descriptive Text --- */}
             <div className="space-y-4 leading-relaxed text-base md:text-lg text-left md:text-justify">
               <p>
-                The Geospatial Intelligence Foundation of Nigeria (GIFON) provides modular, competency-based training designed to build technical and analytical GEOINT capacity across sectors. Courses range from beginner to advanced levels in remote sensing, GIS, data analytics, and policy.
+                The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) provides modular, competency-based training designed to build technical and analytical GEOINT capacity across sectors. Courses range from beginner to advanced levels in remote sensing, GIS, data analytics, and policy.
               </p>
               <p>
-                GIFON’s training serves students, early-career professionals, and government and private sector practitioners. Each module integrates core components such as GIS foundations, Earth Observation (EO) for security and environment, and GEOINT for decision support. 
+                <span className="cooper">GIFON</span>’s training serves students, early-career professionals, and government and private sector practitioners. Each module integrates core components such as GIS foundations, Earth Observation (EO) for security and environment, and GEOINT for decision support. 
               </p>
               <p>
                   Assessments are project-based, producing capstone deliverables, badges, and certificates.
@@ -168,7 +168,7 @@ export default function EducationPage() {
             {/* --- Descriptive Text --- */}
             <div className="space-y-4 leading-relaxed text-base md:text-lg text-left md:text-justify">
               <p>
-                Beyond specific programmes, GIFON is dedicated to the holistic development of geospatial talent in Nigeria. We believe in nurturing skills at every career stage, from the curious student to the seasoned professional.
+                Beyond specific programmes, <span className="cooper">GIFON</span> is dedicated to the holistic development of geospatial talent in Nigeria. We believe in nurturing skills at every career stage, from the curious student to the seasoned professional.
               </p>
               <p>
                 Our Talent Development initiatives focus on:

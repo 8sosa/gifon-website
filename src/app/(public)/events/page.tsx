@@ -190,7 +190,7 @@ export default async function EventsPage() {
            <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-semibold mb-6 text-center">Events & Highlights</h2>
             <p className="text-gray-700 leading-relaxed text-justify">
-              The Geospatial Intelligence Foundation of Nigeria (GIFON) actively convenes and participates in events that drive dialogue, innovation, and collaboration in the field of geospatial intelligence and national development.
+              The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) actively convenes and participates in events that drive dialogue, innovation, and collaboration in the field of geospatial intelligence and national development.
             </p>
             <p className="text-gray-700 leading-relaxed text-justify pt-2">Our Events & Highlights section provides a showcase of key milestones and activities, capturing how GIFON is shaping policy, research, and practice across Nigeria and beyond.</p>
             <p className="text-gray-700 leading-relaxed text-justify pt-4">
@@ -204,10 +204,10 @@ export default async function EventsPage() {
                 Workshops & Trainings – capacity-building sessions that strengthen technical expertise and knowledge-sharing.
               </li>
               <li>
-                National Engagements – GIFON’s contributions to government initiatives, defence and security dialogues, and development programs.
+                National Engagements – <span className="cooper">GIFON</span>’s contributions to government initiatives, defence and security dialogues, and development programs.
               </li>
               <li>
-                International Participation – highlights from global events where GIFON represents Nigeria’s voice in the GEOINT community.
+                International Participation – highlights from global events where <span className="cooper">GIFON</span> represents Nigeria’s voice in the GEOINT community.
               </li>
               <li>
                 Community Initiatives – youth empowerment, academic partnerships, and innovation-driven outreach projects.
@@ -351,7 +351,7 @@ export default async function EventsPage() {
                           {program.description}
                         </p>
                         <Link 
-                          href={`/education#${program.anchor}`} // Links to Education page anchor
+                          href={`/education/${program.anchor}`} // Links to Education page anchor
                           className="inline-flex items-center gap-2 text-sm text-green-600 font-semibold hover:underline group"
                         >
                           Learn More
