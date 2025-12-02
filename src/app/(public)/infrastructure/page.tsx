@@ -35,20 +35,20 @@ export default function InfrastructurePage() {
         <section className="py-16 bg-white">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <h2 className="text-3xl font-semibold text-gray-800">
-              GIFON Policy Contribution to Nigeria’s Critical Infrastructure
+              <span className="cooper">GIFON</span> Policy Contribution to Nigeria’s Critical Infrastructure
               Sectors
             </h2>
             
             <p className="text-gray-700 leading-relaxed max-w-5xl mx-auto">
-              The Geospatial Intelligence Foundation of Nigeria (GIFON)
+              The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>)
               acknowledges the vital role of Nigeria’s critical
               infrastructure sectors in sustaining national security, economic
-              prosperity, and public well-being. GIFON is committed to
+              prosperity, and public well-being. <span className="cooper">GIFON</span> is committed to
               deploying geospatial intelligence capabilities to enhance the
               protection, resilience, and optimization of these sectors.
             </p>
             <p className="text-gray-700 leading-relaxed max-w-5xl mx-auto">
-              GIFON will integrate geospatial intelligence across all critical
+              <span className="cooper">GIFON</span> will integrate geospatial intelligence across all critical
               infrastructure sectors, build strong partnerships with
               government, industry, and international stakeholders, and
               develop tailored solutions that combine data, technology, and

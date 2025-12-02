@@ -89,7 +89,7 @@ export default function ContactPage() {
                     </div>
                     <h2 className="text-4xl font-bold text-gray-800 mb-4">Message Sent!</h2>
                     <p className="text-lg text-gray-600 max-w-md mx-auto">
-                    Thank you for reaching out to GIFON. A member of our team will review your message and get back to you shortly.
+                    Thank you for reaching out to <span className="cooper">GIFON</span>. A member of our team will review your message and get back to you shortly.
                     </p>
                     <button 
                         onClick={() => setIsSubmitted(false)}

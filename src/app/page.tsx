@@ -43,7 +43,6 @@ export default function HomePage() {
       {/* --- SECTORS CAROUSEL --- */}
       <section id="sectors-carousel" className="py-16 bg-white overflow-hidden border-b border-gray-100">
         <div className="max-w-7xl mx-auto mb-10 px-6 text-center">
-           <span className="text-green-600 font-bold tracking-wider uppercase text-sm">Capabilities</span>
            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Critical Infrastructure Support</h2>
         </div>
         
@@ -163,7 +162,7 @@ export default function HomePage() {
                     <div className="p-3 bg-blue-50 text-blue-600 rounded-xl"><Share2 size={24} /></div>
                     <h3 className="text-2xl font-bold text-gray-800">Connect</h3>
                 </div>
-                <p className="text-gray-500 mb-6">Follow <span className="font-cooper text-gray-800">GIFON</span> on social media for real-time updates.</p>
+                <p className="text-gray-500 mb-6">Follow <span className="cooper">GIFON</span> on social media for real-time updates.</p>
                 <div className="grid grid-cols-5 gap-2 mt-auto">
                     {[
                         { icon: FaFacebook, color: "hover:text-blue-600" },
@@ -245,7 +244,7 @@ export default function HomePage() {
               
               <p className="mb-8 text-gray-600 text-lg leading-relaxed">
                 We are looking forward to featuring a member&apos;s StoryMap each
-                month in this section. The first one celebrates <span className="font-cooper text-gray-800">GIFON&apos;s</span> GIS
+                month in this section. The first one celebrates <span className="cooper">GIFON&apos;s</span> GIS
                 Hall of Fame inductees.
               </p>
               

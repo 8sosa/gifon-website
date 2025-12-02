@@ -14,6 +14,7 @@ export type EventSkeleton = {
     endDate: EntryFieldTypes.Symbol;
     // CHANGED: explicitly defined as Location
     location: EntryFieldTypes.Location; 
+    venue: EntryFieldTypes.Symbol; 
     link: EntryFieldTypes.Symbol;
   };
 };
@@ -65,6 +66,7 @@ export type FlatEvent = {
   startDate: string;
   endDate?: string;
   location: string;
+  venue: string;
   link: string;
   image: string;
 };

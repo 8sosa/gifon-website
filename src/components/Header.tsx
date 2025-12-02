@@ -7,8 +7,9 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { FaXTwitter, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
 import { FaSearch, FaTimes, FaBars, FaChevronDown, FaChevronRight } from "react-icons/fa";
 
-interface MenuItem {
-  label: React.ReactNode;
+// 1. Export Interface so wrapper can import it
+export interface MenuItem {
+  label?: React.ReactNode;
   href?: string;
   anchor?: string;
   link?: string;
@@ -36,7 +37,7 @@ function useIsMobile(breakpoint = 1024) {
   return isMobile;
 }
 
-// --- Component: Dropdown Item (Handles Nested Timeout Logic) ---
+// --- Component: Dropdown Item ---
 function DropdownItem({
   child,
   parentHref,
@@ -54,9 +55,9 @@ function DropdownItem({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const hasChildren = Boolean(child.children?.length);
+  // Determine correct href logic
   const href = child.link ?? (child.href ? child.href : `${parentHref}#${child.anchor ?? ""}`);
 
-  // Handlers for Grace Period
   const handleMouseEnter = () => {
     if (isMobile) return;
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -67,10 +68,9 @@ function DropdownItem({
     if (isMobile) return;
     timeoutRef.current = setTimeout(() => {
       setIsOpen(false);
-    }, 200); // 200ms grace period
+    }, 200);
   };
 
-  // Mobile Toggle
   const handleMobileClick = (e: React.MouseEvent) => {
     if (isMobile && hasChildren) {
       e.preventDefault();
@@ -108,13 +108,11 @@ function DropdownItem({
             <FaChevronDown size={10} className={`transform transition-transform ${isOpen ? "rotate-180" : ""}`} />
           </button>
         )}
-        {/* Desktop Chevron */}
         {hasChildren && !isMobile && (
           <FaChevronRight size={10} className="text-gray-400 ml-2" />
         )}
       </div>
 
-      {/* Render Sub-Dropdown */}
       {hasChildren && (
         <div className={`${!isMobile && !isOpen ? "hidden" : ""} ${isMobile && !isOpen ? "hidden" : "block"}`}>
           <Dropdown
@@ -151,7 +149,6 @@ function Dropdown({
           ? "pl-4 border-l border-gray-100 space-y-2 mt-2"
           : "absolute top-full left-0 bg-white shadow-xl min-w-60 border-t-4 border-green-600 rounded-b-lg py-2"
         } 
-        /* Adjusted positioning for nested items to overlap slightly and prevent gaps */
         ${!isMobile && depth > 0 ? "top-0 left-full -ml-1 -mt-2" : ""}
       `}
     >
@@ -169,13 +166,15 @@ function Dropdown({
   );
 }
 
-export default function Header() {
+// 2. Main Header Component - Accepts Props Now
+export default function Header({ navItems }: { navItems: MenuItem[] }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   
-  // Ref to hold the timeout ID for the root menu items
+  // NOTE: Static data and fetching logic removed from here.
+  // It is now passed in via 'navItems' prop.
+  
   const rootTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -183,8 +182,6 @@ export default function Header() {
   const router = useRouter();
   const navRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
-
-  // --- Handlers ---
 
   const closeAll = useCallback(() => {
     setMobileMenuOpen(false);
@@ -224,11 +221,8 @@ export default function Header() {
     if (user) setIsLoggedIn(true);
   }, []);
 
-  // --- Root Hover Logic with Timeout ---
   function handleRootEnter(label: string, hasChildren: boolean) {
     if (!hasChildren || isMobile) return;
-    
-    // Clear any pending close timer
     if (rootTimeoutRef.current) {
       clearTimeout(rootTimeoutRef.current);
     }
@@ -237,27 +231,10 @@ export default function Header() {
 
   function handleRootLeave() {
     if (isMobile) return;
-    
-    // Set a timer to close the menu. If the user moves mouse back in, 
-    // handleRootEnter will clear this timer.
     rootTimeoutRef.current = setTimeout(() => {
       setOpenDropdown(null);
-    }, 50); // 200ms delay
+    }, 50);
   }
-
-  // --- Data (Condensed for brevity, kept structure) ---
-  const menuItems: MenuItem[] = [
-    { label: 'Home', href: '/' },
-    { label: 'About Us', href: '/about', children: [ { label: 'Aim', anchor: 'aim' }, { label: 'Mission', anchor: 'mission-vision' }, { label: 'Vision', anchor: 'mission-vision' }, { label: 'Objectives', anchor: 'objectives' }, { label: 'Core Values', anchor: 'core-values' }, { label: 'Board of Directors', anchor: 'board-directors' }, { label: 'Our Partners', anchor: 'our-partners' } ] },
-    { label: 'Membership', href: '/membership', children: [ { label: 'Why Join GIFON', anchor: 'why-join' }, { label: 'Membership Categories', anchor: 'categories' }, { label: 'Membership Benefits', anchor: 'benefits' }, { label: 'Pioneer Members', anchor: 'pioneer' }, { label: 'Membership Portal (Apply & Renew)', anchor: 'apply' } ] },
-    { label: 'Education', href: '/education', children: [ { label: 'Training', anchor: 'C-T' }, { label: 'Programmes', anchor: 'programs', children: [ { label: 'Youth Empowerment & Talent Acceleration', link: '/education/youth-empowerment' }, { label: 'Women in GEOINT (WINGS)', link: '/education/wings' }, { label: 'Geoinnovation & Tech Incubation', link: '/education/geoinnovation' }, { label: 'National Geospatial Security & Intelligence Hub', link: '/education/geospatial-hub' }, { label: 'Community Mapping for Development', link: '/education/community-mapping' }, { label: 'Open Data & Research', link: '/education/open-data' }, { label: 'Conferences, Workshops & Masterclasses', link: '/education/conferences' }, { label: 'Training & Certification', link: '/education/training' } ] }, { label: 'Talent Development', anchor: 'talent' } ] },
-    { label: 'Events', href: '/events', children: [ { label: 'Upcoming Events', anchor: 'upcoming-events', children: [ { label: 'DGI London', anchor: 'dgi-london' }, { label: 'USGIF', anchor: 'usgif' }, { label: 'FIG', anchor: 'fig' }, { label: 'AAG', anchor: 'aag' }, { label: 'AARSE', anchor: 'aarse' }, { label: 'EIS-Africa', anchor: 'eis-africa' }, { label: 'GEOSON', anchor: 'geoson' }, { label: 'GIFON Pre-Launch', anchor: 'geoson' } ] }, { label: 'Past Events', anchor: 'past-events', children: [ { label: 'DGI 2024', anchor: 'dgi-london' }, { label: 'USGIF 2024', anchor: 'usgif' }, { label: 'FIG 2024', anchor: 'fig' }, { label: 'AAG 2024', anchor: 'aag' }, { label: 'AARSE 2024', anchor: 'aarse' }, { label: 'EIS-Africa 2024', anchor: 'eis-africa' }, { label: 'GEOSON 2024', anchor: 'geoson' } ] }, { label: 'Outreach', anchor: 'outreach', children: [ { label: 'Youth-Focused Programmes', anchor: 'youth-focused-programmes', children: [ { label: 'Boot Camps', anchor: 'boot-camps' }, { label: 'STEM & GEOINT Awareness Programmes', anchor: 'stem-geoint-awareness' }, { label: 'GeoInnovation Challenge / Hackathons', anchor: 'geoinnovation-challenge' } ] }, { label: 'Women-in-GEOINT Initiatives', anchor: 'women-in-geoint-initiatives', children: [ { label: 'Women in Geospatial Leadership Programmes', anchor: 'women-geospatial-leadership' }, { label: 'Community Service & Development Projects', anchor: 'community-service-projects' } ] }, { label: 'Professional & Institutional Engagement', anchor: 'professional-institutional-engagement', children: [ { label: 'GeoCommunity Development Programmes', anchor: 'geocommunity-development' }, { label: 'GeoConnect Networking Events', anchor: 'geoconnect-networking' }, { label: 'Public Lectures & Policy Roundtables', anchor: 'public-lectures-roundtables' } ] } ] } ] },
-    { label: 'Media Resources', href: '/resources', children: [ { label: 'News', anchor: 'News' }, { label: 'Press Releases', anchor: 'Press' }, { label: 'Podcast', anchor: 'Podcast' }, { label: 'Webinar', anchor: 'Webinar' }, { label: 'Publication Archive', anchor: 'publications' }, { label: 'Photo & Video Gallery', anchor: 'Gallery' }, { label: 'Downloads', anchor: 'Downloads' } ] },
-    { label: 'Infrastructure', href: '/infrastructure', children: [ { label: 'Energy', anchor: 'energy' }, { label: 'Transportation Systems', anchor: 'transportation' }, { label: 'Communications', anchor: 'communication' }, { label: 'Defense Industrial Base', anchor: 'defence' }, { label: 'Agriculture & Food Security', anchor: 'food' }, { label: 'Water & Dams', anchor: 'water' }, { label: 'Public Health', anchor: 'health' }, { label: 'Finance & Banking', anchor: 'finance' }, { label: 'Manufacturing', anchor: 'manufacturing' }, { label: 'Education', anchor: 'education' }, { label: 'Emergency Services', anchor: 'emergency' }, { label: 'Critical Manufacturing', anchor: 'industrial' }, { label: 'Govt. Facilities', anchor: 'government' }, { label: 'IT', anchor: 'it' }, { label: 'Space Systems', anchor: 'space' } ] },
-    { label: 'Groups & Forums', href: '/forums', children: [ { label: 'Young Professionals Forum', anchor: 'young-professionals' }, { label: 'Women in GEOINT Forum', anchor: 'anti-corruption' }, { label: 'Industry & Private Sector Forum', anchor: 'fund-raising' }, { label: 'Policy Briefs & white Paper ', anchor: 'slavery' }, { label: 'Research Reports', anchor: 'volunteer' } ] },
-    { label: 'Policies', href: '/policies', children: [ { label: 'Code of Ethics', anchor: 'ethics' }, { label: 'Anti-Corruption', anchor: 'anti-corruption' }, { label: 'Fund Raising', anchor: 'fund-raising' }, { label: 'Anti-Modern-Day Slavery', anchor: 'slavery' }, { label: 'Volunteer & Internship', anchor: 'volunteer' } ] },
-    { label: 'Get Involved', href: '/get-involved', children: [ { label: `Volunteer opportunities`, anchor: `opportunities`} ] },
-  ];
 
   const topBarItems: MenuItem[] = [
     { label: 'Contact Us', href: '/contact-us' },
@@ -318,7 +295,8 @@ export default function Header() {
       <div className="hidden lg:block border-t border-gray-100 bg-green-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="flex justify-between items-center py-2">
-                {menuItems.map((item) => {
+                {/* USE navItems PROP HERE */}
+                {navItems.map((item) => {
                     const hasChildren = Boolean(item.children?.length);
                     const isOpen = openDropdown === item.label;
 
@@ -326,7 +304,6 @@ export default function Header() {
                         <div 
                             key={item.label as string} 
                             className="relative group h-full"
-                            // Using the new handler with timeout logic
                             onMouseEnter={() => handleRootEnter(item.label as string, hasChildren)}
                             onMouseLeave={handleRootLeave}
                         >
@@ -358,7 +335,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* 3. MOBILE MENU DRAWER (Unchanged logic, just simplified JSX for brevity) */}
+      {/* 3. MOBILE MENU DRAWER */}
       <div className={`fixed inset-y-0 right-0 w-[85%] sm:w-[350px] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
           <div className="flex flex-col h-full overflow-y-auto pb-20">
               <div className="flex justify-between items-center p-5 border-b border-gray-100 bg-green-50">
@@ -366,7 +343,8 @@ export default function Header() {
                   <button onClick={closeAll} className="text-gray-500 hover:text-red-500"><FaTimes size={24} /></button>
               </div>
               <div className="p-4 space-y-1">
-                  {menuItems.map((item, idx) => {
+                  {/* USE navItems PROP HERE AS WELL */}
+                  {navItems.map((item, idx) => {
                        const hasChildren = Boolean(item.children?.length);
                        const isOpen = openDropdown === item.label;
                        return (

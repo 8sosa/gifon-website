@@ -202,9 +202,9 @@ export default async function EventsPage() {
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="max-w-3xl mx-auto text-center mb-16">
                 <span className="text-green-600 font-bold uppercase tracking-wider text-sm mb-2 block">Our Impact</span>
-                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 font-cooper">Events & Highlights</h2>
+                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 cooper">Events & Highlights</h2>
                 <p className="text-gray-600 leading-relaxed text-lg">
-                <span className="font-cooper text-gray-800">GIFON</span> actively convenes events that drive dialogue, innovation, and collaboration. We celebrate our role in mapping the future and empowering the nation.
+                <span className="cooper">GIFON</span> actively convenes events that drive dialogue, innovation, and collaboration. We celebrate our role in mapping the future and empowering the nation.
                 </p>
             </div>
 
@@ -242,7 +242,7 @@ export default async function EventsPage() {
         <section id="upcoming" className="py-20 px-4 md:px-6 bg-gray-50 border-t border-gray-200">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mb-12">
-                <h2 className="text-3xl font-bold text-gray-900 font-cooper">Upcoming Events</h2>
+                <h2 className="text-3xl font-bold text-gray-900 cooper">Upcoming Events</h2>
                 <div className="hidden md:flex items-center gap-2 text-sm text-gray-500">
                     <Calendar size={16} /> Mark your calendars
                 </div>
@@ -344,7 +344,7 @@ export default async function EventsPage() {
            
            <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-5xl font-bold mb-4 font-cooper">Outreach Programmes</h2>
+                <h2 className="text-3xl md:text-5xl font-bold mb-4 cooper">Outreach Programmes</h2>
                 <p className="text-gray-400 max-w-2xl mx-auto">
                     Extending our impact beyond the boardroom. Discover how we engage, empower, and elevate the community.
                 </p>

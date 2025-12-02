@@ -63,7 +63,7 @@ export default async function AboutPage() {
           <div className='w-full lg:w-1/2 flex flex-col items-start'>
             <div className="inline-block mb-6 text-left">
               <span className="text-green-600 font-bold tracking-widest uppercase text-sm mb-2 block">Who We Are</span>
-              <h2 className="text-gray-900 text-4xl md:text-5xl font-bold font-cooper">
+              <h2 className="text-gray-900 text-4xl md:text-5xl font-bold cooper">
                 Welcome!
               </h2>
               <div className="w-24 h-1.5 bg-green-600 mt-4 rounded-full"></div>
@@ -71,10 +71,10 @@ export default async function AboutPage() {
             
             <div className="prose prose-lg text-gray-600 leading-relaxed text-justify">
               <p className="mb-6">
-                The Geospatial Intelligence Foundation of Nigeria (<span className="font-cooper text-gray-800">GIFON</span>) is Nigeria&apos;s first dedicated platform to institutionalize geospatial intelligence. We are a movement bringing together government, military, academia, industry, and international partners to reshape how Nigeria thinks about intelligence, decision-making, and governance.
+                The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is Nigeria&apos;s first dedicated platform to institutionalize geospatial intelligence. We are a movement bringing together government, military, academia, industry, and international partners to reshape how Nigeria thinks about intelligence, decision-making, and governance.
               </p>
               <p className="p-6 bg-gray-50 border-l-4 border-green-500 rounded-r-xl italic text-gray-700">
-                Founded by Dr. AA Usman, GIFON&apos;s quest is to ensure Nigeria is no longer &quot;blind in an era where other nations were seeing the world in sharper detail than ever before&quot;.
+                Founded by Dr. AA Usman, <span className="cooper">GIFON</span>&apos;s quest is to ensure Nigeria is no longer &quot;blind in an era where other nations were seeing the world in sharper detail than ever before&quot;.
               </p>
               <p className="mt-6">
                  This vision is about embedding GEOINT into the DNA of Nigeria’s governance —a dream once seen as radical, now recognized as indispensable to Nigeria’s survival and Africa’s rise.
@@ -101,7 +101,7 @@ export default async function AboutPage() {
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Our Aim</h2>
               <p className="text-gray-700 leading-relaxed mb-4 text-justify">
-                The aim of the Geospatial Intelligence Foundation of Nigeria (GIFON) is to harness the power of geospatial data and technology to drive sustainable development, enhance national security, and empower decision-making across all sectors in Nigeria. Through innovation, education, collaboration, and policy frameworks, the Foundation strives to position Nigeria as a leader in the global geospatial intelligence community, ensuring that geospatial solutions contribute to the nation’s socio-economic progress, environmental sustainability, and resilience to future challenges. This aim emphasizes the Foundation’s commitment to Nigeria’s growth, security, and leadership in the geospatial sector, while focusing on the broad impact of geospatial intelligence on governance, development, advancing sustainable development and global cooperation.
+                The aim of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is to harness the power of geospatial data and technology to drive sustainable development, enhance national security, and empower decision-making across all sectors in Nigeria. Through innovation, education, collaboration, and policy frameworks, the Foundation strives to position Nigeria as a leader in the global geospatial intelligence community, ensuring that geospatial solutions contribute to the nation’s socio-economic progress, environmental sustainability, and resilience to future challenges. This aim emphasizes the Foundation’s commitment to Nigeria’s growth, security, and leadership in the geospatial sector, while focusing on the broad impact of geospatial intelligence on governance, development, advancing sustainable development and global cooperation.
               </p>
             </MotionDiv>
             
@@ -140,7 +140,7 @@ export default async function AboutPage() {
                   Mission
                 </h2>
                 <p className="text-gray-300 leading-relaxed text-justify text-lg">
-                  The Geospatial Intelligence Foundation of Nigeria (GIFON) is dedicated to advancing the understanding, development, and responsible application of geospatial intelligence (GEOINT) to support national security, economic development humanitarian efforts, and informed decision-making. We foster collaboration between government, industry, and academia to drive innovation, build a skilled workforce, and promote the ethical use of geospatial data and technologies.
+                  The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is dedicated to advancing the understanding, development, and responsible application of geospatial intelligence (GEOINT) to support national security, economic development humanitarian efforts, and informed decision-making. We foster collaboration between government, industry, and academia to drive innovation, build a skilled workforce, and promote the ethical use of geospatial data and technologies.
                 </p>
               </div>
             </MotionDiv>
@@ -177,7 +177,7 @@ export default async function AboutPage() {
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-gray-900">Our Objectives</h2>
             <p className="text-lg text-gray-600 mb-12 text-justify md:text-center max-w-4xl mx-auto">
-              The objectives of GIFON focus on building a strong foundation for geospatial intelligence in Nigeria, addressing both technical and strategic goals.
+            The objectives of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>), focuses on building a strong foundation for geospatial intelligence in Nigeria, addressing both technical and strategic goals. They emphasize the importance of education, collaboration, research, and application across sectors, while also aligning with broader national and global development priorities.  
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">

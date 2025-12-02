@@ -25,6 +25,7 @@ export type FlatEvent = {
   startDate: string;
   endDate?: string;
   location: string;
+  venue: string;
   link: string;
   image: string; // CHANGED: Renamed from 'images' to 'image' to match the data structure
 };
@@ -88,6 +89,7 @@ export async function getUpcomingEvents(): Promise<FlatEvent[]> {
       startDate: getString(f.startDate),
       endDate: getString(f.endDate),
       location: locationName, 
+      venue: getString(f.venue),
       link: getString(f.link),
       image, // This now matches FlatEvent.image
     };

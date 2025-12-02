@@ -1,7 +1,7 @@
 import './globals.css';
 import { Montserrat, Bellota } from 'next/font/google';
 import localFont from 'next/font/local';
-import Header from '@/components/Header';
+import HeaderWrapper from '@/components/HeaderWrapper';
 import Footer from '@/components/Footer';
 
 const montserrat = Montserrat({
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           flex min-h-screen flex-col
         `}
       >
-        <Header />
+        <HeaderWrapper />
         
         {/* CHANGE 2: Add dynamic top padding (pt) to main.
            - pt-20 (5rem) for Mobile (matches the h-20 header)

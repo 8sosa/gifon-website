@@ -95,7 +95,7 @@ export default function EducationPage() {
                </div>
                
                <p className="text-lg leading-relaxed text-gray-600">
-                  The Geospatial Intelligence Foundation of Nigeria (<span className="cooper text-gray-800">GIFON</span>) provides modular, competency-based training designed to build technical and analytical GEOINT capacity across sectors.
+                  The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) provides modular, competency-based training designed to build technical and analytical GEOINT capacity across sectors.
                </p>
 
                {/* Feature List */}
