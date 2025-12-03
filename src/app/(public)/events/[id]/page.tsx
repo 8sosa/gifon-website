@@ -18,6 +18,7 @@ import {
   ArrowRight,
   HelpCircle
 } from "lucide-react";
+import Link from "next/link";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -249,16 +250,14 @@ export default async function EventDetailPage({ params }: Props) {
                     </div>
 
                     <div className="mt-8 pt-6 border-t border-gray-100">
-                        <a
-                            href={event.link || "#"}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-full bg-green-600 text-white font-bold px-6 py-4 rounded-xl shadow-lg hover:bg-green-700 hover:shadow-green-500/30 hover:-translate-y-1 transition-all duration-300 gap-2 group"
-                        >
-                            <Ticket size={20} />
-                            <span>Register Now</span>
-                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                        </a>
+                    <Link
+                        href={`/events/${event.id}/register`}
+                        className="flex items-center justify-center w-full bg-green-600 text-white font-bold px-6 py-4 rounded-xl shadow-lg hover:bg-green-700 hover:shadow-green-500/30 hover:-translate-y-1 transition-all duration-300 gap-2 group"
+                    >
+                        <Ticket size={20} />
+                        <span>Register Now</span>
+                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
                         <p className="text-center text-xs text-gray-400 mt-4">
                             Limited seats available. Registration closes soon.
                         </p>

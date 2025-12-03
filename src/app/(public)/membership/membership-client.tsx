@@ -377,9 +377,9 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                     <h2 className="text-2xl md:text-3xl font-semibold mb-4">Have questions about joining <span className="cooper">GIFON</span>?</h2>
                     <div className="text-base md:text-lg text-gray-400 mb-8 wrap-break-word flex flex-col items-center">
                         Contact our membership team at
-                        <div className='flex flex-row items-center gap-1'><AiOutlineMail/> membership@gifon.org.ng</div>
+                        <div className='flex flex-row items-center gap-1 hover:text-green-500'><AiOutlineMail/> membership@gifon.org.ng</div>
                         or call 
-                        <div className='flex flex-row items-center gap-1'><BsVoicemail/> +234 707 721 1243.</div>
+                        <div className='flex flex-row items-center gap-1 hover:text-green-500'><BsVoicemail/> +234 707 721 1243.</div>
                     </div>
                     {/* <Link
                         href="/contact-us"

@@ -118,7 +118,7 @@ export default function WomenInGeointPage() {
                  Discover the full policy details and activities of our Women in GEOINT Forum (GI-NGW).
                </p>
                <Link // Changed from <a> to <Link>
-                 href="/directory#women-in-geoint" // Link to the forum section on the portal/directory page
+                 href="/forums#women-in-geoint" // Link to the forum section on the portal/directory page
                  className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
                >
                  Visit the GI-NGW Forum Page

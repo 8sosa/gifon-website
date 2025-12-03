@@ -88,7 +88,6 @@ export default function EducationPage() {
             {/* Left: Text Content */}
             <div className="w-full lg:w-1/2 space-y-6">
                <div className="inline-block">
-                  <span className="text-green-600 font-bold uppercase tracking-wider text-sm mb-2 block">Capacity Building</span>
                   <h2 className="text-3xl md:text-5xl font-bold text-gray-900 cooper">
                     Specialized Training
                   </h2>
