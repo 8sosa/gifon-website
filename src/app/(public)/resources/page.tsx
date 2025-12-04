@@ -132,7 +132,7 @@ export default function ResourcesPage() {
               <div className="p-4 bg-white rounded-lg shadow-md flex flex-col md:flex-row justify-between md:items-center">
                 <div>
                   <span className="text-sm text-gray-500">Oct 20, 2025</span>
-                  <h3 className="text-lg font-semibold text-gray-800">GIFON Appoints New Director for Research and Development</h3>
+                  <h3 className="text-lg font-semibold text-gray-800"><span className="cooper">GIFON</span> Appoints New Director for Research and Development</h3>
                 </div>
                 <Link href="#" className="mt-2 md:mt-0 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-lg font-semibold hover:bg-green-200 w-fit">
                   Read Statement
@@ -189,10 +189,10 @@ export default function ResourcesPage() {
                   <Image src="/ph.svg" alt="Webinar placeholder" fill className="object-cover"/>
                 </div>
                 <div className="p-4 flex flex-col grow">
-                  <span className="text-sm text-red-600 font-semibold mb-1">UPCOMING: NOV 15, 2025</span>
+                  <span className="text-sm text-green-600 font-semibold mb-1">UPCOMING: NOV 15, 2025</span>
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">Coastal Resilience & Flood Modeling</h3>
                   <p className="text-gray-600 text-sm grow mb-4">Join our panel of experts as they discuss climate change adaptation strategies for coastal cities.</p>
-                  <Link href="#" className="inline-block bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 w-fit">
+                  <Link href="#" className="inline-block bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 w-fit">
                     Register Now
                   </Link>
                 </div>

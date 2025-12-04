@@ -24,7 +24,7 @@ export default function EducationPage() {
     },
     {
       title: 'Women in GEOINT (WINGS)',
-      src: '/media/wing.jpg',
+      src: '/media/wings.JPG',
       link: '/education/wings',
       description: 'Dedicated to empowering women in the field of geospatial intelligence (GeoINT) by providing a platform for collaboration, professional development, mentorship, and advocacy.'
     },

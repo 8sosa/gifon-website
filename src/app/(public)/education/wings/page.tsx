@@ -45,7 +45,7 @@ export default function WomenInGeointPage() {
         title="GIFON Women in GEOINT Program"
         description="Empowering women in the field of geospatial intelligence (GeoINT) through collaboration, professional development, mentorship, and advocacy."
         backgroundMedia={[
-          "/media/wing.jpg",
+          "/media/wings.JPG",
         ]}
       />
 

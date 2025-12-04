@@ -34,6 +34,7 @@ export default async function AboutPage() {
     <>
       <HeroSection
         title="About Us"
+        description='Aim • Mission • Vision'
         backgroundMedia={[
           '/media/AIM.jpg'
         ]}

@@ -70,10 +70,10 @@ export default async function HeaderWrapper() {
         ] 
     },
     { 
-        label: 'Infrastructure', 
+        label: 'Area of Support', 
         href: '/infrastructure', 
         children: [ 
-            { label: 'Energy', anchor: 'energy' }, 
+            { label: 'Power and Energy', anchor: 'energy' }, 
             { label: 'Transportation Systems', anchor: 'transportation' }, 
             { label: 'Communications', anchor: 'communication' }, 
             { label: 'Defense Industrial Base', anchor: 'defence' }, 

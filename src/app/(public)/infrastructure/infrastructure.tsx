@@ -31,7 +31,7 @@ export interface Sector {
 export const sections: Record<string, Sector> = {
   energy: {
     id: 'energy',
-    title: 'Energy',
+    title: 'Power and Energy',
     icon: <FaBolt size={24} />,
     summary: 'Mapping and monitoring of power grids, oil and gas pipelines, and renewable energy assets.',
     description: `Apply GEOINT for mapping and monitoring of power grids, oil and gas pipelines, and renewable energy assets. Support early warning for vandalism, illegal tapping, and sabotage. Enhance site planning for future energy infrastructure and off-grid solutions.`,
@@ -48,7 +48,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaCar size={24} />,
     summary: 'Spatial analysis for air, road, rail, and maritime networks and logistics.',
     description: `Provide spatial analysis for air, road, rail, and maritime networks. Optimize traffic management, logistics, and accident prevention. Support secure navigation and border monitoring for aviation and maritime safety.`,
-    image: '/media/Transportation.jpg',
+    image: '/media/Transport.jpg',
     highlights: [
       'Provide spatial analysis for air, road, rail, and maritime networks.',
       'Optimize traffic management, logistics, and accident prevention.',
@@ -139,7 +139,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaGears size={24} />,
     summary: 'Supply chain risk management and industrial park planning analytics.',
     description: `Use geospatial intelligence for supply chain risk management. Provide location analytics for industrial park planning and monitoring. Support resilience of manufacturing assets against natural and man-made hazards.`,
-    image: '/media/Manufacturing 1.jpg',
+    image: '/media/manufacturing img.jpg',
     highlights: [
       'Use geospatial intelligence for supply chain risk management.',
       'Provide location analytics for industrial park planning and monitoring.',
@@ -152,7 +152,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaGraduationCap size={24} />,
     summary: 'Planning equitable distribution of schools and strengthening STEM programs.',
     description: `Support planning and equitable distribution of schools and research centers. Use spatial data to strengthen STEM and geospatial education programs. Facilitate research collaborations with academia and global geospatial partners.`,
-    image: '/media/Education (2).jpg',
+    image: '/media/edu.jpeg',
     highlights: [
       'Support planning and equitable distribution of schools and research centers.',
       'Use spatial data to strengthen STEM and geospatial education programs.',
@@ -165,7 +165,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaFirstAid size={24} />,
     summary: 'Real-time situational awareness for disaster response and recovery.',
     description: `Provide real-time situational awareness for disaster response and recovery. Optimize deployment of fire, rescue, and law enforcement services. Support search and rescue missions with satellite and drone imagery.`,
-    image: '/media/Emergency.jpg',
+    image: '/media/Emergency Services.jpg',
     highlights: [
       'Provide real-time situational awareness for disaster response and recovery.',
       'Optimize deployment of fire, rescue, and law enforcement services.',

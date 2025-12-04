@@ -12,13 +12,13 @@ export default function Footer() {
       { label: 'About Us', href: '/about' },
       { label: 'Board of Directors', href: '/about#board-directors' },
       { label: 'Our Partners', href: '/about#our-partners' },
-    ],
-    resources: [
       { label: 'Membership', href: '/membership' },
       { label: 'Education & Training', href: '/education' },
       { label: 'Events', href: '/events' },
       { label: 'Media Resources', href: '/resources' },
-      { label: 'Infrastructure', href: '/infrastructure' },
+      { label: 'Area of Support', href: '/infrastructure' },
+      { label: 'Groups & Forums', href: '/forums' },
+      { label: 'Get Involved', href: '/get-involved' }
     ],
     legal: [
       { label: 'Policies', href: '/policies' },
@@ -57,7 +57,7 @@ export default function Footer() {
               </div>
             </Link>
 
-            <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
+            <p className="text-gray-500 hover:text-green-400 text-sm leading-relaxed max-w-sm">
                 Empowering Nigeria through geospatial intelligence, innovation, and strategic collaboration. Join us in shaping the future of national security and development.
             </p>
 
@@ -76,7 +76,7 @@ export default function Footer() {
           </div>
 
           {/* --- 2. Links Columns (Col Span 4) --- */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-4 space-y-8">
             <div>
                 <h4 className="text-white font-bold mb-4 uppercase text-xs tracking-widest border-l-2 border-green-600 pl-3">Foundation</h4>
                 <ul className="space-y-2.5">
@@ -91,20 +91,6 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="lg:col-span-2 space-y-8">
-            <div>
-                <h4 className="text-white font-bold mb-4 uppercase text-xs tracking-widest border-l-2 border-green-600 pl-3">Resources</h4>
-                <ul className="space-y-2.5">
-                    {links.resources.map(link => (
-                        <li key={link.label}>
-                            <Link href={link.href} className="hover:text-green-400 transition-colors text-gray-400 hover:pl-1 duration-200 block">
-                                {link.label}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-          </div>
 
           {/* --- 3. Detailed Contact (Col Span 4) --- */}
           <div className="lg:col-span-4 space-y-6">

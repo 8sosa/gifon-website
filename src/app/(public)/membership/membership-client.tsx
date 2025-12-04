@@ -223,7 +223,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                             {getCategoryIcon(idx)}
                         </div>
                         <div className="grow mb-8">
-                            <div className="bg-green-50 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
+                            <div className="bg-green-50 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-300 group-hover:text-white transition-colors duration-300">
                                 {getCategoryIcon(idx)}
                             </div>
                             <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-green-700 transition-colors">{item.title}</h3>
