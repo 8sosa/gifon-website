@@ -89,7 +89,7 @@ export default function EducationPage() {
             <div className="w-full lg:w-1/2 space-y-6">
                <div className="inline-block">
                   <h2 className="text-3xl md:text-5xl font-bold text-gray-900 cooper">
-                    Specialized Training
+                    Training
                   </h2>
                </div>
                
