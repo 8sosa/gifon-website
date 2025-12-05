@@ -116,7 +116,7 @@ export default async function HeaderWrapper() {
     { 
         label: 'Get Involved', 
         href: '/get-involved', 
-        children: [ { label: `Volunteer opportunities`, anchor: `opportunities`} ] 
+        // children: [ { label: `Volunteer opportunities`, anchor: `opportunities`} ] 
     },
   ];
 
