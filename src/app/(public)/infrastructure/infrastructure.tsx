@@ -9,13 +9,10 @@ import {
   FaLandmark,
   FaTractor,
   FaShieldAlt,
-  FaIndustry,
   FaFirstAid,
   FaGraduationCap,
-  FaSatellite, 
-  FaNetworkWired,
 } from 'react-icons/fa';
-import { FaGears } from 'react-icons/fa6';
+import { FaGears, FaHammer } from 'react-icons/fa6'; // Added FaHammer for Mines
 
 export interface Sector {
   id: string;
@@ -27,7 +24,6 @@ export interface Sector {
   highlights: readonly string[];
 }
 
-// We export 'sections' as a Record for easy ID lookups (sections.energy)
 export const sections: Record<string, Sector> = {
   energy: {
     id: 'energy',
@@ -42,22 +38,22 @@ export const sections: Record<string, Sector> = {
       'Enhance site planning for future energy infrastructure and off-grid solutions.',
     ],
   },
-  transportation: {
-    id: 'transportation',
-    title: 'Transportation Systems',
-    icon: <FaCar size={24} />,
-    summary: 'Spatial analysis for air, road, rail, and maritime networks and logistics.',
-    description: `Provide spatial analysis for air, road, rail, and maritime networks. Optimize traffic management, logistics, and accident prevention. Support secure navigation and border monitoring for aviation and maritime safety.`,
-    image: '/media/Transport.jpg',
+  water: {
+    id: 'water',
+    title: 'Water',
+    icon: <FaWater size={24} />,
+    summary: 'Monitoring rivers, dams, and irrigation systems with flood risk modelling.',
+    description: `Map and monitor rivers, dams, and irrigation systems. Provide flood risk modelling and disaster preparedness solutions. Enhance water quality monitoring and equitable access through spatial intelligence.`,
+    image: '/media/water image.jpg',
     highlights: [
-      'Provide spatial analysis for air, road, rail, and maritime networks.',
-      'Optimize traffic management, logistics, and accident prevention.',
-      'Support secure navigation and border monitoring for aviation and maritime safety.',
+      'Map and monitor rivers, dams, and irrigation systems.',
+      'Provide flood risk modelling and disaster preparedness solutions.',
+      'Enhance water quality monitoring and equitable access through spatial intelligence.',
     ],
   },
   communication: {
     id: 'communication',
-    title: 'Communications',
+    title: 'Information, Communications, Science and Technology (ICT)',
     icon: <FaBroadcastTower size={24} />,
     summary: 'Siting and protection of telecom towers, fibre networks, and ICT hubs.',
     description: `Use geospatial data for siting and protection of telecom towers, fibre networks, and ICT hubs. Support redundancy planning to avoid single points of failure. Enable location-based intelligence to secure cyber and physical communication assets.`,
@@ -68,61 +64,9 @@ export const sections: Record<string, Sector> = {
       'Enable location-based intelligence to secure cyber and physical communication assets.',
     ],
   },
-  defence: {
-    id: 'defence',
-    title: 'Defense Industrial Base',
-    icon: <FaShieldAlt size={24} />,
-    summary: 'Advanced mapping and terrain analysis for military logistics and operations.',
-    description: `Provide advanced mapping and terrain analysis for military logistics and operations. Support secure defence manufacturing zones through geospatial risk assessment. Contribute to defence readiness with real-time intelligence for operational planning.`,
-    image: '/media/Defence new.jpg',
-    highlights: [
-      'Provide advanced mapping and terrain analysis for military logistics and operations.',
-      'Support secure defence manufacturing zones through geospatial risk assessment.',
-      'Contribute to defence readiness with real-time intelligence for operational planning.',
-    ],
-  },
-  food: {
-    id: 'food',
-    title: 'Agriculture and Food Security',
-    icon: <FaTractor size={24} />,
-    summary: 'Earth observation for crop monitoring, yield forecasting, and climate adaptation.',
-    description: `Use earth observation for crop monitoring, yield forecasting, and climate adaptation. Strengthen food security through land use analysis and supply chain visibility. Detect and prevent illegal land grabs and encroachment on agricultural reserves.`,
-    image: '/media/Food Security (1).jpg',
-    highlights: [
-      'Use earth observation for crop monitoring, yield forecasting, and climate adaptation.',
-      'Strengthen food security through land use analysis and supply chain visibility.',
-      'Detect and prevent illegal land grabs and encroachment on agricultural reserves.',
-    ],
-  },
-  water: {
-    id: 'water',
-    title: 'Water and Dams',
-    icon: <FaWater size={24} />,
-    summary: 'Monitoring rivers, dams, and irrigation systems with flood risk modelling.',
-    description: `Map and monitor rivers, dams, and irrigation systems. Provide flood risk modelling and disaster preparedness solutions. Enhance water quality monitoring and equitable access through spatial intelligence.`,
-    image: '/media/water and environment.jpg',
-    highlights: [
-      'Map and monitor rivers, dams, and irrigation systems.',
-      'Provide flood risk modelling and disaster preparedness solutions.',
-      'Enhance water quality monitoring and equitable access through spatial intelligence.',
-    ],
-  },
-  health: {
-    id: 'health',
-    title: ' Health and Healthcare',
-    icon: <FaHeartbeat size={24} />,
-    summary: 'GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns.',
-    description: `Use GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns. Support healthcare infrastructure planning and accessibility analysis. Provide real-time data for emergency response and disaster medicine.`,
-    image: '/media/HealthCare.jpg',
-    highlights: [
-      'Use GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns.',
-      'Support healthcare infrastructure planning and accessibility analysis.',
-      'Provide real-time data for emergency response and disaster medicine.',
-    ],
-  },
   finance: {
     id: 'finance',
-    title: 'Finance and Banking',
+    title: 'Banking, Finance and Insurance',
     icon: <FaUniversity size={24} />,
     summary: 'Location-based intelligence for ATM siting and tracking illicit transactions.',
     description: `Strengthen financial security through location-based intelligence for ATM and branch siting. Support anti-fraud operations by tracking geospatial patterns of illicit transactions. Map financial inclusion gaps to guide policy and private investment.`,
@@ -133,17 +77,30 @@ export const sections: Record<string, Sector> = {
       'Map financial inclusion gaps to guide policy and private investment.',
     ],
   },
-  manufacturing: {
-    id: 'manufacturing',
-    title: 'Manufacturing',
-    icon: <FaGears size={24} />,
-    summary: 'Supply chain risk management and industrial park planning analytics.',
-    description: `Use geospatial intelligence for supply chain risk management. Provide location analytics for industrial park planning and monitoring. Support resilience of manufacturing assets against natural and man-made hazards.`,
-    image: '/media/manufacturing img.jpg',
+  health: {
+    id: 'health',
+    title: 'Health',
+    icon: <FaHeartbeat size={24} />,
+    summary: 'GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns.',
+    description: `Use GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns. Support healthcare infrastructure planning and accessibility analysis. Provide real-time data for emergency response and disaster medicine.`,
+    image: '/media/HealthCare.jpg',
     highlights: [
-      'Use geospatial intelligence for supply chain risk management.',
-      'Provide location analytics for industrial park planning and monitoring.',
-      'Support resilience of manufacturing assets against natural and man-made hazards.',
+      'Use GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns.',
+      'Support healthcare infrastructure planning and accessibility analysis.',
+      'Provide real-time data for emergency response and disaster medicine.',
+    ],
+  },
+  government: {
+    id: 'government',
+    title: 'Public Administration',
+    icon: <FaLandmark size={24} />,
+    summary: 'Mapping, monitoring, and securing federal/state government facilities.',
+    description: `Map, monitor, and secure federal/state government facilities. Support continuity of government planning using spatial risk assessments. Provide GEOINT for the protection of national monuments, heritage sites, and strategic assets.`,
+    image: '/media/GOVERNMENT.jpg',
+    highlights: [
+      'Map, monitor, and secure federal/state government facilities.',
+      'Support continuity of government planning using spatial risk assessments.',
+      'Provide GEOINT for the protection of national monuments, heritage sites, and strategic assets.',
     ],
   },
   education: {
@@ -159,6 +116,45 @@ export const sections: Record<string, Sector> = {
       'Facilitate research collaborations with academia and global geospatial partners.',
     ],
   },
+  defence: {
+    id: 'defence',
+    title: 'Defence and Security',
+    icon: <FaShieldAlt size={24} />,
+    summary: 'Advanced mapping and terrain analysis for military logistics and operations.',
+    description: `Provide advanced mapping and terrain analysis for military logistics and operations. Support secure defence manufacturing zones through geospatial risk assessment. Contribute to defence readiness with real-time intelligence for operational planning.`,
+    image: '/media/Defence new.jpg',
+    highlights: [
+      'Provide advanced mapping and terrain analysis for military logistics and operations.',
+      'Support secure defence manufacturing zones through geospatial risk assessment.',
+      'Contribute to defence readiness with real-time intelligence for operational planning.',
+    ],
+  },
+  transportation: {
+    id: 'transportation',
+    title: 'Transport',
+    icon: <FaCar size={24} />,
+    summary: 'Spatial analysis for air, road, rail, and maritime networks and logistics.',
+    description: `Provide spatial analysis for air, road, rail, and maritime networks. Optimize traffic management, logistics, and accident prevention. Support secure navigation and border monitoring for aviation and maritime safety.`,
+    image: '/media/Transport.jpg',
+    highlights: [
+      'Provide spatial analysis for air, road, rail, and maritime networks.',
+      'Optimize traffic management, logistics, and accident prevention.',
+      'Support secure navigation and border monitoring for aviation and maritime safety.',
+    ],
+  },
+  food: {
+    id: 'food',
+    title: 'Food and Agriculture',
+    icon: <FaTractor size={24} />,
+    summary: 'Earth observation for crop monitoring, yield forecasting, and climate adaptation.',
+    description: `Use earth observation for crop monitoring, yield forecasting, and climate adaptation. Strengthen food security through land use analysis and supply chain visibility. Detect and prevent illegal land grabs and encroachment on agricultural reserves.`,
+    image: '/media/Food Security (1).jpg',
+    highlights: [
+      'Use earth observation for crop monitoring, yield forecasting, and climate adaptation.',
+      'Strengthen food security through land use analysis and supply chain visibility.',
+      'Detect and prevent illegal land grabs and encroachment on agricultural reserves.',
+    ],
+  },
   emergency: {
     id: 'emergency',
     title: 'Emergency Services',
@@ -172,60 +168,60 @@ export const sections: Record<string, Sector> = {
       'Support search and rescue missions with satellite and drone imagery.',
     ],
   },
-  industrial: {
-    id: 'industrial',
-    title: 'Critical Manufacturing & Industrial Processes',
-    icon: <FaIndustry size={24} />,
-    summary: 'Monitoring chemical, pharmaceutical, and heavy industry facilities.',
-    description: `Monitor chemical, pharmaceutical, and heavy industry facilities for safety and compliance. Provide GEOINT for early detection of industrial hazards and environmental risks. Strengthen resilience of production hubs through geospatial risk modeling.`,
-    image: '/media/industrial systems.jpg',
+  manufacturing: {
+    id: 'manufacturing',
+    title: 'Industrial and Manufacturing',
+    icon: <FaGears size={24} />,
+    summary: 'Supply chain risk management and industrial park planning analytics.',
+    description: `Use geospatial intelligence for supply chain risk management. Provide location analytics for industrial park planning and monitoring. Support resilience of manufacturing assets against natural and man-made hazards.`,
+    image: '/media/manufacturing img.jpg',
     highlights: [
-      'Monitor chemical, pharmaceutical, and heavy industry facilities for safety and compliance.',
-      'Provide GEOINT for early detection of industrial hazards and environmental risks.',
-      'Strengthen resilience of production hubs through geospatial risk modeling.',
+      'Use geospatial intelligence for supply chain risk management.',
+      'Provide location analytics for industrial park planning and monitoring.',
+      'Support resilience of manufacturing assets against natural and man-made hazards.',
     ],
   },
-  government: {
-    id: 'government',
-    title: 'Government Facilities & National Monuments',
-    icon: <FaLandmark size={24} />,
-    summary: 'Mapping, monitoring, and securing federal/state government facilities.',
-    description: `Map, monitor, and secure federal/state government facilities. Support continuity of government planning using spatial risk assessments. Provide GEOINT for the protection of national monuments, heritage sites, and strategic assets.`,
-    image: '/media/GOVERNMENT.jpg',
+  mines: {
+    id: 'mines',
+    title: 'Mines and Steel',
+    icon: <FaHammer size={24} />,
+    summary: 'Geospatial monitoring of mining sites, geological surveys, and steel production.',
+    description: `Apply GEOINT for the mapping and monitoring of mining sites, steel plants, and mineral exploration zones. Detect illegal mining activities and environmental degradation through satellite imagery. Support strategic planning for the steel industry and raw material supply chains.`,
+    image: '/media/mines and steel.jpg',
     highlights: [
-      'Map, monitor, and secure federal/state government facilities.',
-      'Support continuity of government planning using spatial risk assessments.',
-      'Provide GEOINT for the protection of national monuments, heritage sites, and strategic assets.',
+      'Apply GEOINT for mapping and monitoring of mining sites, mineral belts, haul routes, and steel-production facilities.',
+      'Support early warning for illegal mining, encroachment, unsafe excavation practices, and environmental degradation.',
+      'Enhance site selection, resource estimation, and operational planning for new mines, processing plants, and logistics corridors.',
     ],
   },
-  // Kept IT and Space as they are often required for app logic, 
-  // but they are not in the top 13 list provided in the text.
-  it: {
-    id: 'it',
-    title: 'Information Technology',
-    icon: <FaNetworkWired size={24} />,
-    summary: 'Mapping digital infrastructure and enhancing cybersecurity resilience.',
-    description: `The IT sector underpins nearly every aspect of modern infrastructure, and geospatial intelligence enhances its security and efficiency. Mapping data centers, fiber routes, and internet exchange points helps identifying physical vulnerabilities that could impact digital connectivity.`,
-    image: '/media/Information Tech.JPG',
-    highlights: [
-      'Apply GEOINT for mapping, monitoring, and vulnerability assessment of fiber-optic routes, telecom towers, data centers, and digital communication hubs.', 
-      'Support early warning for network disruptions caused by physical tampering, environmental hazards, or unauthorized expansions.', 
-      'Enhance planning for future broadband expansion, smart-city deployments, and resilient ICT backbone systems.'
-    ],
-  },
-  space: {
-    id: 'space',
-    title: 'Space & Satellite Systems',
-    icon: <FaSatellite size={24} />,
-    summary: 'Protecting satellites and advancing space-based GEOINT capabilities.',
-    description: `Space and satellite systems form the foundation of modern geospatial intelligence, enabling global navigation, communication, and earth observation. Monitoring orbital assets and space weather is essential to maintaining the integrity of the GEOINT infrastructure itself.`,
-    image: '/media/Space and Satellite.jpg',
-    highlights: [
-      'Apply GEOINT to map, track, and assess the status of ground stations, satellite control facilities, and launch-support infrastructure.', 
-      'Support early warning for space-asset interference, ground-station intrusion, and signal jamming or spoofing threats.', 
-      'Enhance planning for satellite deployment, orbital asset management, and national space-based services such as navigation, EO, and communications'
-    ],
-  },
+  
+  // NOTE: 'IT' and 'Space' are kept as extra utilities but are outside the core list of 13.
+  // it: {
+  //   id: 'it',
+  //   title: 'Information Technology',
+  //   icon: <FaNetworkWired size={24} />,
+  //   summary: 'Mapping digital infrastructure and enhancing cybersecurity resilience.',
+  //   description: `The IT sector underpins nearly every aspect of modern infrastructure, and geospatial intelligence enhances its security and efficiency. Mapping data centers, fiber routes, and internet exchange points helps identifying physical vulnerabilities that could impact digital connectivity.`,
+  //   image: '/media/Information Tech.JPG',
+  //   highlights: [
+  //     'Apply GEOINT for mapping, monitoring, and vulnerability assessment of fiber-optic routes, telecom towers, data centers, and digital communication hubs.',
+  //     'Support early warning for network disruptions caused by physical tampering, environmental hazards, or unauthorized expansions.',
+  //     'Enhance planning for future broadband expansion, smart-city deployments, and resilient ICT backbone systems.',
+  //   ],
+  // },
+  // space: {
+  //   id: 'space',
+  //   title: 'Space & Satellite Systems',
+  //   icon: <FaSatellite size={24} />,
+  //   summary: 'Protecting satellites and advancing space-based GEOINT capabilities.',
+  //   description: `Space and satellite systems form the foundation of modern geospatial intelligence, enabling global navigation, communication, and earth observation. Monitoring orbital assets and space weather is essential to maintaining the integrity of the GEOINT infrastructure itself.`,
+  //   image: '/media/Space and Satellite.jpg',
+  //   highlights: [
+  //     'Apply GEOINT to map, track, and assess the status of ground stations, satellite control facilities, and launch-support infrastructure.',
+  //     'Support early warning for space-asset interference, ground-station intrusion, and signal jamming or spoofing threats.',
+  //     'Enhance planning for satellite deployment, orbital asset management, and national space-based services such as navigation, EO, and communications.',
+  //   ],
+  // },
 } as const;
 
 export type SectionId = keyof typeof sections;

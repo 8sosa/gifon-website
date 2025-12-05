@@ -74,21 +74,19 @@ export default async function HeaderWrapper() {
         href: '/infrastructure', 
         children: [ 
             { label: 'Power and Energy', anchor: 'energy' }, 
-            { label: 'Transportation Systems', anchor: 'transportation' }, 
-            { label: 'Communications', anchor: 'communication' }, 
-            { label: 'Defense Industrial Base', anchor: 'defence' }, 
-            { label: 'Agriculture & Food Security', anchor: 'food' }, 
-            { label: 'Water & Dams', anchor: 'water' }, 
-            { label: 'Public Health', anchor: 'health' }, 
-            { label: 'Finance & Banking', anchor: 'finance' }, 
-            { label: 'Manufacturing', anchor: 'manufacturing' }, 
+            { label: 'Water', anchor: 'water' }, 
+            { label: 'Information, Communications, Science and Technology (ICT)', anchor: 'communication' }, 
+            { label: 'Banking, Finance and Insurance', anchor: 'finance' }, 
+            { label: 'Health', anchor: 'health' }, 
+            { label: 'Public Administration', anchor: 'government' }, 
             { label: 'Education', anchor: 'education' }, 
+            { label: 'Defence and Security', anchor: 'defence' }, 
+            { label: 'Transport', anchor: 'transportation' }, 
+            { label: 'Food and Agriculture', anchor: 'food' }, 
             { label: 'Emergency Services', anchor: 'emergency' }, 
-            { label: 'Critical Manufacturing', anchor: 'industrial' }, 
-            { label: 'Govt. Facilities', anchor: 'government' }, 
-            { label: 'IT', anchor: 'it' }, 
-            { label: 'Space Systems', anchor: 'space' } 
-        ] 
+            { label: 'Industrial and Manufacturing', anchor: 'manufacturing' }, 
+            { label: 'Mines and Steel', anchor: 'mines' }
+        ]
     },
     // --- UPDATED SECTION START ---
     { 
@@ -98,9 +96,9 @@ export default async function HeaderWrapper() {
             // Anchors updated to match your forums.tsx file
             { label: 'Young Professionals Forum', anchor: 'young-professionals' }, 
             { label: 'Women in GEOINT Forum', anchor: 'women-in-geoint' }, 
-            { label: 'Industry & Private Sector Forum', anchor: 'industry' }, 
-            { label: 'Policy, Governance & Ethics', anchor: 'policy' }, 
-            { label: 'Academia & Research', anchor: 'academia' } 
+            { label: 'Industry & Private Sector Forum', anchor: 'industry-private-sector' }, 
+            { label: 'Policy, Governance & Ethics', anchor: 'policy-governance-ethics' }, 
+            { label: 'Academia & Research', anchor: 'academia-research' } 
         ] 
     },
     // --- UPDATED SECTION END ---

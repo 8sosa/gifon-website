@@ -4,9 +4,8 @@ import { getTeamMembers } from '@/lib/contentful-queries';
 import { FlatMember } from '@/types/types';
 import { LogoCarousel, CarouselItem } from '@/components/LogoCarousel';
 import Image from 'next/image';
-import Link from 'next/link';
 import { 
-  Target, Eye, Layers, GraduationCap, Users, Shield, Sprout, ScrollText, Database, Microscope, Megaphone, Globe, Building2, FileBadge, Download 
+  Target, Eye, Layers, GraduationCap, Users, Shield, Sprout, ScrollText, Database, Microscope, Megaphone, Globe, Building2, FileBadge, 
 } from 'lucide-react';
 import MotionDiv from "@/components/MotionDiv"; 
 import MotionImg from "@/components/MotionImg";
@@ -378,7 +377,7 @@ export default async function AboutPage() {
         </section>
 
         {/* --- 3. THE QUEST SECTION (Moved Here) --- */}
-        <section className="py-20 px-6 bg-green-50 border-t border-gray-100">
+        {/* <section className="py-20 px-6 bg-green-50 border-t border-gray-100">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 cooper">The Quest</h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
@@ -398,7 +397,7 @@ export default async function AboutPage() {
               </Link>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* --- PARTNERS --- */}
         <section id="our-partners" className="py-16 md:py-24 px-4 md:px-6 bg-green-200">

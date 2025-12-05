@@ -3,12 +3,15 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script"; 
 import { 
   Calendar, MapPin, User, Mail, Briefcase, 
-  CheckCircle2, ArrowLeft, Ticket, Loader2, ShieldCheck 
+  CheckCircle2, ArrowLeft, Ticket, Loader2, ShieldCheck
 } from "lucide-react";
 
-// Define the shape of the event data passed from the parent
+// --- TYPE DEFINITIONS ---
+
+// 1. Event Data Interface
 interface EventData {
   id: string;
   title: string;
@@ -18,8 +21,49 @@ interface EventData {
   image: string;
 }
 
+// 2. Paystack Types
+interface PaystackSuccessResponse {
+  reference: string;
+  message: string;
+  status: string;
+  trans: string;
+  transaction: string;
+  trxref: string;
+}
+
+interface PaystackConfig {
+  key: string;
+  email: string;
+  amount: number;
+  currency?: string;
+  ref?: string;
+  metadata?: {
+    custom_fields: Array<{
+      display_name: string;
+      variable_name: string;
+      value: string;
+    }>;
+  };
+  callback: (response: PaystackSuccessResponse) => void;
+  onClose: () => void;
+}
+
+// 3. Extend Window Interface
+declare global {
+  interface Window {
+    PaystackPop?: {
+      setup: (config: PaystackConfig) => {
+        openIframe: () => void;
+      };
+    };
+  }
+}
+
 export default function RegistrationForm({ event }: { event: EventData }) {
-  // Static Ticket Data (Since tickets aren't in your Contentful model yet)
+  // Paystack Public Key
+  const publicKey = 'pk_test_6e8d2af9e1ef122e711e928c5c36ac57934f7930'; 
+
+  // Static Ticket Data
   const tickets = [
     { id: 'standard', name: 'Standard Access', price: 50000, desc: 'Full access to sessions, lunch & materials.' },
     { id: 'vip', name: 'VIP Delegate', price: 150000, desc: 'Priority seating, gala dinner & exclusive networking.' },
@@ -29,6 +73,7 @@ export default function RegistrationForm({ event }: { event: EventData }) {
   const [selectedTicket, setSelectedTicket] = useState(tickets[0].id);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [paymentRef, setPaymentRef] = useState('');
   const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", org: "", jobTitle: "" });
 
   const currentTicket = tickets.find(t => t.id === selectedTicket);
@@ -37,41 +82,96 @@ export default function RegistrationForm({ event }: { event: EventData }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // --- PAYSTACK LOGIC ---
+  const payWithPaystack = () => {
+    // Basic Validation
+    if (!formData.email || !formData.firstName || !formData.lastName) {
+        alert("Please fill in all required fields.");
+        setIsSubmitting(false);
+        return;
+    }
+
+    if (typeof window === 'undefined' || !window.PaystackPop) {
+      alert("Payment system is loading. Please try again.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    const handler = window.PaystackPop.setup({
+      key: publicKey,
+      email: formData.email,
+      amount: (currentTicket?.price || 0) * 100, // Amount in kobo
+      currency: 'NGN',
+      ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+      metadata: {
+        custom_fields: [
+          { display_name: "Event", variable_name: "event_title", value: event.title },
+          { display_name: "Ticket Type", variable_name: "ticket_type", value: currentTicket?.name || 'Unknown' },
+          { display_name: "Attendee Name", variable_name: "attendee_name", value: `${formData.firstName} ${formData.lastName}` }
+        ]
+      },
+      callback: function(response: PaystackSuccessResponse) {
+        // Payment Success
+        setPaymentRef(response.reference);
+        setIsSuccess(true);
+        setIsSubmitting(false);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      onClose: function() {
+        setIsSubmitting(false);
+        alert('Transaction cancelled.');
+      }
+    });
+
+    handler.openIframe();
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    payWithPaystack();
+  };
+
+  // --- SUCCESS VIEW ---
   if (isSuccess) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6 font-sans">
         <div className="bg-white p-10 rounded-3xl shadow-2xl max-w-lg w-full text-center border border-green-100 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-green-400 to-green-600"></div>
-          <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+          <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm animate-in zoom-in duration-300">
             <CheckCircle2 className="text-green-600 w-12 h-12" />
           </div>
           <h2 className="text-3xl font-bold text-gray-900 mb-2 font-cooper">You&apos;re All Set!</h2>
-          <p className="text-gray-600 mb-8 leading-relaxed">
-            Registration confirmed for <strong>{event.title}</strong>.<br/>
-            A confirmation email has been sent to <strong>{formData.email}</strong>.
+          <p className="text-gray-600 mb-6 leading-relaxed">
+            Registration confirmed for <strong>{event.title}</strong>.
           </p>
+          
+          <div className="bg-gray-50 p-4 rounded-xl text-left text-sm text-gray-600 mb-8 space-y-2 border border-gray-100">
+            <div className="flex justify-between"><span>Ticket:</span> <span className="font-bold text-gray-900">{currentTicket?.name}</span></div>
+            <div className="flex justify-between"><span>Amount Paid:</span> <span className="font-bold text-gray-900">₦{currentTicket?.price.toLocaleString()}</span></div>
+            <div className="flex justify-between"><span>Reference:</span> <span className="font-mono text-xs">{paymentRef}</span></div>
+          </div>
+
           <div className="space-y-3">
             <Link href="/" className="block w-full bg-green-600 text-white font-bold py-4 rounded-xl hover:bg-green-700 transition shadow-lg">
               Return to Home
             </Link>
+            <button onClick={() => window.print()} className="block w-full bg-white border border-gray-200 text-gray-700 font-bold py-3 rounded-xl hover:bg-gray-50 transition">
+              Download Receipt
+            </button>
           </div>
         </div>
       </div>
     );
   }
 
+  // --- FORM VIEW ---
   return (
     <div className="min-h-screen bg-gray-50 font-sans pb-20">
+      
+      {/* Load Paystack Script */}
+      <Script src="https://js.paystack.co/v1/inline.js" strategy="lazyOnload" />
+
       {/* Navbar Placeholder */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -166,17 +266,30 @@ export default function RegistrationForm({ event }: { event: EventData }) {
 
                 {/* Submit Area */}
                 <div className="pt-4">
-                    <button type="submit" disabled={isSubmitting} className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-5 rounded-2xl shadow-xl hover:shadow-green-600/30 transition-all flex items-center justify-center gap-3 transform hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none">
-                        {isSubmitting ? ( <><Loader2 className="animate-spin" /> Processing...</> ) : ( "Complete Registration" )}
+                    <button 
+                        type="submit" 
+                        disabled={isSubmitting}
+                        className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-5 rounded-2xl shadow-xl hover:shadow-green-600/30 transition-all flex items-center justify-center gap-3 transform hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                    >
+                        {isSubmitting ? (
+                            <><Loader2 className="animate-spin" /> Processing Payment...</>
+                        ) : (
+                            <>
+                                Proceed to Payment
+                                <div className="bg-white/20 p-1 rounded-full"><Ticket size={18} /></div>
+                            </>
+                        )}
                     </button>
                     <p className="text-center text-xs text-gray-400 mt-6 flex items-center justify-center gap-1.5 opacity-80">
-                        <ShieldCheck size={14} className="text-green-600" /> Encrypted & Secure Transaction
+                        <ShieldCheck size={14} className="text-green-600" /> 
+                        Encrypted & Secure Transaction powered by Paystack
                     </p>
                 </div>
+
             </form>
           </div>
 
-          {/* --- RIGHT COLUMN: EVENT SUMMARY (Sticky) --- */}
+          {/* --- RIGHT COLUMN: ORDER SUMMARY (Sticky) --- */}
           <div className="lg:col-span-4">
             <div className="sticky top-28 space-y-6">
                 <div className="bg-white p-6 rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden relative">

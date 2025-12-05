@@ -1,23 +1,26 @@
+"use client"; // Required for state
+
+import { useState } from 'react';
 import HeroSection from '@/components/HeroSection';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Heart, Briefcase, Cpu, Users, ArrowRight, CheckCircle2 } from 'lucide-react';
+import DonationModal from '@/components/DonationModal'; // Import the new modal
 
 export default function DonatePage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
       <HeroSection
         title="GET INVOLVED"
-        // Uncommented and refined for impact
         description="Join us in advancing geospatial intelligence. Your support fuels innovation, strengthens national security, and drives sustainable development in Nigeria."
-        backgroundMedia={[
-          "/media/Get Involved Background.jpg",
-        ]}
+        backgroundMedia={["/media/20240418_130158.JPG"]}
       />
 
       <main className="w-full font-sans">
         
-        {/* --- Section 1: Introduction / Mission Statement --- */}
+        {/* ... (Section 1 remains the same) ... */}
         <section className="py-20 px-4 bg-white">
           <div className="max-w-4xl mx-auto text-center">
             <span className="text-green-600 font-bold tracking-wider text-sm uppercase mb-2 block">
@@ -36,7 +39,7 @@ export default function DonatePage() {
           </div>
         </section>
         
-        {/* --- Section 2: Donation / Support Options (Cards) --- */}
+        {/* --- Section 2: Donation / Support Options --- */}
         <section id="donate" className="py-20 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -46,9 +49,8 @@ export default function DonatePage() {
               </p>
             </div>
 
-            {/* Grid for Support Options */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              {/* Card 1: Individual */}
+              {/* Card 1 */}
               <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col items-center text-center">
                 <div className="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6">
                   <Heart size={28} />
@@ -58,8 +60,8 @@ export default function DonatePage() {
                   One-time or recurring donations fuel our daily operations and community outreach programs.
                 </p>
               </div>
-
-              {/* Card 2: Corporate */}
+              
+              {/* Card 2 */}
               <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col items-center text-center">
                 <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-6">
                   <Briefcase size={28} />
@@ -70,7 +72,7 @@ export default function DonatePage() {
                 </p>
               </div>
 
-              {/* Card 3: Technology */}
+              {/* Card 3 */}
               <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col items-center text-center">
                 <div className="w-14 h-14 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-6">
                   <Cpu size={28} />
@@ -82,21 +84,21 @@ export default function DonatePage() {
               </div>
             </div>
 
-            {/* CTA Button */}
+            {/* CTA Button - Triggers Modal */}
             <div className="text-center">
-              <a
-                href="#"
+              <button
+                onClick={() => setIsModalOpen(true)}
                 className="inline-flex items-center justify-center bg-green-600 text-white px-10 py-4 rounded-lg font-semibold text-lg hover:bg-green-700 hover:-translate-y-0.5 transition-all shadow-lg shadow-green-600/20"
               >
                 Donate to <span className="cooper ml-1 font-serif">GIFON</span>
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
+              </button>
               <p className="mt-4 text-sm text-gray-500">Secure payment processing via Paystack/Flutterwave</p>
             </div>
           </div>
         </section>
 
-        {/* --- Section 3: Volunteer Opportunities (Split Layout) --- */}
+        {/* ... (Section 3: Volunteer - Same as before) ... */}
         <section id="volunteer" className="py-20 px-4 bg-white overflow-hidden relative">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
@@ -130,9 +132,7 @@ export default function DonatePage() {
               </Link>
             </div>
 
-            {/* Right Column: Visual Element */}
-            {/* If you have a real image of volunteers, put it here. Otherwise, this abstract pattern works well. */}
-            {/* Right Column: Visual Element (User's Image Logic Integrated) */}
+            {/* Right Column */}
             <div className="order-1 lg:order-2 relative h-[400px] lg:h-full min-h-[400px] w-full bg-gray-200 rounded-2xl overflow-hidden shadow-2xl group">
               <Image
                 src='/media/ye.jpg'
@@ -140,22 +140,8 @@ export default function DonatePage() {
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              {/* Optional: Subtle gradient overlay to make image pop */}
               <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none"></div>
             </div>
-            {/* <div className="relative">
-              <div className="absolute -inset-4 bg-green-100 rounded-2xl transform rotate-3 -z-10"></div>
-              <div className="bg-gray-100 rounded-2xl p-8 min-h-[400px] flex items-center justify-center border border-gray-200 shadow-inner">
-                 <div className="text-center">
-                    <div className="bg-white p-4 rounded-full inline-block mb-4 shadow-sm">
-                        <Users size={48} className="text-green-600/50" />
-                    </div>
-                    <p className="text-gray-400 text-sm italic">
-                      [Insert Image of Volunteers or Mapping Event Here]
-                    </p>
-                 </div>
-              </div>
-            </div> */}
 
           </div>
         </section>
@@ -168,9 +154,13 @@ export default function DonatePage() {
               Whether you donate or volunteer, your action helps build a secure, data-driven society.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-               <a href="#donate" className="bg-white text-green-900 px-8 py-3 rounded font-semibold hover:bg-gray-100 transition">
+               {/* Trigger Modal Here Too */}
+               <button 
+                 onClick={() => setIsModalOpen(true)}
+                 className="bg-white text-green-900 px-8 py-3 rounded font-semibold hover:bg-gray-100 transition"
+                >
                  Donate Now
-               </a>
+               </button>
                <Link href="/contact-us" className="border border-white text-white px-8 py-3 rounded font-semibold hover:bg-white/10 transition">
                  Contact Us
                </Link>
@@ -178,6 +168,12 @@ export default function DonatePage() {
           </div>
         </section>
       </main>
+
+      {/* --- RENDER MODAL --- */}
+      <DonationModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </>
   );
 }
