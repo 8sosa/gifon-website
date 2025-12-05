@@ -31,7 +31,7 @@ export default async function HeaderWrapper() {
             { label: 'Membership Categories', anchor: 'categories' }, 
             { label: 'Membership Benefits', anchor: 'benefits' }, 
             { label: 'Pioneer Members', anchor: 'pioneer' }, 
-            { label: 'Membership Portal (Apply & Renew)', anchor: 'apply' } 
+            { label: 'How to Apply', anchor: 'apply' } 
         ] 
     },
     { 

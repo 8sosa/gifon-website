@@ -263,7 +263,7 @@ export default function ContactPage() {
                             Abuja - Nigeria.
                         </address>
                         <a 
-                            href="https://maps.google.com" 
+                            href="https://maps.app.goo.gl/d6i8Ea7SZ4KCGCcc7" 
                             target="_blank"
                             rel="noreferrer"
                             className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors border border-white/10"
@@ -314,7 +314,7 @@ export default function ContactPage() {
                         <div className="h-px bg-gray-100 my-2"></div>
                         
                         <ContactRow 
-                            title="Events" 
+                            title="Events & Exhibitions" 
                             phone="+234 707 739 6196" 
                             email="Events.exhibition@gifon.org.ng" 
                         />

@@ -190,10 +190,9 @@ export default function YetaPage() {
         </section>
 
         {/* --- Audience & Outcomes Section --- */}
-        <section id="audience-outcomes" className="py-20 px-4 bg-gray-900 text-white">
+        {/* <section id="audience-outcomes" className="py-20 px-4 bg-gray-900 text-white">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
             
-            {/* Target Audience */}
             <div>
               <h2 className="text-3xl font-semibold mb-6 border-b border-gray-700 pb-4 inline-block">
                   Target Audience
@@ -214,7 +213,6 @@ export default function YetaPage() {
               </ul>
             </div>
 
-            {/* Expected Outcomes */}
             <div>
               <h2 className="text-3xl font-semibold mb-6 border-b border-gray-700 pb-4 inline-block">
                   Expected Outcomes
@@ -234,7 +232,7 @@ export default function YetaPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* --- CTA Section --- */}
         <section id="join" className="py-16 px-4 bg-green-600 text-white text-center">

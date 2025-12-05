@@ -65,12 +65,12 @@ export default function Footer() {
                   <Image src="/logo.png" alt="GIFON Logo" fill className="object-contain"/>
               </div>
               <div className="flex flex-col cooper">
-                <h1 className="text-4xl font-extrabold text-white leading-none tracking-tight group-hover:text-green-500 transition-colors">GIFON</h1>
-                <span className="text-[0.65rem] font-bold text-gray-500 uppercase tracking-wider group-hover:text-green-400 transition-colors">Geospatial Intelligence Foundation</span>
+                <h1 className="text-5xl md:text-5xl lg:text-[4rem] font-extrabold text-white leading-none tracking-tight group-hover:text-green-500 transition-colors">GIFON</h1>
+                <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.55rem] font-bold text-gray-500 uppercase tracking-wider group-hover:text-green-400 transition-colors">Geospatial Intelligence Foundation</span>
               </div>
             </Link>
 
-            <p className="text-gray-500 text-sm leading-relaxed max-w-md">
+            <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400">
                 Empowering Nigeria through geospatial intelligence, innovation, and strategic collaboration. Join us in shaping the future of national security and development.
             </p>
 
@@ -97,7 +97,8 @@ export default function Footer() {
                     <FaLocationDot className="mt-1 text-green-600 shrink-0 group-hover:animate-bounce" />
                     <address className="not-italic text-gray-400 text-sm leading-relaxed">
                         12 Richard Clapperton Street,<br />
-                        Off Maman Nasir Street, Asokoro District,<br />
+                        Off Maman Nasir Street,<br />
+                        Asokoro District,<br />
                         Abuja, Nigeria.
                     </address>
                 </div>
@@ -118,7 +119,7 @@ export default function Footer() {
                       { title: 'Outreach', phone: '+234 707 726 9829', email: 'outreach@gifon.org.ng' },
                       { title: 'Education', phone: '+234 707 721 1243', email: 'Education@gifon.org.ng' },
                       { title: 'Research', phone: '+234 707 739 6196', email: 'research@gifon.org.ng' },
-                      { title: 'Events', phone: '+234 707 739 6196', email: 'Events.exhibition@gifon.org.ng' },
+                      { title: 'Events & Exhibitions', phone: '+234 707 739 6196', email: 'Events.exhibition@gifon.org.ng' },
                   ].map((contact, idx) => (
                       <div key={idx} className="flex flex-col text-xs">
                           <span className="font-bold text-green-700 mb-1">{contact.title}</span>

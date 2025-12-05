@@ -247,7 +247,7 @@ export default function TrainingCertificationPage() {
         </section>
 
         {/* --- Expected Outcomes Section --- */}
-        <section id="outcomes" className="py-20 px-4 bg-green-50 text-center">
+        {/* <section id="outcomes" className="py-20 px-4 bg-green-50 text-center">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-semibold mb-10 text-green-900">
               Expected Outcomes
@@ -268,7 +268,7 @@ export default function TrainingCertificationPage() {
                 ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
       </main>
     </>

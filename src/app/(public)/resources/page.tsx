@@ -1,8 +1,7 @@
 import HeroSection from '@/components/HeroSection';
 import Link from 'next/link';
-import {JSX} from 'react'; // Use this to import JSX namespace
-import Image from 'next/image'; // Import Next.js Image component
-// Import all the icons we'll need
+import { JSX } from 'react';
+import Image from 'next/image';
 import { 
   FaBookOpen, 
   FaNewspaper, 
@@ -10,10 +9,41 @@ import {
   FaMicrophoneAlt, 
   FaChalkboardTeacher, 
   FaImages, 
-  FaDownload 
+  FaDownload,
+  FaPlay, 
+  FaVideo,
+  FaCalendarAlt
 } from "react-icons/fa";
 
-// A simple reusable component for consistent section headers
+// --- 1. TYPE DEFINITIONS (Fixes the "never" errors) ---
+
+interface ResourceItem {
+  id?: string;
+  title: string;
+  date?: string;
+  description?: string;
+  image?: string;
+  link: string;
+  type?: string; // For downloads (PDF/DOC)
+  size?: string; // For downloads
+  status?: string; // For webinars (Upcoming/Past)
+}
+
+import resourcesData from './resources';
+// --- 2. DATA SOURCE ---
+// We explicitly type this object as ': ResourcesData' so TS knows what the empty arrays contain.
+// const resourcesData: ResourcesData = {
+//     news: [], // Empty to trigger "No news yet"
+//     press: [],
+//     podcasts: [],
+//     webinars: [],
+//     gallery: [],
+//     downloads: [],
+//     publications: []
+// };
+
+// --- 3. REUSABLE COMPONENTS ---
+
 const SectionHeader = ({ title, icon }: { title: string, icon: JSX.Element }) => (
   <div className="inline-block mb-8 text-left">
     <h2 className="text-green-600 text-3xl font-semibold flex items-center gap-3">
@@ -23,6 +53,46 @@ const SectionHeader = ({ title, icon }: { title: string, icon: JSX.Element }) =>
     <div className="w-20 h-1 bg-green-600 mt-2"></div>
   </div>
 );
+
+const ResourceSection = ({ 
+  id, 
+  title, 
+  icon, 
+  data, 
+  bgColor = "bg-white",
+  renderItem 
+}: { 
+  id: string, 
+  title: string, 
+  icon: JSX.Element, 
+  data: ResourceItem[], // Specific type here
+  bgColor?: string,
+  renderItem: (item: ResourceItem, idx: number) => JSX.Element 
+}) => {
+  return (
+    <section className={`${bgColor} pt-16`} id={id}>
+      <div className='max-w-5xl mx-auto px-6 py-16'>
+        <SectionHeader title={title} icon={icon} />
+        
+        {data.length > 0 ? (
+          <div className={id === 'Gallery' ? "grid grid-cols-2 md:grid-cols-4 gap-4" : (id === 'News' || id === 'Webinar') ? "grid md:grid-cols-3 gap-6" : "space-y-4"}>
+            {data.map((item, idx) => renderItem(item, idx))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-12 px-4 bg-gray-50/50 rounded-xl border-2 border-dashed border-gray-200 text-center">
+            <div className="bg-gray-100 p-4 rounded-full mb-4 text-gray-400">
+                {icon}
+            </div>
+            <h3 className="text-lg font-semibold text-gray-600">No {title.toLowerCase()} available</h3>
+            <p className="text-gray-500 text-sm mt-2 max-w-sm">
+                We haven&apos;t published any {title.toLowerCase()} just yet. Please check back later or subscribe to our newsletter for updates.
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
 
 export default function ResourcesPage() {
   return (
@@ -35,7 +105,6 @@ export default function ResourcesPage() {
         ]}
       />
 
-      {/* Main content wrapper */}
       <main>
 
         {/* --- 1. MEDIA & RESOURCES (Intro) --- */}
@@ -68,254 +137,252 @@ export default function ResourcesPage() {
         </section>
 
         {/* --- 2. NEWS --- */}
-        <section className='bg-white pt-16' id='News'>
-          <div className='max-w-5xl mx-auto px-6 py-16'>
-            <SectionHeader title="News" icon={<FaNewspaper size={24} />} />
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* News Item 1 */}
-              <div className="rounded-lg shadow-lg overflow-hidden bg-white flex flex-col">
-                <div className="relative w-full h-40"> {/* Wrapper for Image */}
-                  <Image src="/ph.svg" alt="News placeholder" fill className="object-cover"/>
-                </div>
-                <div className="p-4 flex flex-col grow">
-                  <span className="text-sm text-gray-500 mb-1">Oct 26, 2025</span>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2"><span className="cooper">GIFON</span> Partners with Ministry of Defence</h3>
-                  <p className="text-gray-600 text-sm grow mb-4">A new MOU is signed to enhance national security through advanced geospatial intelligence...</p>
-                  <Link href="#" className="text-green-600 hover:underline font-semibold">Read More &rarr;</Link>
-                </div>
-              </div>
-              {/* News Item 2 */}
-              <div className="rounded-lg shadow-lg overflow-hidden bg-white flex flex-col">
-                <div className="relative w-full h-40"> {/* Wrapper for Image */}
-                  <Image src="/ph.svg" alt="News placeholder" fill className="object-cover"/>
-                </div>
-                <div className="p-4 flex flex-col grow">
-                  <span className="text-sm text-gray-500 mb-1">Oct 22, 2025</span>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">Youth Empowerment Program Launches</h3>
-                  <p className="text-gray-600 text-sm grow mb-4">The first cohort of the WINGS program begins training, focusing on remote sensing...</p>
-                  <Link href="#" className="text-green-600 hover:underline font-semibold">Read More &rarr;</Link>
-                </div>
-              </div>
-              {/* News Item 3 */}
-              <div className="rounded-lg shadow-lg overflow-hidden bg-white flex flex-col">
-                <div className="relative w-full h-40"> {/* Wrapper for Image */}
-                  <Image src="/ph.svg" alt="News placeholder" fill className="object-cover"/>
-                </div>
-                <div className="p-4 flex flex-col grow">
-                  <span className="text-sm text-gray-500 mb-1">Oct 18, 2025</span>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">Annual Conference Dates Announced</h3>
-                  {/* FIXED: Unescaped quotes */}
-                  <p className="text-gray-600 text-sm grow mb-4">GeoINSIGHT 2026 will be held in Abuja, focusing on &quot;GEOINT for Critical Infrastructure&quot;...</p>
-                  <Link href="#" className="text-green-600 hover:underline font-semibold">Read More &rarr;</Link>
-                </div>
-              </div>
+        <ResourceSection 
+          id="News" 
+          title="News" 
+          icon={<FaNewspaper size={24} />} 
+          data={resourcesData.news}
+          bgColor="bg-white"
+          renderItem={(item, idx) => (
+            <div key={idx} className="rounded-lg shadow-lg overflow-hidden bg-white flex flex-col border border-gray-100">
+               <div className="relative w-full h-40 bg-gray-200">
+                  <Image 
+                    src={item.image || "/ph.svg"} 
+                    alt={item.title} 
+                    fill 
+                    className="object-cover"
+                  />
+               </div>
+               <div className="p-5 flex flex-col grow">
+                  <span className="text-xs text-gray-500 mb-2 flex items-center gap-1">
+                    <FaCalendarAlt size={10} /> {item.date}
+                  </span>
+                  <h3 className="font-bold text-gray-800 text-lg mb-2 leading-tight">{item.title}</h3>
+                  <p className="text-sm text-gray-600 mb-4 line-clamp-3">{item.description}</p>
+                  <Link href={item.link} className="mt-auto text-green-600 font-semibold hover:underline text-sm">
+                    Read Article &rarr;
+                  </Link>
+               </div>
             </div>
-          </div>
-        </section>
+          )}
+        />
 
         {/* --- 3. PRESS RELEASES --- */}
-        <section className='bg-green-50 pt-16' id='Press'>
-          <div className='max-w-5xl mx-auto px-6 py-16'>
-            <SectionHeader title="Press Releases" icon={<FaBullhorn size={24} />} />
-            <div className="space-y-4">
-              {/* Press Item 1 */}
-              <div className="p-4 bg-white rounded-lg shadow-md flex flex-col md:flex-row justify-between md:items-center">
+        <ResourceSection 
+          id="Press" 
+          title="Press Releases" 
+          icon={<FaBullhorn size={24} />} 
+          data={resourcesData.press}
+          bgColor="bg-green-50"
+          renderItem={(item, idx) => (
+             <div key={idx} className="p-6 bg-white rounded-lg shadow-sm flex flex-col md:flex-row justify-between md:items-center gap-4 hover:shadow-md transition-shadow">
                 <div>
-                  <span className="text-sm text-gray-500">Oct 26, 2025</span>
-                  <h3 className="text-lg font-semibold text-gray-800">Official Statement: <span className="cooper">GIFON</span> Stance on National Data Sharing Policy</h3>
+                  <span className="text-xs font-bold text-green-600 uppercase tracking-wider mb-1 block">{item.date}</span>
+                  <h3 className="font-semibold text-gray-900 text-lg">{item.title}</h3>
                 </div>
-                <Link href="#" className="mt-2 md:mt-0 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-lg font-semibold hover:bg-green-200 w-fit">
+                <Link href={item.link} className="px-4 py-2 bg-gray-100 text-gray-700 rounded text-sm font-medium hover:bg-green-600 hover:text-white transition-colors whitespace-nowrap">
                   Read Statement
                 </Link>
-              </div>
-              {/* Press Item 2 */}
-              <div className="p-4 bg-white rounded-lg shadow-md flex flex-col md:flex-row justify-between md:items-center">
-                <div>
-                  <span className="text-sm text-gray-500">Oct 20, 2025</span>
-                  <h3 className="text-lg font-semibold text-gray-800"><span className="cooper">GIFON</span> Appoints New Director for Research and Development</h3>
-                </div>
-                <Link href="#" className="mt-2 md:mt-0 inline-block bg-green-100 text-green-700 px-4 py-2 rounded-lg font-semibold hover:bg-green-200 w-fit">
-                  Read Statement
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+             </div>
+          )}
+        />
 
         {/* --- 4. PODCAST --- */}
-        <section className='bg-white pt-16' id='Podcast'>
-          <div className='max-w-5xl mx-auto px-6 py-16'>
-            <SectionHeader title="GeoINSIGHT Podcast" icon={<FaMicrophoneAlt size={24} />} />
-            <div className="bg-gray-50 rounded-lg shadow-lg p-6 flex flex-col md:flex-row gap-6 items-center">
-              {/* Wrapper for Image */}
-              <div className="relative w-full md:w-48 h-48 shrink-0">
-                <Image src="/ph.svg" alt="Podcast placeholder" fill className="object-cover rounded-md"/>
-              </div>
-              <div className="flex-1">
-                <span className="text-sm font-semibold text-green-600">LATEST EPISODE</span>
-                {/* FIXED: Unescaped apostrophe */}
-                <h3 className="text-2xl font-bold text-gray-800 mt-1 mb-2">Ep. 1: Mapping Nigeria&apos;s Energy Future</h3>
-                <p className="text-gray-600 mb-4">We sit down with Dr. Fatima Bello to discuss how satellite imagery is being used to secure pipelines and identify new renewable energy sites...</p>
-                <Link href="#" className="inline-block bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700">
-                  Listen Now
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ResourceSection 
+          id="Podcast" 
+          title="GeoINSIGHT Podcast" 
+          icon={<FaMicrophoneAlt size={24} />} 
+          data={resourcesData.podcasts}
+          bgColor="bg-white"
+          renderItem={(item, idx) => (
+             <div key={idx} className="bg-gray-900 rounded-xl overflow-hidden text-white flex flex-col md:flex-row">
+                <div className="relative w-full md:w-48 h-48 bg-gray-800 shrink-0">
+                    <Image src={item.image || "/ph.svg"} alt={item.title} fill className="object-cover"/>
+                </div>
+                <div className="p-6 flex flex-col justify-center">
+                    <span className="text-xs font-bold text-green-400 uppercase tracking-wider mb-2">Episode {idx + 1}</span>
+                    <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                    <p className="text-gray-300 text-sm mb-4 line-clamp-2">{item.description}</p>
+                    <Link href={item.link} className="inline-flex items-center gap-2 text-sm font-bold hover:text-green-400 transition-colors">
+                        Listen Now &rarr;
+                    </Link>
+                </div>
+             </div>
+          )}
+        />
 
         {/* --- 5. WEBINAR --- */}
-        <section className='bg-green-50 pt-16' id='Webinar'>
-          <div className='max-w-5xl mx-auto px-6 py-16'>
-            <SectionHeader title="Webinars & Masterclasses" icon={<FaChalkboardTeacher size={24} />} />
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Webinar Item 1 */}
-              <div className="rounded-lg shadow-lg overflow-hidden bg-white flex flex-col">
-                <div className="relative w-full h-48"> {/* Wrapper for Image */}
-                  <Image src="/ph.svg" alt="Webinar placeholder" fill className="object-cover"/>
+        <ResourceSection 
+          id="Webinar" 
+          title="Webinars & Masterclasses" 
+          icon={<FaChalkboardTeacher size={24} />} 
+          data={resourcesData.webinars}
+          bgColor="bg-green-50"
+          renderItem={(item, idx) => (
+             <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group">
+                <div className="relative w-full h-40 bg-gray-200">
+                    <Image src={item.image || "/ph.svg"} alt={item.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500"/>
+                    <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                        {item.status || "Past Event"}
+                    </div>
                 </div>
-                <div className="p-4 flex flex-col grow">
-                  <span className="text-sm text-gray-500 mb-1">PAST EVENT: SEP 30, 2025</span>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">Intro to AI/ML in Geospatial Analysis</h3>
-                  <p className="text-gray-600 text-sm grow mb-4">Watch the recording of our 2-hour masterclass on object detection and land use classification.</p>
-                  <Link href="#" className="inline-block bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 w-fit">
-                    Watch Now
-                  </Link>
+                <div className="p-5">
+                    <h3 className="font-bold text-gray-800 mb-2">{item.title}</h3>
+                    <p className="text-sm text-gray-600 mb-4">{item.description}</p>
+                    <Link href={item.link} className="block w-full text-center py-2 border border-green-600 text-green-600 rounded hover:bg-green-600 hover:text-white transition-colors text-sm font-semibold">
+                        View Details
+                    </Link>
                 </div>
-              </div>
-              {/* Webinar Item 2 */}
-              <div className="rounded-lg shadow-lg overflow-hidden bg-white flex flex-col">
-                <div className="relative w-full h-48"> {/* Wrapper for Image */}
-                  <Image src="/ph.svg" alt="Webinar placeholder" fill className="object-cover"/>
-                </div>
-                <div className="p-4 flex flex-col grow">
-                  <span className="text-sm text-green-600 font-semibold mb-1">UPCOMING: NOV 15, 2025</span>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">Coastal Resilience & Flood Modeling</h3>
-                  <p className="text-gray-600 text-sm grow mb-4">Join our panel of experts as they discuss climate change adaptation strategies for coastal cities.</p>
-                  <Link href="#" className="inline-block bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 w-fit">
-                    Register Now
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+             </div>
+          )}
+        />
 
-        {/* --- 6. PUBLICATIONS (Your existing section) --- */}
-        <section className='w-full bg-green-700 pt-16' id='publications'>
-          <div className='max-w-5xl mx-auto px-6 py-16'>
-            <div className="mb-12 text-center">
-              <h2 className="text-3xl font-bold text-white mb-4">
-                PUBLICATIONS
+        {/* --- 6. PUBLICATIONS --- */}
+        <section className='relative w-full bg-green-900 pt-24 pb-32 overflow-hidden' id='publications'>
+          
+          {/* Decorative Background Pattern (Grid) */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none" 
+               style={{ 
+                 backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', 
+                 backgroundSize: '40px 40px' 
+               }}>
+          </div>
+          {/* Radial Glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-green-600/20 blur-[100px] pointer-events-none"></div>
+
+          <div className='max-w-6xl mx-auto px-6 relative z-10'>
+            
+            {/* Section Header */}
+            <div className="mb-16 text-center">
+              <span className="inline-block py-1 px-3 rounded-full bg-green-800 text-green-300 text-xs font-bold uppercase tracking-widest mb-4 border border-green-700">
+                Knowledge Hub
+              </span>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-cooper">
+                Publications & Research
               </h2>
-              <p className="text-lg text-green-100 max-w-3xl mx-auto">
-                At <span className="cooper">GIFON</span>, knowledge is at the heart of our mission. Through our publications, we document insights, share cutting-edge research, and shape conversations on geospatial intelligence.
+              <p className="text-lg text-green-100 max-w-3xl mx-auto leading-relaxed">
+                At <span className="cooper font-bold">GIFON</span>, knowledge is our currency. Explore our archive of insights, peer-reviewed research, and strategic policy documents shaping the future of geospatial intelligence.
               </p>
             </div>
 
-            {(() => {
-              const publications = [
-                { title: "Eyes on Location – The Journal of GeoINSIGHT", id: "GeoINSIGHT", description: "Our flagship peer-reviewed journal featuring original research, policy analyses, and thought leadership on GEOINT and its applications." },
-                { title: "Eyes on Location – The GeoINSIGHT Bulletin", id: "Bulletin", description: "A monthly newsletter that delivers concise updates, expert commentary, and highlights of GIFON activities." },
-                { title: "Conference & Workshop Proceedings", id: "Proceedings", description: "We publish proceedings from our conferences and masterclasses, capturing knowledge shared by experts." },
-                { title: "Policy Briefs & White Papers", id: "Policy", description: "Strategic documents offering evidence-based recommendations to support government and stakeholders." },
-                { title: "Research Reports", id: "Research", description: "Comprehensive studies exploring challenges and opportunities in Nigeria’s 13 critical infrastructure sectors." },
-              ];
-              return (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
-                  {publications.map((pub, idx) => (
-                    <div 
-                      key={idx} 
-                      className="bg-white rounded-lg p-6 hover:bg-green-50 flex flex-col gap-4 shadow-lg"
-                      id={pub.id}
-                    >
-                      <div className="inline-block text-left">
-                        <h2 className="text-green-600 text-xl font-semibold flex flex-row items-center gap-2">
-                          <FaBookOpen size={20}/>
-                          {pub.title}
-                        </h2>
-                        <div className="w-16 h-1 bg-green-600 mt-2 items-start"></div>
-                      </div>
-                      <p className="grow">{pub.description}</p>
-                      <Link
-                        href="#"
-                        className="inline-block bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 w-fit mt-4"
-                      >
-                        READ MORE
-                      </Link>
+            {/* Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-700">
+              {resourcesData.publications.map((pub, idx) => (
+                <div 
+                  key={idx} 
+                  id={pub.id}
+                  className="group relative bg-white rounded-2xl p-8 shadow-xl border border-transparent hover:border-green-400 transition-all duration-300 hover:-translate-y-2 flex flex-col"
+                >
+                  {/* Hover Glow Effect */}
+                  <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl -z-10"></div>
+
+                  {/* Icon & Header */}
+                  <div className="flex items-start gap-5 mb-4">
+                    <div className="shrink-0 w-14 h-14 bg-green-100 text-green-700 rounded-xl flex items-center justify-center shadow-inner group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
+                      <FaBookOpen size={24}/>
                     </div>
-                  ))}
+                    <div>
+                      <h2 className="text-xl font-bold text-gray-900 leading-tight group-hover:text-green-800 transition-colors">
+                        {pub.title}
+                      </h2>
+                      <div className="w-12 h-1 bg-green-200 mt-3 group-hover:w-24 transition-all duration-500"></div>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className="grow text-gray-600 leading-relaxed mb-8 text-sm md:text-base">
+                    {pub.description}
+                  </p>
+
+                  {/* Action Bar */}
+                  <div className="mt-auto pt-6 border-t border-gray-100 flex items-center justify-between">
+                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                      {pub.id?.replace(/-/g, ' ')}
+                    </span>
+                    <Link
+                      href={pub.link || "#"}
+                      className="inline-flex items-center gap-2 text-green-700 font-bold text-sm hover:text-green-900 transition-colors group/link"
+                    >
+                      Access Document 
+                      <span className="transform group-hover/link:translate-x-1 transition-transform">→</span>
+                    </Link>
+                  </div>
                 </div>
-              );
-            })()}
+              ))}
+            </div>
           </div>
         </section>
 
         {/* --- 7. PHOTO & VIDEO GALLERY --- */}
-        <section className='bg-white pt-16' id='Gallery'>
-          <div className='max-w-5xl mx-auto px-6 py-16'>
-            <SectionHeader title="Photo & Video Gallery" icon={<FaImages size={24} />} />
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {/* Mock gallery images */}
-              <div className="relative w-full h-48 aspect-square">
-                <Image src="/ph.svg" alt="Gallery 1" fill className="rounded-lg shadow-md object-cover"/>
-              </div>
-              <div className="relative w-full h-48 aspect-square">
-                <Image src="/ph.svg" alt="Gallery 2" fill className="rounded-lg shadow-md object-cover"/>
-              </div>
-              <div className="relative w-full h-48 aspect-square">
-                <Image src="/ph.svg" alt="Gallery 3" fill className="rounded-lg shadow-md object-cover"/>
-              </div>
-              <div className="relative w-full h-48 aspect-square">
-                <Image src="/ph.svg" alt="Gallery 4" fill className="rounded-lg shadow-md object-cover"/>
-              </div>
-              <div className="relative w-full h-48 aspect-square">
-                <Image src="/ph.svg" alt="Gallery 5" fill className="rounded-lg shadow-md object-cover"/>
-              </div>
-              <div className="relative w-full h-48 aspect-square">
-                <Image src="/ph.svg" alt="Gallery 6" fill className="rounded-lg shadow-md object-cover"/>
-              </div>
-              <div className="relative w-full h-48 aspect-square">
-                <Image src="/ph.svg" alt="Gallery 7" fill className="rounded-lg shadow-md object-cover"/>
-              </div>
-              <div className="relative w-full h-48 aspect-square">
-                <Image src="/ph.svg" alt="Gallery 8" fill className="rounded-lg shadow-md object-cover"/>
-              </div>
-            </div>
-            <div className="text-center mt-8">
-              {/* <Link href="#" className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700">
-                View All on Flickr
-              </Link> */}
-            </div>
-          </div>
-        </section>
+        <ResourceSection 
+          id="Gallery" 
+          title="Photo & Video Gallery" 
+          icon={<FaImages size={24} />} 
+          data={resourcesData.gallery}
+          bgColor="bg-white"
+          renderItem={(item, idx) => {
+             // Check if the item is a video based on its type
+             const isVideo = item.type?.toLowerCase() === 'video';
+
+             return (
+               <Link 
+                 key={idx} 
+                 href={item.link || '#'} 
+                 target={isVideo ? "_blank" : undefined} // Optional: Open videos in new tab
+                 className="relative w-full aspect-square bg-gray-900 rounded-xl overflow-hidden group cursor-pointer block border border-gray-100 shadow-sm hover:shadow-md transition-all"
+               >
+                  {/* Thumbnail Image (Poster for video) */}
+                  <Image 
+                      src={item.image || "/ph.svg"} 
+                      alt={item.title} 
+                      fill 
+                      className={`object-cover transition-transform duration-700 ${isVideo ? 'group-hover:scale-105' : 'group-hover:scale-110'} opacity-90 group-hover:opacity-100`}
+                  />
+
+                  {/* VIDEO: Play Button Overlay */}
+                  {isVideo && (
+                    <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                        <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 shadow-lg group-hover:scale-110 transition-transform">
+                            <FaPlay className="text-white ml-1" size={18} />
+                        </div>
+                        {/* Corner Badge */}
+                        <div className="absolute top-3 right-3 bg-black/60 text-white text-[10px] font-bold px-2 py-1 rounded flex items-center gap-1 backdrop-blur-sm">
+                            <FaVideo size={10} /> VIDEO
+                        </div>
+                    </div>
+                  )}
+
+                  {/* Hover Overlay with Title */}
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                      <span className="text-white text-sm font-bold line-clamp-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        {item.title}
+                      </span>
+                      {item.date && <span className="text-gray-300 text-xs mt-1">{item.date}</span>}
+                  </div>
+               </Link>
+             );
+          }}
+        />
 
         {/* --- 8. DOWNLOADS --- */}
-        <section className='bg-green-50 pt-16' id='Downloads'>
-          <div className='max-w-5xl mx-auto px-6 py-16'>
-            <SectionHeader title="Downloads" icon={<FaDownload size={24} />} />
-            <div className="space-y-3">
-              {/* Download Item */}
-              <Link href="#" className="p-4 bg-white rounded-lg shadow-md flex items-center gap-4 hover:bg-gray-50 transition">
-                <FaDownload className="text-green-600 w-5 h-5" />
-                <h3 className="text-lg font-semibold text-gray-80cm"><span className="cooper">GIFON</span> Annual Report 2024</h3>
-                <span className="ml-auto text-sm text-gray-500">(PDF, 5.2MB)</span>
-              </Link>
-              {/* Download Item */}
-              {/* <Link href="#" className="p-4 bg-white rounded-lg shadow-md flex items-center gap-4 hover:bg-gray-50 transition">
-                <FaDownload className="text-green-600 w-5 h-5" />
-                <h3 className="text-lg font-semibold text-gray-800">Membership Application Form</h3>
-                <span className="ml-auto text-sm text-gray-500">(DOCX, 1.1MB)</span>
-              </Link> */}
-              {/* Download Item */}
-              <Link href="#" className="p-4 bg-white rounded-lg shadow-md flex items-center gap-4 hover:bg-gray-50 transition">
-                <FaDownload className="text-green-600 w-5 h-5" />
-                <h3 className="text-lg font-semibold text-gray-800">GeoINSIGHT Conference Brochure 2025</h3>
-                <span className="ml-auto text-sm text-gray-500">(PDF, 2.8MB)</span>
-              </Link>
-            </div>
-          </div>
-        </section>
+        <ResourceSection 
+          id="Downloads" 
+          title="Downloads" 
+          icon={<FaDownload size={24} />} 
+          data={resourcesData.downloads}
+          bgColor="bg-green-50"
+          renderItem={(item, idx) => (
+            <Link key={idx} href={item.link} className="p-4 bg-white rounded-lg shadow-md flex items-center gap-4 hover:bg-gray-50 transition group border border-gray-100">
+              <div className="bg-green-100 p-3 rounded-full text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                <FaDownload size={16} />
+              </div>
+              <div className="grow">
+                <h3 className="text-lg font-semibold text-gray-800 group-hover:text-green-700 transition-colors">{item.title}</h3>
+                <span className="text-sm text-gray-500 font-medium">{item.type} • {item.size}</span>
+              </div>
+            </Link>
+          )}
+        />
 
       </main>
     </>

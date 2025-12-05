@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { FaXTwitter, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
 import { FaSearch, FaTimes, FaBars, FaChevronDown, FaChevronRight } from "react-icons/fa";
+import SearchModal from "./SearchModal";
 
 // 1. Export Interface so wrapper can import it
 export interface MenuItem {
@@ -177,7 +178,6 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
   const rootTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
 
   const router = useRouter();
   const navRef = useRef<HTMLElement | null>(null);
@@ -197,14 +197,16 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
     closeAll();
   };
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchValue.trim()) {
-      alert(`You searched for: ${searchValue}`);
-      setSearchValue("");
-      setIsSearchOpen(false);
-    }
-  };
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -278,7 +280,13 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
                          <a key={idx} href={item.href} className={`${item.colorClass} ${item.hoverColorClass} transition-colors text-lg`}>{item.label}</a>
                     ))}
                 </div>
-                <button onClick={() => setIsSearchOpen(true)} className="text-gray-500 hover:text-green-700 transition-colors"><FaSearch size={18} /></button>
+                  <button 
+                  onClick={() => setIsSearchOpen(true)} 
+                  className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-500 transition-colors text-xs border border-transparent hover:border-gray-300"
+                >
+                  <FaSearch size={14} />
+                  <span className="hidden xl:inline">Search (⌘K)</span>
+                </button>
             </div>
 
             {/* Mobile Toggle */}
@@ -382,18 +390,10 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
       {mobileMenuOpen && ( <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={closeAll}></div> )}
 
       {/* 4. SEARCH OVERLAY */}
-      {isSearchOpen && (
-        <div className="fixed inset-0 z-60 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center p-4 animate-in fade-in duration-200">
-            <button className="absolute top-6 right-6 text-gray-500 hover:text-red-500 transition-colors" onClick={() => setIsSearchOpen(false)}><FaTimes size={32} /></button>
-            <div className="w-full max-w-2xl">
-                <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Search GIFON</h2>
-                <form onSubmit={handleSearchSubmit} className="relative">
-                    <input type="search" autoFocus value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="What are you looking for?" className="w-full text-xl md:text-2xl border-b-2 border-gray-300 py-4 pr-12 bg-transparent focus:outline-none focus:border-green-600 transition-colors placeholder-gray-400" />
-                    <button type="submit" className="absolute right-0 top-1/2 -translate-y-1/2 text-green-600 hover:text-green-800"><FaSearch size={28} /></button>
-                </form>
-            </div>
-        </div>
-      )}
+      <SearchModal 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)} 
+      />
     </header>
   );
 }

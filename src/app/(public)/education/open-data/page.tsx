@@ -10,8 +10,6 @@ import {
   FaBookOpen, 
   FaChalkboardTeacher, 
   FaNetworkWired,
-  FaCheck,
-  FaUsers
 } from 'react-icons/fa';
 
 
@@ -244,10 +242,9 @@ export default function OpenDataResearchPage() {
         </section>
 
         {/* --- Beneficiaries & Outcomes Section --- */}
-        <section id="beneficiaries-outcomes" className="py-20 px-4 bg-gray-900 text-white">
+        {/* <section id="beneficiaries-outcomes" className="py-20 px-4 bg-gray-900 text-white">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
             
-            {/* Beneficiaries */}
             <div>
               <div className="flex items-center gap-3 mb-6 border-b border-gray-700 pb-4">
                   <FaUsers size={28} className="text-green-400" />
@@ -269,7 +266,6 @@ export default function OpenDataResearchPage() {
               </ul>
             </div>
 
-            {/* Outcomes */}
             <div>
               <div className="flex items-center gap-3 mb-6 border-b border-gray-700 pb-4">
                   <FaCheck size={28} className="text-green-400" />
@@ -292,7 +288,7 @@ export default function OpenDataResearchPage() {
             </div>
 
           </div>
-        </section>
+        </section> */}
 
       </main>
     </>
