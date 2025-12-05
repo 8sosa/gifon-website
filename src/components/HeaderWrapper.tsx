@@ -70,7 +70,7 @@ export default async function HeaderWrapper() {
         ] 
     },
     { 
-        label: 'Area of Support', 
+        label: 'Areas of Support', 
         href: '/infrastructure', 
         children: [ 
             { label: 'Power and Energy', anchor: 'energy' }, 

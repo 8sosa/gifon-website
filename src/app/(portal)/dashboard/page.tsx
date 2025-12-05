@@ -1,281 +1,288 @@
-// src/app/profile/page.tsx (or wherever your portal page is)
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation'; // Import useRouter
+import { useRouter } from 'next/navigation';
 import { 
-  FaBookOpen, 
-  FaChalkboardTeacher, 
-  FaUsers, 
-  FaDownload, 
-  FaFileUpload, 
-  FaCogs, 
-  FaCreditCard,
-  FaEdit,
-  FaIdBadge
-} from 'react-icons/fa';
+  BookOpen, 
+  Video, 
+  Users, 
+  Download, 
+  FileText, 
+  Settings, 
+  CreditCard,
+  Edit3,
+  BadgeCheck,
+  Building2,
+  Calendar,
+  LogOut,
+  ChevronRight
+} from 'lucide-react';
 
-// --- 1. Define a type for our User data ---
-// This should match the data in your 'users' collection
 type User = {
   _id: string;
   name: string;
   email: string;
   organization: string;
-  avatar?: string; // Make avatar optional
-  category: string; // This is the 'membership.type'
-  // Add any other fields you need, e.g., phone
+  avatar?: string;
+  category: string;
+  createdAt?: string; 
 };
 
 const memberResources = [
   {
     title: "Publications Archive",
-    description: "Access all past issues of the GeoINSIGHT Journal and Bulletin.",
-    icon: <FaBookOpen size={24} />,
+    description: "Access issues of the GeoINSIGHT Journal and Bulletin.",
+    icon: <BookOpen className="text-white" size={24} />,
+    color: "bg-blue-600",
     href: "/resources#publications",
   },
   {
-    title: "Webinar Recordings",
-    description: "Watch recordings of all past member-only webinars and masterclasses.",
-    icon: <FaChalkboardTeacher size={24} />,
+    title: "Webinar Library",
+    description: "Watch recordings of past masterclasses and sessions.",
+    icon: <Video className="text-white" size={24} />,
+    color: "bg-purple-600",
     href: "/resources#Webinar",
   },
   {
     title: "Member Directory",
-    description: "Connect with other GIFON professionals and institutions.",
-    icon: <FaUsers size={24} />,
-    href: "/dashboard/directory", // Example of a portal-only page
+    description: "Connect with GIFON professionals and partners.",
+    icon: <Users className="text-white" size={24} />,
+    color: "bg-green-600",
+    href: "/dashboard/directory", 
   },
   {
-    title: "Downloadable Toolkits",
-    description: "Get policy briefs, research reports, and project toolkits.",
-    icon: <FaDownload size={24} />,
+    title: "Toolkits & Downloads",
+    description: "Get policy briefs, reports, and project templates.",
+    icon: <Download className="text-white" size={24} />,
+    color: "bg-orange-500",
     href: "/resources#Downloads",
   },
   {
-    title: "Submit a Paper",
-    description: "Submit your research for the next GeoINSIGHT Journal.",
-    icon: <FaFileUpload size={24} />,
+    title: "Submit Research",
+    description: "Submit a paper for the next GeoINSIGHT Journal.",
+    icon: <FileText className="text-white" size={24} />,
+    color: "bg-red-500",
     href: "/dashboard/submit",
   },
   {
     title: "Account Settings",
-    description: "Update your profile, password, and contact information.",
-    icon: <FaCogs size={24} />,
+    description: "Update your profile, password, and preferences.",
+    icon: <Settings className="text-white" size={24} />,
+    color: "bg-slate-600",
     href: "/dashboard/settings",
   },
 ];
 
 export default function MembershipPortalPage() {
-  // --- 2. Add state for user, loading, and errors ---
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  // --- 3. Add useEffect to fetch data on load ---
   useEffect(() => {
-    
-    // Optimistic load for fast UX
-    // Load the user data we saved during login
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
-      setIsLoading(false); // We have *some* data, so stop loading
+      setIsLoading(false);
     }
 
     const fetchFreshUserData = async () => {
       try {
-        // Fetch data from our '/api/users/me' endpoint
-        // No headers needed! The browser sends the httpOnly cookie automatically.
-        const res = await fetch('/api/users/me', {
-          method: 'GET',
-        });
-
+        const res = await fetch('/api/users/me', { method: 'GET' });
         if (!res.ok) {
-          // If the cookie is invalid/expired, our API will send a 401
-          // which the middleware *should* have caught, but we'll catch it here too.
-          localStorage.removeItem('user'); // Clear the bad data
-          throw new Error('Session expired or invalid. Please log in again.');
+          localStorage.removeItem('user'); 
+          throw new Error('Session expired. Please log in again.');
         }
-
         const data = await res.json();
-        setUser(data.user); // Set the fresh user state
-        
-        // Re-sync localStorage with the fresh data
+        setUser(data.user); 
         localStorage.setItem('user', JSON.stringify(data.user)); 
-
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message);
-          if (err.message.includes('Session expired')) {
-            router.push('/login');
-          }
+          if (err.message.includes('Session expired')) router.push('/login');
         } else {
           setError('An unknown error occurred.');
         }
       } finally {
-        // Only set loading to false if we didn't have storedUser
-        if (!storedUser) {
-          setIsLoading(false);
-        }
+        if (!storedUser) setIsLoading(false);
       }
     };
 
     fetchFreshUserData();
-  }, [router]); // Add router to dependency array
-  // --- 4. Add Loading and Error states ---
+  }, [router]);
+
+  // --- Handlers ---
+  const handleLogout = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try { await fetch('/api/auth/logout', { method: 'POST' }); } catch (error) { console.error(error); }
+    localStorage.removeItem('user');
+    router.push('/');
+  };
+
+  // --- Loading / Error States ---
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-xl">Loading your dashboard...</p>
+      <div className="flex justify-center items-center h-screen bg-gray-50">
+        <div className="flex flex-col items-center gap-4">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-600"></div>
+            <p className="text-gray-500 font-medium">Loading Dashboard...</p>
+        </div>
       </div>
     );
   }
 
-  if (error) {
+  if (error || !user) {
     return (
-      <div className="flex flex-col justify-center items-center h-screen text-center">
-        <p className="text-xl text-red-600">Error: {error}</p>
-        <Link href="/login" className="mt-4 text-green-600 underline">
-          Go to Login
-        </Link>
-      </div>
-    );
-  }
-  
-  // This state is in case fetching succeeds but user is null for some reason
-  if (!user) {
-    return (
-      <div className="flex flex-col justify-center items-center h-screen text-center">
-        <p className="text-xl text-red-600">Could not load user data.</p>
-        <Link href="/login" className="mt-4 text-green-600 underline">
-          Go to Login
-        </Link>
+      <div className="flex flex-col justify-center items-center h-screen text-center bg-gray-50 p-4">
+        <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-md w-full">
+            <h3 className="text-xl font-bold text-red-600 mb-2">Access Error</h3>
+            <p className="text-gray-600 mb-6">{error || "Could not load user data."}</p>
+            <Link href="/login" className="block w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition">
+                Back to Login
+            </Link>
+        </div>
       </div>
     );
   }
 
-  // --- 5. Render the page with REAL data ---
+  // --- Main Dashboard ---
   return (
-    <>
-      {/* 1. Welcome Header (Replaces HeroSection for a portal) */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold leading-tight text-gray-900">
-            Welcome, {user.name}!
-          </h1>
-          <p className="text-gray-600 mt-1">
-            This is your personal member dashboard.
-          </p>
+    <div className="min-h-screen bg-gray-50 font-sans">
+      
+      {/* 1. Top Navigation Bar (Simplified for Dashboard) */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+                <span className="font-cooper font-bold text-green-800 text-xl">GIFON</span>
+                <span className="text-gray-300 text-xl font-light">|</span>
+                <span className="text-gray-500 text-sm uppercase tracking-wider font-semibold">Member Portal</span>
+            </div>
+            <div className="flex items-center gap-4">
+                <div className="hidden md:flex flex-col items-end mr-2">
+                    <span className="text-sm font-bold text-gray-800 leading-none">{user.name}</span>
+                    <span className="text-xs text-gray-500">{user.category} Member</span>
+                </div>
+                <div className="relative w-10 h-10 rounded-full bg-gray-200 overflow-hidden border-2 border-white shadow-sm">
+                    <Image src={user.avatar || "/ph.svg"} alt="User" fill className="object-cover" />
+                </div>
+            </div>
         </div>
       </header>
 
-      {/* 2. Main Portal Content */}
-      <main className="bg-gray-100 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-4 gap-8">
+      {/* 2. Hero / Welcome Area */}
+      <div className="bg-green-900 text-white py-12 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+        <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+                <h1 className="text-3xl md:text-4xl font-bold font-cooper mb-2">Welcome back, {user.name.split(' ')[0]}!</h1>
+                <p className="text-green-200 text-lg">Here is an overview of your membership status and resources.</p>
+            </div>
+            <div className="flex gap-3">
+                <Link href="/contact-us" className="px-5 py-2.5 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-semibold backdrop-blur-sm transition-colors border border-white/10">
+                    Contact Support
+                </Link>
+                <button onClick={handleLogout} className="px-5 py-2.5 bg-red-500/20 hover:bg-red-500/30 text-red-100 rounded-lg text-sm font-semibold backdrop-blur-sm transition-colors border border-red-500/20 flex items-center gap-2">
+                    <LogOut size={16} /> Sign Out
+                </button>
+            </div>
+        </div>
+      </div>
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 -mt-8 relative z-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
-          {/* --- Sidebar (Profile & Membership) --- */}
-          <aside className="lg:col-span-1 space-y-8">
+          {/* --- LEFT: Profile & Status Card --- */}
+          <div className="lg:col-span-1 space-y-6">
             
-            {/* Profile Card */}
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <Image
-                src={user.avatar || "/ph.svg"} // Use placeholder if no avatar
-                alt="Profile Picture"
-                width={100}
-                height={100}
-                className="rounded-full mx-auto mb-4 border-4 border-green-200"
-              />
-              <h2 className="text-xl font-semibold text-gray-800">{user.name}</h2>
-              <p className="text-sm text-gray-600">{user.email}</p>
-              <p className="text-sm text-gray-600 mt-1">{user.organization}</p>
-              <Link
-                href="/dashboard/settings"
-                className="mt-4 inline-flex items-center gap-2 text-sm text-green-600 hover:underline"
-              >
-                <FaEdit />
-                Edit Profile
-              </Link>
+            {/* ID Card */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div className="h-24 bg-linear-to-r from-green-600 to-green-400 relative">
+                    <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full border-4 border-white bg-gray-100 overflow-hidden shadow-md">
+                        <Image src={user.avatar || "/ph.svg"} alt="Profile" fill className="object-cover" />
+                    </div>
+                </div>
+                <div className="pt-12 pb-6 px-6 text-center">
+                    <h2 className="text-xl font-bold text-gray-900">{user.name}</h2>
+                    <p className="text-sm text-gray-500 flex items-center justify-center gap-1 mt-1">
+                        <Building2 size={12} /> {user.organization || "No Organization"}
+                    </p>
+                    
+                    <div className="mt-6 flex justify-center gap-2">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-bold border border-green-100">
+                            <BadgeCheck size={14} /> Active
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 text-gray-600 text-xs font-medium border border-gray-100">
+                            <Calendar size={14} /> Member since {new Date(user.createdAt || Date.now()).getFullYear()}
+                        </span>
+                    </div>
+
+                    <div className="mt-6 pt-6 border-t border-gray-50 grid grid-cols-2 gap-4 text-left">
+                        <div>
+                            <p className="text-xs text-gray-400 uppercase font-bold tracking-wider">Member ID</p>
+                            <p className="text-sm font-mono text-gray-700 mt-0.5 truncate" title={user._id}>...{user._id.slice(-8)}</p>
+                        </div>
+                        <div>
+                            <p className="text-xs text-gray-400 uppercase font-bold tracking-wider">Plan</p>
+                            <p className="text-sm font-medium text-gray-700 mt-0.5">{user.category}</p>
+                        </div>
+                    </div>
+
+                    <Link href="/dashboard/settings" className="mt-6 w-full py-2.5 rounded-lg border border-gray-200 text-gray-600 text-sm font-bold hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                        <Edit3 size={16} /> Edit Profile
+                    </Link>
+                </div>
             </div>
 
-            {/* Membership Card */}
-            <div className="bg-white shadow-lg rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-800 border-b pb-2 mb-4 flex items-center gap-2">
-                <FaIdBadge className="text-green-600" />
-                Membership Status
-              </h3>
-              <ul className="space-y-2 text-sm text-gray-700">
-                <li className="flex justify-between">
-                  <span className="font-semibold">Level:</span>
-                  <span>{user.category}</span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="font-semibold">Member ID:</span>
-                  {/* We're using the MongoDB _id for now. You could create a custom one. */}
-                  <span>...{user._id.slice(-10)}</span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="font-semibold">Status:</span>
-                  <span className="font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
-                    Active
-                  </span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="font-semibold">Expires:</span>
-                  {/* You'll need to add this field to your user model to show it */}
-                  <span>TBD</span>
-                </li>
-              </ul>
-              <Link
-                href="/membership#apply" // Link to renewal section
-                className="mt-6 w-full flex items-center justify-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700 transition"
-              >
-                <FaCreditCard />
-                Renew Now
-              </Link>
+            {/* Quick Actions */}
+            <div className="bg-green-50 rounded-2xl p-6 border border-green-100">
+                <h3 className="font-bold text-green-900 mb-4 flex items-center gap-2">
+                    <CreditCard size={18} /> Renewal Status
+                </h3>
+                <p className="text-sm text-green-800/80 mb-4 leading-relaxed">
+                    Your membership is active. Renewal will be due on <span className="font-bold">Dec 31, {new Date().getFullYear()}</span>.
+                </p>
+                <button className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold text-sm transition-colors shadow-sm shadow-green-200">
+                    Renew Membership
+                </button>
             </div>
-          </aside>
 
-          {/* --- Main Content (Resources) --- */}
-          <section className="lg:col-span-3">
-            <div className="bg-white shadow-lg rounded-lg p-8">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                Your Member Resources
-              </h2>
-              
-              {/* Grid of resource cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {memberResources.map((resource) => (
+          </div>
+
+          {/* --- RIGHT: Resources Grid --- */}
+          <div className="lg:col-span-2">
+            <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                Member Resources
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {memberResources.map((resource, i) => (
                   <Link
-                    key={resource.title}
+                    key={i}
                     href={resource.href}
-                    className="block p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg hover:bg-green-50 transition-all"
+                    className="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full"
                   >
-                    <div className="flex items-start gap-4">
-                      <span className="text-green-600 mt-1">
-                        {resource.icon}
-                      </span>
-                      <div>
-                        <h4 className="text-lg font-semibold text-gray-900">
-                          {resource.title}
-                        </h4>
-                        <p className="text-sm text-gray-600 mt-1">
-                          {resource.description}
+                    <div>
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${resource.color} shadow-md group-hover:scale-110 transition-transform duration-300`}>
+                            {resource.icon}
+                        </div>
+                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">{resource.title}</h3>
+                        <p className="text-sm text-gray-500 leading-relaxed">
+                            {resource.description}
                         </p>
-                      </div>
+                    </div>
+                    <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between text-sm font-semibold text-gray-400 group-hover:text-green-600 transition-colors">
+                        <span>Access Now</span>
+                        <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>
                 ))}
-              </div>
             </div>
-          </section>
+          </div>
 
         </div>
       </main>
-    </>
+    </div>
   );
 }

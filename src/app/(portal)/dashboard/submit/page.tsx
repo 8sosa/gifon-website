@@ -1,15 +1,33 @@
-// src/app/dashboard/submit/page.tsx
-
 "use client";
 
 import { useState } from 'react';
-import { CheckCircle } from 'lucide-react';
-import HeroSection from '@/components/HeroSection'; // Assuming you want a hero
+import Link from 'next/link';
+import { 
+  CheckCircle2, 
+  UploadCloud, 
+  User, 
+  Mail, 
+  FileText, 
+  AlignLeft, 
+  Loader2, 
+  AlertCircle,
+  ArrowLeft 
+} from 'lucide-react';
+import HeroSection from '@/components/HeroSection';
 
 export default function SubmitPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setFileName(e.target.files[0].name);
+    } else {
+      setFileName(null);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,7 +56,6 @@ export default function SubmitPage() {
       const res = await fetch('/api/submissions', {
         method: 'POST',
         body: formData,
-        // No 'Content-Type' header needed, browser sets it
       });
 
       const data = await res.json();
@@ -47,9 +64,9 @@ export default function SubmitPage() {
         throw new Error(data.message || 'Something went wrong');
       }
 
-      // Success!
       setSuccessMessage(data.message);
-      form.reset(); // Clear the form
+      form.reset();
+      setFileName(null);
 
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -67,120 +84,182 @@ export default function SubmitPage() {
       <HeroSection
         title="Submit Your Work"
         description="Share your research with the GEOINT community. Submit your paper for review for the next GeoINSIGHT Journal."
-        backgroundMedia={["/bg/a.JPG"]} // Use any of your cool backgrounds
+        backgroundMedia={["/bg/a.JPG"]}
       />
 
-      <main className="w-full py-20 px-4 bg-gray-50 flex items-center justify-center">
-        <div className="max-w-2xl w-full bg-white p-8 rounded-lg shadow-md">
+      <main className="w-full py-20 px-4 bg-gray-50 flex flex-col items-center justify-center min-h-screen">
+        
+        {/* --- Back Navigation --- */}
+        <div className="w-full max-w-3xl mb-6">
+            <Link 
+              href="/dashboard" 
+              className="inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-green-700 transition-colors group"
+            >
+                <div className="p-2 bg-white rounded-full shadow-sm border border-gray-200 group-hover:border-green-200 transition-colors">
+                    <ArrowLeft size={16} /> 
+                </div>
+                Back to Dashboard
+            </Link>
+        </div>
+        
+        <div className="max-w-3xl w-full bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
           
-          {successMessage ? (
-            // --- SUCCESS STATE ---
-            <div className="flex flex-col items-center justify-center text-center py-12">
-              <CheckCircle className="text-green-600 w-16 h-16 mx-auto mb-4" />
-              <h2 className="text-2xl font-semibold text-gray-800 mb-2">Submission Received!</h2>
-              <p className="text-gray-600">
-                {successMessage}
-              </p>
-              <button
-                onClick={() => setSuccessMessage(null)} // Allow submitting another
-                className="mt-8 text-sm text-green-600 hover:underline font-medium"
-              >
-                Submit another paper
-              </button>
-            </div>
-          ) : (
-            // --- DEFAULT FORM STATE ---
-            <>
-              <h2 className="text-2xl font-semibold mb-6 text-center">Journal Submission Form</h2>
-              
-              {error && (
-                <div className="mb-4 p-3 text-sm text-red-700 bg-red-100 rounded-md border border-red-200">
-                  {error}
-                </div>
-              )}
+          {/* Header Strip */}
+          <div className="bg-green-900 px-8 py-6 text-white relative overflow-hidden">
+            {/* Subtle pattern overlay */}
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
+            <h2 className="text-2xl font-bold font-cooper relative z-10">Journal Submission Portal</h2>
+            <p className="text-green-200 text-sm mt-1 relative z-10">GeoINSIGHT: Eyes on Location</p>
+          </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="authorName" className="block text-sm font-medium text-gray-700">
-                    Author Name(s)
-                  </label>
-                  <input
-                    type="text"
-                    id="authorName"
-                    name="authorName"
-                    required
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
-                    placeholder="Dr. Fatima Bello, Prof. John Doe"
-                  />
+          <div className="p-8 md:p-10">
+            {successMessage ? (
+              // --- SUCCESS STATE ---
+              <div className="flex flex-col items-center justify-center text-center py-10 animate-in zoom-in duration-300">
+                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 shadow-sm">
+                    <CheckCircle2 className="text-green-600 w-10 h-10" />
                 </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                    Corresponding Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
-                    placeholder="you@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                    Publication Title
-                  </label>
-                  <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    required
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="abstract" className="block text-sm font-medium text-gray-700">
-                    Abstract (max 500 words)
-                  </label>
-                  <textarea
-                    id="abstract"
-                    name="abstract"
-                    rows={6}
-                    required
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="publicationFile" className="block text-sm font-medium text-gray-700">
-                    Upload Manuscript
-                  </label>
-                  <input
-                    type="file"
-                    id="publicationFile"
-                    name="publicationFile"
-                    required
-                    className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
-                    accept=".doc, .docx, .pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/pdf"
-                  />
-                  <p className="mt-1 text-xs text-gray-500">
-                    Max 10MB. Allowed formats: .pdf, .doc, .docx
-                  </p>
-                </div>
-
+                <h2 className="text-2xl font-bold text-gray-900 mb-3">Submission Received!</h2>
+                <p className="text-gray-600 max-w-md mx-auto leading-relaxed mb-8">
+                  {successMessage}. Our editorial team will review your manuscript and contact you shortly via email.
+                </p>
                 <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  onClick={() => setSuccessMessage(null)}
+                  className="px-8 py-3 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors border border-gray-200"
                 >
-                  {isLoading ? 'Submitting...' : 'Submit Paper'}
+                  Submit Another Paper
                 </button>
-              </form>
-            </>
-          )}
+              </div>
+            ) : (
+              // --- FORM STATE ---
+              <>
+                {error && (
+                  <div className="mb-8 flex items-start gap-3 bg-red-50 p-4 rounded-xl border border-red-100 text-red-700 animate-in fade-in slide-in-from-top-2">
+                    <AlertCircle size={20} className="shrink-0 mt-0.5" />
+                    <span className="text-sm font-medium">{error}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  
+                  {/* Grid for Name & Email */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-1">
+                      <label htmlFor="authorName" className="text-sm font-bold text-gray-700 ml-1">Author Name(s)</label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-3 text-gray-400" size={18} />
+                        <input
+                          type="text"
+                          id="authorName"
+                          name="authorName"
+                          required
+                          className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all placeholder:text-gray-400"
+                          placeholder="Dr. Fatima Bello..."
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1">
+                      <label htmlFor="email" className="text-sm font-bold text-gray-700 ml-1">Corresponding Email</label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-3 text-gray-400" size={18} />
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          required
+                          className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all placeholder:text-gray-400"
+                          placeholder="researcher@university.edu"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label htmlFor="title" className="text-sm font-bold text-gray-700 ml-1">Publication Title</label>
+                    <div className="relative">
+                        <FileText className="absolute left-3 top-3 text-gray-400" size={18} />
+                        <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        required
+                        className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all placeholder:text-gray-400"
+                        placeholder="Enter the full title of your paper"
+                        />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-1">
+                    <label htmlFor="abstract" className="text-sm font-bold text-gray-700 ml-1">Abstract (max 500 words)</label>
+                    <div className="relative">
+                        <div className="absolute left-3 top-3 text-gray-400"><AlignLeft size={18} /></div>
+                        <textarea
+                        id="abstract"
+                        name="abstract"
+                        rows={5}
+                        required
+                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all placeholder:text-gray-400 resize-none"
+                        placeholder="Brief summary of your research objectives and findings..."
+                        />
+                    </div>
+                  </div>
+
+                  {/* Custom File Upload Area */}
+                  <div className="space-y-1">
+                    <label className="text-sm font-bold text-gray-700 ml-1">Upload Manuscript</label>
+                    <div className="relative group">
+                        <input
+                            type="file"
+                            id="publicationFile"
+                            name="publicationFile"
+                            required
+                            onChange={handleFileChange}
+                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                            accept=".doc, .docx, .pdf"
+                        />
+                        <div className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all ${fileName ? 'border-green-500 bg-green-50' : 'border-gray-300 bg-white group-hover:bg-gray-50 group-hover:border-green-400'}`}>
+                            <div className="flex flex-col items-center justify-center gap-2">
+                                <div className={`p-3 rounded-full transition-colors ${fileName ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-500 group-hover:text-green-600 group-hover:bg-green-50'}`}>
+                                    <UploadCloud size={24} />
+                                </div>
+                                
+                                {fileName ? (
+                                    <div>
+                                        <p className="text-sm font-bold text-green-700 break-all px-4">{fileName}</p>
+                                        <p className="text-xs text-green-600 font-medium">Ready to upload</p>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <p className="text-sm font-bold text-gray-700">Click to upload or drag and drop</p>
+                                        <p className="text-xs text-gray-400 mt-1 font-medium">PDF, DOC, DOCX (Max 10MB)</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-4">
+                    <button
+                        type="submit"
+                        disabled={isLoading}
+                        className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-green-600/30 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0"
+                    >
+                        {isLoading ? (
+                        <>
+                            <Loader2 className="animate-spin" /> Submitting...
+                        </>
+                        ) : (
+                        "Submit Paper"
+                        )}
+                    </button>
+                  </div>
+
+                </form>
+              </>
+            )}
+          </div>
         </div>
       </main>
     </>

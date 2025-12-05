@@ -63,7 +63,7 @@ export default async function AboutPage() {
           
           <div className='w-full lg:w-1/2 flex flex-col items-start'>
             <div className="inline-block mb-6 text-left">
-              <span className="text-green-600 font-bold tracking-widest uppercase text-sm mb-2 block">Who We Are</span>
+              {/* <span className="text-green-600 font-bold tracking-widest uppercase text-sm mb-2 block">Who We Are</span> */}
               <h2 className="text-gray-900 text-4xl md:text-5xl font-bold cooper">
                 About GIFON
               </h2>
