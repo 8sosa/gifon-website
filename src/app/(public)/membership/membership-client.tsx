@@ -177,7 +177,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             <HeroSection
                 title="Join the Geospatial Intelligence Movement"
                 description="Connect with a powerful network of professionals, institutions, and agencies shaping Nigeria’s geospatial future."
-                backgroundMedia={["/media/Membership background.jpg"]}
+                backgroundMedia={["/media/20240418_130158.JPG"]}
             />
             
             {/* Why Join Section */}

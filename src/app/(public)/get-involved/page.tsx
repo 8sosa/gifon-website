@@ -23,9 +23,6 @@ export default function DonatePage() {
         {/* ... (Section 1 remains the same) ... */}
         <section className="py-20 px-4 bg-white">
           <div className="max-w-4xl mx-auto text-center">
-            <span className="text-green-600 font-bold tracking-wider text-sm uppercase mb-2 block">
-              Our Mission Needs You
-            </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
               Be a Catalyst for Change
             </h2>
