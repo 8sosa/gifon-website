@@ -178,7 +178,7 @@ export default function PublicationsPage() {
                     We welcome submissions from professionals, researchers, and students. Share your insights, research, or case studies with the GEOINT community.
                 </p>
                 <Link
-                    href="/contact-us"
+                    href="/dashboard/submit"
                     className="inline-block bg-green-600 text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-green-700 transition transform hover:-translate-y-1"
                 >
                     Submit Your Article

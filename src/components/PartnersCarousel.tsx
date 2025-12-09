@@ -7,39 +7,39 @@ const partners = [
   {
     name: "DGI London",
     logo: "/images/dgi.jpeg", 
-    width: 140,
-    height: 60,
+    width: 280,
+    height: 120,
   },
   {
     name: "Nigerian Air-Force",
     logo: "/images/naf.png", 
-    width: 160,
-    height: 60,
+    width: 320,
+    height: 120,
   },
   {
     name: "Defense HeadQuarters",
     logo: "/images/dhq.png",
-    width: 150,
-    height: 60,
+    width: 300,
+    height: 120,
   },
   {
     name: "Nigerian Army",
     logo: "/images/na.png",
-    width: 140,
-    height: 60,
+    width: 280,
+    height: 120,
   },
   // Duplicated for effect to ensure the scroll is long enough visually
   {
     name: "DGI London",
     logo: "/images/dgi.jpeg", 
-    width: 140,
-    height: 60,
+    width: 280,
+    height: 120,
   },
   {
     name: "Nigerian Air-Force",
     logo: "/images/naf.png", 
-    width: 160,
-    height: 60,
+    width: 320,
+    height: 120,
   },
 ];
 
