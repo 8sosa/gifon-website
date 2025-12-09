@@ -37,6 +37,7 @@ interface ModalState {
 
 // Fixed: Defined strict interface for Form Data
 interface MembershipFormData {
+  membershipType: string;
   surname: string; firstName: string; middleName: string;
   dob: string; gender: string; maritalStatus: string;
   stateOfOrigin: string; city: string; lga: string;
@@ -135,6 +136,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
 
     // Form Data State
     const [formData, setFormData] = useState<MembershipFormData>({
+        membershipType: 'Undergraduate',
         surname: '', firstName: '', middleName: '',
         dob: '', gender: '', maritalStatus: '',
         stateOfOrigin: '', city: '', lga: '',
@@ -157,7 +159,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
     });
 
     const categories: CategoryItem[] = [
-        { title: "Undergrad and Postgraduate Membership", desc: "For undergraduates and postgraduates." },
+        { title: "Student Membership", desc: "For undergraduates and postgraduates." },
         { title: "Professional Membership", desc: "For individuals in geospatial, tech, security, and related fields." },
         { title: "Institutional Membership", desc: "For universities, research institutes, and training centers." },
         { title: "Corporate Membership", desc: "For private sector organizations." },
@@ -267,6 +269,30 @@ export default function MembershipClient({ children }: { children: React.ReactNo
              <User className="text-green-600" size={20} />
              <h4 className="font-bold text-gray-800">Personal Information</h4>
           </div>
+          
+          {selectedCategory?.title === 'Student Membership' && (
+          <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
+            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Membership Type</label>
+            <div className="flex gap-6">
+              {['Undergraduate', 'Postgraduate'].map(type => (
+                <label key={type} className="flex items-center gap-2 cursor-pointer group">
+                  <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${formData.membershipType === type ? 'border-green-600 bg-white' : 'border-gray-300'}`}>
+                      {formData.membershipType === type && <div className="w-3 h-3 bg-green-600 rounded-full" />}
+                  </div>
+                  <input 
+                    type="radio" 
+                    name="membershipType" 
+                    value={type} 
+                    checked={formData.membershipType === type} 
+                    onChange={handleChange}
+                    className="hidden" 
+                  />
+                  <span className={`text-sm font-medium transition-colors ${formData.membershipType === type ? 'text-green-800' : 'text-gray-600'}`}>{type}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+          )}
     
           <div className="grid grid-cols-2 gap-4">
             <div className='space-y-1'>
@@ -333,7 +359,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 <input name="qualification" placeholder="e.g. B.Sc Geography (2019)" value={formData.qualification} onChange={handleChange} className="input-field w-full" />
             </div>
             
-            {selectedCategory?.title === 'Undergrad and Postgraduate Membership' && (
+            {selectedCategory?.title === 'Student Membership' && (
                 <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
                     <label className="text-xs font-bold text-blue-800 mb-1 block">Field of Study (Required for Students)</label>
                     <input name="fieldOfStudy" placeholder="e.g. Surveying & Geoinformatics" value={formData.fieldOfStudy} onChange={handleChange} className="input-field w-full bg-white border-blue-200" />

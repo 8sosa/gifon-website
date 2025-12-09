@@ -60,19 +60,19 @@ export default function Footer() {
           
           {/* --- Col A: Brand & Socials --- */}
           <div className="space-y-6 flex flex-col items-center justify-center h-full">
-            <div className='flex flex-col items-center justify-center'>
+            <div className='flex flex-col items-center justify-center gap-4'>
               <Link href="/" className="flex items-center gap-3 group w-fit">
                 <div className="relative w-16 h-16 grayscale group-hover:grayscale-0 transition-all duration-300">
                     <Image src="/logo.png" alt="GIFON Logo" fill className="object-contain"/>
                 </div>
                 <div className="flex flex-col cooper">
-                  <h1 className="text-5xl md:text-5xl lg:text-[4rem] font-extrabold text-white leading-none tracking-tight group-hover:text-green-500 transition-colors">GIFON</h1>
-                  <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.55rem] font-bold text-gray-500 uppercase tracking-wider group-hover:text-green-400 transition-colors">Geospatial Intelligence Foundation</span>
+                  <h1 className="text-5xl md:text-5xl lg:text-[4rem] font-extrabold text-white leading-none tracking-wider group-hover:text-green-500 transition-colors">GIFON</h1>
+                  <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.5rem] font-bold  text-gray-500 uppercase tracking-wider group-hover:text-green-400 whitespace-nowrap bellefair">Geospatial Intelligence Foundation of Nigeria</span>
                 </div>
               </Link>
 
-              <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400">
-                  Empowering Nigeria through geospatial intelligence, innovation, and strategic collaboration. Join us in shaping the future of national security and development.
+              <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400 text-center">
+                  Empowering Nigeria through geospatial intelligence, innovation, and strategic collaboration.
               </p>
 
               <div className="flex flex-wrap gap-3">
@@ -98,7 +98,7 @@ export default function Footer() {
                 
                 <div className="flex items-start gap-3 mb-8 group">
                     <FaLocationDot className="mt-1 text-green-600 shrink-0 group-hover:animate-bounce" />
-                    <address className="not-italic text-gray-400 text-sm leading-relaxed">
+                    <address className="not-italic text-gray-400 text-sm leading-relaxed text-center">
                         12 Richard Clapperton Street,<br />
                         Off Maman Nasir Street,<br />
                         Asokoro District,<br />
@@ -107,7 +107,7 @@ export default function Footer() {
                 </div>
                 
                 {/* General Inquiry (Full Width) */}
-                <div className="mb-6 flex flex-col text-xs bg-gray-900/50 p-3 rounded-lg border border-gray-800">
+                <div className="mb-6 flex flex-col text-xs bg-gray-900/50 p-3 rounded-lg border border-gray-800 text-center">
                   <span className="font-bold text-gray-300 mb-1">General Inquiries</span>
                   <a href={`mailto:info@gifon.org.ng`} className="hover:text-green-400 transition-colors text-gray-400 flex items-center gap-1.5 break-all">
                       <FaEnvelope size={12} /> info@gifon.org.ng
