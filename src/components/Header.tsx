@@ -249,7 +249,7 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
   const socialItems: MenuItem[] = [
     { label: <FaXTwitter />, href: '#', colorClass: 'text-black', hoverColorClass: 'hover:text-gray-700' },
     { label: <FaFacebookF />, href: '#', colorClass: 'text-blue-600', hoverColorClass: 'hover:text-blue-800' },
-    { label: <FaLinkedinIn />, href: '#', colorClass: 'text-blue-700', hoverColorClass: 'hover:text-blue-900' },
+    { label: <FaLinkedinIn />, href: 'https://www.linkedin.com/in/gifon-africa-53a32831a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app', colorClass: 'text-blue-700', hoverColorClass: 'hover:text-blue-900' },
   ];
 
   return (
@@ -277,7 +277,7 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
                 </div>
                 <div className="flex items-center space-x-3 text-sm">
                     {socialItems.map((item, idx) => (
-                         <a key={idx} href={item.href} className={`${item.colorClass} ${item.hoverColorClass} transition-colors text-lg`}>{item.label}</a>
+                         <a key={idx} href={item.href} target="_blank" className={`${item.colorClass} ${item.hoverColorClass} transition-colors text-lg`}>{item.label}</a>
                     ))}
                 </div>
                   <button 
@@ -382,7 +382,7 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
                       {topBarItems.map((item, idx) => ( <Link key={idx} href={item.href!} onClick={(e) => { if(item.onClick) item.onClick(e); closeAll(); }} className="text-sm font-medium text-gray-600 bg-white py-2 px-3 rounded shadow-sm text-center hover:text-green-700">{item.label}</Link> ))}
                   </div>
                   <div className="flex justify-center space-x-6">
-                      {socialItems.map((item, idx) => ( <a key={idx} href={item.href} className={`${item.colorClass} text-xl`}>{item.label}</a> ))}
+                      {socialItems.map((item, idx) => ( <a key={idx} href={item.href} target="_blank" className={`${item.colorClass} text-xl`}>{item.label}</a> ))}
                   </div>
               </div>
           </div>

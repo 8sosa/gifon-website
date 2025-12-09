@@ -11,7 +11,9 @@ import {
   AlignLeft, 
   Loader2, 
   AlertCircle,
-  ArrowLeft 
+  ArrowLeft,
+  FileDown, // Added Icon
+  ExternalLink // Added Icon
 } from 'lucide-react';
 import HeroSection from '@/components/HeroSection';
 
@@ -20,6 +22,9 @@ export default function SubmitPage() {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
+  
+  // NEW: State for guideline agreement
+  const [agreedToGuidelines, setAgreedToGuidelines] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -34,6 +39,13 @@ export default function SubmitPage() {
     setIsLoading(true);
     setError(null);
     setSuccessMessage(null);
+
+    // NEW: Validation Check for Guidelines
+    if (!agreedToGuidelines) {
+        setError('You must read and agree to the Author Submission Guidelines before submitting.');
+        setIsLoading(false);
+        return;
+    }
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -67,6 +79,7 @@ export default function SubmitPage() {
       setSuccessMessage(data.message);
       form.reset();
       setFileName(null);
+      setAgreedToGuidelines(false); // Reset checkbox
 
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -106,7 +119,6 @@ export default function SubmitPage() {
           
           {/* Header Strip */}
           <div className="bg-green-900 px-8 py-6 text-white relative overflow-hidden">
-            {/* Subtle pattern overlay */}
             <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
             <h2 className="text-2xl font-bold font-cooper relative z-10">Journal Submission Portal</h2>
             <p className="text-green-200 text-sm mt-1 relative z-10">GeoINSIGHT: Eyes on Location</p>
@@ -240,11 +252,49 @@ export default function SubmitPage() {
                     </div>
                   </div>
 
-                  <div className="pt-4">
+                  {/* --- NEW: Mandatory Guidelines Section --- */}
+                  <div className="bg-blue-50 border border-blue-100 rounded-xl p-5">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                        <div>
+                            <h4 className="font-bold text-blue-900 flex items-center gap-2">
+                                <FileText size={18} /> Author Guidelines
+                            </h4>
+                            <p className="text-xs text-blue-700/80 mt-1">Please read the submission requirements before proceeding.</p>
+                        </div>
+                        <a 
+                            href="/docs/AUTHOR SUBMISSION GUIDELINES FOR GIFON JOURNAL.pdf" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-white text-blue-700 text-sm font-bold rounded-lg border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-colors shadow-sm"
+                        >
+                            <FileDown size={16} /> Download PDF <ExternalLink size={12} className="opacity-50" />
+                        </a>
+                    </div>
+                    
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                        <div className="relative flex items-center mt-0.5">
+                            <input 
+                                type="checkbox" 
+                                checked={agreedToGuidelines}
+                                onChange={(e) => {
+                                    setAgreedToGuidelines(e.target.checked);
+                                    if(error) setError(null); // Clear error on check
+                                }}
+                                className="peer h-5 w-5 cursor-pointer appearance-none rounded border border-gray-300 bg-white transition-all checked:border-blue-600 checked:bg-blue-600 hover:border-blue-400"
+                            />
+                             <CheckCircle2 className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100" size={14} />
+                        </div>
+                        <span className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors select-none">
+                            I confirm that I have read the <b>Author Submission Guidelines</b> and formatted my manuscript accordingly.
+                        </span>
+                    </label>
+                  </div>
+
+                  <div className="pt-2">
                     <button
                         type="submit"
-                        disabled={isLoading}
-                        className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-green-600/30 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0"
+                        disabled={isLoading || !agreedToGuidelines} // Disabled if not agreed
+                        className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-green-600/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5 active:translate-y-0 disabled:transform-none disabled:shadow-none"
                     >
                         {isLoading ? (
                         <>
@@ -254,6 +304,11 @@ export default function SubmitPage() {
                         "Submit Paper"
                         )}
                     </button>
+                    {!agreedToGuidelines && (
+                        <p className="text-center text-xs text-gray-400 mt-2">
+                            Please agree to the guidelines to enable submission.
+                        </p>
+                    )}
                   </div>
 
                 </form>

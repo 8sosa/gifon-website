@@ -2,20 +2,13 @@ import HeroSection from '@/components/HeroSection';
 import { TeamGrid } from '@/components/TeamGrid';
 import { getTeamMembers } from '@/lib/contentful-queries';
 import { FlatMember } from '@/types/types';
-import { LogoCarousel, CarouselItem } from '@/components/LogoCarousel';
+import PartnersCarousel from '@/components/PartnersCarousel';
 import Image from 'next/image';
 import { 
   Target, Eye, Layers, GraduationCap, Users, Shield, Sprout, ScrollText, Database, Microscope, Megaphone, Globe, Building2, FileBadge, 
 } from 'lucide-react';
 import MotionDiv from "@/components/MotionDiv"; 
 import MotionImg from "@/components/MotionImg";
-
-const partnerLogos: CarouselItem[] = [
-  { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
-  { src: '/images/na.png', alt: 'Nigerian Army' },
-  { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
-  { src: '/images/dgi.jpeg', alt: 'DGI London', caption: 'Media Partners' },
-];
 
 function mapMembersByCategory(members: FlatMember[], category: string): FlatMember[] {
   return members.filter((member) => member.category === category);
@@ -377,12 +370,13 @@ export default async function AboutPage() {
         </section>
 
         {/* --- PARTNERS --- */}
-        <section id="our-partners" className="py-16 md:py-24 px-4 md:px-6 bg-green-200">
+        {/* <section id="our-partners" className="py-16 md:py-24 px-4 md:px-6 bg-green-200">
             <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-10 text-green-900">Our Partners</h2>
             <LogoCarousel items={partnerLogos} loopDurationMs={20000} />
             </div>
-        </section>
+        </section> */}
+            <PartnersCarousel />
         
       </main>
     </>

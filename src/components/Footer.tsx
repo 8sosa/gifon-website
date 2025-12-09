@@ -26,10 +26,10 @@ export default function Footer() {
 
   const socialLinks = [
     { name: 'X', icon: <FaXTwitter />, href: '#', hover: 'hover:bg-black hover:text-white' },
-    { name: 'LinkedIn', icon: <FaLinkedinIn />, href: '#', hover: 'hover:bg-blue-600 hover:text-white' },
+    { name: 'LinkedIn', icon: <FaLinkedinIn />, href: 'https://www.linkedin.com/in/gifon-africa-53a32831a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app', hover: 'hover:bg-blue-600 hover:text-white' },
     { name: 'Facebook', icon: <FaFacebookF />, href: '#', hover: 'hover:bg-blue-700 hover:text-white' },
-    { name: 'Youtube', icon: <FaYoutube />, href: '#', hover: 'hover:bg-red-600 hover:text-white' },
-    { name: 'Instagram', icon: <FaInstagram />, href: '#', hover: 'hover:bg-pink-600 hover:text-white' },
+    { name: 'Youtube', icon: <FaYoutube />, href: 'https://youtube.com/@gifonmedia?si=mNwfsyy0lNTpTyMP', hover: 'hover:bg-red-600 hover:text-white' },
+    { name: 'Instagram', icon: <FaInstagram />, href: 'https://www.instagram.com/gifonafrica?igsh=MWxkMno5aHMyNzhubA==', hover: 'hover:bg-pink-600 hover:text-white' },
     { name: 'Whatsapp', icon: <FaWhatsapp />, href: '#', hover: 'hover:bg-green-500 hover:text-white' },
   ];
 
@@ -59,8 +59,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           
           {/* --- Col A: Brand & Socials --- */}
-          <div className="space-y-6">
-            <div className='flex flex-col m-auto'>
+          <div className="space-y-6 flex flex-col items-center justify-center h-full">
+            <div className='flex flex-col items-center justify-center'>
               <Link href="/" className="flex items-center gap-3 group w-fit">
                 <div className="relative w-16 h-16 grayscale group-hover:grayscale-0 transition-all duration-300">
                     <Image src="/logo.png" alt="GIFON Logo" fill className="object-contain"/>
@@ -80,6 +80,7 @@ export default function Footer() {
                       <a 
                           key={link.name} 
                           href={link.href} 
+                          target="_blank"
                           className={`w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center transition-all duration-300 ${link.hover}`}
                           aria-label={`Follow us on ${link.name}`}
                       >

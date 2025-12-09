@@ -34,7 +34,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
             {m.name === leaderName && (
               <div className="mt-auto pt-2">
                 <Link 
-                    href="/docs/THE QUEST BY DR. AA USMAN-20251204111559.pdf" 
+                    href="/docs/The QUEST PDF.pdf" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="group"

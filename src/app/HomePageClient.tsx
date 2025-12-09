@@ -2,6 +2,7 @@
 
 import HeroSection from '@/components/HeroSection';
 import { LogoCarousel, CarouselItem } from '@/components/LogoCarousel';
+import PartnersCarousel from '@/components/PartnersCarousel';
 import { FlatEvent } from '@/types/types'; 
 import RevealProvider from "@/components/ui/RevealProvider";
 import Image from 'next/image';
@@ -76,17 +77,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
         </div>
       </section>
 
-      {/* --- PARTNERS SECTION --- */}
-      <section id="our-partners" className="py-16 px-4 md:px-6 bg-green-300">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-10 text-green-900 flex items-center justify-center gap-3 sen">
-            <span className="w-12 h-1 bg-green-300 rounded-full "></span>
-            Partners
-            <span className="w-12 h-1 bg-green-300 rounded-full"></span>
-          </h2>
-          <LogoCarousel items={partnerLogos} loopDurationMs={20000} />
-        </div>
-      </section>
+      <PartnersCarousel />
 
       {/* --- NEWSLETTER SECTION --- */}
       <section className="relative w-full h-[600px] flex items-center justify-center overflow-hidden group">

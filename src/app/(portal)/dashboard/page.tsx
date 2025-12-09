@@ -16,6 +16,7 @@ import {
   BadgeCheck,
   Building2,
   Calendar,
+  LayoutDashboard,
   LogOut,
   ChevronRight
 } from 'lucide-react';
@@ -27,6 +28,7 @@ type User = {
   organization: string;
   avatar?: string;
   category: string;
+  role: string;
   createdAt?: string; 
 };
 
@@ -179,7 +181,19 @@ export default function MembershipPortalPage() {
                 <h1 className="text-3xl md:text-4xl font-bold font-cooper mb-2">Welcome back, {user.name.split(' ')[0]}!</h1>
                 <p className="text-green-200 text-lg">Here is an overview of your membership status and resources.</p>
             </div>
-            <div className="flex gap-3">
+            
+            {/* UPDATED BUTTON GROUP */}
+            <div className="flex flex-wrap gap-3">
+                {/* Admin Button - Only renders if role is 'admin' */}
+                {user.role === 'admin' && (
+                    <Link 
+                        href="/admin/dashboard" 
+                        className="px-5 py-2.5 bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-100 rounded-lg text-sm font-semibold backdrop-blur-sm transition-colors border border-yellow-500/20 flex items-center gap-2"
+                    >
+                        <LayoutDashboard size={16} /> Admin Panel
+                    </Link>
+                )}
+
                 <Link href="/contact-us" className="px-5 py-2.5 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-semibold backdrop-blur-sm transition-colors border border-white/10">
                     Contact Support
                 </Link>
