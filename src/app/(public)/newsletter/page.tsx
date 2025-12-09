@@ -67,7 +67,11 @@ export default function PublicationsPage() {
     <>
       <HeroSection
         title="Eyes on Location – The GeoINSIGHT Bulletin"
-        description="Stay informed with GIFON's flagship publication, balancing deep insights on policy and technology with engaging updates from our community."
+        description={
+          <>
+            Stay informed with <span className="cooper font-bold">GIFON</span>'s flagship publication, balancing deep insights on policy and technology with engaging updates from our community.
+          </>
+      }
         ctaText="Read Latest Issue"
         ctaLink="#latest-issue"
         backgroundMedia={[
