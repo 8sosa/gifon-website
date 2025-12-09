@@ -189,51 +189,6 @@ export default function YetaPage() {
           </div>
         </section>
 
-        {/* --- Audience & Outcomes Section --- */}
-        {/* <section id="audience-outcomes" className="py-20 px-4 bg-gray-900 text-white">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
-            
-            <div>
-              <h2 className="text-3xl font-semibold mb-6 border-b border-gray-700 pb-4 inline-block">
-                  Target Audience
-              </h2>
-              <ul className="space-y-4 text-gray-300 text-lg">
-                <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                    University students and graduates (18–30 years).
-                </li>
-                <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                    Young professionals in technology, geography, and security.
-                </li>
-                <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                    Innovators, coders, and entrepreneurs with interest in GEOINT.
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-semibold mb-6 border-b border-gray-700 pb-4 inline-block">
-                  Expected Outcomes
-              </h2>
-              <div className="space-y-6">
-                  {[
-                      { l: "Skilled Youth Workforce", t: "Hundreds of young Nigerians trained annually in GEOINT." },
-                      { l: "Job Creation", t: "Employment pathways in government, private sector, and startups." },
-                      { l: "Indigenous Solutions", t: "Homegrown technologies addressing critical infrastructure sectors." },
-                      { l: "Global Exposure", t: "Nigerian youth participating in international GEOINT ecosystems." }
-                  ].map((item, i) => (
-                      <div key={i}>
-                          <h4 className="font-bold text-green-400 text-lg">{item.l}</h4>
-                          <p className="text-gray-400">{item.t}</p>
-                      </div>
-                  ))}
-              </div>
-            </div>
-          </div>
-        </section> */}
-
         {/* --- CTA Section --- */}
         <section id="join" className="py-16 px-4 bg-green-600 text-white text-center">
             <div className="max-w-3xl mx-auto">

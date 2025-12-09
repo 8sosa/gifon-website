@@ -5,8 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 type HeroSectionProps = {
-  title?: string;
-  description?: string;
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
   description1?: string | React.ReactNode;
   // Now accepts a single string OR an array of strings
   backgroundMedia?: string | string[]; 
@@ -96,14 +96,14 @@ export default function HeroSection({
         
         {/* Title: Scales from text-4xl (mobile) to text-7xl (desktop) */}
         {title && (
-          <h1 className="cooper text-white font-bold mb-4 drop-shadow-lg text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
+          <h1 className="bellefair text-white font-bold mb-4 drop-shadow-lg text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
             {title}
           </h1>
         )}
 
         {/* Description: Scales text size */}
         {description && (
-          <p className="cooper text-gray-200 text-lg sm:text-xl md:text-2xl font-light max-w-3xl mb-8 drop-shadow-md">
+          <p className="sen text-gray-200 text-lg sm:text-xl md:text-2xl font-light max-w-3xl mb-8 drop-shadow-md">
             {description}
           </p>
         )}

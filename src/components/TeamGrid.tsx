@@ -27,8 +27,8 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
                 />
             </div>
             
-            <h4 className="text-lg font-bold text-gray-900">{m.name}</h4>
-            <p className="text-sm text-green-700 font-medium mb-4">{m.role}</p>
+            <h4 className="text-lg font-bold text-gray-900 bellefair">{m.name}</h4>
+            <p className="text-sm text-green-700 font-medium mb-4 sen">{m.role}</p>
             
             {/* 2. Conditional Check for Dr. AA Usman */}
             {m.name === leaderName && (

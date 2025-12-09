@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap&?family=Bellefair&display=swap&family=Sen:wght@400..800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -7,6 +7,14 @@
 @font-face {
   font-family: "Cooper";
   src: url("/fonts/COOPBL.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bellmt";
+  src: url("/fonts/bell-mt.ttf") format("ttf");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -58,9 +66,24 @@ html, body {
   scroll-padding-top: 8rem;
 }
 
+h2 {
+  font-family: "Bellefair", serif !important;
+}
+
 .pageHead { margin-top: 8rem; }
+.bellefair {
+  font-family: "Bellefair", serif;
+  font-style: normal;
+}
+.sen {
+  font-family: "Sen", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 
 .cooper { font-family: "Cooper", sans-serif; }
+.bellmt { font-family: "Bellmt", sans-serif; }
 .bellota { font-family: "Bellota Text", sans-serif; }
 .inter { font-family: "Inter", sans-serif; }
 .montserrat { font-family: "Montserrat", sans-serif; }

@@ -13,7 +13,7 @@ export default async function People () {
   return (
         <section id="pioneer" className="py-20 px-6 bg-gray-50fullSect ">
             <div className="max-w-6xl mx-auto">
-            <h2 className="cooper text-4xl font-bold mb-8 text-center">Pioneer Members</h2>
+            <h2 className="text-4xl font-bold mb-8 text-center">Pioneer Members</h2>
             <TeamGrid members={mapMembersByCategory(members, 'Board')} />
             </div>
         </section>

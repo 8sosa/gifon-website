@@ -47,10 +47,10 @@ export default async function AboutPage() {
           {/* Background Decorative Blob */}
           <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-green-50 rounded-full blur-3xl -z-10 opacity-60 pointer-events-none"></div>
 
-          <div className="w-full lg:w-1/2 relative group top-24">
+          <div className="w-full lg:w-1/2 relative group lg:top-24">
             <div className="relative w-full h-auto rounded-3xl overflow-hidden shadow-2xl border-[6px] border-white transform transition-transform duration-500 hover:scale-[1.01]">
                 <Image
-                src="/media/Pioneer and quest.jpg" 
+                src="/media/about us.jpg" 
                 alt="Geospatial Intelligence for Nigeria"
                 width={600}
                 height={400}
@@ -64,8 +64,8 @@ export default async function AboutPage() {
           <div className='w-full lg:w-1/2 flex flex-col items-start'>
             <div className="inline-block mb-6 text-left">
               {/* <span className="text-green-600 font-bold tracking-widest uppercase text-sm mb-2 block">Who We Are</span> */}
-              <h2 className="text-gray-900 text-4xl md:text-5xl font-bold cooper">
-                About GIFON
+              <h2 className="text-gray-900 text-4xl md:text-5xl font-bold bellefair">
+                About <span className="cooper">GIFON</span>
               </h2>
               <div className="w-24 h-1.5 bg-green-600 mt-4 rounded-full"></div>
             </div>
@@ -105,7 +105,7 @@ export default async function AboutPage() {
               {/* Added Card Styling Here */}
               <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-2 h-full bg-green-500"></div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 cooper">Our Aim</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Our Aim</h2>
                 <p className="text-gray-600 leading-relaxed text-justify text-lg">
                   The aim of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is to harness the power of geospatial data and technology to drive sustainable development, enhance national security, and empower decision-making across all sectors in Nigeria. 
                   <br/><br/>
@@ -147,7 +147,7 @@ export default async function AboutPage() {
               </div>
               
               <div className="relative z-10 h-full flex flex-col">
-                <h2 className="text-3xl font-bold mb-6 flex items-center gap-4 text-green-400 cooper">
+                <h2 className="text-3xl font-bold mb-6 flex items-center gap-4 text-green-400">
                   <Target size={36} />
                   Mission
                 </h2>
@@ -169,7 +169,7 @@ export default async function AboutPage() {
               </div>
 
               <div className="relative z-10 h-full flex flex-col">
-                <h2 className="text-3xl font-bold mb-6 flex items-center gap-4 text-green-400 cooper">
+                <h2 className="text-3xl font-bold mb-6 flex items-center gap-4 text-green-400">
                   <Eye size={36} />
                   Vision
                 </h2>
@@ -188,7 +188,7 @@ export default async function AboutPage() {
         <section id="objectives" className="py-24 px-4 md:px-6 bg-linear-to-b from-white to-gray-50">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 max-w-4xl mx-auto">
-                <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 cooper">Our Objectives</h2>
+                <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">Our Objectives</h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
                 The objectives of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>), focuses on building a strong foundation for geospatial intelligence in Nigeria, addressing both technical and strategic goals. They emphasize the importance of education, collaboration, research, and application across sectors.
                 </p>
@@ -274,7 +274,7 @@ export default async function AboutPage() {
                       <div className="p-3 bg-green-50 rounded-xl text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors duration-300 shadow-sm">
                         <obj.icon size={24} />
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-700 transition-colors">{obj.title}</h3>
+                      <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-700 transition-colors sen">{obj.title}</h3>
                     </div>
                     <p className="text-gray-600 text-sm md:text-base leading-relaxed text-justify">
                       {obj.text}
@@ -289,7 +289,7 @@ export default async function AboutPage() {
         {/* --- CORE VALUES --- */}
         <section id="core-values" className="py-24 px-6 bg-linear-to-r from-gray-900 via-black to-gray-800 text-white border-t-4 border-green-600">
           <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl font-bold mb-16 cooper">Our Core Values</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-16">Our Core Values</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
@@ -357,7 +357,7 @@ export default async function AboutPage() {
                       </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-green-400 cooper">{val.title}</h3>
+                  <h3 className="text-xl font-bold text-green-400 sen">{val.title}</h3>
                   <p className="text-gray-300 text-sm leading-relaxed text-justify">{val.desc}</p>
                 </MotionDiv>
               ))}
@@ -369,40 +369,17 @@ export default async function AboutPage() {
         <section id="board-directors" className="py-24 px-4 md:px-6 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-5xl font-bold cooper text-gray-900">Board of Trustees</h2>
+                <h2 className="text-3xl md:text-5xl font-bold text-gray-900">Board of Trustees</h2>
                 <div className="w-24 h-1 bg-green-600 mx-auto mt-4 rounded-full"></div>
             </div>
             <TeamGrid members={mapMembersByCategory(members, 'Board')} />
           </div>
         </section>
 
-        {/* --- 3. THE QUEST SECTION (Moved Here) --- */}
-        {/* <section className="py-20 px-6 bg-green-50 border-t border-gray-100">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 cooper">The Quest</h2>
-            <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
-              Founded by Dr. AA Usman, <span className="cooper">GIFON</span>&apos;s quest is to ensure Nigeria is no longer &quot;blind in an era where other nations were seeing the world in sharper detail than ever before&quot;. This vision is about embedding GEOINT into the DNA of Nigeria’s governance.
-            </p>
-            <div className="flex justify-center">
-              <Link 
-                href="/docs/THE QUEST BY DR. AA USMAN-20251204111559.pdf" 
-                target="_blank" 
-                rel="noopener noreferrer" // Security best practice for new tabs
-                className="group"
-              > 
-                <button className="flex items-center gap-3 bg-green-600 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-green-700 transition-all duration-300 transform hover:-translate-y-1">
-                  <Download size={20} className="group-hover:animate-bounce" />
-                  <span>Download &quot;The Quest&quot; by Dr. AA Usman</span>
-                </button>
-              </Link>
-            </div>
-          </div>
-        </section> */}
-
         {/* --- PARTNERS --- */}
         <section id="our-partners" className="py-16 md:py-24 px-4 md:px-6 bg-green-200">
             <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-10 text-green-900 cooper">Our Partners</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-10 text-green-900">Our Partners</h2>
             <LogoCarousel items={partnerLogos} loopDurationMs={20000} />
             </div>
         </section>

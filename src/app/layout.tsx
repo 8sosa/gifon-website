@@ -23,6 +23,12 @@ const cooper = localFont({
   display: 'swap',
 });
 
+const bellmt = localFont({
+  src: 'fonts/bell-mt.ttf',
+  variable: '--font-bellmt',
+  display: 'swap',
+});
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -30,7 +36,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className={`
           ${montserrat.variable} 
           ${bellota.variable} 
-          /* ${cooper.variable} */ 
+          ${cooper.variable}
+          ${bellmt.variable}
           flex min-h-screen flex-col
         `}
       >

@@ -60,37 +60,39 @@ export default function Footer() {
           
           {/* --- Col A: Brand & Socials --- */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-3 group w-fit">
-              <div className="relative w-16 h-16 grayscale group-hover:grayscale-0 transition-all duration-300">
-                  <Image src="/logo.png" alt="GIFON Logo" fill className="object-contain"/>
-              </div>
-              <div className="flex flex-col cooper">
-                <h1 className="text-5xl md:text-5xl lg:text-[4rem] font-extrabold text-white leading-none tracking-tight group-hover:text-green-500 transition-colors">GIFON</h1>
-                <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.55rem] font-bold text-gray-500 uppercase tracking-wider group-hover:text-green-400 transition-colors">Geospatial Intelligence Foundation</span>
-              </div>
-            </Link>
+            <div className='flex flex-col m-auto'>
+              <Link href="/" className="flex items-center gap-3 group w-fit">
+                <div className="relative w-16 h-16 grayscale group-hover:grayscale-0 transition-all duration-300">
+                    <Image src="/logo.png" alt="GIFON Logo" fill className="object-contain"/>
+                </div>
+                <div className="flex flex-col cooper">
+                  <h1 className="text-5xl md:text-5xl lg:text-[4rem] font-extrabold text-white leading-none tracking-tight group-hover:text-green-500 transition-colors">GIFON</h1>
+                  <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.55rem] font-bold text-gray-500 uppercase tracking-wider group-hover:text-green-400 transition-colors">Geospatial Intelligence Foundation</span>
+                </div>
+              </Link>
 
-            <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400">
-                Empowering Nigeria through geospatial intelligence, innovation, and strategic collaboration. Join us in shaping the future of national security and development.
-            </p>
+              <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400">
+                  Empowering Nigeria through geospatial intelligence, innovation, and strategic collaboration. Join us in shaping the future of national security and development.
+              </p>
 
-            <div className="flex flex-wrap gap-3">
-                {socialLinks.map((link) => (
-                    <a 
-                        key={link.name} 
-                        href={link.href} 
-                        className={`w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center transition-all duration-300 ${link.hover}`}
-                        aria-label={`Follow us on ${link.name}`}
-                    >
-                        {link.icon}
-                    </a>
-                ))}
+              <div className="flex flex-wrap gap-3">
+                  {socialLinks.map((link) => (
+                      <a 
+                          key={link.name} 
+                          href={link.href} 
+                          className={`w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center transition-all duration-300 ${link.hover}`}
+                          aria-label={`Follow us on ${link.name}`}
+                      >
+                          {link.icon}
+                      </a>
+                  ))}
+              </div>
             </div>
           </div>
 
           {/* --- Col B: Detailed Contact Grid --- */}
           <div className="space-y-6 md:pl-8 md:border-l md:border-gray-900">
-            <div>
+            <div className='flex flex-col items-center'>
                 <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-widest border-l-2 border-green-600 pl-3">Contact Information</h4>
                 
                 <div className="flex items-start gap-3 mb-8 group">

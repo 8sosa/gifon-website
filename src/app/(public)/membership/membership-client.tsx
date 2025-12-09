@@ -1,26 +1,29 @@
+
 "use client";
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import HeroSection from '@/components/HeroSection';
-// import Link from "next/link";
 import { 
   CheckCircle, 
   X, 
   GraduationCap, 
   Briefcase, 
+  User, MapPin, Phone, Mail,
   Building2, 
   Landmark, 
   Award, 
   Users, 
   FileText, 
   ChevronRight, 
+  ChevronLeft,
+  AlertCircle,
   UploadCloud,
   Quote
 } from 'lucide-react';
 import { AiOutlineMail } from "react-icons/ai";
 import Modal from '@/components/Modal';
 
-// --- Types & Content ---
+// --- Types & Interfaces ---
 interface CategoryItem {
     title: string;
     desc: string;
@@ -30,6 +33,31 @@ interface ModalState {
   isOpen: boolean;
   content: string | null;
   title: string | null;
+}
+
+// Fixed: Defined strict interface for Form Data
+interface MembershipFormData {
+  membershipType: string;
+  surname: string; firstName: string; middleName: string;
+  dob: string; gender: string; maritalStatus: string;
+  stateOfOrigin: string; city: string; lga: string;
+  address: string; phone: string; email: string;
+  occupation: string; institution: string; qualification: string; fieldOfStudy: string;
+  guarantorName: string; guarantorPhone: string;
+  background: {
+    [key: string]: string; 
+    tuberculosis: string;
+    mentalDisorder: string;
+    criminalRecord: string;
+    pendingCharges: string;
+    militaryService: string;
+  };
+  files: {
+    nationalId: File | null;
+    certs: File | null;
+    cv: File | null;
+  };
+  agreedToDeclaration: boolean;
 }
 
 const forumContent = {
@@ -95,12 +123,40 @@ const forumContent = {
 }
 
 export default function MembershipClient({ children }: { children: React.ReactNode }) {
+    // UI States
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [modalData, setModalData] = useState<ModalState>({ isOpen: false, content: null, title: null });
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState<CategoryItem | null>(null);
     const [isModalSubmitted, setIsModalSubmitted] = useState(false);
+    
+    // Wizard State
+    const [currentStep, setCurrentStep] = useState(1);
+
+    // Form Data State
+    const [formData, setFormData] = useState<MembershipFormData>({
+        membershipType: 'Regular',
+        surname: '', firstName: '', middleName: '',
+        dob: '', gender: '', maritalStatus: '',
+        stateOfOrigin: '', city: '', lga: '',
+        address: '', phone: '', email: '',
+        occupation: '', institution: '', qualification: '', fieldOfStudy: '',
+        guarantorName: '', guarantorPhone: '',
+        background: {
+          tuberculosis: 'No',
+          mentalDisorder: 'No',
+          criminalRecord: 'No',
+          pendingCharges: 'No',
+          militaryService: 'No',
+        },
+        files: {
+          nationalId: null,
+          certs: null,
+          cv: null
+        },
+        agreedToDeclaration: false
+    });
 
     const categories: CategoryItem[] = [
         { title: "Student Membership", desc: "For undergraduates and postgraduates." },
@@ -111,7 +167,6 @@ export default function MembershipClient({ children }: { children: React.ReactNo
         { title: "Fellow/Honorary Membership", desc: "For distinguished leaders and contributors." },
     ];
 
-    // Helper to get icon based on index/title for visual flair
     const getCategoryIcon = (index: number) => {
         const icons = [GraduationCap, Briefcase, Building2, Building2, Landmark, Award];
         const Icon = icons[index] || Users;
@@ -119,12 +174,14 @@ export default function MembershipClient({ children }: { children: React.ReactNo
     };
 
     // --- Handlers ---
+
     const openDocModal = (content: string, title: string) => setModalData({ isOpen: true, content, title });
     const closeDocModal = () => setModalData({ isOpen: false, content: null, title: null });
 
     const handleApplyClick = (category: CategoryItem) => {
         setSelectedCategory(category);
         setIsModalOpen(true);
+        setCurrentStep(1); // Reset to step 1 on open
     };
 
     const handleCloseAppModal = () => {
@@ -135,32 +192,64 @@ export default function MembershipClient({ children }: { children: React.ReactNo
         setError(null);
     };
 
+    // Fixed: Properly typed change handler
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+        if (error) setError(null); 
+    };
+
+    const handleBackgroundChange = (key: string, value: string) => {
+        setFormData(prev => ({
+          ...prev,
+          background: { ...prev.background, [key]: value }
+        }));
+    };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, key: keyof MembershipFormData['files']) => {
+        if (e.target.files && e.target.files[0]) {
+            setFormData(prev => ({
+                ...prev,
+                files: { ...prev.files, [key]: e.target.files![0] }
+            }));
+        }
+    };
+
+    // const nextStep = () => setCurrentStep(prev => prev + 1);
+    // const prevStep = () => setCurrentStep(prev => prev - 1);
+
     const handleModalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
         setError(null);
-
-        const form = e.currentTarget;
-        const fileInput = form.elements.namedItem('upload') as HTMLInputElement;
-        const file = fileInput.files ? fileInput.files[0] : null;
-
-        if (!file) {
-            setError('A file upload is required.');
-            setIsLoading(false);
-            return;
+    
+        const submissionData = new FormData();
+    
+        // Append text fields
+        Object.entries(formData).forEach(([key, value]) => {
+            if (key !== 'files' && key !== 'background' && key !== 'agreedToDeclaration') {
+                submissionData.append(key, value as string);
+            }
+        });
+    
+        // Append Background
+        Object.entries(formData.background).forEach(([key, value]) => {
+            submissionData.append(`background_${key}`, value);
+        });
+    
+        // Append Files
+        if (formData.files.nationalId) submissionData.append('nationalId', formData.files.nationalId);
+        if (formData.files.certs) submissionData.append('certs', formData.files.certs);
+        if (formData.files.cv) submissionData.append('cv', formData.files.cv);
+    
+        if (selectedCategory) {
+            submissionData.append('category', selectedCategory.title);
         }
-        if (file.size > 1024 * 1024 * 5) { 
-            setError('File is too large. Please upload under 5MB.');
-            setIsLoading(false);
-            return;
-        }
-
-        const formData = new FormData(form);
-
+    
         try {
             const res = await fetch('/api/auth/apply', {
                 method: 'POST',
-                body: formData, 
+                body: submissionData,
             });
             const result = await res.json();
             if (!res.ok) throw new Error(result.message || 'Something went wrong');
@@ -170,6 +259,277 @@ export default function MembershipClient({ children }: { children: React.ReactNo
         } finally {
             setIsLoading(false);
         }
+    };
+
+    // --- RENDER STEPS ---
+
+    const renderStep1 = () => (
+        <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+          <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+             <User className="text-green-600" size={20} />
+             <h4 className="font-bold text-gray-800">Personal Information</h4>
+          </div>
+          
+          <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
+            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Membership Type</label>
+            <div className="flex gap-6">
+              {['Regular', 'Student'].map(type => (
+                <label key={type} className="flex items-center gap-2 cursor-pointer group">
+                  <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${formData.membershipType === type ? 'border-green-600 bg-white' : 'border-gray-300'}`}>
+                      {formData.membershipType === type && <div className="w-3 h-3 bg-green-600 rounded-full" />}
+                  </div>
+                  <input 
+                    type="radio" 
+                    name="membershipType" 
+                    value={type} 
+                    checked={formData.membershipType === type} 
+                    onChange={handleChange}
+                    className="hidden" 
+                  />
+                  <span className={`text-sm font-medium transition-colors ${formData.membershipType === type ? 'text-green-800' : 'text-gray-600'}`}>{type}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+    
+          <div className="grid grid-cols-2 gap-4">
+            <div className='space-y-1'>
+                <label className="text-xs font-semibold text-gray-500">Surname <span className='text-red-500'>*</span></label>
+                <input name="surname" value={formData.surname} onChange={handleChange} className="input-field" placeholder="Doe" />
+            </div>
+            <div className='space-y-1'>
+                <label className="text-xs font-semibold text-gray-500">First Name <span className='text-red-500'>*</span></label>
+                <input name="firstName" value={formData.firstName} onChange={handleChange} className="input-field" placeholder="Jane" />
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-4">
+            <div className='space-y-1'>
+                <label className="text-xs font-semibold text-gray-500">Date of Birth <span className='text-red-500'>*</span></label>
+                <input name="dob" type="date" value={formData.dob} onChange={handleChange} className="input-field" />
+            </div>
+            <div className='space-y-1'>
+                <label className="text-xs font-semibold text-gray-500">Gender <span className='text-red-500'>*</span></label>
+                <select name="gender" value={formData.gender} onChange={handleChange} className="input-field">
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                </select>
+            </div>
+          </div>
+    
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <div className="relative">
+                <Mail className="absolute left-3 top-2.5 text-gray-400" size={16} />
+                <input name="email" type="email" placeholder="Email Address" value={formData.email} onChange={handleChange} className="input-field pl-10" />
+             </div>
+             <div className="relative">
+                <Phone className="absolute left-3 top-2.5 text-gray-400" size={16} />
+                <input name="phone" type="tel" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="input-field pl-10" />
+             </div>
+          </div>
+    
+          <div className="relative">
+            <MapPin className="absolute left-3 top-2.5 text-gray-400" size={16} />
+            <input name="address" placeholder="Contact Address" value={formData.address} onChange={handleChange} className="input-field pl-10 w-full" />
+          </div>
+        </div>
+      );
+    
+      const renderStep2 = () => (
+        <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+           <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+             <Briefcase className="text-green-600" size={20} />
+             <h4 className="font-bold text-gray-800">Education & Profession</h4>
+          </div>
+
+          <div className="space-y-4">
+            <div>
+                <label className="text-xs font-semibold text-gray-500 mb-1 block">Current Occupation</label>
+                <input name="occupation" placeholder="e.g. GIS Analyst" value={formData.occupation} onChange={handleChange} className="input-field w-full" />
+            </div>
+            <div>
+                <label className="text-xs font-semibold text-gray-500 mb-1 block">Institution / Organization</label>
+                <input name="institution" placeholder="e.g. University of Lagos" value={formData.institution} onChange={handleChange} className="input-field w-full" />
+            </div>
+            <div>
+                <label className="text-xs font-semibold text-gray-500 mb-1 block">Highest Qualification</label>
+                <input name="qualification" placeholder="e.g. B.Sc Geography (2019)" value={formData.qualification} onChange={handleChange} className="input-field w-full" />
+            </div>
+            
+            {formData.membershipType === 'Student' && (
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                    <label className="text-xs font-bold text-blue-800 mb-1 block">Field of Study (Required for Students)</label>
+                    <input name="fieldOfStudy" placeholder="e.g. Surveying & Geoinformatics" value={formData.fieldOfStudy} onChange={handleChange} className="input-field w-full bg-white border-blue-200" />
+                </div>
+            )}
+          </div>
+        </div>
+      );
+    
+      const renderStep3 = () => (
+        <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+           <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+             <AlertCircle className="text-green-600" size={20} />
+             <h4 className="font-bold text-gray-800">Background Check</h4>
+          </div>
+
+          <div className="bg-gray-50 p-4 rounded-xl space-y-3 max-h-60 overflow-y-auto pr-2 custom-scrollbar border border-gray-100">
+            {[
+              { key: 'tuberculosis', label: 'History of Tuberculosis (Last 3 years)?' },
+              { key: 'mentalDisorder', label: 'Physical/Mental disorder requiring service?' },
+              { key: 'criminalRecord', label: 'Criminal offence (charged/convicted)?' },
+              { key: 'militaryService', label: 'Military/Police/Security Service?' },
+            ].map((item) => (
+              <div key={item.key} className="flex justify-between items-start md:items-center bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                <span className="text-sm text-gray-700 font-medium">{item.label}</span>
+                <div className="flex gap-4 ml-4 shrink-0">
+                  <label className="flex items-center gap-1 cursor-pointer">
+                      <input type="radio" className="accent-green-600" checked={formData.background[item.key] === 'Yes'} onChange={() => handleBackgroundChange(item.key, 'Yes')} /> 
+                      <span className="text-sm">Yes</span>
+                  </label>
+                  <label className="flex items-center gap-1 cursor-pointer">
+                      <input type="radio" className="accent-green-600" checked={formData.background[item.key] === 'No'} onChange={() => handleBackgroundChange(item.key, 'No')} /> 
+                      <span className="text-sm">No</span>
+                  </label>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="pt-4 border-t border-gray-100">
+            <h4 className="font-bold text-gray-800 text-sm mb-3">Guarantor Details</h4>
+            <div className="grid grid-cols-2 gap-4">
+                <input name="guarantorName" placeholder="Guarantor Name" value={formData.guarantorName} onChange={handleChange} className="input-field" />
+                <input name="guarantorPhone" placeholder="Guarantor Phone" value={formData.guarantorPhone} onChange={handleChange} className="input-field" />
+            </div>
+          </div>
+        </div>
+      );
+    
+      const renderStep4 = () => (
+        <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+           <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+             <UploadCloud className="text-green-600" size={20} />
+             <h4 className="font-bold text-gray-800">Required Attachments</h4>
+          </div>
+
+          <div className="space-y-3">
+            {[
+                { id: 'nationalId', label: "National ID / Int'l Passport", req: true },
+                { id: 'certs', label: "Educational/Professional Certificates", req: false },
+                { id: 'cv', label: "Curriculum Vitae", req: false }
+            ].map((file) => (
+                <div key={file.id} className="group relative border-2 border-dashed border-gray-200 hover:border-green-400 bg-gray-50 hover:bg-green-50/30 rounded-xl p-4 transition-all">
+                <label className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 cursor-pointer">
+                    <div className="flex items-center gap-3">
+                        <div className="bg-white p-2 rounded-full shadow-sm text-green-600">
+                            <FileText size={20} />
+                        </div>
+                        <div>
+                            <p className="text-sm font-bold text-gray-800">{file.label} {file.req && <span className="text-red-500">*</span>}</p>
+                            <p className="text-xs text-gray-400">
+                                {formData.files[file.id as keyof MembershipFormData['files']] 
+                                ? <span className="text-green-600 font-medium">File Selected: {formData.files[file.id as keyof MembershipFormData['files']]?.name}</span> 
+                                : "Max size 5MB (PDF/JPG)"}
+                            </p>
+                        </div>
+                    </div>
+                    <input 
+                        type="file" 
+                        onChange={(e) => handleFileChange(e, file.id as keyof MembershipFormData['files'])}
+                        className="hidden" // Hiding default input
+                    />
+                    <span className="bg-white border border-gray-200 text-gray-600 text-xs font-bold px-3 py-1.5 rounded-lg group-hover:bg-green-600 group-hover:text-white transition-colors">
+                        Choose File
+                    </span>
+                </label>
+                </div>
+            ))}
+          </div>
+        </div>
+      );
+    
+      const renderStep5 = () => (
+        <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+           <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+             <CheckCircle className="text-green-600" size={20} />
+             <h4 className="font-bold text-gray-800">Declaration</h4>
+          </div>
+
+          <div className="bg-orange-50 p-5 rounded-xl border border-orange-100 text-sm text-gray-800 leading-relaxed shadow-inner">
+            <p className="font-bold mb-3 flex items-center gap-2 text-orange-800">
+                <AlertCircle size={16} /> I understand that:
+            </p>
+            <ul className="list-disc pl-5 space-y-2 text-gray-700 text-xs md:text-sm">
+               <li>Any false statement shall be grounds for immediate rejection or termination.</li>
+               <li>Membership of GIFON is a privilege, not a right.</li>
+               <li>I pledge to abide by the Code of Ethics and Decisions of GIFON.</li>
+            </ul>
+          </div>
+          
+          <label className="flex items-start gap-4 p-4 border-2 border-transparent hover:border-green-100 rounded-xl cursor-pointer hover:bg-green-50/30 transition bg-gray-50">
+            <input 
+              type="checkbox" 
+              checked={formData.agreedToDeclaration}
+              onChange={(e) => setFormData(prev => ({...prev, agreedToDeclaration: e.target.checked}))}
+              className="mt-1 w-5 h-5 accent-green-600 rounded focus:ring-green-500 border-gray-300 shrink-0" 
+            />
+            <span className="text-sm text-gray-600 font-medium select-none">
+              I hereby declare that the information provided is true and I agree to the terms above.
+            </span>
+          </label>
+        </div>
+      );
+
+      // --- Validation Logic ---
+    const validateStep = (step: number): boolean => {
+        if (step === 1) {
+            // Check Name, Email, Phone, DOB, Gender
+            if (!formData.surname || !formData.firstName) {
+                setError("Please enter your full name.");
+                return false;
+            }
+            if (!formData.email || !formData.phone) {
+                setError("Please provide valid contact details.");
+                return false;
+            }
+            if (!formData.dob || !formData.gender) {
+                setError("Date of birth and gender are required.");
+                return false;
+            }
+        }
+        
+        if (step === 2) {
+             // Basic professional check
+             if (!formData.occupation && !formData.institution) {
+                 setError("Please provide your current occupation or institution.");
+                 return false;
+             }
+        }
+
+        if (step === 4) {
+            // Require National ID at minimum
+            if (!formData.files.nationalId) {
+                setError("Please upload your National ID or Passport.");
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    // Updated Next/Prev Handlers
+    const nextStep = () => {
+        if (validateStep(currentStep)) {
+            setError(null); // Clear errors on success
+            setCurrentStep(prev => prev + 1);
+        }
+    };
+
+    const prevStep = () => {
+        setError(null); // Clear errors when going back
+        setCurrentStep(prev => prev - 1);
     };
 
     return (
@@ -420,13 +780,26 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                         className="relative w-full max-w-lg bg-white shadow-2xl rounded-2xl flex flex-col max-h-[90vh] overflow-hidden"
                         onClick={(e) => e.stopPropagation()} 
                     >
-                        {/* Modal Header */}
+                        {/* Header */}
                         <div className="bg-gray-50 px-6 py-5 border-b border-gray-100 flex justify-between items-center">
                              <div>
                                 <h3 className="text-xl font-bold text-gray-800">
                                     {isModalSubmitted ? "Application Received" : "Join GIFON"}
                                 </h3>
-                                {!isModalSubmitted && <p className="text-sm text-gray-500">Applying for: <span className="font-semibold text-green-600">{selectedCategory.title}</span></p>}
+                                {!isModalSubmitted && (
+                                    <div className="flex flex-col md:flex-row md:items-center gap-2 text-sm text-gray-500 mt-1">
+                                        <span className="font-semibold text-green-600">{selectedCategory.title}</span>
+                                        <span className="bg-gray-200 px-2 py-0.5 rounded-full text-xs text-gray-700">Step {currentStep}/5</span>
+                                    </div>
+                                )}
+                                {!isModalSubmitted && (
+                                    <div className="w-full bg-gray-200 h-1.5 mt-1">
+                                        <div 
+                                            className="h-full bg-green-600 transition-all duration-500 ease-out"
+                                            style={{ width: `${(currentStep / 5) * 100}%` }}
+                                        ></div>
+                                    </div>
+                                )}
                              </div>
                              <button 
                                 onClick={handleCloseAppModal}
@@ -436,8 +809,8 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                             </button>
                         </div>
 
-                        {/* Modal Body */}
-                        <div className="p-6 overflow-y-auto">
+                        {/* Body */}
+                        <div className="p-6 overflow-y-auto flex-1">
                             {isModalSubmitted ? (
                                 <div className="flex flex-col items-center justify-center text-center py-10">
                                     <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 animate-in zoom-in duration-300">
@@ -447,64 +820,58 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                                     <p className="text-gray-600 mb-8 max-w-xs mx-auto">
                                         Your application has been submitted securely. We will review your documents and contact you shortly.
                                     </p>
-                                    <button
-                                        onClick={handleCloseAppModal}
-                                        className="w-full bg-gray-900 text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition font-bold"
-                                    >
+                                    <button onClick={handleCloseAppModal} className="w-full bg-gray-900 text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition font-bold">
                                         Close Window
                                     </button>
                                 </div>
                             ) : (
-                                <form className="space-y-5" onSubmit={handleModalSubmit}>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div className="space-y-1">
-                                            <label htmlFor="name" className="text-sm font-bold text-gray-700">Full Name</label>
-                                            <input type="text" id="name" name="name" required className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all outline-none" placeholder="Jane Doe" />
-                                        </div>
-                                        <div className="space-y-1">
-                                            <label htmlFor="phone" className="text-sm font-bold text-gray-700">Phone</label>
-                                            <input type="tel" id="phone" name="phone" required className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all outline-none" placeholder="+234..." />
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="space-y-1">
-                                        <label htmlFor="email" className="text-sm font-bold text-gray-700">Email Address</label>
-                                        <input type="email" id="email" name="email" required className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all outline-none" placeholder="jane@example.com" />
-                                    </div>
-                                    
-                                    <div className="space-y-1">
-                                        <label htmlFor="organization" className="text-sm font-bold text-gray-700">Organization</label>
-                                        <input type="text" id="organization" name="organization" className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all outline-none" placeholder="University or Company Name" />
-                                    </div>
-                                    
-                                    <input type="hidden" name="category" value={selectedCategory.title} />
-
-                                    <div className="bg-blue-50 border border-blue-100 p-4 rounded-xl space-y-2">
-                                        <label htmlFor="upload" className="flex items-center gap-2 text-sm font-bold text-blue-800">
-                                            <UploadCloud size={18} /> Upload Supporting Document
-                                        </label>
-                                        <input 
-                                            type="file" 
-                                            id="upload" 
-                                            name="upload" 
-                                            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-white file:text-blue-700 hover:file:bg-blue-50 cursor-pointer"
-                                        />
-                                        <p className="text-xs text-blue-600/70">Max size: 5MB. PDF, JPG, or PNG.</p>
+                                <form onSubmit={handleModalSubmit} className="flex flex-col h-full">
+                                    {/* Render the Active Step */}
+                                    <div className="flex-1">
+                                        {currentStep === 1 && renderStep1()}
+                                        {currentStep === 2 && renderStep2()}
+                                        {currentStep === 3 && renderStep3()}
+                                        {currentStep === 4 && renderStep4()}
+                                        {currentStep === 5 && renderStep5()}
                                     </div>
 
+                                    {/* Error Message */}
                                     {error && (
-                                        <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-100">
+                                        <div className="mt-4 flex items-center gap-2 text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-100">
                                             <X size={16} /> {error}
                                         </div>
                                     )}
-                                    
-                                    <button 
-                                        type="submit" 
-                                        disabled={isLoading}
-                                        className="w-full bg-green-600 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-green-600/30 hover:-translate-y-0.5 active:translate-y-0"
-                                    >
-                                        {isLoading ? 'Processing Application...' : 'Submit Application'}
-                                    </button>
+
+                                    {/* Navigation Buttons */}
+                                    <div className="flex gap-3 mt-8 pt-4 border-t border-gray-100">
+                                        {currentStep > 1 && (
+                                          <button 
+                                            type="button" 
+                                            onClick={prevStep}
+                                            className="flex-1 py-3.5 rounded-xl font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition flex items-center justify-center gap-2"
+                                          >
+                                            <ChevronLeft size={18} /> Back
+                                          </button>
+                                        )}
+                                        
+                                        {currentStep < 5 ? (
+                                          <button 
+                                            type="button" 
+                                            onClick={nextStep}
+                                            className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2"
+                                          >
+                                            Next <ChevronRight size={18} />
+                                          </button>
+                                        ) : (
+                                          <button 
+                                            type="submit"
+                                            disabled={isLoading || !formData.agreedToDeclaration}
+                                            className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                          >
+                                             {isLoading ? 'Processing...' : 'Submit Application'}
+                                          </button>
+                                        )}
+                                    </div>
                                 </form>
                             )}
                         </div>
@@ -518,6 +885,24 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 title={modalData.title}
                 content={modalData.content}
             />
+
+            {/* Helper Styles for Input Fields to keep JSX clean */}
+            <style jsx>{`
+                .input-field {
+                width: 100%;
+                padding: 10px 16px;
+                background-color: #f9fafb; /* bg-gray-50 */
+                border: 1px solid #e5e7eb; /* border-gray-200 */
+                border-radius: 0.5rem; /* rounded-lg */
+                transition: all 0.2s;
+                outline: none;
+                }
+                .input-field:focus {
+                background-color: white;
+                border-color: transparent;
+                box-shadow: 0 0 0 2px #22c55e; /* ring-green-500 */
+                }
+            `}</style>
         </>
     );
 }

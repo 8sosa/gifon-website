@@ -77,7 +77,7 @@ export default function ForumsPage() {
             <div className="text-center max-w-4xl mx-auto mb-16">
               <h2 className="text-sm font-bold text-green-600 uppercase tracking-widest mb-3">Our Ecosystem</h2>
               <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-                Collaboration Drives <span className="cooper text-green-700">Innovation</span>
+                Collaboration Drives <span className="bellefair text-green-700">Innovation</span>
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed">
                 The <span className="cooper">GIFON</span> Groups & Forums serve as structured communities of practice where professionals, institutions, researchers, and enthusiasts can learn, engage, and innovate together. We believe that collective intelligence drives national progress.

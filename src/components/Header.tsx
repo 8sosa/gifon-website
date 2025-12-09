@@ -262,9 +262,9 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
               <div className="relative w-12 h-12 md:w-16 md:h-16 mr-3 transition-transform group-hover:scale-105">
                   <Image src="/logo.png" alt="Gifon" fill className="object-contain"/>
               </div>
-              <div className="flex flex-col justify-center cooper">
-                <h1 className="text-5xl md:text-5xl lg:text-[4rem] font-extrabold text-green-700 leading-none">GIFON</h1>
-                <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.5rem] font-bold text-green-800 uppercase tracking-tight whitespace-nowrap">Geospatial Intelligence Foundation of Nigeria</span>
+              <div className="flex flex-col justify-center">
+                <h1 className="text-5xl md:text-5xl lg:text-[4rem] font-extrabold text-green-700 leading-none cooper">GIFON</h1>
+                <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.5rem] font-bold text-green-800 uppercase tracking-tight whitespace-nowrap bellefair">Geospatial Intelligence Foundation of Nigeria</span>
               </div>
             </Link>
 
@@ -272,7 +272,7 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
             <div className="hidden lg:flex items-center space-x-6">
                 <div className="flex items-center space-x-4 text-sm font-medium text-gray-600 border-r border-gray-300 pr-4">
                     {topBarItems.map((item, idx) => (
-                        <Link key={idx} href={item.href!} onClick={item.onClick} className="hover:text-green-700 transition-colors">{item.label}</Link>
+                        <Link key={idx} href={item.href!} onClick={item.onClick} className="hover:text-green-700 transition-colors bellefair">{item.label}</Link>
                     ))}
                 </div>
                 <div className="flex items-center space-x-3 text-sm">
@@ -318,7 +318,7 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
                             <Link
                                 href={item.href ?? "#"}
                                 className={`
-                                    flex items-center py-3 px-3 text-[0.5rem] xl:text-[0.7rem] font-bold uppercase tracking-wide transition-colors cooper
+                                    flex items-center py-3 px-3 text-[0.5rem] xl:text-[0.7rem] font-bold uppercase tracking-wide transition-colors bellefair
                                     ${isOpen ? "text-green-300" : "text-gray-200 hover:text-green-300"}
                                 `}
                                 onClick={closeAll}

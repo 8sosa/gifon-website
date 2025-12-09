@@ -88,7 +88,7 @@ export default function EducationPage() {
             {/* Left: Text Content */}
             <div className="w-full lg:w-1/2 space-y-6">
                <div className="inline-block">
-                  <h2 className="text-3xl md:text-5xl font-bold text-gray-900 cooper">
+                  <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
                     Training
                   </h2>
                </div>
@@ -142,7 +142,7 @@ export default function EducationPage() {
           <div className="max-w-7xl mx-auto">
             
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 cooper mb-4">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                 Our Programmes
               </h2>
               <p className="max-w-2xl mx-auto text-gray-600">
@@ -195,7 +195,7 @@ export default function EducationPage() {
            <div className="absolute top-0 right-0 w-1/2 h-full bg-green-600/10 rounded-l-full blur-3xl pointer-events-none"></div>
 
            <div className="max-w-5xl mx-auto relative z-10 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 cooper">Talent Development</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Talent Development</h2>
               <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
                 Beyond specific programmes, <span className="cooper text-white">GIFON</span> is dedicated to the holistic development of geospatial talent in Nigeria. We are building a robust pipeline of GEOINT professionals ready to meet the challenges of tomorrow.
               </p>

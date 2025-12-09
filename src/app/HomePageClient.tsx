@@ -48,7 +48,11 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
   return (
     <RevealProvider>
       <HeroSection
-        title="Geospatial Intelligence Foundation of Nigeria (GIFON)"
+        title={
+        <>
+          Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>)
+        </>
+        }
         description='Source • Analyze • Automate • Share'
         backgroundMedia={[
           '/bg/e.jpeg',
@@ -63,7 +67,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
       {/* --- SECTORS CAROUSEL --- */}
       <section id="sectors-carousel" className="py-16 bg-white overflow-hidden border-b border-gray-100">
         <div className="max-w-7xl mx-auto mb-10 px-6 text-center">
-           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Critical Infrastructure Support</h2>
+           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 bellefair">Critical Infrastructure Support</h2>
         </div>
         <div className="relative py-4">
             <div className="absolute inset-y-0 left-0 w-24 bg-linear-to-r from-white to-transparent z-10 pointer-events-none"></div>
@@ -75,8 +79,8 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
       {/* --- PARTNERS SECTION --- */}
       <section id="our-partners" className="py-16 px-4 md:px-6 bg-green-300">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-10 text-green-900 flex items-center justify-center gap-3">
-            <span className="w-12 h-1 bg-green-300 rounded-full"></span>
+          <h2 className="text-3xl font-bold mb-10 text-green-900 flex items-center justify-center gap-3 sen">
+            <span className="w-12 h-1 bg-green-300 rounded-full "></span>
             Partners
             <span className="w-12 h-1 bg-green-300 rounded-full"></span>
           </h2>
@@ -144,7 +148,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left space-y-6">
               <div>
                   <h2 className="text-green-400 font-bold uppercase tracking-widest text-sm mb-2">Community</h2>
-                  <h3 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+                  <h3 className="text-3xl md:text-5xl font-bold text-white leading-tight bellefair">
                     Get Involved
                   </h3>
               </div>
@@ -165,7 +169,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
       {/* --- COMMUNITY HUB --- */}
       <section className="bg-gray-50 py-20 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Community Hub</h2>
+            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 bellefair">Community Hub</h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
@@ -173,7 +177,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 flex flex-col hover:-translate-y-2 transition-transform duration-300">
                 <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 bg-blue-50 text-blue-600 rounded-xl"><Share2 size={24} /></div>
-                    <h3 className="text-2xl font-bold text-gray-800">Connect</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 bellefair">Connect</h3>
                 </div>
                 <p className="text-gray-500 mb-6">Follow <span className="cooper">GIFON</span> on social media for real-time updates.</p>
                 <div className="grid grid-cols-5 gap-2 mt-auto">
@@ -195,7 +199,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 flex flex-col hover:-translate-y-2 transition-transform duration-300">
                 <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 bg-green-50 text-green-600 rounded-xl"><Newspaper size={24} /></div>
-                    <h3 className="text-2xl font-bold text-gray-800">Latest News</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 bellefair">Latest News</h3>
                 </div>
                 <div className="flex-1 flex flex-col items-center justify-center text-center p-6 border-2 border-dashed border-gray-100 rounded-2xl bg-gray-50/50">
                     <Newspaper className="text-gray-300 mb-2" size={40} />
@@ -207,7 +211,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 flex flex-col hover:-translate-y-2 transition-transform duration-300">
                 <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 bg-purple-50 text-purple-600 rounded-xl"><Calendar size={24} /></div>
-                    <h3 className="text-2xl font-bold text-gray-800">Events</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 bellefair">Events</h3>
                 </div>
                 {upcomingEvents.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-16 bg-white rounded-3xl border border-dashed border-gray-300">

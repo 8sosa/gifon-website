@@ -11,6 +11,7 @@ const config = {
           sans: ["var(--font-montserrat)", "sans-serif"],
           bellota: ["var(--font-bellota)", "cursive"],
           cooper: ["var(--font-cooper)", "serif"],
+          bellmt: ["var(--font-bellmt)", "serif"],
         },
       },
     },
