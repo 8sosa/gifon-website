@@ -72,7 +72,7 @@ export default function Footer() {
               </Link>
 
               <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400 text-center">
-                  Empowering Nigeria through geospatial intelligence, innovation, and strategic collaboration.
+                Mapping the future empowering the nation.
               </p>
 
               <div className="flex flex-wrap gap-3">

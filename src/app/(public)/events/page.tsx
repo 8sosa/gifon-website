@@ -183,12 +183,7 @@ export default async function EventsPage() {
         title="Events & Outreach"
         description="Connecting the community through conferences, workshops, and development programmes."
         backgroundMedia={[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
-          "/bg/b.JPG",
-          "/bg/c.JPG",
-          "/bg/d.JPG",
-          "/ph.svg",
+          "/media/resources/20120308_092350.JPG",
         ]}
       />
 

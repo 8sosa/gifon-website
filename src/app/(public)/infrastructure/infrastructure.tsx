@@ -96,7 +96,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaLandmark size={24} />,
     summary: 'Mapping, monitoring, and securing federal/state government facilities.',
     description: `Map, monitor, and secure federal/state government facilities. Support continuity of government planning using spatial risk assessments. Provide GEOINT for the protection of national monuments, heritage sites, and strategic assets.`,
-    image: '/media/Public Administration.jpg',
+    image: '/media/GOVERNMENT.jpg',
     highlights: [
       'Map, monitor, and secure federal/state government facilities.',
       'Support continuity of government planning using spatial risk assessments.',

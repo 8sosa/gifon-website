@@ -126,7 +126,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
               <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 group">
                 <div className="absolute inset-0 bg-green-500/20 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
                 <video 
-                  src="/vids/vid1.mp4" 
+                  src="/media/WhatsApp Video 2025-09-26 at 11.00.50_27df64d8.mp4" 
                   autoPlay 
                   loop 
                   muted 

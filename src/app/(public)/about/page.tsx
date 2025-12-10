@@ -28,7 +28,7 @@ export default async function AboutPage() {
         title="About Us"
         description='Aim • Mission • Vision'
         backgroundMedia={[
-          '/media/AIM.jpg'
+          '/media/about background.jpg'
         ]}
       />
       
@@ -369,14 +369,7 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        {/* --- PARTNERS --- */}
-        {/* <section id="our-partners" className="py-16 md:py-24 px-4 md:px-6 bg-green-200">
-            <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-10 text-green-900">Our Partners</h2>
-            <LogoCarousel items={partnerLogos} loopDurationMs={20000} />
-            </div>
-        </section> */}
-            <PartnersCarousel />
+        <PartnersCarousel />
         
       </main>
     </>

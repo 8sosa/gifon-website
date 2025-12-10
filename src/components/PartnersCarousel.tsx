@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+// import React from "react";
 import Image from "next/image";
 
 const partners = [
@@ -19,27 +19,14 @@ const partners = [
   {
     name: "Defense HeadQuarters",
     logo: "/images/dhq.png",
-    width: 300,
-    height: 120,
+    width: 600,
+    height: 300,
   },
   {
     name: "Nigerian Army",
     logo: "/images/na.png",
-    width: 280,
-    height: 120,
-  },
-  // Duplicated for effect to ensure the scroll is long enough visually
-  {
-    name: "DGI London",
-    logo: "/images/dgi.jpeg", 
-    width: 280,
-    height: 120,
-  },
-  {
-    name: "Nigerian Air-Force",
-    logo: "/images/naf.png", 
-    width: 320,
-    height: 120,
+    width: 500,
+    height: 250,
   },
 ];
 

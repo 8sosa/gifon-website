@@ -42,7 +42,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
                     {/* I adjusted the padding slightly (px-6 py-2) so it fits nicely in the card */}
                     <button className="flex items-center gap-2 bg-green-600 text-white px-6 py-2.5 rounded-full font-bold text-xs shadow-lg hover:bg-green-700 transition-all duration-300 transform hover:-translate-y-1">
                     <Download size={16} className="group-hover:animate-bounce" />
-                    <span>Download &quot;The Quest&quot;</span>
+                    <span>Read &quot;The Quest&quot;</span>
                     </button>
                 </Link>
               </div>
