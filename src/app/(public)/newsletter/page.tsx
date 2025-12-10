@@ -81,12 +81,7 @@ export default function PublicationsPage() {
         ctaText="Read Latest Issue"
         ctaLink="#latest-issue"
         backgroundMedia={[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
-          "/bg/b.JPG",
-          "/bg/c.JPG",
-          "/bg/d.JPG",
-          "/ph.svg",
+          "/media/eye.jpeg",
         ]}
       />
 
