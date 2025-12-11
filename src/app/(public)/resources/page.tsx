@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from 'react';
 import HeroSection from '@/components/HeroSection';
 import Link from 'next/link';
 import { JSX } from 'react';
@@ -14,6 +17,7 @@ import {
   FaVideo,
   FaCalendarAlt
 } from "react-icons/fa";
+import { X } from 'lucide-react';
 
 // --- 1. TYPE DEFINITIONS (Fixes the "never" errors) ---
 
@@ -30,19 +34,6 @@ interface ResourceItem {
 }
 
 import resourcesData from './resources';
-// --- 2. DATA SOURCE ---
-// We explicitly type this object as ': ResourcesData' so TS knows what the empty arrays contain.
-// const resourcesData: ResourcesData = {
-//     news: [], // Empty to trigger "No news yet"
-//     press: [],
-//     podcasts: [],
-//     webinars: [],
-//     gallery: [],
-//     downloads: [],
-//     publications: []
-// };
-
-// --- 3. REUSABLE COMPONENTS ---
 
 const SectionHeader = ({ title, icon }: { title: string, icon: JSX.Element }) => (
   <div className="inline-block mb-8 text-left">
@@ -95,6 +86,11 @@ const ResourceSection = ({
 };
 
 export default function ResourcesPage() {
+  // 1. State for the Lightbox
+  const [selectedImage, setSelectedImage] = useState<any | null>(null);
+
+  // Helper to close modal
+  const closeLightbox = () => setSelectedImage(null);
   return (
     <>
       <HeroSection
@@ -321,17 +317,24 @@ export default function ResourcesPage() {
           data={resourcesData.gallery}
           bgColor="bg-white"
           renderItem={(item, idx) => {
-             // Check if the item is a video based on its type
              const isVideo = item.type?.toLowerCase() === 'video';
 
              return (
-               <Link 
+               <div 
                  key={idx} 
-                 href={item.link || '#'} 
-                 target={isVideo ? "_blank" : undefined} // Optional: Open videos in new tab
+                 // 2. Click Handler Logic
+                 onClick={() => {
+                    if (isVideo) {
+                        // If video, open link in new tab
+                        if (item.link) window.open(item.link, "_blank");
+                    } else {
+                        // If image, open modal
+                        setSelectedImage(item);
+                    }
+                 }}
                  className="relative w-full aspect-square bg-gray-900 rounded-xl overflow-hidden group cursor-pointer block border border-gray-100 shadow-sm hover:shadow-md transition-all"
                >
-                  {/* Thumbnail Image (Poster for video) */}
+                  {/* Thumbnail Image */}
                   <Image 
                       src={item.image || "/ph.svg"} 
                       alt={item.title} 
@@ -345,7 +348,6 @@ export default function ResourcesPage() {
                         <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 shadow-lg group-hover:scale-110 transition-transform">
                             <FaPlay className="text-white ml-1" size={18} />
                         </div>
-                        {/* Corner Badge */}
                         <div className="absolute top-3 right-3 bg-black/60 text-white text-[10px] font-bold px-2 py-1 rounded flex items-center gap-1 backdrop-blur-sm">
                             <FaVideo size={10} /> VIDEO
                         </div>
@@ -359,10 +361,10 @@ export default function ResourcesPage() {
                       </span>
                       {item.date && <span className="text-gray-300 text-xs mt-1">{item.date}</span>}
                   </div>
-               </Link>
+               </div>
              );
           }}
-        />
+      />
 
         {/* --- 8. DOWNLOADS --- */}
         <ResourceSection 
@@ -385,6 +387,43 @@ export default function ResourcesPage() {
         />
 
       </main>
+      {/* 3. LIGHTBOX MODAL */}
+      {selectedImage && (
+        <div 
+            className="fixed inset-0 z-100 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+            onClick={closeLightbox} // Close when clicking background
+        >
+            {/* Close Button */}
+            <button 
+                onClick={closeLightbox}
+                className="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all z-50"
+            >
+                <X size={32} />
+            </button>
+
+            {/* Image Container */}
+            <div 
+                className="relative w-full max-w-5xl h-auto max-h-[85vh] flex flex-col items-center"
+                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image itself
+            >
+                <div className="relative w-full h-[70vh] md:h-[80vh]">
+                    <Image 
+                        src={selectedImage.image || "/ph.svg"} 
+                        alt={selectedImage.title} 
+                        fill 
+                        className="object-contain"
+                        priority
+                    />
+                </div>
+                
+                {/* Caption */}
+                <div className="mt-4 text-center">
+                    <h3 className="text-white text-lg font-bold">{selectedImage.title}</h3>
+                    {selectedImage.date && <p className="text-gray-400 text-sm">{selectedImage.date}</p>}
+                </div>
+            </div>
+        </div>
+      )}
     </>
   );
 }

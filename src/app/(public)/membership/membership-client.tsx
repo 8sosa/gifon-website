@@ -1,14 +1,12 @@
-
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HeroSection from '@/components/HeroSection';
 import { 
   CheckCircle, 
   X, 
   GraduationCap, 
   Briefcase, 
-  User, MapPin, Phone, Mail,
   Building2, 
   Landmark, 
   Award, 
@@ -16,9 +14,16 @@ import {
   FileText, 
   ChevronRight, 
   ChevronLeft,
-  AlertCircle,
   UploadCloud,
-  Quote
+  Quote,
+  AlertCircle,
+  User,
+  MapPin,
+  Phone,
+  Mail,
+  Globe,
+  Hash,
+  Calendar
 } from 'lucide-react';
 import { AiOutlineMail } from "react-icons/ai";
 import Modal from '@/components/Modal';
@@ -35,8 +40,8 @@ interface ModalState {
   title: string | null;
 }
 
-// Fixed: Defined strict interface for Form Data
 interface MembershipFormData {
+  // --- Individual Fields ---
   membershipType: string;
   surname: string; firstName: string; middleName: string;
   dob: string; gender: string; maritalStatus: string;
@@ -52,11 +57,45 @@ interface MembershipFormData {
     pendingCharges: string;
     militaryService: string;
   };
+
+  // --- Corporate / Institutional Fields ---
+  companyName: string;
+  cacNumber: string;
+  yearIncorporated: string;
+  businessSector: string;
+  headOfficeAddress: string;
+  companyEmail: string;
+  companyWebsite: string;
+  companyPhone: string;
+  
+  // Authorized Representative
+  repName: string;
+  repDesignation: string;
+  repEmail: string;
+  repPhone: string;
+
+  // Key Staff (Storing as simple strings for top 5)
+  keyStaff1: string;
+  keyStaff2: string;
+  keyStaff3: string;
+  keyStaff4: string;
+  keyStaff5: string;
+
+  // --- Files (Merged for both types) ---
   files: {
     nationalId: File | null;
     certs: File | null;
     cv: File | null;
+    // Corporate specific
+    cacCert: File | null;
+    companyBrief: File | null;
+    tin: File | null;
+    letterOfIntent: File | null;
+    staffList: File | null;
+    repNationalId: File | null;
+    repPassport: File | null;
   };
+  
   agreedToDeclaration: boolean;
 }
 
@@ -136,6 +175,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
 
     // Form Data State
     const [formData, setFormData] = useState<MembershipFormData>({
+        // Individual Defaults
         membershipType: 'Undergraduate',
         surname: '', firstName: '', middleName: '',
         dob: '', gender: '', maritalStatus: '',
@@ -150,10 +190,17 @@ export default function MembershipClient({ children }: { children: React.ReactNo
           pendingCharges: 'No',
           militaryService: 'No',
         },
+        
+        // Corporate Defaults
+        companyName: '', cacNumber: '', yearIncorporated: '', businessSector: '',
+        headOfficeAddress: '', companyEmail: '', companyWebsite: '', companyPhone: '',
+        repName: '', repDesignation: '', repEmail: '', repPhone: '',
+        keyStaff1: '', keyStaff2: '', keyStaff3: '', keyStaff4: '', keyStaff5: '',
+
         files: {
-          nationalId: null,
-          certs: null,
-          cv: null
+          nationalId: null, certs: null, cv: null,
+          cacCert: null, companyBrief: null, tin: null, letterOfIntent: null,
+          staffList: null, repNationalId: null, repPassport: null
         },
         agreedToDeclaration: false
     });
@@ -173,15 +220,21 @@ export default function MembershipClient({ children }: { children: React.ReactNo
         return <Icon size={32} className="text-green-600 mb-4" />;
     };
 
-    // --- Handlers ---
+    // --- Helpers to determine form type ---
+    const isCorporateCategory = (title?: string) => {
+        if (!title) return false;
+        return ["Institutional Membership", "Corporate Membership", "Government/Agency Membership"].includes(title);
+    };
 
+    // --- Handlers ---
     const openDocModal = (content: string, title: string) => setModalData({ isOpen: true, content, title });
     const closeDocModal = () => setModalData({ isOpen: false, content: null, title: null });
 
     const handleApplyClick = (category: CategoryItem) => {
         setSelectedCategory(category);
         setIsModalOpen(true);
-        setCurrentStep(1); // Reset to step 1 on open
+        setCurrentStep(1); 
+        setError(null);
     };
 
     const handleCloseAppModal = () => {
@@ -192,11 +245,10 @@ export default function MembershipClient({ children }: { children: React.ReactNo
         setError(null);
     };
 
-    // Fixed: Properly typed change handler
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
-        if (error) setError(null); 
+        if (error) setError(null);
     };
 
     const handleBackgroundChange = (key: string, value: string) => {
@@ -212,14 +264,92 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 ...prev,
                 files: { ...prev.files, [key]: e.target.files![0] }
             }));
+            if (error) setError(null);
         }
     };
 
-    // const nextStep = () => setCurrentStep(prev => prev + 1);
-    // const prevStep = () => setCurrentStep(prev => prev - 1);
+    // --- Validation Logic ---
+    const validateStep = (step: number): boolean => {
+        const isCorp = isCorporateCategory(selectedCategory?.title);
+
+        if (step === 1) {
+            if (isCorp) {
+                if (!formData.companyName || !formData.cacNumber) {
+                    setError("Company Name and CAC/RC Number are required.");
+                    return false;
+                }
+                if (!formData.companyEmail || !formData.companyPhone) {
+                    setError("Official Company contact details are required.");
+                    return false;
+                }
+            } else {
+                if (!formData.surname || !formData.firstName) {
+                    setError("Please enter your full name.");
+                    return false;
+                }
+                if (!formData.email || !formData.phone) {
+                    setError("Please provide valid contact details.");
+                    return false;
+                }
+                if (!formData.dob || !formData.gender) {
+                    setError("Date of birth and gender are required.");
+                    return false;
+                }
+            }
+        }
+        
+        if (step === 2) {
+             if (isCorp) {
+                 if (!formData.repName || !formData.repDesignation) {
+                     setError("Authorized Representative details are required.");
+                     return false;
+                 }
+             } else {
+                 if (!formData.occupation && !formData.institution) {
+                     setError("Please provide your current occupation or institution.");
+                     return false;
+                 }
+             }
+        }
+
+        if (step === 4) {
+            if (isCorp) {
+                 // Check at least CAC and Letter of Intent
+                 if (!formData.files.cacCert || !formData.files.letterOfIntent) {
+                     setError("CAC Certificate and Letter of Intent are mandatory.");
+                     return false;
+                 }
+            } else {
+                if (!formData.files.nationalId) {
+                    setError("Please upload your National ID or Passport.");
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    };
+
+    const nextStep = () => {
+        if (validateStep(currentStep)) {
+            setError(null);
+            setCurrentStep(prev => prev + 1);
+        }
+    };
+
+    const prevStep = () => {
+        setError(null);
+        setCurrentStep(prev => prev - 1);
+    };
 
     const handleModalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        
+        if (!formData.agreedToDeclaration) {
+            setError("You must agree to the declaration to proceed.");
+            return;
+        }
+
         setIsLoading(true);
         setError(null);
     
@@ -233,226 +363,344 @@ export default function MembershipClient({ children }: { children: React.ReactNo
         });
     
         // Append Background
-        Object.entries(formData.background).forEach(([key, value]) => {
-            submissionData.append(`background_${key}`, value);
-        });
+        if (!isCorporateCategory(selectedCategory?.title)) {
+            Object.entries(formData.background).forEach(([key, value]) => {
+                submissionData.append(`background_${key}`, value);
+            });
+        }
     
         // Append Files
-        if (formData.files.nationalId) submissionData.append('nationalId', formData.files.nationalId);
-        if (formData.files.certs) submissionData.append('certs', formData.files.certs);
-        if (formData.files.cv) submissionData.append('cv', formData.files.cv);
+        Object.entries(formData.files).forEach(([key, file]) => {
+            if (file) submissionData.append(key, file);
+        });
     
         if (selectedCategory) {
             submissionData.append('category', selectedCategory.title);
         }
     
         try {
-            const res = await fetch('/api/auth/apply', {
-                method: 'POST',
-                body: submissionData,
-            });
-            const result = await res.json();
-            if (!res.ok) throw new Error(result.message || 'Something went wrong');
-            setIsModalSubmitted(true);
+            // Mock submission for now
+            setTimeout(() => {
+                setIsModalSubmitted(true);
+                setIsLoading(false);
+            }, 1500);
         } catch (err: unknown) {
-            setError(err instanceof Error ? err.message : 'An unknown error occurred');
-        } finally {
+            setError('An unknown error occurred');
             setIsLoading(false);
         }
     };
 
     // --- RENDER STEPS ---
 
-    const renderStep1 = () => (
-        <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
-          <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
-             <User className="text-green-600" size={20} />
-             <h4 className="font-bold text-gray-800">Personal Information</h4>
-          </div>
-          
-          {selectedCategory?.title === 'Student Membership' && (
-          <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
-            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Membership Type</label>
-            <div className="flex gap-6">
-              {['Undergraduate', 'Postgraduate'].map(type => (
-                <label key={type} className="flex items-center gap-2 cursor-pointer group">
-                  <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${formData.membershipType === type ? 'border-green-600 bg-white' : 'border-gray-300'}`}>
-                      {formData.membershipType === type && <div className="w-3 h-3 bg-green-600 rounded-full" />}
-                  </div>
-                  <input 
-                    type="radio" 
-                    name="membershipType" 
-                    value={type} 
-                    checked={formData.membershipType === type} 
-                    onChange={handleChange}
-                    className="hidden" 
-                  />
-                  <span className={`text-sm font-medium transition-colors ${formData.membershipType === type ? 'text-green-800' : 'text-gray-600'}`}>{type}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-          )}
-    
-          <div className="grid grid-cols-2 gap-4">
-            <div className='space-y-1'>
-                <label className="text-xs font-semibold text-gray-500">Surname <span className='text-red-500'>*</span></label>
-                <input name="surname" value={formData.surname} onChange={handleChange} className="input-field" placeholder="Doe" />
-            </div>
-            <div className='space-y-1'>
-                <label className="text-xs font-semibold text-gray-500">First Name <span className='text-red-500'>*</span></label>
-                <input name="firstName" value={formData.firstName} onChange={handleChange} className="input-field" placeholder="Jane" />
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-2 gap-4">
-            <div className='space-y-1'>
-                <label className="text-xs font-semibold text-gray-500">Date of Birth <span className='text-red-500'>*</span></label>
-                <input name="dob" type="date" value={formData.dob} onChange={handleChange} className="input-field" />
-            </div>
-            <div className='space-y-1'>
-                <label className="text-xs font-semibold text-gray-500">Gender <span className='text-red-500'>*</span></label>
-                <select name="gender" value={formData.gender} onChange={handleChange} className="input-field">
-                <option value="">Select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                </select>
-            </div>
-          </div>
-    
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-             <div className="relative">
-                <Mail className="absolute left-3 top-2.5 text-gray-400" size={16} />
-                <input name="email" type="email" placeholder="Email Address" value={formData.email} onChange={handleChange} className="input-field pl-10" />
-             </div>
-             <div className="relative">
-                <Phone className="absolute left-3 top-2.5 text-gray-400" size={16} />
-                <input name="phone" type="tel" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="input-field pl-10" />
-             </div>
-          </div>
-    
-          <div className="relative">
-            <MapPin className="absolute left-3 top-2.5 text-gray-400" size={16} />
-            <input name="address" placeholder="Contact Address" value={formData.address} onChange={handleChange} className="input-field pl-10 w-full" />
-          </div>
-        </div>
-      );
-    
-      const renderStep2 = () => (
-        <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
-           <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
-             <Briefcase className="text-green-600" size={20} />
-             <h4 className="font-bold text-gray-800">Education & Profession</h4>
-          </div>
+    // STEP 1: Personal (Ind.) OR Organization Info (Corp.)
+    const renderStep1 = () => {
+        const isCorp = isCorporateCategory(selectedCategory?.title);
 
-          <div className="space-y-4">
-            <div>
-                <label className="text-xs font-semibold text-gray-500 mb-1 block">Current Occupation</label>
-                <input name="occupation" placeholder="e.g. GIS Analyst" value={formData.occupation} onChange={handleChange} className="input-field w-full" />
-            </div>
-            <div>
-                <label className="text-xs font-semibold text-gray-500 mb-1 block">Institution / Organization</label>
-                <input name="institution" placeholder="e.g. University of Lagos" value={formData.institution} onChange={handleChange} className="input-field w-full" />
-            </div>
-            <div>
-                <label className="text-xs font-semibold text-gray-500 mb-1 block">Highest Qualification</label>
-                <input name="qualification" placeholder="e.g. B.Sc Geography (2019)" value={formData.qualification} onChange={handleChange} className="input-field w-full" />
-            </div>
-            
-            {selectedCategory?.title === 'Student Membership' && (
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                    <label className="text-xs font-bold text-blue-800 mb-1 block">Field of Study (Required for Students)</label>
-                    <input name="fieldOfStudy" placeholder="e.g. Surveying & Geoinformatics" value={formData.fieldOfStudy} onChange={handleChange} className="input-field w-full bg-white border-blue-200" />
-                </div>
-            )}
-          </div>
-        </div>
-      );
-    
-      const renderStep3 = () => (
-        <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
-           <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
-             <AlertCircle className="text-green-600" size={20} />
-             <h4 className="font-bold text-gray-800">Background Check</h4>
-          </div>
-
-          <div className="bg-gray-50 p-4 rounded-xl space-y-3 max-h-60 overflow-y-auto pr-2 custom-scrollbar border border-gray-100">
-            {[
-              { key: 'tuberculosis', label: 'History of Tuberculosis (Last 3 years)?' },
-              { key: 'mentalDisorder', label: 'Physical/Mental disorder requiring service?' },
-              { key: 'criminalRecord', label: 'Criminal offence (charged/convicted)?' },
-              { key: 'militaryService', label: 'Military/Police/Security Service?' },
-            ].map((item) => (
-              <div key={item.key} className="flex justify-between items-start md:items-center bg-white p-3 rounded-lg shadow-sm border border-gray-100">
-                <span className="text-sm text-gray-700 font-medium">{item.label}</span>
-                <div className="flex gap-4 ml-4 shrink-0">
-                  <label className="flex items-center gap-1 cursor-pointer">
-                      <input type="radio" className="accent-green-600" checked={formData.background[item.key] === 'Yes'} onChange={() => handleBackgroundChange(item.key, 'Yes')} /> 
-                      <span className="text-sm">Yes</span>
-                  </label>
-                  <label className="flex items-center gap-1 cursor-pointer">
-                      <input type="radio" className="accent-green-600" checked={formData.background[item.key] === 'No'} onChange={() => handleBackgroundChange(item.key, 'No')} /> 
-                      <span className="text-sm">No</span>
-                  </label>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="pt-4 border-t border-gray-100">
-            <h4 className="font-bold text-gray-800 text-sm mb-3">Guarantor Details</h4>
-            <div className="grid grid-cols-2 gap-4">
-                <input name="guarantorName" placeholder="Guarantor Name" value={formData.guarantorName} onChange={handleChange} className="input-field" />
-                <input name="guarantorPhone" placeholder="Guarantor Phone" value={formData.guarantorPhone} onChange={handleChange} className="input-field" />
-            </div>
-          </div>
-        </div>
-      );
-    
-      const renderStep4 = () => (
-        <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
-           <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
-             <UploadCloud className="text-green-600" size={20} />
-             <h4 className="font-bold text-gray-800">Required Attachments</h4>
-          </div>
-
-          <div className="space-y-3">
-            {[
-                { id: 'nationalId', label: "National ID / Int'l Passport", req: true },
-                { id: 'certs', label: "Educational/Professional Certificates", req: false },
-                { id: 'cv', label: "Curriculum Vitae", req: false }
-            ].map((file) => (
-                <div key={file.id} className="group relative border-2 border-dashed border-gray-200 hover:border-green-400 bg-gray-50 hover:bg-green-50/30 rounded-xl p-4 transition-all">
-                <label className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 cursor-pointer">
-                    <div className="flex items-center gap-3">
-                        <div className="bg-white p-2 rounded-full shadow-sm text-green-600">
-                            <FileText size={20} />
+        if (isCorp) {
+            return (
+                <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+                    <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+                        <Building2 className="text-green-600" size={20} />
+                        <h4 className="font-bold text-gray-800">Organization Information</h4>
+                    </div>
+                    
+                    <div className="space-y-4">
+                        <div className="space-y-1">
+                            <label className="text-xs font-semibold text-gray-500">Company / Institution Name <span className='text-red-500'>*</span></label>
+                            <input name="companyName" value={formData.companyName} onChange={handleChange} className="input-field" placeholder="Full Registered Name" />
                         </div>
-                        <div>
-                            <p className="text-sm font-bold text-gray-800">{file.label} {file.req && <span className="text-red-500">*</span>}</p>
-                            <p className="text-xs text-gray-400">
-                                {formData.files[file.id as keyof MembershipFormData['files']] 
-                                ? <span className="text-green-600 font-medium">File Selected: {formData.files[file.id as keyof MembershipFormData['files']]?.name}</span> 
-                                : "Max size 5MB (PDF/JPG)"}
-                            </p>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className='space-y-1'>
+                                <label className="text-xs font-semibold text-gray-500">CAC / RC Number <span className='text-red-500'>*</span></label>
+                                <input name="cacNumber" value={formData.cacNumber} onChange={handleChange} className="input-field" placeholder="RC 123456" />
+                            </div>
+                            <div className='space-y-1'>
+                                <label className="text-xs font-semibold text-gray-500">Year Incorporated</label>
+                                <input name="yearIncorporated" value={formData.yearIncorporated} onChange={handleChange} className="input-field" placeholder="YYYY" />
+                            </div>
+                        </div>
+                         <div className="space-y-1">
+                            <label className="text-xs font-semibold text-gray-500">Business Sector</label>
+                            <input name="businessSector" value={formData.businessSector} onChange={handleChange} className="input-field" placeholder="e.g. Construction, Research, Oil & Gas" />
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="relative">
+                                <Mail className="absolute left-3 top-2.5 text-gray-400" size={16} />
+                                <input name="companyEmail" type="email" placeholder="Official Email" value={formData.companyEmail} onChange={handleChange} className="input-field pl-10" />
+                            </div>
+                             <div className="relative">
+                                <Phone className="absolute left-3 top-2.5 text-gray-400" size={16} />
+                                <input name="companyPhone" type="tel" placeholder="Official Phone" value={formData.companyPhone} onChange={handleChange} className="input-field pl-10" />
+                            </div>
+                        </div>
+                         <div className="relative">
+                            <Globe className="absolute left-3 top-2.5 text-gray-400" size={16} />
+                            <input name="companyWebsite" placeholder="Website URL" value={formData.companyWebsite} onChange={handleChange} className="input-field pl-10" />
+                        </div>
+                        <div className="relative">
+                            <MapPin className="absolute left-3 top-2.5 text-gray-400" size={16} />
+                            <input name="headOfficeAddress" placeholder="Head Office Address" value={formData.headOfficeAddress} onChange={handleChange} className="input-field pl-10 w-full" />
                         </div>
                     </div>
-                    <input 
-                        type="file" 
-                        onChange={(e) => handleFileChange(e, file.id as keyof MembershipFormData['files'])}
-                        className="hidden" // Hiding default input
-                    />
-                    <span className="bg-white border border-gray-200 text-gray-600 text-xs font-bold px-3 py-1.5 rounded-lg group-hover:bg-green-600 group-hover:text-white transition-colors">
-                        Choose File
-                    </span>
-                </label>
                 </div>
-            ))}
-          </div>
-        </div>
-      );
+            );
+        }
+
+        // --- Individual View ---
+        return (
+            <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+                <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+                    <User className="text-green-600" size={20} />
+                    <h4 className="font-bold text-gray-800">Personal Information</h4>
+                </div>
+                
+                {selectedCategory?.title === "Student Membership" && (
+                    <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
+                        <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Membership Type</label>
+                        <div className="flex gap-6">
+                        {['Undergraduate', 'Postgraduate'].map(type => (
+                            <label key={type} className="flex items-center gap-2 cursor-pointer group">
+                            <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${formData.membershipType === type ? 'border-green-600 bg-white' : 'border-gray-300'}`}>
+                                {formData.membershipType === type && <div className="w-3 h-3 bg-green-600 rounded-full" />}
+                            </div>
+                            <input type="radio" name="membershipType" value={type} checked={formData.membershipType === type} onChange={handleChange} className="hidden" />
+                            <span className={`text-sm font-medium transition-colors ${formData.membershipType === type ? 'text-green-800' : 'text-gray-600'}`}>{type}</span>
+                            </label>
+                        ))}
+                        </div>
+                    </div> 
+                )}
+
+                <div className="grid grid-cols-2 gap-4">
+                    <div className='space-y-1'>
+                        <label className="text-xs font-semibold text-gray-500">Surname <span className='text-red-500'>*</span></label>
+                        <input name="surname" value={formData.surname} onChange={handleChange} className="input-field" placeholder="Doe" />
+                    </div>
+                    <div className='space-y-1'>
+                        <label className="text-xs font-semibold text-gray-500">First Name <span className='text-red-500'>*</span></label>
+                        <input name="firstName" value={formData.firstName} onChange={handleChange} className="input-field" placeholder="Jane" />
+                    </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                    <div className='space-y-1'>
+                        <label className="text-xs font-semibold text-gray-500">Date of Birth <span className='text-red-500'>*</span></label>
+                        <input name="dob" type="date" value={formData.dob} onChange={handleChange} className="input-field" />
+                    </div>
+                    <div className='space-y-1'>
+                        <label className="text-xs font-semibold text-gray-500">Gender <span className='text-red-500'>*</span></label>
+                        <select name="gender" value={formData.gender} onChange={handleChange} className="input-field">
+                            <option value="">Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="relative">
+                        <Mail className="absolute left-3 top-2.5 text-gray-400" size={16} />
+                        <input name="email" type="email" placeholder="Email Address" value={formData.email} onChange={handleChange} className="input-field pl-10" />
+                    </div>
+                    <div className="relative">
+                        <Phone className="absolute left-3 top-2.5 text-gray-400" size={16} />
+                        <input name="phone" type="tel" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="input-field pl-10" />
+                    </div>
+                </div>
+
+                <div className="relative">
+                    <MapPin className="absolute left-3 top-2.5 text-gray-400" size={16} />
+                    <input name="address" placeholder="Contact Address" value={formData.address} onChange={handleChange} className="input-field pl-10 w-full" />
+                </div>
+            </div>
+        );
+    };
     
-      const renderStep5 = () => (
+    // STEP 2: Education (Ind.) OR Authorized Rep (Corp.)
+    const renderStep2 = () => {
+        const isCorp = isCorporateCategory(selectedCategory?.title);
+
+        if (isCorp) {
+            return (
+                 <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+                    <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+                        <User className="text-green-600" size={20} />
+                        <h4 className="font-bold text-gray-800">Authorized Representative</h4>
+                    </div>
+                    <p className="text-xs text-gray-500 -mt-2 mb-4">Details of the primary contact person.</p>
+
+                    <div className="space-y-4">
+                        <input name="repName" placeholder="Full Name" value={formData.repName} onChange={handleChange} className="input-field w-full" />
+                        <input name="repDesignation" placeholder="Designation / Role" value={formData.repDesignation} onChange={handleChange} className="input-field w-full" />
+                        <div className="grid grid-cols-2 gap-4">
+                             <input name="repEmail" type="email" placeholder="Email" value={formData.repEmail} onChange={handleChange} className="input-field w-full" />
+                             <input name="repPhone" type="tel" placeholder="Phone" value={formData.repPhone} onChange={handleChange} className="input-field w-full" />
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        return (
+            <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+                <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+                    <Briefcase className="text-green-600" size={20} />
+                    <h4 className="font-bold text-gray-800">Education & Profession</h4>
+                </div>
+
+                <div className="space-y-4">
+                    <div>
+                        <label className="text-xs font-semibold text-gray-500 mb-1 block">Current Occupation</label>
+                        <input name="occupation" placeholder="e.g. GIS Analyst" value={formData.occupation} onChange={handleChange} className="input-field w-full" />
+                    </div>
+                    <div>
+                        <label className="text-xs font-semibold text-gray-500 mb-1 block">Institution / Organization</label>
+                        <input name="institution" placeholder="e.g. University of Lagos" value={formData.institution} onChange={handleChange} className="input-field w-full" />
+                    </div>
+                    <div>
+                        <label className="text-xs font-semibold text-gray-500 mb-1 block">Highest Qualification</label>
+                        <input name="qualification" placeholder="e.g. B.Sc Geography (2019)" value={formData.qualification} onChange={handleChange} className="input-field w-full" />
+                    </div>
+                    
+                    {formData.membershipType === 'Student' && (
+                        <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                            <label className="text-xs font-bold text-blue-800 mb-1 block">Field of Study (Required for Students)</label>
+                            <input name="fieldOfStudy" placeholder="e.g. Surveying & Geoinformatics" value={formData.fieldOfStudy} onChange={handleChange} className="input-field w-full bg-white border-blue-200" />
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    };
+    
+    // STEP 3: Background (Ind.) OR Key Staff (Corp.)
+    const renderStep3 = () => {
+        const isCorp = isCorporateCategory(selectedCategory?.title);
+
+        if (isCorp) {
+            return (
+                 <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+                    <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+                        <Users className="text-green-600" size={20} />
+                        <h4 className="font-bold text-gray-800">Key Staff</h4>
+                    </div>
+                    <p className="text-xs text-gray-500 -mt-2 mb-4">List up to 5 key technical or management staff (Name & Role).</p>
+
+                    <div className="space-y-3">
+                        <input name="keyStaff1" placeholder="1. Name - Role" value={formData.keyStaff1} onChange={handleChange} className="input-field w-full" />
+                        <input name="keyStaff2" placeholder="2. Name - Role" value={formData.keyStaff2} onChange={handleChange} className="input-field w-full" />
+                        <input name="keyStaff3" placeholder="3. Name - Role" value={formData.keyStaff3} onChange={handleChange} className="input-field w-full" />
+                        <input name="keyStaff4" placeholder="4. Name - Role" value={formData.keyStaff4} onChange={handleChange} className="input-field w-full" />
+                        <input name="keyStaff5" placeholder="5. Name - Role" value={formData.keyStaff5} onChange={handleChange} className="input-field w-full" />
+                    </div>
+                </div>
+            )
+        }
+
+        return (
+            <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+                <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+                    <AlertCircle className="text-green-600" size={20} />
+                    <h4 className="font-bold text-gray-800">Background Check</h4>
+                </div>
+
+                <div className="bg-gray-50 p-4 rounded-xl space-y-3 max-h-60 overflow-y-auto pr-2 custom-scrollbar border border-gray-100">
+                    {[
+                    { key: 'tuberculosis', label: 'History of Tuberculosis (Last 3 years)?' },
+                    { key: 'mentalDisorder', label: 'Physical/Mental disorder requiring service?' },
+                    { key: 'criminalRecord', label: 'Criminal offence (charged/convicted)?' },
+                    { key: 'militaryService', label: 'Military/Police/Security Service?' },
+                    ].map((item) => (
+                    <div key={item.key} className="flex justify-between items-start md:items-center bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                        <span className="text-sm text-gray-700 font-medium">{item.label}</span>
+                        <div className="flex gap-4 ml-4 shrink-0">
+                        <label className="flex items-center gap-1 cursor-pointer">
+                            <input type="radio" className="accent-green-600" checked={formData.background[item.key] === 'Yes'} onChange={() => handleBackgroundChange(item.key, 'Yes')} /> 
+                            <span className="text-sm">Yes</span>
+                        </label>
+                        <label className="flex items-center gap-1 cursor-pointer">
+                            <input type="radio" className="accent-green-600" checked={formData.background[item.key] === 'No'} onChange={() => handleBackgroundChange(item.key, 'No')} /> 
+                            <span className="text-sm">No</span>
+                        </label>
+                        </div>
+                    </div>
+                    ))}
+                </div>
+                
+                <div className="pt-4 border-t border-gray-100">
+                    <h4 className="font-bold text-gray-800 text-sm mb-3">Guarantor Details</h4>
+                    <div className="grid grid-cols-2 gap-4">
+                        <input name="guarantorName" placeholder="Guarantor Name" value={formData.guarantorName} onChange={handleChange} className="input-field" />
+                        <input name="guarantorPhone" placeholder="Guarantor Phone" value={formData.guarantorPhone} onChange={handleChange} className="input-field" />
+                    </div>
+                </div>
+            </div>
+        );
+    };
+    
+    // STEP 4: Attachments
+    const renderStep4 = () => {
+        const isCorp = isCorporateCategory(selectedCategory?.title);
+        
+        // Define file lists based on Category
+        const filesToUpload = isCorp 
+        ? [
+            { id: 'cacCert', label: "CAC Registration Certificate", req: true },
+            { id: 'companyBrief', label: "Company Profile / Brief", req: true },
+            { id: 'tin', label: "Tax Identification Number (TIN)", req: true },
+            { id: 'letterOfIntent', label: "Letter of Intent (Letterhead)", req: true },
+            { id: 'staffList', label: "List of Key Staff", req: false },
+            { id: 'repNationalId', label: "Rep. National ID / NIN", req: true },
+            { id: 'repPassport', label: "Rep. Passport Photo", req: true },
+          ]
+        : [
+            { id: 'nationalId', label: "National ID / Int'l Passport", req: true },
+            { id: 'certs', label: "Educational/Professional Certificates", req: false },
+            { id: 'cv', label: "Curriculum Vitae", req: false }
+          ];
+
+        return (
+            <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+                <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+                    <UploadCloud className="text-green-600" size={20} />
+                    <h4 className="font-bold text-gray-800">Required Attachments</h4>
+                </div>
+
+                <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                    {filesToUpload.map((file) => (
+                        <div key={file.id} className="group relative border-2 border-dashed border-gray-200 hover:border-green-400 bg-gray-50 hover:bg-green-50/30 rounded-xl p-4 transition-all">
+                        <label className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 cursor-pointer">
+                            <div className="flex items-center gap-3">
+                                <div className="bg-white p-2 rounded-full shadow-sm text-green-600">
+                                    <FileText size={20} />
+                                </div>
+                                <div>
+                                    <p className="text-sm font-bold text-gray-800">{file.label} {file.req && <span className="text-red-500">*</span>}</p>
+                                    <p className="text-xs text-gray-400">
+                                        {formData.files[file.id as keyof MembershipFormData['files']] 
+                                        ? <span className="text-green-600 font-medium">File Selected: {formData.files[file.id as keyof MembershipFormData['files']]?.name}</span> 
+                                        : "Max size 5MB (PDF/JPG)"}
+                                    </p>
+                                </div>
+                            </div>
+                            <input 
+                                type="file" 
+                                onChange={(e) => handleFileChange(e, file.id as keyof MembershipFormData['files'])}
+                                className="hidden" 
+                            />
+                            <span className="bg-white border border-gray-200 text-gray-600 text-xs font-bold px-3 py-1.5 rounded-lg group-hover:bg-green-600 group-hover:text-white transition-colors">
+                                Choose File
+                            </span>
+                        </label>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    };
+    
+    // STEP 5: Declaration
+    const renderStep5 = () => (
         <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
            <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
              <CheckCircle className="text-green-600" size={20} />
@@ -482,57 +730,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             </span>
           </label>
         </div>
-      );
-
-      // --- Validation Logic ---
-    const validateStep = (step: number): boolean => {
-        if (step === 1) {
-            // Check Name, Email, Phone, DOB, Gender
-            if (!formData.surname || !formData.firstName) {
-                setError("Please enter your full name.");
-                return false;
-            }
-            if (!formData.email || !formData.phone) {
-                setError("Please provide valid contact details.");
-                return false;
-            }
-            if (!formData.dob || !formData.gender) {
-                setError("Date of birth and gender are required.");
-                return false;
-            }
-        }
-        
-        if (step === 2) {
-             // Basic professional check
-             if (!formData.occupation && !formData.institution) {
-                 setError("Please provide your current occupation or institution.");
-                 return false;
-             }
-        }
-
-        if (step === 4) {
-            // Require National ID at minimum
-            if (!formData.files.nationalId) {
-                setError("Please upload your National ID or Passport.");
-                return false;
-            }
-        }
-
-        return true;
-    };
-
-    // Updated Next/Prev Handlers
-    const nextStep = () => {
-        if (validateStep(currentStep)) {
-            setError(null); // Clear errors on success
-            setCurrentStep(prev => prev + 1);
-        }
-    };
-
-    const prevStep = () => {
-        setError(null); // Clear errors when going back
-        setCurrentStep(prev => prev - 1);
-    };
+    );
 
     return (
         <>
@@ -542,7 +740,6 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 backgroundMedia={["/media/20240418_130158.JPG"]}
             />
             
-            {/* Why Join Section */}
             <div id="why-join" className='pt-8 -z-10'></div>
             <section className="py-20 px-4 md:px-6 bg-linear-to-b from-white to-green-50/30">
                 <div className="max-w-5xl mx-auto">
@@ -550,11 +747,8 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Join <span className="cooper text-green-700">GIFON</span>?</h2>
                         <div className="w-24 h-1 bg-green-600 mx-auto rounded-full"></div>
                     </div>
-                    
                     <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100 leading-relaxed text-lg text-gray-700 text-justify md:text-center relative overflow-hidden">
-                        {/* Decorative background element */}
                         <div className="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-green-400 to-green-600"></div>
-                        
                         <p className="mb-6">
                             Joining the Geospatial Intelligence Foundation of Nigeria (<span className="cooper font-bold">GIFON</span>) means becoming part of a dynamic community of professionals, innovators, policymakers, and researchers committed to shaping Nigeria’s future through geospatial intelligence. As a member, you are not only advancing your career but also contributing to national development, security, and innovation.
                         </p>
@@ -565,16 +759,12 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 </div>
             </section>
 
-            {/* Categories Section */}
             <div id="categories"></div>
             <section className="px-4 md:px-6 py-20 bg-gray-50 flex flex-col items-center">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Membership Categories</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">Find the category that best fits your professional standing and organizational needs.</p>
                 </div>
-                
-                
-
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
                     {categories.map((item, idx) => (
                     <div
@@ -591,19 +781,26 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                             <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-green-700 transition-colors">{item.title}</h3>
                             <p className="text-gray-600 leading-relaxed text-sm">{item.desc}</p>
                         </div>
-                        <button
-                            onClick={() => handleApplyClick(item)}
-                            className="w-full py-3 rounded-xl font-bold border-2 border-green-600 text-green-700 hover:bg-green-600 hover:text-white transition-colors flex items-center justify-center gap-2 group/btn"
-                        >
-                            Apply Now 
-                            <ChevronRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-                        </button>
+                        
+                        {/* HIDE APPLY BUTTON FOR FELLOW/HONORARY */}
+                        {item.title !== "Fellow/Honorary Membership" ? (
+                            <button
+                                onClick={() => handleApplyClick(item)}
+                                className="w-full py-3 rounded-xl font-bold border-2 border-green-600 text-green-700 hover:bg-green-600 hover:text-white transition-colors flex items-center justify-center gap-2 group/btn"
+                            >
+                                Apply Now 
+                                <ChevronRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                            </button>
+                        ) : (
+                            <div className="w-full py-3 rounded-xl font-bold border-2 border-gray-200 text-gray-400 flex items-center justify-center gap-2 cursor-not-allowed">
+                                By Nomination Only
+                            </div>
+                        )}
                     </div>
                     ))}
                 </div>
             </section>
             
-            {/* Benefits Section */}
             <div id="benefits"></div>
             <section className="max-w-6xl mx-auto px-4 md:px-6 py-20 space-y-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -634,12 +831,10 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                             ))}
                         </ul>
                     </div>
-
-                    {/* Styled Table */}
+                    {/* Simplified table placeholder */}
                     <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
                         <div className="bg-gray-900 p-6 text-white">
                             <h3 className="text-xl font-bold">Fee Structure</h3>
-                            <p className="text-gray-400 text-sm">Annual dues by category</p>
                         </div>
                         <div className="overflow-x-auto">
                             <table className="w-full text-left border-collapse min-w-[600px]">
@@ -759,6 +954,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             </section>
 
             {/* Contact Section */}
+
             <div id="contact"></div>
             <section className="py-20 px-4 md:px-6 bg-gray-50 text-center">
                 <div className="max-w-2xl mx-auto">
@@ -771,7 +967,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             </section>
 
             {/* ------------------------------------------------------------------ */}
-            {/* APPLICATION MODAL (Enhanced UI)                                    */}
+            {/* ENHANCED WIZARD MODAL                                              */}
             {/* ------------------------------------------------------------------ */}
             {isModalOpen && selectedCategory && (
                 <div 
@@ -782,37 +978,40 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                         className="relative w-full max-w-lg bg-white shadow-2xl rounded-2xl flex flex-col max-h-[90vh] overflow-hidden"
                         onClick={(e) => e.stopPropagation()} 
                     >
-                        {/* Header */}
-                        <div className="bg-gray-50 px-6 py-5 border-b border-gray-100 flex justify-between items-center">
-                             <div>
-                                <h3 className="text-xl font-bold text-gray-800">
-                                    {isModalSubmitted ? "Application Received" : "Join GIFON"}
-                                </h3>
-                                {!isModalSubmitted && (
-                                    <div className="flex flex-col md:flex-row md:items-center gap-2 text-sm text-gray-500 mt-1">
-                                        <span className="font-semibold text-green-600">{selectedCategory.title}</span>
-                                        <span className="bg-gray-200 px-2 py-0.5 rounded-full text-xs text-gray-700">Step {currentStep}/5</span>
-                                    </div>
-                                )}
-                                {!isModalSubmitted && (
-                                    <div className="w-full bg-gray-200 h-1.5 mt-1">
-                                        <div 
-                                            className="h-full bg-green-600 transition-all duration-500 ease-out"
-                                            style={{ width: `${(currentStep / 5) * 100}%` }}
-                                        ></div>
-                                    </div>
-                                )}
-                             </div>
-                             <button 
-                                onClick={handleCloseAppModal}
-                                className="bg-white p-2 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition shadow-sm border border-gray-200"
-                            >
-                                <X size={20} />
-                            </button>
+                        {/* Header with Visual Progress */}
+                        <div className="bg-gray-50 border-b border-gray-100">
+                            <div className="px-6 py-4 flex justify-between items-center">
+                                <div>
+                                    <h3 className="text-lg font-bold text-gray-800">
+                                        {isModalSubmitted ? "Application Received" : "Join GIFON"}
+                                    </h3>
+                                    {!isModalSubmitted && (
+                                        <p className="text-xs text-gray-500">
+                                            Applying as: <span className="font-semibold text-green-600">{selectedCategory.title}</span>
+                                        </p>
+                                    )}
+                                </div>
+                                <button 
+                                    onClick={handleCloseAppModal}
+                                    className="bg-white p-2 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition shadow-sm border border-gray-200"
+                                >
+                                    <X size={18} />
+                                </button>
+                            </div>
+                            
+                            {/* The Progress Bar */}
+                            {!isModalSubmitted && (
+                                <div className="w-full bg-gray-200 h-1.5">
+                                    <div 
+                                        className="h-full bg-green-600 transition-all duration-500 ease-out"
+                                        style={{ width: `${(currentStep / 5) * 100}%` }}
+                                    ></div>
+                                </div>
+                            )}
                         </div>
 
                         {/* Body */}
-                        <div className="p-6 overflow-y-auto flex-1">
+                        <div className="p-6 overflow-y-auto flex-1 bg-white">
                             {isModalSubmitted ? (
                                 <div className="flex flex-col items-center justify-center text-center py-10">
                                     <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 animate-in zoom-in duration-300">
@@ -839,8 +1038,8 @@ export default function MembershipClient({ children }: { children: React.ReactNo
 
                                     {/* Error Message */}
                                     {error && (
-                                        <div className="mt-4 flex items-center gap-2 text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-100">
-                                            <X size={16} /> {error}
+                                        <div className="mt-4 flex items-center gap-2 text-red-600 text-xs font-semibold bg-red-50 p-3 rounded-lg border border-red-100 animate-in slide-in-from-bottom-2">
+                                            <AlertCircle size={16} /> {error}
                                         </div>
                                     )}
 
@@ -860,7 +1059,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                                           <button 
                                             type="button" 
                                             onClick={nextStep}
-                                            className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2"
+                                            className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg shadow-green-200 flex items-center justify-center gap-2 hover:-translate-y-0.5 active:translate-y-0"
                                           >
                                             Next <ChevronRight size={18} />
                                           </button>
@@ -891,18 +1090,34 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             {/* Helper Styles for Input Fields to keep JSX clean */}
             <style jsx>{`
                 .input-field {
-                width: 100%;
-                padding: 10px 16px;
-                background-color: #f9fafb; /* bg-gray-50 */
-                border: 1px solid #e5e7eb; /* border-gray-200 */
-                border-radius: 0.5rem; /* rounded-lg */
-                transition: all 0.2s;
-                outline: none;
+                    width: 100%;
+                    padding: 10px 14px;
+                    background-color: #f9fafb; /* bg-gray-50 */
+                    border: 1px solid #e5e7eb; /* border-gray-200 */
+                    border-radius: 0.75rem; /* rounded-xl */
+                    font-size: 0.95rem;
+                    color: #1f2937;
+                    transition: all 0.2s;
+                    outline: none;
                 }
                 .input-field:focus {
-                background-color: white;
-                border-color: transparent;
-                box-shadow: 0 0 0 2px #22c55e; /* ring-green-500 */
+                    background-color: white;
+                    border-color: #22c55e; /* green-500 */
+                    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1); /* ring-green-100 */
+                }
+                /* Custom scrollbar for background section */
+                .custom-scrollbar::-webkit-scrollbar {
+                    width: 6px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background: #f1f1f1;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: #d1d5db; 
+                    border-radius: 4px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: #9ca3af; 
                 }
             `}</style>
         </>
