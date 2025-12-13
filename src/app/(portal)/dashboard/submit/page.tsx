@@ -79,7 +79,7 @@ export default function SubmitPage() {
       setSuccessMessage(data.message);
       form.reset();
       setFileName(null);
-      setAgreedToGuidelines(false); // Reset checkbox
+      setAgreedToGuidelines(false);
 
     } catch (err: unknown) {
       if (err instanceof Error) {

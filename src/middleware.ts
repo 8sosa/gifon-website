@@ -1,7 +1,7 @@
 // src/middleware.ts
 
 import { NextRequest, NextResponse } from 'next/server';
-import { jwtVerify, JWTPayload } from 'jose'; // Import JWTPayload
+import { jwtVerify, JWTPayload } from 'jose';
 
 const COOKIE_NAME = 'jwt-token';
 const SECRET_KEY = process.env.JWT_SECRET;
@@ -10,7 +10,9 @@ const SECRET_KEY = process.env.JWT_SECRET;
 const protectedRoutes = [
   '/dashboard',
   '/dashboard/:path*',
-  '/admin/:path*',
+  '/admin',           // Protects the admin UI pages
+  '/admin/:path*',    // Protects sub-pages
+  '/api/admin/:path*' // <--- NEW: Protects the Admin API endpoints
 ];
 
 // 2. Define your public-only routes
@@ -20,8 +22,6 @@ const publicOnlyRoutes = [
   '/reset-password',
 ];
 
-// --- FIX 1: Define the shape of our token's payload ---
-// This tells TypeScript what to expect inside the cookie.
 interface AppJwtPayload extends JWTPayload {
   userId: string;
   email: string;
@@ -35,58 +35,64 @@ export async function middleware(req: NextRequest) {
   const cookie = req.cookies.get(COOKIE_NAME);
   const token = cookie?.value;
 
-  // 4. Decode the token (if it exists)
-  // --- FIX 2: Replaced 'any' with our specific 'AppJwtPayload' interface ---
+  // 4. Decode the token
   let payload: AppJwtPayload | null = null;
   if (token && SECRET_KEY) {
     try {
       const secret = new TextEncoder().encode(SECRET_KEY);
       const { payload: verifiedPayload } = await jwtVerify(token, secret);
-      
-      // --- FIX 3: Cast to 'unknown' first, then to our type ---
-      // This satisfies the linter and confirms we know what we're doing.
       payload = verifiedPayload as unknown as AppJwtPayload;
     } catch (err) {
-      // Token is invalid/expired, treat as logged out
       console.warn("Middleware verification error:", err);
-      // We'll just let this fall through, payload will be null
     }
   }
 
   const isLoggedIn = !!payload;
 
-  // 5. Handle protected routes
-  const isProtectedRoute = protectedRoutes.some((route) => pathname.startsWith(route));
+  // 5. Handle protected routes (General Access)
+  const isProtectedRoute = protectedRoutes.some((route) => pathname.startsWith(route.replace('/:path*', '')));
+  
   if (isProtectedRoute && !isLoggedIn) {
-    // Not logged in and trying to access a protected page
+    // SECURITY FIX: If it's an API call, return 401 JSON instead of redirecting
+    if (pathname.startsWith('/api')) {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    }
+    
+    // Otherwise redirect to login
     const loginUrl = new URL('/login', req.url);
     loginUrl.searchParams.set('next', pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  // 6. Handle admin-only routes
-  if (pathname.startsWith('/admin') && isLoggedIn) {
-    // This check is now fully type-safe!
+  // 6. Handle Admin-Only routes (Role Check)
+  // We check if the path starts with /admin OR /api/admin
+  if ((pathname.startsWith('/admin') || pathname.startsWith('/api/admin')) && isLoggedIn) {
     if (payload?.role !== 'admin') {
-      // Logged in, but not an admin
-      return NextResponse.redirect(new URL('/', req.url)); // Redirect to homepage
+      
+      // SECURITY FIX: If it's an API call, return 403 JSON instead of redirecting
+      if (pathname.startsWith('/api')) {
+        return NextResponse.json({ message: 'Forbidden: Admin access required' }, { status: 403 });
+      }
+
+      // Otherwise redirect to homepage
+      return NextResponse.redirect(new URL('/', req.url));
     }
   }
 
   // 7. Handle public-only routes
   const isPublicOnlyRoute = publicOnlyRoutes.some((route) => pathname.startsWith(route));
   if (isPublicOnlyRoute && isLoggedIn) {
-    // Logged in, but trying to see the /login page
-    return NextResponse.redirect(new URL('/dashboard', req.url)); // Redirect to their dashboard
+    return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
-  // 8. All other cases (public pages, etc.)
   return NextResponse.next();
 }
 
-// 9. The new, recommended config
+// 9. The Config
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    // SECURITY FIX: removed 'api' from the exclusion list below.
+    // Now middleware runs on API routes too.
+    '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 };

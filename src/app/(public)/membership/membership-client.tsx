@@ -28,7 +28,6 @@ import {
 import { AiOutlineMail } from "react-icons/ai";
 import Modal from '@/components/Modal';
 
-// --- Types & Interfaces ---
 interface CategoryItem {
     title: string;
     desc: string;
@@ -342,6 +341,54 @@ export default function MembershipClient({ children }: { children: React.ReactNo
         setCurrentStep(prev => prev - 1);
     };
 
+    // const handleModalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+        
+    //     if (!formData.agreedToDeclaration) {
+    //         setError("You must agree to the declaration to proceed.");
+    //         return;
+    //     }
+
+    //     setIsLoading(true);
+    //     setError(null);
+    
+    //     const submissionData = new FormData();
+    
+    //     // Append text fields
+    //     Object.entries(formData).forEach(([key, value]) => {
+    //         if (key !== 'files' && key !== 'background' && key !== 'agreedToDeclaration') {
+    //             submissionData.append(key, value as string);
+    //         }
+    //     });
+    
+    //     // Append Background
+    //     if (!isCorporateCategory(selectedCategory?.title)) {
+    //         Object.entries(formData.background).forEach(([key, value]) => {
+    //             submissionData.append(`background_${key}`, value);
+    //         });
+    //     }
+    
+    //     // Append Files
+    //     Object.entries(formData.files).forEach(([key, file]) => {
+    //         if (file) submissionData.append(key, file);
+    //     });
+    
+    //     if (selectedCategory) {
+    //         submissionData.append('category', selectedCategory.title);
+    //     }
+    
+    //     try {
+    //         // Mock submission for now
+    //         setTimeout(() => {
+    //             setIsModalSubmitted(true);
+    //             setIsLoading(false);
+    //         }, 1500);
+    //     } catch (err: unknown) {
+    //         setError('An unknown error occurred');
+    //         setIsLoading(false);
+    //     }
+    // };
+
     const handleModalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
@@ -355,37 +402,53 @@ export default function MembershipClient({ children }: { children: React.ReactNo
     
         const submissionData = new FormData();
     
-        // Append text fields
+        // 1. Append Text Fields
         Object.entries(formData).forEach(([key, value]) => {
+            // Skip complex objects, we handle them below
             if (key !== 'files' && key !== 'background' && key !== 'agreedToDeclaration') {
                 submissionData.append(key, value as string);
             }
         });
     
-        // Append Background
+        // 2. Append Background Info (Only for Individuals)
         if (!isCorporateCategory(selectedCategory?.title)) {
             Object.entries(formData.background).forEach(([key, value]) => {
                 submissionData.append(`background_${key}`, value);
             });
         }
     
-        // Append Files
+        // 3. Append Files
         Object.entries(formData.files).forEach(([key, file]) => {
-            if (file) submissionData.append(key, file);
+            if (file) {
+                submissionData.append(key, file);
+            }
         });
     
+        // 4. Append Category
         if (selectedCategory) {
             submissionData.append('category', selectedCategory.title);
         }
     
         try {
-            // Mock submission for now
-            setTimeout(() => {
-                setIsModalSubmitted(true);
-                setIsLoading(false);
-            }, 1500);
+            // --- REAL API CALL START ---
+            const res = await fetch('/api/auth/apply', {
+                method: 'POST',
+                body: submissionData, // Browser automatically sets Content-Type to multipart/form-data
+            });
+
+            const result = await res.json();
+
+            if (!res.ok) {
+                throw new Error(result.message || 'Something went wrong during submission.');
+            }
+            
+            setIsModalSubmitted(true);
+            // --- REAL API CALL END ---
+
         } catch (err: unknown) {
-            setError('An unknown error occurred');
+            console.error(err);
+            setError(err instanceof Error ? err.message : 'An unknown error occurred');
+        } finally {
             setIsLoading(false);
         }
     };
@@ -404,6 +467,23 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                         <h4 className="font-bold text-gray-800">Organization Information</h4>
                     </div>
                     
+                    {selectedCategory?.title === "Institutional Membership" && (
+                        <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
+                            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Membership Type</label>
+                            <div className="flex flex-col gap-6">
+                            {['Academia', 'Research & Innovation Institutes', 'Training and Capacity Building Center'].map(type => (
+                                <label key={type} className="flex items-center gap-2 cursor-pointer group">
+                                <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${formData.membershipType === type ? 'border-green-600 bg-white' : 'border-gray-300'}`}>
+                                    {formData.membershipType === type && <div className="w-3 h-3 bg-green-600 rounded-full" />}
+                                </div>
+                                <input type="radio" name="membershipType" value={type} checked={formData.membershipType === type} onChange={handleChange} className="hidden" />
+                                <span className={`text-sm font-medium transition-colors ${formData.membershipType === type ? 'text-green-800' : 'text-gray-600'}`}>{type}</span>
+                                </label>
+                            ))}
+                            </div>
+                        </div> 
+                    )}
+
                     <div className="space-y-4">
                         <div className="space-y-1">
                             <label className="text-xs font-semibold text-gray-500">Company / Institution Name <span className='text-red-500'>*</span></label>

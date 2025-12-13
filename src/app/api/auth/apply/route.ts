@@ -2,14 +2,13 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
-import cloudinary from '@/lib/cloudinary'; // Our new client
+import cloudinary from '@/lib/cloudinary';
 
-const DB_NAME = 'test-db'; // !! Change this
+const DB_NAME = 'test-db'; // Update to your production DB name eventually
 const COLLECTION_NAME = 'applications';
 
-// Helper function to stream file to Cloudinary
+// Helper: Upload a single file to Cloudinary
 async function uploadToCloudinary(file: File) {
-  // We need to convert the file to a buffer to upload it
   const fileBuffer = await file.arrayBuffer();
   const mimeType = file.type;
   const encoding = 'base64';
@@ -18,95 +17,102 @@ async function uploadToCloudinary(file: File) {
 
   try {
     const result = await cloudinary.uploader.upload(fileUri, {
-      folder: 'gifon_applications', // Optional: puts all uploads in a folder
-      resource_type: 'auto', // Automatically detect file type
+      folder: 'gifon_applications',
+      resource_type: 'auto',
     });
-    return result.secure_url; // This is the URL we want to save
+    return result.secure_url;
   } catch (error) {
     console.error('Cloudinary upload error:', error);
-    throw new Error('Could not upload file to storage.');
+    throw new Error('Could not upload file.');
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
-    // 1. Parse the FormData, not JSON
     const formData = await req.formData();
+    
+    // Containers for our processed data
+    const applicationData: Record<string, any> = {};
+    const backgroundData: Record<string, any> = {};
+    const fileUrls: Record<string, string> = {};
+    const fileUploadPromises: Promise<void>[] = [];
 
-    // 2. Extract the text fields
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const phone = formData.get('phone') as string;
-    const organization = formData.get('organization') as string | null;
-    const category = formData.get('category') as string;
-
-    // 3. Extract the file
-    const file = formData.get('upload') as File | null;
-
-    // 4. Validation (backend)
-    if (!email || !name || !phone || !category) {
-      return NextResponse.json(
-        { message: 'Missing required text fields' },
-        { status: 400 }
-      );
-    }
-    if (!file) {
-      return NextResponse.json(
-        { message: 'Missing required file upload' },
-        { status: 400 }
-      );
-    }
-
-    // 5. Upload the file to Cloudinary
-    let supportingDocumentUrl = '';
-    try {
-      supportingDocumentUrl = await uploadToCloudinary(file);
-    } catch (uploadError: unknown) {
-      if (uploadError instanceof Error) {
-        return NextResponse.json(
-          { message: uploadError.message },
-          { status: 500 }
-        );
+    // 1. Iterate through ALL FormData entries
+    for (const [key, value] of formData.entries()) {
+      
+      // CASE A: It is a File
+      if (value instanceof File) {
+        if (value.size > 0) { // Only upload if file exists and has content
+          const uploadPromise = uploadToCloudinary(value)
+            .then((url) => {
+              fileUrls[key] = url; // Save URL using the field name (e.g., 'cacCert': 'https://...')
+            })
+            .catch((err) => {
+              console.error(`Failed to upload ${key}`, err);
+              // We continue even if one fails, or you could throw here to stop everything
+            });
+          fileUploadPromises.push(uploadPromise);
+        }
+      } 
+      // CASE B: It is Text
+      else if (typeof value === 'string') {
+        // Check if it belongs to the 'background' nested object
+        if (key.startsWith('background_')) {
+          const cleanKey = key.replace('background_', '');
+          backgroundData[cleanKey] = value;
+        } else {
+          applicationData[key] = value;
+        }
       }
-      return NextResponse.json(
-        { message: 'File upload failed.' },
-        { status: 500 }
+    }
+
+    // 2. Wait for all files to upload
+    await Promise.all(fileUploadPromises);
+
+    // 3. Construct the final object
+    const finalDocument: Record<string, any> = {
+      ...applicationData,         // spread basic fields (surname, companyName, etc.)
+      background: backgroundData, // nest the background answers
+      files: fileUrls,            // nest the file URLs
+      status: 'pending',
+      submittedAt: new Date(),
+    };
+
+    // 4. Basic Validation (Ensure we have at least an email or company email)
+    const primaryEmail = finalDocument.email || finalDocument.companyEmail || finalDocument.repEmail;
+    
+    if (!primaryEmail || !finalDocument.category) {
+       return NextResponse.json(
+        { message: 'Missing required contact information or category.' },
+        { status: 400 }
       );
     }
 
-    // 6. Connect to MongoDB
+    // 5. Connect to MongoDB
     const client = await clientPromise;
     const db = client.db(DB_NAME);
     const applicationsCollection = db.collection(COLLECTION_NAME);
 
-    // 7. Check for duplicate application
+    // 6. Check for duplicates (using the primary email found)
     const existingApplication = await applicationsCollection.findOne({
-      email,
+      $or: [
+        { email: primaryEmail },
+        { companyEmail: primaryEmail },
+        { repEmail: primaryEmail }
+      ],
       status: 'pending',
     });
 
     if (existingApplication) {
       return NextResponse.json(
-        { message: 'You already have a pending application.' },
+        { message: 'An application with this email is already pending.' },
         { status: 409 }
       );
     }
 
-    // 8. Create the new application object (now with the file URL)
-    const newApplication = {
-      email,
-      name,
-      phone,
-      organization: organization || '',
-      category,
-      supportingDocumentUrl, // <-- Here it is!
-      status: 'pending',
-      submittedAt: new Date(),
-    };
+    // 7. Insert into DB
+    const result = await applicationsCollection.insertOne(finalDocument);
 
-    const result = await applicationsCollection.insertOne(newApplication);
-
-    // 9. Send success response
     return NextResponse.json(
       {
         message: 'Application submitted successfully',
@@ -114,10 +120,12 @@ export async function POST(req: NextRequest) {
       },
       { status: 201 }
     );
+
   } catch (error: unknown) {
-    console.error(error);
-    let errorMessage = 'Internal Server Error';
-    if (error instanceof Error) errorMessage = error.message;
-    return NextResponse.json({ message: errorMessage }, { status: 500 });
+    console.error('API Error:', error);
+    return NextResponse.json(
+      { message: error instanceof Error ? error.message : 'Internal Server Error' },
+      { status: 500 }
+    );
   }
 }

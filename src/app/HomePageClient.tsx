@@ -56,12 +56,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
         }
         description='Source • Analyze • Automate • Share'
         backgroundMedia={[
-          '/bg/e.jpeg',
-          '/bg/a.JPG',
-          '/bg/b.JPG',
-          '/bg/c.JPG',
-          '/bg/d.JPG',
-          '/ph.svg',
+          '/vids/home.mp4',
         ]}
       />
 
