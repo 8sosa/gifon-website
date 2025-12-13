@@ -145,7 +145,7 @@ export default async function AboutPage() {
                   Mission
                 </h2>
                 <p className="text-gray-300 leading-relaxed text-justify text-lg grow">
-                  To advance the understanding, development, and responsible application of geospatial intelligence (GEOINT) to support national security, economic development humanitarian efforts, and informed decision-making. We foster collaboration between government, industry, and academia to drive innovation, build a skilled workforce, and promote the ethical use of geospatial data.
+                The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is dedicated to advancing the understanding, development, and responsible application of geospatial intelligence (GEOINT) to support national security, economic development humanitarian efforts, and informed decision-making. We foster collaboration between government, industry, and academia to drive innovation, build a skilled workforce, and promote the ethical use of geospatial data and technologies.
                 </p>
               </div>
             </MotionDiv>
@@ -168,7 +168,7 @@ export default async function AboutPage() {
                 </h2>
                 <div className="grow flex items-center">
                     <p className="text-gray-300 leading-relaxed text-justify text-lg md:text-xl font-medium">
-                    To be Nigeria&apos;s leading catalyst for geospatial innovation, empowering national development through actionable intelligence, spatial data excellence, and sustainable technological advancement.              
+                    To be Nigeria&apos;s leading catalyst for geospatial innovation, empowering national development through actionable intelligence, spatial data excellence, and sustainable technological advancement.
                     </p>
                 </div>
               </div>
@@ -191,63 +191,63 @@ export default async function AboutPage() {
               {[
                 {
                     icon: Layers,
-                    title: 'Advancing Tech Adoption',
-                    text: 'Promote the widespread adoption of advanced geospatial technologies (GIS, remote sensing, UAVs, AI) across public and private sectors.',
+                    title: 'Advancing Geospatial Technology Adoption',
+                    text: 'Promote the widespread adoption of advanced geospatial technologies (e.g., geographic information systems, remote sensing, UAVs, AI) across public and private sectors to support data-driven decision-making processes, enhance national development, and improve service delivery.',
                 },
                 {
                     icon: GraduationCap,
-                    title: 'Capacity & Skills',
-                    text: 'Develop and implement educational programs, workshops, and certifications to build local capacity and empower professionals.',
+                    title: 'Building Capacity & Skill Development',
+                    text: 'Develop and implement educational programs, workshops, and certifications to build local capacity in geospatial intelligence. Empower professionals, government officials, and communities with the skills required to effectively use geospatial data in their respective fields.',
                 },
                 {
                     icon: Users,
-                    title: 'Public-Private Collaboration',
-                    text: 'Facilitate collaboration between the public sector, private enterprises, and academia to create a robust geospatial ecosystem.',
+                    title: 'Fostering Public-Private Sector Collaboration',
+                    text: 'Facilitate collaboration between the public sector, private enterprises, and academia to create a robust geospatial ecosystem in Nigeria. This includes fostering partnerships to drive innovation, share resources, and enhance the effectiveness of geospatial solutions.',
                 },
                 {
                     icon: Shield,
-                    title: 'National Security',
-                    text: 'Leverage geospatial intelligence to improve national security, disaster response, and situational awareness for military agencies.',
+                    title: 'Enhancing National Security & Safety',
+                    text: 'Leverage geospatial intelligence to improve national security and disaster response capabilities. Develop tools and solutions that enhance situational awareness, monitoring, and prediction for military, law enforcement, and emergency response agencies.',
                 },
                 {
                     icon: Sprout,
-                    title: 'Sustainable Development',
-                    text: 'Tackle challenges related to climate change, urbanization, and agriculture. Support Nigeria’s Sustainable Development Goals (SDGs).',
+                    title: 'Driving Sustainable Development Initiatives',
+                    text: 'Promote the application of geospatial intelligence in tackling critical challenges related to climate change, sustainable urbanization, agriculture, water resources management, and environmental conservation. Support the achievement of Nigeria’s Sustainable Development Goals (SDGs).',
                 },
                 {
                     icon: ScrollText,
-                    title: 'Policy Advocacy',
-                    text: 'Advocate for the integration of geospatial intelligence into national policy frameworks and ensure data is prioritized in governance.',
+                    title: 'Policy Advocacy & Strategic Influence',
+                    text: 'Advocate for the integration of geospatial intelligence into national and local policy frameworks. Engage with government agencies to ensure geospatial data and technologies are recognized and prioritized as critical components of national development and governance.',
                 },
                 {
                     icon: Database,
-                    title: 'Data Accessibility',
-                    text: 'Enhance the availability and accessibility of geospatial data ensuring information is transparent, accurate, and available.',
+                    title: 'Promoting Geospatial Data Accessibility & Transparency',
+                    text: 'Enhance the availability and accessibility of geospatial data to all sectors of society, ensuring that information is transparent, accurate, and available to decision-makers, researchers, and the public.',
                 },
                 {
                     icon: Microscope,
-                    title: 'Research & Development',
-                    text: 'Foster research and innovation in geospatial science, encouraging new methodologies and supporting academic institutions.',
+                    title: 'Research & Development (R&D) in Geospatial Intelligence',
+                    text: 'Foster research and innovation in geospatial science and technology, encouraging the development of new methodologies, tools, and applications. Support academic institutions and research centres in Nigeria to contribute to the global geospatial community.',
                 },
                 {
                     icon: Megaphone,
-                    title: 'Public Awareness',
-                    text: 'Raise awareness about the potential of geospatial intelligence through media campaigns and public outreach.',
+                    title: 'Raising Public Awareness & Engagement',
+                    text: 'Raise awareness about the importance and potential of geospatial intelligence through media campaigns, seminars, and public outreach programs. Ensure that citizens, businesses, and local communities understand the benefits and applications of geospatial data in their everyday lives.',
                 },
                 {
                     icon: Globe,
-                    title: 'International Cooperation',
-                    text: 'Position Nigeria as a key player in the global community by engaging with international organizations and standards.',
+                    title: 'International Cooperation & Networking',
+                    text: 'Position Nigeria as a key player in the global geospatial intelligence community by actively engaging with international organizations, participating in global forums, and contributing to international standards and best practices.',
                 },
                 {
                     icon: Building2,
-                    title: 'Urban Planning',
-                    text: 'Support urban planning and infrastructure development with tools that help governments make informed decisions.',
+                    title: 'Data-Driven Decision-Making for Urban Planning & Infrastructure',
+                    text: 'Support the use of geospatial intelligence in urban planning, infrastructure development, and resource management. Provide tools and frameworks that help local and national governments make informed decisions about infrastructure projects, land-use planning, and resource allocation.',
                 },
                 {
                     icon: FileBadge,
-                    title: 'Standards & Governance',
-                    text: 'Advocate for national geospatial data standards to ensure data quality, interoperability, and consistency.',
+                    title: 'Strengthening Geospatial Standards & Governance',
+                    text: 'Advocate for the development and implementation of national geospatial data standards and governance frameworks to ensure data quality, interoperability, and consistency across all sectors.',
                 },
               ].map((obj, i) => (
                 <MotionDiv
@@ -267,7 +267,7 @@ export default async function AboutPage() {
                       <div className="p-3 bg-green-50 rounded-xl text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors duration-300 shadow-sm">
                         <obj.icon size={24} />
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-700 transition-colors sen">{obj.title}</h3>
+                      <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-700 transition-colors sen min-h-[60px]">{obj.title}</h3>
                     </div>
                     <p className="text-gray-600 text-sm md:text-base leading-relaxed text-justify">
                       {obj.text}
@@ -289,47 +289,47 @@ export default async function AboutPage() {
                 { 
                   title: 'Integrity', 
                   img: '/media/INTEGRITY.png',
-                  desc: 'We uphold the highest standards of ethics, transparency, and accountability in everything we do. Trust is the foundation of geospatial intelligence.' 
+                  desc: 'We uphold the highest standards of ethics, transparency, and accountability in everything we do. Trust is the foundation of geospatial intelligence, and we are committed to ensuring that our data, analyses, and partnerships are built on honesty and reliability.' 
                 },
                 { 
                   title: 'Innovation', 
                   img: '/media/INNOVATION.png',
-                  desc: 'We are at the forefront of technological advancements. By fostering a culture of creativity, we strive to pioneer new ways of utilizing geospatial data.' 
+                  desc: 'We are at the forefront of technological advancements in geospatial intelligence. By fostering a culture of creativity and continuous learning, we strive to pioneer new ways of utilizing geospatial data to solve the complex challenges facing Nigeria.' 
                 },
                 { 
                   title: 'Collaboration', 
                   img: '/media/collaboration.png',
-                  desc: 'We believe in the power of partnerships. Through collaboration with governments, academia, and private sector, we harness collective expertise.' 
+                  desc: 'We believe in the power of partnerships. Through collaboration with governments, academia, the private sector, and international stakeholders, we seek to harness collective expertise, resources, and networks to advance the field of geospatial intelligence.' 
                 },
                 { 
                   title: 'Excellence', 
                   img: '/media/excellence.png',
-                  desc: `We are committed to the pursuit of excellence. From research to practical applications, we deliver high-quality solutions that meet global standards.` 
+                  desc: "We are committed to the pursuit of excellence in all aspects of our work. From research to practical applications, we deliver high-quality solutions that meet global standards and drive measurable impact for Nigeria's development." 
                 },
                 { 
                   title: 'Sustainability',
                   img: '/media/SUSTAINABILITY.png',
-                  desc: 'We prioritize sustainable practices, advocating for long-term solutions that balance economic growth with environmental responsibility.' 
+                  desc: 'We prioritize sustainable practices in our use of geospatial technologies, advocating for long-term solutions that balance economic growth with environmental and social responsibility. Our aim is to ensure that geospatial intelligence supports the sustainable development of Nigeria and the broader African continent.' 
                 },
                 { 
                   title: 'Accessibility', 
                   img: '/media/ACCESS.png', 
-                  desc: 'We believe that geospatial intelligence should be accessible to all, democratizing the use of geospatial data for diverse stakeholders across Nigeria.' 
+                  desc: 'We believe that geospatial intelligence should be accessible to all, from government policymakers to local communities. We are committed to democratizing the use of geospatial data by making it understandable, usable, and impactful for diverse stakeholders across Nigeria.' 
                 },
                 { 
                   title: 'Leadership', 
                   img: '/media/leadership.png', 
-                  desc: 'We strive to be the leaders in the geospatial intelligence community in Nigeria and Africa, advocating for geospatial technologies in shaping policy.' 
+                  desc: 'We strive to be the leaders in the geospatial intelligence community in Nigeria and Africa. We advocate for geospatial technologies in shaping policy, decision-making, and governance, positioning the Foundation as a key player in national and regional development.' 
                 },
                 { 
-                  title: 'National Development', 
+                  title: 'Commitment to National Development', 
                   img: '/media/NATIONAL DEVELOPMENT.png', 
-                  desc: `Our core mission is to support Nigeria's growth through strategic use of geospatial intelligence to improve the quality of life for Nigerians.` 
+                  desc: "Our core mission is to support Nigeria's growth and development through strategic use of geospatial intelligence. Whether in urban planning, disaster management, national security, or agriculture, we are dedicated to improving the quality of life for Nigerians through data-driven insights." 
                 },
                 { 
                   title: 'Inclusivity', 
                   img: '/media/INCLUSIVITY.png', 
-                  desc: 'We embrace diversity, ensuring that geospatial intelligence is used to empower all Nigerians, regardless of their background.' 
+                  desc: 'We embrace diversity and inclusivity, ensuring that geospatial intelligence is used to empower all Nigerians, regardless of their background, to make informed decisions that drive progress and reduce inequalities.' 
                 },
               ].map((val, i) => (
                 <MotionDiv
