@@ -85,6 +85,7 @@ interface MembershipFormData {
     nationalId: File | null;
     certs: File | null;
     cv: File | null;
+    passport: File | null;
     // Corporate specific
     cacCert: File | null;
     companyBrief: File | null;
@@ -197,7 +198,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
         keyStaff1: '', keyStaff2: '', keyStaff3: '', keyStaff4: '', keyStaff5: '',
 
         files: {
-          nationalId: null, certs: null, cv: null,
+          nationalId: null, certs: null, cv: null, passport: null,
           cacCert: null, companyBrief: null, tin: null, letterOfIntent: null,
           staffList: null, repNationalId: null, repPassport: null
         },
@@ -259,10 +260,23 @@ export default function MembershipClient({ children }: { children: React.ReactNo
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, key: keyof MembershipFormData['files']) => {
         if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+    
+            // 1. Validation (Limit to 2MB)
+            if (file.size > 2 * 1024 * 1024) {
+                alert("File size must be less than 2MB");
+                return;
+            }
+    
+            // 2. State Update (Nested inside 'files')
             setFormData(prev => ({
                 ...prev,
-                files: { ...prev.files, [key]: e.target.files![0] }
+                files: { 
+                    ...prev.files, 
+                    [key]: file 
+                }
             }));
+    
             if (error) setError(null);
         }
     };
@@ -340,54 +354,6 @@ export default function MembershipClient({ children }: { children: React.ReactNo
         setError(null);
         setCurrentStep(prev => prev - 1);
     };
-
-    // const handleModalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-        
-    //     if (!formData.agreedToDeclaration) {
-    //         setError("You must agree to the declaration to proceed.");
-    //         return;
-    //     }
-
-    //     setIsLoading(true);
-    //     setError(null);
-    
-    //     const submissionData = new FormData();
-    
-    //     // Append text fields
-    //     Object.entries(formData).forEach(([key, value]) => {
-    //         if (key !== 'files' && key !== 'background' && key !== 'agreedToDeclaration') {
-    //             submissionData.append(key, value as string);
-    //         }
-    //     });
-    
-    //     // Append Background
-    //     if (!isCorporateCategory(selectedCategory?.title)) {
-    //         Object.entries(formData.background).forEach(([key, value]) => {
-    //             submissionData.append(`background_${key}`, value);
-    //         });
-    //     }
-    
-    //     // Append Files
-    //     Object.entries(formData.files).forEach(([key, file]) => {
-    //         if (file) submissionData.append(key, file);
-    //     });
-    
-    //     if (selectedCategory) {
-    //         submissionData.append('category', selectedCategory.title);
-    //     }
-    
-    //     try {
-    //         // Mock submission for now
-    //         setTimeout(() => {
-    //             setIsModalSubmitted(true);
-    //             setIsLoading(false);
-    //         }, 1500);
-    //     } catch (err: unknown) {
-    //         setError('An unknown error occurred');
-    //         setIsLoading(false);
-    //     }
-    // };
 
     const handleModalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -535,18 +501,74 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 </div>
                 
                 {selectedCategory?.title === "Student Membership" && (
-                    <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
-                        <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Membership Type</label>
-                        <div className="flex gap-6">
-                        {['Undergraduate', 'Postgraduate'].map(type => (
-                            <label key={type} className="flex items-center gap-2 cursor-pointer group">
-                            <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${formData.membershipType === type ? 'border-green-600 bg-white' : 'border-gray-300'}`}>
-                                {formData.membershipType === type && <div className="w-3 h-3 bg-green-600 rounded-full" />}
+                    <div className="space-y-4">
+                        {/* Membership Type Radio Buttons */}
+                        <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
+                            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Membership Type</label>
+                            <div className="flex gap-6">
+                                {['Undergraduate', 'Postgraduate'].map(type => (
+                                    <label key={type} className="flex items-center gap-2 cursor-pointer group">
+                                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${formData.membershipType === type ? 'border-green-600 bg-white' : 'border-gray-300'}`}>
+                                            {formData.membershipType === type && <div className="w-3 h-3 bg-green-600 rounded-full" />}
+                                        </div>
+                                        <input type="radio" name="membershipType" value={type} checked={formData.membershipType === type} onChange={handleChange} className="hidden" />
+                                        <span className={`text-sm font-medium transition-colors ${formData.membershipType === type ? 'text-green-800' : 'text-gray-600'}`}>{type}</span>
+                                    </label>
+                                ))}
                             </div>
-                            <input type="radio" name="membershipType" value={type} checked={formData.membershipType === type} onChange={handleChange} className="hidden" />
-                            <span className={`text-sm font-medium transition-colors ${formData.membershipType === type ? 'text-green-800' : 'text-gray-600'}`}>{type}</span>
+                        </div>
+
+                        {/* Student ID Image Upload */}
+                        <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
+                            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">
+                                Passport Photograph
                             </label>
-                        ))}
+                            
+                            {!formData.files.passport ? (
+                                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-green-300 border-dashed rounded-lg cursor-pointer bg-white hover:bg-green-50 transition-colors group">
+                                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <UploadCloud className="w-8 h-8 mb-2 text-green-500 group-hover:scale-110 transition-transform" />
+                                        <p className="text-xs text-gray-500">
+                                            <span className="font-semibold text-green-600">Click to upload</span> or drag and drop
+                                        </p>
+                                        <p className="text-[10px] text-gray-400 mt-1">PNG, JPG or PDF (MAX. 2MB)</p>
+                                    </div>
+                                    <input 
+                                        type="file" 
+                                        className="hidden" 
+                                        accept="image/*,.pdf"
+                                        // WE PASS THE SPECIFIC KEY HERE
+                                        onChange={(e) => handleFileChange(e, 'passport')} 
+                                    />
+                                </label>
+                            ) : (
+                                <div className="flex items-center justify-between p-3 bg-white border border-green-200 rounded-lg shadow-sm">
+                                    <div className="flex items-center gap-3 overflow-hidden">
+                                        <div className="p-2 bg-green-100 rounded-lg text-green-600">
+                                            <UploadCloud size={20} />
+                                        </div>
+                                        <div className="flex flex-col min-w-0">
+                                            <span className="text-sm font-medium text-gray-700 truncate max-w-[200px]">
+                                                {formData.files.passport.name}
+                                            </span>
+                                            <span className="text-xs text-gray-400">
+                                                {(formData.files.passport.size / 1024 / 1024).toFixed(2)} MB
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        // Update the removal logic to target nested files
+                                        onClick={() => setFormData(prev => ({ 
+                                            ...prev, 
+                                            files: { ...prev.files, passport: null } 
+                                        }))}
+                                        className="p-1.5 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full transition-colors"
+                                    >
+                                        <X size={18} />
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div> 
                 )}

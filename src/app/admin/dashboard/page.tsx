@@ -275,7 +275,7 @@ export default function AdminDashboard() {
 
   // --- RENDER MAIN PAGE ---
   return (
-    <div className="container mx-auto p-4 md:p-8">
+    <div className="container mx-auto p-4 md:p-8 max-w-5xl min-h-dvh">
       <h1 className="text-3xl font-bold mb-8 text-gray-800">Admin Dashboard</h1>
 
       {/* TABS */}

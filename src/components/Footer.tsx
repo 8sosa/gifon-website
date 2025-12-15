@@ -72,7 +72,7 @@ export default function Footer() {
               </Link>
 
               <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400 text-center">
-                Mapping the future empowering the nation.
+                Mapping the Future Empowering the Nation.
               </p>
 
               <div className="flex flex-wrap gap-3">

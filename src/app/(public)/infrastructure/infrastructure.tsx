@@ -70,7 +70,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaUniversity size={24} />,
     summary: 'Location-based intelligence for ATM siting and tracking illicit transactions.',
     description: `Strengthen financial security through location-based intelligence for ATM and branch siting. Support anti-fraud operations by tracking geospatial patterns of illicit transactions. Map financial inclusion gaps to guide policy and private investment.`,
-    image: '/ph.svg',
+    image: '/media/Banking and finance.jpeg',
     highlights: [
       'Strengthen financial security through location-based intelligence for ATM and branch siting.',
       'Support anti-fraud operations by tracking geospatial patterns of illicit transactions.',
@@ -187,7 +187,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaHammer size={24} />,
     summary: 'Geospatial monitoring of mining sites, geological surveys, and steel production.',
     description: `Apply GEOINT for the mapping and monitoring of mining sites, steel plants, and mineral exploration zones. Detect illegal mining activities and environmental degradation through satellite imagery. Support strategic planning for the steel industry and raw material supply chains.`,
-    image: '/ph.svg',
+    image: '/media/mines.jpeg',
     highlights: [
       'Apply GEOINT for mapping and monitoring of mining sites, mineral belts, haul routes, and steel-production facilities.',
       'Support early warning for illegal mining, encroachment, unsafe excavation practices, and environmental degradation.',

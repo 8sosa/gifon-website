@@ -8,20 +8,14 @@ const {
   EMAIL_SERVER_PASSWORD 
 } = process.env;
 
-if (!EMAIL_SERVER_HOST || !EMAIL_SERVER_PORT || !EMAIL_SERVER_USER || !EMAIL_SERVER_PASSWORD) {
-  console.warn(
-    'Email server environment variables not set. Emails will not be sent.'
-  );
-}
-
 export const transporter = nodemailer.createTransport({
-  host: EMAIL_SERVER_HOST,
-  port: parseInt(EMAIL_SERVER_PORT || '587', 10), // 465 is for secure (SSL)
-  secure: parseInt(EMAIL_SERVER_PORT || '587', 10) === 465, // true for 465, false for others
+  host: EMAIL_SERVER_HOST || 'smtp.gmail.com',
+  port: 465, // Force 465 for Gmail SSL
+  secure: true, // true for 465, false for other ports
   auth: {
     user: EMAIL_SERVER_USER,
-    pass: EMAIL_SERVER_PASSWORD,
+    pass: EMAIL_SERVER_PASSWORD?.replace(/\s+/g, ''), // AUTOMATIC FIX: Removes spaces if you accidentally left them
   },
 });
 
-export const emailFrom = process.env.EMAIL_FROM || 'noreply@gifon.org.ng';
+export const emailFrom = process.env.EMAIL_FROM || '"GIFON Admin" <noreply@gifon.org.ng>';

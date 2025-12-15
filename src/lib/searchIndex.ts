@@ -1,5 +1,5 @@
 import { infrastructureList } from '../app/(public)/infrastructure/infrastructure';
-import resourcesData from '../app/(public)/resources/resources';
+import resourcesData, { ResourceItem } from '../app/(public)/resources/resources';
 
 export type SearchItem = {
   id: string;
@@ -9,53 +9,14 @@ export type SearchItem = {
   href: string;
 };
 
-// --- TYPE DEFINITIONS ---
-// Define interfaces for your data items to avoid using 'any'
-
-interface Publication {
-  id?: string;
-  title: string;
-  description?: string;
-  link?: string;
-}
-
-interface Download {
-  title: string;
-  type?: string;
-  size?: string;
-  link?: string;
-}
-
-interface NewsItem {
-  title: string;
-  description?: string;
-  date?: string;
-  link?: string;
-}
-
-interface PressItem {
-  title: string;
-  date?: string;
-  link?: string;
-}
-
-interface PodcastItem {
-  title: string;
-  description?: string;
-  link?: string;
-}
-
-interface WebinarItem {
-  title: string;
-  description?: string;
-  status?: string;
-  link?: string;
-}
-
-interface GalleryItem {
-  title?: string;
-  type?: string;
-  link?: string;
+// --- HELPER: Safe Title Extractor ---
+// Since ResourceItem.title can be JSX (ReactNode), this helper ensures we always get a string for search.
+function getSearchableTitle(item: ResourceItem, defaultTitle: string): string {
+  if (typeof item.title === 'string') {
+    return item.title;
+  }
+  // If title is JSX, try to use the ID, or fall back to the generic name
+  return item.id || defaultTitle;
 }
 
 // --- 1. Static Pages ---
@@ -80,66 +41,66 @@ const sectorItems: SearchItem[] = infrastructureList.map((sector) => ({
   href: `/infrastructure#${sector.id}`,
 }));
 
-// --- 3. Resources (Fully Dynamic Logic with Types) ---
+// --- 3. Resources (Unified Type Logic) ---
 
 // Map Publications
-const publicationItems: SearchItem[] = (resourcesData.publications || []).map((pub: Publication, idx: number) => ({
+const publicationItems: SearchItem[] = (resourcesData.publications || []).map((pub: ResourceItem, idx: number) => ({
   id: `pub-${pub.id || idx}`,
-  title: pub.title,
+  title: getSearchableTitle(pub, 'Publication'),
   description: pub.description || 'Publication resource',
-  category: 'Resource',
-  href: pub.link || '/resources#publications',
+  category: "Resource",
+  href: pub.link
 }));
 
 // Map Downloads
-const downloadItems: SearchItem[] = (resourcesData.downloads || []).map((dl: Download, idx: number) => ({
+const downloadItems: SearchItem[] = (resourcesData.downloads || []).map((dl: ResourceItem, idx: number) => ({
   id: `dl-${idx}`,
-  title: dl.title,
+  title: getSearchableTitle(dl, 'Downloadable File'),
   description: `Downloadable ${dl.type || 'File'} (${dl.size || 'Size unknown'})`,
   category: 'Resource',
   href: dl.link || '/resources#Downloads',
 }));
 
 // Map News
-const newsItems: SearchItem[] = (resourcesData.news || []).map((item: NewsItem, idx: number) => ({
+const newsItems: SearchItem[] = (resourcesData.news || []).map((item: ResourceItem, idx: number) => ({
   id: `news-${idx}`,
-  title: item.title,
+  title: getSearchableTitle(item, 'News Article'),
   description: item.description || `News update${item.date ? ' from ' + item.date : ''}`,
   category: 'Resource',
   href: item.link || '/resources#News',
 }));
 
 // Map Press Releases
-const pressItems: SearchItem[] = (resourcesData.press || []).map((item: PressItem, idx: number) => ({
+const pressItems: SearchItem[] = (resourcesData.press || []).map((item: ResourceItem, idx: number) => ({
   id: `press-${idx}`,
-  title: item.title,
+  title: getSearchableTitle(item, 'Press Release'),
   description: `Press Release${item.date ? ' (' + item.date + ')' : ''}`,
   category: 'Resource',
   href: item.link || '/resources#Press',
 }));
 
 // Map Podcasts
-const podcastItems: SearchItem[] = (resourcesData.podcasts || []).map((item: PodcastItem, idx: number) => ({
+const podcastItems: SearchItem[] = (resourcesData.podcasts || []).map((item: ResourceItem, idx: number) => ({
   id: `pod-${idx}`,
-  title: item.title,
+  title: getSearchableTitle(item, 'Podcast Episode'),
   description: item.description || 'Podcast Episode',
   category: 'Resource',
   href: item.link || '/resources#Podcast',
 }));
 
 // Map Webinars
-const webinarItems: SearchItem[] = (resourcesData.webinars || []).map((item: WebinarItem, idx: number) => ({
+const webinarItems: SearchItem[] = (resourcesData.webinars || []).map((item: ResourceItem, idx: number) => ({
   id: `web-${idx}`,
-  title: item.title,
+  title: getSearchableTitle(item, 'Webinar'),
   description: item.description || `Webinar (${item.status || 'Event'})`,
   category: 'Resource',
   href: item.link || '/resources#Webinar',
 }));
 
 // Map Gallery (Photos & Videos)
-const galleryItems: SearchItem[] = (resourcesData.gallery || []).map((item: GalleryItem, idx: number) => ({
+const galleryItems: SearchItem[] = (resourcesData.gallery || []).map((item: ResourceItem, idx: number) => ({
   id: `gal-${idx}`,
-  title: item.title || 'Gallery Media',
+  title: getSearchableTitle(item, 'Gallery Media'),
   description: item.type === 'video' ? 'Video Content' : 'Photo Gallery',
   category: 'Resource',
   href: item.link || '/resources#Gallery',

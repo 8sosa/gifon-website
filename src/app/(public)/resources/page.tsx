@@ -18,20 +18,9 @@ import {
   FaCalendarAlt
 } from "react-icons/fa";
 import { X } from 'lucide-react';
+import { ResourceItem } from './resources';
 
 // --- 1. TYPE DEFINITIONS (Fixes the "never" errors) ---
-
-interface ResourceItem {
-  id?: string;
-  title: string;
-  date?: string;
-  description?: string;
-  image?: string;
-  link: string;
-  type?: string; // For downloads (PDF/DOC)
-  size?: string; // For downloads
-  status?: string; // For webinars (Upcoming/Past)
-}
 
 import resourcesData from './resources';
 
@@ -144,7 +133,7 @@ export default function ResourcesPage() {
                <div className="relative w-full h-40 bg-gray-200">
                   <Image 
                     src={item.image || "/ph.svg"} 
-                    alt={item.title} 
+                    alt={item.id} 
                     fill 
                     className="object-cover"
                   />
@@ -193,7 +182,7 @@ export default function ResourcesPage() {
           renderItem={(item, idx) => (
              <div key={idx} className="bg-gray-900 rounded-xl overflow-hidden text-white flex flex-col md:flex-row">
                 <div className="relative w-full md:w-48 h-48 bg-gray-800 shrink-0">
-                    <Image src={item.image || "/ph.svg"} alt={item.title} fill className="object-cover"/>
+                    <Image src={item.image || "/ph.svg"} alt={item.id} fill className="object-cover"/>
                 </div>
                 <div className="p-6 flex flex-col justify-center">
                     <span className="text-xs font-bold text-green-400 uppercase tracking-wider mb-2">Episode {idx + 1}</span>
@@ -217,7 +206,7 @@ export default function ResourcesPage() {
           renderItem={(item, idx) => (
              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group">
                 <div className="relative w-full h-40 bg-gray-200">
-                    <Image src={item.image || "/ph.svg"} alt={item.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500"/>
+                    <Image src={item.image || "/ph.svg"} alt={item.id} fill className="object-cover group-hover:scale-105 transition-transform duration-500"/>
                     <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
                         {item.status || "Past Event"}
                     </div>
@@ -337,7 +326,7 @@ export default function ResourcesPage() {
                   {/* Thumbnail Image */}
                   <Image 
                       src={item.image || "/ph.svg"} 
-                      alt={item.title} 
+                      alt={item.id} 
                       fill 
                       className={`object-cover transition-transform duration-700 ${isVideo ? 'group-hover:scale-105' : 'group-hover:scale-110'} opacity-90 group-hover:opacity-100`}
                   />

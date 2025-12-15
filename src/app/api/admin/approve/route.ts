@@ -10,6 +10,7 @@ import { ObjectId } from 'mongodb'; // To correctly find by _id
 const DB_NAME = 'test-db'; // Change this!
 const APPS_COLLECTION = 'applications';
 const USERS_COLLECTION = 'users';
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
 
 export async function POST(req: NextRequest) {
   // TODO: Add authentication here!
@@ -97,7 +98,7 @@ export async function POST(req: NextRequest) {
             <li><strong>Temporary Password:</strong> ${randomPassword}</li>
           </ul>
           <p>Please log in and change your password immediately.</p>
-          <a href="https://your-website.com/login">Click here to Login</a>
+          <a href="${baseUrl}/login" style="padding: 10px 20px; background-color: #16a34a; color: white; text-decoration: none; border-radius: 5px;">Click here to Login</a>
         `,
       });
     } catch (emailError) {

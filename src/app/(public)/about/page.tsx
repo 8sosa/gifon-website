@@ -10,6 +10,8 @@ import {
 } from 'lucide-react';
 import MotionDiv from "@/components/MotionDiv"; 
 import MotionImg from "@/components/MotionImg";
+import Management from '@/components/advisory';
+
 
 function mapMembersByCategory(members: FlatMember[], category: string): FlatMember[] {
   return members.filter((member) => member.category === category);
@@ -421,16 +423,60 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        {/* --- BOARD OF TRUSTEES --- */}
-        <section id="board-directors" className="py-24 px-4 md:px-6 bg-white">
+        <section id="board-directors" className="py-24 px-4 md:px-6 bg-white relative">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-5xl font-bold text-gray-900">Board of Trustees</h2>
-                <div className="w-24 h-1 bg-green-600 mx-auto mt-4 rounded-full"></div>
+            {/* Header */}
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+              <span className="text-green-600 font-bold tracking-wider text-sm uppercase">Governance</span>
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">Board of Trustees</h2>
+              <p className="text-gray-500 text-lg">
+                Distinguished individuals providing strategic oversight and ensuring we stay true to our mission.
+              </p>
+              <div className="w-24 h-1 bg-green-100 mx-auto mt-8 rounded-full">
+                  <div className="w-12 h-full bg-green-600 rounded-full"></div>
+              </div>
             </div>
+
+            {/* Grid */}
             <TeamGrid members={mapMembersByCategory(members, 'Board')} />
           </div>
         </section>
+
+      {/* --- SECTION 2: MANAGEMENT TEAM (Dynamic, Asymmetrical, Light Gray) --- */}
+      <section id="management-team" className="py-24 px-4 md:px-6 bg-gray-50 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+            
+            {/* Left Column: Sticky Title & Context */}
+            <div className="lg:w-1/3 lg:sticky lg:top-24 text-left">
+              <span className="inline-block py-1 px-3 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider mb-4">
+                Operations
+              </span>
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                Management <br/> <span className="text-green-600">Team</span>
+              </h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                Our executive team combines decades of expertise in geospatial intelligence, policy formation, and administrative leadership to drive our daily operations.
+              </p>
+              
+              {/* Decorative Stat or Quote */}
+              <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hidden lg:block">
+                <p className="italic text-gray-500 mb-4">"Leadership is the capacity to translate vision into reality."</p>
+                <div className="flex items-center gap-2">
+                   <div className="h-1 w-10 bg-green-500 rounded-full"></div>
+                   <span className="text-sm font-semibold text-gray-900">GIFON Executive</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: The Grid */}
+            <div className="lg:w-2/3 w-full">
+              <TeamGrid members={mapMembersByCategory(members, 'Advisory')} />
+            </div>
+
+          </div>
+        </div>
+      </section>
 
         <PartnersCarousel />
         
