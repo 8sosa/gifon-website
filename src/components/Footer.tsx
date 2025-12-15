@@ -66,8 +66,8 @@ export default function Footer() {
                     <Image src="/logo.png" alt="GIFON Logo" fill className="object-contain"/>
                 </div>
                 <div className="flex flex-col cooper">
-                  <h1 className="text-5xl md:text-5xl lg:text-[4rem] font-extrabold text-white leading-none tracking-wider group-hover:text-green-500 transition-colors">GIFON</h1>
-                  <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.5rem] font-bold  text-gray-500 uppercase tracking-wider group-hover:text-green-400 whitespace-nowrap bellefair">Geospatial Intelligence Foundation of Nigeria</span>
+                  <h1 className="text-5xl md:text-5xl lg:text-[4rem] font-extrabold leading-none tracking-wider text-green-500 transition-colors">GIFON</h1>
+                  <span className="text-[0.4rem] md:text-[0.65rem] lg:text-[0.5rem] font-bold  uppercase tracking-wider text-green-400 whitespace-nowrap bellefair">Geospatial Intelligence Foundation of Nigeria</span>
                 </div>
               </Link>
 
@@ -94,9 +94,9 @@ export default function Footer() {
           {/* --- Col B: Detailed Contact Grid --- */}
           <div className="space-y-6 md:pl-8 md:border-l md:border-gray-900">
             <div className='flex flex-col items-center'>
-                <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-widest border-l-2 border-green-600 pl-3">Contact Information</h4>
+                <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-widest border-l-2 border-green-600 pl-3 -ml-10">Contact Information</h4>
                 
-                <div className="flex items-start gap-3 mb-8 group">
+                <div className="flex items-start gap-3 mb-8 group -ml-8">
                     <FaLocationDot className="mt-1 text-green-600 shrink-0 group-hover:animate-bounce" />
                     <address className="not-italic text-gray-400 text-sm leading-relaxed text-center">
                         12 Richard Clapperton Street,<br />

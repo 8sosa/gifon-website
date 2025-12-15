@@ -929,32 +929,32 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                                 <tbody className="text-sm divide-y divide-gray-100">
                                     <tr className="hover:bg-green-50/50 transition-colors">
                                         <td className="px-6 py-4 font-bold text-gray-900">Student</td>
-                                        <td className="px-6 py-4 text-gray-600">₦ xx,xxx</td>
-                                        <td className="px-6 py-4 text-gray-600">₦ xx,xxx</td>
+                                        <td className="px-6 py-4 text-gray-600">₦ 45,000</td>
+                                        <td className="px-6 py-4 text-gray-600">₦ 108,000</td>
                                         <td className="px-6 py-4 text-red-400 opacity-50"><X size={18}/></td>
                                     </tr>
                                     <tr className="hover:bg-green-50/50 transition-colors">
                                         <td className="px-6 py-4 font-bold text-gray-900">Professional</td>
-                                        <td className="px-6 py-4 text-gray-600">₦ xx,xxx</td>
-                                        <td className="px-6 py-4 text-gray-600">₦ xx,xxx</td>
+                                        <td className="px-6 py-4 text-gray-600">₦ 150,000</td>
+                                        <td className="px-6 py-4 text-gray-600">₦ 360,000</td>
                                         <td className="px-6 py-4 text-green-600"><CheckCircle size={18}/></td>
                                     </tr>
                                     <tr className="hover:bg-green-50/50 transition-colors">
                                         <td className="px-6 py-4 font-bold text-gray-900">Institutional</td>
-                                        <td className="px-6 py-4 text-gray-600">₦ xx,xxx</td>
-                                        <td className="px-6 py-4 text-gray-600">₦ xx,xxx</td>
+                                        <td className="px-6 py-4 text-gray-600">₦ 1,350,000</td>
+                                        <td className="px-6 py-4 text-gray-600">₦ 3,240,000</td>
                                         <td className="px-6 py-4 text-green-600"><CheckCircle size={18}/></td>
                                     </tr>
                                     <tr className="hover:bg-green-50/50 transition-colors">
                                         <td className="px-6 py-4 font-bold text-gray-900">Corporate</td>
-                                        <td className="px-6 py-4 text-gray-600">₦ xx,xxx</td>
-                                        <td className="px-6 py-4 text-gray-600">₦ xx,xxx</td>
+                                        <td className="px-6 py-4 text-gray-600">₦ 3,750,000</td>
+                                        <td className="px-6 py-4 text-gray-600">₦ 9,000,000</td>
                                         <td className="px-6 py-4 text-green-600"><CheckCircle size={18}/></td>
                                     </tr>
                                     <tr className="hover:bg-green-50/50 transition-colors">
                                         <td className="px-6 py-4 font-bold text-gray-900">Govt/Agency</td>
-                                        <td className="px-6 py-4 text-gray-600 italic">Negotiated</td>
-                                        <td className="px-6 py-4 text-gray-600 italic">Negotiated</td>
+                                        <td className="px-6 py-4 text-gray-600 italic">4,500,000</td>
+                                        <td className="px-6 py-4 text-gray-600 italic">10,800,000</td>
                                         <td className="px-6 py-4 text-green-600"><CheckCircle size={18}/></td>
                                     </tr>
                                     <tr className="bg-green-50 hover:bg-green-100 transition-colors">

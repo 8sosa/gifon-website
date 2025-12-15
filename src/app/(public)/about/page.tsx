@@ -58,7 +58,7 @@ export default async function AboutPage() {
             <div className="inline-block mb-6 text-left">
               {/* <span className="text-green-600 font-bold tracking-widest uppercase text-sm mb-2 block">Who We Are</span> */}
               <h2 className="text-gray-900 text-4xl md:text-5xl font-bold bellefair">
-                About <span className="cooper">GIFON</span>
+                About <span className="cooper text-green-600">GIFON</span>
               </h2>
               <div className="w-24 h-1.5 bg-green-600 mt-4 rounded-full"></div>
             </div>
@@ -183,7 +183,7 @@ export default async function AboutPage() {
             <div className="text-center mb-16 max-w-4xl mx-auto">
                 <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">Our Objectives</h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                The objectives of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>), focuses on building a strong foundation for geospatial intelligence in Nigeria, addressing both technical and strategic goals. They emphasize the importance of education, collaboration, research, and application across sectors.
+                  The Objectives of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>), focuses on building a strong foundation for geospatial intelligence in Nigeria, addressing both technical and strategic goals, with emphasis on the importance of education, collaboration, research and application across sectors.
                 </p>
             </div>
 
