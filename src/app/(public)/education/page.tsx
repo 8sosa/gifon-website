@@ -36,7 +36,7 @@ export default function EducationPage() {
     },
     {
       title: 'National Geospatial Security Hub',
-      src: "/images/D.jpeg",
+      src: "/media/Geospatial Hub.JPG",
       link: '/education/geospatial-hub',
       description: 'Serving as the nation’s premier center for geospatial intelligence innovation, data integration, and strategic decision support for security agencies.'
     },
@@ -60,7 +60,7 @@ export default function EducationPage() {
     },
     {
       title: 'Training & Certification',
-      src: "/media/TRAINING AND CERTIFICATION.jpg", 
+      src: "/ph.svg", 
       link: '/education/training',
       description: 'Providing standardized, high-quality, and industry-recognized certifications in geospatial intelligence, data science, and related technologies.'
     },
@@ -120,7 +120,7 @@ export default function EducationPage() {
             <div className="w-full lg:w-1/2">
                 <div className="relative h-[400px] w-full bg-green-900 rounded-3xl overflow-hidden shadow-2xl group">
                    <Image 
-                     src="/media/TRAINING AND CERTIFICATION.jpg" 
+                     src="/ph.svg" 
                      alt="Training session" 
                      fill 
                      className="object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"

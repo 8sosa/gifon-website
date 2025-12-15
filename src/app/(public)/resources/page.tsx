@@ -97,7 +97,7 @@ export default function ResourcesPage() {
         title="Resources"
         description="Access tools, datasets, training materials, and downloadables to support your geospatial projects."
         backgroundMedia = {[
-          "/media/WebGIF.mp4"
+          "/vids/globe.mp4"
         ]}
       />
 

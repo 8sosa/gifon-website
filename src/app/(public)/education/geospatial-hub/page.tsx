@@ -55,7 +55,7 @@ export default function GeospatialHubPage() {
         title="National Geospatial Security & Intelligence Hub"
         description="“Mapping the Future. Empowering the Nation.”"
         backgroundMedia={[
-          "/images/D.jpeg",
+          "/media/Geospatial Hub.JPG",
         ]}
       />
 

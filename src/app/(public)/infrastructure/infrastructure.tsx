@@ -44,7 +44,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaWater size={24} />,
     summary: 'Monitoring rivers, dams, and irrigation systems with flood risk modelling.',
     description: `Map and monitor rivers, dams, and irrigation systems. Provide flood risk modelling and disaster preparedness solutions. Enhance water quality monitoring and equitable access through spatial intelligence.`,
-    image: '/media/water image.jpg',
+    image: '/media/waterrrr.jpeg',
     highlights: [
       'Map and monitor rivers, dams, and irrigation systems.',
       'Provide flood risk modelling and disaster preparedness solutions.',
@@ -70,7 +70,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaUniversity size={24} />,
     summary: 'Location-based intelligence for ATM siting and tracking illicit transactions.',
     description: `Strengthen financial security through location-based intelligence for ATM and branch siting. Support anti-fraud operations by tracking geospatial patterns of illicit transactions. Map financial inclusion gaps to guide policy and private investment.`,
-    image: '/media/Finance.jpg',
+    image: '/ph.svg',
     highlights: [
       'Strengthen financial security through location-based intelligence for ATM and branch siting.',
       'Support anti-fraud operations by tracking geospatial patterns of illicit transactions.',
@@ -122,7 +122,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaShieldAlt size={24} />,
     summary: 'Advanced mapping and terrain analysis for military logistics and operations.',
     description: `Provide advanced mapping and terrain analysis for military logistics and operations. Support secure defence manufacturing zones through geospatial risk assessment. Contribute to defence readiness with real-time intelligence for operational planning.`,
-    image: '/media/Defence new.jpg',
+    image: '/ph.svg',
     highlights: [
       'Provide advanced mapping and terrain analysis for military logistics and operations.',
       'Support secure defence manufacturing zones through geospatial risk assessment.',
@@ -148,7 +148,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaTractor size={24} />,
     summary: 'Earth observation for crop monitoring, yield forecasting, and climate adaptation.',
     description: `Use earth observation for crop monitoring, yield forecasting, and climate adaptation. Strengthen food security through land use analysis and supply chain visibility. Detect and prevent illegal land grabs and encroachment on agricultural reserves.`,
-    image: '/media/Food Security (1).jpg',
+    image: '/media/agric new.jpeg',
     highlights: [
       'Use earth observation for crop monitoring, yield forecasting, and climate adaptation.',
       'Strengthen food security through land use analysis and supply chain visibility.',
@@ -187,7 +187,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaHammer size={24} />,
     summary: 'Geospatial monitoring of mining sites, geological surveys, and steel production.',
     description: `Apply GEOINT for the mapping and monitoring of mining sites, steel plants, and mineral exploration zones. Detect illegal mining activities and environmental degradation through satellite imagery. Support strategic planning for the steel industry and raw material supply chains.`,
-    image: '/media/mines and steel.jpg',
+    image: '/ph.svg',
     highlights: [
       'Apply GEOINT for mapping and monitoring of mining sites, mineral belts, haul routes, and steel-production facilities.',
       'Support early warning for illegal mining, encroachment, unsafe excavation practices, and environmental degradation.',

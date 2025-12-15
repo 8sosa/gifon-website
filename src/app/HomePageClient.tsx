@@ -56,7 +56,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
         }
         description='Source • Analyze • Automate • Share'
         backgroundMedia={[
-          '/vids/home.mp4',
+          "/vids/globe.mp4",
         ]}
       />
 
@@ -83,7 +83,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
           muted 
           playsInline
         >
-          <source src="/media/WebGIF.mp4" type="video/mp4" />
+          <source src="/vids/globe.mp4" type="video/mp4" />
         </video>
         <div className="absolute top-0 left-0 w-full h-full bg-linear-to-t from-black/80 via-black/40 to-black/30 z-10"></div>
         <div className="relative z-20 text-center px-4 w-full max-w-4xl mx-auto">

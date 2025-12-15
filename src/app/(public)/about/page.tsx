@@ -4,6 +4,7 @@ import { getTeamMembers } from '@/lib/contentful-queries';
 import { FlatMember } from '@/types/types';
 import PartnersCarousel from '@/components/PartnersCarousel';
 import Image from 'next/image';
+import { FeatureAccordion } from '@/components/FeatureAccordion';
 import { 
   Target, Eye, Layers, GraduationCap, Users, Shield, Sprout, ScrollText, Database, Microscope, Megaphone, Globe, Building2, FileBadge, 
 } from 'lucide-react';
@@ -18,6 +19,76 @@ const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
+
+const features = [
+  {
+      icon: Layers,
+      title: 'Advancing Geospatial Technology Adoption',
+      text: 'Promote the widespread adoption of advanced geospatial technologies (e.g., geographic information systems, remote sensing, UAVs, AI) across public and private sectors to support data-driven decision-making processes, enhance national development, and improve service delivery.',
+  },
+  {
+      icon: GraduationCap,
+      title: 'Building Capacity & Skill Development',
+      text: 'Develop and implement educational programs, workshops, and certifications to build local capacity in geospatial intelligence. Empower professionals, government officials, and communities with the skills required to effectively use geospatial data in their respective fields.',
+  },
+  {
+      icon: Users,
+      title: 'Fostering Public-Private Sector Collaboration',
+      text: 'Facilitate collaboration between the public sector, private enterprises, and academia to create a robust geospatial ecosystem in Nigeria. This includes fostering partnerships to drive innovation, share resources, and enhance the effectiveness of geospatial solutions.',
+  },
+  {
+      icon: Shield,
+      title: 'Enhancing National Security & Safety',
+      text: 'Leverage geospatial intelligence to improve national security and disaster response capabilities. Develop tools and solutions that enhance situational awareness, monitoring, and prediction for military, law enforcement, and emergency response agencies.',
+  },
+  {
+      icon: Sprout,
+      title: 'Driving Sustainable Development Initiatives',
+      text: 'Promote the application of geospatial intelligence in tackling critical challenges related to climate change, sustainable urbanization, agriculture, water resources management, and environmental conservation. Support the achievement of Nigeria’s Sustainable Development Goals (SDGs).',
+  },
+  {
+      icon: ScrollText,
+      title: 'Policy Advocacy & Strategic Influence',
+      text: 'Advocate for the integration of geospatial intelligence into national and local policy frameworks. Engage with government agencies to ensure geospatial data and technologies are recognized and prioritized as critical components of national development and governance.',
+  },
+  {
+      icon: Database,
+      title: 'Promoting Geospatial Data Accessibility & Transparency',
+      text: 'Enhance the availability and accessibility of geospatial data to all sectors of society, ensuring that information is transparent, accurate, and available to decision-makers, researchers, and the public.',
+  },
+  {
+      icon: Microscope,
+      title: 'Research & Development (R&D) in Geospatial Intelligence',
+      text: 'Foster research and innovation in geospatial science and technology, encouraging the development of new methodologies, tools, and applications. Support academic institutions and research centres in Nigeria to contribute to the global geospatial community.',
+  },
+  {
+      icon: Megaphone,
+      title: 'Raising Public Awareness & Engagement',
+      text: 'Raise awareness about the importance and potential of geospatial intelligence through media campaigns, seminars, and public outreach programs. Ensure that citizens, businesses, and local communities understand the benefits and applications of geospatial data in their everyday lives.',
+  },
+  {
+      icon: Globe,
+      title: 'International Cooperation & Networking',
+      text: 'Position Nigeria as a key player in the global geospatial intelligence community by actively engaging with international organizations, participating in global forums, and contributing to international standards and best practices.',
+  },
+  {
+      icon: Building2,
+      title: 'Data-Driven Decision-Making for Urban Planning & Infrastructure',
+      text: 'Support the use of geospatial intelligence in urban planning, infrastructure development, and resource management. Provide tools and frameworks that help local and national governments make informed decisions about infrastructure projects, land-use planning, and resource allocation.',
+  },
+  {
+      icon: FileBadge,
+      title: 'Strengthening Geospatial Standards & Governance',
+      text: 'Advocate for the development and implementation of national geospatial data standards and governance frameworks to ensure data quality, interoperability, and consistency across all sectors.',
+  },
+]
+
+const processedFeatures = features.map(f => ({
+  title: f.title,
+  text: f.text,
+  icon: <f.icon size={24} />, // Small icon
+  largeIcon: <f.icon size={140} strokeWidth={1.5} /> // Big background icon
+}));
 
 export default async function AboutPage() {
   const members: FlatMember[] = await getTeamMembers();
@@ -187,7 +258,7 @@ export default async function AboutPage() {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {[
                 {
                     icon: Layers,
@@ -250,31 +321,23 @@ export default async function AboutPage() {
                     text: 'Advocate for the development and implementation of national geospatial data standards and governance frameworks to ensure data quality, interoperability, and consistency across all sectors.',
                 },
               ].map((obj, i) => (
-                <MotionDiv
+                <ExpandableCard 
                   key={i}
-                  className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 relative overflow-hidden group hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
+                  title={obj.title}
+                  text={obj.text}
                   variants={fadeUp}
-                >
-                  <div className="absolute -bottom-6 -right-6 text-gray-50 group-hover:text-green-50 transition-colors duration-500 rotate-12">
-                    <obj.icon size={140} strokeWidth={1.5} />
-                  </div>
-
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="p-3 bg-green-50 rounded-xl text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors duration-300 shadow-sm">
-                        <obj.icon size={24} />
-                      </div>
-                      <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-700 transition-colors sen min-h-[60px]">{obj.title}</h3>
-                    </div>
-                    <p className="text-gray-600 text-sm md:text-base leading-relaxed text-justify">
-                      {obj.text}
-                    </p>
-                  </div>
-                </MotionDiv>
+                  
+                  // CRITICAL: We render the icon HERE inside the parent.
+                  // We pass the RESULT (<Icon />) to the child.
+                  icon={<obj.icon size={24} />} 
+                  largeIcon={<obj.icon size={140} strokeWidth={1.5} />}
+                />
               ))}
+
+            </div> */}
+            <div className="max-w-7xl mx-auto px-4">
+              {/* Pass the data to the Client Component */}
+              <FeatureAccordion items={processedFeatures} />
             </div>
           </div>
         </section>
