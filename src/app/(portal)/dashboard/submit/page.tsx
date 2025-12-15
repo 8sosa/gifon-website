@@ -203,7 +203,7 @@ export default function SubmitPage() {
                   </div>
                   
                   <div className="space-y-1">
-                    <label htmlFor="abstract" className="text-sm font-bold text-gray-700 ml-1">Abstract (max 500 words)</label>
+                    <label htmlFor="abstract" className="text-sm font-bold text-gray-700 ml-1">Abstract (150-250 words)</label>
                     <div className="relative">
                         <div className="absolute left-3 top-3 text-gray-400"><AlignLeft size={18} /></div>
                         <textarea

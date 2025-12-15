@@ -52,6 +52,7 @@ export async function POST(req: NextRequest) {
     // 2. Check if a user with this email already exists
     const existingUser = await usersCollection.findOne({ email: application.email });
     if (existingUser) {
+      console.log(`User with email ${application.email} already exists. as ${existingUser}`);
       return NextResponse.json(
         { message: 'A user with this email already exists' },
         { status: 409 }

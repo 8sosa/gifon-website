@@ -26,6 +26,7 @@ type User = {
   name: string;
   email: string;
   organization: string;
+  passportUrl?: string;
   avatar?: string;
   category: string;
   role: string;
@@ -214,8 +215,12 @@ export default function MembershipPortalPage() {
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="h-24 bg-linear-to-r from-green-600 to-green-400 relative">
                     <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full border-4 border-white bg-gray-100 overflow-hidden shadow-md">
-                        <Image src={user.avatar || "/ph.svg"} alt="Profile" fill className="object-cover" />
-                    </div>
+                    <Image 
+                      src={user.passportUrl || user.avatar || "/ph.svg"} 
+                      alt="Profile" 
+                      fill 
+                      className="object-cover" 
+                  />                    </div>
                 </div>
                 <div className="pt-12 pb-6 px-6 text-center">
                     <h2 className="text-xl font-bold text-gray-900">{user.name}</h2>

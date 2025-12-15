@@ -1,62 +1,64 @@
 // src/app/api/users/me/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
-import { jwtVerify } from 'jose'; // <-- Use jose, not jsonwebtoken
 import clientPromise from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
+import { v2 as cloudinary } from 'cloudinary';
+import { jwtVerify } from 'jose';
 
-const DB_NAME = 'test-db'; // !! Change this
+// --- CONFIGURATION ---
+const DB_NAME = process.env.MONGODB_DB || 'test-db'; // Updated to use Env Var
 const USERS_COLLECTION = 'users';
-const COOKIE_NAME = 'jwt-token';
+const COOKIE_NAME = 'jwt-token'; // Ensure this matches your login cookie name
 const SECRET_KEY = process.env.JWT_SECRET;
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 interface JwtPayload {
   userId: string;
   email: string;
 }
 
-// --- NEW HELPER ---
-// This helper reads the cookie and verifies it
+// --- HELPER: Verify JWT ---
 async function getJwtPayload(req: NextRequest): Promise<JwtPayload | null> {
   const cookie = req.cookies.get(COOKIE_NAME);
-  if (!cookie?.value) {
-    return null;
-  }
+  if (!cookie?.value) return null;
   
   const token = cookie.value;
   
   if (!SECRET_KEY) {
-    throw new Error('JWT_SECRET is not set');
+    console.error('JWT_SECRET is not defined in environment variables');
+    return null;
   }
 
   try {
     const secret = new TextEncoder().encode(SECRET_KEY);
     const { payload } = await jwtVerify(token, secret);
     return payload as unknown as JwtPayload;
-    } catch (error) {
-    console.warn("JWT verification failed in /api/users/me:", error);
-    return null; // Invalid or expired token
+  } catch (error) {
+    console.warn("JWT verification failed:", error);
+    return null; 
   }
 }
 
-// --- UPDATED GET FUNCTION ---
+// --- GET: Fetch User ---
 export async function GET(req: NextRequest) {
   try {
     const payload = await getJwtPayload(req);
     if (!payload) {
-      return NextResponse.json(
-        { message: 'Invalid or missing token' },
-        { status: 401 }
-      );
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
     const client = await clientPromise;
     const db = client.db(DB_NAME);
-    const usersCollection = db.collection(USERS_COLLECTION);
-
-    const user = await usersCollection.findOne(
+    const user = await db.collection(USERS_COLLECTION).findOne(
       { _id: new ObjectId(payload.userId) },
-      { projection: { password: 0 } } // NEVER send the password
+      { projection: { password: 0 } }
     );
 
     if (!user) {
@@ -65,80 +67,89 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ user }, { status: 200 });
   } catch (error: unknown) {
-    console.error('Error in GET /api/users/me:', error);
-    let errorMessage = 'Internal Server Error';
-    if (error instanceof Error) {
-      errorMessage = error.message;
-      if (error.name === 'BSONError') {
-        errorMessage = 'Invalid ID format';
-        return NextResponse.json({ message: errorMessage }, { status: 400 });
-      }
-    }
-    return NextResponse.json(
-      { message: errorMessage },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }
 
-// --- UPDATED PATCH FUNCTION ---
+// --- PATCH: Update Profile & Upload Image ---
 export async function PATCH(req: NextRequest) {
   try {
+    // 1. Authenticate
     const payload = await getJwtPayload(req);
     if (!payload) {
-      return NextResponse.json(
-        { message: 'Invalid or missing token' },
-        { status: 401 }
-      );
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
-    const { name, organization } = await req.json();
-    if (!name && !organization) {
-      return NextResponse.json(
-        { message: 'No update fields provided' },
-        { status: 400 }
-      );
+    // 2. Parse FormData
+    const formData = await req.formData();
+    const name = formData.get('name')?.toString();
+    const organization = formData.get('organization')?.toString();
+    const passportFile = formData.get('passport') as File | null;
+
+    if (!name && !organization && !passportFile) {
+      return NextResponse.json({ message: 'No changes provided' }, { status: 400 });
     }
 
-    const client = await clientPromise;
-    const db = client.db(DB_NAME);
-    const usersCollection = db.collection(USERS_COLLECTION);
-
-    const updateData: { [key: string]: string } = {};
+    // 3. Prepare Update Data
+    const updateData: { [key: string]: any } = {};
     if (name) updateData.name = name;
     if (organization) updateData.organization = organization;
 
-    const result = await usersCollection.updateOne(
+    // 4. Handle Cloudinary Upload
+    if (passportFile) {
+      // Basic validation
+      if (!passportFile.type.startsWith('image/')) {
+        return NextResponse.json({ message: 'File must be an image' }, { status: 400 });
+      }
+
+      const bytes = await passportFile.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+
+      // Upload to Cloudinary
+      const uploadResult: any = await new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_stream(
+          {
+            folder: 'gifon_passports',
+            resource_type: 'image',
+            public_id: `user_${payload.userId}`,
+            overwrite: true,
+            transformation: [{ width: 400, height: 400, crop: "fill" }] // Optional: Resize to square
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        ).end(buffer);
+      });
+
+      updateData.passportUrl = uploadResult.secure_url;
+    }
+
+    // 5. Update Database
+    const client = await clientPromise;
+    const result = await client.db(DB_NAME).collection(USERS_COLLECTION).findOneAndUpdate(
       { _id: new ObjectId(payload.userId) },
-      { $set: updateData }
+      { $set: updateData },
+      { returnDocument: 'after' }
     );
 
-    if (result.matchedCount === 0) {
+    // FIX: Handle different MongoDB Driver versions (some return { value: doc }, some return doc)
+    const updatedUser = (result && (result as any).value) ? (result as any).value : result;
+
+    if (!updatedUser) {
       return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
 
-    // --- IMPORTANT ---
-    // The user's profile is updated in the DB, but the
-    // localStorage 'user' object is now stale.
-    // We'll fix this in the /settings page later by returning the *new* user.
-    // For now, this is fine.
-
+    // 6. Return the updated user so Frontend can update localStorage
     return NextResponse.json(
-      { message: 'Profile updated successfully' },
+      { message: 'Profile updated successfully', user: updatedUser },
       { status: 200 }
     );
+
   } catch (error: unknown) {
     console.error('Error in PATCH /api/users/me:', error);
-    let errorMessage = 'Internal Server Error';
-    if (error instanceof Error) {
-      errorMessage = error.message;
-      if (error.name === 'BSONError') {
-        errorMessage = 'Invalid ID format';
-        return NextResponse.json({ message: errorMessage }, { status: 400 });
-      }
-    }
     return NextResponse.json(
-      { message: errorMessage },
+      { message: error instanceof Error ? error.message : 'Server Error' }, 
       { status: 500 }
     );
   }

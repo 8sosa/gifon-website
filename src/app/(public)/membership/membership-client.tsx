@@ -449,6 +449,58 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                             </div>
                         </div> 
                     )}
+                    {/* Passport Image Upload */}
+                    <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
+                            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">
+                                Photograph
+                            </label>
+                            
+                            {!formData.files.passport ? (
+                                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-green-300 border-dashed rounded-lg cursor-pointer bg-white hover:bg-green-50 transition-colors group">
+                                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <UploadCloud className="w-8 h-8 mb-2 text-green-500 group-hover:scale-110 transition-transform" />
+                                        <p className="text-xs text-gray-500">
+                                            <span className="font-semibold text-green-600">Click to upload</span> or drag and drop
+                                        </p>
+                                        <p className="text-[10px] text-gray-400 mt-1">PNG, JPG or PDF (MAX. 2MB)</p>
+                                    </div>
+                                    <input 
+                                        type="file" 
+                                        className="hidden" 
+                                        accept="image/*,.pdf"
+                                        // WE PASS THE SPECIFIC KEY HERE
+                                        onChange={(e) => handleFileChange(e, 'passport')} 
+                                    />
+                                </label>
+                            ) : (
+                                <div className="flex items-center justify-between p-3 bg-white border border-green-200 rounded-lg shadow-sm">
+                                    <div className="flex items-center gap-3 overflow-hidden">
+                                        <div className="p-2 bg-green-100 rounded-lg text-green-600">
+                                            <UploadCloud size={20} />
+                                        </div>
+                                        <div className="flex flex-col min-w-0">
+                                            <span className="text-sm font-medium text-gray-700 truncate max-w-[200px]">
+                                                {formData.files.passport.name}
+                                            </span>
+                                            <span className="text-xs text-gray-400">
+                                                {(formData.files.passport.size / 1024 / 1024).toFixed(2)} MB
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        // Update the removal logic to target nested files
+                                        onClick={() => setFormData(prev => ({ 
+                                            ...prev, 
+                                            files: { ...prev.files, passport: null } 
+                                        }))}
+                                        className="p-1.5 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full transition-colors"
+                                    >
+                                        <X size={18} />
+                                    </button>
+                                </div>
+                            )}
+                        </div>
 
                     <div className="space-y-4">
                         <div className="space-y-1">
@@ -517,62 +569,61 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                                 ))}
                             </div>
                         </div>
-
-                        {/* Student ID Image Upload */}
-                        <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
-                            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">
-                                Passport Photograph
-                            </label>
-                            
-                            {!formData.files.passport ? (
-                                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-green-300 border-dashed rounded-lg cursor-pointer bg-white hover:bg-green-50 transition-colors group">
-                                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <UploadCloud className="w-8 h-8 mb-2 text-green-500 group-hover:scale-110 transition-transform" />
-                                        <p className="text-xs text-gray-500">
-                                            <span className="font-semibold text-green-600">Click to upload</span> or drag and drop
-                                        </p>
-                                        <p className="text-[10px] text-gray-400 mt-1">PNG, JPG or PDF (MAX. 2MB)</p>
-                                    </div>
-                                    <input 
-                                        type="file" 
-                                        className="hidden" 
-                                        accept="image/*,.pdf"
-                                        // WE PASS THE SPECIFIC KEY HERE
-                                        onChange={(e) => handleFileChange(e, 'passport')} 
-                                    />
-                                </label>
-                            ) : (
-                                <div className="flex items-center justify-between p-3 bg-white border border-green-200 rounded-lg shadow-sm">
-                                    <div className="flex items-center gap-3 overflow-hidden">
-                                        <div className="p-2 bg-green-100 rounded-lg text-green-600">
-                                            <UploadCloud size={20} />
-                                        </div>
-                                        <div className="flex flex-col min-w-0">
-                                            <span className="text-sm font-medium text-gray-700 truncate max-w-[200px]">
-                                                {formData.files.passport.name}
-                                            </span>
-                                            <span className="text-xs text-gray-400">
-                                                {(formData.files.passport.size / 1024 / 1024).toFixed(2)} MB
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <button
-                                        type="button"
-                                        // Update the removal logic to target nested files
-                                        onClick={() => setFormData(prev => ({ 
-                                            ...prev, 
-                                            files: { ...prev.files, passport: null } 
-                                        }))}
-                                        className="p-1.5 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full transition-colors"
-                                    >
-                                        <X size={18} />
-                                    </button>
-                                </div>
-                            )}
-                        </div>
                     </div> 
                 )}
 
+                {/* Passport Image Upload */}
+                <div className="bg-green-50/50 p-4 rounded-xl border border-green-100">
+                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">
+                        Passport Photograph
+                    </label>
+                    
+                    {!formData.files.passport ? (
+                        <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-green-300 border-dashed rounded-lg cursor-pointer bg-white hover:bg-green-50 transition-colors group">
+                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                <UploadCloud className="w-8 h-8 mb-2 text-green-500 group-hover:scale-110 transition-transform" />
+                                <p className="text-xs text-gray-500">
+                                    <span className="font-semibold text-green-600">Click to upload</span> or drag and drop
+                                </p>
+                                <p className="text-[10px] text-gray-400 mt-1">PNG, JPG or PDF (MAX. 2MB)</p>
+                            </div>
+                            <input 
+                                type="file" 
+                                className="hidden" 
+                                accept="image/*,.pdf"
+                                // WE PASS THE SPECIFIC KEY HERE
+                                onChange={(e) => handleFileChange(e, 'passport')} 
+                            />
+                        </label>
+                    ) : (
+                        <div className="flex items-center justify-between p-3 bg-white border border-green-200 rounded-lg shadow-sm">
+                            <div className="flex items-center gap-3 overflow-hidden">
+                                <div className="p-2 bg-green-100 rounded-lg text-green-600">
+                                    <UploadCloud size={20} />
+                                </div>
+                                <div className="flex flex-col min-w-0">
+                                    <span className="text-sm font-medium text-gray-700 truncate max-w-[200px]">
+                                        {formData.files.passport.name}
+                                    </span>
+                                    <span className="text-xs text-gray-400">
+                                        {(formData.files.passport.size / 1024 / 1024).toFixed(2)} MB
+                                    </span>
+                                </div>
+                            </div>
+                            <button
+                                type="button"
+                                // Update the removal logic to target nested files
+                                onClick={() => setFormData(prev => ({ 
+                                    ...prev, 
+                                    files: { ...prev.files, passport: null } 
+                                }))}
+                                className="p-1.5 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full transition-colors"
+                            >
+                                <X size={18} />
+                            </button>
+                        </div>
+                    )}
+                </div>
                 <div className="grid grid-cols-2 gap-4">
                     <div className='space-y-1'>
                         <label className="text-xs font-semibold text-gray-500">Surname <span className='text-red-500'>*</span></label>
