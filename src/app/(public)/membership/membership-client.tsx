@@ -953,8 +953,8 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                                     </tr>
                                     <tr className="hover:bg-green-50/50 transition-colors">
                                         <td className="px-6 py-4 font-bold text-gray-900">Govt/Agency</td>
-                                        <td className="px-6 py-4 text-gray-600 italic">4,500,000</td>
-                                        <td className="px-6 py-4 text-gray-600 italic">10,800,000</td>
+                                        <td className="px-6 py-4 text-gray-600">₦ 4,500,000</td>
+                                        <td className="px-6 py-4 text-gray-600">₦ 10,800,000</td>
                                         <td className="px-6 py-4 text-green-600"><CheckCircle size={18}/></td>
                                     </tr>
                                     <tr className="bg-green-50 hover:bg-green-100 transition-colors">
