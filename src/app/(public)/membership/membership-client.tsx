@@ -866,8 +866,8 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             </p>
             <ul className="list-disc pl-5 space-y-2 text-gray-700 text-xs md:text-sm">
                <li>Any false statement shall be grounds for immediate rejection or termination.</li>
-               <li>Membership of GIFON is a privilege, not a right.</li>
-               <li>I pledge to abide by the Code of Ethics and Decisions of GIFON.</li>
+               <li>Membership of <span className="cooper">GIFON</span> is a privilege, not a right.</li>
+               <li>I pledge to abide by the Code of Ethics and Decisions of <span className="cooper">GIFON</span>.</li>
             </ul>
           </div>
           

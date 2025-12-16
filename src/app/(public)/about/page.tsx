@@ -99,7 +99,6 @@ export default async function AboutPage() {
     <>
       <HeroSection
         title="About Us"
-        description='Aim • Mission • Vision'
         backgroundMedia={[
           '/media/about background.jpg'
         ]}
@@ -464,7 +463,7 @@ export default async function AboutPage() {
                 <p className="italic text-gray-500 mb-4">"Leadership is the capacity to translate vision into reality."</p>
                 <div className="flex items-center gap-2">
                    <div className="h-1 w-10 bg-green-500 rounded-full"></div>
-                   <span className="text-sm font-semibold text-gray-900">GIFON Executive</span>
+                   <span className="text-sm font-semibold text-gray-900"><span className="cooper">GIFON</span> Executive</span>
                 </div>
               </div>
             </div>

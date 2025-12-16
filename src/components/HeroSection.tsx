@@ -96,7 +96,7 @@ export default function HeroSection({
         
         {/* Title: Scales from text-4xl (mobile) to text-7xl (desktop) */}
         {title && (
-          <h1 className="bellefair text-white font-bold mb-4 drop-shadow-lg text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
+          <h1 className="bellefair text-white font-bold mb-4 drop-shadow-lg text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight -mt-1">
             {title}
           </h1>
         )}
