@@ -257,8 +257,8 @@ export default function ContactPage() {
                             <FaBuilding /> Visit Us
                         </h2>
                         <address className="not-italic text-gray-300 leading-relaxed mb-6">
-                            12 Richard Clapperton St,<br/>
-                            Off Maman Nasir St,<br/>
+                            12 Richard Clapperton Street,<br/>
+                            Off Maman Nasir Street,<br/>
                             Asokoro District,<br/>
                             Abuja - Nigeria.
                         </address>
