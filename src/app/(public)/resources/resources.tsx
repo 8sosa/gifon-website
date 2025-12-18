@@ -37,7 +37,6 @@ const resourcesData: ResourcesData = {
       {"id":"6", "title": "Mar 10, 2012 (1)", "image": "/media/resources/20120310_041150.JPG", "link": "#" },
       {"id":"7", "title": "Mar 10, 2012 (2)", "image": "/media/resources/20120310_052733.JPG", "link": "#" },
       {"id":"8", "title": "Mar 14, 2012 (1)", "image": "/media/resources/20120314_185032.JPG", "link": "#" },
-      {"id":"9", "title": "Feb 17, 2022", "image": "/media/resources/20220217_125458.JPG", "link": "#" },
       {"id":"10", "title": "Apr 26, 2023", "image": "/media/resources/20230426_121805.JPG", "link": "#" },
       {"id":"11", "title": "Apr 18, 2024 (1)", "image": "/media/resources/20240418_130319.JPG", "link": "#" },
       {"id":"12", "title": "Apr 18, 2024 (2)", "image": "/media/resources/20240418_130339.JPG", "link": "#" },

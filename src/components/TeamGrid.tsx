@@ -40,12 +40,6 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 bellefair mb-2">{leader.name}</h2>
                 <p className="text-lg md:text-xl text-green-700 font-medium sen uppercase tracking-wider">Founder & Executive Chairman, <span className="cooper">GIFON</span></p>
               </div>
-
-              {/* Styled Blockquote */}
-              <blockquote className="relative p-6 text-lg italic border-l-4 border-green-600 bg-white shadow-sm rounded-r-xl text-gray-700 bellefair leading-relaxed">
-                 <Quote className="absolute top-2 left-2 text-green-200 h-8 w-8 -translate-y-1/2 -translate-x-1/2 transform rotate-180 fill-current" />
-                "{leaderQuote}"
-              </blockquote>
               
               {/* Action Button */}
               <div className="pt-2">

@@ -1055,12 +1055,14 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                  
                  <div className="max-w-4xl mx-auto text-center relative z-10">
                     <Quote className="text-green-400 w-16 h-16 mx-auto mb-6 opacity-80" />
-                    <blockquote className="text-2xl md:text-4xl text-white font-serif leading-relaxed mb-8">
-                        “<span className="cooper">GIFON</span> connects us to global geospatial networks while addressing Nigeria’s critical national infrastructure needs.”
+                    <blockquote className="text-2xl md:text-4xl text-white font-serif leading-relaxed mb-8 italic">
+                        "A Legacy written on Maps- <br/>
+                        Building the Eyes of the Republic Through<br/>
+                        Geospatial Intelligence"
                     </blockquote>
                     <div className="flex flex-col items-center">
                         <p className="text-xl font-bold text-green-400">Dr. AA Usman</p>
-                        <p className="text-green-200 uppercase tracking-widest text-sm">Founder / Chairman BOT</p>
+                        <p className="text-green-200 uppercase tracking-widest text-sm">Founder & Executive Chairman, <span className="cooper">GIFON</span></p>
                     </div>
                 </div>
             </section>
