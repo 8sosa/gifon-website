@@ -245,7 +245,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
           <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
             <div className="w-full md:w-1/2">
               <div className="relative w-full aspect-4/3 rounded-2xl shadow-2xl overflow-hidden border-4 border-white transform md:rotate-2 hover:rotate-0 transition-transform duration-500">
-                <Image src="/sm.jpeg" alt="Featured StoryMap" fill className="object-cover"/>
+                <Image src="/media/spotlight.jpeg" alt="Victory Lucky" fill className="object-cover"/>
                 <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-green-800 shadow-sm">Featured</div>
               </div>
             </div>
