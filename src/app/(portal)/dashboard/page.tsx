@@ -121,6 +121,7 @@ export default function MembershipPortalPage() {
     e.preventDefault();
     try { await fetch('/api/auth/logout', { method: 'POST' }); } catch (error) { console.error(error); }
     localStorage.removeItem('user');
+    window.dispatchEvent(new Event("auth-change"));
     router.push('/');
   };
 

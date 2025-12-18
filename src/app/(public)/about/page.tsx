@@ -105,7 +105,7 @@ export default async function AboutPage() {
         </>
         }
         backgroundMedia={[
-          '/media/about background.jpg'
+          '/media/AIM copy 2.jpg'
         ]}
       />
       
