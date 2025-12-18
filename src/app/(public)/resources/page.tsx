@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from "react";
 import HeroSection from '@/components/HeroSection';
 import Link from 'next/link';
 import { JSX } from 'react';
@@ -15,7 +15,9 @@ import {
   FaDownload,
   FaPlay, 
   FaVideo,
-  FaCalendarAlt
+  FaCalendarAlt,
+  FaChevronLeft,
+  FaChevronRight
 } from "react-icons/fa";
 import { X } from 'lucide-react';
 import { ResourceItem } from './resources';
@@ -77,9 +79,50 @@ const ResourceSection = ({
 export default function ResourcesPage() {
   // 1. State for the Lightbox
   const [selectedImage, setSelectedImage] = useState<any | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const lightboxImages = resourcesData.gallery.filter(
+    (item) => item.type?.toLowerCase() !== 'video'
+);
+
+const currentImage = lightboxIndex !== null ? lightboxImages[lightboxIndex] : null;
+
+// 2. NAVIGATION HANDLERS
+const closeLightbox = () => setLightboxIndex(null);
+
+const showNext = useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setLightboxIndex((prev) => {
+        if (prev === null) return null;
+        // Loop back to 0 if at the end
+        return prev === lightboxImages.length - 1 ? 0 : prev + 1;
+    });
+}, [lightboxImages.length]);
+
+const showPrev = useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setLightboxIndex((prev) => {
+        if (prev === null) return null;
+        // Loop to last item if at 0
+        return prev === 0 ? lightboxImages.length - 1 : prev - 1;
+    });
+}, [lightboxImages.length]);
+
+// 3. KEYBOARD SUPPORT (Arrow Keys)
+useEffect(() => {
+    if (lightboxIndex === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "ArrowRight") showNext();
+        if (e.key === "ArrowLeft") showPrev();
+        if (e.key === "Escape") closeLightbox();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+}, [lightboxIndex, showNext, showPrev]);
 
   // Helper to close modal
-  const closeLightbox = () => setSelectedImage(null);
   return (
     <>
       <HeroSection
@@ -303,35 +346,34 @@ export default function ResourcesPage() {
           id="Gallery" 
           title="Photo & Video Gallery" 
           icon={<FaImages size={24} />} 
-          data={resourcesData.gallery}
+          data={resourcesData.gallery} // We still render ALL items (mixed) in the grid
           bgColor="bg-white"
           renderItem={(item, idx) => {
-             const isVideo = item.type?.toLowerCase() === 'video';
+              const isVideo = item.type?.toLowerCase() === 'video';
 
-             return (
-               <div 
-                 key={idx} 
-                 // 2. Click Handler Logic
-                 onClick={() => {
+              return (
+                <div 
+                  key={idx} 
+                  onClick={() => {
                     if (isVideo) {
-                        // If video, open link in new tab
                         if (item.link) window.open(item.link, "_blank");
                     } else {
-                        // If image, open modal
-                        setSelectedImage(item);
+                        // Find the index of this specific image inside our "Images Only" list
+                        const cleanIndex = lightboxImages.indexOf(item);
+                        if (cleanIndex !== -1) setLightboxIndex(cleanIndex);
                     }
-                 }}
-                 className="relative w-full aspect-square bg-gray-900 rounded-xl overflow-hidden group cursor-pointer block border border-gray-100 shadow-sm hover:shadow-md transition-all"
-               >
-                  {/* Thumbnail Image */}
+                  }}
+                  className="relative w-full aspect-square bg-gray-900 rounded-xl overflow-hidden group cursor-pointer block border border-gray-100 shadow-sm hover:shadow-md transition-all"
+                >
+                  {/* ... (Your existing Image/Video Thumbnail JSX remains unchanged) ... */}
                   <Image 
                       src={item.image || "/ph.svg"} 
                       alt={item.id} 
                       fill 
                       className={`object-cover transition-transform duration-700 ${isVideo ? 'group-hover:scale-105' : 'group-hover:scale-110'} opacity-90 group-hover:opacity-100`}
                   />
-
-                  {/* VIDEO: Play Button Overlay */}
+                  
+                  {/* Video Overlay Logic */}
                   {isVideo && (
                     <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                         <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 shadow-lg group-hover:scale-110 transition-transform">
@@ -343,17 +385,17 @@ export default function ResourcesPage() {
                     </div>
                   )}
 
-                  {/* Hover Overlay with Title */}
+                  {/* Hover Text */}
                   <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                       <span className="text-white text-sm font-bold line-clamp-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                         {item.title}
                       </span>
                       {item.date && <span className="text-gray-300 text-xs mt-1">{item.date}</span>}
                   </div>
-               </div>
-             );
+                </div>
+              );
           }}
-      />
+        />
 
         {/* --- 8. DOWNLOADS --- */}
         <ResourceSection 
@@ -377,42 +419,66 @@ export default function ResourcesPage() {
 
       </main>
       {/* 3. LIGHTBOX MODAL */}
-      {selectedImage && (
-        <div 
-            className="fixed inset-0 z-100 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 animate-in fade-in duration-200"
-            onClick={closeLightbox} // Close when clicking background
-        >
-            {/* Close Button */}
-            <button 
-                onClick={closeLightbox}
-                className="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all z-50"
-            >
-                <X size={32} />
-            </button>
+      {currentImage && (
+      <div 
+          className="fixed inset-0 z-100 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+          onClick={closeLightbox}
+      >
+          {/* Close Button */}
+          <button 
+              onClick={closeLightbox}
+              className="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all z-50"
+          >
+              <X size={32} />
+          </button>
 
-            {/* Image Container */}
-            <div 
-                className="relative w-full max-w-5xl h-auto max-h-[85vh] flex flex-col items-center"
-                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image itself
-            >
-                <div className="relative w-full h-[70vh] md:h-[80vh]">
-                    <Image 
-                        src={selectedImage.image || "/ph.svg"} 
-                        alt={selectedImage.title} 
-                        fill 
-                        className="object-contain"
-                        priority
-                    />
-                </div>
-                
-                {/* Caption */}
-                <div className="mt-4 text-center">
-                    <h3 className="text-white text-lg font-bold">{selectedImage.title}</h3>
-                    {selectedImage.date && <p className="text-gray-400 text-sm">{selectedImage.date}</p>}
-                </div>
-            </div>
-        </div>
-      )}
+          {/* LEFT BUTTON (Previous) */}
+          <button 
+            onClick={showPrev}
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-50 hover:scale-110"
+          >
+            <FaChevronLeft size={24} />
+          </button>
+
+          {/* RIGHT BUTTON (Next) */}
+          <button 
+            onClick={showNext}
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-50 hover:scale-110"
+          >
+            <FaChevronRight size={24} />
+          </button>
+
+          {/* Image Container */}
+          <div 
+              className="relative w-full max-w-5xl h-auto max-h-[85vh] flex flex-col items-center"
+              onClick={(e) => e.stopPropagation()} 
+          >
+              {/* IMAGE DISPLAY */}
+              <div className="relative w-full h-[70vh] md:h-[80vh]">
+                  <Image 
+                      // Use Key to force re-render animation when image changes
+                      key={currentImage.id || lightboxIndex} 
+                      src={currentImage.image || "/ph.svg"} 
+                      alt={currentImage.id} 
+                      fill 
+                      className="object-contain"
+                      priority
+                  />
+              </div>
+              
+              {/* CAPTION & COUNTER */}
+              <div className="mt-4 text-center">
+                  <h3 className="text-white text-lg font-bold">{currentImage.title}</h3>
+                  <div className="flex items-center justify-center gap-2 text-gray-400 text-sm mt-1">
+                      {currentImage.date && <span>{currentImage.date}</span>}
+                      {/* Optional: Show "1 of 5" counter */}
+                      <span className="text-gray-600">•</span>
+                      <span>{lightboxIndex! + 1} / {lightboxImages.length}</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+    )}
     </>
   );
 }
