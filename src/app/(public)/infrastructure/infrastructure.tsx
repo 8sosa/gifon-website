@@ -31,7 +31,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaBolt size={24} />,
     summary: 'Mapping and monitoring of power grids, oil and gas pipelines, and renewable energy assets.',
     description: `Apply GEOINT for mapping and monitoring of power grids, oil and gas pipelines, and renewable energy assets. Support early warning for vandalism, illegal tapping, and sabotage. Enhance site planning for future energy infrastructure and off-grid solutions.`,
-    image: '/media/Energy.jpg',
+    image: '/media/energy.jpeg',
     highlights: [
       'Apply GEOINT for mapping and monitoring of power grids, oil and gas pipelines, and renewable energy assets.',
       'Support early warning for vandalism, illegal tapping, and sabotage.',

@@ -8,7 +8,7 @@ const partners = [
     logo: "/images/dgi.jpeg", 
     width: 280,
     height: 120,
-    caption: "Media Partners", // <--- Added this property
+    caption: "Media Partner",
   },
   {
     name: "Nigerian Air-Force",
