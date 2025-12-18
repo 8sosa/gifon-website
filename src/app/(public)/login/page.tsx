@@ -48,6 +48,7 @@ export default function LoginPage() {
         }
         
         localStorage.removeItem('jwt');
+        window.dispatchEvent(new Event("auth-change"));
         router.push("/dashboard"); 
       }
     } catch (err: unknown) {
@@ -67,8 +68,7 @@ export default function LoginPage() {
       <HeroSection
         title="Member Login"
         backgroundMedia={[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
+          "/media/login.jpeg",
         ]}
       />
 

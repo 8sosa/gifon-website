@@ -19,7 +19,7 @@ export default async function HeaderWrapper() {
             { label: 'Vision', anchor: 'mission-vision' }, 
             { label: 'Objectives', anchor: 'objectives' }, 
             { label: 'Core Values', anchor: 'core-values' }, 
-            { label: 'Board of Directors', anchor: 'board-directors' }, 
+            { label: 'Management Team', anchor: 'management-team' }, 
             { label: 'Our Partners', anchor: 'our-partners' } 
         ] 
     },
@@ -30,7 +30,7 @@ export default async function HeaderWrapper() {
             { label: 'Why Join GIFON', anchor: 'why-join' }, 
             { label: 'Membership Categories', anchor: 'categories' }, 
             { label: 'Membership Benefits', anchor: 'benefits' }, 
-            { label: 'Pioneer Members', anchor: 'pioneer' }, 
+            { label: 'Management Team', anchor: 'management-team' }, 
             { label: 'How to Apply', anchor: 'apply' } 
         ] 
     },

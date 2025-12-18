@@ -199,7 +199,7 @@ export default async function EventsPage() {
                 <span className="text-green-600 font-bold uppercase tracking-wider text-sm mb-2 block">Our Impact</span>
                 <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Events & Highlights</h2>
                 <p className="text-gray-600 leading-relaxed text-lg">
-                <span className="cooper">GIFON</span> actively convenes events that drive dialogue, innovation, and collaboration. We celebrate our role in mapping the future and empowering the nation.
+                <span className="cooper">GIFON</span> actively convenes events that drive dialogue, innovation, and collaboration. We celebrate our role in Mapping the Future and Empowering the Nation.
                 </p>
             </div>
 

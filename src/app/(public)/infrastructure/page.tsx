@@ -23,7 +23,7 @@ export default function InfrastructurePage() {
     <>
       <HeroSection
         title="Critical Infrastructure Support"
-        description="From Maps to Mission: Mapping Nigerias Critical Assets for Security, Resilience, and Sustainable Growth"
+        description="Our Core areas of support is Critical infrastructure, where Geospatial Intelligence, policy Insights, and advanced technologies are applied to strengthen, secure and future proof the systems essential to national security, economic resilience and National development."
         backgroundMedia={[
           '/media/criticalinfrastructuresupport.jpg',
         ]}

@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import Breadcrumbs from "@/components/BreadCrumbs";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { FaXTwitter, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
 import { FaSearch, FaTimes, FaBars, FaChevronDown, FaChevronRight } from "react-icons/fa";
 import SearchModal from "./SearchModal";
 
-// 1. Export Interface so wrapper can import it
+// 1. Export Interface
 export interface MenuItem {
   label?: React.ReactNode;
   href?: string;
@@ -28,12 +29,8 @@ function useIsMobile(breakpoint = 1024) {
     const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
     const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     setIsMobile(mq.matches);
-    if (mq.addEventListener) mq.addEventListener("change", onChange);
-    else mq.addListener(onChange);
-    return () => {
-      if (mq.removeEventListener) mq.removeEventListener("change", onChange);
-      else mq.removeListener(onChange);
-    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, [breakpoint]);
   return isMobile;
 }
@@ -56,7 +53,6 @@ function DropdownItem({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const hasChildren = Boolean(child.children?.length);
-  // Determine correct href logic
   const href = child.link ?? (child.href ? child.href : `${parentHref}#${child.anchor ?? ""}`);
 
   const handleMouseEnter = () => {
@@ -167,19 +163,17 @@ function Dropdown({
   );
 }
 
-// 2. Main Header Component - Accepts Props Now
+// 2. Main Header Component
 export default function Header({ navItems }: { navItems: MenuItem[] }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  
-  // NOTE: Static data and fetching logic removed from here.
-  // It is now passed in via 'navItems' prop.
   
   const rootTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const router = useRouter();
+  const pathname = usePathname(); // Helpful to detect page changes
   const navRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
 
@@ -188,13 +182,52 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
     setOpenDropdown(null);
   }, []);
 
+  // --- UPDATED AUTH CHECKER ---
+  const checkAuth = useCallback(() => {
+    const user = localStorage.getItem('user');
+    setIsLoggedIn(!!user);
+  }, []);
+
+  // 1. Check on Mount
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  // 2. Check on Storage Event (Cross-tab sync)
+  useEffect(() => {
+    const handleStorageChange = () => checkAuth();
+    window.addEventListener('storage', handleStorageChange);
+    // Custom event listener for same-tab updates (dispatch 'auth-change' event on login)
+    window.addEventListener('auth-change', handleStorageChange); 
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('auth-change', handleStorageChange);
+    };
+  }, [checkAuth]);
+
+  // --- UPDATED LOGOUT LOGIC ---
   const handleLogout = async (e: React.MouseEvent) => {
     e.preventDefault();
-    try { await fetch('/api/auth/logout', { method: 'POST' }); } catch (error) { console.error(error); }
+    
+    // 1. Optimistic Update (Immediate UI Change)
     localStorage.removeItem('user');
     setIsLoggedIn(false);
-    router.push('/');
     closeAll();
+    
+    // 2. Dispatch event so other components know (Optional but good practice)
+    window.dispatchEvent(new Event("auth-change"));
+
+    // 3. Navigation
+    router.push('/');
+
+    // 4. Server Side Cleanup (Non-blocking for UI)
+    try { 
+        await fetch('/api/auth/logout', { method: 'POST' }); 
+    } catch (error) { 
+        console.error("Logout API failed:", error); 
+        // Note: We don't revert state here because the user intends to logout regardless of server error
+    }
   };
 
   useEffect(() => {
@@ -217,11 +250,6 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [closeAll, isMobile]);
-
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) setIsLoggedIn(true);
-  }, []);
 
   function handleRootEnter(label: string, hasChildren: boolean) {
     if (!hasChildren || isMobile) return;
@@ -249,7 +277,7 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
   const socialItems: MenuItem[] = [
     { label: <FaXTwitter />, href: '#', colorClass: 'text-black', hoverColorClass: 'hover:text-gray-700' },
     { label: <FaFacebookF />, href: '#', colorClass: 'text-blue-600', hoverColorClass: 'hover:text-blue-800' },
-    { label: <FaLinkedinIn />, href: 'https://www.linkedin.com/in/gifon-africa-53a32831a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app', colorClass: 'text-blue-700', hoverColorClass: 'hover:text-blue-900' },
+    { label: <FaLinkedinIn />, href: 'https://www.linkedin.com/in/gifon-africa-53a32831a', colorClass: 'text-blue-700', hoverColorClass: 'hover:text-blue-900' },
   ];
 
   return (
@@ -272,7 +300,14 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
             <div className="hidden lg:flex items-center space-x-6">
                 <div className="flex items-center space-x-4 text-sm font-medium text-gray-600 border-r border-gray-300 pr-4">
                     {topBarItems.map((item, idx) => (
-                        <Link key={idx} href={item.href!} onClick={item.onClick} className="hover:text-green-700 transition-colors bellefair">{item.label}</Link>
+                        <Link 
+                            key={idx} 
+                            href={item.href!} 
+                            onClick={item.onClick} 
+                            className="hover:text-green-700 transition-colors bellefair"
+                        >
+                            {item.label}
+                        </Link>
                     ))}
                 </div>
                 <div className="flex items-center space-x-3 text-sm">
@@ -303,7 +338,6 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
       <div className="hidden lg:block border-t border-gray-100 bg-green-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="flex justify-between items-center py-2">
-                {/* USE navItems PROP HERE */}
                 {navItems.map((item) => {
                     const hasChildren = Boolean(item.children?.length);
                     const isOpen = openDropdown === item.label;
@@ -327,7 +361,6 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
                                 {hasChildren && <FaChevronDown size={10} className={`ml-1 transition-transform ${isOpen ? "rotate-180" : ""}`} />}
                             </Link>
 
-                            {/* Dropdown Container */}
                             {hasChildren && isOpen && (
                                 <Dropdown 
                                     items={item.children ?? []} 
@@ -343,6 +376,8 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
         </div>
       </div>
 
+      <Breadcrumbs />
+
       {/* 3. MOBILE MENU DRAWER */}
       <div className={`fixed inset-y-0 right-0 w-[85%] sm:w-[350px] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
           <div className="flex flex-col h-full overflow-y-auto pb-20">
@@ -351,7 +386,6 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
                   <button onClick={closeAll} className="text-gray-500 hover:text-red-500"><FaTimes size={24} /></button>
               </div>
               <div className="p-4 space-y-1">
-                  {/* USE navItems PROP HERE AS WELL */}
                   {navItems.map((item, idx) => {
                        const hasChildren = Boolean(item.children?.length);
                        const isOpen = openDropdown === item.label;

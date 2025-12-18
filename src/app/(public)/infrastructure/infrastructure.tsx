@@ -122,7 +122,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaShieldAlt size={24} />,
     summary: 'Advanced mapping and terrain analysis for military logistics and operations.',
     description: `Provide advanced mapping and terrain analysis for military logistics and operations. Support secure defence manufacturing zones through geospatial risk assessment. Contribute to defence readiness with real-time intelligence for operational planning.`,
-    image: '/ph.svg',
+    image: '/media/defense.jpeg',
     highlights: [
       'Provide advanced mapping and terrain analysis for military logistics and operations.',
       'Support secure defence manufacturing zones through geospatial risk assessment.',
@@ -148,7 +148,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaTractor size={24} />,
     summary: 'Earth observation for crop monitoring, yield forecasting, and climate adaptation.',
     description: `Use earth observation for crop monitoring, yield forecasting, and climate adaptation. Strengthen food security through land use analysis and supply chain visibility. Detect and prevent illegal land grabs and encroachment on agricultural reserves.`,
-    image: '/media/agric new.jpeg',
+    image: '/media/agriculture.jpeg',
     highlights: [
       'Use earth observation for crop monitoring, yield forecasting, and climate adaptation.',
       'Strengthen food security through land use analysis and supply chain visibility.',

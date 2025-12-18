@@ -60,7 +60,7 @@ export default function EducationPage() {
     },
     {
       title: 'Training & Certification',
-      src: "/ph.svg", 
+      src: "/media/training.jpeg", 
       link: '/education/training',
       description: 'Providing standardized, high-quality, and industry-recognized certifications in geospatial intelligence, data science, and related technologies.'
     },
@@ -120,7 +120,7 @@ export default function EducationPage() {
             <div className="w-full lg:w-1/2">
                 <div className="relative h-[400px] w-full bg-green-900 rounded-3xl overflow-hidden shadow-2xl group">
                    <Image 
-                     src="/ph.svg" 
+                     src="/media/training.jpeg" 
                      alt="Training session" 
                      fill 
                      className="object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"

@@ -75,7 +75,7 @@ export default function PublicationsPage() {
         // title="Eyes on Location – The GeoINSIGHT Bulletin"
         description={
           <>
-            Stay informed with <span className="cooper font-bold">GIFON</span>'s flagship publication, balancing deep insights on policy and technology with engaging updates from our community.
+            Stay Informed through <span className="cooper font-bold">GIFON</span>'s flagship delivering a balanced blend of policy analysis, technological insights and engaging updates from our growing Geospatial Intelligence Community.
           </>
       }
         ctaText="Read Latest Issue"

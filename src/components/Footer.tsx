@@ -71,9 +71,14 @@ export default function Footer() {
                 </div>
               </Link>
 
-              <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400 text-center">
-                Mapping the Future Empowering the Nation.
-              </p>
+              <div className='flex flex-col text-center gap-1 pl-10'>
+                <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400 text-center">
+                  Mapping the Future
+                </p>
+                <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400 text-center">
+                  Empowering the Nation.
+                </p>
+              </div>
 
               <div className="flex flex-wrap gap-3">
                   {socialLinks.map((link) => (

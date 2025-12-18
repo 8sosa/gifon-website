@@ -3,6 +3,7 @@ import { Montserrat, Bellota } from 'next/font/google';
 import localFont from 'next/font/local';
 import HeaderWrapper from '@/components/HeaderWrapper';
 import Footer from '@/components/Footer';
+// import Breadcrumbs from "@/components/BreadCrumbs";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -42,12 +43,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}
       >
         <HeaderWrapper />
-        
-        {/* CHANGE 2: Add dynamic top padding (pt) to main.
-           - pt-20 (5rem) for Mobile (matches the h-20 header)
-           - lg:pt-36 (9rem) for Desktop (matches h-24 + green nav bar height)
-        */}
         <main className="grow min-h-1/2 flex flex-col justify-start pt-20 lg:pt-36">
+          {/* <Breadcrumbs /> */}
           {children}
         </main>
         

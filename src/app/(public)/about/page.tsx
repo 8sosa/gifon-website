@@ -99,6 +99,11 @@ export default async function AboutPage() {
     <>
       <HeroSection
         title="About Us"
+        description={
+        <>
+          <span className="cooper">GIFON</span> advances Geospatial intelligence in support of Nigeria&apos;s Critical Infrastructure, National Security, Sustainable development connecting experts, institutions and innovators to shape a safer smarter Nation.
+        </>
+        }
         backgroundMedia={[
           '/media/about background.jpg'
         ]}
@@ -422,25 +427,6 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        <section id="board-directors" className="py-24 px-4 md:px-6 bg-white relative">
-          <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-16 max-w-3xl mx-auto">
-              <span className="text-green-600 font-bold tracking-wider text-sm uppercase">Governance</span>
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">Board of Trustees</h2>
-              <p className="text-gray-500 text-lg">
-                Distinguished individuals providing strategic oversight and ensuring we stay true to our mission.
-              </p>
-              <div className="w-24 h-1 bg-green-100 mx-auto mt-8 rounded-full">
-                  <div className="w-12 h-full bg-green-600 rounded-full"></div>
-              </div>
-            </div>
-
-            {/* Grid */}
-            <TeamGrid members={mapMembersByCategory(members, 'Board')} />
-          </div>
-        </section>
-
       {/* --- SECTION 2: MANAGEMENT TEAM (Dynamic, Asymmetrical, Light Gray) --- */}
       <section id="management-team" className="py-24 px-4 md:px-6 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
@@ -455,15 +441,15 @@ export default async function AboutPage() {
                 Management <br/> <span className="text-green-600">Team</span>
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                Our executive team combines decades of expertise in geospatial intelligence, policy formation, and administrative leadership to drive our daily operations.
+                Our Executive Team drives <span className="cooper">GIFON</span>&apos;s mission with expertise, vision and leadership advancing Geospatial Intelligence, National Security and sustainable development in Nigeria.
               </p>
               
               {/* Decorative Stat or Quote */}
               <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hidden lg:block">
-                <p className="italic text-gray-500 mb-4">"Leadership is the capacity to translate vision into reality."</p>
+                <p className="italic text-gray-500 mb-4">"Leading with Insights. Securing with intelligence. Innovating for Nigeria."</p>
                 <div className="flex items-center gap-2">
                    <div className="h-1 w-10 bg-green-500 rounded-full"></div>
-                   <span className="text-sm font-semibold text-gray-900"><span className="cooper">GIFON</span> Executive</span>
+                   <p className="text-sm font-semibold text-gray-900"><span className="cooper">GIFON</span> Executive</p>
                 </div>
               </div>
             </div>

@@ -62,8 +62,9 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
 
       {/* --- SECTORS CAROUSEL --- */}
       <section id="sectors-carousel" className="py-16 bg-white overflow-hidden border-b border-gray-100">
-        <div className="max-w-7xl mx-auto mb-10 px-6 text-center">
-           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 bellefair">Critical Infrastructure Support</h2>
+        <div className="max-w-5xl mx-auto mb-10 px-6 text-center bellefair gap-6">
+           {/* <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Critical Infrastructure Support</h2> */}
+           <span className="text-md font-bold text-gray-700">Our Core areas of support is Critical infrastructure, where Geospatial Intelligence, policy Insights, and advanced technologies are applied to strengthen, secure and future proof the systems essential to national security, economic resilience and National development.</span>
         </div>
         <div className="relative py-4">
             <div className="absolute inset-y-0 left-0 w-24 bg-linear-to-r from-white to-transparent z-10 pointer-events-none"></div>
@@ -139,7 +140,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
                   </h3>
               </div>
               <p className="text-gray-300 text-lg leading-relaxed">
-                Join a community dedicated to mapping the future and empowering the nation. Whether you are an individual or an organization, discover how you can contribute to the GeoINT ecosystem.
+                Join a growing community of professionals, institutions and innovators advancing Geospatial Intelligence in support of Nigeria’s Critical Infrastructure, National Security and Sustainable development.
               </p>
               <div className="pt-4">
                 <a href="/membership" className="inline-block bg-white text-green-900 font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl hover:bg-gray-100 transition-all hover:scale-105">
@@ -251,13 +252,13 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             <div className="w-full md:w-1/2 flex flex-col items-start text-left">
               <div className="inline-block mb-4">
                 <h2 className="text-green-600 text-sm font-bold uppercase tracking-widest mb-2">Showcase</h2>
-                <h3 className="text-3xl md:text-4xl font-bold text-gray-900">Featured StoryMap</h3>
+                <h3 className="text-3xl md:text-4xl font-bold text-gray-900">Members Spotlight</h3>
               </div>
               <p className="mb-8 text-gray-600 text-lg leading-relaxed">
-                We are looking forward to featuring a member&apos;s StoryMap each month in this section. The first one celebrates <span className="cooper">GIFON&apos;s</span> GIS Hall of Fame inductees.
+                We Look Forward to featuring a selected members story each month in this section. This feature celebrates a distinguished inductee into <span className="cooper">GIFON&apos;s</span> Hall of Fame.
               </p>
               <button className="bg-gray-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-600 transition-all shadow-lg hover:shadow-green-500/30 flex items-center gap-2">
-                Launch StoryMap <ArrowRight size={18} />
+                Launch Spotlight <ArrowRight size={18} />
               </button>
             </div>
           </div>
