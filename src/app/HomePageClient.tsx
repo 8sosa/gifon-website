@@ -11,22 +11,10 @@ import { FaRegNewspaper, FaFacebook, FaLinkedin, FaInstagram, FaYoutube, FaTwitt
 import { Calendar, Newspaper, ArrowRight, Share2 } from 'lucide-react';
 import { sections } from './(public)/infrastructure/infrastructure';
 
-// --- Static Data ---
-const partnerLogos: CarouselItem[] = [
-  { src: '/images/dhq.png', alt: 'Defense HeadQuarters' },
-  { src: '/images/na.png', alt: 'Nigerian Army' },
-  { src: '/images/naf.png', alt: 'Nigerian Air-Force' },
-  { src: '/images/dgi.jpeg', alt: 'DGI London', caption: 'Media Partners' },
-];
-
 const sectorItems: CarouselItem[] = Object.values(sections).map((sector) => {
-  // 1. Determine the image source safely
-  const imageSrc = Array.isArray(sector.images) 
-    ? sector.images[0] 
-    : sector.images;
 
   return {
-    src: imageSrc,
+    src: sector.images, // Pass the array or string directly!
     alt: sector.title,
     title: sector.title, 
     href: `/infrastructure#${sector.id}`, 
@@ -76,7 +64,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
         <div className="relative py-4">
             <div className="absolute inset-y-0 left-0 w-24 bg-linear-to-r from-green-900 to-transparent z-10 pointer-events-none"></div>
             <div className="absolute inset-y-0 right-0 w-24 bg-linear-to-l from-green-900 to-transparent z-10 pointer-events-none"></div>
-            <LogoCarousel items={sectorItems} loopDurationMs={40000} />
+            <LogoCarousel items={sectorItems}/>
         </div>
       </section>
 

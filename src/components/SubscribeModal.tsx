@@ -66,9 +66,9 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
                     <Mail className="text-green-300" size={24} />
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold font-cooper mb-2 leading-tight">
-                    Eyes on Location
+                    - Eyes on Location -
                 </h3>
-                <p className="text-green-200 text-sm md:text-base font-medium uppercase tracking-wider mb-4">
+                <p className="text-green-200 text-sm md:text-base font-medium uppercase tracking-wider mb-4 text-center">
                     The GeoINSIGHT Bulletin
                 </p>
                 <p className="text-gray-300 text-sm leading-relaxed">

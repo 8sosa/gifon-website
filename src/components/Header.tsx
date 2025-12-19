@@ -287,32 +287,36 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
         <div className="flex justify-between items-center h-20 md:h-24">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-4 md:gap-6 group">
-              {/* Logo Placeholder - replaces the globe/leaf icon */}
-              <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 transition-transform group-hover:scale-105">
-                {/* Ensure you have your logo.png here, or use a placeholder icon */}
-                <Image 
-                  src="/logo.png" 
-                  alt="GIFON Logo" 
-                  fill 
-                  className="object-contain"
-                />
-              </div>
+            {/* Logo Placeholder - replaces the globe/leaf icon */}
+            <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 transition-transform group-hover:scale-105">
+               {/* Ensure you have your logo.png here, or use a placeholder icon */}
+               <Image 
+                 src="/logo.png" 
+                 alt="GIFON Logo" 
+                 fill 
+                 className="object-contain"
+               />
+            </div>
 
-              {/* Main Title Text */}
-              <div className="flex flex-col justify-center">
-                {/* The "GEOSPATIAL Intelligence" line */}
-                <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
-                  Geospatial Intelligence
-                </h1>
-                {/* The "FOUNDATION OF NIGERIA" line */}
-                <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
-                  Foundation Of Nigeria
-                </h1>
-                <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair uppercase drop-shadow-sm text-center">
-                  (<span className="cooper text-black">GIFON</span>)
-                </h1>
-              </div>
-            </Link>
+            {/* Main Title Text */}
+            <div className="flex flex-col justify-center">
+              {/* The "GEOSPATIAL" line */}
+              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
+                Geospatial
+              </h1>
+              {/* The "INTELLIGENCE" line */}
+              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
+                Intelligence
+              </h1>
+              {/* The "FOUNDATION OF NIGERIA" line */}
+              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
+                Foundation Of Nigeria
+              </h1>
+              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair uppercase drop-shadow-sm text-center">
+                (<span className="cooper text-black">GIFON</span>)
+              </h1>
+            </div>
+          </Link>
 
             {/* Desktop Utilities */}
             <div className="hidden lg:flex items-center space-x-6">

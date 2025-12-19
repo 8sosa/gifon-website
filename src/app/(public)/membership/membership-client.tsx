@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import HeroSection from '@/components/HeroSection';
 import { 
@@ -160,6 +161,24 @@ const forumContent = {
     </div>
   `
 }
+
+const pioneerMembers = [
+    {
+        name: " ",
+        role: " ",
+        photo: "/ph.svg"
+    },
+    {
+        name: " ",
+        role: " ",
+        photo: "/ph.svg"
+    },
+    {
+        name: " ",
+        role: " ",
+        photo: "/ph.svg"
+    },
+];
 
 export default function MembershipClient({ children }: { children: React.ReactNode }) {
     // UI States
@@ -1039,6 +1058,35 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                             </table>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <div id="pioneer-members"></div>
+            <section className="py-20 px-4 md:px-6 bg-white">
+                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight text-center">
+                    Pioneer Members
+                </h2>
+                <div className="mt-16 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-6">
+                    {pioneerMembers.map((m, i) => (
+                        <div key={i} className="flex flex-col items-center relative">      
+                        <div className="flex flex-col items-center text-center w-40 group">
+                          <div className="relative w-32 h-32 mb-3 transition-transform duration-300 group-hover:scale-105">
+                            <Image
+                              src={m.photo}
+                              alt={m.name}
+                              fill
+                              className="rounded-full object-cover shadow-md border-4 border-white ring-1 ring-gray-100"
+                            />
+                          </div>
+                          <h4 className="text-base font-bold text-gray-900 bellefair mb-0.5 group-hover:text-green-700 transition-colors">
+                            {m.name}
+                          </h4>
+                          <p className="text-xs text-green-600 font-medium sen uppercase tracking-tight">
+                            {m.role}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                 </div>
             </section>
 
