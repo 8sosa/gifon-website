@@ -67,7 +67,8 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             <LogoCarousel items={sectorItems}/>
         </div>
       </section>
-
+      
+      <div id='our-partners'></div>
       <PartnersCarousel />
 
       {/* --- NEWSLETTER SECTION --- */}

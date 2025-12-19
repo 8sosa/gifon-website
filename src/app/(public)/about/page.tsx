@@ -459,7 +459,7 @@ export default async function AboutPage() {
           </div>
         </div>
       </section>
-
+                <div id='our-partners'></div>
         <PartnersCarousel />
         
       </main>
