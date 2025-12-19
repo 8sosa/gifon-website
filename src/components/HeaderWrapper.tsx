@@ -70,7 +70,7 @@ export default async function HeaderWrapper() {
         ] 
     },
     { 
-        label: 'Areas of Support', 
+        label: 'Geospatial Intelligence Consulting', 
         href: '/infrastructure', 
         children: [ 
             { label: 'Power and Energy', anchor: 'energy' }, 
