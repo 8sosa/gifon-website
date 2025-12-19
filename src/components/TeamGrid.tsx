@@ -38,7 +38,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
             <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 max-w-2xl">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 bellefair mb-2">{leader.name}</h2>
-                <p className="text-lg md:text-xl text-green-700 font-medium sen uppercase tracking-wider">Founder & Executive Chairman, <span className="cooper">GIFON</span></p>
+                <p className="text-lg md:text-xl text-green-700 font-medium uppercase tracking-wider italic">Founder & Executive Chairman, <span className="cooper not-italic">GIFON</span></p>
               </div>
               
               {/* Action Button */}
@@ -56,39 +56,92 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
       )}
 
 
-      {/* --- SECTION 2: The Rest of the Team --- */}
-      {others.length > 0 && (
-        <>
-          <div className="text-center mb-12">
-            <div className="w-20 h-1 bg-green-600 mx-auto mt-2 rounded-full"></div>
-          </div>
-          
-          {/* Using CSS Grid for better vertical alignment across rows */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 justify-items-center">
-            {others.map((m, i) => (
-              <div 
-                key={i} 
-                className="flex flex-col items-center text-center w-full max-w-xs group"
-              >
-                {/* Image container with hover effect */}
-                <div className="relative w-40 h-40 mb-5 transition-transform duration-300 group-hover:scale-105">
-                    {/* Subtle ring instead of prominent border for non-leaders */}
+      {/* --- SECTION 2: The Team Tree --- */}
+      {others.length > 0 && (() => {
+        // 1. DATA PREPARATION
+        // Find specific key people
+        const rootNode = others.find(m => m.name.includes("Isaac Amkpa"));
+        const leftNode = others.find(m => m.name.includes("Paulette Oguma"));
+        
+        // Create a list of "everyone else" (excluding Isaac and Paulette)
+        const restOfTeam = others.filter(m => 
+          !m.name.includes("Isaac Amkpa") && 
+          !m.name.includes("Paulette Oguma")
+        );
+
+        // Combine for the bottom row: Paulette must be first (Left)
+        // We cast the result to match the type of 'others', guaranteeing no undefined values
+        const bottomRow = [leftNode, ...restOfTeam].filter((n) => !!n) as typeof others;
+        return (
+          <div className="flex flex-col items-center w-full mb-16">
+            
+            {/* --- LEVEL 1: THE ROOT (Isaac Amkpa) --- */}
+            {rootNode && (
+              <div className="flex flex-col items-center relative z-10">
+                <div className="flex flex-col items-center text-center group cursor-pointer">
+                  <div className="relative w-48 h-48 mb-4 transition-transform duration-300 group-hover:scale-105">
                     <Image
-                    src={m.photo}
-                    alt={m.name}
-                    fill
-                    className="rounded-full object-cover shadow-md border-4 border-white ring-1 ring-gray-200/80"
+                      src={rootNode.photo}
+                      alt={rootNode.name}
+                      fill
+                      className="rounded-full object-cover shadow-xl border-4 border-white ring-2 ring-green-100"
                     />
+                  </div>
+                  <h4 className="text-xl font-bold text-gray-900 bellefair group-hover:text-green-700 transition-colors">
+                    {rootNode.name}
+                  </h4>
+                  <p className="text-green-600 font-medium sen uppercase tracking-tight">
+                    {rootNode.role}
+                  </p>
                 </div>
-                
-                <h4 className="text-lg font-bold text-gray-900 bellefair mb-1 group-hover:text-green-700 transition-colors">{m.name}</h4>
-                <p className="text-sm text-green-600 font-medium sen uppercase tracking-tight">{m.role}</p>
-                
+
+                {/* Vertical Connector Line from Root Down */}
+                <div className="w-px h-12 bg-gray-300 mt-2"></div>
               </div>
-            ))}
+            )}
+
+            {/* --- CONNECTOR BAR (Horizontal Tree Branch) --- */}
+            {/* Only show if we have a bottom row */}
+            {bottomRow.length > 0 && (
+              <div className="relative w-full max-w-4xl flex justify-center mb-8">
+                  {/* The horizontal line spanning the children */}
+                  {/* We constrain width to cover roughly the center of first child to center of last child */}
+                  <div className="absolute top-0 w-[85%] h-px bg-gray-300"></div>
+              </div>
+            )}
+
+            {/* --- LEVEL 2: THE BRANCHES (Paulette + Others) --- */}
+            <div className="flex flex-wrap justify-center gap-x-12 gap-y-12 max-w-6xl mx-auto relative z-10">
+              {bottomRow.map((m, i) => (
+                <div key={i} className="flex flex-col items-center relative">
+                  
+                  {/* Vertical Connector Line from Branch Up */}
+                  {/* Pulls up to touch the horizontal bar */}
+                  <div className="absolute -top-8 w-px h-8 bg-gray-300"></div>
+
+                  <div className="flex flex-col items-center text-center w-40 group">
+                    <div className="relative w-32 h-32 mb-3 transition-transform duration-300 group-hover:scale-105">
+                      <Image
+                        src={m.photo}
+                        alt={m.name}
+                        fill
+                        className="rounded-full object-cover shadow-md border-4 border-white ring-1 ring-gray-100"
+                      />
+                    </div>
+                    <h4 className="text-base font-bold text-gray-900 bellefair mb-0.5 group-hover:text-green-700 transition-colors">
+                      {m.name}
+                    </h4>
+                    <p className="text-xs text-green-600 font-medium sen uppercase tracking-tight">
+                      {m.role}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
           </div>
-        </>
-      )}
+        );
+      })()}
     </section>
   );
 }
