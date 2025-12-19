@@ -60,12 +60,11 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
       {others.length > 0 && (
         <>
           <div className="text-center mb-12">
-            <h3 className="text-2xl font-bold bellefair text-gray-800">Our Dedicated Team</h3>
             <div className="w-20 h-1 bg-green-600 mx-auto mt-2 rounded-full"></div>
           </div>
           
           {/* Using CSS Grid for better vertical alignment across rows */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16 justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 justify-items-center">
             {others.map((m, i) => (
               <div 
                 key={i} 

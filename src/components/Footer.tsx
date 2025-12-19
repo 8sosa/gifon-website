@@ -71,7 +71,7 @@ export default function Footer() {
                 </div>
               </Link>
 
-              <div className='flex flex-col text-center gap-1 pl-10'>
+              <div className='flex flex-col text-center gap-0 pl-10'>
                 <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400 text-center">
                   Mapping the Future
                 </p>

@@ -1062,7 +1062,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                     </blockquote>
                     <div className="flex flex-col items-center">
                         <p className="text-xl font-bold text-green-400">Dr. AA Usman</p>
-                        <p className="text-green-200 uppercase tracking-widest text-sm">Founder & Executive Chairman, <span className="cooper">GIFON</span></p>
+                        <p className="text-green-200 uppercase tracking-widest text-sm italic">Founder & Executive Chairman, <span className="cooper not-italic">GIFON</span></p>
                     </div>
                 </div>
             </section>

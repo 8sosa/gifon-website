@@ -20,7 +20,7 @@ export interface Sector {
   icon: JSX.Element;
   summary: string;
   description: string;
-  image: string;
+  images: readonly string[] | string;
   highlights: readonly string[];
 }
 
@@ -31,7 +31,10 @@ export const sections: Record<string, Sector> = {
     icon: <FaBolt size={24} />,
     summary: 'Mapping and monitoring of power grids, oil and gas pipelines, and renewable energy assets.',
     description: `Apply GEOINT for mapping and monitoring of power grids, oil and gas pipelines, and renewable energy assets. Support early warning for vandalism, illegal tapping, and sabotage. Enhance site planning for future energy infrastructure and off-grid solutions.`,
-    image: '/media/energy.jpeg',
+    images: [
+      '/media/energy.jpeg',
+      '/media/energy1.jpeg',
+    ],
     highlights: [
       'Apply GEOINT for mapping and monitoring of power grids, oil and gas pipelines, and renewable energy assets.',
       'Support early warning for vandalism, illegal tapping, and sabotage.',
@@ -44,7 +47,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaWater size={24} />,
     summary: 'Monitoring rivers, dams, and irrigation systems with flood risk modelling.',
     description: `Map and monitor rivers, dams, and irrigation systems. Provide flood risk modelling and disaster preparedness solutions. Enhance water quality monitoring and equitable access through spatial intelligence.`,
-    image: '/media/waterrrr.jpeg',
+    images: '/media/waterrrr.jpeg',
     highlights: [
       'Map and monitor rivers, dams, and irrigation systems.',
       'Provide flood risk modelling and disaster preparedness solutions.',
@@ -57,7 +60,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaBroadcastTower size={24} />,
     summary: 'Siting and protection of telecom towers, fibre networks, and ICT hubs.',
     description: `Use geospatial data for siting and protection of telecom towers, fibre networks, and ICT hubs. Support redundancy planning to avoid single points of failure. Enable location-based intelligence to secure cyber and physical communication assets.`,
-    image: '/media/Comunication.jpg',
+    images: '/media/Comunication.jpg',
     highlights: [
       'Use geospatial data for siting and protection of telecom towers, fibre networks, and ICT hubs.',
       'Support redundancy planning to avoid single points of failure.',
@@ -70,7 +73,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaUniversity size={24} />,
     summary: 'Location-based intelligence for ATM siting and tracking illicit transactions.',
     description: `Strengthen financial security through location-based intelligence for ATM and branch siting. Support anti-fraud operations by tracking geospatial patterns of illicit transactions. Map financial inclusion gaps to guide policy and private investment.`,
-    image: '/media/Banking and finance.jpeg',
+    images: '/media/Banking and finance.jpeg',
     highlights: [
       'Strengthen financial security through location-based intelligence for ATM and branch siting.',
       'Support anti-fraud operations by tracking geospatial patterns of illicit transactions.',
@@ -83,7 +86,11 @@ export const sections: Record<string, Sector> = {
     icon: <FaHeartbeat size={24} />,
     summary: 'GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns.',
     description: `Use GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns. Support healthcare infrastructure planning and accessibility analysis. Provide real-time data for emergency response and disaster medicine.`,
-    image: '/media/HealthCare.jpg',
+    images: 
+    [
+      '/media/health.jpeg',
+      '/media/health1.jpeg'
+    ],
     highlights: [
       'Use GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns.',
       'Support healthcare infrastructure planning and accessibility analysis.',
@@ -96,7 +103,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaLandmark size={24} />,
     summary: 'Mapping, monitoring, and securing federal/state government facilities.',
     description: `Map, monitor, and secure federal/state government facilities. Support continuity of government planning using spatial risk assessments. Provide GEOINT for the protection of national monuments, heritage sites, and strategic assets.`,
-    image: '/media/pa.jpeg',
+    images: '/media/pa.jpeg',
     highlights: [
       'Map, monitor, and secure federal/state government facilities.',
       'Support continuity of government planning using spatial risk assessments.',
@@ -109,7 +116,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaGraduationCap size={24} />,
     summary: 'Planning equitable distribution of schools and strengthening STEM programs.',
     description: `Support planning and equitable distribution of schools and research centers. Use spatial data to strengthen STEM and geospatial education programs. Facilitate research collaborations with academia and global geospatial partners.`,
-    image: '/media/edu.jpeg',
+    images: '/media/edu.jpeg',
     highlights: [
       'Support planning and equitable distribution of schools and research centers.',
       'Use spatial data to strengthen STEM and geospatial education programs.',
@@ -122,7 +129,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaShieldAlt size={24} />,
     summary: 'Advanced mapping and terrain analysis for military logistics and operations.',
     description: `Provide advanced mapping and terrain analysis for military logistics and operations. Support secure defence manufacturing zones through geospatial risk assessment. Contribute to defence readiness with real-time intelligence for operational planning.`,
-    image: '/media/defense.jpeg',
+    images: '/media/defense.jpeg',
     highlights: [
       'Provide advanced mapping and terrain analysis for military logistics and operations.',
       'Support secure defence manufacturing zones through geospatial risk assessment.',
@@ -135,7 +142,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaCar size={24} />,
     summary: 'Spatial analysis for air, road, rail, and maritime networks and logistics.',
     description: `Provide spatial analysis for air, road, rail, and maritime networks. Optimize traffic management, logistics, and accident prevention. Support secure navigation and border monitoring for aviation and maritime safety.`,
-    image: '/media/Transport.jpg',
+    images: '/media/Transport.jpg',
     highlights: [
       'Provide spatial analysis for air, road, rail, and maritime networks.',
       'Optimize traffic management, logistics, and accident prevention.',
@@ -148,7 +155,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaTractor size={24} />,
     summary: 'Earth observation for crop monitoring, yield forecasting, and climate adaptation.',
     description: `Use earth observation for crop monitoring, yield forecasting, and climate adaptation. Strengthen food security through land use analysis and supply chain visibility. Detect and prevent illegal land grabs and encroachment on agricultural reserves.`,
-    image: '/media/agriculture.jpeg',
+    images: '/media/agriculture.jpeg',
     highlights: [
       'Use earth observation for crop monitoring, yield forecasting, and climate adaptation.',
       'Strengthen food security through land use analysis and supply chain visibility.',
@@ -161,7 +168,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaFirstAid size={24} />,
     summary: 'Real-time situational awareness for disaster response and recovery.',
     description: `Provide real-time situational awareness for disaster response and recovery. Optimize deployment of fire, rescue, and law enforcement services. Support search and rescue missions with satellite and drone imagery.`,
-    image: '/media/Emergency Services.jpg',
+    images: '/media/Emergency Services.jpg',
     highlights: [
       'Provide real-time situational awareness for disaster response and recovery.',
       'Optimize deployment of fire, rescue, and law enforcement services.',
@@ -174,7 +181,7 @@ export const sections: Record<string, Sector> = {
     icon: <FaGears size={24} />,
     summary: 'Supply chain risk management and industrial park planning analytics.',
     description: `Use geospatial intelligence for supply chain risk management. Provide location analytics for industrial park planning and monitoring. Support resilience of manufacturing assets against natural and man-made hazards.`,
-    image: '/media/manufacturing img.jpg',
+    images: '/media/manufacturing img.jpg',
     highlights: [
       'Use geospatial intelligence for supply chain risk management.',
       'Provide location analytics for industrial park planning and monitoring.',
@@ -186,8 +193,8 @@ export const sections: Record<string, Sector> = {
     title: 'Mines and Steel',
     icon: <FaHammer size={24} />,
     summary: 'Geospatial monitoring of mining sites, geological surveys, and steel production.',
-    description: `Apply GEOINT for the mapping and monitoring of mining sites, steel plants, and mineral exploration zones. Detect illegal mining activities and environmental degradation through satellite imagery. Support strategic planning for the steel industry and raw material supply chains.`,
-    image: '/media/mines.jpeg',
+    description: `Apply GEOINT for the mapping and monitoring of mining sites, steel plants, and mineral exploration zones. Detect illegal mining activities and environmental degradation through satellite imagesry. Support strategic planning for the steel industry and raw material supply chains.`,
+    images: '/media/mines.jpeg',
     highlights: [
       'Apply GEOINT for mapping and monitoring of mining sites, mineral belts, haul routes, and steel-production facilities.',
       'Support early warning for illegal mining, encroachment, unsafe excavation practices, and environmental degradation.',

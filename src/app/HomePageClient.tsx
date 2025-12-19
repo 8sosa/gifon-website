@@ -19,12 +19,19 @@ const partnerLogos: CarouselItem[] = [
   { src: '/images/dgi.jpeg', alt: 'DGI London', caption: 'Media Partners' },
 ];
 
-const sectorItems: CarouselItem[] = Object.values(sections).map((sector) => ({
-  src: sector.image,
-  alt: sector.title,
-  title: sector.title, 
-  href: `/infrastructure#${sector.id}`, 
-}));
+const sectorItems: CarouselItem[] = Object.values(sections).map((sector) => {
+  // 1. Determine the image source safely
+  const imageSrc = Array.isArray(sector.images) 
+    ? sector.images[0] 
+    : sector.images;
+
+  return {
+    src: imageSrc,
+    alt: sector.title,
+    title: sector.title, 
+    href: `/infrastructure#${sector.id}`, 
+  };
+});
 
 // --- Helper for Date Badge ---
 function getDateParts(dateString?: string) {
@@ -64,7 +71,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
       <section id="sectors-carousel" className="py-16 bg-green-900 overflow-hidden border-b border-gray-100">
         <div className="max-w-5xl mx-auto mb-10 px-6 text-center bellefair gap-6">
            {/* <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Critical Infrastructure Support</h2> */}
-           <span className="text-xl font-bold text-gray-100">Our Core areas of support is Critical infrastructure, where Geospatial Intelligence, policy Insights, and advanced technologies are applied to strengthen, secure and future proof the systems essential to national security, economic resilience and National development.</span>
+           <span className="text-xl font-bold text-gray-100">Our core areas of support is critical infrastructure, where Geospatial Intelligence, policy insights, and advanced technologies are applied to strengthen, secure and future proof the systems essential to national security, economic resilience and national development.</span>
         </div>
         <div className="relative py-4">
             <div className="absolute inset-y-0 left-0 w-24 bg-linear-to-r from-green-900 to-transparent z-10 pointer-events-none"></div>

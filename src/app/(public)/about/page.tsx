@@ -434,9 +434,6 @@ export default async function AboutPage() {
             
             {/* Left Column: Sticky Title & Context */}
             <div className="lg:w-1/3 lg:sticky lg:top-24 text-left">
-              <span className="inline-block py-1 px-3 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider mb-4">
-                Operations
-              </span>
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 Management <br/> <span className="text-green-600">Team</span>
               </h2>

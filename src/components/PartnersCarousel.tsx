@@ -38,7 +38,7 @@ export default function PartnersCarousel() {
 
       <div className="max-w-7xl mx-auto px-6 text-center mb-16 relative z-10">
         <h3 className="text-3xl font-bold text-white font-cooper">
-          <span className="text-green-500">Partners</span>
+          <span className="text-green-500">Our Partners</span>
         </h3>
       </div>
 

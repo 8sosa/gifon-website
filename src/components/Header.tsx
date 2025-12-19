@@ -301,19 +301,19 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
             {/* Main Title Text */}
             <div className="flex flex-col justify-center">
               {/* The "GEOSPATIAL" line */}
-              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair uppercase drop-shadow-sm">
-                GEOSPATIAL
+              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
+                Geospatial
               </h1>
               {/* The "INTELLIGENCE" line */}
-              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair uppercase drop-shadow-sm">
-                INTELLIGENCE
+              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
+                Intelligence
               </h1>
               {/* The "FOUNDATION OF NIGERIA" line */}
-              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair uppercase drop-shadow-sm">
-                FOUNDATION OF NIGERIA
+              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
+                Foundation Of Nigeria
               </h1>
               <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair uppercase drop-shadow-sm">
-                (GIFON)
+                (<span className="text-black">GIFON</span>)
               </h1>
             </div>
           </Link>

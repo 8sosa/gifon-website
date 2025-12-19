@@ -3,15 +3,18 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Sector } from "@/app/(public)/infrastructure/infrastructure"; // Import the shared type
+import { Sector } from "@/app/(public)/infrastructure/infrastructure"; 
 
 export default function SectionDetail({ section }: { section: Sector }) {
+  
+  // --- FIX: Logic to select the main display image ---
+  // If 'images' is an array, grab the first one. If it's a string, use it directly.
+  const displayImage = Array.isArray(section.images) 
+    ? section.images[0] 
+    : section.images;
+
   return (
     <section className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-      {/* Layout: 
-        On Desktop: Text Left (3 cols), Visual/Diagram Right (2 cols) 
-        On Mobile: Visual Top, Text Bottom
-      */}
       <div className="grid lg:grid-cols-5 gap-12 items-start">
         
         {/* LEFT COLUMN: Content */}
@@ -45,7 +48,6 @@ export default function SectionDetail({ section }: { section: Sector }) {
                   className="p-4 rounded-xl bg-green-50 border border-green-100 shadow-sm flex items-center gap-3"
                 >
                   <div className="text-green-600">
-                    {/* Simple checkmark icon */}
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -77,21 +79,20 @@ export default function SectionDetail({ section }: { section: Sector }) {
         <aside className="lg:col-span-2 space-y-6">
           <div className="sticky top-24">
             <div className="relative aspect-4/3 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+              {/* --- FIX: Use the calculated displayImage variable --- */}
               <Image 
-                src={section.image} 
+                src={displayImage} 
                 alt={section.title} 
                 fill 
                 className="object-cover hover:scale-105 transition-transform duration-700" 
               />
               
-              {/* Overlay for visual flair */}
               <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent pointer-events-none"></div>
               <div className="absolute bottom-4 left-4 right-4 text-white text-sm font-medium drop-shadow-md">
                  {section.summary}
               </div>
             </div>
 
-            {/* Optional: Add a 'Related Resources' card below the image if needed */}
             <div className="mt-6 p-6 bg-gray-50 rounded-2xl border border-gray-100">
                 <h4 className="font-bold text-gray-900 mb-2">Need detailed reports?</h4>
                 <p className="text-sm text-gray-600 mb-4">
