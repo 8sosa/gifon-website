@@ -87,8 +87,8 @@ export default function Footer() {
               <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
                 Foundation Of Nigeria
               </h1>
-              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair uppercase drop-shadow-sm text-center">
-                (<span className="cooper text-white">GIFON</span>)
+              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-white leading-none tracking-wide bellefair uppercase drop-shadow-sm text-center">
+                (<span className="cooper">GIFON</span>)
               </h1>
             </div>
           </Link>

@@ -312,8 +312,8 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
               <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
                 Foundation Of Nigeria
               </h1>
-              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair uppercase drop-shadow-sm">
-                (<span className="cooper text-black">GIFON</span>)
+              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-black leading-none tracking-wide bellefair uppercase drop-shadow-sm">
+                (<span className="cooper">GIFON</span>)
               </h1>
             </div>
           </Link>

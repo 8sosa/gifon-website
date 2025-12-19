@@ -78,7 +78,7 @@ export default function PublicationsPage() {
             Stay Informed through <span className="cooper font-bold">GIFON</span>'s flagship publication, delivering a balanced blend of policy analysis, technological insights and engaging updates from our growing Geospatial Intelligence Community.
           </>
       }
-        ctaText="Read Latest Issue"
+        ctaText="Read Latest Issues"
         ctaLink="#latest-issue"
         backgroundMedia={[
           "/media/eye.jpeg",
