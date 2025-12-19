@@ -266,29 +266,48 @@ useEffect(() => {
         />
 
         {/* --- 6. PUBLICATIONS --- */}
-        <section className='relative w-full bg-green-900 pt-24 pb-32 overflow-hidden' id='publications'>
+        <section className='relative w-full pt-24 pb-32 overflow-hidden' id='publications'>
           
-          {/* Decorative Background Pattern (Grid) */}
-          <div className="absolute inset-0 opacity-10 pointer-events-none" 
-               style={{ 
-                 backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', 
-                 backgroundSize: '40px 40px' 
-               }}>
+          {/* --- 1. BACKGROUND IMAGE & OVERLAY --- */}
+          <div className="absolute inset-0 z-0">
+            <Image 
+              src="/media/sub.JPG" // <--- REPLACE THIS with your image path
+              alt="Background" 
+              fill 
+              className="object-cover"
+              priority={false}
+            />
+            
+            {/* Dark Overlay: This ensures text is readable. 
+                Adjust opacity (e.g., /90, /80) to show more or less of the image. 
+            */}
+            <div className="absolute inset-0 bg-green-900/90 mix-blend-multiply"></div>
           </div>
-          {/* Radial Glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-green-600/20 blur-[100px] pointer-events-none"></div>
 
+          {/* --- 2. DECORATIVE ELEMENTS (Kept from your original code) --- */}
+          {/* Grid Pattern */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none z-0" 
+              style={{ 
+                backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', 
+                backgroundSize: '40px 40px' 
+              }}>
+          </div>
+          
+          {/* Radial Glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-green-600/20 blur-[100px] pointer-events-none z-0"></div>
+
+          {/* --- 3. CONTENT (Must be relative & z-10 to sit above image) --- */}
           <div className='max-w-6xl mx-auto px-6 relative z-10'>
             
             {/* Section Header */}
             <div className="mb-16 text-center">
-              <span className="inline-block py-1 px-3 rounded-full bg-green-800 text-green-300 text-xs font-bold uppercase tracking-widest mb-4 border border-green-700">
+              <span className="inline-block py-1 px-3 rounded-full bg-green-800/80 backdrop-blur-sm text-green-300 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30">
                 Knowledge Hub
               </span>
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-cooper">
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-cooper drop-shadow-md">
                 Publications & Research
               </h2>
-              <p className="text-lg text-green-100 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg text-green-50 max-w-3xl mx-auto leading-relaxed drop-shadow-sm">
                 At <span className="cooper font-bold">GIFON</span>, knowledge is our currency. Explore our archive of insights, peer-reviewed research, and strategic policy documents shaping the future of geospatial intelligence.
               </p>
             </div>
@@ -299,7 +318,7 @@ useEffect(() => {
                 <div 
                   key={idx} 
                   id={pub.id}
-                  className="group relative bg-white rounded-2xl p-8 shadow-xl border border-transparent hover:border-green-400 transition-all duration-300 hover:-translate-y-2 flex flex-col"
+                  className="group relative bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20 hover:border-green-400 transition-all duration-300 hover:-translate-y-2 flex flex-col"
                 >
                   {/* Hover Glow Effect */}
                   <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl -z-10"></div>
