@@ -71,7 +71,7 @@ export default function PartnersCarousel() {
                 </div>
                 {/* Conditional Rendering for Caption */}
                 {partner.caption && (
-                  <span className="mb-2 text-md font-semibold uppercase tracking-wider text-green-500 mt-10">
+                  <span className="mb-2 text-md font-semibold uppercase tracking-wider text-green-500 mt-1">
                     {partner.caption}
                   </span>
                 )}
@@ -99,7 +99,7 @@ export default function PartnersCarousel() {
                 </div>
                 {/* Conditional Rendering for Caption */}
                 {partner.caption && (
-                  <span className="mb-2 text-md font-semibold uppercase tracking-wider text-green-500 mt-10">
+                  <span className="mb-2 text-md font-semibold uppercase tracking-wider text-green-500 mt-1">
                     {partner.caption}
                   </span>
                 )}
