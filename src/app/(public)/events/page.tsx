@@ -190,7 +190,8 @@ export default async function EventsPage() {
       <main className="w-full font-sans bg-gray-50">
         
         {/* --- HIGHLIGHTS SECTION --- */}
-        <section id="highlights" className="py-20 px-4 md:px-6 bg-white relative overflow-hidden">
+        <div id="highlights" className="scroll-mt-24"></div>
+        <section className="py-20 px-4 md:px-6 bg-white relative overflow-hidden">
           {/* Decorative Elements */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-green-50 rounded-full blur-3xl z-0 translate-x-1/2 -translate-y-1/2"></div>
 
@@ -234,7 +235,8 @@ export default async function EventsPage() {
         </section>
 
         {/* --- UPCOMING EVENTS --- */}
-        <section id="upcoming" className="py-20 px-4 md:px-6 bg-gray-50 border-t border-gray-200">
+        <div id="upcoming" className="scroll-mt-24"></div>
+        <section className="py-20 px-4 md:px-6 bg-gray-50 border-t border-gray-200">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mb-12">
                 <h2 className="text-3xl font-bold text-gray-900">Upcoming Events</h2>
@@ -297,7 +299,8 @@ export default async function EventsPage() {
         </section>
 
         {/* --- PAST EVENTS --- */}
-        <section id="past" className="py-16 px-4 md:px-6 bg-white border-t border-gray-200">
+        <div id="past" className="scroll-mt-24"></div>
+        <section className="py-16 px-4 md:px-6 bg-white border-t border-gray-200">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold text-gray-400 mb-8 uppercase tracking-widest">Past Events Archive</h2>
             
@@ -333,7 +336,8 @@ export default async function EventsPage() {
         </section>
 
         {/* --- OUTREACH PROGRAMMES --- */}
-        <section id="outreach" className="py-20 px-4 md:px-6 bg-slate-900 text-white relative overflow-hidden">
+        <div id="outreach" className="scroll-mt-24"></div>
+        <section className="py-20 px-4 md:px-6 bg-slate-900 text-white relative overflow-hidden">
            {/* Background Pattern */}
            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
            

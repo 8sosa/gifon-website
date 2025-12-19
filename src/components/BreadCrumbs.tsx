@@ -9,7 +9,7 @@ export default function Breadcrumbs() {
   const pathname = usePathname();
 
   // 1. Don't show breadcrumbs on the homepage
-  if (pathname === "/") return null;
+  // if (pathname === "/") return null;
 
   // 2. Split path into segments (remove empty strings)
   const pathSegments = pathname.split("/").filter((segment) => segment !== "");

@@ -182,6 +182,42 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
     setOpenDropdown(null);
   }, []);
 
+  // --- AUTH LOGIC ---
+  useEffect(() => {
+    // 1. Optimistic Check: Check LocalStorage immediately
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setIsLoggedIn(true);
+    }
+
+    // 2. Background Verification: Call API to confirm token is valid
+    const validateSession = async () => {
+      try {
+        const res = await fetch('/api/users/me', { method: 'GET' });
+        
+        if (res.ok) {
+          // Session is valid
+          const data = await res.json();
+          // Optional: Update local storage with fresh data
+          localStorage.setItem('user', JSON.stringify(data.user));
+          setIsLoggedIn(true);
+        } else {
+          // Session expired or invalid
+          localStorage.removeItem('user');
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error("Session validation failed:", error);
+        // On network error, we generally assume logged out to be safe, 
+        // or keep the optimistic state. Here we fail safe:
+        localStorage.removeItem('user');
+        setIsLoggedIn(false);
+      }
+    };
+
+    validateSession();
+  }, []);
+
   // --- UPDATED AUTH CHECKER ---
   const checkAuth = useCallback(() => {
     const user = localStorage.getItem('user');
@@ -281,10 +317,10 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
   ];
 
   return (
-    <header className="fixed w-full top-0 z-50 bg-white shadow-md font-sans" ref={navRef}>
+    <header className="fixed w-full min-h-max top-0 z-50 bg-white shadow-md font-sans" ref={navRef}>
       {/* 1. TOP ROW */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 md:h-24">
+      <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 min-h-max">
+        <div className="flex justify-between items-center">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-4 md:gap-6 group">
             {/* Logo Placeholder - replaces the globe/leaf icon */}

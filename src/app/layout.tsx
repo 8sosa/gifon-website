@@ -32,7 +32,15 @@ const bellmt = localFont({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" 
+      className="
+        scroll-smooth 
+        scroll-pt-[10.09375rem] 
+        md:scroll-pt-[14.59375rem] 
+        lg:scroll-pt-[16.40625rem] 
+        xl:scroll-pt-[16.706875rem]
+      "
+    >
       <body 
         className={`
           ${montserrat.variable} 
@@ -43,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}
       >
         <HeaderWrapper />
-        <main className="grow min-h-1/2 flex flex-col justify-start pt-20 lg:pt-36">
+        <main className="grow min-h-1/2 flex flex-col justify-start pt-[10.09375rem] md:pt-[14.59375rem] lg:pt-[16.40625rem] xl:pt-[16.706875rem]">
           {/* <Breadcrumbs /> */}
           {children}
         </main>

@@ -98,31 +98,37 @@ export default function PoliciesPage() {
             {policies.map((policy) => {
               const IconComponent = policy.icon || FileText; // Fallback icon just in case
               return (
-                <div 
-                  key={policy.id} 
-                  id={policy.id} 
-                  className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group"
-                >
-                  <div className="mb-6 p-4 bg-green-50 text-green-600 rounded-lg w-fit group-hover:bg-green-600 group-hover:text-white transition-colors">
-                    <IconComponent className="w-8 h-8" />
+                <>
+                  <div className='flex flex-col' key={policy.id}>
+                    {/* Spacer div to create space before each section for anchor links */}
+                    <div id={policy.id} className="pt-35 -mt-20"></div>
+                    <div 
+                      key={policy.id} 
+                      id={policy.id} 
+                      className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group"
+                    >
+                      <div className="mb-6 p-4 bg-green-50 text-green-600 rounded-lg w-fit group-hover:bg-green-600 group-hover:text-white transition-colors">
+                        <IconComponent className="w-8 h-8" />
+                      </div>
+                      
+                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-700 transition-colors">
+                        {policy.title}
+                      </h3>
+                      
+                      <p className="text-gray-600 leading-relaxed mb-8 grow">
+                        {policy.description}
+                      </p>
+                      
+                      <Button
+                        onClick={() => openModal(policy)}
+                        className="w-full bg-white text-green-600 border-2 border-green-600 hover:bg-green-50 font-semibold transition-colors mt-auto"
+                        variant="outline"
+                      >
+                        Read Full Policy
+                      </Button>
+                    </div>
                   </div>
-                  
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-700 transition-colors">
-                    {policy.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 leading-relaxed mb-8 grow">
-                    {policy.description}
-                  </p>
-                  
-                  <Button
-                    onClick={() => openModal(policy)}
-                    className="w-full bg-white text-green-600 border-2 border-green-600 hover:bg-green-50 font-semibold transition-colors mt-auto"
-                    variant="outline"
-                  >
-                    Read Full Policy
-                  </Button>
-                </div>
+                </>
               );
             })}
           </div>

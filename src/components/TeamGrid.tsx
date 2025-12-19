@@ -38,7 +38,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
             <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 max-w-2xl">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 bellefair mb-2">{leader.name}</h2>
-                <p className="text-lg md:text-xl text-green-700 font-medium uppercase tracking-wider italic">Founder & Executive Chairman, <span className="cooper not-italic">GIFON</span></p>
+                <p className="text-lg md:text-xl text-green-700 font-medium uppercase tracking-wider italic xl:text-nowrap">Founder & Executive Chairman,<br /> <span className="cooper not-italic">GIFON</span></p>
               </div>
               
               {/* Action Button */}

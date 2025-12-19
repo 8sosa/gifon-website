@@ -912,7 +912,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 backgroundMedia={["/media/20240418_130158.JPG"]}
             />
             
-            <div id="why-join" className='pt-8 -z-10'></div>
+            <div id="why-join" className="scroll-mt-24"></div>
             <section className="py-20 px-4 md:px-6 bg-linear-to-b from-white to-green-50/30">
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center mb-10">
@@ -931,7 +931,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 </div>
             </section>
 
-            <div id="categories"></div>
+            <div id="categories" className="scroll-mt-24"></div>
             <section className="px-4 md:px-6 py-20 bg-gray-50 flex flex-col items-center">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Membership Categories</h2>
@@ -973,7 +973,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 </div>
             </section>
             
-            <div id="benefits"></div>
+            <div id="benefits" className="scroll-mt-24"></div>
             <section className="max-w-6xl mx-auto px-4 md:px-6 py-20 space-y-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div>
@@ -1061,7 +1061,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 </div>
             </section>
 
-            <div id="pioneer-members"></div>
+            <div  id="pioneer-members" className="scroll-mt-24"></div>
             <section className="py-20 px-4 md:px-6 bg-white">
                 <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight text-center">
                     Pioneer Members
@@ -1090,13 +1090,8 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 </div>
             </section>
 
-            {/* Server Component Injection */}
-            <div className="px-4 md:px-6">
-                {children}
-            </div>
-
             {/* Testimonials */}
-            <div id="testimonials"></div>
+            <div id="testimonials" className="scroll-mt-24"></div>
             <section className="py-24 px-4 md:px-6 bg-green-900 relative overflow-hidden">
                  {/* Decorative background pattern */}
                  <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
@@ -1116,7 +1111,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             </section>
             
             {/* How to Apply Section */}
-            <div id="apply"></div>
+            <div id="apply" className="scroll-mt-24"></div>
             <section className="py-20 px-4 md:px-6 bg-white">
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center mb-16">
@@ -1158,7 +1153,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
 
             {/* Contact Section */}
 
-            <div id="contact"></div>
+            <div id="contact" className="scroll-mt-24"></div>
             <section className="py-20 px-4 md:px-6 bg-gray-50 text-center">
                 <div className="max-w-2xl mx-auto">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">Still have questions?</h2>

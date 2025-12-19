@@ -81,7 +81,7 @@ export default function InfrastructurePage() {
     <>
       <HeroSection
         title="Critical Infrastructure Support"
-        description="Our Core areas of support is Critical infrastructure, where Geospatial Intelligence, policy Insights, and advanced technologies are applied to strengthen, secure and future proof the systems essential to national security, economic resilience and National development."
+        description="Our core area of support is Critical Infrastructure, where geospatial intelligence, policy Insights, and advanced technologies are applied to strengthen, secure and future proof the systems essential to national security, economic resilience and National development."
         backgroundMedia={[
           '/media/criticalinfrastructuresupport.jpg',
         ]}
@@ -132,50 +132,56 @@ export default function InfrastructurePage() {
           }
 
           return (
-            <section
-              key={sector.id}
-              id={sector.id}
-              className={`py-16 ${backgroundColor}`}
-            >
-              <div className="max-w-6xl mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
-                  
-                  {/* Text Content */}
-                  <div className={`md:col-span-3 ${textOrder}`}>
-                    <SectionHeader
-                      title={sector.title}
-                      icon={sector.icon}
-                    />
-                    <div className="space-y-4 text-gray-700 leading-relaxed">
-                      <ul>
-                        {sector.highlights.map((point, idx) => (
-                          <li key={idx} className="list-disc list-inside mb-2">
-                            {point}
-                          </li>
-                        ))}
-                      </ul>
+            <>
+              <div className='flex flex-col' key={sector.id}>
+                {/* Spacer div to create space before each section for anchor links */}
+                <div id={sector.id} className="pt-20 -mt-20"></div>
+                <section
+                  key={sector.id}
+                  id={sector.id}
+                  className={`py-16 ${backgroundColor}`}
+                >
+                  <div className="max-w-6xl mx-auto px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
                       
-                      <Link
-                        href={`/infrastructure/${sector.id}`} 
-                        className="inline-block mt-4 bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition"
-                      >
-                        Learn More
-                      </Link>
+                      {/* Text Content */}
+                      <div className={`md:col-span-3 ${textOrder}`}>
+                        <SectionHeader
+                          title={sector.title}
+                          icon={sector.icon}
+                        />
+                        <div className="space-y-4 text-gray-700 leading-relaxed">
+                          <ul>
+                            {sector.highlights.map((point, idx) => (
+                              <li key={idx} className="list-disc list-inside mb-2">
+                                {point}
+                              </li>
+                            ))}
+                          </ul>
+                          
+                          <Link
+                            href={`/infrastructure/${sector.id}`} 
+                            className="inline-block mt-4 bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition"
+                          >
+                            Learn More
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* --- 3. Image Content Column (Updated) --- */}
+                      <div className={`md:col-span-2 ${imageOrder} h-full`}>
+                        {/* The component itself handles whether it's one image or multiple */}
+                        <FadeCarousel 
+                            images={imageArray} 
+                            altText={sector.title} 
+                        />
+                      </div>
+
                     </div>
                   </div>
-
-                  {/* --- 3. Image Content Column (Updated) --- */}
-                  <div className={`md:col-span-2 ${imageOrder} h-full`}>
-                    {/* The component itself handles whether it's one image or multiple */}
-                    <FadeCarousel 
-                        images={imageArray} 
-                        altText={sector.title} 
-                    />
-                  </div>
-
-                </div>
+                </section>
               </div>
-            </section>
+            </>
           );
         })}
       </main>

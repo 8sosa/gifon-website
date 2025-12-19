@@ -37,14 +37,12 @@ const SectionHeader = ({ title, icon }: { title: string, icon: JSX.Element }) =>
 );
 
 const ResourceSection = ({ 
-  id, 
   title, 
   icon, 
   data, 
   bgColor = "bg-white",
   renderItem 
 }: { 
-  id: string, 
   title: string, 
   icon: JSX.Element, 
   data: ResourceItem[], // Specific type here
@@ -52,12 +50,12 @@ const ResourceSection = ({
   renderItem: (item: ResourceItem, idx: number) => JSX.Element 
 }) => {
   return (
-    <section className={`${bgColor} pt-16`} id={id}>
+    <section className={`${bgColor} pt-16`} id={title}>
       <div className='max-w-5xl mx-auto px-6 py-16'>
         <SectionHeader title={title} icon={icon} />
         
         {data.length > 0 ? (
-          <div className={id === 'Gallery' ? "grid grid-cols-2 md:grid-cols-4 gap-4" : (id === 'News' || id === 'Webinar') ? "grid md:grid-cols-3 gap-6" : "space-y-4"}>
+          <div className={title === 'Photo & Video Gallery' ? "grid grid-cols-2 md:grid-cols-4 gap-4" : (title === 'News' || title === 'Webinars & Masterclasses') ? "grid md:grid-cols-3 gap-6" : "space-y-4"}>
             {data.map((item, idx) => renderItem(item, idx))}
           </div>
         ) : (
@@ -165,8 +163,8 @@ useEffect(() => {
         </section>
 
         {/* --- 2. NEWS --- */}
+        <div id="News" className="scroll-mt-24"></div>
         <ResourceSection 
-          id="News" 
           title="News" 
           icon={<FaNewspaper size={24} />} 
           data={resourcesData.news}
@@ -196,8 +194,8 @@ useEffect(() => {
         />
 
         {/* --- 3. PRESS RELEASES --- */}
+        <div id="Press" className="scroll-mt-24"></div>
         <ResourceSection 
-          id="Press" 
           title="Press Releases" 
           icon={<FaBullhorn size={24} />} 
           data={resourcesData.press}
@@ -216,8 +214,8 @@ useEffect(() => {
         />
 
         {/* --- 4. PODCAST --- */}
-        <ResourceSection 
-          id="Podcast" 
+        <div id="Podcast" className="scroll-mt-24"></div>
+        <ResourceSection      
           title="GeoINSIGHT Podcast" 
           icon={<FaMicrophoneAlt size={24} />} 
           data={resourcesData.podcasts}
@@ -240,8 +238,8 @@ useEffect(() => {
         />
 
         {/* --- 5. WEBINAR --- */}
-        <ResourceSection 
-          id="Webinar" 
+        <div id="Webinar" className="scroll-mt-24"></div>
+        <ResourceSection  
           title="Webinars & Masterclasses" 
           icon={<FaChalkboardTeacher size={24} />} 
           data={resourcesData.webinars}
@@ -266,7 +264,8 @@ useEffect(() => {
         />
 
         {/* --- 6. PUBLICATIONS --- */}
-        <section className='relative w-full pt-24 pb-32 overflow-hidden' id='publications'>
+        <div id='publications' className="scroll-mt-24"></div>
+        <section className='relative w-full pt-24 pb-32 overflow-hidden'>
           
           {/* --- 1. BACKGROUND IMAGE & OVERLAY --- */}
           <div className="absolute inset-0 z-0">
@@ -361,8 +360,8 @@ useEffect(() => {
         </section>
 
         {/* --- 7. PHOTO & VIDEO GALLERY --- */}
-        <ResourceSection 
-          id="Gallery" 
+        <div id="Gallery" className="scroll-mt-24"></div>
+        <ResourceSection  
           title="Photo & Video Gallery" 
           icon={<FaImages size={24} />} 
           data={resourcesData.gallery} // We still render ALL items (mixed) in the grid
@@ -417,8 +416,8 @@ useEffect(() => {
         />
 
         {/* --- 8. DOWNLOADS --- */}
+        <div id="Downloads" className="scroll-mt-24"></div>
         <ResourceSection 
-          id="Downloads" 
           title="Downloads" 
           icon={<FaDownload size={24} />} 
           data={resourcesData.downloads}

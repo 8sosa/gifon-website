@@ -101,7 +101,7 @@ export default async function AboutPage() {
         title="About Us"
         description={
         <>
-          <span className="cooper">GIFON</span> advances Geospatial intelligence in support of Nigeria&apos;s Critical Infrastructure, National Security, Sustainable development connecting experts, institutions and innovators to shape a safer smarter Nation.
+          <span className="cooper">GIFON</span> advances Geospatial Intelligence in support of nigeria&apos;s critical infrastructure, national security, sustainable development connecting experts, institutions and innovators to shape a safer smarter Nation.
         </>
         }
         backgroundMedia={[
@@ -158,7 +158,8 @@ export default async function AboutPage() {
         </section>
 
         {/* --- 2. AIM SECTION (Now in a Card) --- */}
-        <section id="aim" className="relative py-20 px-6 bg-slate-50 border-y border-gray-100">
+        <div id="aim" className="scroll-mt-24"></div>
+        <section className="relative py-20 px-6 bg-slate-50 border-y border-gray-100">
           {/* Technical Dot Grid Background Pattern */}
           <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
 
@@ -202,7 +203,8 @@ export default async function AboutPage() {
         </section>
 
         {/* --- MISSION + VISION --- */}
-        <section id="mission-vision" className="py-24 px-6 bg-white relative">
+        <div id="mission-vision" className="scroll-mt-24"></div>
+        <section className="py-24 px-6 bg-white relative">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             
             {/* MISSION CARD */}
@@ -255,7 +257,8 @@ export default async function AboutPage() {
         </section>
 
         {/* --- OBJECTIVES --- */}
-        <section id="objectives" className="py-24 px-4 md:px-6 bg-linear-to-b from-white to-gray-50">
+        <div id="objectives" className="scroll-mt-24"></div>
+        <section className="py-24 px-4 md:px-6 bg-linear-to-b from-white to-gray-50">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 max-w-4xl mx-auto">
                 <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">Our Objectives</h2>
@@ -349,7 +352,8 @@ export default async function AboutPage() {
         </section>
 
         {/* --- CORE VALUES --- */}
-        <section id="core-values" className="py-24 px-6 bg-linear-to-r from-gray-900 via-black to-gray-800 text-white border-t-4 border-green-600">
+        <div id="core-values" className="scroll-mt-24"></div>
+        <section className="py-24 px-6 bg-linear-to-r from-gray-900 via-black to-gray-800 text-white border-t-4 border-green-600">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-3xl md:text-5xl font-bold mb-16">Our Core Values</h2>
             
@@ -427,39 +431,41 @@ export default async function AboutPage() {
           </div>
         </section>
 
-      {/* --- SECTION 2: MANAGEMENT TEAM (Dynamic, Asymmetrical, Light Gray) --- */}
-      <section id="management-team" className="py-24 px-4 md:px-6 bg-gray-50 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
-            
-            {/* Left Column: Sticky Title & Context */}
-            <div className="lg:w-1/3 lg:sticky lg:top-24 text-left">
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                Management <br/> <span className="text-green-600">Team</span>
-              </h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                Our Executive Team drives <span className="cooper">GIFON</span>&apos;s mission with expertise, vision and leadership advancing Geospatial Intelligence, National Security and sustainable development in Nigeria.
-              </p>
+        {/* --- SECTION 2: MANAGEMENT TEAM (Dynamic, Asymmetrical, Light Gray) --- */}
+        <div id="management-team" className='pt-20 -z-10 bg-gray-50'></div>
+        <section className="py-24 px-4 md:px-6 bg-gray-50 border-t border-gray-100">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
               
-              {/* Decorative Stat or Quote */}
-              <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hidden lg:block">
-                <p className="italic text-gray-500 mb-4">"Leading with Insights. Securing with intelligence. Innovating for Nigeria."</p>
-                <div className="flex items-center gap-2">
-                   <div className="h-1 w-10 bg-green-500 rounded-full"></div>
-                   <p className="text-sm font-semibold text-gray-900"><span className="cooper">GIFON</span> Executive</p>
+              {/* Left Column: Sticky Title & Context */}
+              <div className="lg:w-1/3 lg:sticky lg:top-24 text-left">
+                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                  Management <br/> <span className="text-green-600">Team</span>
+                </h2>
+                <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                  Our Executive Team drives <span className="cooper">GIFON</span>&apos;s mission with expertise, vision and leadership advancing Geospatial Intelligence, National Security and sustainable development in Nigeria.
+                </p>
+                
+                {/* Decorative Stat or Quote */}
+                <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hidden lg:block">
+                  <p className="italic text-gray-500 mb-4">"Leading with Insights. Securing with intelligence. Innovating for Nigeria."</p>
+                  <div className="flex items-center gap-2">
+                    <div className="h-1 w-10 bg-green-500 rounded-full"></div>
+                    <p className="text-sm font-semibold text-gray-900"><span className="cooper">GIFON</span> Executive</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Right Column: The Grid */}
-            <div className="lg:w-2/3 w-full">
-              <TeamGrid members={mapMembersByCategory(members, 'Advisory')} />
-            </div>
+              {/* Right Column: The Grid */}
+              <div className="lg:w-2/3 w-full">
+                <TeamGrid members={mapMembersByCategory(members, 'Advisory')} />
+              </div>
 
+            </div>
           </div>
-        </div>
-      </section>
-                <div id='our-partners'></div>
+        </section>
+        
+        <div id='our-partners' className="scroll-mt-24"></div>
         <PartnersCarousel />
         
       </main>

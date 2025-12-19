@@ -30,7 +30,7 @@ export default async function HeaderWrapper() {
             { label: 'Why Join GIFON', anchor: 'why-join' }, 
             { label: 'Membership Categories', anchor: 'categories' }, 
             { label: 'Membership Benefits', anchor: 'benefits' }, 
-            { label: 'Management Team', anchor: 'management-team' }, 
+            { label: 'Pioneer Members', anchor: 'pioneer-members' }, 
             { label: 'How to Apply', anchor: 'apply' } 
         ] 
     },
@@ -70,7 +70,7 @@ export default async function HeaderWrapper() {
         ] 
     },
     { 
-        label: 'Geospatial Intelligence Consulting', 
+        label: 'Areas of Support', 
         href: '/infrastructure', 
         children: [ 
             { label: 'Power and Energy', anchor: 'energy' }, 

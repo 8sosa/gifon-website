@@ -13,8 +13,8 @@ const partners = [
   {
     name: "Nigerian Air-Force",
     logo: "/images/naf.png", 
-    width: 566,
-    height: 294,
+    width: 800,
+    height: 337,
   },
   {
     name: "Defense HeadQuarters",
@@ -103,9 +103,9 @@ function PartnerCard({ partner }: { partner: typeof partners[0] }) {
             w-108 h-66 
             shrink-0 
             flex flex-col items-center justify-center 
-            bg-white/5 backdrop-blur-sm
+            bg-white/50 backdrop-blur-sm
             border border-white/10 rounded-xl
-            hover:border-green-500/50 hover:bg-white/10 hover:shadow-[0_0_20px_-5px_rgba(34,197,94,0.2)]
+            hover:border-green-500/50 hover:bg-white/95 hover:shadow-[0_0_20px_-5px_rgba(34,197,94,0.2)]
             transition-all duration-300
           "
         >

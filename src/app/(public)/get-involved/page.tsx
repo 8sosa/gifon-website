@@ -14,7 +14,7 @@ export default function DonatePage() {
     <>
       <HeroSection
         title="GET INVOLVED"
-        description="Join us in advancing geospatial intelligence. Your support fuels innovation, strengthens national security, and drives sustainable development in Nigeria."
+        description="Join us in advancing Geospatial Intelligence. Your support fuels innovation, strengthens national security, and drives sustainable development in Nigeria."
         backgroundMedia={["/media/20240418_130158.JPG"]}
       />
 
@@ -37,7 +37,8 @@ export default function DonatePage() {
         </section>
         
         {/* --- Section 2: Donation / Support Options --- */}
-        <section id="donate" className="py-20 px-4 bg-gray-50">
+        <div id="donate" className="scroll-mt-24"></div>
+        <section className="py-20 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4 text-gray-900">Support Our Work</h2>
@@ -96,7 +97,8 @@ export default function DonatePage() {
         </section>
 
         {/* ... (Section 3: Volunteer - Same as before) ... */}
-        <section id="volunteer" className="py-20 px-4 bg-white overflow-hidden relative">
+        <div id="volunteer" className="scroll-mt-24"></div>
+        <section className="py-20 px-4 bg-white overflow-hidden relative">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
             {/* Left Column: Text */}
