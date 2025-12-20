@@ -34,35 +34,35 @@ export default function PoliciesPage() {
       id: "ethics",
       title: "Code of Ethics",
       icon: ShieldCheck,
-      file: "/docs/Code of Ethics and Professional Conduct-20251209144055.pdf", // Changed to .pdf
+      file: "/docs/Code of Ethics and Professional Conduct-20251220162154.pdf", // Changed to .pdf
       description: `This Code establishes the ethical principles and professional standards expected of all members, staff, and partners to ensure integrity, trust, and accountability.`,
     },
     {
       id: "anti-corruption",
       title: "Anti-Corruption",
       icon: Gavel,
-      file: "/docs/GIFON ANTI CORRUPTION POLICY-20251209144055.pdf", // Changed to .pdf
+      file: "/docs/GIFON ANTI CORRUPTION POLICY-20251220162336.pdf", // Changed to .pdf
       description: `GIFON is committed to zero tolerance for bribery, embezzlement, extortion, or fraud. This policy provides the framework for preventing and detecting corrupt practices.`,
     },
     {
       id: "fund-raising",
       title: "Fund Raising & Grants",
       icon: Coins,
-      file: "/docs/GIFON FUND RAISING AND GRANTS POLICY-20251209144057.pdf", // Changed to .pdf
+      file: "/docs/GIFON FUND RAISING AND GRANTS POLICY-20251220162338.pdf", // Changed to .pdf
       description: `Outlining the principles, structures, and procedures to ensure all fundraising and grant acquisition activities are ethical, transparent, and support our strategic objectives.`,
     },
     {
       id: "slavery",
       title: "Anti-Modern-Day Slavery",
       icon: LinkIcon,
-      file: "/docs/GIFON ANTI MODERN DAY SLAVERY-20251209144053.pdf", // Changed to .pdf
+      file: "/docs/GIFON ANTI MODERN DAY SLAVERY-20251220162337.pdf", // Changed to .pdf
       description: `Our firm commitment to the eradication of all forms of modern slavery, forced labour, and human trafficking in our operations and supply chains.`,
     },
     {
       id: "volunteer",
       title: "Volunteer & Internship",
       icon: UsersRound,
-      file: "/docs/VOLUNTEER AND INTERNSHIP POLICY-20251209143804.pdf", // Changed to .pdf
+      file: "/docs/VOLUNTEER AND INTERNSHIP POLICY-20251220162335.pdf", // Changed to .pdf
       description: `Establishing a formal structure for engaging volunteers and interns in meaningful roles that provide skill development and professional exposure.`,
     },
   ];
@@ -86,12 +86,6 @@ export default function PoliciesPage() {
 
       <main className="w-full bg-gray-50 py-20 px-4">
         <div className="max-w-6xl mx-auto">
-           {/* <div className="text-center mb-16 max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Operational Standards</h2>
-              <p className="text-gray-600 text-lg">
-                At GIFON, we are governed by a robust set of policies designed to ensure transparency, ethical conduct, and operational excellence across all our activities.
-              </p>
-            </div> */}
 
           {/* Grid layout for Policy Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
