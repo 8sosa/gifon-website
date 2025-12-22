@@ -85,14 +85,14 @@ export const sections: Record<string, Sector> = {
     title: 'Health',
     icon: <FaHeartbeat size={24} />,
     summary: 'GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns.',
-    description: `Use GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns. Support healthcare infrastructure planning and accessibility analysis. Provide real-time data for emergency response and disaster medicine.`,
+    description: `Use Geospatial Intelligence for disease outbreak mapping, pandemic preparedness, and vaccination campaigns. Support healthcare infrastructure planning and accessibility analysis. Provide real-time data for emergency response and disaster medicine.`,
     images: 
     [
       '/media/health.jpeg',
       '/media/health1.jpeg'
     ],
     highlights: [
-      'Use GIS for disease outbreak mapping, pandemic preparedness, and vaccination campaigns.',
+      'Use Geospatial Intelligence for disease outbreak mapping, pandemic preparedness, and vaccination campaigns.',
       'Support healthcare infrastructure planning and accessibility analysis.',
       'Provide real-time data for emergency response and disaster medicine.',
     ],

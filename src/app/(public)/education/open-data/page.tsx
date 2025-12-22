@@ -56,7 +56,7 @@ export default function OpenDataResearchPage() {
           <ul className="space-y-2">
             {[
               "Satellite imagery archives",
-              "GIS layers (land use, transport, health)",
+              "Geospatial Intelligence layers (land use, transport, health)",
               "Datasets on disaster risk & demographics",
               "Tiered access model (Open, Restricted, Researcher)"
             ].map((item, i) => (
@@ -76,7 +76,7 @@ export default function OpenDataResearchPage() {
       content: (
         <ul className="space-y-2">
           {[
-            "Annual GIFON Research Fellowship for postgraduates.",
+            <p>Annual <span className="cooper">GIFON</span> Research Fellowship for postgraduates.</p>,
             "Seed grants for applied research projects.",
             "Joint research with universities and international bodies."
           ].map((item, i) => (
@@ -96,7 +96,7 @@ export default function OpenDataResearchPage() {
         <ul className="space-y-2">
           {[
             "Annual State of Nigeria’s Geospatial Intelligence Report.",
-            "Peer-reviewed GIFON Journal – Eyes on Location.",
+            <p>Peer-reviewed <span className="cooper font-bold">GIFON</span> Journal – Eyes on Location.</p>,
             "Working papers and policy briefs for government."
           ].map((item, i) => (
             <li key={i} className="flex items-start text-sm text-gray-700">
@@ -134,7 +134,7 @@ export default function OpenDataResearchPage() {
         <ul className="space-y-2">
           {[
             "Partner with universities, NGOs, and global bodies.",
-            "Establish a GIFON Research Network.",
+            <p>Establish a <span className="cooper font-bold">GIFON</span> Research Network.</p>,
             "Contribute to international platforms (UN-GGIM, GEO)."
           ].map((item, i) => (
             <li key={i} className="flex items-start text-sm text-gray-700">
@@ -240,55 +240,6 @@ export default function OpenDataResearchPage() {
             </div>
           </div>
         </section>
-
-        {/* --- Beneficiaries & Outcomes Section --- */}
-        {/* <section id="beneficiaries-outcomes" className="py-20 px-4 bg-gray-900 text-white">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
-            
-            <div>
-              <div className="flex items-center gap-3 mb-6 border-b border-gray-700 pb-4">
-                  <FaUsers size={28} className="text-green-400" />
-                  <h2 className="text-3xl font-semibold">Target Beneficiaries</h2>
-              </div>
-              <ul className="space-y-4">
-                {[
-                    "Academic researchers and students.",
-                    "Policymakers and government agencies.",
-                    "Tech innovators, startups, and developers.",
-                    "Civil society organizations and media.",
-                    "International research partners."
-                ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-lg text-gray-300">
-                        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                        {item}
-                    </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <div className="flex items-center gap-3 mb-6 border-b border-gray-700 pb-4">
-                  <FaCheck size={28} className="text-green-400" />
-                  <h2 className="text-3xl font-semibold">Expected Outcomes</h2>
-              </div>
-              <div className="space-y-4">
-                {[
-                    "Creation of Nigeria’s largest open geospatial data repository.",
-                    "Strengthened evidence-based decision-making at all government levels.",
-                    "Enhanced innovation through access to reliable datasets.",
-                    "Increased contributions to global geospatial intelligence knowledge.",
-                    "A sustainable pipeline of research outputs supporting security."
-                ].map((item, i) => (
-                    <div key={i} className="flex gap-4 p-4 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 transition-colors">
-                        <FaCheck className="text-green-400 mt-1 shrink-0" />
-                        <p className="text-gray-300 text-sm leading-relaxed">{item}</p>
-                    </div>
-                ))}
-              </div>
-            </div>
-
-          </div>
-        </section> */}
 
       </main>
     </>

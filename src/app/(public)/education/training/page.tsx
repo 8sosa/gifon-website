@@ -53,7 +53,7 @@ export default function TrainingCertificationPage() {
       headerColor: "bg-blue-600",
       courses: [
         "Introduction to GEOINT",
-        "GIS & Remote Sensing Fundamentals",
+        "Geospatial Intelligence Fundamentals",
         "Geospatial Data Collection & Analysis",
         "Cartography & Visualization"
       ]
@@ -113,7 +113,7 @@ export default function TrainingCertificationPage() {
             <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-6">
                 <p>
                 The Training & Certification Programmes (TCP) of the Geospatial
-                Intelligence Foundation of Nigeria (<span className="cooper font-bold">GIFON</span>) are designed to
+                Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) are designed to
                 provide standardized, high-quality, and industry-recognized
                 certifications in geospatial intelligence, data science, and
                 related technologies.
@@ -210,9 +210,9 @@ export default function TrainingCertificationPage() {
               <ul className="space-y-4 text-gray-300 text-lg">
                 {[
                     { b: "Blended Learning:", t: "In-person + online modules." },
-                    { b: "Accredited Trainers:", t: "Drawn from GIFON experts, academia, military, and global partners." },
+                    { b: "Accredited Trainers:", t:<>Drawn from <span className="cooper">GIFON</span> experts, academia, military, and global partners.</> },
                     { b: "Training Labs:", t: "Practical, scenario-based exercises." },
-                    { b: "Certification Exams:", t: "Assessment-based certification aligned with GIFON standards." },
+                    { b: "Certification Exams:", t:<>Assessment-based certification aligned with <span className="cooper">GIFON</span> standards.</> },
                     { b: "CPD:", t: "Recertification and advanced training every 2 years." }
                 ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
@@ -245,30 +245,6 @@ export default function TrainingCertificationPage() {
             </div>
           </div>
         </section>
-
-        {/* --- Expected Outcomes Section --- */}
-        {/* <section id="outcomes" className="py-20 px-4 bg-green-50 text-center">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-semibold mb-10 text-green-900">
-              Expected Outcomes
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                {[
-                    "A nationally and internationally recognized certification framework for GEOINT professionals.",
-                    "A growing pool of certified practitioners contributing to Nigeria’s security, economy, and innovation.",
-                    "Strengthened institutional capacity across government, industry, and academia.",
-                    "Enhanced global competitiveness of Nigeria’s geospatial workforce."
-                ].map((outcome, i) => (
-                    <div key={i} className="flex items-start gap-4 p-6 bg-white rounded-xl shadow-sm border border-green-100">
-                        <span className="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600 font-bold shrink-0">
-                            {i + 1}
-                        </span>
-                        <p className="text-gray-700 font-medium">{outcome}</p>
-                    </div>
-                ))}
-            </div>
-          </div>
-        </section> */}
 
       </main>
     </>

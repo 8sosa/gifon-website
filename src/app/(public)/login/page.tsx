@@ -174,7 +174,7 @@ export default function LoginPage() {
                   <div className="w-full border-t border-gray-200"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">New to GIFON?</span>
+                  <span className="px-2 bg-white text-gray-500">New to <span className="cooper">GIFON</span>?</span>
                 </div>
               </div>
 

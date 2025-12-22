@@ -42,7 +42,10 @@ export default function PoliciesPage() {
       title: "Anti-Corruption",
       icon: Gavel,
       file: "/docs/GIFON ANTI CORRUPTION POLICY-20251220162336.pdf", // Changed to .pdf
-      description: `GIFON is committed to zero tolerance for bribery, embezzlement, extortion, or fraud. This policy provides the framework for preventing and detecting corrupt practices.`,
+      description: 
+        <>
+          <span className="cooper">GIFON</span> is committed to zero tolerance for bribery, embezzlement, extortion, or fraud. This policy provides the framework for preventing and detecting corrupt practices.
+        </>
     },
     {
       id: "fund-raising",

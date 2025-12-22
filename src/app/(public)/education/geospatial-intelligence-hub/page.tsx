@@ -130,7 +130,7 @@ export default function GeospatialHubPage() {
               <div className="hidden lg:block p-6 bg-white/5 rounded-2xl border border-white/10">
                  <FaGlobe size={40} className="text-blue-400 mb-4" />
                  <p className="text-sm text-gray-300">
-                   Positioning Nigeria as a regional leader in the West African geospatial ecosystem.
+                   Positioning Nigeria as a regional Leader In the African Geospatial ecosystem.
                  </p>
               </div>
             </div>

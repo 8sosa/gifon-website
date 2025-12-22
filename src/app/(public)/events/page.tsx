@@ -355,7 +355,7 @@ export default async function EventsPage() {
                   
                   {/* Group Header */}
                   <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b border-white/10 pb-6">
-                    <div className={`p-4 rounded-2xl ${group.groupColor.replace('text-', 'bg-').replace('bg-', 'text-white ')} bg-opacity-20`}>
+                    <div className={`p-4 rounded-2xl ${group.groupColor.replace('text-', 'bg-').replace('bg-', 'text-green-800 ')} bg-opacity-20`}>
                         <group.groupIcon size={32} />
                     </div>
                     <div>

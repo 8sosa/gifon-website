@@ -37,7 +37,7 @@ export default function EducationPage() {
     {
       title: 'National Geospatial Security Hub',
       src: "/media/Geospatial Hub.JPG",
-      link: '/education/geospatial-hub',
+      link: '/education/geospatial-intelligence-hub',
       description: 'Serving as the nation’s premier center for geospatial intelligence innovation, data integration, and strategic decision support for security agencies.'
     },
     {
@@ -100,7 +100,7 @@ export default function EducationPage() {
                {/* Feature List */}
                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                   {[
-                    { icon: Layers, title: "Modular Learning", desc: "Beginner to Advanced levels in Remote Sensing & GIS." },
+                    { icon: Layers, title: "Modular Learning", desc: "Beginner to Advanced levels in Remote Sensing & Geospatial Intelligence." },
                     { icon: Target, title: "Competency Based", desc: "Focused on real-world skills and application." },
                     { icon: Award, title: "Certified", desc: "Project-based assessments producing industry badges." },
                     { icon: Users, title: "Inclusive", desc: "For students, gov't, and private sector practitioners." },

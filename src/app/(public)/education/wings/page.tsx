@@ -30,7 +30,7 @@ export default function WomenInGeointPage() {
     {
       icon: <FaUserTie size={24} className="text-yellow-600" />,
       title: "Creating Role Models and Mentors",
-      text: "Visible female leaders in GEOINT will inspire young girls and students to pursue careers in geospatial science, remote sensing, GIS, data analytics, and related security/intelligence fields."
+      text: "Visible female leaders in GEOINT will inspire young girls and students to pursue careers in geospatial science, remote sensing, Geospatial Intelligence, data analytics, and related security/intelligence fields."
     },
     {
       icon: <FaBalanceScale size={24} className="text-red-600" />,

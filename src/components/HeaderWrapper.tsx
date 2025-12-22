@@ -43,7 +43,7 @@ export default async function HeaderWrapper() {
                 { label: 'Youth Empowerment & Talent Acceleration', link: '/education/youth-empowerment' }, 
                 { label: 'Women in GEOINT (WINGS)', link: '/education/wings' }, 
                 { label: 'Geoinnovation & Tech Incubation', link: '/education/geoinnovation' }, 
-                { label: 'National Geospatial Security Hub', link: '/education/geospatial-hub' }, 
+                { label: 'National Geospatial Security Hub', link: '/education/geospatial-intelligence-hub' }, 
                 { label: 'Community Mapping', link: '/education/community-mapping' }, 
                 { label: 'Open Data & Research', link: '/education/open-data' }, 
                 { label: 'Conferences & Workshops', link: '/education/conferences' }, 

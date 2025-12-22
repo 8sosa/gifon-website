@@ -59,7 +59,7 @@ export default function YetaPage() {
       icon: <FaChalkboardTeacher size={24} />,
       title: "Capacity Building & Training",
       points: [
-        "Foundational Training: GIS, remote sensing, mapping.",
+        "Foundational Training: Geospatial Intelligence, remote sensing, mapping.",
         "Advanced Skills: AI, machine learning, drones, satellite systems.",
         "Soft Skills: Leadership, ethics, and project management."
       ]

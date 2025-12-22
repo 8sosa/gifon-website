@@ -59,7 +59,7 @@ export default function CommunityMappingPage() {
       icon: <FaUserCog size={24} />,
       color: "bg-blue-100 text-blue-700",
       points: [
-        "Training on basic GIS tools (OpenStreetMap, QGIS).",
+        "Training on basic Geospatial Intelligence tools (OpenStreetMap, QGIS).",
         "Data collection using mobile apps and drones.",
         "Ethics of community data ownership."
       ]
@@ -72,7 +72,7 @@ export default function CommunityMappingPage() {
       points: [
         "Mapping schools, clinics, water points, and resources.",
         "Identifying disaster-prone areas.",
-        "Integration into GIFON’s National Hub."
+        <p>Integration into <span className="cooper">GIFON</span>&apos;s National Hub.</p>
       ]
     },
     {
@@ -93,7 +93,7 @@ export default function CommunityMappingPage() {
       color: "bg-teal-100 text-teal-700",
       points: [
         "Establish community geospatial clubs.",
-        "Link youth to GIFON career pathways.",
+        <p>Link youth to <span className="cooper">GIFON</span> career pathways.</p>,
         "Scale successful models regionally."
       ]
     }

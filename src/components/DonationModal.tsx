@@ -160,7 +160,7 @@ export default function DonationModal({ isOpen, onClose }: DonationModalProps) {
                     <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
                         <Heart size={24} fill="currentColor" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900">Support GIFON</h3>
+                    <h3 className="text-xl font-bold text-gray-900">Support <span className="cooper">GIFON</span></h3>
                     <p className="text-sm text-gray-600">Your contribution drives innovation.</p>
                 </div>
 

@@ -93,7 +93,7 @@ export default function PublicationsPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 font-cooper">About The GeoINSIGHT Bulletin</h2>
             <div className="text-gray-600 leading-relaxed text-lg space-y-4 max-w-3xl mx-auto">
               <p>
-                &quot;The GeoINSIGHT Bulletin&quot; is <span className="cooper font-bold text-gray-800">GIFON</span>&apos;s premier newsletter, providing members and partners with critical analysis, updates, and spotlights on the world of geospatial intelligence.
+                &quot;The GeoINSIGHT Bulletin&quot; is <span className="cooper font-bold text-gray-800">GIFON</span>&apos;s premier newsletter, providing members and partners with critical analysis, updates, and spotlights on the world of Geospatial Intelligence.
               </p>
               <p>
                 Our design balances <strong className="text-green-700">deep insights</strong> (feature articles, policy) with <strong className="text-green-700">community engagement</strong>, ensuring a consistent, professional, and valuable read in every edition.

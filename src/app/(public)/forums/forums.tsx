@@ -244,7 +244,7 @@ const allForums = [
       <br>
       <h3 style="font-size: 1.25rem; font-weight: 600;">2. Promote Innovation and Competitiveness</h3>
       <ul>
-        <li>Encourage research, development, and adoption of emerging technologies (AI, satellite systems, drones, GIS, cyber-geo tools).</li>
+        <li>Encourage research, development, and adoption of emerging technologies (AI, satellite systems, drones, Geospatial Intelligence, cyber-geo tools).</li>
         <li>Support Nigerian companies and startups in competing globally in the geospatial and intelligence ecosystem.</li>
       </ul>
       <br>
