@@ -103,62 +103,65 @@ interface MembershipFormData {
 const forumContent = {
     supportingDocuments: `
     <div class="space-y-4 text-sm md:text-base font-sans text-gray-700">
-      <h2 style="font-size: 1.1rem; font-weight: 700; color: #15803d; margin-bottom: 1rem;"><span className="cooper">GIFON</span> Membership Registration – Supporting Documents Checklist</h2>
-      
-      <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
-        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Student Membership</h3>
-        <ul style="list-style-type: disc; padding-left: 1.5rem;">
-          <li>Valid Student ID Card</li>
-          <li>Admission Letter or Proof of Enrollment</li>
-          <li>Recent Passport Photograph</li>
-          <li>National Identification Number (NIN) Slip or any Valid National ID</li>
-          <li>Recommendation Letter (optional)</li>
-        </ul>
-      </div>
+  <h2 style="font-size: 1.1rem; font-weight: 700; color: #15803d; margin-bottom: 1rem;"><span className="cooper">GIFON</span> Membership Registration – Supporting Documents Checklist</h2>
+  
+  <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
+    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Student Membership</h3>
+    <ul style="list-style-type: disc; padding-left: 1.5rem;">
+      <li>Valid Student ID Card</li>
+      <li>Admission Letter or Proof of Enrollment</li>
+      <li>Valid Government-Issued identification (NIMC, International Passport, residence permit)</li>
+      <li>Recommendation Letter (Optional)</li>
+      <li>Coloured Passport Photograph (2x2, not older than 1 month)</li>
+    </ul>
+  </div>
 
-      <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
-        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Professional Membership</h3>
-        <ul style="list-style-type: disc; padding-left: 1.5rem;">
-          <li>Updated Curriculum Vitae (CV)</li>
-          <li>Relevant Academic Certificates (Minimum: B.Sc / B.Eng)</li>
-          <li>Professional Certifications (if any)</li>
-          <li>National Identification Number (NIN) Slip or any Valid National ID</li>
-          <li>Recent Passport Photograph</li>
-        </ul>
-      </div>
+  <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
+    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Professional Membership</h3>
+    <ul style="list-style-type: disc; padding-left: 1.5rem;">
+      <li>Updated Curriculum Vitae (CV)</li>
+      <li>Academic Certificates (Higher Institution)</li>
+      <li>Professional Certifications (if any)</li>
+      <li>Valid Government-Issued identification (NIMC, International Passport, residence permit)</li>
+      <li>Coloured Passport Photograph (2x2, not older than 1 month)</li>
+    </ul>
+  </div>
 
-       <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
-        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Institutional Membership</h3>
-        <ul style="list-style-type: disc; padding-left: 1.5rem;">
-          <li>Institutional Profile or Brochure</li>
-          <li>Certificate of Establishment / Accreditation</li>
-          <li>Letter of Intent on Official Institutional Letterhead</li>
-          <li>
-            Details of Authorized Institutional Contact Person:
-            <ul style="list-style-type: circle; padding-left: 1.5rem; margin-top: 0.25rem;">
-              <li>Name and Designation</li>
-              <li>Official Email & Phone Number</li>
-              <li>Institutional ID Card</li>
-              <li>National Identification Number (NIN) Slip or any Valid National ID</li>
-              <li>Recent Passport Photograph</li>
-            </ul>
-          </li>
+   <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
+    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Institutional Membership</h3>
+    <ul style="list-style-type: disc; padding-left: 1.5rem;">
+      <li>Certificate of Establishment / Accreditation</li>
+      <li>Letter of Intent on Official Institutional Letterhead</li>
+      <li>
+        Details of Authorized Contact Person:
+        <ul style="list-style-type: circle; padding-left: 1.5rem; margin-top: 0.25rem;">
+          <li>Name and Designation</li>
+          <li>Official Email Address & Official Phone Number</li>
         </ul>
-      </div>
-      
-       <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
-        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Corporate Membership</h3>
-        <ul style="list-style-type: disc; padding-left: 1.5rem;">
-          <li>Certificate of Incorporation (CAC)</li>
-          <li>Company Profile or Brochure</li>
-          <li>Tax Identification Number (TIN)</li>
-          <li>Letter of Intent on Company Letterhead</li>
-          <li>List of Key Technical and/or Management Staff (with roles)</li>
-          <li>National Identification Number (NIN) Slip or any Valid National ID for Authorized Company Representative</li>
-          <li>Recent Passport Photograph of Authorized Representative</li>
+      </li>
+      <li>Institutional ID Card of Authorized Contact Person(s)</li>
+      <li>Valid Government-Issued identification (NIMC, International Passport, residence permit)</li>
+      <li>Coloured Passport Photograph of Authorized Contact Person (2x2, not older than 1 month)</li>
+    </ul>
+  </div>
+  
+   <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
+    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Corporate Membership</h3>
+    <ul style="list-style-type: disc; padding-left: 1.5rem;">
+      <li>Certificate of Incorporation</li>
+      <li>Letter of Intent on Company Letterhead</li>
+      <li>
+        Details of Authorized Contact Person:
+        <ul style="list-style-type: circle; padding-left: 1.5rem; margin-top: 0.25rem;">
+          <li>Name and Designation</li>
+          <li>Official Email Address & Official Phone Number</li>
         </ul>
-      </div>
-    </div>
+      </li>
+      <li>Valid Government-Issued identification (NIMC, International Passport, residence permit) of Authorized Contact Person</li>
+      <li>Coloured Passport Photograph of Authorized Contact Person (2x2, not older than 1 month)</li>
+    </ul>
+  </div>
+</div>
   `
 }
 
@@ -1145,7 +1148,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                             onClick={() => openDocModal(forumContent.supportingDocuments, "Supporting Documents Checklist")}
                             className='inline-flex items-center gap-2 text-green-700 bg-green-50 px-6 py-3 rounded-full hover:bg-green-100 transition font-semibold border border-green-200'
                         >
-                            <FileText size={18} /> Supporting documents attached here
+                            <FileText size={18} /> View Required Documents Checklist
                         </button>
                     </div>
                 </div>

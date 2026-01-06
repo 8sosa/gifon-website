@@ -150,7 +150,7 @@ export default function OpenDataResearchPage() {
   return (
     <>
       <HeroSection
-        title="GIFON Open Data & Research Programme (ODRP)"
+        title={<><span className="cooper">GIFON</span>  Open Data & Research Programme (ODRP)</>}
         description="“Open Data. Open Research. Smarter Nigeria.”"
         backgroundMedia={[
           "/images/F.jpeg",

@@ -97,7 +97,7 @@ export default function TrainingCertificationPage() {
   return (
     <>
       <HeroSection
-        title="GIFON Training & Certification Programmes (TCP)"
+        title={<><span className="cooper">GIFON</span>  Training & Certification Programmes (TCP)</>}
         description="“Building Skills. Certifying Excellence. Advancing GEOINT for Nigeria and Beyond.”"
         backgroundMedia={[
           "/media/training.jpeg",

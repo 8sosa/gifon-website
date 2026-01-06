@@ -105,7 +105,7 @@ export default function GeoinnovationPage() {
   return (
     <>
       <HeroSection
-        title="GIFON Y-GeoInnovation & Tech Incubation Programme (Y-GITI)"
+        title={<><span className="cooper">GIFON</span>  Y-GeoInnovation & Tech Incubation Programme (Y-GITI)</>}
         description="“Innovating with Location. Incubating the Future.”"
         backgroundMedia={[
           "/media/geoino.jpeg",

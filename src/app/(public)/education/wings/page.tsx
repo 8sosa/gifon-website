@@ -42,7 +42,7 @@ export default function WomenInGeointPage() {
   return (
     <>
       <HeroSection
-        title="GIFON Women in GEOINT Program"
+        title={<><span className="cooper">GIFON</span> Women in GEOINT Program</>}
         description="Empowering women in the field of geospatial intelligence (GeoINT) through collaboration, professional development, mentorship, and advocacy."
         backgroundMedia={[
           "/media/wings.JPG",
