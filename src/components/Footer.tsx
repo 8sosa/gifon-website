@@ -10,15 +10,10 @@ export default function Footer() {
   
   // Group links logically for a better layout
   const quickLinks = [
-      { label: 'Home', href: '/' },
-      { label: 'About Us', href: '/about' },
-      { label: 'Membership', href: '/membership' },
-      { label: 'Education & Training', href: '/education' },
+      { label: 'Education', href: '/education' },
       { label: 'Events', href: '/events' },
       { label: 'Media Resources', href: '/resources' },
-      { label: 'Areas of Support', href: '/infrastructure' },
       { label: 'Groups & Forums', href: '/forums' },
-      { label: 'Get Involved', href: '/get-involved' }
   ];
 
   const legalLinks = [

@@ -88,9 +88,10 @@ export default function FoundingVision() {
           >
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
               Through sustained institutional leadership, policy engagement, capacity development, and ecosystem building, he has contributed significantly to the emergence of Nigeria’s GEOINT landscape, emphasizing professional standards, ethical use, and alignment with the country’s critical infrastructure and development priorities.
-            </p>
-            <p className="text-gray-600 text-lg leading-relaxed mb-8">
+              <br/>
               His work bridges enterprise and public interest, building indigenous capability through RESLARC while shaping national discourse, coordination, and international engagement through <span className="cooper">GIFON</span>.
+              <br/>
+              Dr. Usman’s vision is of a Nigeria where decisions at every level of governance are informed by integrated, predictive, and intelligence driven spatial understanding, positioning the nation as a continental leader in geospatial intelligence and location-based innovation.
             </p>
 
             <a 

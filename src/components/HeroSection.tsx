@@ -92,7 +92,7 @@ export default function HeroSection({
       })}
 
       {/* --- CONTENT LAYER (Z-Index higher than background) --- */}
-      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto">
+      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto -mt-16">
         
         {/* Title: Scales from text-4xl (mobile) to text-7xl (desktop) */}
         {title && (
