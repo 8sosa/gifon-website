@@ -5,7 +5,9 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import Breadcrumbs from "@/components/BreadCrumbs";
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { FaXTwitter, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
+import { 
+  // FaXTwitter, FaFacebookF, 
+  FaLinkedinIn, FaYoutube, FaInstagram, } from "react-icons/fa6";
 import { FaSearch, FaTimes, FaBars, FaChevronDown, FaChevronRight } from "react-icons/fa";
 import SearchModal from "./SearchModal";
 
@@ -311,9 +313,12 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
   ];
 
   const socialItems: MenuItem[] = [
-    { label: <FaXTwitter />, href: '#', colorClass: 'text-black', hoverColorClass: 'hover:text-gray-700' },
-    { label: <FaFacebookF />, href: '#', colorClass: 'text-blue-600', hoverColorClass: 'hover:text-blue-800' },
+    // { label: <FaXTwitter />, href: '#', colorClass: 'text-black', hoverColorClass: 'hover:text-gray-700' },
+    // { label: <FaFacebookF />, href: '#', colorClass: 'text-blue-600', hoverColorClass: 'hover:text-blue-800' },
     { label: <FaLinkedinIn />, href: 'https://www.linkedin.com/in/gifon-africa-53a32831a', colorClass: 'text-blue-700', hoverColorClass: 'hover:text-blue-900' },
+    { label: <FaYoutube />, href: 'https://youtube.com/@gifonmedia?si=mNwfsyy0lNTpTyMP', colorClass:'text-red-600', hoverColorClass: 'hover:text-red-800' },
+    { label: <FaInstagram />, href: 'https://www.instagram.com/gifonafrica?igsh=MWxkMno5aHMyNzhubA==', colorClass: 'text-pink-600', hoverColorClass: 'hover:text-pink-800' },
+    
   ];
 
   return (

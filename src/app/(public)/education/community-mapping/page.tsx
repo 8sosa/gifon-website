@@ -137,7 +137,7 @@ export default function CommunityMappingPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                  Programme Objectives
+                CMD Programme Objectives
                 </h2>
                 <div className="w-20 h-1 bg-green-600 mx-auto rounded-full"></div>
             </div>

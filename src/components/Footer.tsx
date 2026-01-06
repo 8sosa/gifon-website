@@ -2,7 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaXTwitter, FaWhatsapp, FaLocationDot, FaEnvelope, FaPhone } from "react-icons/fa6";
+import { FaYoutube, FaInstagram, FaLinkedinIn,
+  //  FaFacebookF, FaXTwitter, FaWhatsapp, 
+   FaLocationDot, FaEnvelope, FaPhone } from "react-icons/fa6";
 
 export default function Footer() {
   
@@ -25,12 +27,12 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { name: 'X', icon: <FaXTwitter />, href: '#', hover: 'hover:bg-black hover:text-white' },
+    // { name: 'X', icon: <FaXTwitter />, href: '#', hover: 'hover:bg-black hover:text-white' },
     { name: 'LinkedIn', icon: <FaLinkedinIn />, href: 'https://www.linkedin.com/in/gifon-africa-53a32831a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app', hover: 'hover:bg-blue-600 hover:text-white' },
-    { name: 'Facebook', icon: <FaFacebookF />, href: '#', hover: 'hover:bg-blue-700 hover:text-white' },
+    // { name: 'Facebook', icon: <FaFacebookF />, href: '#', hover: 'hover:bg-blue-700 hover:text-white' },
     { name: 'Youtube', icon: <FaYoutube />, href: 'https://youtube.com/@gifonmedia?si=mNwfsyy0lNTpTyMP', hover: 'hover:bg-red-600 hover:text-white' },
     { name: 'Instagram', icon: <FaInstagram />, href: 'https://www.instagram.com/gifonafrica?igsh=MWxkMno5aHMyNzhubA==', hover: 'hover:bg-pink-600 hover:text-white' },
-    { name: 'Whatsapp', icon: <FaWhatsapp />, href: '#', hover: 'hover:bg-green-500 hover:text-white' },
+    // { name: 'Whatsapp', icon: <FaWhatsapp />, href: '#', hover: 'hover:bg-green-500 hover:text-white' },
   ];
 
   return (
