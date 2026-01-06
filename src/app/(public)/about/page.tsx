@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import MotionDiv from "@/components/MotionDiv"; 
 import MotionImg from "@/components/MotionImg";
-import Management from '@/components/advisory';
+import FoundingVision from '@/components/FVision';
 
 
 function mapMembersByCategory(members: FlatMember[], category: string): FlatMember[] {
@@ -431,6 +431,9 @@ export default async function AboutPage() {
           </div>
         </section>
 
+        {/* Founding Vision */}
+        <div id="founding-vision" className='pt-20 -z-10 bg-gray-50'></div>
+        <FoundingVision />
         {/* --- SECTION 2: MANAGEMENT TEAM (Dynamic, Asymmetrical, Light Gray) --- */}
         <div id="management-team" className='pt-20 -z-10 bg-gray-50'></div>
         <section className="py-24 px-4 md:px-6 bg-gray-50 border-t border-gray-100">

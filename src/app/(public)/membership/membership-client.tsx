@@ -1097,7 +1097,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                  <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
                  
                  <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <Quote className="text-green-400 w-16 h-16 mx-auto mb-6 opacity-80" />
+                    {/* <Quote className="text-green-400 w-16 h-16 mx-auto mb-6 opacity-80" /> */}
                     <blockquote className="text-2xl md:text-4xl text-white font-serif leading-relaxed mb-8 italic">
                         "A Legacy written on Maps- <br/>
                         Building the Eyes of the Republic Through<br/>
@@ -1115,7 +1115,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             <section className="py-20 px-4 md:px-6 bg-white">
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Application Process</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Membership Application Process</h2>
                         <p className="text-gray-500">Follow these simple steps to become a member.</p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -1145,7 +1145,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                             onClick={() => openDocModal(forumContent.supportingDocuments, "Supporting Documents Checklist")}
                             className='inline-flex items-center gap-2 text-green-700 bg-green-50 px-6 py-3 rounded-full hover:bg-green-100 transition font-semibold border border-green-200'
                         >
-                            <FileText size={18} /> View Required Documents Checklist
+                            <FileText size={18} /> Supporting documents attached here
                         </button>
                     </div>
                 </div>

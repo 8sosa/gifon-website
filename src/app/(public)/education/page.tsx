@@ -94,16 +94,16 @@ export default function EducationPage() {
                </div>
                
                <p className="text-lg leading-relaxed text-gray-600">
-                  The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) provides modular, competency-based training designed to build technical and analytical GEOINT capacity across sectors.
+                  The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) delivers professional competency-based learning across all sectors.
                </p>
 
                {/* Feature List */}
                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                   {[
-                    { icon: Layers, title: "Modular Learning", desc: "Beginner to Advanced levels in Remote Sensing & Geospatial Intelligence." },
-                    { icon: Target, title: "Competency Based", desc: "Focused on real-world skills and application." },
-                    { icon: Award, title: "Certified", desc: "Project-based assessments producing industry badges." },
-                    { icon: Users, title: "Inclusive", desc: "For students, gov't, and private sector practitioners." },
+                    { icon: Layers, title: "Professional Learning Tracks", desc: "Our professional learning tracks delivers structured, outcome driven pathways designed to build expertise and professional readiness." },
+                    { icon: Target, title: "Proficiency Based", desc: "our proficiency-based certification Validates mastery and competence through practical inward skills and application." },
+                    { icon: Award, title: "Professional Certification", desc: "Our professional certification validates that an individual has achieved the highest standard of expertise, competence and ethical ethos in their field." },
+                    { icon: Users, title: "People Centred", desc: "Our People centred approach prioritises human capacity, ethical practice and real-world impact on all our programmes." },
                   ].map((feat, i) => (
                     <div key={i} className="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
                        <div className="text-green-600 mt-1"><feat.icon size={20} /></div>

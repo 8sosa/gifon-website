@@ -136,7 +136,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
                   </h3>
               </div>
               <p className="text-gray-300 text-lg leading-relaxed">
-                Join a growing community of professionals, institutions and innovators advancing Geospatial Intelligence in support of Nigeria’s Critical Infrastructure, National Security and Sustainable development.
+                Join a growing community of professionals, institutions and innovators advancing Geospatial Intelligence in support of Nigeria’s critical infrastructure, national security and sustainable development.
               </p>
               <div className="pt-4">
                 <a href="/membership" className="inline-block bg-white text-green-900 font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl hover:bg-gray-100 transition-all hover:scale-105">

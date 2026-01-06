@@ -4,28 +4,21 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react'; 
 
-// Define the shape of our data
 interface FeatureItem {
   title: string;
   text: string;
-  // We pass the React Nodes (rendered icons) to avoid serialization errors
   icon: React.ReactNode; 
   largeIcon: React.ReactNode; 
 }
 
 export function FeatureAccordion({ items }: { items: FeatureItem[] }) {
-  // STATE: This tracks the ID of the ONE currently open card. 
-  // If null, all are closed.
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const handleToggle = (index: number) => {
-    // If clicking the already open card, close it (set to null). Otherwise, open the new one.
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    // 'items-start' PREVENTS the "Ghost Card" stretching. 
-    // Short cards will stay short, even if a neighbor is tall.
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
       {items.map((item, i) => (
         <ExpandableCard 
@@ -39,64 +32,91 @@ export function FeatureAccordion({ items }: { items: FeatureItem[] }) {
   );
 }
 
-// Internal Sub-component (controlled by parent)
 function ExpandableCard({ title, text, icon, largeIcon, isOpen, onClick }: FeatureItem & { isOpen: boolean; onClick: () => void }) {
   return (
     <motion.div
       layout
       onClick={onClick}
-      initial={false}
-      animate={{ 
-        backgroundColor: isOpen ? "#ffffff" : "#ffffff",
-      }}
       className={`
-        p-6 rounded-2xl shadow-lg border border-gray-100 relative overflow-hidden 
-        cursor-pointer group transition-all duration-300
-        ${isOpen ? 'ring-2 ring-green-500 ring-offset-2' : 'hover:-translate-y-2 hover:shadow-2xl'}
+        relative overflow-hidden rounded-2xl cursor-pointer group transition-all duration-500
+        ${isOpen ? 'shadow-xl' : 'hover:shadow-2xl hover:-translate-y-1'}
       `}
     >
-      {/* Background Icon */}
-      <motion.div 
-        layout="position"
-        className="absolute -bottom-6 -right-6 text-gray-50 group-hover:text-green-50 transition-colors duration-500 rotate-12"
-      >
-        {largeIcon}
-      </motion.div>
+      {/* 1. Gradient Border Effect (via a background div) */}
+      <div className={`
+        absolute inset-0 transition-opacity duration-500
+        bg-linear-to-br from-green-400 via-emerald-500 to-teal-500
+        ${isOpen ? 'opacity-100' : 'opacity-0 group-hover:opacity-40'}
+      `} />
 
-      <div className="relative z-10">
-        <motion.div layout="position" className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className={`
-              p-3 rounded-xl transition-colors duration-300 shadow-sm
-              ${isOpen ? 'bg-green-600 text-white' : 'bg-green-50 text-green-600 group-hover:bg-green-600 group-hover:text-white'}
-            `}>
-              {icon}
-            </div>
-            
-            <h3 className="text-lg font-bold text-gray-900 group-hover:text-green-700 transition-colors sen text-left">
-              {title}
-            </h3>
-          </div>
+      {/* 2. The Inner Card Content (White container slightly inset to reveal border) */}
+      <div className={`
+        relative h-full m-px rounded-[15px] p-6 transition-all duration-300
+        ${isOpen ? 'bg-green-50/50 backdrop-blur-sm' : 'bg-white'}
+      `}>
+        
+        {/* Decorative Background Blob for depth */}
+        <div className={`
+          absolute -top-10 -right-10 w-32 h-32 bg-green-200 rounded-full blur-3xl opacity-20 pointer-events-none transition-all duration-500
+          ${isOpen ? 'scale-150 opacity-30' : 'scale-100'}
+        `} />
 
-          <div className={`text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-             <ChevronDown size={20} />
-          </div>
+        {/* Large Background Icon Watermark */}
+        <motion.div 
+          layout="position"
+          className={`
+            absolute -bottom-6 -right-6 transition-all duration-500 rotate-12
+            ${isOpen ? 'text-green-200/50 scale-110' : 'text-gray-100 group-hover:text-green-100'}
+          `}
+        >
+          {largeIcon}
         </motion.div>
 
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <p className="text-gray-600 text-sm md:text-base leading-relaxed text-justify pt-4 border-t border-gray-100 mt-4">
-                {text}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div className="relative z-10">
+          <motion.div layout="position" className="flex items-start justify-between gap-4">
+            <div className="flex items-center gap-4">
+              {/* 3. Gradient Icon Container */}
+              <div className={`
+                p-3 rounded-xl shadow-md transition-all duration-300 flex items-center justify-center
+                bg-linear-to-br from-green-500 to-emerald-600 text-white
+                ${isOpen ? 'ring-2 ring-green-200 ring-offset-1' : 'group-hover:scale-105'}
+              `}>
+                {icon}
+              </div>
+              
+              <h3 className={`
+                text-lg font-bold transition-colors duration-300 sen text-left
+                ${isOpen ? 'text-green-800' : 'text-gray-800 group-hover:text-green-700'}
+              `}>
+                {title}
+              </h3>
+            </div>
+
+            <div className={`
+              text-green-500 transition-transform duration-300 bg-green-50 p-1 rounded-full
+              ${isOpen ? 'rotate-180 bg-green-100' : 'group-hover:bg-green-100'}
+            `}>
+               <ChevronDown size={18} />
+            </div>
+          </motion.div>
+
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <div className="pt-4 mt-4 border-t border-green-100/60">
+                  <p className="text-gray-600 text-sm md:text-base leading-relaxed text-justify">
+                    {text}
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </motion.div>
   );
