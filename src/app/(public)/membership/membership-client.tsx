@@ -181,6 +181,16 @@ const pioneerMembers = [
         role: " ",
         photo: "/ph.svg"
     },
+    {
+        name: " ",
+        role: " ",
+        photo: "/ph.svg"
+    },
+    {
+        name: " ",
+        role: " ",
+        photo: "/ph.svg"
+    },
 ];
 
 export default function MembershipClient({ children }: { children: React.ReactNode }) {
@@ -911,7 +921,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
         <>
             <HeroSection
                 title="Join the Geospatial Intelligence Movement"
-                description="Connect with a powerful network of professionals, institutions, and agencies shaping Nigeria’s geospatial future."
+                description={<>Join the <span className="cooper">GIFON</span> Community, Connect, Learn, and Contribute to Advancing Geospatial Intelligence, National Security, and Sustainable Development in Nigeria.</>}
                 backgroundMedia={["/media/20240418_130158.JPG"]}
             />
             
@@ -924,12 +934,48 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                     </div>
                     <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100 leading-relaxed text-lg text-gray-700 text-justify md:text-center relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-green-400 to-green-600"></div>
-                        <p className="mb-6">
-                            Joining the Geospatial Intelligence Foundation of Nigeria (<span className="cooper font-bold">GIFON</span>) means becoming part of a dynamic community of professionals, innovators, policymakers, and researchers committed to shaping Nigeria’s future through geospatial intelligence. As a member, you are not only advancing your career but also contributing to national development, security, and innovation.
-                        </p>
-                        <p>
-                            <span className="cooper font-bold">GIFON</span> membership provides you with opportunities to network with thought leaders, access exclusive research and publications, attend specialized training and workshops, and participate in shaping policies that strengthen Nigeria’s geospatial ecosystem.
-                        </p>
+                        <p>Join <span className="cooper font-bold">GIFON</span> and be part of a movement shaping the future of Nigeria through Geospatial Intelligence. Here, you don&apos;t just learn, you innovate, collaborate, and lead initiatives that strengthen national security, advance sustainable development, and transform communities. Connect with visionary experts, gain access to cutting-edge knowledge, and contribute your skills to projects that make a real, lasting impact. At <span className="cooper font-bold">GIFON</span>, your insights drive progress, your intelligence fuels solutions, and together, we empower a safer, smarter, and more resilient Nigeria.</p>
+                    </div>
+                </div>
+            </section>
+
+            {/* How to Apply Section */}
+            <div id="apply" className="scroll-mt-24"></div>
+            <section className="py-20 px-4 md:px-6 bg-white">
+                <div className="max-w-5xl mx-auto">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Membership Application Process</h2>
+                        <p className="text-gray-500">Follow these simple steps to become a member.</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                        {[
+                            { title: "Choose Category", desc: "Review categories to find your fit." },
+                            { title: "Fill Form", desc: "Complete the online application." },
+                            { title: "Attach Docs", desc: "Upload required supporting files." },
+                            { title: "Payment", desc: "Securely pay your annual dues." },
+                            { title: "Confirmation", desc: "Receive your Digital ID." }
+                        ].map((step, i) => (
+                            <div key={i} className="relative bg-gray-50 p-6 rounded-xl border border-gray-100 flex flex-col items-center text-center">
+                                <div className="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-bold text-lg mb-4 shadow-lg shadow-green-200">
+                                    {i + 1}
+                                </div>
+                                <h3 className="font-bold text-gray-900 mb-2">{step.title}</h3>
+                                <p className="text-xs text-gray-500 leading-relaxed">{step.desc}</p>
+                                {/* Connector Line (Desktop Only) */}
+                                {i < 4 && (
+                                    <div className="hidden md:block absolute top-11 -right-1/2 w-full h-0.5 bg-gray-200 -z-10"></div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="text-center mt-12">
+                        <button
+                            onClick={() => openDocModal(forumContent.supportingDocuments, "Supporting Documents Checklist")}
+                            className='inline-flex items-center gap-2 text-green-700 bg-green-50 px-6 py-3 rounded-full hover:bg-green-100 transition font-semibold border border-green-200'
+                        >
+                            <FileText size={18} /> View Required Documents Checklist
+                        </button>
                     </div>
                 </div>
             </section>
@@ -1069,7 +1115,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight text-center">
                     Pioneer Members
                 </h2>
-                <div className="mt-16 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div className="mt-16 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-6 items-center">
                     {pioneerMembers.map((m, i) => (
                         <div key={i} className="flex flex-col items-center relative">      
                         <div className="flex flex-col items-center text-center w-40 group">
@@ -1078,7 +1124,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                               src={m.photo}
                               alt={m.name}
                               fill
-                              className="rounded-full object-cover shadow-md border-4 border-white ring-1 ring-gray-100"
+                              className=" object-cover shadow-md border-4 border-white ring-1 ring-gray-100"
                             />
                           </div>
                           <h4 className="text-base font-bold text-gray-900 bellefair mb-0.5 group-hover:text-green-700 transition-colors">
@@ -1108,54 +1154,13 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                     </blockquote>
                     <div className="flex flex-col items-center">
                         <p className="text-xl font-bold text-green-400">Dr. AA Usman</p>
-                        <p className="text-green-200 uppercase tracking-widest text-sm italic">Founder & Executive Chairman, <span className="cooper not-italic">GIFON</span></p>
+                        <p className="text-green-200 uppercase tracking-widest text-sm italic">Founder & Executive Chairman</p>
+                        <p className="text-green-200 uppercase tracking-widest text-md italic">Geospatial Intelligence Foundation of Nigeria</p>
                     </div>
                 </div>
             </section>
             
-            {/* How to Apply Section */}
-            <div id="apply" className="scroll-mt-24"></div>
-            <section className="py-20 px-4 md:px-6 bg-white">
-                <div className="max-w-5xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Membership Application Process</h2>
-                        <p className="text-gray-500">Follow these simple steps to become a member.</p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                        {[
-                            { title: "Choose Category", desc: "Review categories to find your fit." },
-                            { title: "Fill Form", desc: "Complete the online application." },
-                            { title: "Attach Docs", desc: "Upload required supporting files." },
-                            { title: "Payment", desc: "Securely pay your annual dues." },
-                            { title: "Confirmation", desc: "Receive your Digital ID." }
-                        ].map((step, i) => (
-                            <div key={i} className="relative bg-gray-50 p-6 rounded-xl border border-gray-100 flex flex-col items-center text-center">
-                                <div className="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-bold text-lg mb-4 shadow-lg shadow-green-200">
-                                    {i + 1}
-                                </div>
-                                <h3 className="font-bold text-gray-900 mb-2">{step.title}</h3>
-                                <p className="text-xs text-gray-500 leading-relaxed">{step.desc}</p>
-                                {/* Connector Line (Desktop Only) */}
-                                {i < 4 && (
-                                    <div className="hidden md:block absolute top-11 -right-1/2 w-full h-0.5 bg-gray-200 -z-10"></div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="text-center mt-12">
-                        <button
-                            onClick={() => openDocModal(forumContent.supportingDocuments, "Supporting Documents Checklist")}
-                            className='inline-flex items-center gap-2 text-green-700 bg-green-50 px-6 py-3 rounded-full hover:bg-green-100 transition font-semibold border border-green-200'
-                        >
-                            <FileText size={18} /> View Required Documents Checklist
-                        </button>
-                    </div>
-                </div>
-            </section>
-
             {/* Contact Section */}
-
             <div id="contact" className="scroll-mt-24"></div>
             <section className="py-20 px-4 md:px-6 bg-gray-50 text-center">
                 <div className="max-w-2xl mx-auto">

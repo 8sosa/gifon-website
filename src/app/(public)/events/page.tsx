@@ -99,83 +99,83 @@ export default async function EventsPage() {
     .sort((a, b) => b._startTs - a._startTs);
 
   // --- Outreach Data (With Lucide Icons) ---
-  const outreachGroups = [
-    {
-      groupTitle: 'Youth-Focused Programmes',
-      groupIcon: Users,
-      groupColor: 'text-blue-600 bg-blue-50',
-      groupAnchor: 'youth-focused-programmes',
-      groupDescription: "Engaging the next generation of GEOINT leaders through hands-on training and challenges.",
-      programs: [
-        {
-          title: 'Boot Camps',
-          icon: Cpu,
-          anchor: 'boot-camps',
-          description: 'Intensive upskilling sprints to fast-track job readiness for graduates and early professionals.'
-        },
-        {
-          title: 'STEM & GEOINT Awareness',
-          icon: Lightbulb,
-          anchor: 'stem-geoint-awareness',
-          description: 'Integrating geospatial literacy into school and tertiary STEM education via outreach and student clubs.'
-        },
-        {
-          title: 'GeoInnovation Challenge',
-          icon: Award,
-          anchor: 'geoinnovation-challenge',
-          description: 'Crowdsourcing practical geo-solutions for national issues, engaging developers, analysts, and startups.'
-        },
-      ]
-    },
-    {
-      groupTitle: 'Women-in-GEOINT Initiatives',
-      groupIcon: Heart, // Using Heart to represent inclusion/care
-      groupColor: 'text-pink-600 bg-pink-50',
-      groupAnchor: 'women-in-geoint-initiatives',
-      groupDescription: "Empowering and elevating the voices and careers of women in the geospatial field.",
-      programs: [
-        {
-          title: 'Women in Leadership',
-          icon: Users,
-          anchor: 'women-geospatial-leadership',
-          description: 'Advancing gender inclusion through capacity building, mentorship, and leadership development.'
-        },
-        {
-          title: 'Community Projects',
-          icon: MapPin,
-          anchor: 'community-service-projects',
-          description: 'Using geospatial intelligence to address community challenges, such as Clean City Mapping Drives.'
-        },
-      ]
-    },
-    {
-      groupTitle: 'Professional Engagement',
-      groupIcon: Briefcase,
-      groupColor: 'text-purple-600 bg-purple-50',
-      groupAnchor: 'professional-institutional-engagement',
-      groupDescription: "Building a connected and collaborative professional ecosystem for all members.",
-      programs: [
-        {
-          title: 'GeoCommunity Dev',
-          icon: Globe,
-          anchor: 'geocommunity-development',
-          description: 'Building strong local and regional networks for collaboration via quarterly meetups.'
-        },
-        {
-          title: 'GeoConnect Networking',
-          icon: Users,
-          anchor: 'geoconnect-networking',
-          description: 'Curated networking sessions and mixers to foster dialogue between government and industry.'
-        },
-        {
-          title: 'Policy Roundtables',
-          icon: Mic,
-          anchor: 'public-lectures-roundtables',
-          description: 'A neutral platform for experts and policymakers to discuss security and GEOINT applications.'
-        },
-      ]
-    }
-  ];
+  // const outreachGroups = [
+  //   {
+  //     groupTitle: 'Youth-Focused Programmes',
+  //     groupIcon: Users,
+  //     groupColor: 'text-blue-600 bg-blue-50',
+  //     groupAnchor: 'youth-focused-programmes',
+  //     groupDescription: "Engaging the next generation of GEOINT leaders through hands-on training and challenges.",
+  //     programs: [
+  //       {
+  //         title: 'Boot Camps',
+  //         icon: Cpu,
+  //         anchor: 'boot-camps',
+  //         description: 'Intensive upskilling sprints to fast-track job readiness for graduates and early professionals.'
+  //       },
+  //       {
+  //         title: 'STEM & GEOINT Awareness',
+  //         icon: Lightbulb,
+  //         anchor: 'stem-geoint-awareness',
+  //         description: 'Integrating geospatial literacy into school and tertiary STEM education via outreach and student clubs.'
+  //       },
+  //       {
+  //         title: 'GeoInnovation Challenge',
+  //         icon: Award,
+  //         anchor: 'geoinnovation-challenge',
+  //         description: 'Crowdsourcing practical geo-solutions for national issues, engaging developers, analysts, and startups.'
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     groupTitle: 'Women-in-GEOINT Initiatives',
+  //     groupIcon: Heart, // Using Heart to represent inclusion/care
+  //     groupColor: 'text-pink-600 bg-pink-50',
+  //     groupAnchor: 'women-in-geoint-initiatives',
+  //     groupDescription: "Empowering and elevating the voices and careers of women in the geospatial field.",
+  //     programs: [
+  //       {
+  //         title: 'Women in Leadership',
+  //         icon: Users,
+  //         anchor: 'women-geospatial-leadership',
+  //         description: 'Advancing gender inclusion through capacity building, mentorship, and leadership development.'
+  //       },
+  //       {
+  //         title: 'Community Projects',
+  //         icon: MapPin,
+  //         anchor: 'community-service-projects',
+  //         description: 'Using geospatial intelligence to address community challenges, such as Clean City Mapping Drives.'
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     groupTitle: 'Professional Engagement',
+  //     groupIcon: Briefcase,
+  //     groupColor: 'text-purple-600 bg-purple-50',
+  //     groupAnchor: 'professional-institutional-engagement',
+  //     groupDescription: "Building a connected and collaborative professional ecosystem for all members.",
+  //     programs: [
+  //       {
+  //         title: 'GeoCommunity Dev',
+  //         icon: Globe,
+  //         anchor: 'geocommunity-development',
+  //         description: 'Building strong local and regional networks for collaboration via quarterly meetups.'
+  //       },
+  //       {
+  //         title: 'GeoConnect Networking',
+  //         icon: Users,
+  //         anchor: 'geoconnect-networking',
+  //         description: 'Curated networking sessions and mixers to foster dialogue between government and industry.'
+  //       },
+  //       {
+  //         title: 'Policy Roundtables',
+  //         icon: Mic,
+  //         anchor: 'public-lectures-roundtables',
+  //         description: 'A neutral platform for experts and policymakers to discuss security and GEOINT applications.'
+  //       },
+  //     ]
+  //   }
+  // ];
 
   return (
     <>
@@ -336,9 +336,8 @@ export default async function EventsPage() {
         </section>
 
         {/* --- OUTREACH PROGRAMMES --- */}
-        <div id="outreach" className="scroll-mt-24"></div>
+        {/* <div id="outreach" className="scroll-mt-24"></div>
         <section className="py-20 px-4 md:px-6 bg-slate-900 text-white relative overflow-hidden">
-           {/* Background Pattern */}
            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
            
            <div className="max-w-7xl mx-auto relative z-10">
@@ -353,7 +352,6 @@ export default async function EventsPage() {
               {outreachGroups.map((group, idx) => (
                 <div key={idx} id={group.groupAnchor} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-10">
                   
-                  {/* Group Header */}
                   <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b border-white/10 pb-6">
                     <div className={`p-4 rounded-2xl ${group.groupColor.replace('text-', 'bg-').replace('bg-', 'text-green-800 ')} bg-opacity-20`}>
                         <group.groupIcon size={32} />
@@ -364,7 +362,6 @@ export default async function EventsPage() {
                     </div>
                   </div>
                   
-                  {/* Cards Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {group.programs.map((program, pIdx) => (
                       <Link 
@@ -394,7 +391,7 @@ export default async function EventsPage() {
               ))}
             </div>
            </div>
-        </section>
+        </section> */}
 
       </main>
     </>

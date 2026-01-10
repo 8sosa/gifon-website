@@ -3,21 +3,13 @@
 import HeroSection from '@/components/HeroSection';
 import { useState } from 'react';
 import Modal from '@/components/Modal';
-import allForums from './forums'; // Ensure this path matches where you saved the data file
+import Link from 'next/link';
+import allForums from './forums'; 
 import { 
-  Users, 
-  Briefcase, 
-  Scale, 
-  GraduationCap, 
-  HeartHandshake, 
-  ArrowRight, 
-  Globe, 
-  Lightbulb, 
-  Target 
+  Users, Briefcase, Scale, GraduationCap, HeartHandshake, Calendar, MapPin, Heart, Cpu, ArrowRight, Globe, Lightbulb, Target, BookOpen, Presentation, Rocket, Award, Mic, ChevronRight 
 } from 'lucide-react';
 
-// --- Icon Mapping Helper ---
-// We map the IDs from your data file to specific icons
+// --- 1. Icon & Color Helpers ---
 const getForumIcon = (id: string) => {
   switch (id) {
     case 'youngProfessionals': return <Users size={40} />;
@@ -40,6 +32,45 @@ const getForumColor = (id: string) => {
   }
 };
 
+// --- 2. Programs Data ---
+const forumDetails: Record<string, any> = {
+  youngProfessionals: {
+    programs: [
+      { title: "Boot Camps", icon: Cpu, anchor: "boot-camps" },
+      { title: 'STEM & GEOINT Awareness',
+      icon: Lightbulb,
+      anchor: 'stem-geoint-awareness' },
+      { title: 'GeoInnovation Challenge',
+      icon: Award,
+      anchor: 'geoinnovation-challenge'
+     }
+    ]
+  },
+  womenInGeoint: {
+    programs: [
+      { title: 'Women in Leadership',
+      icon: Users,
+      anchor: 'women-geospatial-leadership' },
+      { title: 'Community Projects',
+      icon: MapPin,
+      anchor: 'community-service-projects' }
+    ]
+  },
+  industry: {
+    programs: [
+      { title: 'GeoCommunity Dev',
+      icon: Globe,
+      anchor: 'geocommunity-development' },
+      { title: 'GeoConnect Networking',
+      icon: Users,
+      anchor: 'geoconnect-networking' },
+      {title: 'Policy Roundtables',
+      icon: Mic,
+      anchor: 'public-lectures-roundtables'}
+    ]
+  }
+};
+
 interface ModalState {
   isOpen: boolean;
   content: string | null;
@@ -47,19 +78,13 @@ interface ModalState {
 }
 
 export default function ForumsPage() {
-  const [modalData, setModalData] = useState<ModalState>({
-    isOpen: false,
-    content: null,
-    title: null,
-  });
-
+  const [modalData, setModalData] = useState<ModalState>({ isOpen: false, content: null, title: null });
+  
   const openModal = (content: string, title: string) => {
     setModalData({ isOpen: true, content, title });
   };
 
-  const closeModal = () => {
-    setModalData({ isOpen: false, content: null, title: null });
-  };
+  const closeModal = () => setModalData({ isOpen: false, content: null, title: null });
 
   return (
     <>
@@ -71,105 +96,148 @@ export default function ForumsPage() {
 
       <main className="font-sans bg-gray-50 min-h-screen">
         
-        {/* --- 1. Introduction & Pillars Section --- */}
-        <section className="py-20 px-4 md:px-6 bg-white rounded-b-[3rem] shadow-sm mb-12">
-          <div className='max-w-6xl mx-auto'>
-            <div className="text-center max-w-4xl mx-auto mb-16">
-              <h2 className="text-sm font-bold text-green-600 uppercase tracking-widest mb-3">Our Ecosystem</h2>
-              <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-                Collaboration Drives <span className="bellefair text-green-700">Innovation</span>
-              </h1>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                The <span className="cooper">GIFON</span> Groups & Forums serve as structured communities of practice where professionals, institutions, researchers, and enthusiasts can learn, engage, and innovate together. We believe that collective intelligence drives national progress.
-              </p>
-            </div>
-
-            {/* Visual Pillars Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-               {[
-                 { icon: Users, title: "Peer Learning", text: "Foster peer-to-peer learning, mentorship, and professional support." },
-                 { icon: Globe, title: "Collaboration", text: "Encourage multi-stakeholder collaboration across government & private sectors." },
-                 { icon: Lightbulb, title: "Applied Research", text: "Enable solution development that advances Nigeria’s geospatial capabilities." },
-                 { icon: Target, title: "Talent Pipeline", text: "Strengthen the national pipeline of GeoINT skills, talent, and innovation." }
-               ].map((item, idx) => (
-                 <div key={idx} className="bg-gray-50 p-6 rounded-2xl hover:-translate-y-1 transition-transform duration-300">
-                    <item.icon className="text-green-600 mb-4 w-10 h-10" />
-                    <h3 className="font-bold text-gray-900 text-lg mb-2">{item.title}</h3>
-                    <p className="text-sm text-gray-600">{item.text}</p>
-                 </div>
-               ))}
+        {/* --- 1. Introduction --- */}
+        <section className="py-20 px-4 md:px-6 bg-white rounded-b-[3rem] shadow-sm mb-12 relative z-10">
+          <div className='max-w-6xl mx-auto text-center'>
+            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+              Collaboration Drives <span className="text-green-700">Innovation</span>
+            </h1>
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto mb-16">
+              The GIFON Groups & Forums serve as structured communities of practice where professionals can learn, engage, and innovate together.
+            </p>
+            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+                {[Users, Globe, Lightbulb, Target].map((Icon, i) => (
+                    <div key={i} className="bg-gray-50 p-4 rounded-full text-green-600">
+                        <Icon size={24} />
+                    </div>
+                ))}
             </div>
           </div>
         </section>
 
-        {/* --- 2. The Forums Grid --- */}
+        {/* --- 2. The Forums Grid (Side Flyout FIXED) --- */}
         <section className="py-16 px-4 md:px-6 max-w-7xl mx-auto">
-           <div className="text-center mb-12">
+           <div className="text-center mb-16">
              <h2 className="text-3xl font-bold text-gray-900">Explore Our Forums</h2>
-             <p className="text-gray-500 mt-2">Click on a card to view the full policy framework</p>
+             <p className="text-gray-500 mt-2">Hover over a card to reveal its programs</p>
            </div>
 
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-             {allForums.map((forum) => (
-               <div 
-                 key={forum.id} 
-                 id={forum.anchor}
-                 className="group bg-white rounded-3xl shadow-xl shadow-gray-200/50 overflow-hidden border border-gray-100 flex flex-col hover:shadow-2xl transition-all duration-300"
-               >
-                 {/* Card Header */}
-                 <div className="p-8 pb-4">
-                   <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-colors duration-300 ${getForumColor(forum.id)}`}>
-                      {getForumIcon(forum.id)}
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8 mb-20">
+             {allForums.map((forum, idx) => {
+               const details = forumDetails[forum.id];
+               
+               return (
+                 // GROUP WRAPPER: relative for positioning, hover:z-50 puts this entire stack above neighbors
+                 <div 
+                    key={forum.id} 
+                    className="group relative hover:z-50" 
+                 >
+                    {/* --- A. THE SLIDING DRAWER --- */}
+                   {details && (
+                     <div className={`
+                        hidden md:block 
+                        absolute top-6 bottom-6 w-[300px] bg-slate-900/95 backdrop-blur-xl text-white z-0
+                        transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1) shadow-2xl
+                        rounded-xl border border-white/10 opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100
+
+                        /* MD Screen (2 Cols) Logic */
+                        md:left-[95%] md:-translate-x-[110%] md:group-hover:translate-x-0
+                        md:origin-left
+                        ${(idx + 1) % 2 === 0 ? 'md:left-auto md:right-[95%] md:translate-x-[110%] md:group-hover:translate-x-0 md:origin-right' : ''}
+
+                        /* LG Screen (3 Cols) Logic - Overrides MD */
+                        lg:left-[95%] lg:-translate-x-[110%] lg:group-hover:translate-x-0
+                        lg:origin-left
+                        ${(idx + 1) % 3 === 0 ? 'lg:left-auto lg:right-[95%] lg:translate-x-[110%] lg:group-hover:translate-x-0 lg:origin-right' : ''}
+                     `}>
+                        <div className="h-full flex flex-col p-6 overflow-hidden">
+                             {/* Decorative vertical line */}
+                             <div className="absolute top-4 bottom-4 left-0 w-1 bg-linear-to-b from-green-500 to-transparent opacity-50"></div>
+                             
+                             <h4 className="text-xs font-bold text-green-400 uppercase tracking-widest mb-6 pl-4">
+                                Active Programs
+                             </h4>
+                             
+                             <div className="space-y-4 grow pl-2">
+                                {details.programs.map((prog: any, pIdx: number) => (
+                                    <Link key={pIdx} href={`/education/${prog.anchor}`} className="flex items-start gap-3 group/link hover:bg-white/10 p-3 rounded-lg transition-colors">
+                                        <div className="text-gray-400 group-hover/link:text-green-400 mt-1">
+                                            <prog.icon size={16} />
+                                        </div>
+                                        <div>
+                                            <div className="text-sm font-bold text-gray-200 group-hover/link:text-white transition-colors">
+                                                {prog.title}
+                                            </div>
+                                        </div>
+                                    </Link>
+                                ))}
+                             </div>
+                             
+                             <div className="pt-4 mt-2 border-t border-white/10 pl-2">
+                                <span className="text-xs text-gray-400 flex items-center gap-1 group-hover/btn:text-white cursor-pointer transition-colors hover:text-green-400">
+                                    View full details <ChevronRight size={12} />
+                                </span>
+                             </div>
+                        </div>
+                     </div>
+                   )}
+
+                   {/* --- B. THE MAIN CARD --- */}
+                   {/* z-20 ensures it stays ON TOP of its own sliding drawer */}
+                   <div className="relative z-20 h-full bg-white rounded-3xl shadow-lg border border-gray-100 flex flex-col transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:border-green-100">
+                     
+                     <div className="p-8 pb-4">
+                       <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-colors duration-300 ${getForumColor(forum.id)}`}>
+                          {getForumIcon(forum.id)}
+                       </div>
+                       <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">
+                         {forum.title}
+                       </h3>
+                     </div>
+
+                     <div className="px-8 pb-8 grow">
+                       <p className="text-gray-600 leading-relaxed line-clamp-3 text-sm">
+                         {forum.description}
+                       </p>
+                     </div>
+
+                     <div className="p-8 pt-0 mt-auto">
+                       <button
+                         onClick={() => openModal(forum.policyContent, `${forum.title} Policy`)}
+                         className="w-full py-3 px-4 rounded-xl bg-gray-50 hover:bg-green-600 text-gray-700 hover:text-white font-semibold transition-all text-sm flex items-center justify-between group/btn"
+                       >
+                         <span>View Policy</span>
+                         <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                       </button>
+                       
+                       {/* Mobile Only Program Hint */}
+                       <div className="md:hidden mt-4 pt-4 border-t border-gray-100">
+                            <p className="text-xs text-gray-400 text-center">
+                                Tap to see {details?.programs.length || 0} active programs
+                            </p>
+                       </div>
+                     </div>
                    </div>
-                   <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">
-                     {forum.title}
-                   </h3>
-                   <div className="w-12 h-1 bg-gray-200 group-hover:bg-green-500 transition-colors rounded-full mb-4"></div>
-                 </div>
 
-                 {/* Card Body */}
-                 <div className="px-8 pb-8 grow">
-                   <p className="text-gray-600 leading-relaxed line-clamp-4">
-                     {forum.description}
-                   </p>
                  </div>
-
-                 {/* Card Footer / Action */}
-                 <div className="p-8 pt-0 mt-auto">
-                   <button
-                     onClick={() => openModal(forum.policyContent, `${forum.title} Policy`)}
-                     className="w-full py-4 px-6 rounded-xl bg-gray-50 hover:bg-green-600 text-gray-700 hover:text-white font-semibold transition-all duration-300 flex items-center justify-between group-hover:shadow-lg"
-                   >
-                     <span>Read Policy Document</span>
-                     <ArrowRight size={18} />
-                   </button>
-                 </div>
-               </div>
-             ))}
+               );
+             })}
            </div>
         </section>
 
         {/* --- 3. Join CTA --- */}
-        <section className="py-20 bg-gray-900 text-white mt-12">
+        <section className="py-20 bg-gray-900 text-white border-t border-gray-800 relative z-10">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to shape the future?</h2>
-            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              Whether you are a seasoned professional, an emerging practitioner, or a student, <span className="cooper text-white">GIFON</span> offers you a home to learn, contribute, and thrive.
-            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/membership" className="px-8 py-4 bg-green-600 hover:bg-green-500 rounded-full font-bold text-lg transition-colors shadow-lg shadow-green-900/50">
-                Become a Member
-              </a>
-              <a href="/contact-us" className="px-8 py-4 bg-transparent border border-gray-600 hover:bg-white/10 rounded-full font-bold text-lg transition-colors">
-                Contact Secretariat
-              </a>
+              <a href="/membership" className="px-8 py-4 bg-green-600 rounded-full font-bold hover:bg-green-500 transition-colors">Become a Member</a>
+              <a href="/contact-us" className="px-8 py-4 border border-gray-600 rounded-full font-bold hover:bg-white/10 transition-colors">Contact Us</a>
             </div>
           </div>
         </section>
 
       </main>
 
-      {/* Reusable Modal */}
       <Modal 
         isOpen={modalData.isOpen} 
         onClose={closeModal} 

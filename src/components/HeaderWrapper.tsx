@@ -39,7 +39,7 @@ export default async function HeaderWrapper() {
         href: '/education', 
         children: [ 
             { label: 'Training', anchor: 'C-T' }, 
-            { label: 'Programmes', anchor: 'programs', children: [ 
+            { label: 'Programs', anchor: 'programs', children: [ 
                 { label: 'Youth Empowerment & Talent Acceleration', link: '/education/youth-empowerment' }, 
                 { label: 'Women in GEOINT (WINGS)', link: '/education/wings' }, 
                 { label: 'Geoinnovation & Tech Incubation', link: '/education/geoinnovation' }, 
@@ -47,9 +47,11 @@ export default async function HeaderWrapper() {
                 { label: 'Community Mapping', link: '/education/community-mapping' }, 
                 { label: 'Open Data & Research', link: '/education/open-data' }, 
                 { label: 'Conferences & Workshops', link: '/education/conferences' }, 
-                { label: 'Training & Certification', link: '/education/training' } 
+                { label: 'Training & Certification', link: '/education/training' },
+                { label: 'Academia & Research', link: '/education/academia' },
             ] }, 
-            { label: 'Talent Development', anchor: 'talent' } 
+            { label: 'Talent Development', anchor: 'talent' },
+            { label: 'Scholarships', anchor: 'Scholarships' }
         ] 
     },
     
@@ -60,32 +62,31 @@ export default async function HeaderWrapper() {
         label: 'Media Resources', 
         href: '/resources', 
         children: [ 
-            { label: 'News', anchor: 'News' }, 
+            { label: 'News & Updates', anchor: 'News' }, 
             { label: 'Press Releases', anchor: 'Press' }, 
-            { label: 'Podcast', anchor: 'Podcast' }, 
-            { label: 'Webinar', anchor: 'Webinar' }, 
+            { label: 'GeoINSIGHT Podcast', anchor: 'Podcast' }, 
+            { label: 'Webinars & Masterclasses', anchor: 'Webinar' }, 
             { label: 'Publication Archive', anchor: 'publications' }, 
             { label: 'Photo & Video Gallery', anchor: 'Gallery' }, 
             { label: 'Downloads', anchor: 'Downloads' } 
         ] 
     },
     { 
-        label: 'Areas of Support', 
-        href: '/infrastructure', 
+        label: 'Business Solutions', 
+        href: '/business-solutions', 
         children: [ 
-            { label: 'Power and Energy', anchor: 'energy' }, 
-            { label: 'Water', anchor: 'water' }, 
-            { label: 'Information, Communications, Science and Technology (ICT)', anchor: 'communication' }, 
-            { label: 'Banking, Finance and Insurance', anchor: 'finance' }, 
-            { label: 'Health', anchor: 'health' }, 
-            { label: 'Public Administration', anchor: 'government' }, 
-            { label: 'Education', anchor: 'education' }, 
-            { label: 'Defence and Security', anchor: 'defence' }, 
-            { label: 'Transport', anchor: 'transportation' }, 
-            { label: 'Food and Agriculture', anchor: 'food' }, 
+            { label: 'Energy & Power', anchor: 'energy' }, 
+            { label: 'Dams & Waterways', anchor: 'water' }, 
+            { label: 'Transportation Systems', anchor: 'transportation' }, 
+            { label: 'Communications & IT', anchor: 'communication' }, 
+            { label: 'Healthcare & Public Health', anchor: 'health' }, 
             { label: 'Emergency Services', anchor: 'emergency' }, 
-            { label: 'Industrial and Manufacturing', anchor: 'manufacturing' }, 
-            { label: 'Mines and Steel', anchor: 'mines' }
+            { label: 'Financial Services', anchor: 'finance' }, 
+            { label: 'Food and Agriculture', anchor: 'food' }, 
+            { label: 'Government Services', anchor: 'government' }, 
+            { label: 'Chemical & Hazardous Materials', anchor: 'education' }, 
+            { label: 'Nuclear & Radiological', anchor: 'defence' }, 
+            { label: 'Critical Manufacturing & Industrial Facilities', anchor: 'manufacturing' }, 
         ]
     },
     // --- UPDATED SECTION START ---
@@ -113,11 +114,11 @@ export default async function HeaderWrapper() {
             { label: 'Volunteer & Internship', anchor: 'volunteer' } 
         ] 
     },
-    { 
-        label: 'Get Involved', 
-        href: '/get-involved', 
-        // children: [ { label: `Volunteer opportunities`, anchor: `opportunities`} ] 
-    },
+    // { 
+    //     label: 'Get Involved', 
+    //     href: '/get-involved', 
+    //     // children: [ { label: `Volunteer opportunities`, anchor: `opportunities`} ] 
+    // },
   ];
 
   // 4. Pass the fully constructed array to the Client Component

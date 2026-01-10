@@ -1,4 +1,4 @@
-import { infrastructureList } from '../app/(public)/infrastructure/infrastructure';
+import { infrastructureList } from '../app/(public)/business-solutions/infrastructure';
 import resourcesData, { ResourceItem } from '../app/(public)/resources/resources';
 
 export type SearchItem = {
@@ -38,7 +38,7 @@ const sectorItems: SearchItem[] = infrastructureList.map((sector) => ({
   title: sector.title,
   description: sector.summary,
   category: 'Sector',
-  href: `/infrastructure#${sector.id}`,
+  href: `/business-solutions#${sector.id}`,
 }));
 
 // --- 3. Resources (Unified Type Logic) ---

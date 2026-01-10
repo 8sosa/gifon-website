@@ -167,18 +167,7 @@ export default function OpenDataResearchPage() {
             
 
             <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-4">
-              <p>
-                The Open Data & Research Programme (ODRP) is a flagship
-                initiative of the Geospatial Intelligence Foundation of Nigeria
-                (<span className="cooper font-bold">GIFON</span>) aimed at promoting data accessibility, research
-                collaboration, and evidence-based policy development in
-                Nigeria’s geospatial intelligence ecosystem.
-              </p>
-              <p>
-                The programme seeks to make geospatial data openly available,
-                ethically managed, and widely used for national development,
-                security, innovation, and academic advancement.
-              </p>
+              <p><span className="cooper font-bold">GIFON</span>&apos;s Open Data and Research Program is dedicated to advancing knowledge, transparency, and innovation in Geospatial Intelligence. By providing access to high-quality geospatial data, conducting rigorous research, and promoting evidence-based analysis, the program supports informed decision making across government, security, and development sectors. It fosters collaboration among researchers, institutions, and communities, driving innovative solutions that strengthen national security, enhance governance, and accelerate sustainable development in Nigeria.</p>
             </div>
           </div>
         </section>

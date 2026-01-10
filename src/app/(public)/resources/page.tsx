@@ -165,7 +165,7 @@ useEffect(() => {
         {/* --- 2. NEWS --- */}
         <div id="News" className="scroll-mt-24"></div>
         <ResourceSection 
-          title="News" 
+          title="News & Updates" 
           icon={<FaNewspaper size={24} />} 
           data={resourcesData.news}
           bgColor="bg-white"
@@ -342,9 +342,9 @@ useEffect(() => {
 
                   {/* Action Bar */}
                   <div className="mt-auto pt-6 border-t border-gray-100 flex items-center justify-between">
-                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    {/* <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
                       {pub.id?.replace(/-/g, ' ')}
-                    </span>
+                    </span> */}
                     <Link
                       href={pub.link || "#"}
                       className="inline-flex items-center gap-2 text-green-700 font-bold text-sm hover:text-green-900 transition-colors group/link"

@@ -66,19 +66,7 @@ export default function GeospatialHubPage() {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">Overview</h2>
             <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-6">
-              <p>
-                The National Geospatial Security & Intelligence Hub (NGSIH) is an
-                initiative of the Geospatial Intelligence Foundation of Nigeria
-                (<span className="cooper font-bold">GIFON</span>) to serve as the nation’s premier center for geospatial
-                intelligence innovation, data integration, and strategic
-                decision support.
-              </p>
-              <p className="font-medium text-gray-900">
-                It is designed as a secure, collaborative environment where
-                government, industry, academia, and international partners can
-                leverage geospatial intelligence to safeguard Nigeria’s national
-                interests and accelerate sustainable development.
-              </p>
+              <p>The National Geospatial Security and Intelligence Hub is Nigeri&apos;s center of excellence for geospatial intelligence, providing critical insights to strengthen national security, protect infrastructure, and support strategic decision-making. By integrating advanced geospatial technologies, data analytics, and intelligence expertise, the Hub empowers government, security agencies, and private institutions to anticipate threats, respond effectively, and drive sustainable development. It serves as a national platform for innovation, collaboration, and capacity building, ensuring that geospatial intelligence translates into actionable solutions for a safer and more resilient Nigeria.</p>
             </div>
           </div>
         </section>

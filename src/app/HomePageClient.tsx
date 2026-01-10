@@ -9,7 +9,7 @@ import Image from 'next/image';
 import Link from "next/link";
 import { FaRegNewspaper, FaFacebook, FaLinkedin, FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa6';
 import { Calendar, Newspaper, ArrowRight, Share2 } from 'lucide-react';
-import { sections } from './(public)/infrastructure/infrastructure';
+import { sections } from './(public)/business-solutions/infrastructure';
 
 const sectorItems: CarouselItem[] = Object.values(sections).map((sector) => {
 
@@ -17,7 +17,7 @@ const sectorItems: CarouselItem[] = Object.values(sections).map((sector) => {
     src: sector.images, // Pass the array or string directly!
     alt: sector.title,
     title: sector.title, 
-    href: `/infrastructure#${sector.id}`, 
+    href: `/business-solutions#${sector.id}`, 
   };
 });
 

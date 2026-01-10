@@ -42,8 +42,8 @@ export default function WomenInGeointPage() {
   return (
     <>
       <HeroSection
-        title={<><span className="cooper">GIFON</span> Women in GEOINT Program</>}
-        description="Empowering women in the field of geospatial intelligence (GeoINT) through collaboration, professional development, mentorship, and advocacy."
+        title={<><span className="cooper">GIFON</span> Women in GEOINT G-WINGS(P)</>}
+        description="Empowering women in the field of geospatial intelligence through collaboration, professional development, mentorship, and advocacy."
         backgroundMedia={[
           "/media/wings.JPG",
         ]}
@@ -54,21 +54,11 @@ export default function WomenInGeointPage() {
         <section id="introduction" className="py-16 px-4 bg-white">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-semibold mb-6 text-gray-800">
-              Why a Women in GEOINT Program?
+              Women in GEOINT G-WINGS(P)
             </h2>
             <div className="space-y-4 text-gray-700 leading-relaxed text-justify md:text-center">
               <p>
-                The geospatial intelligence (GEOINT) sector plays a critical
-                role in advancing national security, sustainable development,
-                and technological innovation. However, women remain
-                significantly underrepresented in this vital field, both in
-                Nigeria and globally.
-              </p>
-              <p>
-                This gender imbalance not only limits inclusivity but also
-                constrains the full potential of geospatial solutions in
-                addressing complex national challenges. Our Women in GEOINT Program
-                is designed to change that.
+                <span className="cooper">GIFON</span>&apos;s Women in GEOINT program is dedicated to empowering and amplifying the voices of women in the field of Geospatial Intelligence. Through mentorship, skills development, and leadership opportunities, the program fosters gender equity, nurtures talent, and builds a strong network of female professionals driving innovation, national security, and sustainable development in Nigeria. By supporting women to lead, innovate, and excel, <span className="cooper">GIFON</span> is shaping a more inclusive and impactful geospatial community.
               </p>
             </div>
           </div>
@@ -114,14 +104,14 @@ export default function WomenInGeointPage() {
          <section id="learn-more" className="py-16 px-4 bg-white text-center">
             <div className="max-w-4xl mx-auto">
                <h2 className="text-2xl font-semibold mb-4 text-gray-800">Learn More & Get Involved</h2>
-               <p className="text-gray-700 leading-relaxed mb-6">
+               {/* <p className="text-gray-700 leading-relaxed mb-6">
                  Discover the full policy details and activities of our Women in GEOINT Forum (GI-NGW).
-               </p>
+               </p> */}
                <Link // Changed from <a> to <Link>
                  href="/forums#women-in-geoint" // Link to the forum section on the portal/directory page
                  className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
                >
-                 Visit the GI-NGW Forum Page
+                 Visit G-WINGS Forum 
                </Link>
             </div>
          </section>

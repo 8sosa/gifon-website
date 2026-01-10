@@ -3,17 +3,493 @@
 import HeroSection from '@/components/HeroSection';
 import Image from 'next/image';
 import Link from 'next/link'; 
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { 
-  BookOpen, 
-  Award, 
-  Users, 
-  ArrowRight, 
-  Target, 
-  Layers, 
-  CheckCircle2 
+  BookOpen, Award, Users, ArrowRight, Target, Layers, CheckCircle2,
+  GraduationCap, FileText, Globe, Sparkles, X, ChevronLeft, ChevronRight,
+  AlertCircle, CheckCircle, Upload, Briefcase, User, Trash2, ArrowUpRight
 } from 'lucide-react';
 
 export default function EducationPage() {
+  // --- STATE MANAGEMENT ---
+  const [isAppModalOpen, setIsAppModalOpen] = useState(false);
+  const [activeTalentFeature, setActiveTalentFeature] = useState<any>(null); // NEW: For Talent Modal
+  const [currentStep, setCurrentStep] = useState(1); 
+  const [isModalSubmitted, setIsModalSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Expanded Form Data State
+  const [formData, setFormData] = useState({
+    // Section A: Personal
+    fullName: '', dob: '', nationality: '', countryRes: '', gender: '', 
+    phone: '', email: '', address: '', linkedin: '',
+    
+    // Section B: Education
+    qualification: '', institution: '', gradYear: '', fieldStudy: '', 
+    gpa: '', certifications: '',
+
+    // Section C: Professional
+    employer: '', jobTitle: '', experienceYears: '', 
+    responsibilities: '', geointExperience: '',
+
+    // Section D: Personal Statement
+    statementText: '',
+
+    // Section E: References
+    ref1Name: '', ref1Rel: '', ref1Email: '', ref1Phone: '',
+    ref2Name: '', ref2Rel: '', ref2Email: '', ref2Phone: '',
+
+    // Section F: Additional
+    canParticipate: '', languages: '', otherAchievements: '',
+
+    // Section G: Declaration
+    signature: '', signDate: '', agreedToDeclaration: false,
+
+    // Attachments (Store File objects)
+    attachments: {
+        cv: null as File | null,
+        transcripts: null as File | null,
+        statement: null as File | null,
+        references: null as File | null,
+    }
+  });
+
+  // --- DATA: TALENT FEATURES ---
+  const talentFeatures = [
+    {
+        id: 'mentorship',
+        icon: Users,
+        colorClass: 'bg-green-600 shadow-green-900/50',
+        textClass: 'text-green-600',
+        title: "GIFON Mentorship Programme",
+        tagline: "“Building minds, guiding careers, and shaping the future of geospatial intelligence.”",
+        description: "The GIFON Mentorship Programme is a structured professional development initiative designed to nurture the next generation of geospatial intelligence (GEOINT) leaders in Nigeria and Africa. The programme connects students, early career professionals, researchers, and emerging practitioners with experienced GEOINT experts, policy leaders, and industry professionals across government, academia, and the private sector. Through guided mentorship, knowledge exchange, career guidance, and exposure to real-world geospatial applications, the programme supports skills transfer, leadership development, ethical practice, and professional excellence within the geospatial intelligence ecosystem."
+    },
+    {
+        id: 'career',
+        icon: Target,
+        colorClass: 'bg-blue-600 shadow-blue-900/50',
+        textClass: 'text-blue-600',
+        title: "GIFON Career Services",
+        tagline: "“From skills to service, empowering geospatial careers with purpose and impact.”",
+        description: "GIFON Career Services is a dedicated career development platform designed to prepare, position, and connect geospatial professionals for meaningful opportunities in national development, security, research, and the global GEOINT workforce. The service supports students, graduates, and professionals through career advisory, employability skills development, certification guidance, and industry alignment. GIFON Career Services bridges the gap between education and practice by aligning talent with evolving workforce needs across public institutions, private industry, international organizations, and innovation-driven enterprises."
+    },
+    {
+        id: 'networking',
+        icon: CheckCircle2,
+        colorClass: 'bg-purple-600 shadow-purple-900/50',
+        textClass: 'text-purple-600',
+        title: "GIFON Professional Networking",
+        tagline: "“Connecting people, expertise, and opportunities across the geospatial intelligence community.”",
+        description: "GIFON Professional Networking provides a collaborative platform that connects geospatial intelligence professionals, institutions, policymakers, researchers, and industry leaders at national, regional, and international levels. The network fosters knowledge sharing, strategic partnerships, peer engagement, and cross sector collaboration within the GEOINT community. Through forums, conferences, roundtables, digital platforms, and special interest groups, GIFON strengthens professional relationships that drive innovation, policy influence, capacity development, and sustainable growth across the geospatial ecosystem."
+    }
+  ];
+
+  // --- HANDLERS ---
+  const handleOpenModal = () => setIsAppModalOpen(true);
+  
+  const handleCloseAppModal = () => {
+    setIsAppModalOpen(false);
+    setTimeout(() => {
+        setCurrentStep(1);
+        setIsModalSubmitted(false);
+        setError(null);
+        setFormData(prev => ({ 
+            ...prev, 
+            agreedToDeclaration: false,
+            attachments: { cv: null, transcripts: null, statement: null, references: null }
+        }));
+    }, 300);
+  };
+
+  // Talent Modal Handlers
+  const openTalentModal = (feature: any) => setActiveTalentFeature(feature);
+  const closeTalentModal = () => setActiveTalentFeature(null);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    setError(null);
+  };
+
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.checked }));
+  };
+
+  const handleFileChange = (key: string, e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
+        if (file.size > 5 * 1024 * 1024) { // 5MB limit
+            setError(`File ${file.name} is too large. Max 5MB.`);
+            return;
+        }
+        setFormData(prev => ({
+            ...prev,
+            attachments: {
+                ...prev.attachments,
+                [key]: file
+            }
+        }));
+        setError(null);
+    }
+  };
+
+  const removeFile = (key: string) => {
+    setFormData(prev => ({
+        ...prev,
+        attachments: {
+            ...prev.attachments,
+            [key]: null
+        }
+    }));
+  };
+
+  const nextStep = () => {
+    // Basic Validation per step
+    if (currentStep === 1 && (!formData.fullName || !formData.email || !formData.phone)) {
+        setError("Please fill in required personal fields."); return;
+    }
+    if (currentStep === 2 && (!formData.qualification || !formData.institution)) {
+        setError("Please fill in your educational background."); return;
+    }
+    if (currentStep === 3 && (!formData.jobTitle)) {
+        setError("Please provide your professional details."); return;
+    }
+    setError(null);
+    setCurrentStep(prev => prev + 1);
+  };
+
+  const prevStep = () => {
+    setError(null);
+    setCurrentStep(prev => prev - 1);
+  };
+
+  const handleModalSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if(!formData.signature || !formData.signDate) {
+        setError("Please sign and date the declaration.");
+        return;
+    }
+    // Check required files
+    if (!formData.attachments.cv || !formData.attachments.transcripts) {
+        setError("Please upload your CV and Transcripts.");
+        return;
+    }
+
+    setIsLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API
+    setIsLoading(false);
+    setIsModalSubmitted(true);
+  };
+
+  // --- RENDER STEPS ---
+  const renderStep1 = () => (
+    <div className="space-y-4 animate-in slide-in-from-right-4 duration-300">
+        <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+            <User className="text-green-600" size={20}/>
+            <h4 className="text-lg font-bold text-gray-900">Section A: Personal Information</h4>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Full Name</label>
+                <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-green-500 outline-none" placeholder="Surname First" />
+            </div>
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Date of Birth</label>
+                <input type="date" name="dob" value={formData.dob} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-green-500 outline-none" />
+            </div>
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Nationality</label>
+                <input type="text" name="nationality" value={formData.nationality} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+            </div>
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Country of Residence</label>
+                <input type="text" name="countryRes" value={formData.countryRes} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+            </div>
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Gender</label>
+                <select name="gender" value={formData.gender} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm bg-white outline-none">
+                    <option value="">Select...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Contact Number</label>
+                <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+            </div>
+        </div>
+        <div className="space-y-1">
+            <label className="text-xs font-bold text-gray-700">Email Address</label>
+            <input type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+        </div>
+        <div className="space-y-1">
+            <label className="text-xs font-bold text-gray-700">Postal Address</label>
+            <input type="text" name="address" value={formData.address} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+        </div>
+        <div className="space-y-1">
+            <label className="text-xs font-bold text-gray-700">LinkedIn / Portfolio URL</label>
+            <input type="text" name="linkedin" value={formData.linkedin} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" placeholder="https://..." />
+        </div>
+    </div>
+  );
+
+  const renderStep2 = () => (
+    <div className="space-y-4 animate-in slide-in-from-right-4 duration-300">
+        <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+            <GraduationCap className="text-green-600" size={20}/>
+            <h4 className="text-lg font-bold text-gray-900">Section B: Educational Background</h4>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Highest Qualification</label>
+                <select name="qualification" value={formData.qualification} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm bg-white outline-none">
+                    <option value="">Select...</option>
+                    <option value="PhD">PhD</option>
+                    <option value="Masters">Masters</option>
+                    <option value="Bachelors">Bachelors</option>
+                    <option value="HND">HND</option>
+                </select>
+            </div>
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Year of Graduation</label>
+                <input type="number" name="gradYear" value={formData.gradYear} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" placeholder="YYYY" />
+            </div>
+        </div>
+        <div className="space-y-1">
+            <label className="text-xs font-bold text-gray-700">Institution / University</label>
+            <input type="text" name="institution" value={formData.institution} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Field of Study / Major</label>
+                <input type="text" name="fieldStudy" value={formData.fieldStudy} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+            </div>
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">GPA (if applicable)</label>
+                <input type="text" name="gpa" value={formData.gpa} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+            </div>
+        </div>
+        <div className="space-y-1">
+            <label className="text-xs font-bold text-gray-700">Other Relevant Certifications</label>
+            <textarea name="certifications" value={formData.certifications} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none h-20" placeholder="List GEOINT, GIS, Security, Data Analytics certs..." />
+        </div>
+    </div>
+  );
+
+  const renderStep3 = () => (
+    <div className="space-y-4 animate-in slide-in-from-right-4 duration-300">
+        <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+            <Briefcase className="text-green-600" size={20}/>
+            <h4 className="text-lg font-bold text-gray-900">Section C: Professional Experience</h4>
+        </div>
+        <div className="space-y-1">
+            <label className="text-xs font-bold text-gray-700">Current Employer / Organization</label>
+            <input type="text" name="employer" value={formData.employer} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Job Title</label>
+                <input type="text" name="jobTitle" value={formData.jobTitle} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+            </div>
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Years Experience</label>
+                <input type="number" name="experienceYears" value={formData.experienceYears} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+            </div>
+        </div>
+        <div className="space-y-1">
+            <label className="text-xs font-bold text-gray-700">Brief Description of Responsibilities</label>
+            <textarea name="responsibilities" value={formData.responsibilities} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none h-20" />
+        </div>
+        <div className="space-y-1">
+            <label className="text-xs font-bold text-gray-700">Relevant GEOINT / Spatial Analytics Experience</label>
+            <textarea name="geointExperience" value={formData.geointExperience} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none h-20" placeholder="Detail your specific experience in this field..." />
+        </div>
+    </div>
+  );
+
+  const renderStep4 = () => (
+    <div className="space-y-4 animate-in slide-in-from-right-4 duration-300">
+        <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+            <FileText className="text-green-600" size={20}/>
+            <h4 className="text-lg font-bold text-gray-900">Section D: Personal Statement</h4>
+        </div>
+        <div className="bg-blue-50 p-4 rounded-lg text-xs text-blue-800 mb-2">
+            <strong>Please address:</strong> Your interest in GEOINT, career goals, and how you will apply this knowledge to national/international development. (500-800 words)
+        </div>
+        <textarea 
+            name="statementText" 
+            value={formData.statementText} 
+            onChange={handleInputChange} 
+            className="w-full p-4 border rounded-lg text-sm outline-none h-64 focus:ring-2 focus:ring-green-500" 
+            placeholder="Start typing your statement here..." 
+        />
+        <p className="text-xs text-gray-400 text-right">You may also upload this as a document in the Attachments section.</p>
+    </div>
+  );
+
+  const renderStep5 = () => (
+    <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
+        <div>
+            <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+                <Users className="text-green-600" size={20}/>
+                <h4 className="text-lg font-bold text-gray-900">Section E: References</h4>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-xl space-y-4 mb-4">
+                <h5 className="text-sm font-bold text-gray-700">Referee 1</h5>
+                <div className="grid grid-cols-2 gap-3">
+                    <input type="text" name="ref1Name" placeholder="Name" value={formData.ref1Name} onChange={handleInputChange} className="p-2 text-xs border rounded" />
+                    <input type="text" name="ref1Rel" placeholder="Relationship" value={formData.ref1Rel} onChange={handleInputChange} className="p-2 text-xs border rounded" />
+                    <input type="email" name="ref1Email" placeholder="Email" value={formData.ref1Email} onChange={handleInputChange} className="p-2 text-xs border rounded" />
+                    <input type="tel" name="ref1Phone" placeholder="Phone" value={formData.ref1Phone} onChange={handleInputChange} className="p-2 text-xs border rounded" />
+                </div>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-xl space-y-4">
+                <h5 className="text-sm font-bold text-gray-700">Referee 2</h5>
+                <div className="grid grid-cols-2 gap-3">
+                    <input type="text" name="ref2Name" placeholder="Name" value={formData.ref2Name} onChange={handleInputChange} className="p-2 text-xs border rounded" />
+                    <input type="text" name="ref2Rel" placeholder="Relationship" value={formData.ref2Rel} onChange={handleInputChange} className="p-2 text-xs border rounded" />
+                    <input type="email" name="ref2Email" placeholder="Email" value={formData.ref2Email} onChange={handleInputChange} className="p-2 text-xs border rounded" />
+                    <input type="tel" name="ref2Phone" placeholder="Phone" value={formData.ref2Phone} onChange={handleInputChange} className="p-2 text-xs border rounded" />
+                </div>
+            </div>
+        </div>
+    </div>
+  );
+
+  const renderStep6 = () => (
+     <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
+        <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+            <Globe className="text-green-600" size={20}/>
+            <h4 className="text-lg font-bold text-gray-900">Section F: Additional Info</h4>
+        </div>
+        <div className="space-y-2">
+            <label className="text-sm font-bold text-gray-700">Are you able to participate in national and international training/exposure programs?</label>
+            <div className="flex gap-6 mt-1">
+                <label className="flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="canParticipate" value="Yes" checked={formData.canParticipate === 'Yes'} onChange={handleInputChange} className="accent-green-600" />
+                    <span className="text-sm">Yes</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="canParticipate" value="No" checked={formData.canParticipate === 'No'} onChange={handleInputChange} className="accent-green-600" />
+                    <span className="text-sm">No</span>
+                </label>
+            </div>
+        </div>
+        <div className="space-y-1 mt-4">
+            <label className="text-xs font-bold text-gray-700">Languages Spoken</label>
+            <input type="text" name="languages" value={formData.languages} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+        </div>
+        <div className="space-y-1">
+            <label className="text-xs font-bold text-gray-700">Any other relevant information or achievements</label>
+            <textarea name="otherAchievements" value={formData.otherAchievements} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none h-24" />
+        </div>
+     </div>
+  );
+
+  const renderStep7 = () => {
+    const docTypes = [
+        { id: 'cv', label: "Curriculum Vitae / Resume", required: true },
+        { id: 'transcripts', label: "Academic Transcripts", required: true },
+        { id: 'statement', label: "Personal Statement", required: false },
+        { id: 'references', label: "Two Reference Letters", required: true },
+    ];
+
+    return (
+        <div className="space-y-4 animate-in slide-in-from-right-4 duration-300">
+            <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+                <Upload className="text-green-600" size={20}/>
+                <h4 className="text-lg font-bold text-gray-900">Attachments Required</h4>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4">
+                {docTypes.map((doc) => {
+                    const file = (formData.attachments as any)[doc.id];
+                    return (
+                        <div key={doc.id} className={`flex items-center justify-between p-4 border rounded-xl transition ${file ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-dashed border-gray-300'}`}>
+                            <div className="flex items-center gap-3 overflow-hidden">
+                                <div className={`p-2 rounded-lg ${file ? 'bg-green-100 text-green-700' : 'bg-white text-gray-400'}`}>
+                                    {file ? <CheckCircle size={20} /> : <FileText size={20} />}
+                                </div>
+                                <div className="flex flex-col min-w-0">
+                                    <span className="text-sm font-bold text-gray-700 truncate block">
+                                        {doc.label} {doc.required && <span className="text-red-500">*</span>}
+                                    </span>
+                                    {file && <span className="text-xs text-green-600 truncate">{file.name}</span>}
+                                </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-2 shrink-0">
+                                {file ? (
+                                    <button 
+                                        type="button" 
+                                        onClick={() => removeFile(doc.id)}
+                                        className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
+                                        title="Remove file"
+                                    >
+                                        <Trash2 size={16} />
+                                    </button>
+                                ) : (
+                                    <>
+                                        <input 
+                                            type="file" 
+                                            id={`file-${doc.id}`} 
+                                            className="hidden" 
+                                            onChange={(e) => handleFileChange(doc.id, e)}
+                                        />
+                                        <label 
+                                            htmlFor={`file-${doc.id}`} 
+                                            className="cursor-pointer text-xs bg-white border border-gray-200 px-3 py-1.5 rounded shadow-sm text-gray-600 hover:text-green-600 hover:border-green-200 transition select-none"
+                                        >
+                                            Upload
+                                        </label>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+            <p className="text-xs text-gray-400 mt-2 text-center">Supported formats: PDF, DOCX, JPG (Max 5MB)</p>
+        </div>
+    );
+  };
+
+  const renderStep8 = () => (
+    <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
+        <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
+            <CheckCircle2 className="text-green-600" size={20}/>
+            <h4 className="text-lg font-bold text-gray-900">Section G: Declaration</h4>
+        </div>
+        <div className="bg-yellow-50 p-5 rounded-xl border border-yellow-100 text-sm text-gray-800 leading-relaxed italic">
+            "I hereby declare that the information provided is accurate and complete. I understand that any false or misleading information may result in disqualification. I agree to comply with all rules and requirements of the GIFON Young Professionals Scholarship Programme."
+        </div>
+        <div className="space-y-4 pt-4">
+            <label className="flex items-center gap-3 cursor-pointer p-3 hover:bg-gray-50 rounded-lg transition border border-transparent hover:border-gray-200">
+                <input 
+                    type="checkbox" 
+                    name="agreedToDeclaration"
+                    checked={formData.agreedToDeclaration}
+                    onChange={handleCheckboxChange}
+                    className="w-5 h-5 accent-green-600 rounded shrink-0" 
+                />
+                <span className="font-bold text-gray-800 text-sm">I Agree to this Declaration</span>
+            </label>
+            <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                    <label className="text-xs font-bold text-gray-700">Digital Signature (Full Name)</label>
+                    <input type="text" name="signature" value={formData.signature} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm font-handwriting outline-none" placeholder="Type full name" />
+                </div>
+                <div className="space-y-1">
+                    <label className="text-xs font-bold text-gray-700">Date</label>
+                    <input type="date" name="signDate" value={formData.signDate} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+                </div>
+            </div>
+        </div>
+    </div>
+  );
+
   // Data array
   const educationPrograms = [
     {
@@ -64,15 +540,21 @@ export default function EducationPage() {
       link: '/education/training',
       description: 'Providing standardized, high-quality, and industry-recognized certifications in geospatial intelligence, data science, and related technologies.'
     },
+    {
+      title: 'Academia & Research Collaboration Programme',
+      src: "/media/training.jpeg", 
+      link: '/education/academia',
+      description: 'Bridging Knowledge and Practice through Geospatial Intelligence.'
+    },
   ];
 
   return (
     <>
       <HeroSection
-        title="Education & Programmes"
+        title="Education & Programs"
         description1={
           <>
-            To advance in your career, it is critical to keep updating your skills. <span className="cooper">GIFON</span> has you covered, no matter your experience level, preferred learning method, or professional development need! We regularly deliver education and training at in-person and virtual events.
+            <span className="cooper">GIFON</span>&apos;s education and training programs are designed to equip professionals, institutions, and stakeholders with the skills and knowledge needed to excel in Geospatial Intelligence. Through hands-on training, advanced courses, and strategic learning initiatives, we build national capacity, foster innovation, and empower participants to apply geospatial insights in strengthening national security, enhancing governance, and driving sustainable development across Nigeria.
           </>
         }
         backgroundMedia={["/media/Education Background.jpg"]}
@@ -94,22 +576,22 @@ export default function EducationPage() {
                </div>
                
                <p className="text-lg leading-relaxed text-gray-600">
-                  The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) delivers professional competency-based learning across all sectors.
+                Our training courses and programs are designed to build national capacity in Geospatial Intelligence, equipping professionals and institutions with the skills, tools, and insights needed to support security, governance, and sustainable development in Nigeria.
                </p>
 
                {/* Feature List */}
                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                   {[
                     { icon: Layers, title: "Professional Learning Tracks", desc: "Our professional learning tracks delivers structured, outcome driven pathways designed to build expertise and professional readiness." },
-                    { icon: Target, title: "Proficiency Based", desc: "our proficiency-based certification Validates mastery and competence through practical inward skills and application." },
+                    { icon: Target, title: "Proficiency Based", desc: "Our proficiency-based certification validates mastery and competence through practical inward skills and application." },
                     { icon: Award, title: "Professional Certification", desc: "Our professional certification validates that an individual has achieved the highest standard of expertise, competence and ethical ethos in their field." },
-                    { icon: Users, title: "People Centred", desc: "Our People centred approach prioritises human capacity, ethical practice and real-world impact on all our programmes." },
+                    { icon: Users, title: "People Centred", desc: "Our People centred approach prioritises human capacity, ethical practice and real-world impact on all our Programs." },
                   ].map((feat, i) => (
                     <div key={i} className="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
                        <div className="text-green-600 mt-1"><feat.icon size={20} /></div>
                        <div>
                          <h4 className="font-bold text-gray-900 text-sm">{feat.title}</h4>
-                         <p className="text-xs text-gray-500 mt-1">{feat.desc}</p>
+                         <p className="text-xs text-gray-500 mt-1 text-justify">{feat.desc}</p>
                        </div>
                     </div>
                   ))}
@@ -136,17 +618,17 @@ export default function EducationPage() {
         </section>
 
 
-        {/* === PROGRAMMES SECTION === */}
+        {/* === Programs SECTION === */}
         <div id="programs" className="scroll-mt-24"></div>
         <section className="py-20 bg-white px-4 md:px-6">
           <div className="max-w-7xl mx-auto">
             
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
-                Our Programmes
+                Our Programs
               </h2>
               <p className="max-w-2xl mx-auto text-gray-600">
-                Explore our diverse initiatives designed to foster innovation, security, and development through geospatial intelligence.
+              <span className="cooper">GIFON</span>&apos;s programs transform knowledge into action, turning ideas into real-world impact. Through cutting-edge initiatives, hands-on projects, and collaborative engagements, we empower professionals, institutions, and communities to harness Geospatial Intelligence for national security, sustainable development, and innovative solutions. Each program is an opportunity to learn, lead, and contribute to a safer, smarter, and more resilient Nigeria.
               </p>
             </div>
             
@@ -194,35 +676,32 @@ export default function EducationPage() {
            {/* Abstract Background */}
            <div className="absolute top-0 right-0 w-1/2 h-full bg-green-600/10 rounded-l-full blur-3xl pointer-events-none"></div>
 
-           <div className="max-w-5xl mx-auto relative z-10 text-center">
+           <div className="max-w-6xl mx-auto relative z-10 text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Talent Development</h2>
               <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-                Beyond specific programmes, <span className="cooper text-white">GIFON</span> is dedicated to the holistic development of geospatial talent in Nigeria. We are building a robust pipeline of GEOINT professionals ready to meet the challenges of tomorrow.
+                Beyond specific Programs, <span className="cooper text-white">GIFON</span> is dedicated to the holistic development of geospatial talent in Nigeria. We are building a robust pipeline of GEOINT professionals ready to meet the challenges of tomorrow.
               </p>
 
-              {/* Three Pillars */}
+              {/* INTERACTIVE CARDS */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 text-left">
-                  <div className="bg-white/10 backdrop-blur p-6 rounded-2xl border border-white/10 hover:bg-white/20 transition-colors">
-                      <div className="bg-green-600 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-white">
-                        <Users size={24} />
+                  {talentFeatures.map((feature, idx) => (
+                      <div 
+                        key={idx} 
+                        onClick={() => openTalentModal(feature)}
+                        className="bg-white/5 backdrop-blur p-8 rounded-3xl border border-white/10 hover:bg-white/10 hover:scale-[1.02] hover:border-green-500/30 transition-all cursor-pointer group flex flex-col"
+                      >
+                          <div className={`${feature.colorClass} w-16 h-16 rounded-2xl flex items-center justify-center text-white shadow-lg mb-6 group-hover:scale-110 transition-transform`}>
+                            <feature.icon size={32} />
+                          </div>
+                          <h3 className="font-bold text-2xl mb-4 group-hover:text-green-400 transition-colors">{feature.title}</h3>
+                          <p className="text-gray-400 text-sm grow mb-6 line-clamp-3">
+                              {feature.tagline}
+                          </p>
+                          <div className="mt-auto flex items-center text-green-400 text-xs font-bold uppercase tracking-widest gap-2">
+                             Read Details <ArrowUpRight size={16} />
+                          </div>
                       </div>
-                      <h3 className="font-bold text-lg mb-2">Mentorship</h3>
-                      <p className="text-gray-400 text-sm">Connecting emerging professionals with experienced leaders in the field.</p>
-                  </div>
-                  <div className="bg-white/10 backdrop-blur p-6 rounded-2xl border border-white/10 hover:bg-white/20 transition-colors">
-                      <div className="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-white">
-                        <Target size={24} />
-                      </div>
-                      <h3 className="font-bold text-lg mb-2">Career Services</h3>
-                      <p className="text-gray-400 text-sm">Providing resources for job seekers, resume workshops, and interview prep.</p>
-                  </div>
-                  <div className="bg-white/10 backdrop-blur p-6 rounded-2xl border border-white/10 hover:bg-white/20 transition-colors">
-                      <div className="bg-purple-600 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-white">
-                        <CheckCircle2 size={24} />
-                      </div>
-                      <h3 className="font-bold text-lg mb-2">Networking</h3>
-                      <p className="text-gray-400 text-sm">Formal and informal opportunities for members to connect and collaborate.</p>
-                  </div>
+                  ))}
               </div>
               
               <Link
@@ -234,7 +713,281 @@ export default function EducationPage() {
            </div>
         </section>
 
+        {/* === NEW: SCHOLARSHIP SECTION === */}
+        <div id="Scholarships" className="scroll-mt-24"></div>
+        <section className="py-24 px-4 md:px-6 bg-green-50/50 border-y border-green-100 relative overflow-hidden">
+            {/* Decorative Background Elements */}
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-green-200/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div className="max-w-7xl mx-auto relative z-10">
+                <div className="flex flex-col xl:flex-row gap-16">
+                    
+                    {/* Left: Content Info */}
+                    <div className="xl:w-3/5 space-y-8">
+                        <div>
+                            {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase tracking-widest mb-4">
+                                <Sparkles size={14} /> New Opportunity
+                            </div> */}
+                            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
+                               <span className="text-green-600">Scholarship</span>
+                            </h2>
+                            <p className="text-sm font-medium text-gray-500 italic">
+                                “From Potential to Precision: Supporting Tomorrow&apos;s GEOINT Experts”
+                            </p>
+                        </div>
+
+                        <div className="prose prose-lg text-gray-600">
+                            <p>
+                            The <span className="cooper">GIFON</span> Scholarship Programme is a strategic human capital development initiative designed to identify, support, and nurture exceptional Nigerian talents in geospatial intelligence, geosciences, data analytics, earth observation, cybersecurity, artificial intelligence, and allied national development disciplines. The programme targets high potential youths, women, early career professionals, and underrepresented groups, providing financial assistance, mentorship, professional exposure, and access to <span className="cooper">GIFON</span>’s national and international GEOINT ecosystem. Beyond financial support, the scholarship is structured as a talent to impact pipeline, aligning academic excellence with Nigeria’s national security priorities, critical infrastructure protection, climate resilience, economic planning, and digital transformation goals. Recipients are integrated into <span className="cooper">GIFON</span>’s broader programmes, research, training, internships, policy engagement, and community mapping initiatives, ensuring that beneficiaries graduate not only as scholars, but as nation ready professionals capable of applying geospatial intelligence for public good.
+                            </p>
+                            <p>
+                            Eligibility is open to outstanding graduates and early-career professionals, typically within the first ten years of professional practice, with academic or professional backgrounds in geospatial sciences, remote sensing, GIS, engineering, data science, intelligence and security studies, environmental sciences, urban and regional planning, or related disciplines. Applicants must demonstrate strong academic or professional merit, ethical conduct, leadership potential, and a clear commitment to applying geospatial intelligence to national development, security, climate resilience, or public interest challenges. Selection is competitive and merit based, with an emphasis on excellence, diversity, and long-term impact at both national and global levels.
+                            </p>
+                        </div>
+
+                        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-green-100 hover:shadow-md transition-shadow">
+                                <GraduationCap className="text-green-600 mb-3" size={32} />
+                                <h4 className="font-bold text-gray-900 mb-2">Education Focus</h4>
+                                <p className="text-sm text-gray-600">Open to graduates in Geospatial Sciences, Engineering, Data Science, Security Studies, and Environmental Sciences.</p>
+                            </div>
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-green-100 hover:shadow-md transition-shadow">
+                                <Globe className="text-blue-600 mb-3" size={32} />
+                                <h4 className="font-bold text-gray-900 mb-2">Global Exposure</h4>
+                                <p className="text-sm text-gray-600">Includes mentorship, international training exposure, and integration into <span className="cooper">GIFON</span>'s research ecosystem.</p>
+                            </div>
+                        </div> */}
+                    </div>
+
+                    {/* Right: Eligibility & Application Card */}
+                    <div className="xl:w-2/5">
+                        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden relative">
+                            <div className="bg-gray-900 p-8 text-white">
+                                <h3 className="text-2xl font-bold mb-2">Eligibility & Application</h3>
+                                <p className="text-gray-400 text-sm">Review criteria before applying</p>
+                            </div>
+                            
+                            <div className="p-8 space-y-6">
+                                
+                                {/* Checklist */}
+                                <div>
+                                    <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                        <CheckCircle2 size={18} className="text-green-600" /> Core Requirements
+                                    </h4>
+                                    <ul className="space-y-3">
+                                        {[
+                                            "Nigerian citizen or partner country national",
+                                            "Bachelor’s degree in relevant STEM/Social Science field",
+                                            "Early-career (<10 years professional experience)",
+                                            "Strong academic merit & leadership potential",
+                                            "Commitment to national development goals"
+                                        ].map((item, i) => (
+                                            <li key={i} className="flex items-start gap-3 text-sm text-gray-600">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 shrink-0"></div>
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <div className="border-t border-gray-100 pt-6">
+                                    <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                        <FileText size={18} className="text-green-600" /> Required Documents
+                                    </h4>
+                                    <div className="text-sm text-gray-600 grid grid-cols-2 gap-2">
+                                        <span>• CV / Resume</span>
+                                        <span>• Academic Transcripts</span>
+                                        <span>• Personal Statement</span>
+                                        <span>• 2 Reference Letters</span>
+                                    </div>
+                                </div>
+
+                                <div className="pt-4">
+                                    <button 
+                                        onClick={handleOpenModal}
+                                        className="block w-full py-4 bg-green-600 hover:bg-green-700 text-white font-bold text-center rounded-xl transition-all shadow-lg hover:shadow-green-900/20"
+                                    >
+                                        Apply Now via Portal
+                                    </button>
+                                    <p className="text-xs text-center text-gray-400 mt-3">
+                                        Selection is competitive and merit-based.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
       </main>
+
+      {/* === 1. SCHOLARSHIP MODAL === */}
+      {isAppModalOpen && (
+            <div 
+                className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/80 p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200"
+                onClick={handleCloseAppModal}
+            >
+                <div 
+                    className="relative w-full max-w-xl bg-white shadow-2xl rounded-2xl flex flex-col max-h-[90vh] overflow-hidden"
+                    onClick={(e) => e.stopPropagation()} 
+                >
+                    {/* Header with Visual Progress */}
+                    <div className="bg-gray-50 border-b border-gray-100 shrink-0">
+                        <div className="px-6 py-4 flex justify-between items-center">
+                            <div>
+                                <h3 className="text-lg font-bold text-gray-800">
+                                    {isModalSubmitted ? "Application Received" : "Scholarship Application"}
+                                </h3>
+                                {!isModalSubmitted && (
+                                    <p className="text-xs text-gray-500">
+                                        Step {currentStep} of 8
+                                    </p>
+                                )}
+                            </div>
+                            <button 
+                                onClick={handleCloseAppModal}
+                                className="bg-white p-2 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition shadow-sm border border-gray-200"
+                            >
+                                <X size={18} />
+                            </button>
+                        </div>
+                        
+                        {/* The Progress Bar */}
+                        {!isModalSubmitted && (
+                            <div className="w-full bg-gray-200 h-1.5">
+                                <div 
+                                    className="h-full bg-green-600 transition-all duration-500 ease-out"
+                                    style={{ width: `${(currentStep / 8) * 100}%` }}
+                                ></div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Body */}
+                    <div className="p-6 overflow-y-auto flex-1 bg-white custom-scrollbar">
+                        {isModalSubmitted ? (
+                            <div className="flex flex-col items-center justify-center text-center py-10">
+                                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 animate-in zoom-in duration-300">
+                                    <CheckCircle className="text-green-600 w-10 h-10" />
+                                </div>
+                                <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
+                                <p className="text-gray-600 mb-8 max-w-xs mx-auto">
+                                    Your application has been submitted securely. We will review your documents and contact you shortly.
+                                </p>
+                                <button onClick={handleCloseAppModal} className="w-full bg-gray-900 text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition font-bold">
+                                    Close Window
+                                </button>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleModalSubmit} className="flex flex-col h-full">
+                                {/* Render the Active Step */}
+                                <div className="flex-1 pb-4">
+                                    {currentStep === 1 && renderStep1()}
+                                    {currentStep === 2 && renderStep2()}
+                                    {currentStep === 3 && renderStep3()}
+                                    {currentStep === 4 && renderStep4()}
+                                    {currentStep === 5 && renderStep5()}
+                                    {currentStep === 6 && renderStep6()}
+                                    {currentStep === 7 && renderStep7()}
+                                    {currentStep === 8 && renderStep8()}
+                                </div>
+
+                                {/* Error Message */}
+                                {error && (
+                                    <div className="mb-4 flex items-center gap-2 text-red-600 text-xs font-semibold bg-red-50 p-3 rounded-lg border border-red-100 animate-in slide-in-from-bottom-2">
+                                        <AlertCircle size={16} /> {error}
+                                    </div>
+                                )}
+
+                                {/* Navigation Buttons */}
+                                <div className="flex gap-3 pt-4 border-t border-gray-100 mt-auto bg-white sticky bottom-0">
+                                    {currentStep > 1 && (
+                                      <button 
+                                        type="button" 
+                                        onClick={prevStep}
+                                        className="flex-1 py-3.5 rounded-xl font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition flex items-center justify-center gap-2"
+                                      >
+                                        <ChevronLeft size={18} /> Back
+                                      </button>
+                                    )}
+                                    
+                                    {currentStep < 8 ? (
+                                      <button 
+                                        type="button" 
+                                        onClick={nextStep}
+                                        className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg shadow-green-200 flex items-center justify-center gap-2 hover:-translate-y-0.5 active:translate-y-0"
+                                      >
+                                        Next <ChevronRight size={18} />
+                                      </button>
+                                    ) : (
+                                      <button 
+                                        type="submit"
+                                        disabled={isLoading || !formData.agreedToDeclaration}
+                                        className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                      >
+                                         {isLoading ? 'Processing...' : 'Submit Application'}
+                                      </button>
+                                    )}
+                                </div>
+                            </form>
+                        )}
+                    </div>
+                </div>
+            </div>
+      )}
+
+      {/* === 2. TALENT DETAILS MODAL === */}
+      {activeTalentFeature && (
+         <div 
+             className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/90 p-4 sm:p-6 backdrop-blur-md animate-in fade-in duration-300"
+             onClick={closeTalentModal}
+         >
+             <div 
+                 className="relative w-full max-w-2xl bg-white shadow-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]"
+                 onClick={(e) => e.stopPropagation()}
+             >
+                 {/* Modal Header Image/Icon Area */}
+                 <div className="bg-gray-50 border-b border-gray-100 p-8 flex items-center gap-6">
+                    <div className={`${activeTalentFeature.colorClass} w-20 h-20 rounded-2xl flex items-center justify-center text-white shadow-xl shrink-0`}>
+                        <activeTalentFeature.icon size={40} />
+                    </div>
+                    <div>
+                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                            {activeTalentFeature.title}
+                        </h3>
+                        <p className={`font-medium italic ${activeTalentFeature.textClass}`}>
+                            {activeTalentFeature.tagline}
+                        </p>
+                    </div>
+                    <button 
+                        onClick={closeTalentModal}
+                        className="absolute top-6 right-6 bg-white p-2 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition shadow-sm border border-gray-200"
+                    >
+                        <X size={20} />
+                    </button>
+                 </div>
+
+                 {/* Modal Content Body */}
+                 <div className="p-8 overflow-y-auto">
+                    <div className="prose prose-lg text-gray-600 leading-relaxed">
+                        <p>{activeTalentFeature.description}</p>
+                    </div>
+                    
+                    <div className="mt-8 pt-8 border-t border-gray-100 flex justify-end">
+                        <button 
+                            onClick={closeTalentModal}
+                            className="bg-gray-100 text-gray-700 hover:bg-gray-200 px-6 py-3 rounded-xl font-bold transition"
+                        >
+                            Close Details
+                        </button>
+                    </div>
+                 </div>
+             </div>
+         </div>
+      )}
+
     </>
   );
 }

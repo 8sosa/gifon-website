@@ -80,7 +80,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
                       src={rootNode.photo}
                       alt={rootNode.name}
                       fill
-                      className="rounded-full object-cover shadow-xl border-4 border-white ring-2 ring-green-100"
+                      className="object-cover shadow-xl border-4 border-white ring-2 ring-green-100"
                     />
                   </div>
                   <h4 className="text-xl font-bold text-gray-900 bellefair group-hover:text-green-700 transition-colors">
@@ -121,7 +121,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
                         src={m.photo}
                         alt={m.name}
                         fill
-                        className="rounded-full object-cover shadow-md border-4 border-white ring-1 ring-gray-100"
+                        className="object-cover shadow-md border-4 border-white ring-1 ring-gray-100"
                       />
                     </div>
                     <h4 className="text-base font-bold text-gray-900 bellefair mb-0.5 group-hover:text-green-700 transition-colors">

@@ -87,7 +87,7 @@ export default function YetaPage() {
       title: "Employment Pathways",
       points: [
         "Certification to increase employability.",
-        "Access to job opportunities via GIFON’s Private Sector Forum.",
+        <>Access to job opportunities via <span className="cooper font-bold">GIFON</span>&apos;s Private Sector Forum.</>,
         "Support to launch startups addressing national challenges."
       ]
     }
@@ -110,19 +110,7 @@ export default function YetaPage() {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">Overview</h2>
             <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-4">
-                <p>
-                The Youth Empowerment & Talent Acceleration Programme (YETAP) is an
-                initiative of the Geospatial Intelligence Foundation of Nigeria
-                (<span className="cooper font-bold">GIFON</span>) to identify, train, and mentor the next generation of
-                Nigerian innovators, analysts, and leaders in the field of
-                geospatial intelligence (GEOINT).
-                </p>
-                <p>
-                This flagship programme provides a structured pathway for Nigerian youth to acquire technical skills,
-                career opportunities, and entrepreneurial support in geospatial
-                intelligence, remote sensing, AI, data science, and related
-                emerging technologies.
-                </p>
+              <p><span className="cooper font-bold">GIFON</span>&apos;s Youth Empowerment and Acceleration Program is designed to equip young Nigerians with the skills, knowledge, and opportunities to excel in Geospatial Intelligence and related technologies. Through mentorship, hands-on training, and innovation-driven projects, the program nurtures the next generation of leaders, innovators, and change-makers. By fostering creativity, leadership, and technical expertise, it empowers youth to contribute meaningfully to national security, sustainable development, and the technological advancement of Nigeria.</p>
             </div>
           </div>
         </section>
@@ -193,9 +181,9 @@ export default function YetaPage() {
         <section id="join" className="py-16 px-4 bg-green-600 text-white text-center">
             <div className="max-w-3xl mx-auto">
                 <h2 className="text-3xl font-bold mb-4">Ready to shape the future?</h2>
-                <p className="mb-8 text-green-100 text-lg">
+                {/* <p className="mb-8 text-green-100 text-lg">
                     Join the Young Professionals Forum to get started on your journey.
-                </p>
+                </p> */}
                 <Link 
                     href="/forums#young-professionals" 
                     className="inline-block bg-white text-green-700 font-bold px-10 py-4 rounded-full hover:bg-gray-100 transition shadow-lg"

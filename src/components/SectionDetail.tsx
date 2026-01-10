@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Sector } from "@/app/(public)/infrastructure/infrastructure"; 
+import { Sector } from "@/app/(public)/business-solutions/infrastructure"; 
 
 export default function SectionDetail({ section }: { section: Sector }) {
   

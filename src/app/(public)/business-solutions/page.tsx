@@ -80,41 +80,16 @@ export default function InfrastructurePage() {
   return (
     <>
       <HeroSection
-        title="Critical Infrastructure Support"
-        description="Our core area of support is Critical Infrastructure, where geospatial intelligence, policy Insights, and advanced technologies are applied to strengthen, secure and future proof the systems essential to national security, economic resilience and National development."
+        title={<><span className="cooper">GIFON</span> Commercial Business Solutions  </>}
+        description={<>
+        <span className="cooper">GIFON</span> Commercial Business Solutions provides cutting-edge geospatial intelligence (GEOINT) products, services, and advisory solutions to businesses, government agencies, and development partners. Leveraging advanced location intelligence, spatial analytics, mapping technologies, and data driven insights, <span className="cooper">GIFON</span> helps organizations make smarter decisions, optimize operations, and identify strategic opportunities. Our commercial offerings span risk assessment, market analysis, infrastructure planning, environmental monitoring, and security support, delivering actionable insights that drive efficiency, innovation, and competitive advantage. By combining technical expertise, tailored solutions, and world class geospatial tools, <span className="cooper">GIFON</span> empowers organizations to translate complex geospatial data into measurable business impact.
+        </>}
         backgroundMedia={[
           '/media/criticalinfrastructuresupport.jpg',
         ]}
       />
 
       <main className='text-justify bg-white'>
-        
-        {/* --- Introductory Section (Unchanged) --- */}
-        <section className="py-16 bg-white">
-          <div className="max-w-5xl mx-auto px-6 space-y-4">
-            <h2 className="text-3xl font-semibold text-gray-800">
-              <span className="cooper">GIFON</span> Policy Contribution to Nigeria’s Critical Infrastructure
-              Sectors
-            </h2>
-            
-            <p className="text-gray-700 leading-relaxed max-w-5xl mx-auto">
-              The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>)
-              acknowledges the vital role of Nigeria’s critical
-              infrastructure sectors in sustaining national security, economic
-              prosperity, and public well-being. <span className="cooper">GIFON</span> is committed to
-              deploying geospatial intelligence capabilities to enhance the
-              protection, resilience, and optimization of these sectors.
-            </p>
-            <p className="text-gray-700 leading-relaxed max-w-5xl mx-auto">
-              <span className="cooper">GIFON</span> will integrate geospatial intelligence across all critical
-              infrastructure sectors, build strong partnerships with
-              government, industry, and international stakeholders, and
-              develop tailored solutions that combine data, technology, and
-              human expertise to safeguard Nigeria’s infrastructure and
-              secure its national future.
-            </p>
-          </div>
-        </section>
 
         {/* --- Main Loop --- */}
         {sectorsList.map((sector, index) => {
@@ -125,7 +100,6 @@ export default function InfrastructurePage() {
           let imageArray: string[] = [];
           
           if (Array.isArray(sector.images)) {
-              // SPREAD operator [...x] creates a mutable copy of the readonly array
               imageArray = [...sector.images]; 
           } else if (typeof sector.images === 'string') {
               imageArray = [sector.images];
@@ -160,7 +134,7 @@ export default function InfrastructurePage() {
                           </ul>
                           
                           <Link
-                            href={`/infrastructure/${sector.id}`} 
+                            href={`/business-solutions/${sector.id}`} 
                             className="inline-block mt-4 bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition"
                           >
                             Learn More

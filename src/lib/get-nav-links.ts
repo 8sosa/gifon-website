@@ -72,34 +72,34 @@ export async function getDynamicEventsMenu(): Promise<MenuItem> {
     if (pastLinks.length === 0) pastLinks.push({ label: 'No past events', href: '/events' });
   
     // 3. Static Outreach Links
-    const outreachLinks: MenuItem[] = [
-      {
-        label: 'Youth-Focused Programmes',
-        href: '/events#youth-focused-programmes',
-        children: [
-          { label: 'Boot Camps', href: '/education/boot-camps' },
-          { label: 'STEM & GEOINT Awareness', href: '/education/stem-geoint-awareness' },
-          { label: 'GeoInnovation Challenge', href: '/education/geoinnovation-challenge' }
-        ]
-      },
-      {
-        label: 'Women-in-GEOINT Initiatives',
-        href: '/events#women-in-geoint-initiatives',
-        children: [
-          { label: 'Leadership Programmes', href: '/education/women-geospatial-leadership' },
-          { label: 'Community Service', href: '/education/community-service-projects' }
-        ]
-      },
-      {
-        label: 'Professional Engagement',
-        href: '/events#professional-institutional-engagement',
-        children: [
-          { label: 'GeoCommunity Development', href: '/education/geocommunity-development' },
-          { label: 'Networking Events', href: '/education/geoconnect-networking' },
-          { label: 'Public Lectures', href: '/education/public-lectures-roundtables' }
-        ]
-      }
-    ];
+    // const outreachLinks: MenuItem[] = [
+    //   {
+    //     label: 'Youth-Focused Programmes',
+    //     href: '/events#youth-focused-programmes',
+    //     children: [
+    //       { label: 'Boot Camps', href: '/education/boot-camps' },
+    //       { label: 'STEM & GEOINT Awareness', href: '/education/stem-geoint-awareness' },
+    //       { label: 'GeoInnovation Challenge', href: '/education/geoinnovation-challenge' }
+    //     ]
+    //   },
+    //   {
+    //     label: 'Women-in-GEOINT Initiatives',
+    //     href: '/events#women-in-geoint-initiatives',
+    //     children: [
+    //       { label: 'Leadership Programmes', href: '/education/women-geospatial-leadership' },
+    //       { label: 'Community Service', href: '/education/community-service-projects' }
+    //     ]
+    //   },
+    //   {
+    //     label: 'Professional Engagement',
+    //     href: '/events#professional-institutional-engagement',
+    //     children: [
+    //       { label: 'GeoCommunity Development', href: '/education/geocommunity-development' },
+    //       { label: 'Networking Events', href: '/education/geoconnect-networking' },
+    //       { label: 'Public Lectures', href: '/education/public-lectures-roundtables' }
+    //     ]
+    //   }
+    // ];
   
     // 4. Return the finalized MenuItem
     return {
@@ -108,7 +108,7 @@ export async function getDynamicEventsMenu(): Promise<MenuItem> {
       children: [
         { label: 'Upcoming Events', href: '/events#upcoming', children: upcomingLinks },
         { label: 'Past Events', href: '/events#past', children: pastLinks },
-        { label: 'Outreach', href: '/events#outreach', children: outreachLinks }
+        // { label: 'Outreach', href: '/events#outreach', children: outreachLinks }
       ]
     };
 }

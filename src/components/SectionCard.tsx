@@ -39,7 +39,7 @@ export default function SectionCard({ section }: { section: Section }) {
         <div className="flex items-center justify-between">
           <span className="text-sm text-slate-600">Learn how GEOINT is applied</span>
           <Link
-            href={`/infrastructure/${section.id}`}
+            href={`/business-solutions/${section.id}`}
             className="inline-flex items-center gap-2 text-indigo-600 font-semibold"
           >
             Learn more →
