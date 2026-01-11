@@ -106,7 +106,6 @@ export default function InfrastructurePage() {
           }
 
           return (
-            <>
               <div className='flex flex-col' key={sector.id}>
                 {/* Spacer div to create space before each section for anchor links */}
                 <div id={sector.id} className="pt-20 -mt-20"></div>
@@ -155,7 +154,6 @@ export default function InfrastructurePage() {
                   </div>
                 </section>
               </div>
-            </>
           );
         })}
       </main>

@@ -4,7 +4,7 @@ export interface ResourceItem {
   id: string;
   title: string | React.ReactNode;
   date?: string;
-  description?: string;
+  description?: string | React.ReactNode;
   image?: string;
   link: string;
   type?: string; // For downloads (PDF/DOC)
@@ -58,8 +58,17 @@ const resourcesData: ResourcesData = {
           <p>The GeoINSIGHT Bulletin</p>
         </>, 
         id: "GeoINSIGHT", 
-        description: "Our flagship peer-reviewed journal featuring original research, policy analyses, and thought leadership on GEOINT and its applications.", 
-        link: "/newsletter" }
+        description: <>The GeoINSIGHT Bulletin is <span className="cooper">GIFON</span>&apos;s official monthly newsletter, designed to provide timely updates, insights, and highlights from the world of geospatial intelligence (GEOINT), innovation, and national development initiatives.</>, 
+        link: "/Eyes-on-Location" },
+      { 
+        title:
+        <>
+          <p>- GeoINSIGHT -</p>
+          <p>The Journal of Geospatial Intelligence</p>
+        </>, 
+        id: "Geospatial", 
+        description: <>GeoINSIGHT is <span className="cooper">GIFON</span>&apos;s flagship journal, dedicated to advancing knowledge, research, and discourse in geospatial intelligence (GEOINT), spatial data science, and location based innovation.</> ,
+        link: "/GeoINSIGHT" }
     ]
   };
 

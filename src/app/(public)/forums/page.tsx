@@ -97,7 +97,7 @@ export default function ForumsPage() {
       <main className="font-sans bg-gray-50 min-h-screen">
         
         {/* --- 1. Introduction --- */}
-        <section className="py-20 px-4 md:px-6 bg-white rounded-b-[3rem] shadow-sm mb-12 relative z-10">
+        {/* <section className="py-20 px-4 md:px-6 bg-white rounded-b-[3rem] shadow-sm mb-12 relative z-10">
           <div className='max-w-6xl mx-auto text-center'>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
               Collaboration Drives <span className="text-green-700">Innovation</span>
@@ -113,7 +113,7 @@ export default function ForumsPage() {
                 ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* --- 2. The Forums Grid (Side Flyout FIXED) --- */}
         <section className="py-16 px-4 md:px-6 max-w-7xl mx-auto">

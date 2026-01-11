@@ -3,7 +3,7 @@ const allForums = [
     id: 'youngProfessionals',
     anchor: 'young-professionals',
     title: "Young Professionals Forum",
-    description: "The GI-NYPN is committed to fostering the next generation of geospatial intelligence professionals in Nigeria. This forum provides a platform for young professionals to connect, learn, innovate, and grow within the GeoINT sector...",
+    description: <>Our Youth Focused Programmes are designed to empower young people with the skills, knowledge, and opportunities needed to thrive in the rapidly evolving world of science, technology, and geospatial intelligence. Through hands on training, mentorship, innovation challenges, and career exposure, <span className="cooper">GIFON</span> equips youth to become confident problem solvers, innovators, and future leaders. By nurturing talent, encouraging inclusion, and linking learning to real world challenges, <span className="cooper">GIFON</span>&apos;s youth initiatives create clear pathways from curiosity to competence, and from skills development to meaningful national and global impact.</>,
     policyContent: `
       <h2 style="font-size: 1.25rem; font-weight: 600;"><span className="cooper">GIFON</span> YOUNG PROFESSIONALS’ FORUM</h2>
       <p><strong>(GI-MYPN) POLICY DOCUMENT version 1.0</strong></p>
@@ -128,7 +128,7 @@ const allForums = [
     id: 'womenInGeoint',
     anchor: 'women-in-geoint',
     title: "Women in GEOINT Forum",
-    description: "The GI-NGW is a forum dedicated to empowering women in GeoINT by providing a platform for collaboration, professional development, mentorship, and advocacy. It seeks to address the gender gap in the geospatial sector in Nigeria...",
+    description: <><span className="cooper">GIFON</span>&apos;s Women in GEOINT Initiatives are designed to advance the participation, leadership, and visibility of women across the geospatial intelligence and technology ecosystem. The initiative provides targeted support through mentorship, skills development, career advancement, networking, and leadership opportunities, creating inclusive pathways for women to thrive in technical, analytical, and decision making roles. By addressing gender gaps, amplifying talent, and fostering supportive professional networks, <span className="cooper">GIFON</span> is committed to building a diverse, innovative, and future ready geospatial intelligence community that reflects the strength and potential of women.</>,
     policyContent: `
       <h2 style="font-size: 1.25rem; font-weight: 600;"><span className="cooper">GIFON</span> WOMEN IN GEOINT FORUM</h2>
       <p><strong>(GI-NGW): POLICY DOCUMENT version1.0</strong></p>
@@ -224,90 +224,6 @@ const allForums = [
       <p>This policy document is a living document, and amendments may be made as the foundation grows and evolves. Proposed amendments will be reviewed by the Board of Directors and communicated to members for feedback.</p>
     `
   },
-  {
-    id: 'industry',
-    anchor: 'industry-private-sector',
-    title: "Industry & Private Sector Forum",
-    description: "This forum recognizes the critical role of the industry and private sector in driving innovation, investment, and sustainable applications of geospatial intelligence across national development and security priorities...",
-    policyContent: `
-      <h2 style="font-size: 1.25rem; font-weight: 600;"><span className="cooper">GIFON</span> INDUSTRY AND PRIVATE SECTOR FORUM</h2>
-      <h2 style="font-size: 1.25rem; font-weight: 600;">POLICY STATEMENT</h2>
-      <br>
-      <p>The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) recognizes the critical role of the industry and private sector in driving innovation, investment, and sustainable applications of geospatial intelligence across national development and security priorities.</p>
-      <p>The Industry and Private Sector Forum (IPSF) of <span className="cooper">GIFON</span> serves as a strategic platform to:</p>
-      <br>
-      <h3 style="font-size: 1.25rem; font-weight: 600;">1. Facilitate Collaboration</h3>
-      <ul>
-        <li>Strengthen partnerships between <span className="cooper">GIFON</span>, private enterprises, technology providers, and geospatial service companies.</li>
-        <li>Create a shared space for dialogue, knowledge exchange, and co-creation of solutions to Nigeria’s geospatial challenges.</li>
-      </ul>
-      <br>
-      <h3 style="font-size: 1.25rem; font-weight: 600;">2. Promote Innovation and Competitiveness</h3>
-      <ul>
-        <li>Encourage research, development, and adoption of emerging technologies (AI, satellite systems, drones, Geospatial Intelligence, cyber-geo tools).</li>
-        <li>Support Nigerian companies and startups in competing globally in the geospatial and intelligence ecosystem.</li>
-      </ul>
-      <br>
-      <h3 style="font-size: 1.25rem; font-weight: 600;">3. Advance Economic Growth</h3>
-      <ul>
-        <li>Leverage geospatial intelligence as a driver of national productivity across the 13 critical infrastructure sectors (energy, transport, communications, defence, agriculture, water, health, finance, manufacturing, education, etc.).</li>
-        <li>Position Nigeria as a regional hub for geospatial innovation, investment, and capacity development.</li>
-      </ul>
-      <br>
-      <h3 style="font-size: 1.25rem; font-weight: 600;">4. Ensure Ethical and Responsible Practice</h3>
-      <ul>
-        <li>Uphold standards of data protection, privacy, and responsible geospatial intelligence use.</li>
-        <li>Promote transparency, accountability, and ethical business conduct in private sector engagements.</li>
-      </ul>
-      <br>
-      <h3 style="font-size: 1.25rem; font-weight: 600;">5. Contribute to National Security and Development</h3>
-      <ul>
-        <li>Mobilize private sector expertise and resources in support of Nigeria’s security architecture, resilience planning, disaster risk reduction, and smart infrastructure development.</li>
-        <li>Strengthen national geospatial intelligence readiness in alignment with government policies and global best practices.</li>
-      </ul>
-      <br>
-      <p><strong>Policy Commitment:</strong></p>
-      <p><span className="cooper">GIFON</span> commits to institutionalizing the Industry and Private Sector Forum as a dynamic and inclusive mechanism for engagement, innovation, and partnership. Through this platform, <span className="cooper">GIFON</span> will ensure that the private sector is not only a stakeholder but also a key driver of Nigeria’s geospatial future.</p>
-    `
-  },
-  {
-    id: 'policy',
-    anchor: 'policy-governance-ethics',
-    title: "Policy, Governance & Ethics Group",
-    description: "The PGE-WG is the institutional mechanism established to uphold accountability, integrity, and transparency. It provides thought leadership, oversight, and policy direction on how geospatial intelligence should be governed...",
-    policyContent: `
-      <h2 style="font-size: 1.25rem; font-weight: 600;">POLICY, GOVERNANCE & ETHICS WORKING GROUP</h2>
-      <br>
-      <p>The Policy, Governance & Ethics Working Group (PGE-WG) of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is the institutional mechanism established to uphold accountability, integrity, and transparency in all our operations. This working group provides thought leadership, oversight, and policy direction on how geospatial intelligence should be governed, regulated, and ethically applied for national development and security.</p>
-      <br>
-      <h3 style="font-size: 1.25rem; font-weight: 600;">Core Mandate</h3>
-      <p><strong>a. Policy Development:</strong> Drafting, reviewing, and recommending national and institutional policies that guide the responsible use of geospatial data and intelligence.</p>
-      <p><strong>b. Governance Frameworks:</strong> Designing effective governance structures to ensure alignment with national security objectives, international standards, and sustainable development goals.</p>
-      <p><strong>c. Ethics Oversight:</strong> Promoting ethical practices, preventing misuse of geospatial intelligence, and ensuring compliance with privacy, human rights, and anti-corruption standards.</p>
-      <p><strong>d. Regulatory Advisory:</strong> Advising government, industry, and civil society stakeholders on laws, regulations, and international conventions relevant to geospatial intelligence.</p>
-      <p><strong>e. Capacity Building:</strong> Building awareness and capacity in policy, ethics, and governance among stakeholders, professionals, and decision-makers.</p>
-      <br>
-      <h3 style="font-size: 1.25rem; font-weight: 600;">Focus Areas</h3>
-      <p><strong>a. Ethical Use of GEOINT:</strong> Safeguarding against abuse, bias, and misuse of sensitive geospatial information.</p>
-      <p><strong>b. Data Privacy & Security:</strong> Ensuring that geospatial data handling respects confidentiality, rights, and national interests.</p>
-      <p><strong>c. Anti-Corruption & Accountability:</strong> Embedding integrity in all <span className="cooper">GIFON</span>’s operations and promoting zero-tolerance for misconduct.</p>
-      <p><strong>d. Inclusive Governance:</strong> Encouraging the participation of women, youth, academia, and the private sector in shaping GEOINT policy.</p>
-      <p><strong>· International Best Practice:</strong> Aligning Nigeria’s GEOINT ecosystem with global standards and conventions.</p>
-      <br>
-      <h3 style="font-size: 1.25rem; font-weight: 600;">Membership & Composition</h3>
-      <p>The PGE-WG comprises experts drawn from:</p>
-      <ul>
-        <li>a. Government policy institutions</li>
-        <li>b. Security and intelligence agencies</li>
-        <li>c. Academia and research bodies</li>
-        <li>d. Industry and private sector leaders</li>
-        <li>e. Civil society and ethics specialists</li>
-      </ul>
-      <br>
-      <h3 style="font-size: 1.25rem; font-weight: 600;">Why It Matters</h3>
-      <p>Strong governance and ethical foundations are essential for the credibility and sustainability of geospatial intelligence in Nigeria. Through the PGE-WG, <span className="cooper">GIFON</span> ensures that innovation is balanced with responsibility, security is balanced with human rights, and progress is anchored on integrity.</p>
-    `
-  }
 ];
 
 export default allForums;

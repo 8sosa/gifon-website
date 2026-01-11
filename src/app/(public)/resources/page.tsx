@@ -124,7 +124,7 @@ useEffect(() => {
   return (
     <>
       <HeroSection
-        title="Resources"
+        title="Media Resources"
         description="Access tools, datasets, training materials, and downloadables to support your geospatial projects."
         backgroundMedia = {[
           "/vids/globe.mp4"
@@ -317,7 +317,10 @@ useEffect(() => {
                 <div 
                   key={idx} 
                   id={pub.id}
-                  className="group relative bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20 hover:border-green-400 transition-all duration-300 hover:-translate-y-2 flex flex-col"
+                  // logic: if index is even, use white; if odd, use slate-50
+                  className={`group relative backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20 hover:border-green-400 transition-all duration-300 hover:-translate-y-2 flex flex-col ${
+                    idx % 2 === 0 ? 'bg-white/95' : 'bg-green-200'
+                  }`}
                 >
                   {/* Hover Glow Effect */}
                   <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl -z-10"></div>
@@ -342,9 +345,6 @@ useEffect(() => {
 
                   {/* Action Bar */}
                   <div className="mt-auto pt-6 border-t border-gray-100 flex items-center justify-between">
-                    {/* <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-                      {pub.id?.replace(/-/g, ' ')}
-                    </span> */}
                     <Link
                       href={pub.link || "#"}
                       className="inline-flex items-center gap-2 text-green-700 font-bold text-sm hover:text-green-900 transition-colors group/link"

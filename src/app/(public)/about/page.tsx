@@ -436,37 +436,8 @@ export default async function AboutPage() {
         <FoundingVision />
         {/* --- SECTION 2: MANAGEMENT TEAM (Dynamic, Asymmetrical, Light Gray) --- */}
         <div id="management-team" className='pt-20 -z-10 bg-gray-50'></div>
-        <section className="py-24 px-4 md:px-6 bg-gray-50 border-t border-gray-100">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+        <TeamGrid members={mapMembersByCategory(members, 'Advisory')} />
               
-              {/* Left Column: Sticky Title & Context */}
-              <div className="lg:w-1/3 lg:sticky lg:top-24 text-left">
-                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Leadership & Management <br/> <span className="text-green-600">Team</span>
-                </h2>
-                <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                  Our Executive Team drives <span className="cooper">GIFON</span>&apos;s mission with expertise, vision and leadership advancing Geospatial Intelligence, National Security and sustainable development in Nigeria.
-                </p>
-                
-                {/* Decorative Stat or Quote */}
-                <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hidden lg:block">
-                  <p className="italic text-gray-500 mb-4 text-center">"Leading with Insights. Securing with intelligence. Innovating for Nigeria."</p>
-                  <div className="flex items-center gap-2">
-                    <div className="h-1 w-10 bg-green-500 rounded-full"></div>
-                    <p className="text-sm font-semibold text-gray-900">The <span className="cooper">GIFON</span> Team</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: The Grid */}
-              <div className="lg:w-2/3 w-full">
-                <TeamGrid members={mapMembersByCategory(members, 'Advisory')} />
-              </div>
-
-            </div>
-          </div>
-        </section>
         
         <div id='our-partners' className="scroll-mt-24"></div>
         <PartnersCarousel />

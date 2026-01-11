@@ -19,6 +19,7 @@ export default async function HeaderWrapper() {
             { label: 'Vision', anchor: 'mission-vision' }, 
             { label: 'Objectives', anchor: 'objectives' }, 
             { label: 'Core Values', anchor: 'core-values' }, 
+            { label: 'Founding Vision', anchor: 'founding-vision' }, 
             { label: 'Management Team', anchor: 'management-team' }, 
             { label: 'Our Partners', anchor: 'our-partners' } 
         ] 
@@ -28,10 +29,10 @@ export default async function HeaderWrapper() {
         href: '/membership', 
         children: [ 
             { label: 'Why Join GIFON', anchor: 'why-join' }, 
+            { label: 'How to Apply', anchor: 'apply' },
             { label: 'Membership Categories', anchor: 'categories' }, 
             { label: 'Membership Benefits', anchor: 'benefits' }, 
             { label: 'Pioneer Members', anchor: 'pioneer-members' }, 
-            { label: 'How to Apply', anchor: 'apply' } 
         ] 
     },
     { 
@@ -89,20 +90,14 @@ export default async function HeaderWrapper() {
             { label: 'Critical Manufacturing & Industrial Facilities', anchor: 'manufacturing' }, 
         ]
     },
-    // --- UPDATED SECTION START ---
     { 
         label: 'Groups & Forums', 
         href: '/forums', 
         children: [ 
-            // Anchors updated to match your forums.tsx file
             { label: 'Young Professionals Forum', anchor: 'young-professionals' }, 
-            { label: 'Women in GEOINT Forum', anchor: 'women-in-geoint' }, 
-            { label: 'Industry & Private Sector Forum', anchor: 'industry-private-sector' }, 
-            { label: 'Policy, Governance & Ethics', anchor: 'policy-governance-ethics' }, 
-            { label: 'Academia & Research', anchor: 'academia-research' } 
+            { label: 'Women in GEOINT Forum', anchor: 'women-in-geoint' },
         ] 
     },
-    // --- UPDATED SECTION END ---
     { 
         label: 'Policies', 
         href: '/policies', 

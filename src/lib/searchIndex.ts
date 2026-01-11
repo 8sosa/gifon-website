@@ -47,7 +47,7 @@ const sectorItems: SearchItem[] = infrastructureList.map((sector) => ({
 const publicationItems: SearchItem[] = (resourcesData.publications || []).map((pub: ResourceItem, idx: number) => ({
   id: `pub-${pub.id || idx}`,
   title: getSearchableTitle(pub, 'Publication'),
-  description: pub.description || 'Publication resource',
+  description: typeof pub.description === 'string' ? pub.description : 'Publication resource',
   category: "Resource",
   href: pub.link
 }));
@@ -65,8 +65,9 @@ const downloadItems: SearchItem[] = (resourcesData.downloads || []).map((dl: Res
 const newsItems: SearchItem[] = (resourcesData.news || []).map((item: ResourceItem, idx: number) => ({
   id: `news-${idx}`,
   title: getSearchableTitle(item, 'News Article'),
-  description: item.description || `News update${item.date ? ' from ' + item.date : ''}`,
-  category: 'Resource',
+  description: (typeof item.description === 'string' && item.description) 
+  ? item.description 
+  : `News update${item.date ? ' from ' + item.date : ''}`,  category: 'Resource',
   href: item.link || '/resources#News',
 }));
 
@@ -83,7 +84,7 @@ const pressItems: SearchItem[] = (resourcesData.press || []).map((item: Resource
 const podcastItems: SearchItem[] = (resourcesData.podcasts || []).map((item: ResourceItem, idx: number) => ({
   id: `pod-${idx}`,
   title: getSearchableTitle(item, 'Podcast Episode'),
-  description: item.description || 'Podcast Episode',
+  description: typeof item.description === 'string' ? item.description : 'Podcast Episode',
   category: 'Resource',
   href: item.link || '/resources#Podcast',
 }));
@@ -92,7 +93,7 @@ const podcastItems: SearchItem[] = (resourcesData.podcasts || []).map((item: Res
 const webinarItems: SearchItem[] = (resourcesData.webinars || []).map((item: ResourceItem, idx: number) => ({
   id: `web-${idx}`,
   title: getSearchableTitle(item, 'Webinar'),
-  description: item.description || `Webinar (${item.status || 'Event'})`,
+  description: typeof item.description === 'string' ? item.description : `Webinar (${item.status || 'Event'})`,
   category: 'Resource',
   href: item.link || '/resources#Webinar',
 }));

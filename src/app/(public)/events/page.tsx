@@ -180,7 +180,7 @@ export default async function EventsPage() {
   return (
     <>
       <HeroSection
-        title="Events & Outreach"
+        title="Events"
         description="Connecting the community through conferences, workshops, and development programmes."
         backgroundMedia={[
           "/media/resources/20120308_092350.JPG",

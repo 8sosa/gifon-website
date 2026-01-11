@@ -16,7 +16,7 @@ import {
   ChevronRight, 
   ChevronLeft,
   UploadCloud,
-  Quote,
+  CheckCircle2, Sparkles,
   AlertCircle,
   User,
   MapPin,
@@ -305,7 +305,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
     const getCategoryIcon = (index: number) => {
         const icons = [GraduationCap, Briefcase, Building2, Building2, Landmark, Award];
         const Icon = icons[index] || Users;
-        return <Icon size={32} className="text-green-600 mb-4" />;
+        return <Icon size={32} className="text-white" />;
     };
 
     // --- Helpers to determine form type ---
@@ -1025,88 +1025,107 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                         ))}
                     </div>
 
-                    <div className="text-center mt-12">
+                    {/* <div className="text-center mt-12">
                         <button
                             onClick={() => openDocModal(forumContent.supportingDocuments, "Supporting Documents Checklist")}
                             className='inline-flex items-center gap-2 text-green-700 bg-green-50 px-6 py-3 rounded-full hover:bg-green-100 transition font-semibold border border-green-200'
                         >
                             <FileText size={18} /> View Required Documents Checklist
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </section>
 
             <div id="categories" className="scroll-mt-24"></div>
-            <section className="px-4 md:px-6 py-20 bg-gray-50 flex flex-col items-center">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Membership Categories</h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto">Find the category that best fits your professional standing and organizational needs.</p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
-                {categories.map((item, idx) => (
-                    <div
-                        key={idx}
-                        className="group relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col hover:-translate-y-1"
-                    >
-                        {/* Background Decor Icon */}
-                        <div className="absolute top-6 right-6 opacity-5 group-hover:opacity-10 transition-opacity text-green-700 scale-150">
+            <section className="relative px-4 md:px-6 py-24 bg-slate-50 overflow-hidden flex flex-col items-center">
+    
+    {/* Abstract Background Pattern */}
+    <div className="absolute inset-0 opacity-[0.03]" 
+         style={{ backgroundImage: 'radial-gradient(#059669 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
+    </div>
+    
+    {/* Section Header */}
+    <div className="relative z-10 text-center mb-16 max-w-3xl">
+        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+        Membership <span className="text-transparent bg-clip-text bg-linear-to-r from-green-600 to-emerald-800">Categories</span>
+        </h2>
+        <p className="text-gray-600 text-lg">
+        Find the category that best fits your professional standing and organizational needs.
+        </p>
+    </div>
+
+    {/* Cards Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full relative z-10">
+        {categories.map((item, idx) => (
+            <div
+                key={idx}
+                className="group relative bg-white rounded-4xl p-8 shadow-xl shadow-gray-200/40 hover:shadow-2xl hover:shadow-green-900/10 transition-all duration-500 border border-gray-100 hover:border-green-500/30 flex flex-col hover:-translate-y-2 overflow-hidden"
+            >
+                {/* Hover Gradient Blob */}
+                <div className="absolute -top-20 -right-20 w-40 h-40 bg-green-500/10 rounded-full blur-3xl group-hover:bg-green-500/20 transition-all duration-500"></div>
+
+                {/* Header Section */}
+                <div className="relative mb-6">
+                    <div className="flex items-start justify-between mb-6">
+                        <div className="p-4 rounded-2xl bg-green-400 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-all duration-500 shadow-sm group-hover:shadow-green-200 group-hover:scale-110 group-hover:rotate-3">
                             {getCategoryIcon(idx)}
                         </div>
-
-                        {/* Header Section */}
-                        <div className="mb-6">
-                            <div className="bg-green-50 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-green-700 group-hover:bg-green-600 group-hover:text-white transition-all duration-300 shadow-sm">
-                                {getCategoryIcon(idx)}
-                            </div>
-                            <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-green-700 transition-colors">
-                                {item.title}
-                            </h3>
-                            <p className="text-gray-500 text-sm leading-relaxed">
-                                {item.desc}
-                            </p>
-                        </div>
-
-                        {/* --- NEW: Supporting Documents List --- */}
-                        {/* Only render if documents exist */}
-                        {item.documents && item.documents.length > 0 && (
-                            <div className="mb-8 grow">
-                                <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
-                                    <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 border-b border-gray-200 pb-2">
-                                        Requirements
-                                    </h4>
-                                    <ul className="space-y-2">
-                                        {item.documents.map((doc, dIdx) => (
-                                            <li key={dIdx} className="flex items-start gap-2 text-xs text-gray-600 leading-snug">
-                                                <div className="min-w-1 h-1 rounded-full bg-green-500 mt-1.5 shadow-sm shadow-green-200"></div>
-                                                <span>{doc}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Footer / Button Area */}
-                        <div className="mt-auto">
-                            {/* HIDE APPLY BUTTON FOR FELLOW/HONORARY */}
-                            {item.title !== "Fellow/Honorary Membership" ? (
-                                <button
-                                    onClick={() => handleApplyClick(item)}
-                                    className="w-full py-3.5 rounded-xl font-bold bg-white border border-gray-200 text-gray-700 hover:border-green-600 hover:bg-green-600 hover:text-white transition-all shadow-sm hover:shadow-lg hover:shadow-green-100 flex items-center justify-center gap-2 group/btn"
-                                >
-                                    Apply Now 
-                                    <ChevronRight size={16} className="text-green-500 group-hover:text-white group-hover/btn:translate-x-1 transition-transform" />
-                                </button>
-                            ) : (
-                                <div className="w-full py-3.5 rounded-xl font-bold bg-gray-50 border border-gray-200 text-gray-400 flex items-center justify-center gap-2 cursor-not-allowed text-sm">
-                                    By Nomination Only
-                                </div>
-                            )}
-                        </div>
+                        {/* Subtle ID number or Decor */}
+                        <span className="text-6xl font-bold text-gray-100 select-none group-hover:text-green-50 transition-colors">
+                            0{idx + 1}
+                        </span>
                     </div>
-                ))}
+                    
+                    <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-green-700 transition-colors">
+                        {item.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm leading-relaxed min-h-10">
+                        {item.desc}
+                    </p>
                 </div>
-            </section>
+
+                {/* Divider */}
+                <div className="w-full h-px bg-gray-100 mb-6 group-hover:bg-green-100 transition-colors"></div>
+
+                {/* Supporting Documents List */}
+                {item.documents && item.documents.length > 0 && (
+                    <div className="mb-8 grow">
+                        <h4 className="text-xs font-bold text-green-800 uppercase tracking-widest mb-4 flex items-center gap-2">
+                            Requirements
+                        </h4>
+                        <ul className="space-y-3">
+                            {item.documents.map((doc, dIdx) => (
+                                <li key={dIdx} className="flex items-start gap-3 text-sm text-gray-600 leading-snug group/item">
+                                    <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 shrink-0 group-hover/item:text-green-600" />
+                                    <span className="group-hover/item:text-gray-900 transition-colors">{doc}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+                {/* Footer / Button Area */}
+                <div className="mt-auto pt-4">
+                    {item.title !== "Fellow/Honorary Membership" ? (
+                        <button
+                            onClick={() => handleApplyClick(item)}
+                            className="w-full py-4 rounded-xl font-bold text-white bg-gray-900 hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-200 flex items-center justify-center gap-2 group/btn relative overflow-hidden"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">
+                                Apply Now 
+                                <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+                            </span>
+                        </button>
+                    ) : (
+                        <div className="w-full py-4 rounded-xl font-bold bg-amber-50 border border-amber-100 text-amber-700/60 flex items-center justify-center gap-2 cursor-not-allowed text-sm uppercase tracking-wide">
+                            By Nomination Only
+                        </div>
+                    )}
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
             
             <div id="benefits" className="scroll-mt-24"></div>
             <section className="max-w-6xl mx-auto px-4 md:px-6 py-20 space-y-12">

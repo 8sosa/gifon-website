@@ -68,14 +68,18 @@ export default function PublicationsPage() {
       <HeroSection
         title={
         <>
-          <p>- Eyes on Location -</p>
-          <p>The GeoINSIGHT Bulletin</p>
+          <p>- GeoINSIGHT -</p>
+          <p>The Journal of Geospatial Intelligence</p>
         </>
         }
         // title="Eyes on Location – The GeoINSIGHT Bulletin"
         description={
           <>
-            Stay Informed through <span className="cooper font-bold">GIFON</span>'s flagship publication, delivering a balanced blend of policy analysis, technological insights and engaging updates from our growing Geospatial Intelligence Community.
+          <span className='text-center'>
+            “Mapping knowledge, informing decisions,
+            <br/>
+            and shaping the future of geospatial intelligence.
+          </span>
           </>
       }
         ctaText="Read Latest Issues"
@@ -89,15 +93,10 @@ export default function PublicationsPage() {
         
         {/* --- About Section --- */}
         <section id="about" className="py-20 px-4 bg-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 font-cooper">About The GeoINSIGHT Bulletin</h2>
-            <div className="text-gray-600 leading-relaxed text-lg space-y-4 max-w-3xl mx-auto">
-              <p>
-                &quot;The GeoINSIGHT Bulletin&quot; is <span className="cooper font-bold text-gray-800">GIFON</span>&apos;s premier newsletter, providing members and partners with critical analysis, updates, and spotlights on the world of Geospatial Intelligence.
-              </p>
-              <p>
-                Our design balances <strong className="text-green-700">deep insights</strong> (feature articles, policy) with <strong className="text-green-700">community engagement</strong>, ensuring a consistent, professional, and valuable read in every edition.
-              </p>
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 font-cooper">About The Journal of Geospatial Intelligence</h2>
+            <div className="text-gray-600 leading-relaxed text-lg space-y-4 text-justify mx-auto">
+              <p>GeoINSIGHT is <span className="cooper">GIFON</span>&apos;s flagship journal, dedicated to advancing knowledge, research, and discourse in geospatial intelligence (GEOINT), spatial data science, and location based innovation. It serves as a credible platform for scholars, practitioners, policymakers, and industry leaders to share insights, research findings, case studies, and thought leadership on geospatial applications for national security, development, infrastructure, and societal impact. The journal aims to bridge theory and practice, promoting evidence based solutions, innovation, and collaboration across the geospatial ecosystem. Each edition highlights trends, challenges, breakthroughs, and success stories, fostering informed decision-making and inspiring the next generation of geospatial professionals.</p>
             </div>
           </div>
         </section>

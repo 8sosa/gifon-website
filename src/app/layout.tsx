@@ -3,6 +3,7 @@ import { Montserrat, Bellota } from 'next/font/google';
 import localFont from 'next/font/local';
 import HeaderWrapper from '@/components/HeaderWrapper';
 import Footer from '@/components/Footer';
+import ScrollToTop from '@/components/ScrollToTop';
 // import Breadcrumbs from "@/components/BreadCrumbs";
 
 const montserrat = Montserrat({
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           flex min-h-screen flex-col
         `}
       >
+        <ScrollToTop />
         <HeaderWrapper />
         <main className="grow min-h-1/2 flex flex-col justify-start pt-[10.09375rem] md:pt-[14.59375rem] lg:pt-[16.40625rem] xl:pt-[16.706875rem]">
           {/* <Breadcrumbs /> */}
