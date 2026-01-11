@@ -174,10 +174,10 @@ export default async function AboutPage() {
               className="order-2 lg:order-1"
             >
               {/* Added Card Styling Here */}
-              <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-2 h-full bg-green-500"></div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Our Aim</h2>
-                <p className="text-gray-600 leading-relaxed text-justify text-lg">
+              <div className="bg-green-800 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-2 h-full bg-gray-800"></div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-200">Our Aim</h2>
+                <p className="text-gray-200 leading-relaxed text-justify text-lg">
                   The aim of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is to harness the power of geospatial data and technology to drive sustainable development, enhance national security, and empower decision-making across all sectors in Nigeria. 
                   <br/><br/>
                   Through innovation, education, collaboration, and policy frameworks, the Foundation strives to position Nigeria as a leader in the global geospatial intelligence community, ensuring that geospatial solutions contribute to the nation’s socio-economic progress, environmental sustainability, and resilience to future challenges. 
@@ -262,8 +262,8 @@ export default async function AboutPage() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 max-w-4xl mx-auto">
                 <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">Our Objectives</h2>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  The Objectives of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>), focuses on building a strong foundation for geospatial intelligence in Nigeria, addressing both technical and strategic goals, with emphasis on the importance of education, collaboration, research and application across sectors.
+                <p className="text-lg text-gray-600 leading-relaxed text-justify">
+                  The objectives of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>), focuses on building a strong foundation for geospatial intelligence in Nigeria, addressing both technical and strategic goals. They emphasize the importance of education, collaboration, research, and application across sectors, while also aligning with broader national and global development priorities.
                 </p>
             </div>
 
@@ -443,7 +443,7 @@ export default async function AboutPage() {
               {/* Left Column: Sticky Title & Context */}
               <div className="lg:w-1/3 lg:sticky lg:top-24 text-left">
                 <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Management <br/> <span className="text-green-600">Team</span>
+                  Leadership & Management <br/> <span className="text-green-600">Team</span>
                 </h2>
                 <p className="text-gray-600 text-lg leading-relaxed mb-8">
                   Our Executive Team drives <span className="cooper">GIFON</span>&apos;s mission with expertise, vision and leadership advancing Geospatial Intelligence, National Security and sustainable development in Nigeria.
@@ -451,10 +451,10 @@ export default async function AboutPage() {
                 
                 {/* Decorative Stat or Quote */}
                 <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hidden lg:block">
-                  <p className="italic text-gray-500 mb-4">"Leading with Insights. Securing with intelligence. Innovating for Nigeria."</p>
+                  <p className="italic text-gray-500 mb-4 text-center">"Leading with Insights. Securing with intelligence. Innovating for Nigeria."</p>
                   <div className="flex items-center gap-2">
                     <div className="h-1 w-10 bg-green-500 rounded-full"></div>
-                    <p className="text-sm font-semibold text-gray-900"><span className="cooper">GIFON</span> Executive</p>
+                    <p className="text-sm font-semibold text-gray-900">The <span className="cooper">GIFON</span> Team</p>
                   </div>
                 </div>
               </div>

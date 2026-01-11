@@ -32,6 +32,7 @@ import Modal from '@/components/Modal';
 interface CategoryItem {
     title: string;
     desc: string;
+    documents: string[];
 }
 
 interface ModalState {
@@ -238,13 +239,68 @@ export default function MembershipClient({ children }: { children: React.ReactNo
     });
 
     const categories: CategoryItem[] = [
-        { title: "Student Membership", desc: "For undergraduates and postgraduates." },
-        { title: "Professional Membership", desc: "For individuals in geospatial, tech, security, and related fields." },
-        { title: "Institutional Membership", desc: "For universities, research institutes, and training centers." },
-        { title: "Corporate Membership", desc: "For private sector organizations." },
-        { title: "Government/Agency Membership", desc: "For ministries, security agencies, and regulators." },
-        { title: "Fellow/Honorary Membership", desc: "For distinguished leaders and contributors." },
-    ];
+        { 
+            title: "Student Membership", 
+            desc: "For undergraduates and postgraduates.",
+            documents: [
+                "Valid Student ID Card",
+                "Admission Letter or Proof of Enrollment",
+                "Valid Government-Issued ID (NIMC, Passport, etc.)",
+                "Recommendation Letter (Optional)",
+                "Coloured Passport Photograph (2x2)"
+            ]
+        },
+        { 
+            title: "Professional Membership", 
+            desc: "For individuals in geospatial, tech, security, and related fields.",
+            documents: [
+                "Updated Curriculum Vitae (CV)",
+                "Academic Certificates (Higher Institution)",
+                "Professional Certifications (if any)",
+                "Valid Government-Issued ID",
+                "Coloured Passport Photograph (2x2)"
+            ]
+        },
+        { 
+            title: "Institutional Membership", 
+            desc: "For universities, research institutes, and training centers.",
+            documents: [
+                "Certificate of Establishment / Accreditation",
+                "Letter of Intent on Official Letterhead",
+                "Details of Authorized Contact Person (Name, Email, Phone)",
+                "Institutional ID of Contact Person",
+                "Valid Government-Issued ID",
+                "Passport Photograph of Contact Person"
+            ]
+        },
+        { 
+            title: "Corporate Membership", 
+            desc: "For private sector organizations.",
+            documents: [
+                "Certificate of Incorporation",
+                "Letter of Intent on Company Letterhead",
+                "Details of Authorized Contact Person (Name, Email, Phone)",
+                "Valid Government-Issued ID of Contact Person",
+                "Passport Photograph of Contact Person"
+            ]
+        },
+        { 
+            title: "Government/Agency Membership", 
+            desc: "For ministries, security agencies, and regulators.",
+            documents: [
+                "Official Letter of Request",
+                "Agency Mandate / Establishment Act",
+                "Details of Liaison Officer",
+                "Official ID of Liaison Officer",
+                "Passport Photograph of Liaison Officer"
+            ]
+        },
+        { 
+            title: "Fellow/Honorary Membership", 
+            desc: "For distinguished leaders and contributors.",
+            documents: [] // No documents listed for this type
+        },
+      ];
 
     const getCategoryIcon = (index: number) => {
         const icons = [GraduationCap, Briefcase, Building2, Building2, Landmark, Award];
@@ -987,38 +1043,68 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                     <p className="text-gray-600 max-w-2xl mx-auto">Find the category that best fits your professional standing and organizational needs.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
-                    {categories.map((item, idx) => (
+                {categories.map((item, idx) => (
                     <div
                         key={idx}
-                        className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col justify-between hover:-translate-y-1"
+                        className="group relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col hover:-translate-y-1"
                     >
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        {/* Background Decor Icon */}
+                        <div className="absolute top-6 right-6 opacity-5 group-hover:opacity-10 transition-opacity text-green-700 scale-150">
                             {getCategoryIcon(idx)}
                         </div>
-                        <div className="grow mb-8">
-                            <div className="bg-green-50 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-300 group-hover:text-white transition-colors duration-300">
+
+                        {/* Header Section */}
+                        <div className="mb-6">
+                            <div className="bg-green-50 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-green-700 group-hover:bg-green-600 group-hover:text-white transition-all duration-300 shadow-sm">
                                 {getCategoryIcon(idx)}
                             </div>
-                            <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-green-700 transition-colors">{item.title}</h3>
-                            <p className="text-gray-600 leading-relaxed text-sm">{item.desc}</p>
+                            <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-green-700 transition-colors">
+                                {item.title}
+                            </h3>
+                            <p className="text-gray-500 text-sm leading-relaxed">
+                                {item.desc}
+                            </p>
                         </div>
-                        
-                        {/* HIDE APPLY BUTTON FOR FELLOW/HONORARY */}
-                        {item.title !== "Fellow/Honorary Membership" ? (
-                            <button
-                                onClick={() => handleApplyClick(item)}
-                                className="w-full py-3 rounded-xl font-bold border-2 border-green-600 text-green-700 hover:bg-green-600 hover:text-white transition-colors flex items-center justify-center gap-2 group/btn"
-                            >
-                                Apply Now 
-                                <ChevronRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-                            </button>
-                        ) : (
-                            <div className="w-full py-3 rounded-xl font-bold border-2 border-gray-200 text-gray-400 flex items-center justify-center gap-2 cursor-not-allowed">
-                                By Nomination Only
+
+                        {/* --- NEW: Supporting Documents List --- */}
+                        {/* Only render if documents exist */}
+                        {item.documents && item.documents.length > 0 && (
+                            <div className="mb-8 grow">
+                                <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                                    <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 border-b border-gray-200 pb-2">
+                                        Requirements
+                                    </h4>
+                                    <ul className="space-y-2">
+                                        {item.documents.map((doc, dIdx) => (
+                                            <li key={dIdx} className="flex items-start gap-2 text-xs text-gray-600 leading-snug">
+                                                <div className="min-w-1 h-1 rounded-full bg-green-500 mt-1.5 shadow-sm shadow-green-200"></div>
+                                                <span>{doc}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
                         )}
+
+                        {/* Footer / Button Area */}
+                        <div className="mt-auto">
+                            {/* HIDE APPLY BUTTON FOR FELLOW/HONORARY */}
+                            {item.title !== "Fellow/Honorary Membership" ? (
+                                <button
+                                    onClick={() => handleApplyClick(item)}
+                                    className="w-full py-3.5 rounded-xl font-bold bg-white border border-gray-200 text-gray-700 hover:border-green-600 hover:bg-green-600 hover:text-white transition-all shadow-sm hover:shadow-lg hover:shadow-green-100 flex items-center justify-center gap-2 group/btn"
+                                >
+                                    Apply Now 
+                                    <ChevronRight size={16} className="text-green-500 group-hover:text-white group-hover/btn:translate-x-1 transition-transform" />
+                                </button>
+                            ) : (
+                                <div className="w-full py-3.5 rounded-xl font-bold bg-gray-50 border border-gray-200 text-gray-400 flex items-center justify-center gap-2 cursor-not-allowed text-sm">
+                                    By Nomination Only
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    ))}
+                ))}
                 </div>
             </section>
             

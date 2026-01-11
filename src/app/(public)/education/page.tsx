@@ -62,27 +62,27 @@ export default function EducationPage() {
         icon: Users,
         colorClass: 'bg-green-600 shadow-green-900/50',
         textClass: 'text-green-600',
-        title: "GIFON Mentorship Programme",
+        title: <><span className="cooper">GIFON</span> Mentorship Programme</>,
         tagline: "“Building minds, guiding careers, and shaping the future of geospatial intelligence.”",
-        description: "The GIFON Mentorship Programme is a structured professional development initiative designed to nurture the next generation of geospatial intelligence (GEOINT) leaders in Nigeria and Africa. The programme connects students, early career professionals, researchers, and emerging practitioners with experienced GEOINT experts, policy leaders, and industry professionals across government, academia, and the private sector. Through guided mentorship, knowledge exchange, career guidance, and exposure to real-world geospatial applications, the programme supports skills transfer, leadership development, ethical practice, and professional excellence within the geospatial intelligence ecosystem."
+        description: <>The <span className="cooper">GIFON</span> Mentorship Programme is a structured professional development initiative designed to nurture the next generation of geospatial intelligence (GEOINT) leaders in Nigeria and Africa. The programme connects students, early career professionals, researchers, and emerging practitioners with experienced GEOINT experts, policy leaders, and industry professionals across government, academia, and the private sector. Through guided mentorship, knowledge exchange, career guidance, and exposure to real-world geospatial applications, the programme supports skills transfer, leadership development, ethical practice, and professional excellence within the geospatial intelligence ecosystem."</>
     },
     {
         id: 'career',
         icon: Target,
         colorClass: 'bg-blue-600 shadow-blue-900/50',
         textClass: 'text-blue-600',
-        title: "GIFON Career Services",
+        title: <><span className="cooper">GIFON</span> Career Services</>,
         tagline: "“From skills to service, empowering geospatial careers with purpose and impact.”",
-        description: "GIFON Career Services is a dedicated career development platform designed to prepare, position, and connect geospatial professionals for meaningful opportunities in national development, security, research, and the global GEOINT workforce. The service supports students, graduates, and professionals through career advisory, employability skills development, certification guidance, and industry alignment. GIFON Career Services bridges the gap between education and practice by aligning talent with evolving workforce needs across public institutions, private industry, international organizations, and innovation-driven enterprises."
+        description: <><span className="cooper">GIFON</span> Career Services is a dedicated career development platform designed to prepare, position, and connect geospatial professionals for meaningful opportunities in national development, security, research, and the global GEOINT workforce. The service supports students, graduates, and professionals through career advisory, employability skills development, certification guidance, and industry alignment. <span className="cooper">GIFON</span> Career Services bridges the gap between education and practice by aligning talent with evolving workforce needs across public institutions, private industry, international organizations, and innovation-driven enterprises.</>
     },
     {
         id: 'networking',
         icon: CheckCircle2,
         colorClass: 'bg-purple-600 shadow-purple-900/50',
         textClass: 'text-purple-600',
-        title: "GIFON Professional Networking",
+        title: <><span className="cooper">GIFON</span> Professional Networking</>,
         tagline: "“Connecting people, expertise, and opportunities across the geospatial intelligence community.”",
-        description: "GIFON Professional Networking provides a collaborative platform that connects geospatial intelligence professionals, institutions, policymakers, researchers, and industry leaders at national, regional, and international levels. The network fosters knowledge sharing, strategic partnerships, peer engagement, and cross sector collaboration within the GEOINT community. Through forums, conferences, roundtables, digital platforms, and special interest groups, GIFON strengthens professional relationships that drive innovation, policy influence, capacity development, and sustainable growth across the geospatial ecosystem."
+        description: <><span className="cooper">GIFON</span> Professional Networking provides a collaborative platform that connects geospatial intelligence professionals, institutions, policymakers, researchers, and industry leaders at national, regional, and international levels. The network fosters knowledge sharing, strategic partnerships, peer engagement, and cross sector collaboration within the GEOINT community. Through forums, conferences, roundtables, digital platforms, and special interest groups, GIFON strengthens professional relationships that drive innovation, policy influence, capacity development, and sustainable growth across the geospatial ecosystem.</>
     }
   ];
 

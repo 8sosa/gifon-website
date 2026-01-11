@@ -82,7 +82,7 @@ export default function PoliciesPage() {
     <>
       <HeroSection
         title="Our Policies"
-        description="Guiding our actions, upholding standards, and fostering excellence in geospatial intelligence."
+        description={<>Guiding our actions, upholding standards, and<br/> fostering excellence in geospatial intelligence.</>}
         backgroundMedia={[
           "/media/POLICIES BACKGROUND.jpg"
         ]}

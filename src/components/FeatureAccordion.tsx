@@ -52,7 +52,7 @@ function ExpandableCard({ title, text, icon, largeIcon, isOpen, onClick }: Featu
       {/* 2. The Inner Card Content (White container slightly inset to reveal border) */}
       <div className={`
         relative h-full m-px rounded-[15px] p-6 transition-all duration-300
-        ${isOpen ? 'bg-green-50/50 backdrop-blur-sm' : 'bg-white'}
+        ${isOpen ? 'bg-green-800 backdrop-blur-sm' : 'bg-white'}
       `}>
         
         {/* Decorative Background Blob for depth */}
@@ -86,7 +86,7 @@ function ExpandableCard({ title, text, icon, largeIcon, isOpen, onClick }: Featu
               
               <h3 className={`
                 text-lg font-bold transition-colors duration-300 sen text-left
-                ${isOpen ? 'text-green-800' : 'text-gray-800 group-hover:text-green-700'}
+                ${isOpen ? 'text-gray-200' : 'text-gray-800 group-hover:text-green-700'}
               `}>
                 {title}
               </h3>
@@ -109,7 +109,7 @@ function ExpandableCard({ title, text, icon, largeIcon, isOpen, onClick }: Featu
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               >
                 <div className="pt-4 mt-4 border-t border-green-100/60">
-                  <p className="text-gray-600 text-sm md:text-base leading-relaxed text-justify">
+                  <p className="text-gray-100 text-sm md:text-base leading-relaxed text-justify">
                     {text}
                   </p>
                 </div>
