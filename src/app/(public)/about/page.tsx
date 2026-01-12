@@ -356,6 +356,7 @@ export default async function AboutPage() {
         <section className="py-24 px-6 bg-linear-to-r from-gray-900 via-black to-gray-800 text-white border-t-4 border-green-600">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-3xl md:text-5xl font-bold mb-16">Our Core Values</h2>
+            <p>At <span className="cooper">GIFON</span>, our core values define who we are and how we serve. We are guided by integrity, professionalism, innovation, and national service, upholding the highest standards of ethical conduct, excellence, and accountability. Through collaboration, inclusiveness, and a commitment to continuous learning, we advance Geospatial Intelligence in ways that strengthen national security, support sustainable development, and deliver lasting impact for Nigeria.</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[

@@ -3,6 +3,8 @@ import Link from 'next/link'; // Make sure Link is imported
 // Import relevant icons from react-icons or lucide-react
 import { FaVenusMars, FaShieldAlt, FaGlobeAfrica, FaGraduationCap, FaUserTie, FaBalanceScale } from 'react-icons/fa';
 
+export const dynamic = 'force-dynamic';
+
 export default function WomenInGeointPage() {
 
   // Data array for the justification points - easier to map and style

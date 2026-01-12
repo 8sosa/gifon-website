@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import HeroSection from '@/components/HeroSection';
 import { 
   FaUniversity, 
@@ -13,6 +14,8 @@ import {
   FaCheckCircle,
   FaHandshake
 } from 'react-icons/fa';
+
+export const dynamic = 'force-dynamic';
 
 export default function AcademiaResearchPage() {
   
@@ -100,13 +103,15 @@ export default function AcademiaResearchPage() {
 
   return (
     <>
-      <HeroSection
-        title={<><span className="cooper">GIFON</span> Academia & Research Collaboration Programme (ARCP)</>}
-        description="“Bridging Knowledge and Practice through Geospatial Intelligence.”"
-        backgroundMedia={[
-          "/media/academia-hero.jpg", // Ensure this image exists or use a placeholder
-        ]}
-      />
+      <Suspense fallback={<div className="h-[60vh] bg-gray-900 w-full animate-pulse" />}>
+        <HeroSection
+          title={<><span className="cooper">GIFON</span> Academia & Research Collaboration Programme (ARCP)</>}
+          description="“Bridging Knowledge and Practice through Geospatial Intelligence.”"
+          backgroundMedia={[
+            "/media/academia-hero.jpg",
+          ]}
+        />
+      </Suspense>
 
       <main className="w-full font-sans">
         

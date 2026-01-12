@@ -13,6 +13,8 @@ import {
   FaRoad 
 } from 'react-icons/fa';
 
+export const dynamic = 'force-dynamic';
+
 export default function YetaPage() {
   
   // 1. Data for Programme Goals

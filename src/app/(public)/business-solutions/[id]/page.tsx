@@ -3,6 +3,8 @@ import { sections } from '../infrastructure';
 import HeroSection from '@/components/HeroSection'; 
 import SectionDetail from '@/components/SectionDetail';
 
+export const dynamic = 'force-dynamic';
+
 interface Props {
   params: Promise<{ id: string }>;
 }

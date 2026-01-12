@@ -57,7 +57,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
 
       {/* --- SECTORS CAROUSEL --- */}
       <section id="sectors-carousel" className="py-16 bg-green-900 overflow-hidden border-b border-gray-100">
-        <div className="max-w-5xl mx-auto mb-10 px-6 text-center bellefair gap-6">
+        <div className="max-w-5xl mx-auto mb-10 px-6 text-justify bellefair gap-6">
            {/* <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Critical Infrastructure Support</h2> */}
            <span className="text-xl font-bold text-gray-100"><span className="cooper">GIFON</span> Commercial Business Solutions provides cutting-edge geospatial intelligence (GEOINT) products, services, and advisory solutions to businesses, government agencies, and development partners. Leveraging advanced location intelligence, spatial analytics, mapping technologies, and data driven insights, <span className="cooper">GIFON</span> helps organizations make smarter decisions, optimize operations, and identify strategic opportunities. Our commercial offerings span risk assessment, market analysis, infrastructure planning, environmental monitoring, and security support, delivering actionable insights that drive efficiency, innovation, and competitive advantage. By combining technical expertise, tailored solutions, and world class geospatial tools, <span className="cooper">GIFON</span> empowers organizations to translate complex geospatial data into measurable business impact.</span>
         </div>
@@ -83,7 +83,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
           <source src="/vids/globe.mp4" type="video/mp4" />
         </video>
         <div className="absolute top-0 left-0 w-full h-full bg-linear-to-t from-black/80 via-black/40 to-black/30 z-10"></div>
-        <div className="relative z-20 text-center px-4 w-full max-w-4xl mx-auto">
+        <div className="relative z-20 text-center px-4 w-full max-w-4xl mx-auto flex flex-row gap-4">
           <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-12 rounded-3xl max-w-lg mx-auto shadow-2xl hover:bg-white/15 transition-all duration-300">
             <div className="text-5xl text-green-400 mb-6 flex w-full items-center justify-center drop-shadow-lg">
                 <FaRegNewspaper />
@@ -96,7 +96,26 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             </h4>
             
             <a 
-              href="/newsletter" 
+              href="/Eyes-on-Location" 
+              className="group inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-green-500/40 transform hover:-translate-y-1"
+            >
+              UNLOCK INSIGHT
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+          <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-12 rounded-3xl max-w-lg mx-auto shadow-2xl hover:bg-white/15 transition-all duration-300">
+            <div className="text-5xl text-green-400 mb-6 flex w-full items-center justify-center drop-shadow-lg">
+                <FaRegNewspaper />
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
+                - GeoINSIGHT -
+            </h3>
+            <h4 className="text-lg md:text-xl font-medium text-green-100 mb-8">
+              The Journal of Geospatial Intelligence
+            </h4>
+            
+            <a 
+              href="/GeoINSIGHT" 
               className="group inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-green-500/40 transform hover:-translate-y-1"
             >
               UNLOCK INSIGHT

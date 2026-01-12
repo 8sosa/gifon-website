@@ -10,6 +10,9 @@ import {
   FaArchive 
 } from 'react-icons/fa';
 
+export const dynamic = 'force-dynamic';
+
+
 export default function ConferencesProceedingsPage() {
   
   // 1. Proceedings Content Data

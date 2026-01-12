@@ -50,7 +50,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
           
           {/* --- LEFT COLUMN: Sticky Title & Context --- */}
           <div className="w-full lg:w-1/3 lg:sticky lg:top-24 text-left">
-            <p className="text-gray-600 text-lg leading-relaxed mb-8">
+            <p className="text-gray-600 text-lg leading-relaxed mb-8 text-justify">
               <span className="cooper">GIFON</span>&apos;s Executive Team provides strategic leadership and forward-looking vision, drawing on deep technical and policy expertise to advance Geospatial Intelligence, strengthen national security, and support sustainable development across Nigeria.
             </p>
             

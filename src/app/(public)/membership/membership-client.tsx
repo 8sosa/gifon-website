@@ -245,9 +245,9 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             documents: [
                 "Valid Student ID Card",
                 "Admission Letter or Proof of Enrollment",
-                "Valid Government-Issued ID (NIMC, Passport, etc.)",
+                "Valid Government-Issued ID (NIMC, International Passport, residence permit)",
                 "Recommendation Letter (Optional)",
-                "Coloured Passport Photograph (2x2)"
+                "Coloured Passport Photograph (2x2, not older than 1 month)"
             ]
         },
         { 
@@ -257,8 +257,8 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 "Updated Curriculum Vitae (CV)",
                 "Academic Certificates (Higher Institution)",
                 "Professional Certifications (if any)",
-                "Valid Government-Issued ID",
-                "Coloured Passport Photograph (2x2)"
+                "Valid Government-Issued ID (NIMC, International Passport, residence permit)",
+                "Coloured Passport Photograph (2x2, not older than 1 month)"
             ]
         },
         { 
@@ -266,11 +266,11 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             desc: "For universities, research institutes, and training centers.",
             documents: [
                 "Certificate of Establishment / Accreditation",
-                "Letter of Intent on Official Letterhead",
-                "Details of Authorized Contact Person (Name, Email, Phone)",
-                "Institutional ID of Contact Person",
-                "Valid Government-Issued ID",
-                "Passport Photograph of Contact Person"
+                "Letter of Intent on Official Institutional Letterhead",
+                "Details of Authorized Contact Person (Name, Designation, Official Email Address, Official Phone Number)",
+                "Institutional ID Card of Authorized Contact Person(s)",
+                "Valid Government-Issued ID (NIMC, International Passport, residence permit)",
+                "Coloured Passport Photograph of Authorized Contact Person (2x2, not older than 1 month)"
             ]
         },
         { 
@@ -279,9 +279,9 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             documents: [
                 "Certificate of Incorporation",
                 "Letter of Intent on Company Letterhead",
-                "Details of Authorized Contact Person (Name, Email, Phone)",
-                "Valid Government-Issued ID of Contact Person",
-                "Passport Photograph of Contact Person"
+                "Details of Authorized Contact Person (Name, Designation, Official Email Address, Official Phone Number)",
+                "Valid Government-Issued ID (NIMC, International Passport, residence permit)",
+                "Coloured Passport Photograph of Authorized Contact Person (2x2, not older than 1 month)"
             ]
         },
         { 
@@ -1039,93 +1039,93 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             <div id="categories" className="scroll-mt-24"></div>
             <section className="relative px-4 md:px-6 py-24 bg-slate-50 overflow-hidden flex flex-col items-center">
     
-    {/* Abstract Background Pattern */}
-    <div className="absolute inset-0 opacity-[0.03]" 
-         style={{ backgroundImage: 'radial-gradient(#059669 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
-    </div>
-    
-    {/* Section Header */}
-    <div className="relative z-10 text-center mb-16 max-w-3xl">
-        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-        Membership <span className="text-transparent bg-clip-text bg-linear-to-r from-green-600 to-emerald-800">Categories</span>
-        </h2>
-        <p className="text-gray-600 text-lg">
-        Find the category that best fits your professional standing and organizational needs.
-        </p>
-    </div>
-
-    {/* Cards Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full relative z-10">
-        {categories.map((item, idx) => (
-            <div
-                key={idx}
-                className="group relative bg-white rounded-4xl p-8 shadow-xl shadow-gray-200/40 hover:shadow-2xl hover:shadow-green-900/10 transition-all duration-500 border border-gray-100 hover:border-green-500/30 flex flex-col hover:-translate-y-2 overflow-hidden"
-            >
-                {/* Hover Gradient Blob */}
-                <div className="absolute -top-20 -right-20 w-40 h-40 bg-green-500/10 rounded-full blur-3xl group-hover:bg-green-500/20 transition-all duration-500"></div>
-
-                {/* Header Section */}
-                <div className="relative mb-6">
-                    <div className="flex items-start justify-between mb-6">
-                        <div className="p-4 rounded-2xl bg-green-400 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-all duration-500 shadow-sm group-hover:shadow-green-200 group-hover:scale-110 group-hover:rotate-3">
-                            {getCategoryIcon(idx)}
-                        </div>
-                        {/* Subtle ID number or Decor */}
-                        <span className="text-6xl font-bold text-gray-100 select-none group-hover:text-green-50 transition-colors">
-                            0{idx + 1}
-                        </span>
-                    </div>
-                    
-                    <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-green-700 transition-colors">
-                        {item.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed min-h-10">
-                        {item.desc}
+                {/* Abstract Background Pattern */}
+                <div className="absolute inset-0 opacity-[0.03]" 
+                    style={{ backgroundImage: 'radial-gradient(#059669 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
+                </div>
+                
+                {/* Section Header */}
+                <div className="relative z-10 text-center mb-16 max-w-3xl">
+                    <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+                    Membership <span className="text-transparent bg-clip-text bg-linear-to-r from-green-600 to-emerald-800">Categories</span>
+                    </h2>
+                    <p className="text-gray-600 text-lg">
+                    Find the category that best fits your professional standing and organizational needs.
                     </p>
                 </div>
 
-                {/* Divider */}
-                <div className="w-full h-px bg-gray-100 mb-6 group-hover:bg-green-100 transition-colors"></div>
-
-                {/* Supporting Documents List */}
-                {item.documents && item.documents.length > 0 && (
-                    <div className="mb-8 grow">
-                        <h4 className="text-xs font-bold text-green-800 uppercase tracking-widest mb-4 flex items-center gap-2">
-                            Requirements
-                        </h4>
-                        <ul className="space-y-3">
-                            {item.documents.map((doc, dIdx) => (
-                                <li key={dIdx} className="flex items-start gap-3 text-sm text-gray-600 leading-snug group/item">
-                                    <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 shrink-0 group-hover/item:text-green-600" />
-                                    <span className="group-hover/item:text-gray-900 transition-colors">{doc}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-
-                {/* Footer / Button Area */}
-                <div className="mt-auto pt-4">
-                    {item.title !== "Fellow/Honorary Membership" ? (
-                        <button
-                            onClick={() => handleApplyClick(item)}
-                            className="w-full py-4 rounded-xl font-bold text-white bg-gray-900 hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-200 flex items-center justify-center gap-2 group/btn relative overflow-hidden"
+                {/* Cards Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full relative z-10">
+                    {categories.map((item, idx) => (
+                        <div
+                            key={idx}
+                            className="group relative bg-white rounded-4xl p-8 shadow-xl shadow-gray-200/40 hover:shadow-2xl hover:shadow-green-900/10 transition-all duration-500 border border-gray-100 hover:border-green-500/30 flex flex-col hover:-translate-y-2 overflow-hidden"
                         >
-                            <span className="relative z-10 flex items-center gap-2">
-                                Apply Now 
-                                <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
-                            </span>
-                        </button>
-                    ) : (
-                        <div className="w-full py-4 rounded-xl font-bold bg-amber-50 border border-amber-100 text-amber-700/60 flex items-center justify-center gap-2 cursor-not-allowed text-sm uppercase tracking-wide">
-                            By Nomination Only
+                            {/* Hover Gradient Blob */}
+                            <div className="absolute -top-20 -right-20 w-40 h-40 bg-green-500/10 rounded-full blur-3xl group-hover:bg-green-500/20 transition-all duration-500"></div>
+
+                            {/* Header Section */}
+                            <div className="relative mb-6">
+                                <div className="flex items-start justify-between mb-6">
+                                    <div className="p-4 rounded-2xl bg-green-400 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-all duration-500 shadow-sm group-hover:shadow-green-200 group-hover:scale-110 group-hover:rotate-3">
+                                        {getCategoryIcon(idx)}
+                                    </div>
+                                    {/* Subtle ID number or Decor */}
+                                    <span className="text-6xl font-bold text-gray-100 select-none group-hover:text-green-50 transition-colors">
+                                        0{idx + 1}
+                                    </span>
+                                </div>
+                                
+                                <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-green-700 transition-colors">
+                                    {item.title}
+                                </h3>
+                                <p className="text-gray-500 text-sm leading-relaxed min-h-10">
+                                    {item.desc}
+                                </p>
+                            </div>
+
+                            {/* Divider */}
+                            <div className="w-full h-px bg-gray-100 mb-6 group-hover:bg-green-100 transition-colors"></div>
+
+                            {/* Supporting Documents List */}
+                            {item.documents && item.documents.length > 0 && (
+                                <div className="mb-8 grow">
+                                    <h4 className="text-xs font-bold text-green-800 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                        Requirements
+                                    </h4>
+                                    <ul className="space-y-3">
+                                        {item.documents.map((doc, dIdx) => (
+                                            <li key={dIdx} className="flex items-start gap-3 text-sm text-gray-600 leading-snug group/item">
+                                                <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 shrink-0 group-hover/item:text-green-600" />
+                                                <span className="group-hover/item:text-gray-900 transition-colors">{doc}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {/* Footer / Button Area */}
+                            <div className="mt-auto pt-4">
+                                {item.title !== "Fellow/Honorary Membership" ? (
+                                    <button
+                                        onClick={() => handleApplyClick(item)}
+                                        className="w-full py-4 rounded-xl font-bold text-white bg-gray-900 hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-200 flex items-center justify-center gap-2 group/btn relative overflow-hidden"
+                                    >
+                                        <span className="relative z-10 flex items-center gap-2">
+                                            Apply Now 
+                                            <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+                                        </span>
+                                    </button>
+                                ) : (
+                                    <div className="w-full py-4 rounded-xl font-bold bg-amber-50 border border-amber-100 text-amber-700/60 flex items-center justify-center gap-2 cursor-not-allowed text-sm uppercase tracking-wide">
+                                        By Nomination Only
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    )}
+                    ))}
                 </div>
-            </div>
-        ))}
-    </div>
-</section>
+            </section>
             
             <div id="benefits" className="scroll-mt-24"></div>
             <section className="max-w-6xl mx-auto px-4 md:px-6 py-20 space-y-12">
@@ -1259,8 +1259,8 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                     </blockquote>
                     <div className="flex flex-col items-center">
                         <p className="text-xl font-bold text-green-400">Dr. AA Usman</p>
-                        <p className="text-green-200 uppercase tracking-widest text-sm italic">Founder & Executive Chairman</p>
-                        <p className="text-green-200 uppercase tracking-widest text-md italic">Geospatial Intelligence Foundation of Nigeria</p>
+                        <p className="text-green-200 uppercase tracking-widest text-sm">Founder & Executive Chairman</p>
+                        <p className="text-green-200 uppercase tracking-widest text-md">Geospatial Intelligence Foundation of Nigeria</p>
                     </div>
                 </div>
             </section>

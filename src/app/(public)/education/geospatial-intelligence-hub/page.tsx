@@ -9,6 +9,8 @@ import {
   FaGlobe,
 } from 'react-icons/fa';
 
+export const dynamic = 'force-dynamic';
+
 export default function GeospatialHubPage() {
   
   // 1. Core Objectives Data

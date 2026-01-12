@@ -10,6 +10,9 @@ import {
   FaUsers,
 } from 'react-icons/fa';
 
+export const dynamic = 'force-dynamic';
+
+
 export default function CommunityMappingPage() {
   
   // 1. Objectives Data

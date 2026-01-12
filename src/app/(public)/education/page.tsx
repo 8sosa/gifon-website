@@ -3,17 +3,18 @@
 import HeroSection from '@/components/HeroSection';
 import Image from 'next/image';
 import Link from 'next/link'; 
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, Suspense } from 'react'; // 1. Added Suspense
 import { 
   BookOpen, Award, Users, ArrowRight, Target, Layers, CheckCircle2,
   GraduationCap, FileText, Globe, Sparkles, X, ChevronLeft, ChevronRight,
   AlertCircle, CheckCircle, Upload, Briefcase, User, Trash2, ArrowUpRight
 } from 'lucide-react';
 
-export default function EducationPage() {
+// 2. Renamed the main logic component to EducationContent (removed default export)
+function EducationContent() {
   // --- STATE MANAGEMENT ---
   const [isAppModalOpen, setIsAppModalOpen] = useState(false);
-  const [activeTalentFeature, setActiveTalentFeature] = useState<any>(null); // NEW: For Talent Modal
+  const [activeTalentFeature, setActiveTalentFeature] = useState<any>(null); 
   const [currentStep, setCurrentStep] = useState(1); 
   const [isModalSubmitted, setIsModalSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -989,5 +990,14 @@ export default function EducationPage() {
       )}
 
     </>
+  );
+}
+
+// 3. New Default Export that wraps the content in Suspense
+export default function EducationPage() {
+  return (
+    <Suspense fallback={<div className="h-[60vh] bg-gray-900 w-full animate-pulse" />}>
+      <EducationContent />
+    </Suspense>
   );
 }
