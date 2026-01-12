@@ -308,7 +308,7 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
     { label: 'Contact Us', href: '/contact-us' },
     ...(isLoggedIn && pathname !== '/login'
       ? [ { label: 'Dashboard', href: '/dashboard' }, { label: 'Log Out', href: '#', onClick: handleLogout } ]
-      : [ { label: 'Sign In', href: '/login' }, { label: 'Create Account', href: '/membership' } ]
+      : [ { label: 'Sign In', href: '/login' }, { label: 'Create Account', href: '/register' } ]
     ),
   ];
 

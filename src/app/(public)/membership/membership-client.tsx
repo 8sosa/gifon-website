@@ -976,8 +976,8 @@ export default function MembershipClient({ children }: { children: React.ReactNo
     return (
         <>
             <HeroSection
-                title="Join the Geospatial Intelligence Movement"
-                description={<>Join the <span className="cooper">GIFON</span> Community, Connect, Learn, and Contribute to Advancing Geospatial Intelligence, National Security, and Sustainable Development in Nigeria.</>}
+                title={<>Join the <span className="cooper">GIFON</span> Community, Connect, Learn, and Contribute to Advancing Geospatial Intelligence, National Security, and Sustainable Development in Nigeria.</>}
+                description={<></>}
                 backgroundMedia={["/media/20240418_130158.JPG"]}
             />
             
@@ -1000,8 +1000,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             <section className="py-20 px-4 md:px-6 bg-white">
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Membership Application Process</h2>
-                        <p className="text-gray-500">Follow these simple steps to become a member.</p>
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">Membership Application Process</h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                         {[
@@ -1049,9 +1048,6 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                     <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
                     Membership <span className="text-transparent bg-clip-text bg-linear-to-r from-green-600 to-emerald-800">Categories</span>
                     </h2>
-                    <p className="text-gray-600 text-lg">
-                    Find the category that best fits your professional standing and organizational needs.
-                    </p>
                 </div>
 
                 {/* Cards Grid */}
@@ -1059,6 +1055,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                     {categories.map((item, idx) => (
                         <div
                             key={idx}
+                            // Ensure 'group' class is present on the parent card
                             className="group relative bg-white rounded-4xl p-8 shadow-xl shadow-gray-200/40 hover:shadow-2xl hover:shadow-green-900/10 transition-all duration-500 border border-gray-100 hover:border-green-500/30 flex flex-col hover:-translate-y-2 overflow-hidden"
                         >
                             {/* Hover Gradient Blob */}
@@ -1087,9 +1084,14 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                             {/* Divider */}
                             <div className="w-full h-px bg-gray-100 mb-6 group-hover:bg-green-100 transition-colors"></div>
 
-                            {/* Supporting Documents List */}
+                            {/* Supporting Documents List - UPDATED SECTION */}
                             {item.documents && item.documents.length > 0 && (
-                                <div className="mb-8 grow">
+                                <div 
+                                    // 1. Default state: Hidden, zero height, transparent, no margin bottom
+                                    // 2. Hover state (group-hover:): Max height expands, opacity becomes 1, margin bottom returns
+                                    // 3. Transition handles the smooth animation between states
+                                    className="grow max-h-0 opacity-0 overflow-hidden mb-0 group-hover:max-h-[500px] group-hover:opacity-100 group-hover:mb-8 transition-all duration-500 ease-in-out"
+                                >
                                     <h4 className="text-xs font-bold text-green-800 uppercase tracking-widest mb-4 flex items-center gap-2">
                                         Requirements
                                     </h4>
@@ -1105,7 +1107,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                             )}
 
                             {/* Footer / Button Area */}
-                            <div className="mt-auto pt-4">
+                            <div className="mt-auto pt-4 relative z-20"> {/* Added relative z-20 to ensure button stays on top during transition */}
                                 {item.title !== "Fellow/Honorary Membership" ? (
                                     <button
                                         onClick={() => handleApplyClick(item)}
@@ -1216,8 +1218,8 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             </section>
 
             <div  id="pioneer-members" className="scroll-mt-24"></div>
-            <section className="py-20 px-4 md:px-6 bg-white">
-                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight text-center">
+            <section className="py-20 px-4 md:px-6 bg-teal-900">
+                <h2 className="text-3xl md:text-5xl font-bold text-gray-100 mb-6 leading-tight text-center">
                     Pioneer Members
                 </h2>
                 <div className="mt-16 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-6 items-center">

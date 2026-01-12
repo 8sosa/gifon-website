@@ -181,7 +181,7 @@ export default function LoginPage() {
               {/* Register Link */}
               <div className="text-center">
                 <Link 
-                  href="/membership" 
+                  href="/register" 
                   className="inline-block w-full py-3.5 px-4 border-2 border-gray-100 rounded-xl text-sm font-bold text-gray-600 hover:text-green-700 hover:border-green-200 hover:bg-green-50 transition-all duration-200"
                 >
                   Create an Account

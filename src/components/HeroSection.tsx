@@ -96,7 +96,7 @@ export default function HeroSection({
         
         {/* Title: Scales from text-4xl (mobile) to text-7xl (desktop) */}
         {title && (
-          <h1 className="bellefair text-white font-bold mb-4 drop-shadow-lg text-2xl sm:text-5xl md:text-6xl lg:text-5xl leading-tight -mt-1">
+          <h1 className="bellefair text-white font-bold mb-4 drop-shadow-lg text-2xl sm:text-5xl md:text-6xl lg:text-5xl leading-tight -mt-1 max-w-7xl">
             {title}
           </h1>
         )}
@@ -110,7 +110,7 @@ export default function HeroSection({
         
         {/* Description: Scales text size */}
         {description1 && (
-          <p className="bellota text-gray-200 text-lg sm:text-xl md:text-2xl font-light max-w-3xl mb-8 drop-shadow-md">
+          <p className="bellota text-gray-200 text-lg sm:text-xl md:text-2xl font-light max-w-3xl text-center mb-8 drop-shadow-md">
             {description1}
           </p>
         )}

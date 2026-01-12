@@ -105,7 +105,7 @@ export default function CommunityMappingPage() {
   return (
     <>
       <HeroSection
-        title="Community Mapping for Development (CMD) Programme"
+        title="Community Mapping for Development (CMD) Program"
         description="“Mapping Communities. Driving Development. Empowering People.”"
         backgroundMedia={[
           "/media/COMMUNITY MAPPING FOR DEVELOPMENT.jpg"
@@ -119,7 +119,9 @@ export default function CommunityMappingPage() {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">Overview</h2>
             <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-6">
-              <p><span className="cooper font-bold">GIFON</span>&apos;s Community Mapping for Development initiative leverages geospatial intelligence to empower communities and drive local development. By mapping resources, infrastructure, and social assets, the program provides actionable insights that inform planning, improve service delivery, and foster sustainable growth. Through collaboration with local stakeholders, residents, and institutions, community mapping strengthens participation, transparency, and resilience, ensuring that development projects are targeted, effective, and inclusive for every Nigerian community.</p>
+              <p>
+                <span className="cooper font-bold">GIFON</span>&apos;s Community Mapping for Development initiative leverages geospatial intelligence to empower communities and drive local development. By mapping resources, infrastructure, and social assets, the program provides actionable insights that inform planning, improve service delivery, and foster sustainable growth. Through collaboration with local stakeholders, residents, and institutions, community mapping strengthens participation, transparency, and resilience, ensuring that development projects are targeted, effective, and inclusive for every Nigerian community.
+              </p>
             </div>
           </div>
         </section>
@@ -156,7 +158,7 @@ export default function CommunityMappingPage() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                  Programme Structure
+                  CMD Programme Structure
                 </h2>
                 <p className="text-gray-500">From awareness to action: our 5-step engagement model.</p>
             </div>

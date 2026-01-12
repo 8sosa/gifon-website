@@ -25,7 +25,7 @@ export default function FoundingVision() {
           <div className="w-24 h-1 bg-green-500 mx-auto mt-6 rounded-full" />
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           
           {/* LEFT TEXT */}
           <motion.div 

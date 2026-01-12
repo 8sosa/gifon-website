@@ -1,5 +1,5 @@
 import { infrastructureList } from '../app/(public)/business-solutions/infrastructure';
-import resourcesData, { ResourceItem } from '../app/(public)/resources/resources';
+import resourcesData, { ResourceItem } from '../app/(public)/media-resources/resources';
 
 export type SearchItem = {
   id: string;
@@ -22,7 +22,7 @@ function getSearchableTitle(item: ResourceItem, defaultTitle: string): string {
 // --- 1. Static Pages ---
 const staticPages: SearchItem[] = [
   { id: 'page-home', title: 'Home', description: 'GIFON Homepage', category: 'Page', href: '/' },
-  { id: 'page-about', title: 'About Us', description: 'Mission, Vision, and Board of Trustees', category: 'Page', href: '/about' },
+  { id: 'page-about', title: 'About Us', description: 'Mission, Vision, and Board of Trustees', category: 'Page', href: '/about-us' },
   { id: 'page-membership', title: 'Membership', description: 'Join GIFON, Benefits, and Categories', category: 'Page', href: '/membership' },
   { id: 'page-education', title: 'Education', description: 'Training, Workshops, and Capacity Building', category: 'Page', href: '/education' },
   { id: 'page-events', title: 'Events', description: 'Upcoming summits and conferences', category: 'Page', href: '/events' },

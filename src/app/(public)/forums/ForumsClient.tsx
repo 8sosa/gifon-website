@@ -3,76 +3,47 @@
 "use client";
 
 import HeroSection from '@/components/HeroSection';
-import { useState } from 'react';
-import Modal from '@/components/Modal';
 import Link from 'next/link';
 import allForums from './forums'; 
 import { 
-  Users, Briefcase, Scale, GraduationCap, HeartHandshake, MapPin, Cpu, ArrowRight, Globe, Lightbulb, Award, Mic, ChevronRight 
+  Users, HeartHandshake, MapPin, Cpu, ArrowRight, Globe, Lightbulb, Award, ChevronRight 
 } from 'lucide-react';
 
 // --- 1. Icon & Color Helpers ---
 const getForumIcon = (id: string) => {
   switch (id) {
-    case 'youngProfessionals': return <Users size={40} />;
-    case 'womenInGeoint': return <HeartHandshake size={40} />;
-    case 'industry': return <Briefcase size={40} />;
-    case 'policy': return <Scale size={40} />;
-    case 'academia': return <GraduationCap size={40} />;
+    case 'young-Professionals': return <Users size={40} />;
+    case 'women-In-Geoint': return <HeartHandshake size={40} />;
     default: return <Globe size={40} />;
   }
 };
 
 const getForumColor = (id: string) => {
   switch (id) {
-    case 'youngProfessionals': return 'bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white';
-    case 'womenInGeoint': return 'bg-pink-50 text-pink-600 group-hover:bg-pink-600 group-hover:text-white';
-    case 'industry': return 'bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white';
-    case 'policy': return 'bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white';
-    case 'academia': return 'bg-green-50 text-green-600 group-hover:bg-green-600 group-hover:text-white';
+    case 'young-Professionals': return 'bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white';
+    case 'women-In-Geoint': return 'bg-pink-50 text-pink-600 group-hover:bg-pink-600 group-hover:text-white';
     default: return 'bg-gray-50 text-gray-600';
   }
 };
 
 // --- 2. Programs Data ---
 const forumDetails: Record<string, any> = {
-  youngProfessionals: {
+  'young-Professionals': {
     programs: [
       { title: "Boot Camps", icon: Cpu, anchor: "boot-camps" },
       { title: 'STEM & GEOINT Awareness', icon: Lightbulb, anchor: 'stem-geoint-awareness' },
       { title: 'GeoInnovation Challenge', icon: Award, anchor: 'geoinnovation-challenge' }
     ]
   },
-  womenInGeoint: {
+  'women-In-Geoint': {
     programs: [
-      { title: 'Women in Leadership', icon: Users, anchor: 'women-geospatial-leadership' },
-      { title: 'Community Projects', icon: MapPin, anchor: 'community-service-projects' }
-    ]
-  },
-  industry: {
-    programs: [
-      { title: 'GeoCommunity Dev', icon: Globe, anchor: 'geocommunity-development' },
-      { title: 'GeoConnect Networking', icon: Users, anchor: 'geoconnect-networking' },
-      { title: 'Policy Roundtables', icon: Mic, anchor: 'public-lectures-roundtables' }
+      { title: 'Women in GeoINT Initiatives', icon: Users, anchor: 'forums/women-in-geoint-Initiatives' },
     ]
   }
 };
 
-interface ModalState {
-  isOpen: boolean;
-  content: string | null;
-  title: string | null;
-}
-
 export default function ForumsClient() {
-  const [modalData, setModalData] = useState<ModalState>({ isOpen: false, content: null, title: null });
   
-  const openModal = (content: string, title: string) => {
-    setModalData({ isOpen: true, content, title });
-  };
-
-  const closeModal = () => setModalData({ isOpen: false, content: null, title: null });
-
   return (
     <>
       <HeroSection
@@ -90,7 +61,6 @@ export default function ForumsClient() {
           </div>
            <div className="text-center mb-16">
              <h2 className="text-3xl font-bold text-gray-900">Explore Our Forums</h2>
-             <p className="text-gray-500 mt-2">Hover over a card to reveal its programs</p>
            </div>
 
            {/* Grid is explicitly 2 columns on MD and up */}
@@ -125,18 +95,27 @@ export default function ForumsClient() {
                              </h4>
                              
                              <div className="space-y-4 grow pl-2">
-                                {details.programs.map((prog: any, pIdx: number) => (
-                                    <Link key={pIdx} href={`/education/${prog.anchor}`} className="flex items-start gap-3 group/link hover:bg-white/10 p-3 rounded-lg transition-colors">
-                                        <div className="text-gray-400 group-hover/link:text-green-400 mt-1">
-                                            <prog.icon size={16} />
-                                        </div>
-                                        <div>
-                                            <div className="text-sm font-bold text-gray-200 group-hover/link:text-white transition-colors">
-                                                {prog.title}
+                                {details.programs.map((prog: any, pIdx: number) => {
+                                    // LOGIC UPDATE: 
+                                    // If anchor contains '/', use it directly (e.g. forums/women...), 
+                                    // otherwise assume it lives under /education/
+                                    const href = prog.anchor.includes('/') 
+                                        ? `/${prog.anchor}` 
+                                        : `/education/${prog.anchor}`;
+
+                                    return (
+                                        <Link key={pIdx} href={href} className="flex items-start gap-3 group/link hover:bg-white/10 p-3 rounded-lg transition-colors">
+                                            <div className="text-gray-400 group-hover/link:text-green-400 mt-1">
+                                                <prog.icon size={16} />
                                             </div>
-                                        </div>
-                                    </Link>
-                                ))}
+                                            <div>
+                                                <div className="text-sm font-bold text-gray-200 group-hover/link:text-white transition-colors">
+                                                    {prog.title}
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    );
+                                })}
                              </div>
                              
                              <div className="pt-4 mt-2 border-t border-white/10 pl-2">
@@ -149,7 +128,7 @@ export default function ForumsClient() {
                    )}
 
                    {/* --- B. THE MAIN CARD --- */}
-                   <div className="relative z-20 h-full bg-white rounded-3xl shadow-lg border border-gray-100 flex flex-col transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:border-green-100">
+                   <div className="relative z-20 h-full bg-white rounded-3xl shadow-lg border border-gray-100 flex flex-col transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:border-green-100" id={forum.id}>
                      
                      <div className="p-8 pb-4">
                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-colors duration-300 ${getForumColor(forum.id)}`}>
@@ -161,26 +140,26 @@ export default function ForumsClient() {
                      </div>
 
                      <div className="px-8 pb-8 grow">
-                       <p className="text-gray-600 leading-relaxed line-clamp-3 text-sm">
+                       <p className="text-gray-600 leading-relaxed text-sm">
                          {forum.description}
                        </p>
                      </div>
 
-                     <div className="p-8 pt-0 mt-auto">
-                       <button
-                         onClick={() => openModal(forum.policyContent, `${forum.title} Policy`)}
+                     {/* <div className="p-8 pt-0 mt-auto">
+                       <Link
+                         href={`/forums/${forum.id}`}
                          className="w-full py-3 px-4 rounded-xl bg-gray-50 hover:bg-green-600 text-gray-700 hover:text-white font-semibold transition-all text-sm flex items-center justify-between group/btn"
                        >
-                         <span>View Policy</span>
+                         <span>View Forum</span>
                          <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-                       </button>
+                       </Link>
                        
                        <div className="md:hidden mt-4 pt-4 border-t border-gray-100">
                             <p className="text-xs text-gray-400 text-center">
                                 Tap to see {details?.programs.length || 0} active programs
                             </p>
-                       </div>
-                     </div>
+                       </div> 
+                       </div> */}
                    </div>
 
                  </div>
@@ -201,13 +180,6 @@ export default function ForumsClient() {
         </section>
 
       </main>
-
-      <Modal 
-        isOpen={modalData.isOpen} 
-        onClose={closeModal} 
-        title={modalData.title}
-        content={modalData.content}
-      />
     </>
   );
 }

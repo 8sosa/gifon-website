@@ -79,7 +79,7 @@ export async function getDynamicEventsMenu(): Promise<MenuItem> {
     //     children: [
     //       { label: 'Boot Camps', href: '/education/boot-camps' },
     //       { label: 'STEM & GEOINT Awareness', href: '/education/stem-geoint-awareness' },
-    //       { label: 'GeoInnovation Challenge', href: '/education/geoinnovation-challenge' }
+    //       { label: 'GeoInnovation Challenge', href: '/education/Y-GITIP-challenge' }
     //     ]
     //   },
     //   {

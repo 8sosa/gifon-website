@@ -59,7 +59,7 @@ const resourcesData: ResourcesData = {
         </>, 
         id: "GeoINSIGHT", 
         description: <>The GeoINSIGHT Bulletin is <span className="cooper">GIFON</span>&apos;s official monthly newsletter, designed to provide timely updates, insights, and highlights from the world of geospatial intelligence (GEOINT), innovation, and national development initiatives.</>, 
-        link: "/Eyes-on-Location" },
+        link: "/the-geoinsight-bulletin" },
       { 
         title:
         <>
@@ -68,7 +68,7 @@ const resourcesData: ResourcesData = {
         </>, 
         id: "Geospatial", 
         description: <>GeoINSIGHT is <span className="cooper">GIFON</span>&apos;s flagship journal, dedicated to advancing knowledge, research, and discourse in geospatial intelligence (GEOINT), spatial data science, and location based innovation.</> ,
-        link: "/GeoINSIGHT" }
+        link: "/the-GeoINSIGHT-journal" }
     ]
   };
 

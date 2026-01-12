@@ -72,11 +72,11 @@ export default function PublicationsClient() {
         }
         description={
           <>
-            “Insights that inform, stories that inspire, <br/>
-            and updates that connect the geospatial intelligence community.”
+            “Insights that inform, stories that inspire, and updates<br/>
+            that connect the geospatial intelligence community.”
           </>
       }
-        ctaText="Read Latest Issues"
+        ctaText="Access"
         ctaLink="#latest-issue"
         backgroundMedia={[
           "/media/eye.jpeg",
@@ -154,7 +154,7 @@ export default function PublicationsClient() {
             </div>
         </section>
         
-        <section id="contribute" className="py-20 px-4 bg-green-50 border-t-4 border-green-600">
+        {/* <section id="contribute" className="py-20 px-4 bg-green-50 border-t-4 border-green-600">
             <div className="max-w-4xl mx-auto text-center">
                 <div className="inline-block p-4 bg-white rounded-full shadow-md mb-6 text-green-600">
                     <PenTool size={32} />
@@ -170,7 +170,7 @@ export default function PublicationsClient() {
                     Submit Your Article
                 </Link>
             </div>
-        </section>
+        </section> */}
         
         <section className="py-16 px-4 bg-white border-t border-gray-200">
             <div className="max-w-4xl mx-auto text-center">
@@ -179,12 +179,12 @@ export default function PublicationsClient() {
                     Contact our editorial team or sign up to receive the next edition directly in your inbox.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                    <Link
+                    {/* <Link
                         href="mailto:editor@gifon.org.ng"
                         className="px-8 py-3 rounded-lg font-semibold text-green-700 border border-green-200 hover:bg-green-50 transition"
                     >
                         Contact Editor
-                    </Link>
+                    </Link> */}
                      <button
                         onClick={() => setShowModal(true)}
                         className="px-8 py-3 rounded-lg font-semibold bg-gray-900 text-white hover:bg-gray-800 transition shadow-md"

@@ -63,9 +63,9 @@ function EducationContent() {
         icon: Users,
         colorClass: 'bg-green-600 shadow-green-900/50',
         textClass: 'text-green-600',
-        title: <><span className="cooper">GIFON</span> Mentorship Programme</>,
-        tagline: "“Building minds, guiding careers, and shaping the future of geospatial intelligence.”",
-        description: <>The <span className="cooper">GIFON</span> Mentorship Programme is a structured professional development initiative designed to nurture the next generation of geospatial intelligence (GEOINT) leaders in Nigeria and Africa. The programme connects students, early career professionals, researchers, and emerging practitioners with experienced GEOINT experts, policy leaders, and industry professionals across government, academia, and the private sector. Through guided mentorship, knowledge exchange, career guidance, and exposure to real-world geospatial applications, the programme supports skills transfer, leadership development, ethical practice, and professional excellence within the geospatial intelligence ecosystem."</>
+        title: <><span className="cooper">GIFON</span> Mentorship program</>,
+        tagline: <>“Building minds, guiding careers, <br/>and shaping the future of geospatial intelligence.”</>,
+        description: <>The <span className="cooper">GIFON</span> Mentorship Program is a structured professional development initiative designed to nurture the next generation of geospatial intelligence (GEOINT) leaders in Nigeria and Africa. The programme connects students, early career professionals, researchers, and emerging practitioners with experienced GEOINT experts, policy leaders, and industry professionals across government, academia, and the private sector. Through guided mentorship, knowledge exchange, career guidance, and exposure to real-world geospatial applications, the programme supports skills transfer, leadership development, ethical practice, and professional excellence within the geospatial intelligence ecosystem."</>
     },
     {
         id: 'career',
@@ -73,8 +73,10 @@ function EducationContent() {
         colorClass: 'bg-blue-600 shadow-blue-900/50',
         textClass: 'text-blue-600',
         title: <><span className="cooper">GIFON</span> Career Services</>,
-        tagline: "“From skills to service, empowering geospatial careers with purpose and impact.”",
-        description: <><span className="cooper">GIFON</span> Career Services is a dedicated career development platform designed to prepare, position, and connect geospatial professionals for meaningful opportunities in national development, security, research, and the global GEOINT workforce. The service supports students, graduates, and professionals through career advisory, employability skills development, certification guidance, and industry alignment. <span className="cooper">GIFON</span> Career Services bridges the gap between education and practice by aligning talent with evolving workforce needs across public institutions, private industry, international organizations, and innovation-driven enterprises.</>
+        tagline: <>“From skills to service, <br/>empowering geospatial careers with purpose and impact.”</>,
+        description: <><span className="cooper">GIFON</span> Career Services is a dedicated career development platform designed to prepare, position, and connect geospatial professionals for meaningful opportunities in national development, security, research, and the global GEOINT workforce. The service supports students, graduates, and professionals through career advisory, employability skills development, certification guidance, and industry alignment. <span className="cooper">GIFON</span> Career Services bridges the gap between education and practice by aligning talent with evolving workforce needs across public institutions, private industry, international organizations, and innovation-driven enterprises.</>,
+        actionLink: "mailto:career@gifon.org.ng",
+        actionLabel: "Apply Now",
     },
     {
         id: 'networking',
@@ -82,7 +84,7 @@ function EducationContent() {
         colorClass: 'bg-purple-600 shadow-purple-900/50',
         textClass: 'text-purple-600',
         title: <><span className="cooper">GIFON</span> Professional Networking</>,
-        tagline: "“Connecting people, expertise, and opportunities across the geospatial intelligence community.”",
+        tagline: <>“Connecting people, expertise, and opportunities <br/>across the geospatial intelligence community.”</>,
         description: <><span className="cooper">GIFON</span> Professional Networking provides a collaborative platform that connects geospatial intelligence professionals, institutions, policymakers, researchers, and industry leaders at national, regional, and international levels. The network fosters knowledge sharing, strategic partnerships, peer engagement, and cross sector collaboration within the GEOINT community. Through forums, conferences, roundtables, digital platforms, and special interest groups, GIFON strengthens professional relationships that drive innovation, policy influence, capacity development, and sustainable growth across the geospatial ecosystem.</>
     }
   ];
@@ -502,13 +504,13 @@ function EducationContent() {
     {
       title: 'Women in GEOINT (WINGS)',
       src: '/media/wings.JPG',
-      link: '/education/wings',
+      link: '/education/g-wings',
       description: 'Dedicated to empowering women in the field of geospatial intelligence (GeoINT) by providing a platform for collaboration, professional development, mentorship, and advocacy.'
     },
     {
       title: 'Geoinnovation & Tech Incubation',
       src: "/media/geoino.jpeg",
-      link: '/education/geoinnovation',
+      link: '/education/Y-GITIP',
       description: 'Nurturing young innovators, startups, and entrepreneurs who are building solutions at the intersection of geospatial intelligence, technology, and national development.'
     },
     {
@@ -526,7 +528,7 @@ function EducationContent() {
     {
       title: 'Open Data & Research',
       src: "/images/F.jpeg",
-      link: '/education/open-data',
+      link: '/education/open-data-research-research',
       description: 'Promoting data accessibility, research collaboration, and evidence-based policy development in Nigeria’s geospatial intelligence ecosystem.'
     },
     {
@@ -699,7 +701,7 @@ function EducationContent() {
                               {feature.tagline}
                           </p>
                           <div className="mt-auto flex items-center text-green-400 text-xs font-bold uppercase tracking-widest gap-2">
-                             Read Details <ArrowUpRight size={16} />
+                             Read More <ArrowUpRight size={16} />
                           </div>
                       </div>
                   ))}
@@ -941,16 +943,16 @@ function EducationContent() {
 
       {/* === 2. TALENT DETAILS MODAL === */}
       {activeTalentFeature && (
-         <div 
-             className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/90 p-4 sm:p-6 backdrop-blur-md animate-in fade-in duration-300"
-             onClick={closeTalentModal}
-         >
-             <div 
-                 className="relative w-full max-w-2xl bg-white shadow-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]"
-                 onClick={(e) => e.stopPropagation()}
-             >
-                 {/* Modal Header Image/Icon Area */}
-                 <div className="bg-gray-50 border-b border-gray-100 p-8 flex items-center gap-6">
+            <div 
+                className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/90 p-4 sm:p-6 backdrop-blur-md animate-in fade-in duration-300"
+                onClick={closeTalentModal}
+            >
+                <div 
+                    className="relative w-full max-w-2xl bg-white shadow-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {/* Modal Header */}
+                    <div className="bg-gray-50 border-b border-gray-100 p-8 flex items-center gap-6">
                     <div className={`${activeTalentFeature.colorClass} w-20 h-20 rounded-2xl flex items-center justify-center text-white shadow-xl shrink-0`}>
                         <activeTalentFeature.icon size={40} />
                     </div>
@@ -958,7 +960,7 @@ function EducationContent() {
                         <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                             {activeTalentFeature.title}
                         </h3>
-                        <p className={`font-medium italic ${activeTalentFeature.textClass}`}>
+                        <p className={`font-medium max-w-2xl italic ${activeTalentFeature.textClass}`}>
                             {activeTalentFeature.tagline}
                         </p>
                     </div>
@@ -968,26 +970,40 @@ function EducationContent() {
                     >
                         <X size={20} />
                     </button>
-                 </div>
+                    </div>
 
-                 {/* Modal Content Body */}
-                 <div className="p-8 overflow-y-auto">
-                    <div className="prose prose-lg text-gray-600 leading-relaxed">
-                        <p>{activeTalentFeature.description}</p>
+                    {/* Modal Content Body */}
+                    <div className="p-8 overflow-y-auto">
+                        <div className="prose prose-lg text-gray-600 leading-relaxed text-justify">
+                            <p>{activeTalentFeature.description}</p>
+                        </div>
+                        
+                        {/* Footer with Conditional Buttons */}
+                        <div className="mt-8 pt-8 border-t border-gray-100 flex justify-end gap-4">
+                            <button 
+                                onClick={closeTalentModal}
+                                className="bg-gray-100 text-gray-700 hover:bg-gray-200 px-6 py-3 rounded-xl font-bold transition"
+                            >
+                                Close
+                            </button>
+
+                            {/* Renders ONLY if actionLink exists (e.g., for Career Services) */}
+                            {activeTalentFeature.actionLink && (
+                                <a 
+                                    href={activeTalentFeature.actionLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold transition flex items-center gap-2 shadow-lg shadow-blue-600/20"
+                                >
+                                    {activeTalentFeature.actionLabel || 'Apply Now'} 
+                                    <ArrowUpRight size={18} />
+                                </a>
+                            )}
+                        </div>
                     </div>
-                    
-                    <div className="mt-8 pt-8 border-t border-gray-100 flex justify-end">
-                        <button 
-                            onClick={closeTalentModal}
-                            className="bg-gray-100 text-gray-700 hover:bg-gray-200 px-6 py-3 rounded-xl font-bold transition"
-                        >
-                            Close Details
-                        </button>
-                    </div>
-                 </div>
-             </div>
-         </div>
-      )}
+                </div>
+            </div>
+        )}
 
     </>
   );

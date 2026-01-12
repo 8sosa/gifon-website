@@ -99,9 +99,9 @@ export default async function AboutPage() {
     <>
       <HeroSection
         title="About Us"
-        description={
+        description1={
         <>
-          <span className="cooper">GIFON</span> advances Geospatial Intelligence in support of nigeria&apos;s critical infrastructure, national security, sustainable development connecting experts, institutions and innovators to shape a safer smarter Nation.
+          <span className="cooper">GIFON</span> advances Geospatial Intelligence in support of nigeria&apos;s critical<br/> infrastructure, national security, sustainable development, connecting <br/>experts, institutions and innovators to shape a safer smarter Nation.
         </>
         }
         backgroundMedia={[
@@ -177,11 +177,11 @@ export default async function AboutPage() {
               <div className="bg-green-800 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-2 h-full bg-gray-800"></div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-200">Our Aim</h2>
-                <p className="text-gray-200 leading-relaxed text-justify text-lg">
+                <p className="text-gray-200 leading-relaxed text-justify text-md">
                   The aim of the Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is to harness the power of geospatial data and technology to drive sustainable development, enhance national security, and empower decision-making across all sectors in Nigeria. 
-                  <br/><br/>
+                  <br/>
                   Through innovation, education, collaboration, and policy frameworks, the Foundation strives to position Nigeria as a leader in the global geospatial intelligence community, ensuring that geospatial solutions contribute to the nation’s socio-economic progress, environmental sustainability, and resilience to future challenges. 
-                  <br/><br/>
+                  <br/>
                   This aim emphasizes the Foundation’s commitment to Nigeria’s growth, security, and leadership in the geospatial sector, while focusing on the broad impact of geospatial intelligence on governance, development, advancing sustainable development and global cooperation.
                 </p>
               </div>
@@ -355,8 +355,8 @@ export default async function AboutPage() {
         <div id="core-values" className="scroll-mt-24"></div>
         <section className="py-24 px-6 bg-linear-to-r from-gray-900 via-black to-gray-800 text-white border-t-4 border-green-600">
           <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl font-bold mb-16">Our Core Values</h2>
-            <p>At <span className="cooper">GIFON</span>, our core values define who we are and how we serve. We are guided by integrity, professionalism, innovation, and national service, upholding the highest standards of ethical conduct, excellence, and accountability. Through collaboration, inclusiveness, and a commitment to continuous learning, we advance Geospatial Intelligence in ways that strengthen national security, support sustainable development, and deliver lasting impact for Nigeria.</p>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Core Values</h2>
+            <p className='mb-8'>At <span className="cooper">GIFON</span>, our core values define who we are and how we serve. We are guided by integrity, professionalism, innovation, and national service, upholding the highest standards of ethical conduct, excellence, and accountability. Through collaboration, inclusiveness, and a commitment to continuous learning, we advance Geospatial Intelligence in ways that strengthen national security, support sustainable development, and deliver lasting impact for Nigeria.</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[

@@ -12,7 +12,7 @@ export default async function HeaderWrapper() {
     { label: 'Home', href: '/' },
     { 
         label: 'About Us', 
-        href: '/about', 
+        href: '/about-us', 
         children: [ 
             { label: 'Aim', anchor: 'aim' }, 
             { label: 'Mission', anchor: 'mission-vision' }, 
@@ -42,11 +42,11 @@ export default async function HeaderWrapper() {
             { label: 'Training', anchor: 'C-T' }, 
             { label: 'Programs', anchor: 'programs', children: [ 
                 { label: 'Youth Empowerment & Talent Acceleration', link: '/education/youth-empowerment' }, 
-                { label: 'Women in GEOINT (WINGS)', link: '/education/wings' }, 
-                { label: 'Geoinnovation & Tech Incubation', link: '/education/geoinnovation' }, 
+                { label: 'Women in GEOINT (WINGS)', link: '/education/g-wings' }, 
+                { label: 'Geoinnovation & Tech Incubation', link: '/education/Y-GITIP' }, 
                 { label: 'National Geospatial Security Hub', link: '/education/geospatial-intelligence-hub' }, 
                 { label: 'Community Mapping', link: '/education/community-mapping' }, 
-                { label: 'Open Data & Research', link: '/education/open-data' }, 
+                { label: 'Open Data & Research', link: '/education/open-data-research' }, 
                 { label: 'Conferences & Workshops', link: '/education/conferences' }, 
                 { label: 'Training & Certification', link: '/education/training' },
                 { label: 'Academia & Research', link: '/education/academia' },
@@ -61,7 +61,7 @@ export default async function HeaderWrapper() {
 
     { 
         label: 'Media Resources', 
-        href: '/resources', 
+        href: '/media-resources', 
         children: [ 
             { label: 'News & Updates', anchor: 'News' }, 
             { label: 'Press Releases', anchor: 'Press' }, 
@@ -80,13 +80,13 @@ export default async function HeaderWrapper() {
             { label: 'Dams & Waterways', anchor: 'water' }, 
             { label: 'Transportation Systems', anchor: 'transportation' }, 
             { label: 'Communications & IT', anchor: 'communication' }, 
+            { label: 'Defense Industrial Base', anchor: 'defence' }, 
             { label: 'Healthcare & Public Health', anchor: 'health' }, 
             { label: 'Emergency Services', anchor: 'emergency' }, 
             { label: 'Financial Services', anchor: 'finance' }, 
             { label: 'Food and Agriculture', anchor: 'food' }, 
             { label: 'Government Services', anchor: 'government' }, 
             { label: 'Chemical & Hazardous Materials', anchor: 'education' }, 
-            { label: 'Nuclear & Radiological', anchor: 'defence' }, 
             { label: 'Critical Manufacturing & Industrial Facilities', anchor: 'manufacturing' }, 
         ]
     },

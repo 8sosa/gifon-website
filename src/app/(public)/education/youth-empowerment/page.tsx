@@ -98,7 +98,7 @@ export default function YetaPage() {
   return (
     <>
       <HeroSection
-        title="Youth Empowerment & Talent Acceleration Programme (YETAP)"
+        title="Youth Empowerment & Talent Acceleration Program (YETAP)"
         description="“Empowering Youth. Accelerating Talent. Building Nigeria’s Geospatial Future.”"
         backgroundMedia={[
           "/media/ye.jpg",
@@ -122,7 +122,7 @@ export default function YetaPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                YETAP Programme Goals
+                YETAP Program Goals
                 </h2>
                 <div className="w-20 h-1 bg-green-600 mx-auto rounded-full"></div>
             </div>
@@ -148,7 +148,7 @@ export default function YetaPage() {
         <section id="structure" className="py-20 px-4 bg-white">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-semibold mb-12 text-center text-gray-800">
-              Programme Structure
+              YETAP Program Structure
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

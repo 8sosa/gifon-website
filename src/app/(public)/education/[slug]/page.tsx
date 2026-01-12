@@ -1,112 +1,196 @@
+// app/(public)/education/[slug]/page.tsx
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { 
-  Target, 
-  Layers, 
   Users, 
-  CheckCircle2, 
   ArrowLeft, 
-  MapPin, 
-  Calendar,
-  Sparkles,
-  ArrowRight
+  ArrowRight,
+  GraduationCap,
+  Briefcase,
+  Building2,
+  ShieldAlert,
+  Lightbulb,
+  BookOpen,
+  Globe,
+  HeartHandshake,
+  Cpu,
+  CheckCircle2
 } from 'lucide-react';
 
-// --- 1. THE DATA ---
-type Program = {
-  title: string;
+// --- 1. DATA TYPES & STRUCTURE ---
+
+type AudienceCategory = {
   category: string;
-  goals: string[];
-  structure: string[];
-  tagline?: string;
-  audience: string[] | string;
-  outcomes: string[];
+  points: string[];
+  icon?: any; // Optional icon override
+};
+
+type Program = {
+  title: string | React.ReactNode;
+  tagline?: string | React.ReactNode;
+  audience: AudienceCategory[];
+};
+
+// Helper to assign icons based on category keywords
+const getIconForCategory = (category: string) => {
+  const lower = category.toLowerCase();
+  if (lower.includes('student') || lower.includes('learners')) return GraduationCap;
+  if (lower.includes('early career') || lower.includes('professional')) return Briefcase;
+  if (lower.includes('public sector') || lower.includes('government')) return Building2;
+  if (lower.includes('security')) return ShieldAlert;
+  if (lower.includes('innovator') || lower.includes('startup') || lower.includes('technology')) return Lightbulb;
+  if (lower.includes('educator') || lower.includes('research')) return BookOpen;
+  if (lower.includes('community') || lower.includes('public')) return Globe;
+  if (lower.includes('inclusion') || lower.includes('youth')) return HeartHandshake;
+  if (lower.includes('tech') || lower.includes('creative')) return Cpu;
+  return Users;
 };
 
 const outreachData: Record<string, Program> = {
   'boot-camps': {
-    title: 'GIFON Bootcamps (STEM & GEOINT)',
-    category: 'Youth-Focused Programme',
+    title: <><span className='cooper'>GIFON</span> Bootcamps</>,
     tagline: '“Learning by doing, building tomorrow’s geospatial and STEM leaders today.”',
-    goals: [
-      'Introduce students, youth, and early career professionals to STEM, geospatial technologies, and geospatial intelligence (GEOINT) in practical and engaging ways.',
-      'Build foundational and advanced skills in areas such as geospatial data analysis, remote sensing, GIS, location intelligence, and applied innovation.',
-      'Serve as talent building pipelines that prepare participants for further training, certification, research, and careers within Nigeria’s growing geospatial and digital economy.',
-      'Nurture critical thinking, technical competence, and career readiness.'
-    ],
-    structure: [
-      'Intensive, hands-on learning programmes combining technical training, problem-based learning, and real-world case studies.',
-      'Immersive sessions that bridge the gap between theory and real-world application using modern tools and data.',
-      'Delivered through in-person and virtual formats.',
-      'Includes mentorship and applied projects solving problems in security, development, innovation, and decision making.'
-    ],
     audience: [
-      'Students & Youth: Secondary school students, Undergraduate/Postgraduate students (GIS, Geography, Surveying, Engineering, CS, Data Science, etc.), NYSC members.',
-      'Early Career & Emerging Professionals: Entry-level GIS/Data analysts, geospatial technicians, graduates seeking practical experience.',
-      'Public Sector & Development Practitioners: MDA staff, Local government officers, Development practitioners (SDGs, climate, humanitarian).',
-      'Security & National Interest Stakeholders: Personnel from security/emergency response institutions, Analysts involved in risk assessment.',
-      'Innovators & Entrepreneurs: Startups, civic-tech innovators, Geo-Innovation Challenge participants.',
-      'Educators & Researchers: Teachers, lecturers, trainers, and researchers seeking applied skills.'
-    ],
-    outcomes: [
-      'Participants equipped with practical skills in STEM, geospatial technologies, and GEOINT.',
-      'Exposure to modern tools, data, and problem-solving approaches.',
-      'Preparation for Nigeria’s evolving geospatial and digital economy.'
+      {
+        category: "Students & Youth",
+        points: [
+          "Secondary school students with interest in STEM and technology",
+          "Undergraduate and postgraduate students in GIS, Geography, Surveying, Engineering, Computer Science, Data Science, Environmental Studies, Urban Planning, and related fields",
+          "NYSC members seeking in demand technical and digital skills"
+        ]
+      },
+      {
+        category: "Early Career & Emerging Professionals",
+        points: [
+          "Entry level GIS analysts, geospatial technicians, and data analysts",
+          "Young professionals transitioning into geospatial intelligence, location intelligence, or data driven roles",
+          "Graduates seeking practical experience to complement academic learning"
+        ]
+      },
+      {
+        category: "Public Sector & Development Practitioners",
+        points: [
+          "Staff of government ministries, departments, and agencies (MDAs) involved in planning, security, environment, infrastructure, and emergency management",
+          "Local government officers engaged in community mapping and development planning",
+          "Development practitioners working on SDGs, climate action, humanitarian response, and public service delivery"
+        ]
+      },
+      {
+        category: "Security & National Interest Stakeholders",
+        points: [
+          "Personnel from security, emergency response, and intelligence related institutions (where appropriate)",
+          "Analysts and officers involved in risk assessment, situational awareness, and decision support"
+        ]
+      },
+      {
+        category: "Innovators & Entrepreneurs",
+        points: [
+          "Startups and innovators building geospatial, civic-tech, or data driven solutions",
+          "Participants in the GIFON Geo-Innovation Challenge",
+          "Entrepreneurs exploring the use of location intelligence for business and social impact"
+        ]
+      },
+      {
+        category: "Educators & Researchers",
+        points: [
+          "Teachers, lecturers, and trainers in STEM and geospatial disciplines",
+          "Researchers seeking applied geospatial skills and exposure to real world datasets"
+        ]
+      }
     ]
   },
   'stem-geoint-awareness': {
     title: 'STEM & GEOINT Awareness',
-    category: 'Youth-Focused Programme',
     tagline: '“Inspiring curiosity, awareness, and confidence in geospatial intelligence.”',
-    goals: [
-      'Increase understanding, interest, and participation in STEM and geospatial intelligence across schools, communities, and institutions.',
-      'Introduce learners and the general public to the role of GEOINT in national security, infrastructure, climate resilience, disaster management, and sustainable development.',
-      'Promote early exposure, inclusivity, and informed participation in geospatial careers.'
-    ],
-    structure: [
-      'National outreach initiative involving school engagements, public lectures, digital campaigns, exhibitions, and community programmes.',
-      'Introduces diverse audiences to the importance of science, technology, and geospatial intelligence in everyday life.'
-    ],
     audience: [
-      'Students & Young Learners: Primary/secondary students, Tertiary students exploring STEM, Youth groups.',
-      'Educators & Academic Institutions: Teachers, School administrators, Lecturers, Academic staff.',
-      'Communities & General Public: Community leaders, CSOs, Citizens interested in maps/data.',
-      'Public Sector & Development Stakeholders: Local government officials, Public servants, Development practitioners.',
-      'Youth & Inclusion Focused Groups: Young women/girls in STEM, Underserved/rural communities, Non-technical audiences.'
-    ],
-    outcomes: [
-      'Increased understanding of how maps, data, and location intelligence affect daily life.',
-      'Enriched STEM education in schools and institutions.',
-      'Broadened public awareness of GEOINT for national development.'
+      {
+        category: "Students & Young Learners",
+        points: [
+          "Primary and secondary school students curious about science, technology, and innovation",
+          "Tertiary institution students exploring STEM and geospatial career pathways",
+          "Youth groups and clubs interested in digital skills and future careers"
+        ]
+      },
+      {
+        category: "Educators & Academic Institutions",
+        points: [
+          "Teachers and school administrators seeking to enrich STEM education",
+          "Lecturers and academic staff in geography, science, engineering, and technology disciplines",
+          "Schools and institutions interested in introducing geospatial concepts into their curricula"
+        ]
+      },
+      {
+        category: "Communities & the General Public",
+        points: [
+          "Community leaders and local development groups",
+          "Civil society organizations and community based organisations",
+          "Citizens interested in understanding how maps, data, and location intelligence affect daily life"
+        ]
+      },
+      {
+        category: "Public Sector & Development Stakeholders",
+        points: [
+          "Local government officials and public servants involved in planning, service delivery, and development programmes",
+          "Development practitioners working in education, environment, health, disaster management, and climate resilience"
+        ]
+      },
+      {
+        category: "Youth & Inclusion Focused Groups",
+        points: [
+          "Young women and girls in STEM initiatives",
+          "Underserved and rural communities seeking exposure to digital and geospatial opportunities",
+          "Nontechnical audiences interested in introductory learning and awareness"
+        ]
+      }
     ]
   },
   'geoinnovation-challenge': {
     title: 'Geo-Innovation Challenge',
-    category: 'Youth-Focused Programme',
     tagline: '“Turning location intelligence into solutions that matter.”',
-    goals: [
-      'Encourage young innovators, startups, and multidisciplinary teams to develop geospatial driven solutions to real-world national and development challenges.',
-      'Apply location intelligence, data analytics, and emerging technologies to priority sectors (security, infrastructure, climate, agriculture, health, urban development).',
-      'Support outstanding solutions through incubation, partnerships, and scale-up.'
-    ],
-    structure: [
-      'Competitive innovation platform focusing on applied solutions.',
-      'Participants receive mentorship, technical guidance, and exposure to industry experts.'
-    ],
     audience: [
-      'Innovators & Startups: Early/growth-stage startups (geospatial, civic-tech, agri-tech, security), Founders, Social enterprises.',
-      'Students & Research Teams: Undergraduate/Postgraduate students, Multidisciplinary teams, University innovation hubs.',
-      'Early Career & Young Professionals: GIS analysts, Data scientists, Developers, Researchers.',
-      'Public Sector & Development Practitioners: Government MDA analysts, Policy/planning professionals.',
-      'Technology & Creative Talent: Software developers, UI/UX designers, Product managers, AI/Drone enthusiasts.'
-    ],
-    outcomes: [
-      'Development of geospatial-driven solutions for real-world challenges.',
-      'Collaboration between technical, policy, and design talents.',
-      'Support for incubation and scaling of impactful innovations.'
+      {
+        category: "Innovators & Startups",
+        points: [
+          "Early stage and growth-stage startups building geospatial, civic-tech, climate-tech, agri-tech, or security related solutions",
+          "Founders and co-founders leveraging location intelligence, data analytics, and emerging technologies",
+          "Social enterprises applying geospatial solutions for public good"
+        ]
+      },
+      {
+        category: "Students & Research Teams",
+        points: [
+          "Undergraduate and postgraduate students in GIS, engineering, computer science, data science, environmental studies, urban planning, and related disciplines",
+          "Multidisciplinary student teams combining technical, policy, and design skills",
+          "University innovation hubs and research groups"
+        ]
+      },
+      {
+        category: "Early Career & Young Professionals",
+        points: [
+          "GIS analysts, data scientists, software developers, and researchers",
+          "Young professionals seeking to turn ideas into deployable geospatial solutions",
+          "Participants of GIFON Bootcamps and Capacity Development programmes"
+        ]
+      },
+      {
+        category: "Public Sector & Development Practitioners",
+        points: [
+          "Analysts and professionals from government MDAs working on security, planning, infrastructure, climate, or development challenges",
+          "Development practitioners addressing SDGs, humanitarian response, and resilience",
+          "Policy and planning professionals interested in data-driven innovation"
+        ]
+      },
+      {
+        category: "Technology & Creative Talent",
+        points: [
+          "Software developers, UI/UX designers, and product managers collaborating on geospatial solutions",
+          "AI, remote sensing, drone, and open data enthusiasts",
+          "Hackers, makers, and problem solvers with an innovation mindset"
+        ]
+      }
     ]
-  },
+  }
 };
 
 // --- 2. THE PAGE COMPONENT ---
@@ -118,18 +202,14 @@ export default async function ProgramDetail({ params }: { params: Promise<{ slug
     return notFound();
   }
 
-  // Helper to handle string vs string array for audience
-  const audienceList = Array.isArray(program.audience) ? program.audience : [program.audience];
-
   return (
     <main className="min-h-screen bg-gray-50 font-sans selection:bg-green-100 selection:text-green-900">
       
       {/* --- HERO SECTION --- */}
-      <section className="relative w-full bg-emerald-950 text-white pt-32 pb-24 overflow-hidden border-b border-emerald-900">
+      <section className="relative w-full bg-emerald-950 text-white pt-32 pb-20 overflow-hidden border-b border-emerald-900">
         
-        {/* Background Patterns */}
+        {/* Abstract Background */}
         <div className="absolute inset-0 z-0 opacity-10">
-            {/* Simple CSS Grid Pattern */}
             <div className="absolute inset-0" 
                  style={{ 
                      backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', 
@@ -139,189 +219,107 @@ export default async function ProgramDetail({ params }: { params: Promise<{ slug
         </div>
         <div className="absolute inset-0 bg-linear-to-t from-emerald-950 via-transparent to-transparent z-0"></div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <Link 
             href="/forums" 
-            className="inline-flex items-center text-emerald-300 hover:text-white mb-8 text-sm font-medium transition-colors group"
+            className="inline-flex items-center text-emerald-300 hover:text-white mb-8 text-sm font-bold uppercase tracking-widest transition-colors group"
           >
             <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" />
             Back to Forums
           </Link>
           
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-900/50 border border-emerald-800 text-emerald-400 text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-md shadow-sm">
-                <Sparkles size={12} />
-                {program.category}
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-[1.1] tracking-tight">
-              {program.title}
-            </h1>
-            
-            {program.tagline && (
-                <p className="text-xl md:text-2xl text-emerald-100/90 font-medium italic border-l-4 border-emerald-500 pl-6 leading-relaxed max-w-2xl">
-                    {program.tagline}
-                </p>
-            )}
-          </div>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-[1.1] tracking-tight">
+            {program.title}
+          </h1>
+          
+          {program.tagline && (
+              <p className="text-xl md:text-2xl text-emerald-100/80 font-serif italic max-w-3xl mx-auto leading-relaxed">
+                  {program.tagline}
+              </p>
+          )}
         </div>
       </section>
 
-      {/* --- CONTENT LAYOUT --- */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 -mt-12 relative z-20 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+      {/* --- MAIN CONTENT --- */}
+      <div className="max-w-7xl mx-auto px-6 py-16">
         
-        {/* === LEFT COLUMN: MAIN INFO (8 Cols) === */}
-        <div className="lg:col-span-8 space-y-12">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
           
-          {/* 1. Goals Section (Card Grid) */}
-          <section className="bg-white rounded-3xl p-8 shadow-xl shadow-gray-200/50 border border-gray-100">
-            <div className="flex items-center gap-3 mb-8 pb-4 border-b border-gray-100">
-              <div className="p-2.5 bg-green-100 rounded-lg text-green-700 shadow-inner">
-                <Target size={24} strokeWidth={2.5} />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900">Program Goals</h2>
-            </div>
+          {/* === LEFT COLUMN: AUDIENCE LIST (8 Cols) === */}
+          <div className="lg:w-2/3">
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {program.goals.map((goal, idx) => (
-                <div key={idx} className="flex gap-4 p-5 rounded-2xl bg-gray-50 hover:bg-green-50/50 transition-colors border border-gray-100 hover:border-green-100 group">
-                   <div className="mt-1 shrink-0 w-6 h-6 rounded-full bg-white border-2 border-green-500 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                        <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                   </div>
-                   <p className="text-gray-700 leading-relaxed text-sm md:text-base font-medium">
-                       {goal}
-                   </p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* 2. Structure Section (Timeline Style) */}
-          <section className="bg-white rounded-3xl p-8 shadow-xl shadow-gray-200/50 border border-gray-100">
-            <div className="flex items-center gap-3 mb-8 pb-4 border-b border-gray-100">
-              <div className="p-2.5 bg-blue-100 rounded-lg text-blue-700 shadow-inner">
-                <Layers size={24} strokeWidth={2.5} />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900">Program Structure</h2>
+            <div className="mb-10">
+               <h2 className="text-3xl font-bold text-gray-900 mb-4">Who Should Participate?</h2>
+               <div className="h-1.5 w-20 bg-green-500 rounded-full"></div>
             </div>
 
-            <div className="relative pl-4">
-                {/* Vertical Line */}
-                <div className="absolute left-4 top-2 bottom-6 w-0.5 bg-gray-200"></div>
+            <div className="grid gap-8">
+              {program.audience.map((group, idx) => {
+                const Icon = getIconForCategory(group.category);
                 
-                <div className="space-y-8">
-                    {program.structure.map((item, idx) => (
-                        <div key={idx} className="relative flex gap-6">
-                            <div className="shrink-0 w-8 h-8 rounded-full bg-blue-50 border-4 border-white ring-2 ring-blue-100 flex items-center justify-center z-10 text-blue-600 font-bold text-sm">
-                                {idx + 1}
-                            </div>
-                            <div className="pt-1">
-                                <p className="text-gray-600 leading-relaxed text-lg">
-                                    {item}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-          </section>
+                return (
+                  <div key={idx} className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group">
+                    <div className="flex items-start gap-4 mb-6">
+                      <div className="shrink-0 p-3 bg-green-50 text-green-600 rounded-xl group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
+                        <Icon size={28} strokeWidth={2} />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-800 pt-2">{group.category}</h3>
+                    </div>
 
-          {/* 3. Outcomes Section (Visual Checklist) */}
-          <section className="bg-white rounded-3xl p-8 shadow-xl shadow-gray-200/50 border border-gray-100">
-            <div className="flex items-center gap-3 mb-8 pb-4 border-b border-gray-100">
-              <div className="p-2.5 bg-purple-100 rounded-lg text-purple-700 shadow-inner">
-                <CheckCircle2 size={24} strokeWidth={2.5} />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900">Expected Outcomes</h2>
-            </div>
-            
-            <div className="space-y-4">
-              {program.outcomes.map((outcome, idx) => (
-                <div key={idx} className="flex items-center justify-between p-5 bg-linear-to-r from-gray-50 to-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all group">
-                  <div className="flex items-center gap-4">
-                    <CheckCircle2 className="text-green-500 w-6 h-6 shrink-0 group-hover:text-green-600 transition-colors" />
-                    <span className="text-gray-800 font-medium">{outcome}</span>
+                    <ul className="space-y-4 ml-2">
+                      {group.points.map((point, pIdx) => (
+                        <li key={pIdx} className="flex items-start gap-3 text-gray-600 leading-relaxed">
+                          <CheckCircle2 size={18} className="text-green-400 mt-1 shrink-0" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
-          </section>
-
-        </div>
-
-        {/* === RIGHT COLUMN: SIDEBAR (4 Cols) === */}
-        <div className="lg:col-span-4 space-y-8">
-          
-          {/* Sticky Wrapper */}
-          <div className="sticky top-24 space-y-6">
-            
-            {/* 1. Audience Card (Dark Theme) */}
-            <div className="bg-gray-900 text-gray-100 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-green-500 rounded-full blur-[60px] opacity-20"></div>
-                
-                <div className="flex items-center gap-3 mb-6 text-green-400">
-                    <Users size={20} />
-                    <h3 className="font-bold uppercase tracking-widest text-xs">Who Should Attend</h3>
-                </div>
-
-                <ul className="space-y-6 relative z-10">
-                    {audienceList.map((aud, i) => {
-                        // Logic to bold the title part of the string (before the colon)
-                        const parts = aud.split(':');
-                        const title = parts.length > 1 ? parts[0] + ':' : null;
-                        const body = parts.length > 1 ? parts.slice(1).join(':') : aud;
-
-                        return (
-                            <li key={i} className="text-sm leading-relaxed border-l-2 border-gray-700 pl-4">
-                                {title && <span className="block font-bold text-white mb-1">{title}</span>}
-                                <span className="text-gray-400">{body}</span>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
-
-            {/* 2. Key Details Box */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm space-y-4">
-                <h3 className="font-bold text-gray-900 text-sm uppercase tracking-wide mb-2">Program Details</h3>
-                
-                <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                    <div>
-                        <span className="block text-gray-900 font-medium text-sm">Location</span>
-                        <span className="text-gray-500 text-sm">Nationwide (Nigeria)</span>
-                    </div>
-                </div>
-                
-                <div className="w-full h-px bg-gray-100"></div>
-                
-                <div className="flex items-start gap-3">
-                    <Calendar className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                    <div>
-                        <span className="block text-gray-900 font-medium text-sm">Frequency</span>
-                        <span className="text-gray-500 text-sm">Annual / Periodic Cycles</span>
-                    </div>
-                </div>
-            </div>
-
-            {/* 3. CTA Box */}
-            <div className="bg-linear-to-br from-green-600 to-emerald-800 rounded-2xl p-8 text-center shadow-lg text-white">
-                <h3 className="text-xl font-bold mb-2">Ready to Join?</h3>
-                <p className="text-green-100 text-sm mb-6">
-                    Be part of the next generation of geospatial leaders.
-                </p>
-                <Link 
-                    href="/contact-us"
-                    className="flex items-center justify-center gap-2 w-full bg-white text-green-800 font-bold py-3.5 px-6 rounded-xl hover:bg-green-50 transition-all shadow-md group"
-                >
-                    Contact Us
-                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform"/>
-                </Link>
-            </div>
-
           </div>
-        </div>
 
+          {/* === RIGHT COLUMN: CTA (4 Cols) === */}
+          <div className="lg:w-1/3 space-y-8">
+            <div className="sticky top-48 md:top-60 lg:top-68 xl:top-70">
+                {/* CTA Box */}
+                <div className="bg-gray-900 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-40 h-40 bg-green-500 rounded-full blur-[80px] opacity-20"></div>
+                    
+                    <h3 className="text-2xl font-bold mb-3 relative z-10">Ready to Apply?</h3>
+                    <p className="text-gray-400 mb-8 relative z-10">
+                        Join us in building the future of geospatial intelligence in Nigeria.
+                    </p>
+                    
+                    <div className="space-y-4 relative z-10">
+                        <Link 
+                            href="/membership"
+                            className="block w-full bg-green-600 hover:bg-green-500 text-white font-bold py-4 px-6 rounded-xl text-center transition-all shadow-lg shadow-green-900/20"
+                        >
+                            Join our Forum
+                        </Link>
+                        <Link 
+                            href="/contact-us"
+                            className="flex items-center justify-center gap-2 w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-4 px-6 rounded-xl text-center transition-all backdrop-blur-sm"
+                        >
+                            Contact Us
+                            <ArrowRight size={18} />
+                        </Link>
+                    </div>
+                </div>
+
+                {/* Additional Info / Note */}
+                <div className="mt-8 p-6 bg-green-50 rounded-2xl border border-green-100 text-sm text-green-800">
+                    <p className="leading-relaxed">
+                        <span className="font-bold block mb-2">Note:</span>
+                        Our programs are designed to be inclusive. If you don't see your exact role listed but believe you can contribute or benefit, please reach out to us.
+                    </p>
+                </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </main>
   );

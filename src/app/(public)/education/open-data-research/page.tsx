@@ -151,8 +151,8 @@ export default function OpenDataResearchPage() {
   return (
     <>
       <HeroSection
-        title={<><span className="cooper">GIFON</span>  Open Data & Research Programme (ODRP)</>}
-        description="“Open Data. Open Research. Smarter Nigeria.”"
+        title={<>Open Data & Research Programme (ODRP)</>}
+        description="“Open Data • Open Research • Smarter Nigeria.”"
         backgroundMedia={[
           "/images/F.jpeg",
         ]}
@@ -164,9 +164,6 @@ export default function OpenDataResearchPage() {
         <section id="overview" className="py-20 px-4 bg-white">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">Overview</h2>
-            
-            
-
             <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-4">
               <p><span className="cooper font-bold">GIFON</span>&apos;s Open Data and Research Program is dedicated to advancing knowledge, transparency, and innovation in Geospatial Intelligence. By providing access to high-quality geospatial data, conducting rigorous research, and promoting evidence-based analysis, the program supports informed decision making across government, security, and development sectors. It fosters collaboration among researchers, institutions, and communities, driving innovative solutions that strengthen national security, enhance governance, and accelerate sustainable development in Nigeria.</p>
             </div>
@@ -178,7 +175,7 @@ export default function OpenDataResearchPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                ODRP Programme Objectives
+                ODRP Program Objectives
                 </h2>
                 <div className="w-16 h-1 bg-green-600 mx-auto rounded-full"></div>
             </div>
@@ -205,7 +202,7 @@ export default function OpenDataResearchPage() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                  Programme Structure
+                  ODRP Program Structure
                 </h2>
                 <p className="text-gray-500">A comprehensive approach to building Nigeria&apos;s data infrastructure.</p>
             </div>

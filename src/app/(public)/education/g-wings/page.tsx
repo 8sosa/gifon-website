@@ -45,7 +45,7 @@ export default function WomenInGeointPage() {
     <>
       <HeroSection
         title={<><span className="cooper">GIFON</span> Women in GEOINT G-WINGS(P)</>}
-        description="Empowering women in the field of geospatial intelligence through collaboration, professional development, mentorship, and advocacy."
+        description={<>Empowering women in the field of geospatial intelligence through collaboration, professional development, mentorship, and advocacy.</>}
         backgroundMedia={[
           "/media/wings.JPG",
         ]}
@@ -70,7 +70,7 @@ export default function WomenInGeointPage() {
         <section id="justification" className="py-16 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-semibold mb-12 text-center text-gray-800">
-            WINGS Program Justification
+            G-WINGS Program Justification
             </h2>
 
             {/* Grid layout for the cards */}

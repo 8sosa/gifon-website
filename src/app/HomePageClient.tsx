@@ -96,7 +96,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             </h4>
             
             <a 
-              href="/Eyes-on-Location" 
+              href="/the-geoinsight-bulletin" 
               className="group inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-green-500/40 transform hover:-translate-y-1"
             >
               UNLOCK INSIGHT
@@ -115,7 +115,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             </h4>
             
             <a 
-              href="/GeoINSIGHT" 
+              href="/the-GeoINSIGHT-journal" 
               className="group inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-green-500/40 transform hover:-translate-y-1"
             >
               UNLOCK INSIGHT

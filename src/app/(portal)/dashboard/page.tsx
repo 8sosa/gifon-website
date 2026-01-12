@@ -18,9 +18,16 @@ import {
   Calendar,
   LayoutDashboard,
   LogOut,
-  ChevronRight
+  Diamond,
+  ChevronRight,
+  X,
+  Clock,
+  MessageCircle,
+  MapPin,
+  CalendarCheck
 } from 'lucide-react';
 
+// --- Types ---
 type User = {
   _id: string;
   name: string;
@@ -33,55 +40,15 @@ type User = {
   createdAt?: string; 
 };
 
-const memberResources = [
-  {
-    title: "Publications Archive",
-    description: "Access issues of the GeoINSIGHT Journal and Bulletin.",
-    icon: <BookOpen className="text-white" size={24} />,
-    color: "bg-blue-600",
-    href: "/resources#publications",
-  },
-  {
-    title: "Webinar Library",
-    description: "Watch recordings of past masterclasses and sessions.",
-    icon: <Video className="text-white" size={24} />,
-    color: "bg-purple-600",
-    href: "/resources#Webinar",
-  },
-  {
-    title: "Member Directory",
-    description: "Connect with GIFON professionals and partners.",
-    icon: <Users className="text-white" size={24} />,
-    color: "bg-green-600",
-    href: "/dashboard/directory", 
-  },
-  {
-    title: "Toolkits & Downloads",
-    description: "Get policy briefs, reports, and project templates.",
-    icon: <Download className="text-white" size={24} />,
-    color: "bg-orange-500",
-    href: "/resources#Downloads",
-  },
-  {
-    title: "Submit Research",
-    description: "Submit a paper for the next GeoINSIGHT Journal.",
-    icon: <FileText className="text-white" size={24} />,
-    color: "bg-red-500",
-    href: "/dashboard/submit",
-  },
-  {
-    title: "Account Settings",
-    description: "Update your profile, password, and preferences.",
-    icon: <Settings className="text-white" size={24} />,
-    color: "bg-slate-600",
-    href: "/dashboard/settings",
-  },
-];
-
+// --- Main Component ---
 export default function MembershipPortalPage() {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
+  // Modal State
+  const [isMentorModalOpen, setIsMentorModalOpen] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -125,6 +92,60 @@ export default function MembershipPortalPage() {
     router.push('/');
   };
 
+  // --- Resource Data ---
+  const memberResources = [
+    {
+      id: "mentor", 
+      title: "Meet your Mentor",
+      description: "Connect with industry experts for professional guidance.",
+      icon: <Diamond className="text-white" size={24} />,
+      color: "bg-green-600",
+      action: () => setIsMentorModalOpen(true), 
+    },
+    {
+      title: "Publications Archive",
+      description: "Access issues of the GeoINSIGHT Journal and Bulletin.",
+      icon: <BookOpen className="text-white" size={24} />,
+      color: "bg-blue-600",
+      href: "/media-resources#publications",
+    },
+    {
+      title: "Webinar Library",
+      description: "Watch recordings of past masterclasses and sessions.",
+      icon: <Video className="text-white" size={24} />,
+      color: "bg-purple-600",
+      href: "/media-resources#Webinar",
+    },
+    {
+      title: "Member Directory",
+      description: "Connect with GIFON professionals and partners.",
+      icon: <Users className="text-white" size={24} />,
+      color: "bg-teal-600",
+      href: "/dashboard/directory", 
+    },
+    {
+      title: "Toolkits & Downloads",
+      description: "Get policy briefs, reports, and project templates.",
+      icon: <Download className="text-white" size={24} />,
+      color: "bg-orange-500",
+      href: "/media-resources#Downloads",
+    },
+    {
+      title: "Submit Research",
+      description: "Submit a paper for the next GeoINSIGHT Journal.",
+      icon: <FileText className="text-white" size={24} />,
+      color: "bg-red-500",
+      href: "/dashboard/submit",
+    },
+    {
+      title: "Account Settings",
+      description: "Update your profile, password, and preferences.",
+      icon: <Settings className="text-white" size={24} />,
+      color: "bg-slate-600",
+      href: "/dashboard/settings",
+    },
+  ];
+
   // --- Loading / Error States ---
   if (isLoading) {
     return (
@@ -151,11 +172,11 @@ export default function MembershipPortalPage() {
     );
   }
 
-  // --- Main Dashboard ---
+  // --- Main Dashboard UI ---
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       
-      {/* 1. Top Navigation Bar (Simplified for Dashboard) */}
+      {/* 1. Top Navigation Bar */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -175,7 +196,7 @@ export default function MembershipPortalPage() {
         </div>
       </header>
 
-      {/* 2. Hero / Welcome Area */}
+      {/* 2. Hero Area */}
       <div className="bg-green-900 text-white py-12 px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -184,9 +205,7 @@ export default function MembershipPortalPage() {
                 <p className="text-green-200 text-lg">Here is an overview of your membership status and resources.</p>
             </div>
             
-            {/* UPDATED BUTTON GROUP */}
             <div className="flex flex-wrap gap-3">
-                {/* Admin Button - Only renders if role is 'admin' */}
                 {user.role === 'admin' && (
                     <Link 
                         href="/admin/dashboard" 
@@ -211,17 +230,11 @@ export default function MembershipPortalPage() {
           
           {/* --- LEFT: Profile & Status Card --- */}
           <div className="lg:col-span-1 space-y-6">
-            
-            {/* ID Card */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="h-24 bg-linear-to-r from-green-600 to-green-400 relative">
                     <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full border-4 border-white bg-gray-100 overflow-hidden shadow-md">
-                    <Image 
-                      src={user.passportUrl || user.avatar || "/ph.svg"} 
-                      alt="Profile" 
-                      fill 
-                      className="object-cover" 
-                  />                    </div>
+                        <Image src={user.passportUrl || user.avatar || "/ph.svg"} alt="Profile" fill className="object-cover" />
+                    </div>
                 </div>
                 <div className="pt-12 pb-6 px-6 text-center">
                     <h2 className="text-xl font-bold text-gray-900">{user.name}</h2>
@@ -255,7 +268,6 @@ export default function MembershipPortalPage() {
                 </div>
             </div>
 
-            {/* Quick Actions */}
             <div className="bg-green-50 rounded-2xl p-6 border border-green-100">
                 <h3 className="font-bold text-green-900 mb-4 flex items-center gap-2">
                     <CreditCard size={18} /> Renewal Status
@@ -267,7 +279,6 @@ export default function MembershipPortalPage() {
                     Renew Membership
                 </button>
             </div>
-
           </div>
 
           {/* --- RIGHT: Resources Grid --- */}
@@ -277,32 +288,147 @@ export default function MembershipPortalPage() {
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {memberResources.map((resource, i) => (
-                  <Link
-                    key={i}
-                    href={resource.href}
-                    className="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full"
-                  >
-                    <div>
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${resource.color} shadow-md group-hover:scale-110 transition-transform duration-300`}>
-                            {resource.icon}
-                        </div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">{resource.title}</h3>
-                        <p className="text-sm text-gray-500 leading-relaxed">
-                            {resource.description}
-                        </p>
-                    </div>
-                    <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between text-sm font-semibold text-gray-400 group-hover:text-green-600 transition-colors">
-                        <span>Access Now</span>
-                        <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </Link>
-                ))}
+                {memberResources.map((resource, i) => {
+                  const innerContent = (
+                    <>
+                      <div>
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${resource.color} shadow-md group-hover:scale-110 transition-transform duration-300`}>
+                              {resource.icon}
+                          </div>
+                          <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">{resource.title}</h3>
+                          <p className="text-sm text-gray-500 leading-relaxed">
+                              {resource.description}
+                          </p>
+                      </div>
+                      <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between text-sm font-semibold text-gray-400 group-hover:text-green-600 transition-colors">
+                          <span>Access Now</span>
+                          <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </>
+                  );
+
+                  if (resource.action) {
+                    return (
+                      <button
+                        key={i}
+                        onClick={resource.action}
+                        className="group text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full w-full"
+                      >
+                        {innerContent}
+                      </button>
+                    );
+                  }
+
+                  return (
+                    <Link
+                      key={i}
+                      href={resource.href || '#'}
+                      className="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full"
+                    >
+                      {innerContent}
+                    </Link>
+                  );
+                })}
             </div>
           </div>
 
         </div>
       </main>
+
+      {/* --- MENTOR MODAL (Dr. AA Usman) --- */}
+      {isMentorModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div 
+            className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200 relative flex flex-col max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()} 
+          >
+            {/* Scrollable Content */}
+            <div className="overflow-y-auto">
+                {/* Header / Banner */}
+                <div className="h-32 bg-linear-to-r from-green-800 to-green-600 relative shrink-0">
+                    <button 
+                        onClick={() => setIsMentorModalOpen(false)}
+                        className="absolute top-4 right-4 p-2 bg-black/20 hover:bg-black/30 text-white rounded-full transition-colors z-10"
+                    >
+                        <X size={20} />
+                    </button>
+                    <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">
+                        <div className="w-24 h-24 rounded-full border-4 border-white bg-gray-100 overflow-hidden shadow-lg relative">
+                            {/* NOTE: Add actual image of Dr. Usman below */}
+                            <Image 
+                                src="/media/usman.jpg" 
+                                alt="Dr. AA Usman"
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Body Content */}
+                <div className="pt-16 pb-8 px-8 text-center">
+                    <h3 className="text-2xl font-bold text-gray-900">Dr. AA Usman</h3>
+                    <p className="text-green-700 font-bold text-sm">Founder & Executive Chairman</p>
+                    <p className="text-gray-500 text-xs mt-1">Geospatial Intelligence • National Security • Capacity Building</p>
+                    
+                    <div className="mt-6 space-y-5">
+                        {/* Bio/Motto */}
+                        <div className="bg-green-50 p-4 rounded-xl border border-green-100">
+                            <p className="text-sm text-green-900 italic font-medium">
+                                “Passionate about empowering young professionals in GEOINT and national development.”
+                            </p>
+                        </div>
+
+                        {/* Mentorship Areas (Tags) */}
+                        <div className="text-left">
+                             <p className="text-xs font-bold text-gray-400 uppercase mb-2">Mentorship Areas</p>
+                             <div className="flex flex-wrap gap-2">
+                                {["Policy Strategy", "Research & Analytics", "Technology Integration"].map(skill => (
+                                    <span key={skill} className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded-full border border-gray-200">
+                                        {skill}
+                                    </span>
+                                ))}
+                             </div>
+                        </div>
+
+                        {/* Availability Section */}
+                        <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 text-left">
+                            <div className="flex items-start gap-3">
+                                <Clock className="text-green-600 mt-0.5 shrink-0" size={18} />
+                                <div>
+                                    <p className="text-xs font-bold text-gray-400 uppercase">Availability</p>
+                                    <p className="text-sm font-medium text-gray-700 mt-1">
+                                        Available for guidance via GIFON messaging or scheduled sessions.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Footer / Buttons (Fixed at bottom) */}
+            <div className="p-4 border-t border-gray-100 bg-gray-50 shrink-0">
+                <div className="grid grid-cols-2 gap-3">
+                   <a 
+                     href="mailto:chairman@gifon.org.ng?subject=Request%20for%20Guidance"
+                     className="flex items-center justify-center gap-2 py-3 px-4 bg-green-700 hover:bg-green-800 text-white rounded-xl font-bold text-sm transition-colors shadow-lg shadow-green-200"
+                   >
+                     <MessageCircle size={16} /> Request Guidance
+                   </a>
+                   <button 
+                     className="flex items-center justify-center gap-2 py-3 px-4 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 rounded-xl font-bold text-sm transition-colors"
+                     onClick={() => alert("Calendar scheduling integration would open here.")}
+                   >
+                     <CalendarCheck size={16} /> Schedule Session
+                   </button>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

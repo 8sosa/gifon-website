@@ -1,195 +1,87 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import HeroSection from "@/components/HeroSection";
 import CountryStateSelect, { CountryStateValue } from "@/components/CountryStateSelect";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  registerIndividualMembership,
-  registerOrganizationMembership,
-} from "@/lib/api/membership";
+import { User, Camera, Upload, FileText, CheckCircle } from "lucide-react"; 
 
-import {
-  Gender,
-  IndustrySector,
-  GeospatialExpertise,
-  AreaOfInterest,
-  // MembershipDuration,
-  ReferralSource,
-  // IndividualMembershipType,
-  IndividualMembershipRequestBody,
-  OrganizationMembershipRequestBody,
-} from "@/types/types";
-
-type FormState = "idle" | "loading" | "verify" | "error";
+// Define the loading states
+type FormState = "idle" | "loading" | "success" | "error";
 
 export default function RegisterPage() {
-  const [individualLocation, setIndividualLocation] = useState<CountryStateValue>({ country: null, state: null });
-  const [organizationLocation, setOrganizationLocation] = useState<CountryStateValue>({ country: null, state: null });
-  const [membershipType, setMembershipType] = useState<
-    "individual" | "corporate"
-  >("individual");
+  
+  // 1. Location State
+  const [location, setLocation] = useState<CountryStateValue>({ country: null, state: null });
 
-  // separate states per form so switching tabs keeps their state isolated
-  const [individualState, setIndividualState] = useState<FormState>("idle");
-  const [organizationState, setOrganizationState] = useState<FormState>("idle");
+  // 2. Profile Picture & ID State
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+  const [idFileName, setIdFileName] = useState<string | null>(null);
+
+  // 3. Form Submission State
+  const [formState, setFormState] = useState<FormState>("idle");
   const [serverMessage, setServerMessage] = useState<string | undefined>(undefined);
 
-  // helpers to map string keys (from form) -> enum values
-  // function mapEnum<T extends Record<string, string | number>>(
-  //   enm: T,
-  //   val?: string | null
-  // ): T[keyof T] | undefined {
-  //   if (!val) return undefined;
-  //   return enm[val as keyof T];
-  // }
-  
-  // function mapEnumArray<T extends Record<string, string | number>>(
-  //   enm: T,
-  //   arr: string[] | null | undefined
-  // ): T[keyof T][] {
-  //   if (!arr || arr.length === 0) return [];
-  //   return arr
-  //     .map((v) => mapEnum(enm, v))
-  //     .filter((x): x is T[keyof T] => x !== undefined);
-  // }
-  
-
-  // ---------- Individual ----------
-  const handleIndividualSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setServerMessage(undefined);
-    setIndividualState("loading");
-    const formData = new FormData(e.currentTarget);
-  
-    try {
-      const genderStr = formData.get("gender")?.toString() ?? "";
-      const dobStr = formData.get("dob")?.toString() ?? "";
-      const yearsExperienceStr = formData.get("yearsExperience")?.toString() ?? "";
-  
-      const expertiseStrings = formData.getAll("geospatialExpertise").map((v) => v.toString());
-      const interestStrings = formData.getAll("areasOfInterest").map((v) => v.toString());
-  
-      // const membershipDurationStr = formData.get("membershipDuration")?.toString() ?? "OneYear";
-      const referralStr = formData.get("howDidYouHearAboutGifon")?.toString() ?? "Online";
-      // const individualMembershipTypeStr = formData.get("individualMembershipType")?.toString() ?? "Professional";
-      const passwordFromForm = formData.get("password")?.toString() ?? "";
-  
-      const payload: IndividualMembershipRequestBody = {
-        fullName: formData.get("fullName")?.toString() ?? "",
-        gender: genderStr as Gender,
-        dateOfBirth: dobStr ? new Date(dobStr).toISOString() : new Date().toISOString(),
-        nationality: formData.get("nationality")?.toString() ?? "",
-        email: formData.get("email")?.toString() ?? "",
-        phoneNumber: formData.get("phoneNumber")?.toString() ?? "",
-        altPhoneNumber: formData.get("altPhoneNumber")?.toString() ?? "",
-        homeAddress: formData.get("homeAddress")?.toString() ?? "",
-        country: individualLocation.country?.label ?? "Nigeria",
-        city: formData.get("city")?.toString() ?? "",
-        state: individualLocation.state?.label ?? "",
-        postalCode: formData.get("postalCode")?.toString() ?? "",
-        linkedinProfile: formData.get("linkedinProfile")?.toString() ?? undefined,
-        twitterHandle: formData.get("twitterHandle")?.toString() ?? undefined,
-        facebookProfile: formData.get("facebookProfile")?.toString() ?? undefined,
-        occupation: formData.get("occupation")?.toString() ?? "",
-        organization: formData.get("organization")?.toString() ?? "",
-        jobTitle: formData.get("jobTitle")?.toString() ?? "",
-        yearsExperience: yearsExperienceStr ? Number(yearsExperienceStr) : 0,
-        geospatialExpertise: expertiseStrings as GeospatialExpertise[],
-        professionalQualifications: formData.get("professionalQualifications")?.toString() ?? "",
-        areasOfInterest: interestStrings as AreaOfInterest[],
-        // individualMembershipType: individualMembershipTypeStr as IndividualMembershipType,
-        // membershipDuration: membershipDurationStr as MembershipDuration,
-        howDidYouHearAboutGifon: referralStr as ReferralSource,
-        password: passwordFromForm,
-        amount: Number(formData.get("amount") ?? 0),
-      };
-  
-      console.log(payload);
-      const result = await registerIndividualMembership(payload);
-      if (result?.status === "fail") {
-        setServerMessage(result.message || "Registration failed. Please check your input.");
-        setIndividualState("error");
-      } else {
-        setServerMessage(result?.message ?? "Registration successful. Please check your email.");
-        setIndividualState("verify");
-      }
-    }catch (err: unknown) {
-      console.error(err);
-      if (err instanceof Error) {
-        setServerMessage(err.message);
-      } else {
-        setServerMessage("Registration failed. Please try again.");
-      }
-      setIndividualState("error");
+  // Handle Profile Picture Preview
+  const handleAvatarChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setAvatarPreview(URL.createObjectURL(file));
     }
   };
-  
 
-  // ---------- Organization ----------
-  const handleOrganizationSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setServerMessage(undefined);
-    setOrganizationState("loading");
-    const formData = new FormData(e.currentTarget);
-  
-    try {
-      const industrySectorStr = formData.get("industrySector")?.toString() ?? "Other";
-      // const membershipDurationStr = formData.get("membershipDuration")?.toString() ?? "OneYear";
-      const passwordFromForm = formData.get("password")?.toString() ?? "";
-  
-      const payload: OrganizationMembershipRequestBody = {
-        email: formData.get("email")?.toString() ?? "",
-        organizationName: formData.get("organizationName")?.toString() ?? "",
-        primaryContactName: formData.get("primaryContactName")?.toString() ?? "",
-        positionTitle: formData.get("positionTitle")?.toString() ?? "",
-        organizationAddress: formData.get("organizationAddress")?.toString() ?? "",
-        city: formData.get("city")?.toString() ?? "",
-        postalCode: formData.get("postalCode")?.toString() ?? "",
-        organizationWebsite: formData.get("organizationWebsite")?.toString() ?? undefined,
-        facebookHandle: formData.get("facebookHandle")?.toString() ?? undefined,
-        twitterHandle: formData.get("twitterHandle")?.toString() ?? undefined,
-        linkedinHandle: formData.get("linkedinHandle")?.toString() ?? undefined,
-        industrySector: industrySectorStr as IndustrySector,
-        numberOfEmployees: Number(formData.get("numberOfEmployees") ?? 0),
-        contribution: formData.get("contribution")?.toString() ?? "",
-        // membershipDuration: membershipDurationStr as MembershipDuration,
-        country: organizationLocation.country?.label ?? "Nigeria",
-        state: organizationLocation.state?.label ?? "",
-        password: passwordFromForm,
-        amount: Number(formData.get("amount") ?? 0),
-      };
-  
-      const result = await registerOrganizationMembership(payload);
-      if (result?.status === "fail") {
-        setServerMessage(result.message || "Registration failed. Please check your input.");
-        setOrganizationState("error");
-        return;
-      } else {
-      setServerMessage(result.message || "Registration successful. Please check your email.");
-      setOrganizationState("verify");
-      }
-    } catch (err: unknown) {
-      console.error(err);
-      if (err instanceof Error) {
-        setServerMessage(err.message);
-      } else {
-        setServerMessage("Registration failed. Please try again.");
-      }
-      setIndividualState("error");
+  // Handle ID File Selection (Just to show the filename)
+  const handleIdFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setIdFileName(file.name);
     }
   };
-  
 
-  // small spinner SVG
+  // 4. Submit Handler
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormState("loading");
+    setServerMessage(undefined);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    // Hardcode category for Casual User
+    formData.append("category", "casual"); 
+
+    // Append Location Data manually
+    if (location.country) formData.append("country", location.country.label);
+    if (location.state) formData.append("state", location.state.label);
+
+    try {
+      const response = await fetch("/api/apply", {
+        method: "POST",
+        body: formData, 
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Something went wrong.");
+      }
+
+      setFormState("success");
+      setServerMessage(data.message || "Account created successfully!");
+      
+      // Reset logic
+      form.reset();
+      setAvatarPreview(null);
+      setIdFileName(null);
+      
+    } catch (error: any) {
+      setFormState("error");
+      setServerMessage(error.message);
+    }
+  };
+
+  // Spinner Component
   const Spinner = () => (
-    <svg
-      className="animate-spin h-5 w-5 inline-block mr-2"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
+    <svg className="animate-spin h-5 w-5 inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
     </svg>
@@ -198,347 +90,278 @@ export default function RegisterPage() {
   return (
     <>
       <HeroSection
-        title="Member Registration"
-        // description="Join the Geospatial Intelligence Foundation of Nigeria (GIFON) to be part of a community shaping the future of GeoINT and national security."
-        backgroundMedia = {[
-          "/bg/e.jpeg",
-          "/bg/a.JPG",
-          "/bg/b.JPG",
-          "/bg/c.JPG",
-          "/bg/d.JPG",
-          "/ph.svg",
+        title="Create a Free Account"
+        backgroundMedia={[
+          "/media/login.jpeg", 
         ]}
       />
 
       <main className="w-full py-16 px-4 bg-gray-50">
-        <div className="max-w-3xl mx-auto bg-white p-8 rounded shadow">
-          {/* Toggle */}
-          <div className="flex justify-center gap-4 mb-8">
-            <button
-              className={`px-6 py-2 rounded-lg font-medium transition ${
-                membershipType === "individual"
-                  ? "bg-green-700 text-white"
-                  : "bg-gray-200 text-gray-700"
-              }`}
-              onClick={() => setMembershipType("individual")}
-            >
-              Individual
-            </button>
-            <button
-              className={`px-6 py-2 rounded-lg font-medium transition ${
-                membershipType === "corporate"
-                  ? "bg-green-700 text-white"
-                  : "bg-gray-200 text-gray-700"
-              }`}
-              onClick={() => setMembershipType("corporate")}
-            >
-              Corporate / Institutional
-            </button>
+        <div className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+          
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-900">Sign Up</h2>
+            <p className="text-gray-500 text-sm mt-1">Access resources and join the community.</p>
           </div>
 
-          {/* Form Area */}
-          <AnimatePresence mode="wait">
-            {membershipType === "individual" ? (
-              <motion.div
-                key="individual"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.24 }}
-              >
-                <h2 className="text-2xl font-semibold mb-6 text-center">
-                  Individual Membership Registration
-                </h2>
-
-                {individualState === "verify" ? (
-                  <div className="p-6 border rounded bg-green-50 text-center">
-                    <h3 className="text-lg font-semibold mb-2">Check your email</h3>
-                    <p className="mb-4">
-                      {serverMessage ?? "We sent a verification link to the email you provided. Please follow the link to verify your account."}
-                    </p>
-                    <a href="/login" className="inline-block mt-2 text-sm underline text-green-700">
-                      Go to Login
-                    </a>
-                   <br/>
-                    <a href="/verify-email" className="inline-block mt-2 text-sm underline text-green-700">
-                      Verify Email with token
-                    </a>
+          {formState === "success" ? (
+            <div className="p-8 border border-green-200 rounded-xl bg-green-50 text-center animate-in fade-in zoom-in">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                <CheckCircle className="h-8 w-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold text-green-800 mb-2">Account Created!</h3>
+              <p className="text-gray-700 mb-6">
+                {serverMessage || "Your account has been successfully created."}
+              </p>
+              <a href="/login" className="inline-block w-full px-6 py-3 bg-green-700 text-white font-bold rounded-xl hover:bg-green-800 transition shadow-lg hover:shadow-green-500/30">
+                Proceed to Login
+              </a>
+            </div>
+          ) : (
+            <form className="space-y-8" onSubmit={handleSubmit}>
+              <fieldset disabled={formState === "loading"} className="space-y-8">
+                
+                {/* --- Profile Picture Upload --- */}
+                <div className="flex flex-col items-center justify-center">
+                  <div className="relative group cursor-pointer">
+                    <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-100 shadow-md bg-gray-50 flex items-center justify-center">
+                      {avatarPreview ? (
+                        <img 
+                          src={avatarPreview} 
+                          alt="Profile Preview" 
+                          className="w-full h-full object-cover" 
+                        />
+                      ) : (
+                        <User size={48} className="text-gray-300" />
+                      )}
+                    </div>
+                    
+                    {/* Overlay/Upload Button */}
+                    <label 
+                      htmlFor="profilePicture" 
+                      className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity rounded-full cursor-pointer"
+                    >
+                      <Camera size={24} />
+                      <span className="text-xs font-medium mt-1">Upload</span>
+                    </label>
+                    <input 
+                      type="file" 
+                      id="profilePicture" 
+                      name="profilePicture" 
+                      accept="image/*"
+                      onChange={handleAvatarChange}
+                      className="hidden" 
+                    />
                   </div>
-                ) : (
-                  <form
-                    className="space-y-6"
-                    onSubmit={handleIndividualSubmit}
+                  <p className="text-xs text-gray-500 mt-2">Profile Picture</p>
+                </div>
+
+                {/* --- Personal Info --- */}
+                <div>
+                  <h3 className="flex items-center gap-2 text-sm font-bold text-gray-900 uppercase tracking-wide mb-4 border-b pb-2">
+                    <User size={18} className="text-green-600"/> Personal Details
+                  </h3>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    
+                    <div className="col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                      <input 
+                        name="fullName" 
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all" 
+                        placeholder="John Doe" 
+                        required 
+                      />
+                    </div>
+
+                    <div className="col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                      <input 
+                        name="email" 
+                        type="email" 
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all" 
+                        placeholder="you@example.com" 
+                        required 
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                      <input 
+                        name="phoneNumber" 
+                        type="tel" 
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all" 
+                        placeholder="+234..." 
+                        required 
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                      <div className="relative">
+                        <select 
+                          name="gender" 
+                          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all appearance-none bg-white" 
+                          required
+                        >
+                          <option value="">Select</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-gray-500">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                      <CountryStateSelect onChange={setLocation} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* --- Means of Identification --- */}
+                <div>
+                  <h3 className="flex items-center gap-2 text-sm font-bold text-gray-900 uppercase tracking-wide mb-4 border-b pb-2">
+                    <FileText size={18} className="text-green-600"/> Means of Identification
+                  </h3>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    
+                    {/* ID Type */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">ID Type</label>
+                      <div className="relative">
+                        <select 
+                          name="idType" 
+                          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all appearance-none bg-white" 
+                          required
+                        >
+                          <option value="">Select Type</option>
+                          <option value="NIN">NIN Slip</option>
+                          <option value="International Passport">International Passport</option>
+                          <option value="Drivers License">Driver's License</option>
+                          <option value="Voters Card">Voter's Card</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-gray-500">
+                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* ID Number */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">ID Number</label>
+                      <input 
+                        name="idNumber" 
+                        type="text" 
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all" 
+                        placeholder="e.g. A0000000" 
+                        required 
+                      />
+                    </div>
+
+                    {/* ID Upload */}
+                    <div className="col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Upload Document</label>
+                      
+                      <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-xl hover:bg-gray-50 transition-colors relative cursor-pointer group">
+                         <div className="space-y-1 text-center">
+                            {idFileName ? (
+                                <div className="flex flex-col items-center">
+                                    <FileText className="mx-auto h-12 w-12 text-green-500" />
+                                    <p className="text-sm text-green-600 font-medium mt-2">{idFileName}</p>
+                                    <p className="text-xs text-gray-400">Click to change</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <Upload className="mx-auto h-12 w-12 text-gray-400 group-hover:text-gray-500" />
+                                    <div className="flex text-sm text-gray-600">
+                                    <span className="relative cursor-pointer bg-white rounded-md font-medium text-green-600 hover:text-green-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-green-500">
+                                        <span>Upload a file</span>
+                                    </span>
+                                    <p className="pl-1">or drag and drop</p>
+                                    </div>
+                                    <p className="text-xs text-gray-500">PNG, JPG, PDF up to 5MB</p>
+                                </>
+                            )}
+                         </div>
+                         <input 
+                            id="idDocument" 
+                            name="idDocument" 
+                            type="file" 
+                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                            accept=".jpg,.jpeg,.png,.pdf"
+                            onChange={handleIdFileChange}
+                            required
+                         />
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* --- Security --- */}
+                <div>
+                  <h3 className="flex items-center gap-2 text-sm font-bold text-gray-900 uppercase tracking-wide mb-4 border-b pb-2">
+                    <User size={18} className="text-green-600"/> Other Details
+                  </h3>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    
+                    <div className="col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Current Occupation / Role</label>
+                      <input 
+                        name="occupation" 
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all" 
+                        placeholder="e.g. Student, Researcher" 
+                      />
+                    </div>
+
+                    <div className="col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                      <input 
+                        type="password" 
+                        name="password" 
+                        placeholder="Create a strong password" 
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all" 
+                        required 
+                        minLength={6}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="pt-2">
+                  {formState === "error" && serverMessage && (
+                    <div className="p-4 mb-4 text-sm text-red-700 bg-red-50 rounded-xl border border-red-200 flex items-center gap-2">
+                      <span className="font-bold">Error:</span> {serverMessage}
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="w-full inline-flex items-center justify-center bg-green-700 text-white px-6 py-4 rounded-xl font-bold hover:bg-green-800 transition-all shadow-lg hover:shadow-green-500/30 transform hover:-translate-y-0.5 disabled:opacity-70 disabled:transform-none"
+                    disabled={formState === "loading"}
                   >
-                    {/* disable inputs when loading */}
-                    <fieldset disabled={individualState === "loading"} className="space-y-6">
-                      <input type="hidden" name="country" value="Nigeria" />
-                      <input type="hidden" name="amount" value="5000" />
+                    {formState === "loading" ? (
+                      <>
+                        <Spinner /> Creating Account...
+                      </>
+                    ) : (
+                      "Sign Up"
+                    )}
+                  </button>
+                </div>
 
-                      {/* Personal Information */}
-                      <div>
-                        <h3 className="font-bold text-lg mb-2">Personal Information</h3>
-                        <div className="grid gap-4 sm:grid-cols-2">
-                          <input name="fullName" className="border p-3 rounded w-full col-span-2" placeholder="Full Name" required />
-                          <div>
-                            <label htmlFor="dob" className="text-sm font-medium mb-1">
-                              Gender
-                            </label>
-                            <select name="gender" className="border p-3 rounded w-full" required>
-                              <option value="">Gender</option>
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
-                              <option value="Other">Other</option>
-                            </select>
-                          </div>
+              </fieldset>
+            </form>
+          )}
 
-                          {/* improved DOB with label */}
-                          <div className="flex flex-col">
-                            <label htmlFor="dob" className="text-sm font-medium mb-1">
-                              Date of Birth
-                            </label>
-                            <input
-                              id="dob"
-                              name="dob"
-                              type="date"
-                              aria-describedby="dob-help"
-                              placeholder="YYYY-MM-DD"
-                              className="border p-3 rounded w-full"
-                              required
-                            />
-                          </div>
-                          <div className="border p-3 rounded w-full col-span-2">
-                            <CountryStateSelect onChange={setIndividualLocation} />
-                          </div>
-                          {/* <input name="country" className="border p-3 rounded w-full" placeholder="Country" required /> */}
-                          <input name="nationality" className="border p-3 rounded w-full" placeholder="Nationality" required />
-                          <input type="email" name="email" className="border p-3 rounded w-full" placeholder="Email Address" required />
-                          <input name="phoneNumber" className="border p-3 rounded w-full" placeholder="Phone Number" required />
-                          <input name="altPhoneNumber" className="border p-3 rounded w-full" placeholder="Alternative Phone Number" />
-                          <input name="homeAddress" className="border p-3 rounded w-full" placeholder="Home Address" />
-                          <input name="city" className="border p-3 rounded w-full" placeholder="City" aria-label="City"/>
-                          {/* <input name="state" className="border p-3 rounded w-full" placeholder="State" /> */}
-                          <input name="postalCode" className="border p-3 rounded w-full" placeholder="Postal Code" />
-                          <input name="linkedinProfile" className="border p-3 rounded w-full" placeholder="LinkedIn Profile" />
-                          <input name="twitterHandle" className="border p-3 rounded w-full" placeholder="Twitter Handle" />
-                          <input name="facebookProfile" className="border p-3 rounded w-full" placeholder="Facebook Profile" />
-                        </div>
-                      </div>
-
-                      {/* Professional Information */}
-                      <div>
-                        <h3 className="font-bold text-lg mb-2">Professional Information</h3>
-                        <div className="grid gap-4 sm:grid-cols-2">
-                          <input name="occupation" className="border p-3 rounded w-full" placeholder="Current Occupation" />
-                          <input name="organization" className="border p-3 rounded w-full" placeholder="Organization/Institution" />
-                          <input name="jobTitle" className="border p-3 rounded w-full" placeholder="Job Title/Role" />
-                          {/* <input name="yearsExperience" className="border p-3 rounded w-full" placeholder="Years of Experience in GeoINT" /> */}
-                        </div>
-
-                        <div className="mt-4">
-                          <p className="mb-2 font-medium">Geospatial Expertise:</p>
-                          <div className="grid sm:grid-cols-2 gap-2">
-                            {["GIS", "RemoteSensing", "Cartography", "DataAnalysis", "SpatialModelling"].map((exp) => (
-                              <label key={exp} className="flex items-center gap-2">
-                                <input type="checkbox" name="geospatialExpertise" value={exp} /> {exp}
-                              </label>
-                            ))}
-                          </div>
-                        </div>
-
-                        <textarea name="professionalQualifications" className="border p-3 rounded w-full mt-4" placeholder="Professional Qualifications (certifications, degrees, etc.)" />
-
-                        <div className="mt-4">
-                          <p className="mb-2 font-medium">Areas of Interest in GeoINT:</p>
-                          <div className="grid sm:grid-cols-2 gap-2">
-                            {[
-                              "NationalSecurityAndDefense",
-                              "DisasterManagement",
-                              "UrbanPlanningAndDevelopment",
-                              "EnvironmentalMonitoring",
-                              "AgricultureAndLandUse",
-                              "TransportationAndInfrastructure",
-                              "ClimateChangeAndSustainability",
-                              "ResearchAndEducation",
-                            ].map((area) => (
-                              <label key={area} className="flex items-center gap-2">
-                                <input type="checkbox" name="areasOfInterest" value={area} /> {area}
-                              </label>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Membership Info */}
-                      <div>
-                        {/* <h3 className="font-bold text-lg mb-2">Membership Details</h3>
-
-                        <select name="individualMembershipType" className="border p-3 rounded w-full" required>
-                          <option value="">Membership Type</option>
-                          <option value="Professional">Professional</option>
-                          <option value="Student">Student</option>
-                          <option value="Honorary">Honorary</option>
-                        </select>
-
-                        <select name="membershipDuration" className="border p-3 rounded w-full mt-3" required>
-                          <option value="">Membership Duration</option>
-                          <option value="OneYear">1 Year</option>
-                          <option value="TwoYears">2 Years</option>
-                          <option value="ThreeYears">3 Years</option>
-                          <option value="Lifetime">Lifetime</option>
-                        </select> */}
-
-                        <select name="howDidYouHearAboutGifon" className="border p-3 rounded w-full mt-3">
-                          <option value="">How did you hear about GIFON?</option>
-                          <option value="Online">Online</option>
-                          {/* <option value="WordOfMouth">Word of Mouth</option> */}
-                          <option value="EventConference">Event/Conference</option>
-                          <option value="Referral">Referral</option>
-                          <option value="Other">Other</option>
-                        </select>
-
-                        {/* <input type="password" name="password" placeholder="Choose a password" className="border p-3 rounded w-full mt-3" required /> */}
-                      </div>
-
-                      {/* Declaration */}
-                      <div className="flex items-start gap-2 mt-6">
-                        <input type="checkbox" required />
-                        <p className="text-sm text-gray-700">
-                          I hereby confirm that clicking <b>Register</b> serves as my signature and agreement to abide by GIFON’s mission and policies.
-                        </p>
-                      </div>
-
-                      <div>
-                        {individualState === "error" && serverMessage && (
-                          <p className="mb-3 text-sm text-red-600">{serverMessage}</p>
-                        )}
-
-                        <button
-                          type="submit"
-                          className="w-full inline-flex items-center justify-center bg-green-700 text-white px-6 py-3 rounded hover:bg-opacity-90 transition disabled:opacity-60"
-                          disabled={individualState === "loading"}
-                        >
-                          {individualState === "loading" ? (
-                            <>
-                              <Spinner /> Submitting...
-                            </>
-                          ) : (
-                            "Submit"
-                          )}
-                        </button>
-                      </div>
-                    </fieldset>
-                  </form>
-                )}
-              </motion.div>
-            ) : (
-              <motion.div
-                key="corporate"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.24 }}
-              >
-                <h2 className="text-2xl font-semibold mb-6 text-center">
-                  Corporate / Institutional Membership Registration
-                </h2>
-
-                {organizationState === "verify" ? (
-                  <div className="p-6 border rounded bg-green-50 text-center">
-                    <h3 className="text-lg font-semibold mb-2">Check your email</h3>
-                    <p className="mb-4">
-                      {serverMessage ?? "We sent a verification link to the email you provided. Please follow the link to verify your organization account."}
-                    </p>
-                    <a href="/login" className="inline-block mt-2 text-sm underline text-green-700">
-                      Go to Login
-                    </a>
-                  </div>
-                ) : (
-                  <form className="space-y-6" onSubmit={handleOrganizationSubmit}>
-                    <fieldset disabled={organizationState === "loading"} className="space-y-6">
-                      <input type="hidden" name="country" value="Nigeria" />
-                      <input type="hidden" name="amount" value="20000" />
-
-                      {/* Org Info */}
-                      <div className="flex flex-col gap-4">
-                        <h3 className="font-bold text-lg mb-2">Organizational Information</h3>
-                        <div className="grid gap-4 sm:grid-cols-2">
-                          <input name="organizationName" className="border p-3 rounded w-full col-span-2" placeholder="Organization Name" required />
-                          <input name="primaryContactName" className="border p-3 rounded w-full" placeholder="Primary Contact Name" required />
-                          <input name="positionTitle" className="border p-3 rounded w-full" placeholder="Position/Title" />
-                          <input type="email" name="email" className="border p-3 rounded w-full col-span-2" placeholder="Contact Email" required />
-                          <input name="organizationWebsite" className="border p-3 rounded w-full col-span-2" placeholder="Organization Website" />
-                          <div className="border p-3 rounded w-full col-span-2">
-                            <CountryStateSelect onChange={setOrganizationLocation} />
-                          </div>
-                          <input name="organizationAddress" className="border p-3 rounded w-full" placeholder="Organization Address" />
-                          <input name="city" className="border p-3 rounded w-full" placeholder="City" />
-                          {/* <input name="state" className="border p-3 rounded w-full" placeholder="State" /> */}
-                          <input name="postalCode" className="border p-3 rounded w-full" placeholder="Postal Code" />
-                          <input name="facebookHandle" className="border p-3 rounded w-full" placeholder="Facebook" />
-                          <input name="twitterHandle" className="border p-3 rounded w-full" placeholder="Twitter" />
-                          <input name="linkedinHandle" className="border p-3 rounded w-full" placeholder="LinkedIn" />
-                        </div>
-
-                        <div className="mt-4">
-                          <p className="mb-2 font-medium">Industry Sector:</p>
-                          {["Government", "PrivateSector", "AcademiaResearch", "NonProfitNGO", "Other"].map((sector) => (
-                            <label key={sector} className="flex flex-wrap items-center gap-2">
-                              <input type="radio" name="industrySector" value={sector} /> {sector}
-                            </label>
-                          ))}
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-medium">Number of Employees</label>
-                          <input type="number" name="numberOfEmployees" className="mt-1 w-full border rounded p-3" />
-                        </div>
-                        <textarea name="contribution" className="border p-3 rounded w-full mt-4" placeholder="How can your organization contribute to GIFON’s mission?" />
-                        <input type="password" name="password" placeholder="Choose a password" className="border p-3 rounded w-full mt-3" required />
-                      </div>
-
-                      {/* Membership Info */}
-                      {/* <div>
-                        <h3 className="font-bold text-lg mb-2">Membership Details</h3>
-                        <select name="membershipDuration" className="border p-3 rounded w-full" required>
-                          <option value="">Membership Duration</option>
-                          <option value="OneYear">1 Year</option>
-                          <option value="TwoYears">2 Years</option>
-                          <option value="ThreeYears">3 Years</option>
-                          <option value="Lifetime">Lifetime</option>
-                        </select>
-                      </div> */}
-
-                      <div>
-                        {organizationState === "error" && serverMessage && (
-                          <p className="mb-3 text-sm text-red-600">{serverMessage}</p>
-                        )}
-
-                        <button
-                          type="submit"
-                          className="w-full inline-flex items-center justify-center bg-green-700 text-white px-6 py-3 rounded hover:bg-opacity-90 transition disabled:opacity-60"
-                          disabled={organizationState === "loading"}
-                        >
-                          {organizationState === "loading" ? (
-                            <>
-                              <Spinner /> Submitting...
-                            </>
-                          ) : (
-                            "Register"
-                          )}
-                        </button>
-                      </div>
-                    </fieldset>
-                  </form>
-                )}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <div className="mt-4 text-center">
+          <div className="mt-8 text-center pt-6 border-t border-gray-100">
             <p className="text-gray-600">
               Already have an account?{" "}
-              <a href="/login" className="text-primary underline">
-                Login
+              <a href="/login" className="text-green-700 font-bold hover:underline">
+                Login here
               </a>
             </p>
           </div>

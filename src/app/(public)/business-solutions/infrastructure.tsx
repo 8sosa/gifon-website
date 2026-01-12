@@ -84,6 +84,19 @@ export const sections: Record<string, Sector> = {
       'Support for digital inclusion, smart city planning, and ICT investments',
     ],
   },
+  defence: {
+    id: 'defence',
+    title: 'Defense Industrial Base',
+    icon: <FaShieldAlt size={24} />,
+    summary: 'Advanced mapping and terrain analysis for military logistics and operations.',
+    description: `Provide advanced mapping and terrain analysis for military logistics and operations. Support secure defence manufacturing zones through geospatial risk assessment. Contribute to defence readiness with real-time intelligence for operational planning.`,
+    images: '/media/defense.jpeg',
+    highlights: [
+      'Provide advanced mapping and terrain analysis for military logistics and operations.',
+      'Support secure defence manufacturing zones through geospatial risk assessment.',
+      'Contribute to defence readiness with real-time intelligence for operational planning',
+    ],
+  },
   health: {
     id: 'health',
     title: 'Healthcare & Public Health',
@@ -164,26 +177,12 @@ export const sections: Record<string, Sector> = {
     icon: <FaGraduationCap size={24} />,
     summary: 'Planning equitable distribution of schools and strengthening STEM programs.',
     description: `Support planning and equitable distribution of schools and research centers. Use spatial data to strengthen STEM and geospatial education programs. Facilitate research collaborations with academia and global geospatial partners.`,
-    images: '/media/edu.jpeg',
+    images: '/media/cah.jpg',
     highlights: [
       'Location and risk mapping of chemical plants, storage facilities, and hazardous sites',
       'Disaster preparedness and environmental safety monitoring',
       'Supply chain and logistics risk assessment for hazardous materials',
       'Compliance support for national safety and environmental regulations',
-    ],
-  },
-  defence: {
-    id: 'defence',
-    title: 'Nuclear & Radiological',
-    icon: <FaShieldAlt size={24} />,
-    summary: 'Advanced mapping and terrain analysis for military logistics and operations.',
-    description: `Provide advanced mapping and terrain analysis for military logistics and operations. Support secure defence manufacturing zones through geospatial risk assessment. Contribute to defence readiness with real-time intelligence for operational planning.`,
-    images: '/media/defense.jpeg',
-    highlights: [
-      'Mapping of nuclear facilities and radiological sites',
-      'Monitoring of radiological hazards and emergency response planning',
-      'Risk assessment and compliance support with international safety standards',
-      'Spatial analysis for energy and security planning',
     ],
   },
   manufacturing: {

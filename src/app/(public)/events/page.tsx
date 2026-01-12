@@ -180,7 +180,7 @@ export default async function EventsPage() {
   return (
     <>
       <HeroSection
-        title="Events"
+        title="Our Flagship Events"
         description="Connecting the community through conferences, workshops, and development programmes."
         backgroundMedia={[
           "/media/resources/20120308_092350.JPG",
@@ -197,8 +197,7 @@ export default async function EventsPage() {
 
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="max-w-3xl mx-auto text-center mb-16">
-                <span className="text-green-600 font-bold uppercase tracking-wider text-sm mb-2 block">Our Impact</span>
-                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Events & Highlights</h2>
+                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Events, Engagements & Highlights</h2>
                 <p className="text-gray-600 leading-relaxed text-lg">
                 <span className="cooper">GIFON</span> actively convenes events that drive dialogue, innovation, and collaboration. We celebrate our role in Mapping the Future and Empowering the Nation.
                 </p>
@@ -223,24 +222,24 @@ export default async function EventsPage() {
                ))}
                
                {/* Last Card: Call to Action */}
-               <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-green-600 text-white shadow-lg text-center">
+               {/* <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-green-600 text-white shadow-lg text-center">
                   <h3 className="text-xl font-bold mb-2">Join the Movement</h3>
                   <p className="text-green-100 text-sm mb-4">Be part of our next event.</p>
                   <Link href="/membership" className="px-6 py-2 bg-white text-green-700 font-bold rounded-full hover:bg-gray-100 transition-colors">
                     Become a Member
                   </Link>
-               </div>
+               </div> */}
             </div>
           </div>
         </section>
 
         {/* --- UPCOMING EVENTS --- */}
         <div id="upcoming" className="scroll-mt-24"></div>
-        <section className="py-20 px-4 md:px-6 bg-gray-50 border-t border-gray-200">
+        <section className="py-20 px-4 md:px-6 bg-green-900 border-t border-gray-200">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mb-12">
-                <h2 className="text-3xl font-bold text-gray-900">Upcoming Events</h2>
-                <div className="hidden md:flex items-center gap-2 text-sm text-gray-500">
+                <h2 className="text-3xl font-bold text-gray-100">Upcoming Events</h2>
+                <div className="hidden md:flex items-center gap-2 text-sm text-gray-100">
                     <Calendar size={16} /> Mark your calendars
                 </div>
             </div>

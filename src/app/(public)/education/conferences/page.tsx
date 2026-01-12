@@ -79,7 +79,7 @@ export default function ConferencesProceedingsPage() {
         <section id="overview" className="py-20 px-4 bg-white">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">
-              Advancing the Ecosystem
+              Advancing the GEOINT Ecosystem
             </h2>
             <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-6">
               <p>

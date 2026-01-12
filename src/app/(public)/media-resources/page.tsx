@@ -65,7 +65,7 @@ const ResourceSection = ({
             </div>
             <h3 className="text-lg font-semibold text-gray-600">No {title.toLowerCase()} available</h3>
             <p className="text-gray-500 text-sm mt-2 max-w-sm">
-                We haven&apos;t published any {title.toLowerCase()} just yet. Please check back later or subscribe to our newsletter for updates.
+                Subscribe to our {title.toUpperCase()} for updates.
             </p>
           </div>
         )}
@@ -125,7 +125,7 @@ useEffect(() => {
     <>
       <HeroSection
         title="Media Resources"
-        description="Your trusted source for insights, updates, and resources on geospatial intelligence and innovation."
+        description={<>Your trusted source for insights, updates, and<br/> resources on geospatial intelligence and innovation.</>}
         backgroundMedia = {[
           "/vids/globe.mp4"
         ]}
@@ -146,14 +146,13 @@ useEffect(() => {
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p><span className="cooper">GIFON</span> Media Resources is your gateway to authoritative, up-to-date, and engaging information on geospatial intelligence, STEM, innovation, and national development initiatives. Designed for the public, professionals, researchers, and media practitioners, this platform provides comprehensive access to <span className="cooper">GIFON</span>’s publications, reports, newsletters, press releases, and multimedia content. Through these resources, <span className="cooper">GIFON</span> ensures that knowledge on maps, location intelligence, data driven insights, and geospatial solutions is accessible, transparent, and actionable. Users can stay informed about programme updates, innovations, research breakthroughs, and thought leadership in GEOINT at both national and global levels.</p>
               
-              <p>Key Features:</p>
+              <p>This section offers:</p>
               <ul className="list-disc list-inside pl-4 space-y-2">
-                <li><span className="font-semibold">Press Releases & News Updates</span> – Timely announcements on <span className="cooper">GIFON</span>’s programmes, events, and collaborations.</li>
-                <li><span className="font-semibold">Photo & Video Gallery</span> – Visual highlights from our events.</li>
-                <li><span className="font-semibold">Reports & Publications</span> – Research papers, technical reports, and policy briefs.</li>
-                <li><span className="font-semibold">Newsletters & Bulletins</span> – Monthly and special editions featuring innovation, capacity development, and sectoral insights.</li>
-                <li><span className="font-semibold">Multimedia Library</span> – Photos, videos, and infographics for education, awareness, and advocacy.</li>
-                <li><span className="font-semibold">Open Data & Research Access</span> – Curated datasets and geospatial resources to support education, research, and innovation.</li>
+                <li><span className="font-semibold">News & Updates</span> – Timely coverage of <span className="cooper">GIFON</span>’s activities, programs, and national engagements.</li>
+                <li><span className="font-semibold">Press Releases</span> – Official statements on initiatives, partnerships, and policy positions.</li>
+                <li><span className="font-semibold">Photo & Video Gallery</span> – Visual highlights from our events, conferences, training programs, and field activities.</li>
+                <li><span className="font-semibold">Publications Archive</span> – Access to research reports, white papers, policy briefs, and bulletins.</li>
+                <li><span className="font-semibold">Resource Materials</span> – Toolkits, guides, and reference documents for professionals, students, and institutions.</li>
               </ul>
               
               <p>

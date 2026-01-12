@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 
+// 1. Added 'website' property to the data
 const partners = [
   {
     name: "DGI London",
@@ -9,24 +10,28 @@ const partners = [
     width: 800,
     height: 337,
     caption: "Media Partner",
+    website: "https://dgi.wbresearch.com/",
   },
   {
-    name: "Nigerian Air-Force",
+    name: "Reslarc Tiger Center",
     logo: "/images/naf.png", 
     width: 800,
     height: 337,
+    website: "#",
   },
   {
-    name: "Defense HeadQuarters",
+    name: "Reslarc Academy",
     logo: "/images/dhq.png",
     width: 1047,
     height: 153,
+    website: "#",
   },
   {
-    name: "Nigerian Army",
+    name: "Reslarc",
     logo: "/images/na.png",
     width: 803,
     height: 133,
+    website: "#",
   },
 ];
 
@@ -92,40 +97,46 @@ export default function PartnersCarousel() {
   );
 }
 
-// --- Helper Component for Consistent Card Styling ---
+// --- Helper Component with Link Wrapper ---
 function PartnerCard({ partner }: { partner: typeof partners[0] }) {
   return (
-    <>
-      <div className="flex flex-col items-center">
-        <div 
-          className="
-            relative group/card
-            w-108 h-66 
-            shrink-0 
-            flex flex-col items-center justify-center 
-            bg-white/50 backdrop-blur-sm
-            border border-white/10 rounded-xl
-            hover:border-green-500/50 hover:bg-white/95 hover:shadow-[0_0_20px_-5px_rgba(34,197,94,0.2)]
-            transition-all duration-300
-          "
-        >
-          {/* Image Container: Fixed height within the card to ensure alignment */}
-          <div className="w-full h-36 px-3 flex items-center justify-center grayscale group-hover/card:grayscale-0 transition-all duration-500">
-            <Image 
-              src={partner.logo} 
-              alt={partner.name} 
-              width={partner.width} 
-              height={partner.height} 
-              className="object-contain w-full h-full drop-shadow-sm" 
-            />
-          </div>
+    <a
+      href={partner.website}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex flex-col items-center group/container cursor-pointer"
+    >
+      <div 
+        className="
+          relative group/card
+          w-108 h-66 
+          shrink-0 
+          flex flex-col items-center justify-center 
+          bg-white/50 backdrop-blur-sm
+          border border-white/10 rounded-xl
+          group-hover/container:border-green-500/50 
+          group-hover/container:bg-white/95 
+          group-hover/container:shadow-[0_0_20px_-5px_rgba(34,197,94,0.2)]
+          transition-all duration-300
+        "
+      >
+        {/* Image Container */}
+        <div className="w-full h-36 px-3 flex items-center justify-center grayscale group-hover/container:grayscale-0 transition-all duration-500">
+          <Image 
+            src={partner.logo} 
+            alt={partner.name} 
+            width={partner.width} 
+            height={partner.height} 
+            className="object-contain w-full h-full drop-shadow-sm" 
+          />
         </div>
-          {partner.caption && (
-            <p className="mt-3 text-xl text-gray-400 font-medium group-hover/card:text-green-400 transition-colors">
-              {partner.caption}
-            </p>
-          )}
       </div>
-    </>
+      
+      {partner.caption && (
+        <p className="mt-3 text-xl text-gray-400 font-medium group-hover/container:text-green-400 transition-colors">
+          {partner.caption}
+        </p>
+      )}
+    </a>
   );
 }
