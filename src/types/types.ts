@@ -3,6 +3,33 @@ import { Document } from '@contentful/rich-text-types';
 import type { EntryFieldTypes } from 'contentful';
 
 /** Contentful “skeleton” types for getEntries<T> */
+
+export type FlatMentor = {
+  id: string;
+  fullName: string;
+  role: string;
+  profilePicture: string;
+  specializations: string[];
+  bioMotto: string;
+  mentorshipAreas: string[];
+  availabilityText: string;
+  contactEmail: string;
+};
+
+export type MentorSkeleton = {
+  contentTypeId: 'mentor';
+  fields: {
+    fullName: EntryFieldTypes.Symbol;
+    role: EntryFieldTypes.Symbol;
+    profilePicture: EntryFieldTypes.AssetLink;
+    specializations: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
+    bioMotto: EntryFieldTypes.Text;
+    mentorshipAreas: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
+    availabilityText: EntryFieldTypes.Text;
+    contactEmail: EntryFieldTypes.Symbol;
+  };
+};
+
 export type EventSkeleton = {
   contentTypeId: 'event';
   fields: {
@@ -18,6 +45,7 @@ export type EventSkeleton = {
     link: EntryFieldTypes.Symbol;
   };
 };
+
 export interface NewsSkeleton {
   contentTypeId: 'newsPost';
   fields: {
@@ -26,7 +54,7 @@ export interface NewsSkeleton {
     date: string;
     coverImage?: Asset;
   };
-}
+};
 
 export interface JobSkeleton {
   contentTypeId: 'jobPosition';
@@ -53,6 +81,7 @@ export interface TeamMemberSkeleton {
     name: string;
     role: string;
     email?: string;
+    bio?: string;
     category: string;
     photo?: Asset;
   };
@@ -95,6 +124,7 @@ export type MembershipTier = {
 export type FlatMember = {
   name: string;
   role: string;
+  bio?: string;
   email?: string;
   category: string;
   photo: string;

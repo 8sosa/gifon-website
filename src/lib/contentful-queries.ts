@@ -11,13 +11,38 @@ import type {
   FlatNewsPost,
   Job,
   MembershipTier,
-  FlatMember
+  FlatMember,
+  MentorSkeleton,
+  FlatMentor
 } from '@/types/types';
 import type { Document } from '@contentful/rich-text-types';
 
-/** * UPDATED TYPE DEFINITION 
- * I moved this here based on your snippet, but ensure it matches your @/types/types file.
- */
+export async function getMentors(): Promise<FlatMentor[]> {
+  const entries = await client.getEntries<MentorSkeleton>({ content_type: 'mentor' });
+
+  return entries.items.map((item) => {
+    const f = item.fields;
+    
+    // Handle Image
+    const rawUrl = getAssetUrl(f.profilePicture);
+    const profilePicture = rawUrl?.startsWith('//')
+      ? `https:${rawUrl}`
+      : rawUrl ?? '/ph.svg';
+
+    return {
+      id: item.sys.id,
+      fullName: getString(f.fullName),
+      role: getString(f.role),
+      profilePicture: profilePicture,
+      specializations: getStringArray(f.specializations),
+      bioMotto: getString(f.bioMotto),
+      mentorshipAreas: getStringArray(f.mentorshipAreas),
+      availabilityText: getString(f.availabilityText),
+      contactEmail: getString(f.contactEmail),
+    };
+  });
+};
+
 export type FlatEvent = {
   id: string;
   title: string;
@@ -154,6 +179,7 @@ export async function getTeamMembers(): Promise<FlatMember[]> {
     return {
       name: getString(f.name),
       role: getString(f.role),
+      bio: getString(f.bio),
       email: f.email ? getString(f.email) : undefined,
       category: getString(f.category),
       photo,

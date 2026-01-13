@@ -54,7 +54,7 @@ export default function RegisterPage() {
     if (location.state) formData.append("state", location.state.label);
 
     try {
-      const response = await fetch("/api/apply", {
+      const response = await fetch("/api/auth/apply", {
         method: "POST",
         body: formData, 
       });

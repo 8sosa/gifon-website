@@ -3,6 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import cloudinary from '@/lib/cloudinary';
+import { transporter, emailFrom } from '@/lib/nodemailer'; // Import mailer
 
 const DB_NAME = 'test-db'; // Update to your production DB name eventually
 const COLLECTION_NAME = 'applications';
@@ -45,18 +46,16 @@ export async function POST(req: NextRequest) {
         if (value.size > 0) { // Only upload if file exists and has content
           const uploadPromise = uploadToCloudinary(value)
             .then((url) => {
-              fileUrls[key] = url; // Save URL using the field name (e.g., 'cacCert': 'https://...')
+              fileUrls[key] = url; 
             })
             .catch((err) => {
               console.error(`Failed to upload ${key}`, err);
-              // We continue even if one fails, or you could throw here to stop everything
             });
           fileUploadPromises.push(uploadPromise);
         }
       } 
       // CASE B: It is Text
       else if (typeof value === 'string') {
-        // Check if it belongs to the 'background' nested object
         if (key.startsWith('background_')) {
           const cleanKey = key.replace('background_', '');
           backgroundData[cleanKey] = value;
@@ -71,9 +70,9 @@ export async function POST(req: NextRequest) {
 
     // 3. Construct the final object
     const finalDocument: Record<string, any> = {
-      ...applicationData,         // spread basic fields (surname, companyName, etc.)
-      background: backgroundData, // nest the background answers
-      files: fileUrls,            // nest the file URLs
+      ...applicationData,
+      background: backgroundData, 
+      files: fileUrls, 
       status: 'pending',
       submittedAt: new Date(),
     };
@@ -112,6 +111,39 @@ export async function POST(req: NextRequest) {
 
     // 7. Insert into DB
     const result = await applicationsCollection.insertOne(finalDocument);
+
+    // 8. Send Confirmation Email
+    // We wrap this in a try-catch so email failure doesn't crash the API response
+    try {
+      // Determine name for greeting (Full Name, Company Name, or Representative Name)
+      const recipientName = finalDocument.fullName || finalDocument.companyName || finalDocument.repName || "Applicant";
+
+      await transporter.sendMail({
+        from: emailFrom,
+        to: primaryEmail,
+        subject: 'Application Received - GIFON',
+        html: `
+          <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px;">
+            <h2 style="color: #15803d;">Application Received</h2>
+            <p>Dear ${recipientName},</p>
+            <p>Thank you for applying to the <strong>Geospatial Intelligence Forum of Nigeria (GIFON)</strong>.</p>
+            <p>We have successfully received your application details and documents. Our team is currently reviewing your submission.</p>
+            <p><strong>What happens next?</strong></p>
+            <ul>
+              <li>Your application will undergo a standard review process.</li>
+              <li>You will receive an email notification once a decision has been made.</li>
+              <li>If approved, you will receive login credentials to access the member portal.</li>
+            </ul>
+            <p>If you have any urgent inquiries, please reply to this email.</p>
+            <br/>
+            <p>Best Regards,<br/><strong>GIFON Membership Team</strong></p>
+          </div>
+        `,
+      });
+    } catch (emailError) {
+      console.error('Failed to send confirmation email:', emailError);
+      // We continue to return success because the application WAS saved to the DB.
+    }
 
     return NextResponse.json(
       {

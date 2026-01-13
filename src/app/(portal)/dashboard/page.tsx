@@ -24,7 +24,8 @@ import {
   Clock,
   MessageCircle,
   MapPin,
-  CalendarCheck
+  CalendarCheck,
+  Loader2
 } from 'lucide-react';
 
 // --- Types ---
@@ -37,27 +38,52 @@ type User = {
   avatar?: string;
   category: string;
   role: string;
-  createdAt?: string; 
+  createdAt?: string;
+  // New Field from DB
+  assignedMentor?: {
+    id: string;
+    name: string;
+    assignedAt: string;
+  };
+};
+
+// Type for Contentful Data
+type MentorProfile = {
+  id: string;
+  fullName: string;
+  role: string;
+  profilePicture: string;
+  specializations: string[];
+  bioMotto: string;
+  mentorshipAreas: string[];
+  availabilityText: string;
+  contactEmail: string;
 };
 
 // --- Main Component ---
 export default function MembershipPortalPage() {
   const [user, setUser] = useState<User | null>(null);
+  
+  // Mentor State
+  const [mentorDetails, setMentorDetails] = useState<MentorProfile | null>(null);
+  const [isMentorLoading, setIsMentorLoading] = useState(false);
+  
+  // General UI State
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
-  // Modal State
   const [isMentorModalOpen, setIsMentorModalOpen] = useState(false);
 
   const router = useRouter();
 
   useEffect(() => {
+    // 1. Check Local Storage
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
       setIsLoading(false);
     }
 
+    // 2. Fetch Fresh User Data (Syncs assignedMentor from DB)
     const fetchFreshUserData = async () => {
       try {
         const res = await fetch('/api/users/me', { method: 'GET' });
@@ -66,8 +92,16 @@ export default function MembershipPortalPage() {
           throw new Error('Session expired. Please log in again.');
         }
         const data = await res.json();
-        setUser(data.user); 
-        localStorage.setItem('user', JSON.stringify(data.user)); 
+        const freshUser = data.user;
+        
+        setUser(freshUser); 
+        localStorage.setItem('user', JSON.stringify(freshUser)); 
+
+        // 3. If User has a mentor assigned, fetch that mentor's Contentful profile
+        if (freshUser.assignedMentor?.id) {
+            fetchMentorProfile(freshUser.assignedMentor.id);
+        }
+
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message);
@@ -83,6 +117,24 @@ export default function MembershipPortalPage() {
     fetchFreshUserData();
   }, [router]);
 
+  // Helper to fetch Contentful Data
+  const fetchMentorProfile = async (mentorId: string) => {
+    setIsMentorLoading(true);
+    try {
+        const res = await fetch('/api/mentors');
+        if (res.ok) {
+            const data = await res.json();
+            // Find the specific mentor matching the ID stored in User DB
+            const match = data.mentors.find((m: MentorProfile) => m.id === mentorId);
+            if (match) setMentorDetails(match);
+        }
+    } catch (e) {
+        console.error("Failed to load mentor details", e);
+    } finally {
+        setIsMentorLoading(false);
+    }
+  };
+
   // --- Handlers ---
   const handleLogout = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -92,29 +144,36 @@ export default function MembershipPortalPage() {
     router.push('/');
   };
 
+  const handleOpenMentorModal = () => {
+    // Even if not assigned yet, we might want to show a "Pending" modal
+    setIsMentorModalOpen(true);
+  };
+
   // --- Resource Data ---
   const memberResources = [
     {
       id: "mentor", 
-      title: "Meet your Mentor",
-      description: "Connect with industry experts for professional guidance.",
+      title: user?.assignedMentor ? "Your Mentor" : "Mentorship Program", // Dynamic Title
+      description: user?.assignedMentor 
+        ? `Connect with ${user.assignedMentor.name}.` 
+        : "You have not been assigned a mentor yet.",
       icon: <Diamond className="text-white" size={24} />,
-      color: "bg-green-600",
-      action: () => setIsMentorModalOpen(true), 
+      color: user?.assignedMentor ? "bg-green-600" : "bg-gray-400", // Grey out if not assigned
+      action: handleOpenMentorModal, 
     },
     {
       title: "Publications Archive",
       description: "Access issues of the GeoINSIGHT Journal and Bulletin.",
       icon: <BookOpen className="text-white" size={24} />,
       color: "bg-blue-600",
-      href: "/media-resources#publications",
+      href: "/dashboard/publications",
     },
     {
       title: "Webinar Library",
       description: "Watch recordings of past masterclasses and sessions.",
       icon: <Video className="text-white" size={24} />,
       color: "bg-purple-600",
-      href: "/media-resources#Webinar",
+      href: "/dashboard/webinar",
     },
     {
       title: "Member Directory",
@@ -128,7 +187,7 @@ export default function MembershipPortalPage() {
       description: "Get policy briefs, reports, and project templates.",
       icon: <Download className="text-white" size={24} />,
       color: "bg-orange-500",
-      href: "/media-resources#Downloads",
+      href: "/dashboard/downloads",
     },
     {
       title: "Submit Research",
@@ -190,7 +249,7 @@ export default function MembershipPortalPage() {
                     <span className="text-xs text-gray-500">{user.category} Member</span>
                 </div>
                 <div className="relative w-10 h-10 rounded-full bg-gray-200 overflow-hidden border-2 border-white shadow-sm">
-                    <Image src={user.avatar || "/ph.svg"} alt="User" fill className="object-cover" />
+                    <Image src={user.passportUrl || user.avatar || "/ph.svg"} alt="User" fill className="object-cover" />
                 </div>
             </div>
         </div>
@@ -247,7 +306,7 @@ export default function MembershipPortalPage() {
                             <BadgeCheck size={14} /> Active
                         </span>
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 text-gray-600 text-xs font-medium border border-gray-100">
-                            <Calendar size={14} /> Member since {new Date(user.createdAt || Date.now()).getFullYear()}
+                            <Calendar size={14} /> Joined {new Date(user.createdAt || Date.now()).getFullYear()}
                         </span>
                     </div>
 
@@ -335,95 +394,128 @@ export default function MembershipPortalPage() {
         </div>
       </main>
 
-      {/* --- MENTOR MODAL (Dr. AA Usman) --- */}
+      {/* --- DYNAMIC MENTOR MODAL --- */}
       {isMentorModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
           <div 
             className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200 relative flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()} 
           >
-            {/* Scrollable Content */}
-            <div className="overflow-y-auto">
-                {/* Header / Banner */}
-                <div className="h-32 bg-linear-to-r from-green-800 to-green-600 relative shrink-0">
+            {/* Case 1: Loading Mentor Data */}
+            {isMentorLoading && (
+                <div className="h-64 flex flex-col items-center justify-center text-gray-500">
+                    <Loader2 className="animate-spin mb-2" size={24} />
+                    <p className="text-sm">Retrieving mentor profile...</p>
+                </div>
+            )}
+
+            {/* Case 2: No Mentor Assigned yet */}
+            {!isMentorLoading && !mentorDetails && (
+                <div className="p-8 text-center flex flex-col items-center">
+                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-gray-400">
+                        <Diamond size={32} />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900">Mentorship Pending</h3>
+                    <p className="text-gray-500 text-sm mt-2 mb-6">
+                        You have not been assigned a specific mentor yet. The GIFON team reviews student profiles and assigns mentors based on career goals.
+                    </p>
                     <button 
                         onClick={() => setIsMentorModalOpen(false)}
-                        className="absolute top-4 right-4 p-2 bg-black/20 hover:bg-black/30 text-white rounded-full transition-colors z-10"
+                        className="bg-gray-100 text-gray-700 font-bold py-2 px-6 rounded-lg hover:bg-gray-200"
                     >
-                        <X size={20} />
+                        Close
                     </button>
-                    <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">
-                        <div className="w-24 h-24 rounded-full border-4 border-white bg-gray-100 overflow-hidden shadow-lg relative">
-                            {/* NOTE: Add actual image of Dr. Usman below */}
-                            <Image 
-                                src="/media/usman.jpg" 
-                                alt="Dr. AA Usman"
-                                fill
-                                className="object-cover"
-                            />
-                        </div>
-                    </div>
                 </div>
+            )}
 
-                {/* Body Content */}
-                <div className="pt-16 pb-8 px-8 text-center">
-                    <h3 className="text-2xl font-bold text-gray-900">Dr. AA Usman</h3>
-                    <p className="text-green-700 font-bold text-sm">Founder & Executive Chairman</p>
-                    <p className="text-gray-500 text-xs mt-1">Geospatial Intelligence • National Security • Capacity Building</p>
-                    
-                    <div className="mt-6 space-y-5">
-                        {/* Bio/Motto */}
-                        <div className="bg-green-50 p-4 rounded-xl border border-green-100">
-                            <p className="text-sm text-green-900 italic font-medium">
-                                “Passionate about empowering young professionals in GEOINT and national development.”
+            {/* Case 3: Mentor Assigned & Loaded */}
+            {!isMentorLoading && mentorDetails && (
+                <>
+                    {/* Scrollable Content */}
+                    <div className="overflow-y-auto">
+                        {/* Header / Banner */}
+                        <div className="h-32 bg-linear-to-r from-green-800 to-green-600 relative shrink-0">
+                            <button 
+                                onClick={() => setIsMentorModalOpen(false)}
+                                className="absolute top-4 right-4 p-2 bg-black/20 hover:bg-black/30 text-white rounded-full transition-colors z-10"
+                            >
+                                <X size={20} />
+                            </button>
+                            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">
+                                <div className="w-24 h-24 rounded-full border-4 border-white bg-gray-100 overflow-hidden shadow-lg relative">
+                                    <Image 
+                                        src={mentorDetails.profilePicture} 
+                                        alt={mentorDetails.fullName}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Body Content */}
+                        <div className="pt-16 pb-8 px-8 text-center">
+                            <h3 className="text-2xl font-bold text-gray-900">{mentorDetails.fullName}</h3>
+                            <p className="text-green-700 font-bold text-sm">{mentorDetails.role}</p>
+                            <p className="text-gray-500 text-xs mt-1">
+                                {mentorDetails.specializations.join(" • ")}
                             </p>
-                        </div>
-
-                        {/* Mentorship Areas (Tags) */}
-                        <div className="text-left">
-                             <p className="text-xs font-bold text-gray-400 uppercase mb-2">Mentorship Areas</p>
-                             <div className="flex flex-wrap gap-2">
-                                {["Policy Strategy", "Research & Analytics", "Technology Integration"].map(skill => (
-                                    <span key={skill} className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded-full border border-gray-200">
-                                        {skill}
-                                    </span>
-                                ))}
-                             </div>
-                        </div>
-
-                        {/* Availability Section */}
-                        <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 text-left">
-                            <div className="flex items-start gap-3">
-                                <Clock className="text-green-600 mt-0.5 shrink-0" size={18} />
-                                <div>
-                                    <p className="text-xs font-bold text-gray-400 uppercase">Availability</p>
-                                    <p className="text-sm font-medium text-gray-700 mt-1">
-                                        Available for guidance via GIFON messaging or scheduled sessions.
+                            
+                            <div className="mt-6 space-y-5">
+                                {/* Bio/Motto */}
+                                <div className="bg-green-50 p-4 rounded-xl border border-green-100">
+                                    <p className="text-sm text-green-900 italic font-medium">
+                                        “{mentorDetails.bioMotto}”
                                     </p>
+                                </div>
+
+                                {/* Mentorship Areas (Tags) */}
+                                <div className="text-left">
+                                    <p className="text-xs font-bold text-gray-400 uppercase mb-2">Mentorship Areas</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {mentorDetails.mentorshipAreas.map(skill => (
+                                            <span key={skill} className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded-full border border-gray-200">
+                                                {skill}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Availability Section */}
+                                <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 text-left">
+                                    <div className="flex items-start gap-3">
+                                        <Clock className="text-green-600 mt-0.5 shrink-0" size={18} />
+                                        <div>
+                                            <p className="text-xs font-bold text-gray-400 uppercase">Availability</p>
+                                            <p className="text-sm font-medium text-gray-700 mt-1">
+                                                {mentorDetails.availabilityText}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            {/* Footer / Buttons (Fixed at bottom) */}
-            <div className="p-4 border-t border-gray-100 bg-gray-50 shrink-0">
-                <div className="grid grid-cols-2 gap-3">
-                   <a 
-                     href="mailto:chairman@gifon.org.ng?subject=Request%20for%20Guidance"
-                     className="flex items-center justify-center gap-2 py-3 px-4 bg-green-700 hover:bg-green-800 text-white rounded-xl font-bold text-sm transition-colors shadow-lg shadow-green-200"
-                   >
-                     <MessageCircle size={16} /> Request Guidance
-                   </a>
-                   <button 
-                     className="flex items-center justify-center gap-2 py-3 px-4 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 rounded-xl font-bold text-sm transition-colors"
-                     onClick={() => alert("Calendar scheduling integration would open here.")}
-                   >
-                     <CalendarCheck size={16} /> Schedule Session
-                   </button>
-                </div>
-            </div>
+                    {/* Footer / Buttons (Fixed at bottom) */}
+                    <div className="p-4 border-t border-gray-100 bg-gray-50 shrink-0">
+                        <div className="grid grid-cols-2 gap-3">
+                        <a 
+                            href={`mailto:${mentorDetails.contactEmail}?subject=Mentorship%20Request%20from%20${user.name}`}
+                            className="flex items-center justify-center gap-2 py-3 px-4 bg-green-700 hover:bg-green-800 text-white rounded-xl font-bold text-sm transition-colors shadow-lg shadow-green-200"
+                        >
+                            <MessageCircle size={16} /> Request Guidance
+                        </a>
+                        <button 
+                            className="flex items-center justify-center gap-2 py-3 px-4 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 rounded-xl font-bold text-sm transition-colors"
+                            onClick={() => alert("Scheduling integration coming soon.")}
+                        >
+                            <CalendarCheck size={16} /> Schedule Session
+                        </button>
+                        </div>
+                    </div>
+                </>
+            )}
 
           </div>
         </div>
