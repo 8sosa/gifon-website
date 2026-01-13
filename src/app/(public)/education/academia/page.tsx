@@ -105,8 +105,17 @@ export default function AcademiaResearchPage() {
     <>
       <Suspense fallback={<div className="h-[60vh] bg-gray-900 w-full animate-pulse" />}>
         <HeroSection
-          title={<><span className="cooper">GIFON</span> Academia & Research Collaboration Programme (ARCP)</>}
+          title={<><span className="cooper">GIFON</span> Academia & Research Collaboration Program</>}
           description="“Bridging Knowledge and Practice through Geospatial Intelligence.”"
+          description1={<>
+                The Academia & Research Collaboration Programme is an initiative of the Geospatial
+                Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) to foster strong 
+                partnerships between universities, research institutions, and <span className="cooper">GIFON</span> in 
+                advancing geospatial intelligence (GEOINT) education, research, and innovation.
+                The programme seeks to position Nigeria’s higher institutions and research centers as key 
+                knowledge partners in developing local solutions to national and regional security, 
+                resilience, and development challenges.                
+                </>}
           backgroundMedia={[
             "/media/academia-hero.jpg",
           ]}
@@ -114,33 +123,13 @@ export default function AcademiaResearchPage() {
       </Suspense>
 
       <main className="w-full font-sans">
-        
-        {/* --- Overview Section --- */}
-        <section id="overview" className="py-20 px-4 bg-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">Overview</h2>
-            <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-6">
-                <p>
-                The Academia & Research Collaboration Programme (ARCP) is an initiative of the Geospatial
-                Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) to foster strong 
-                partnerships between universities, research institutions, and <span className="cooper">GIFON</span> in 
-                advancing geospatial intelligence (GEOINT) education, research, and innovation.
-                </p>
-                <p className="font-medium text-green-800">
-                The programme seeks to position Nigeria’s higher institutions and research centers as key 
-                knowledge partners in developing local solutions to national and regional security, 
-                resilience, and development challenges.
-                </p>
-            </div>
-          </div>
-        </section>
 
         {/* --- Objectives Section --- */}
         <section id="objectives" className="py-20 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                Programme Objectives
+                Program Objectives
                 </h2>
                 <div className="w-16 h-1 bg-green-600 mx-auto rounded-full"></div>
             </div>
@@ -167,7 +156,7 @@ export default function AcademiaResearchPage() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                Programme Structure
+                Program Structure
                 </h2>
                 <p className="text-gray-500 max-w-2xl mx-auto">
                     A multi-faceted approach to integrating GEOINT into the academic and research ecosystem of Nigeria.

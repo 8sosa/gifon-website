@@ -125,6 +125,7 @@ useEffect(() => {
     <>
       <HeroSection
         title="Media Resources"
+        tagline={<>From Space To Street</>}
         description={<>Your trusted source for insights, updates, and<br/> resources on geospatial intelligence and innovation.</>}
         backgroundMedia = {[
           "/vids/globe.mp4"
@@ -300,9 +301,7 @@ useEffect(() => {
             
             {/* Section Header */}
             <div className="mb-16 text-center">
-              <span className="inline-block py-1 px-3 rounded-full bg-green-800/80 backdrop-blur-sm text-green-300 text-xs font-bold uppercase tracking-widest mb-4 border border-green-500/30">
-                Knowledge Hub
-              </span>
+              
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-cooper drop-shadow-md">
                 Publications & Research
               </h2>

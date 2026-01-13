@@ -82,6 +82,7 @@ export interface TeamMemberSkeleton {
     role: string;
     email?: string;
     bio?: string;
+    quote?: string;
     category: string;
     photo?: Asset;
   };
@@ -125,6 +126,7 @@ export type FlatMember = {
   name: string;
   role: string;
   bio?: string;
+  quote?: string;
   email?: string;
   category: string;
   photo: string;

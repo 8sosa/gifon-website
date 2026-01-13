@@ -68,35 +68,21 @@ export default function ConferencesProceedingsPage() {
       <HeroSection
         title="Conferences & Workshop Proceedings"
         description="“Documenting Dialogue. Preserving Knowledge. Shaping Policy.”"
+        description1={<> The Geospatial Intelligence Foundation of Nigeria (<span className="cooper font-bold">GIFON</span>)
+        recognizes the value of knowledge-sharing, collaboration, and
+        continuous learning in advancing the geospatial intelligence
+        ecosystem.
+        Through conferences, workshops, technical symposia, and
+        roundtables, <span className="cooper font-bold">GIFON</span> creates platforms where policymakers, security
+        agencies, industry leaders, researchers, and young innovators
+        converge to discuss pressing issues and shape future directions.
+      </>}
         backgroundMedia={[
           "/media/Conference Background.jpg",
         ]}
       />
 
       <main className="w-full font-sans">
-        
-        {/* --- Overview Section --- */}
-        <section id="overview" className="py-20 px-4 bg-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">
-              Advancing the GEOINT Ecosystem
-            </h2>
-            <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-6">
-              <p>
-                The Geospatial Intelligence Foundation of Nigeria (<span className="cooper font-bold">GIFON</span>)
-                recognizes the value of knowledge-sharing, collaboration, and
-                continuous learning in advancing the geospatial intelligence
-                ecosystem.
-              </p>
-              <p>
-                Through conferences, workshops, technical symposia, and
-                roundtables, <span className="cooper font-bold">GIFON</span> creates platforms where policymakers, security
-                agencies, industry leaders, researchers, and young innovators
-                converge to discuss pressing issues and shape future directions.
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* --- Proceedings Details Section --- */}
         <section id="proceedings" className="py-20 px-4 bg-gray-50">

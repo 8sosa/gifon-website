@@ -98,31 +98,22 @@ export default function YetaPage() {
   return (
     <>
       <HeroSection
-        title="Youth Empowerment & Talent Acceleration Program (YETAP)"
+        title="Youth Empowerment & Talent Acceleration Program"
         description="“Empowering Youth. Accelerating Talent. Building Nigeria’s Geospatial Future.”"
+        description1={<><span className="cooper font-bold">GIFON</span>&apos;s Youth Empowerment and Acceleration Program is designed to equip young Nigerians with the skills, knowledge, and opportunities to excel in Geospatial Intelligence and related technologies. Through mentorship, hands-on training, and innovation-driven projects, the program nurtures the next generation of leaders, innovators, and change-makers. By fostering creativity, leadership, and technical expertise, it empowers youth to contribute meaningfully to national security, sustainable development, and the technological advancement of Nigeria.</>}
         backgroundMedia={[
           "/media/ye.jpg",
         ]}
       />
 
       <main className="w-full font-sans">
-        
-        {/* --- Overview Section --- */}
-        <section id="overview" className="py-20 px-4 bg-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">Overview</h2>
-            <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-4">
-              <p><span className="cooper font-bold">GIFON</span>&apos;s Youth Empowerment and Acceleration Program is designed to equip young Nigerians with the skills, knowledge, and opportunities to excel in Geospatial Intelligence and related technologies. Through mentorship, hands-on training, and innovation-driven projects, the program nurtures the next generation of leaders, innovators, and change-makers. By fostering creativity, leadership, and technical expertise, it empowers youth to contribute meaningfully to national security, sustainable development, and the technological advancement of Nigeria.</p>
-            </div>
-          </div>
-        </section>
 
         {/* --- Programme Goals Section --- */}
         <section id="goals" className="py-20 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                YETAP Program Goals
+                Program Goals
                 </h2>
                 <div className="w-20 h-1 bg-green-600 mx-auto rounded-full"></div>
             </div>
@@ -148,7 +139,7 @@ export default function YetaPage() {
         <section id="structure" className="py-20 px-4 bg-white">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-semibold mb-12 text-center text-gray-800">
-              YETAP Program Structure
+              Program Structure
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

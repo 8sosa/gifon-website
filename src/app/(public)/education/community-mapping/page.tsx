@@ -105,33 +105,22 @@ export default function CommunityMappingPage() {
   return (
     <>
       <HeroSection
-        title="Community Mapping for Development (CMD) Program"
+        title="Community Mapping for Development Program"
         description="“Mapping Communities. Driving Development. Empowering People.”"
+        description1={<><span className="cooper font-bold">GIFON</span>&apos;s Community Mapping for Development initiative leverages geospatial intelligence to empower communities and drive local development. By mapping resources, infrastructure, and social assets, the program provides actionable insights that inform planning, improve service delivery, and foster sustainable growth. Through collaboration with local stakeholders, residents, and institutions, community mapping strengthens participation, transparency, and resilience, ensuring that development projects are targeted, effective, and inclusive for every Nigerian community.</>}
         backgroundMedia={[
           "/media/COMMUNITY MAPPING FOR DEVELOPMENT.jpg"
         ]}
       />
 
       <main className="w-full font-sans">
-        
-        {/* --- Overview Section --- */}
-        <section id="overview" className="py-20 px-4 bg-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">Overview</h2>
-            <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-6">
-              <p>
-                <span className="cooper font-bold">GIFON</span>&apos;s Community Mapping for Development initiative leverages geospatial intelligence to empower communities and drive local development. By mapping resources, infrastructure, and social assets, the program provides actionable insights that inform planning, improve service delivery, and foster sustainable growth. Through collaboration with local stakeholders, residents, and institutions, community mapping strengthens participation, transparency, and resilience, ensuring that development projects are targeted, effective, and inclusive for every Nigerian community.
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* --- Objectives Section --- */}
         <section id="objectives" className="py-20 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                CMD Programme Objectives
+                Program Objectives
                 </h2>
                 <div className="w-20 h-1 bg-green-600 mx-auto rounded-full"></div>
             </div>
@@ -158,7 +147,7 @@ export default function CommunityMappingPage() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                  CMD Programme Structure
+                  Program Structure
                 </h2>
                 <p className="text-gray-500">From awareness to action: our 5-step engagement model.</p>
             </div>

@@ -49,17 +49,31 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
           Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>)
         </>
         }
-        description='Source • Analyze • Automate • Share'
+        description='Mapping the future • Empowering the Nation'
         backgroundMedia={[
           "/vids/globe.mp4",
         ]}
       />
 
+        {/* --- Overview Section --- */}
+        <section id="overview" className="py-20 px-4 bg-linear-to-br from-green-200 via-white to-green-200">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">Mapping the future • Empowering the Nation</h2>
+            <div className="text-gray-700 leading-relaxed text-lg md:text-center space-y-6">
+              <p className='text-justify'>
+                The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is dedicated to advancing the use of geospatial intelligence as a strategic tool for national security, informed governance, and sustainable development. By harnessing mapping technologies, location based data, and analytical insight, <span className="cooper">GIFON</span> supports decision makers with the intelligence required to anticipate challenges, protect critical assets, and plan for the future. Through research, capacity development, policy engagement, and innovation, <span className="cooper">GIFON</span> bridges data and decision making, empowering institutions and communities with knowledge that drives resilience, growth, and national progress.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      <div id='our-partners'></div>
+      <PartnersCarousel />
       {/* --- SECTORS CAROUSEL --- */}
       <section id="sectors-carousel" className="py-16 bg-green-900 overflow-hidden border-b border-gray-100">
         <div className="max-w-5xl mx-auto mb-10 px-6 text-justify bellefair gap-6">
-           {/* <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Critical Infrastructure Support</h2> */}
-           <span className="text-xl font-bold text-gray-100"><span className="cooper">GIFON</span> Commercial Business Solutions provides cutting-edge geospatial intelligence (GEOINT) products, services, and advisory solutions to businesses, government agencies, and development partners. Leveraging advanced location intelligence, spatial analytics, mapping technologies, and data driven insights, <span className="cooper">GIFON</span> helps organizations make smarter decisions, optimize operations, and identify strategic opportunities. Our commercial offerings span risk assessment, market analysis, infrastructure planning, environmental monitoring, and security support, delivering actionable insights that drive efficiency, innovation, and competitive advantage. By combining technical expertise, tailored solutions, and world class geospatial tools, <span className="cooper">GIFON</span> empowers organizations to translate complex geospatial data into measurable business impact.</span>
+           <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-4 text-center">Our Business Solutions</h2>
+           <span className="text-xl font-bold text-gray-100"><span className="cooper">GIFON</span> Business Solutions provides cutting-edge geospatial intelligence (GEOINT) products, services, and advisory solutions to businesses, government agencies, and development partners. Leveraging advanced location intelligence, spatial analytics, mapping technologies, and data driven insights, <span className="cooper">GIFON</span> helps organizations make smarter decisions, optimize operations, and identify strategic opportunities. Our offerings span risk assessment, market analysis, infrastructure planning, environmental monitoring, and security support, delivering actionable insights that drive efficiency, innovation, and competitive advantage. By combining technical expertise, tailored solutions, and world class geospatial tools, <span className="cooper">GIFON</span> empowers organizations to translate complex geospatial data into measurable business impact.</span>
         </div>
         <div className="relative py-4">
             <div className="absolute inset-y-0 left-0 w-24 bg-linear-to-r from-green-900 to-transparent z-10 pointer-events-none"></div>
@@ -67,9 +81,6 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             <LogoCarousel items={sectorItems}/>
         </div>
       </section>
-      
-      <div id='our-partners'></div>
-      <PartnersCarousel />
 
       {/* --- NEWSLETTER SECTION --- */}
       <section className="relative w-full h-[600px] flex items-center justify-center overflow-hidden group">
@@ -83,44 +94,50 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
           <source src="/vids/globe.mp4" type="video/mp4" />
         </video>
         <div className="absolute top-0 left-0 w-full h-full bg-linear-to-t from-black/80 via-black/40 to-black/30 z-10"></div>
-        <div className="relative z-20 text-center px-4 w-full max-w-4xl mx-auto flex flex-row gap-4">
-          <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-12 rounded-3xl max-w-lg mx-auto shadow-2xl hover:bg-white/15 transition-all duration-300">
-            <div className="text-5xl text-green-400 mb-6 flex w-full items-center justify-center drop-shadow-lg">
-                <FaRegNewspaper />
-            </div>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
-                - Eyes on Location -
-            </h3>
-            <h4 className="text-lg md:text-xl font-medium text-green-100 mb-8">
-                The GeoINSIGHT Bulletin
-            </h4>
-            
-            <a 
-              href="/the-geoinsight-bulletin" 
-              className="group inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-green-500/40 transform hover:-translate-y-1"
-            >
-              UNLOCK INSIGHT
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+        <div className="relative z-20flex flex-col gap-4">
+          <div className="relative z-20 max-w-5xl mx-auto mb-10 px-6 text-justify bellefair gap-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-4 text-center">GEOINSIGHT</h2>
+            <span className="text-xl font-bold text-gray-100">GEOINSIGHT is <span className="cooper">GIFON</span>&apos;s flagship publication platform, delivering trusted geospatial intelligence through peer reviewed research, policy briefs, and timely bulletins that keep decision makers’ eyes on location.</span>
           </div>
-          <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-12 rounded-3xl max-w-lg mx-auto shadow-2xl hover:bg-white/15 transition-all duration-300">
-            <div className="text-5xl text-green-400 mb-6 flex w-full items-center justify-center drop-shadow-lg">
-                <FaRegNewspaper />
+          <div className="relative z-20 text-center px-4 w-full max-w-4xl mx-auto flex flex-row gap-4">
+            <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-12 rounded-3xl max-w-lg mx-auto shadow-2xl hover:bg-white/15 transition-all duration-300">
+              <div className="text-5xl text-green-400 mb-6 flex w-full items-center justify-center drop-shadow-lg">
+                  <FaRegNewspaper />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
+                  - Eyes on Location -
+              </h3>
+              <h4 className="text-lg md:text-xl font-medium text-green-100 mb-8">
+                  The GeoINSIGHT Bulletin
+              </h4>
+              
+              <a 
+                href="/the-geoinsight-bulletin" 
+                className="group inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-green-500/40 transform hover:-translate-y-1"
+              >
+                UNLOCK INSIGHT
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
-                - GeoINSIGHT -
-            </h3>
-            <h4 className="text-lg md:text-xl font-medium text-green-100 mb-8">
-              The Journal of Geospatial Intelligence
-            </h4>
-            
-            <a 
-              href="/the-GeoINSIGHT-journal" 
-              className="group inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-green-500/40 transform hover:-translate-y-1"
-            >
-              UNLOCK INSIGHT
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+            <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-12 rounded-3xl max-w-lg mx-auto shadow-2xl hover:bg-white/15 transition-all duration-300">
+              <div className="text-5xl text-green-400 mb-6 flex w-full items-center justify-center drop-shadow-lg">
+                  <FaRegNewspaper />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
+                  - GeoINSIGHT -
+              </h3>
+              <h4 className="text-lg md:text-xl font-medium text-green-100 mb-8">
+                The Journal of Geospatial Intelligence
+              </h4>
+              
+              <a 
+                href="/the-GeoINSIGHT-journal" 
+                className="group inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-green-500/40 transform hover:-translate-y-1"
+              >
+                UNLOCK INSIGHT
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -149,7 +166,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             {/* Text Content */}
             <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left space-y-6">
               <div>
-                  <h2 className="text-green-400 font-bold uppercase tracking-widest text-sm mb-2">Community</h2>
+                  <h2 className="text-green-400 font-bold uppercase tracking-widest text-sm mb-2"><span className="cooper">GIFON</span> Community</h2>
                   <h3 className="text-3xl md:text-5xl font-bold text-white leading-tight bellefair">
                     Get Involved
                   </h3>
@@ -171,7 +188,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
       {/* --- COMMUNITY HUB --- */}
       <section className="bg-gray-50 py-20 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 bellefair">Community Hub</h2>
+            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 bellefair"><span className="cooper">GIFON</span> Community Hub</h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
@@ -261,16 +278,14 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             <div className="w-full md:w-1/2">
               <div className="relative w-full aspect-4/3 rounded-2xl shadow-2xl overflow-hidden border-4 border-white transform md:rotate-2 hover:rotate-0 transition-transform duration-500">
                 <Image src="/media/spotlight.jpeg" alt="Victory Lucky" fill className="object-cover"/>
-                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-green-800 shadow-sm">Featured</div>
               </div>
             </div>
             <div className="w-full md:w-1/2 flex flex-col items-start text-left">
               <div className="inline-block mb-4">
-                <h2 className="text-green-600 text-sm font-bold uppercase tracking-widest mb-2">Showcase</h2>
                 <h3 className="text-3xl md:text-4xl font-bold text-gray-900">Members Spotlight</h3>
               </div>
               <p className="mb-8 text-gray-600 text-lg leading-relaxed">
-                We Look Forward to featuring a selected members story each month in this section. This feature celebrates a distinguished inductee into <span className="cooper">GIFON&apos;s</span> Hall of Fame.
+              Showcasing our members&apos; expertise, impact, and commitment to national geospatial advancement.
               </p>
               <button className="bg-gray-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-600 transition-all shadow-lg hover:shadow-green-500/30 flex items-center gap-2">
                 Launch Spotlight <ArrowRight size={18} />

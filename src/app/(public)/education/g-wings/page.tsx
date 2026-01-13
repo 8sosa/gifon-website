@@ -44,33 +44,20 @@ export default function WomenInGeointPage() {
   return (
     <>
       <HeroSection
-        title={<><span className="cooper">GIFON</span> Women in GEOINT G-WINGS(P)</>}
-        description={<>Empowering women in the field of geospatial intelligence through collaboration, professional development, mentorship, and advocacy.</>}
+        title={<><span className="cooper">GIFON</span> Women in GEOINT</>}
+        description1={<><span className="cooper">GIFON</span>&apos;s Women in GEOINT program is dedicated to empowering and amplifying the voices of women in the field of Geospatial Intelligence. Through mentorship, skills development, and leadership opportunities, the program fosters gender equity, nurtures talent, and builds a strong network of female professionals driving innovation, national security, and sustainable development in Nigeria. By supporting women to lead, innovate, and excel, <span className="cooper">GIFON</span> is shaping a more inclusive and impactful geospatial community.</>}
         backgroundMedia={[
           "/media/wings.JPG",
         ]}
       />
 
       <main className="w-full">
-        {/* --- Introduction Section --- */}
-        <section id="introduction" className="py-16 px-4 bg-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-semibold mb-6 text-gray-800">
-              Women in GEOINT G-WINGS(P)
-            </h2>
-            <div className="space-y-4 text-gray-700 leading-relaxed text-justify md:text-center">
-              <p>
-                <span className="cooper">GIFON</span>&apos;s Women in GEOINT program is dedicated to empowering and amplifying the voices of women in the field of Geospatial Intelligence. Through mentorship, skills development, and leadership opportunities, the program fosters gender equity, nurtures talent, and builds a strong network of female professionals driving innovation, national security, and sustainable development in Nigeria. By supporting women to lead, innovate, and excel, <span className="cooper">GIFON</span> is shaping a more inclusive and impactful geospatial community.
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* --- Justification Section (Using Cards) --- */}
         <section id="justification" className="py-16 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-semibold mb-12 text-center text-gray-800">
-            G-WINGS Program Justification
+            Program Justification
             </h2>
 
             {/* Grid layout for the cards */}

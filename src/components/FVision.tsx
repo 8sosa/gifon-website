@@ -7,6 +7,7 @@ import Dr from "./media/usman.jpg";
 
 export default function FoundingVision() {
   return (
+    <>
     <section className="relative py-20 bg-white overflow-hidden">
       {/* Background Decor */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
@@ -69,11 +70,11 @@ export default function FoundingVision() {
             </div>
 
             {/* Name Tag (Moved Below) */}
-            <div className="mt-8 text-center z-10">
+            {/* <div className="mt-8 text-center z-10">
               <h3 className="text-gray-900 font-bold text-2xl mb-1">Dr. AA Usman</h3>
               <p className="text-green-600 font-bold text-sm uppercase tracking-wider">Founder & Executive Chairman</p>
               <p className="text-gray-500 text-sm mt-1 font-medium">Geospatial Intelligence Foundation of Nigeria</p>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* RIGHT TEXT */}
@@ -104,5 +105,26 @@ export default function FoundingVision() {
         </div>
       </div>
     </section>
+    {/* Testimonials */}
+    <div id="testimonials" className="scroll-mt-24"></div>
+    <section className="py-24 px-4 md:px-6 bg-green-900 relative overflow-hidden">
+         {/* Decorative background pattern */}
+         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
+         
+         <div className="max-w-4xl mx-auto text-center relative z-10">
+            {/* <Quote className="text-green-400 w-16 h-16 mx-auto mb-6 opacity-80" /> */}
+            <blockquote className="text-2xl md:text-4xl text-white font-serif leading-relaxed mb-8 italic">
+                "A Legacy written on Maps- <br/>
+                Building the Eyes of the Republic Through<br/>
+                Geospatial Intelligence"
+            </blockquote>
+            <div className="flex flex-col items-center">
+                <p className="text-xl font-bold text-green-400">Dr. AA Usman</p>
+                <p className="text-green-200 uppercase tracking-widest text-sm">Founder & Executive Chairman</p>
+                <p className="text-green-200 uppercase tracking-widest text-md">Geospatial Intelligence Foundation of Nigeria</p>
+            </div>
+        </div>
+    </section>
+    </>
   );
 }

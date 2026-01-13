@@ -151,31 +151,22 @@ export default function OpenDataResearchPage() {
   return (
     <>
       <HeroSection
-        title={<>Open Data & Research Programme (ODRP)</>}
+        title={<>Open Data & Research Programme</>}
         description="“Open Data • Open Research • Smarter Nigeria.”"
+        description1={<><span className="cooper font-bold">GIFON</span>&apos;s Open Data and Research Program is dedicated to advancing knowledge, transparency, and innovation in Geospatial Intelligence. By providing access to high-quality geospatial data, conducting rigorous research, and promoting evidence-based analysis, the program supports informed decision making across government, security, and development sectors. It fosters collaboration among researchers, institutions, and communities, driving innovative solutions that strengthen national security, enhance governance, and accelerate sustainable development in Nigeria.</>}
         backgroundMedia={[
           "/images/F.jpeg",
         ]}
       />
 
       <main className="w-full font-sans">
-        
-        {/* --- Overview Section --- */}
-        <section id="overview" className="py-20 px-4 bg-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">Overview</h2>
-            <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-4">
-              <p><span className="cooper font-bold">GIFON</span>&apos;s Open Data and Research Program is dedicated to advancing knowledge, transparency, and innovation in Geospatial Intelligence. By providing access to high-quality geospatial data, conducting rigorous research, and promoting evidence-based analysis, the program supports informed decision making across government, security, and development sectors. It fosters collaboration among researchers, institutions, and communities, driving innovative solutions that strengthen national security, enhance governance, and accelerate sustainable development in Nigeria.</p>
-            </div>
-          </div>
-        </section>
 
         {/* --- Objectives Section --- */}
         <section id="objectives" className="py-20 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                ODRP Program Objectives
+                Program Objectives
                 </h2>
                 <div className="w-16 h-1 bg-green-600 mx-auto rounded-full"></div>
             </div>
@@ -202,7 +193,7 @@ export default function OpenDataResearchPage() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
-                  ODRP Program Structure
+                  Program Structure
                 </h2>
                 <p className="text-gray-500">A comprehensive approach to building Nigeria&apos;s data infrastructure.</p>
             </div>

@@ -24,7 +24,7 @@ function EducationContent() {
   const [formData, setFormData] = useState({
     // Section A: Personal
     fullName: '', dob: '', nationality: '', countryRes: '', gender: '', 
-    phone: '', email: '', address: '', linkedin: '',
+    phone: '', email: '', address: '', linkedin: '',membershipNumber: '',
     
     // Section B: Education
     qualification: '', institution: '', gradYear: '', fieldStudy: '', 
@@ -221,6 +221,10 @@ function EducationContent() {
             <div className="space-y-1">
                 <label className="text-xs font-bold text-gray-700">Contact Number</label>
                 <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
+            </div>
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-700">Membership Number</label>
+                <input type="number" name="membershipNumber" value={formData.membershipNumber} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
             </div>
         </div>
         <div className="space-y-1">
@@ -630,7 +634,7 @@ function EducationContent() {
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                 Our Programs
               </h2>
-              <p className="max-w-2xl mx-auto text-gray-600">
+              <p className="max-w-2xl mx-auto text-gray-600 text-justify">
               <span className="cooper">GIFON</span>&apos;s programs transform knowledge into action, turning ideas into real-world impact. Through cutting-edge initiatives, hands-on projects, and collaborative engagements, we empower professionals, institutions, and communities to harness Geospatial Intelligence for national security, sustainable development, and innovative solutions. Each program is an opportunity to learn, lead, and contribute to a safer, smarter, and more resilient Nigeria.
               </p>
             </div>
@@ -728,39 +732,23 @@ function EducationContent() {
                     
                     {/* Left: Content Info */}
                     <div className="xl:w-3/5 space-y-8">
+                        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight -mt-4 text-left">
+                            <span className="text-green-600">Scholarship</span>
+                        </h2>
                         <div>
-                            {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase tracking-widest mb-4">
-                                <Sparkles size={14} /> New Opportunity
-                            </div> */}
-                            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
-                               <span className="text-green-600">Scholarship</span>
-                            </h2>
-                            <p className="text-sm font-medium text-gray-500 italic">
+                            <p className="text-sm font-medium text-green-800 italic">
                                 “From Potential to Precision: Supporting Tomorrow&apos;s GEOINT Experts”
                             </p>
                         </div>
 
-                        <div className="prose prose-lg text-gray-600">
+                        <div className="prose prose-lg text-gray-600 text-justify">
                             <p>
-                            The <span className="cooper">GIFON</span> Scholarship Programme is a strategic human capital development initiative designed to identify, support, and nurture exceptional Nigerian talents in geospatial intelligence, geosciences, data analytics, earth observation, cybersecurity, artificial intelligence, and allied national development disciplines. The programme targets high potential youths, women, early career professionals, and underrepresented groups, providing financial assistance, mentorship, professional exposure, and access to <span className="cooper">GIFON</span>’s national and international GEOINT ecosystem. Beyond financial support, the scholarship is structured as a talent to impact pipeline, aligning academic excellence with Nigeria’s national security priorities, critical infrastructure protection, climate resilience, economic planning, and digital transformation goals. Recipients are integrated into <span className="cooper">GIFON</span>’s broader programmes, research, training, internships, policy engagement, and community mapping initiatives, ensuring that beneficiaries graduate not only as scholars, but as nation ready professionals capable of applying geospatial intelligence for public good.
-                            </p>
-                            <p>
+                            The Geospatial Intelligence Foundation of Nigeria's Scholarship Program is a strategic human capital development initiative designed to identify, support, and nurture exceptional Nigerian talents in geospatial intelligence, geosciences, data analytics, earth observation, cybersecurity, artificial intelligence, and allied national development disciplines. The programme targets high potential youths, women, early career professionals, and underrepresented groups, providing financial assistance, mentorship, professional exposure, and access to <span className="cooper">GIFON</span>’s national and international GEOINT ecosystem. Beyond financial support, the scholarship is structured as a talent to impact pipeline, aligning academic excellence with Nigeria’s national security priorities, critical infrastructure protection, climate resilience, economic planning, and digital transformation goals. Recipients are integrated into <span className="cooper">GIFON</span>’s broader programmes, research, training, internships, policy engagement, and community mapping initiatives, ensuring that beneficiaries graduate not only as scholars, but as nation ready professionals capable of applying geospatial intelligence for public good.
+                            <br/>
+                            <br/>
                             Eligibility is open to outstanding graduates and early-career professionals, typically within the first ten years of professional practice, with academic or professional backgrounds in geospatial sciences, remote sensing, GIS, engineering, data science, intelligence and security studies, environmental sciences, urban and regional planning, or related disciplines. Applicants must demonstrate strong academic or professional merit, ethical conduct, leadership potential, and a clear commitment to applying geospatial intelligence to national development, security, climate resilience, or public interest challenges. Selection is competitive and merit based, with an emphasis on excellence, diversity, and long-term impact at both national and global levels.
                             </p>
                         </div>
-
-                        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-green-100 hover:shadow-md transition-shadow">
-                                <GraduationCap className="text-green-600 mb-3" size={32} />
-                                <h4 className="font-bold text-gray-900 mb-2">Education Focus</h4>
-                                <p className="text-sm text-gray-600">Open to graduates in Geospatial Sciences, Engineering, Data Science, Security Studies, and Environmental Sciences.</p>
-                            </div>
-                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-green-100 hover:shadow-md transition-shadow">
-                                <Globe className="text-blue-600 mb-3" size={32} />
-                                <h4 className="font-bold text-gray-900 mb-2">Global Exposure</h4>
-                                <p className="text-sm text-gray-600">Includes mentorship, international training exposure, and integration into <span className="cooper">GIFON</span>'s research ecosystem.</p>
-                            </div>
-                        </div> */}
                     </div>
 
                     {/* Right: Eligibility & Application Card */}
@@ -811,7 +799,7 @@ function EducationContent() {
                                         onClick={handleOpenModal}
                                         className="block w-full py-4 bg-green-600 hover:bg-green-700 text-white font-bold text-center rounded-xl transition-all shadow-lg hover:shadow-green-900/20"
                                     >
-                                        Apply Now via Portal
+                                        Apply Now
                                     </button>
                                     <p className="text-xs text-center text-gray-400 mt-3">
                                         Selection is competitive and merit-based.
@@ -957,10 +945,10 @@ function EducationContent() {
                         <activeTalentFeature.icon size={40} />
                     </div>
                     <div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 text-center">
                             {activeTalentFeature.title}
                         </h3>
-                        <p className={`font-medium max-w-2xl italic ${activeTalentFeature.textClass}`}>
+                        <p className={`font-medium max-w-2xl italic ${activeTalentFeature.textClass} text-center`}>
                             {activeTalentFeature.tagline}
                         </p>
                     </div>

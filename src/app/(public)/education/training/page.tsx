@@ -99,8 +99,18 @@ export default function TrainingCertificationPage() {
   return (
     <>
       <HeroSection
-        title={<><span className="cooper">GIFON</span>  Training & Certification Programmes (TCP)</>}
+        title={<><span className="cooper">GIFON</span>  Training & Certification Programmes</>}
         description="“Building Skills. Certifying Excellence. Advancing GEOINT for Nigeria and Beyond.”"
+        description1={<>
+                The Training & Certification Programmes of the Geospatial
+                Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) are designed to
+                provide standardized, high-quality, and industry-recognized
+                certifications in geospatial intelligence, data science, and
+                related technologies.
+                These programmes strengthen the national workforce, build
+                institutional capacity, and align Nigerian expertise with global
+                GEOINT standards.
+        </>}
         backgroundMedia={[
           "/media/training.jpeg",
         ]}
@@ -109,25 +119,7 @@ export default function TrainingCertificationPage() {
       <main className="w-full font-sans">
         
         {/* --- Overview Section --- */}
-        <section id="overview" className="py-20 px-4 bg-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">Overview</h2>
-            <div className="text-gray-700 leading-relaxed text-lg text-justify md:text-center space-y-6">
-                <p>
-                The Training & Certification Programmes (TCP) of the Geospatial
-                Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) are designed to
-                provide standardized, high-quality, and industry-recognized
-                certifications in geospatial intelligence, data science, and
-                related technologies.
-                </p>
-                <p className="font-medium text-green-800">
-                These programmes strengthen the national workforce, build
-                institutional capacity, and align Nigerian expertise with global
-                GEOINT standards.
-                </p>
-            </div>
-          </div>
-        </section>
+        
 
         {/* --- Objectives Section --- */}
         <section id="objectives" className="py-20 px-4 bg-gray-50">

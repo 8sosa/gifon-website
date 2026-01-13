@@ -55,24 +55,14 @@ export default function GeospatialHubPage() {
     <>
       <HeroSection
         title="National Geospatial Security & Intelligence Hub"
-        description="“Mapping • Securing • Empowering”"
+        description='Source • Analyze • Automate • Share'
+        description1={<>The National Geospatial Security and Intelligence Hub is Nigeria&apos;s center of excellence for geospatial intelligence, providing critical insights to strengthen national security, protect infrastructure, and support strategic decision-making. By integrating advanced geospatial technologies, data analytics, and intelligence expertise, the Hub empowers government, security agencies, and private institutions to anticipate threats, respond effectively, and drive sustainable development. It serves as a national platform for innovation, collaboration, and capacity building, ensuring that geospatial intelligence translates into actionable solutions for a safer and more resilient Nigeria.</>}
         backgroundMedia={[
           "/media/Geospatial Hub.JPG",
         ]}
       />
 
       <main className="w-full font-sans">
-        
-        {/* --- Overview Section --- */}
-        <section id="overview" className="py-20 px-4 bg-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-gray-800">Overview</h2>
-            <div className="text-gray-700 leading-relaxed text-lg md:text-center space-y-6">
-              <p className='text-justify'>The National Geospatial Security and Intelligence Hub is Nigeria&apos;s center of excellence for geospatial intelligence, providing critical insights to strengthen national security, protect infrastructure, and support strategic decision-making. By integrating advanced geospatial technologies, data analytics, and intelligence expertise, the Hub empowers government, security agencies, and private institutions to anticipate threats, respond effectively, and drive sustainable development. It serves as a national platform for innovation, collaboration, and capacity building, ensuring that geospatial intelligence translates into actionable solutions for a safer and more resilient Nigeria.</p>
-            </div>
-          </div>
-        </section>
-
         {/* --- Core Objectives Section --- */}
         <section id="objectives" className="py-20 px-4 bg-gray-50">
           <div className="max-w-6xl mx-auto">

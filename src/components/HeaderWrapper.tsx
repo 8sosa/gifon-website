@@ -42,7 +42,7 @@ export default async function HeaderWrapper() {
             { label: 'Training', anchor: 'C-T' }, 
             { label: 'Programs', anchor: 'programs', children: [ 
                 { label: 'Youth Empowerment & Talent Acceleration', link: '/education/youth-empowerment' }, 
-                { label: 'Women in GEOINT (WINGS)', link: '/education/g-wings' }, 
+                { label: 'Women in GEOINT', link: '/education/g-wings' }, 
                 { label: 'Geoinnovation & Tech Incubation', link: '/education/Y-GITIP' }, 
                 { label: 'National Geospatial Security Hub', link: '/education/geospatial-intelligence-hub' }, 
                 { label: 'Community Mapping', link: '/education/community-mapping' }, 

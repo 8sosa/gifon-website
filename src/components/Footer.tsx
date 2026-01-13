@@ -14,6 +14,7 @@ export default function Footer() {
       { label: 'Events', href: '/events' },
       { label: 'Media Resources', href: '/resources' },
       { label: 'Groups & Forums', href: '/forums' },
+      { label: 'Contact Us', href: '/contact-us' },
   ];
 
   const legalLinks = [

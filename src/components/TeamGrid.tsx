@@ -201,7 +201,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
                 </div>
 
                 <div className="prose prose-sm text-gray-600 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
-                  <p className="leading-relaxed">
+                  <p className="leading-relaxed text-justify">
                     {/* Fallback text if bio isn't in FlatMember yet */}
                     {(selectedMember as any).bio || "Biography currently unavailable."}
                   </p>
@@ -210,7 +210,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
                 {/* Optional Footer/Contact in Modal */}
                 <div className="mt-8 pt-6 border-t border-gray-100 flex items-center gap-2">
                    <div className="h-1 w-8 bg-green-500 rounded-full"></div>
-                   <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">GIFON Team Member</span>
+                   <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">{(selectedMember as any).quote || "Quote currently unavailable."}</span>
                 </div>
               </div>
             </div>

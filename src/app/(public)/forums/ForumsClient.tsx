@@ -49,6 +49,7 @@ export default function ForumsClient() {
       <HeroSection
         title="Groups & Forums"
         description="Connecting minds, building networks, and advancing geospatial intelligence together."
+        description1={<><span className="cooper">GIFON</span> Groups & Forums provide dynamic platforms for professionals, practitioners, policymakers, researchers, and enthusiasts to connect, collaborate, and share knowledge within the geospatial intelligence ecosystem. These platforms foster active engagement, peer learning, and multi stakeholder dialogue on key topics in GEOINT, STEM, innovation, national security, infrastructure, and sustainable development. Through structured groups, interest communities, and thematic forums, participants can exchange insights, discuss challenges, showcase innovations, and develop practical solutions for national and regional priorities. <span className="cooper">GIFON</span> Groups & Forums are designed to bridge gaps between academia, industry, government, and civil society, building a strong, informed, and collaborative GEOINT community.</>}
         backgroundMedia={["/media/Background Groups and forums.jpg"]}
       />
 
@@ -56,9 +57,6 @@ export default function ForumsClient() {
         
         {/* --- 2. The Forums Grid --- */}
         <section className="py-16 px-4 md:px-6 max-w-7xl mx-auto">
-          <div className='pb-16'>
-            <p><span className="cooper">GIFON</span> Groups & Forums provide dynamic platforms for professionals, practitioners, policymakers, researchers, and enthusiasts to connect, collaborate, and share knowledge within the geospatial intelligence ecosystem. These platforms foster active engagement, peer learning, and multi stakeholder dialogue on key topics in GEOINT, STEM, innovation, national security, infrastructure, and sustainable development. Through structured groups, interest communities, and thematic forums, participants can exchange insights, discuss challenges, showcase innovations, and develop practical solutions for national and regional priorities. <span className="cooper">GIFON</span> Groups & Forums are designed to bridge gaps between academia, industry, government, and civil society, building a strong, informed, and collaborative GEOINT community.</p>
-          </div>
            <div className="text-center mb-16">
              <h2 className="text-3xl font-bold text-gray-900">Explore Our Forums</h2>
            </div>
@@ -69,7 +67,7 @@ export default function ForumsClient() {
                const details = forumDetails[forum.id];
                
                return (
-                 <div key={forum.id} className="group relative hover:z-50">
+                 <div key={forum.id} className="group relative hover:z-10">
                     {/* --- A. THE SLIDING DRAWER --- */}
                    {details && (
                      <div className={`
@@ -128,7 +126,7 @@ export default function ForumsClient() {
                    )}
 
                    {/* --- B. THE MAIN CARD --- */}
-                   <div className="relative z-20 h-full bg-white rounded-3xl shadow-lg border border-gray-100 flex flex-col transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:border-green-100" id={forum.id}>
+                   <div className="relative z-9 h-full bg-white rounded-3xl shadow-lg border border-gray-100 flex flex-col transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:border-green-100" id={forum.id}>
                      
                      <div className="p-8 pb-4">
                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-colors duration-300 ${getForumColor(forum.id)}`}>
@@ -140,7 +138,7 @@ export default function ForumsClient() {
                      </div>
 
                      <div className="px-8 pb-8 grow">
-                       <p className="text-gray-600 leading-relaxed text-sm">
+                       <p className="text-gray-600 leading-relaxed text-sm text-justify">
                          {forum.description}
                        </p>
                      </div>

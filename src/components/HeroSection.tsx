@@ -8,6 +8,7 @@ type HeroSectionProps = {
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
   description1?: string | React.ReactNode;
+  tagline?: string | React.ReactNode;
   // Now accepts a single string OR an array of strings
   backgroundMedia?: string | string[]; 
   cycleInterval?: number;
@@ -24,6 +25,7 @@ export default function HeroSection({
   title = "",
   description = "",
   description1 = "",
+  tagline = "",
   backgroundMedia = [], // Default empty
   cycleInterval = 5000,
   ctaText,
@@ -74,8 +76,6 @@ export default function HeroSection({
                 className="absolute top-0 left-0 w-full h-full object-cover"
               />
             ) : (
-              // Using standard img tag with object-cover for background behavior
-              // You can use Next/Image here too, but standard img is often smoother for crossfading backgrounds
               <Image
                 src={src}
                 alt={`Slide ${index}`}
@@ -94,23 +94,30 @@ export default function HeroSection({
       {/* --- CONTENT LAYER (Z-Index higher than background) --- */}
       <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto -mt-16">
         
-        {/* Title: Scales from text-4xl (mobile) to text-7xl (desktop) */}
+        {/* Title */}
         {title && (
-          <h1 className="bellefair text-white font-bold mb-4 drop-shadow-lg text-2xl sm:text-5xl md:text-6xl lg:text-5xl leading-tight -mt-1 max-w-7xl">
+          <h1 className="bellefair text-white font-bold mb-4 drop-shadow-lg text-xl sm:text-4xl md:text-5xl leading-tight -mt-1 max-w-7xl opacity-90">
             {title}
           </h1>
         )}
+        
+        {/* TAGLINE: Now significantly bigger */}
+        {tagline && (
+          <h2 className="bellefair text-white font-bold mb-6 drop-shadow-2xl text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-none max-w-7xl tracking-wide">
+            {tagline}
+          </h2>
+        )}
 
-        {/* Description: Scales text size */}
+        {/* Description */}
         {description && (
-          <p className="sen text-gray-200 text-[10px] sm:text-xl md:text-2xl font-light text-justify mb-8 drop-shadow-md">
+          <p className="sen text-gray-200 text-sm sm:text-xl md:text-2xl font-light text-justify mb-8 drop-shadow-md">
             {description}
           </p>
         )}
         
-        {/* Description: Scales text size */}
+        {/* Description 1 */}
         {description1 && (
-          <p className="bellota text-gray-200 text-lg sm:text-xl md:text-2xl font-light max-w-3xl text-center mb-8 drop-shadow-md">
+          <p className="bellota text-gray-200 text-sm sm:text-xl md:text-xl font-light max-w-3xl text-justify drop-shadow-md">
             {description1}
           </p>
         )}
@@ -119,7 +126,7 @@ export default function HeroSection({
         {ctaText && ctaLink && (
           <Link 
             href={ctaLink} 
-            className="bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition transform hover:scale-105 shadow-lg"
+            className="bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition transform hover:scale-105 shadow-lg mt-8"
           >
             {ctaText}
           </Link>

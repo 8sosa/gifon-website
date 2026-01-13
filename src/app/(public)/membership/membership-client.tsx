@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { AiOutlineMail } from "react-icons/ai";
 import Modal from '@/components/Modal';
+import ExpandableGrid from '@/components/ExpandableCard';
 
 interface CategoryItem {
     title: string;
@@ -101,95 +102,30 @@ interface MembershipFormData {
   agreedToDeclaration: boolean;
 }
 
-const forumContent = {
-    supportingDocuments: `
-    <div class="space-y-4 text-sm md:text-base font-sans text-gray-700">
-  <h2 style="font-size: 1.1rem; font-weight: 700; color: #15803d; margin-bottom: 1rem;"><span className="cooper">GIFON</span> Membership Registration – Supporting Documents Checklist</h2>
-  
-  <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
-    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Student Membership</h3>
-    <ul style="list-style-type: disc; padding-left: 1.5rem;">
-      <li>Valid Student ID Card</li>
-      <li>Admission Letter or Proof of Enrollment</li>
-      <li>Valid Government-Issued identification (NIMC, International Passport, residence permit)</li>
-      <li>Recommendation Letter (Optional)</li>
-      <li>Coloured Passport Photograph (2x2, not older than 1 month)</li>
-    </ul>
-  </div>
-
-  <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
-    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Professional Membership</h3>
-    <ul style="list-style-type: disc; padding-left: 1.5rem;">
-      <li>Updated Curriculum Vitae (CV)</li>
-      <li>Academic Certificates (Higher Institution)</li>
-      <li>Professional Certifications (if any)</li>
-      <li>Valid Government-Issued identification (NIMC, International Passport, residence permit)</li>
-      <li>Coloured Passport Photograph (2x2, not older than 1 month)</li>
-    </ul>
-  </div>
-
-   <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
-    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Institutional Membership</h3>
-    <ul style="list-style-type: disc; padding-left: 1.5rem;">
-      <li>Certificate of Establishment / Accreditation</li>
-      <li>Letter of Intent on Official Institutional Letterhead</li>
-      <li>
-        Details of Authorized Contact Person:
-        <ul style="list-style-type: circle; padding-left: 1.5rem; margin-top: 0.25rem;">
-          <li>Name and Designation</li>
-          <li>Official Email Address & Official Phone Number</li>
-        </ul>
-      </li>
-      <li>Institutional ID Card of Authorized Contact Person(s)</li>
-      <li>Valid Government-Issued identification (NIMC, International Passport, residence permit)</li>
-      <li>Coloured Passport Photograph of Authorized Contact Person (2x2, not older than 1 month)</li>
-    </ul>
-  </div>
-  
-   <div style="background-color: #f9fafb; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #16a34a;">
-    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Corporate Membership</h3>
-    <ul style="list-style-type: disc; padding-left: 1.5rem;">
-      <li>Certificate of Incorporation</li>
-      <li>Letter of Intent on Company Letterhead</li>
-      <li>
-        Details of Authorized Contact Person:
-        <ul style="list-style-type: circle; padding-left: 1.5rem; margin-top: 0.25rem;">
-          <li>Name and Designation</li>
-          <li>Official Email Address & Official Phone Number</li>
-        </ul>
-      </li>
-      <li>Valid Government-Issued identification (NIMC, International Passport, residence permit) of Authorized Contact Person</li>
-      <li>Coloured Passport Photograph of Authorized Contact Person (2x2, not older than 1 month)</li>
-    </ul>
-  </div>
-</div>
-  `
-}
-
 const pioneerMembers = [
     {
-        name: " ",
-        role: " ",
+        name: "Dr.",
+        role: "Founder",
         photo: "/ph.svg"
     },
     {
-        name: " ",
-        role: " ",
+        name: "Dr.  ",
+        role: "Co-Founder",
         photo: "/ph.svg"
     },
     {
-        name: " ",
-        role: " ",
+        name: "Dr. ",
+        role: "Co-Founder",
         photo: "/ph.svg"
     },
     {
-        name: " ",
-        role: " ",
+        name: "Dr. ",
+        role: "Co-Founder",
         photo: "/ph.svg"
     },
     {
-        name: " ",
-        role: " ",
+        name: "Dr. ",
+        role: "Co-Founder",
         photo: "/ph.svg"
     },
 ];
@@ -990,13 +926,13 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                     </div>
                     <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100 leading-relaxed text-lg text-gray-700 text-justify md:text-center relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-green-400 to-green-600"></div>
-                        <p>Join <span className="cooper font-bold">GIFON</span> and be part of a movement shaping the future of Nigeria through Geospatial Intelligence. Here, you don&apos;t just learn, you innovate, collaborate, and lead initiatives that strengthen national security, advance sustainable development, and transform communities. Connect with visionary experts, gain access to cutting-edge knowledge, and contribute your skills to projects that make a real, lasting impact. At <span className="cooper font-bold">GIFON</span>, your insights drive progress, your intelligence fuels solutions, and together, we empower a safer, smarter, and more resilient Nigeria.</p>
+                        <p className='text-justify'>Join <span className="cooper font-bold">GIFON</span> and be part of a community shaping the future of Nigeria through Geospatial Intelligence. Here, you don&apos;t just learn, you innovate, collaborate, and lead initiatives that strengthen national security, advance sustainable development, and transform communities. Connect with visionary experts, gain access to cutting-edge knowledge, and contribute your skills to projects that make a real, lasting impact. At <span className="cooper font-bold">GIFON</span>, your insights drive progress, your intelligence fuels solutions, and together, we empower a safer, smarter, and more resilient Nigeria.</p>
                     </div>
                 </div>
             </section>
 
             {/* How to Apply Section */}
-            <div id="apply" className="scroll-mt-24"></div>
+            {/* <div id="apply" className="scroll-mt-24"></div>
             <section className="py-20 px-4 md:px-6 bg-white">
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center mb-16">
@@ -1016,7 +952,6 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                                 </div>
                                 <h3 className="font-bold text-gray-900 mb-2">{step.title}</h3>
                                 <p className="text-xs text-gray-500 leading-relaxed">{step.desc}</p>
-                                {/* Connector Line (Desktop Only) */}
                                 {i < 4 && (
                                     <div className="hidden md:block absolute top-11 -right-1/2 w-full h-0.5 bg-gray-200 -z-10"></div>
                                 )}
@@ -1024,16 +959,16 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                         ))}
                     </div>
 
-                    {/* <div className="text-center mt-12">
+                    <div className="text-center mt-12">
                         <button
                             onClick={() => openDocModal(forumContent.supportingDocuments, "Supporting Documents Checklist")}
                             className='inline-flex items-center gap-2 text-green-700 bg-green-50 px-6 py-3 rounded-full hover:bg-green-100 transition font-semibold border border-green-200'
                         >
                             <FileText size={18} /> View Required Documents Checklist
                         </button>
-                    </div> */}
+                    </div>
                 </div>
-            </section>
+            </section> */}
 
             <div id="categories" className="scroll-mt-24"></div>
             <section className="relative px-4 md:px-6 py-24 bg-slate-50 overflow-hidden flex flex-col items-center">
@@ -1044,88 +979,15 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                 </div>
                 
                 {/* Section Header */}
-                <div className="relative z-10 text-center mb-16 max-w-3xl">
-                    <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-                    Membership <span className="text-transparent bg-clip-text bg-linear-to-r from-green-600 to-emerald-800">Categories</span>
+                <div className="relative z-10 text-center mb-4 max-w-3xl">
+                    <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight">
+                    Membership Application <span className='text-green-600'>Process</span>
                     </h2>
                 </div>
 
                 {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full relative z-10">
-                    {categories.map((item, idx) => (
-                        <div
-                            key={idx}
-                            // Ensure 'group' class is present on the parent card
-                            className="group relative bg-white rounded-4xl p-8 shadow-xl shadow-gray-200/40 hover:shadow-2xl hover:shadow-green-900/10 transition-all duration-500 border border-gray-100 hover:border-green-500/30 flex flex-col hover:-translate-y-2 overflow-hidden"
-                        >
-                            {/* Hover Gradient Blob */}
-                            <div className="absolute -top-20 -right-20 w-40 h-40 bg-green-500/10 rounded-full blur-3xl group-hover:bg-green-500/20 transition-all duration-500"></div>
-
-                            {/* Header Section */}
-                            <div className="relative mb-6">
-                                <div className="flex items-start justify-between mb-6">
-                                    <div className="p-4 rounded-2xl bg-green-400 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-all duration-500 shadow-sm group-hover:shadow-green-200 group-hover:scale-110 group-hover:rotate-3">
-                                        {getCategoryIcon(idx)}
-                                    </div>
-                                    {/* Subtle ID number or Decor */}
-                                    <span className="text-6xl font-bold text-gray-100 select-none group-hover:text-green-50 transition-colors">
-                                        0{idx + 1}
-                                    </span>
-                                </div>
-                                
-                                <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-green-700 transition-colors">
-                                    {item.title}
-                                </h3>
-                                <p className="text-gray-500 text-sm leading-relaxed min-h-10">
-                                    {item.desc}
-                                </p>
-                            </div>
-
-                            {/* Divider */}
-                            <div className="w-full h-px bg-gray-100 mb-6 group-hover:bg-green-100 transition-colors"></div>
-
-                            {/* Supporting Documents List - UPDATED SECTION */}
-                            {item.documents && item.documents.length > 0 && (
-                                <div 
-                                    // 1. Default state: Hidden, zero height, transparent, no margin bottom
-                                    // 2. Hover state (group-hover:): Max height expands, opacity becomes 1, margin bottom returns
-                                    // 3. Transition handles the smooth animation between states
-                                    className="grow max-h-0 opacity-0 overflow-hidden mb-0 group-hover:max-h-[500px] group-hover:opacity-100 group-hover:mb-8 transition-all duration-500 ease-in-out"
-                                >
-                                    <h4 className="text-xs font-bold text-green-800 uppercase tracking-widest mb-4 flex items-center gap-2">
-                                        Requirements
-                                    </h4>
-                                    <ul className="space-y-3">
-                                        {item.documents.map((doc, dIdx) => (
-                                            <li key={dIdx} className="flex items-start gap-3 text-sm text-gray-600 leading-snug group/item">
-                                                <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 shrink-0 group-hover/item:text-green-600" />
-                                                <span className="group-hover/item:text-gray-900 transition-colors">{doc}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-
-                            {/* Footer / Button Area */}
-                            <div className="mt-auto pt-4 relative z-20"> {/* Added relative z-20 to ensure button stays on top during transition */}
-                                {item.title !== "Fellow/Honorary Membership" ? (
-                                    <button
-                                        onClick={() => handleApplyClick(item)}
-                                        className="w-full py-4 rounded-xl font-bold text-white bg-gray-900 hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-green-200 flex items-center justify-center gap-2 group/btn relative overflow-hidden"
-                                    >
-                                        <span className="relative z-10 flex items-center gap-2">
-                                            Apply Now 
-                                            <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
-                                        </span>
-                                    </button>
-                                ) : (
-                                    <div className="w-full py-4 rounded-xl font-bold bg-amber-50 border border-amber-100 text-amber-700/60 flex items-center justify-center gap-2 cursor-not-allowed text-sm uppercase tracking-wide">
-                                        By Nomination Only
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    ))}
+                <div className="w-full">
+                    <ExpandableGrid />
                 </div>
             </section>
             
@@ -1218,11 +1080,11 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             </section>
 
             <div  id="pioneer-members" className="scroll-mt-24"></div>
-            <section className="py-20 px-4 md:px-6 bg-teal-900">
+            <section className="py-20 px-4 md:px-6 bg-green-900">
                 <h2 className="text-3xl md:text-5xl font-bold text-gray-100 mb-6 leading-tight text-center">
                     Pioneer Members
                 </h2>
-                <div className="mt-16 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-6 items-center">
+                <div className="mt-16 max-w-5xl mx-auto flex flex-row gap-6 items-center">
                     {pioneerMembers.map((m, i) => (
                         <div key={i} className="flex flex-col items-center relative">      
                         <div className="flex flex-col items-center text-center w-40 group">
@@ -1234,7 +1096,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                               className=" object-cover shadow-md border-4 border-white ring-1 ring-gray-100"
                             />
                           </div>
-                          <h4 className="text-base font-bold text-gray-900 bellefair mb-0.5 group-hover:text-green-700 transition-colors">
+                          <h4 className="text-base font-bold text-gray-100 bellefair mb-0.5 group-hover:text-green-700 transition-colors">
                             {m.name}
                           </h4>
                           <p className="text-xs text-green-600 font-medium sen uppercase tracking-tight">
@@ -1243,39 +1105,6 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                         </div>
                       </div>
                     ))}
-                </div>
-            </section>
-
-            {/* Testimonials */}
-            <div id="testimonials" className="scroll-mt-24"></div>
-            <section className="py-24 px-4 md:px-6 bg-green-900 relative overflow-hidden">
-                 {/* Decorative background pattern */}
-                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
-                 
-                 <div className="max-w-4xl mx-auto text-center relative z-10">
-                    {/* <Quote className="text-green-400 w-16 h-16 mx-auto mb-6 opacity-80" /> */}
-                    <blockquote className="text-2xl md:text-4xl text-white font-serif leading-relaxed mb-8 italic">
-                        "A Legacy written on Maps- <br/>
-                        Building the Eyes of the Republic Through<br/>
-                        Geospatial Intelligence"
-                    </blockquote>
-                    <div className="flex flex-col items-center">
-                        <p className="text-xl font-bold text-green-400">Dr. AA Usman</p>
-                        <p className="text-green-200 uppercase tracking-widest text-sm">Founder & Executive Chairman</p>
-                        <p className="text-green-200 uppercase tracking-widest text-md">Geospatial Intelligence Foundation of Nigeria</p>
-                    </div>
-                </div>
-            </section>
-            
-            {/* Contact Section */}
-            <div id="contact" className="scroll-mt-24"></div>
-            <section className="py-20 px-4 md:px-6 bg-gray-50 text-center">
-                <div className="max-w-2xl mx-auto">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Still have questions?</h2>
-                    <div className="inline-flex items-center gap-2 bg-white px-8 py-4 rounded-full shadow-md border border-gray-100 text-lg font-medium text-gray-700 hover:text-green-600 transition-colors cursor-pointer group">
-                        <AiOutlineMail className="text-green-600 text-xl group-hover:scale-110 transition-transform" /> 
-                        <a href="mailto:membership@gifon.org.ng">membership@gifon.org.ng</a>
-                    </div>
                 </div>
             </section>
 

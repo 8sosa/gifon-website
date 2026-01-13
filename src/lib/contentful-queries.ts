@@ -180,6 +180,7 @@ export async function getTeamMembers(): Promise<FlatMember[]> {
       name: getString(f.name),
       role: getString(f.role),
       bio: getString(f.bio),
+      quote: getString(f.quote),
       email: f.email ? getString(f.email) : undefined,
       category: getString(f.category),
       photo,

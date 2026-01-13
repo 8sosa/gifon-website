@@ -30,13 +30,12 @@ const resourcesData: ResourcesData = {
     "gallery": [
       // Dated Files
       {"id":"1", "title": "Jan 01, 2012 (2)", "image": "/media/resources/20120101_073630.JPG", "link": "#" },
-      {"id":"2", "title": "Jan 07, 2012 (1)", "image": "/media/resources/20120107_021449.JPG", "link": "#" },
       {"id":"3", "title": "Jan 07, 2012 (2)", "image": "/media/resources/20120107_023517.JPG", "link": "#" },
       {"id":"4", "title": "Mar 08, 2012 (1)", "image": "/media/resources/20120308_092350 (1).JPG", "link": "#" },
       {"id":"5", "title": "Mar 08, 2012 (2)", "image": "/media/resources/20120308_093255.JPG", "link": "#" },
       {"id":"6", "title": "Mar 10, 2012 (1)", "image": "/media/resources/20120310_041150.JPG", "link": "#" },
       {"id":"7", "title": "Mar 10, 2012 (2)", "image": "/media/resources/20120310_052733.JPG", "link": "#" },
-      {"id":"8", "title": "Mar 14, 2012 (1)", "image": "/media/resources/20120314_185032.JPG", "link": "#" },
+      {"id":"8", "title": "Our serene training facility", "image": "/media/resources/20120314_185032.JPG", "link": "#" },
       {"id":"10", "title": "Apr 26, 2023", "image": "/media/resources/20230426_121805.JPG", "link": "#" },
       {"id":"11", "title": "Apr 18, 2024 (1)", "image": "/media/resources/20240418_130319.JPG", "link": "#" },
       {"id":"12", "title": "Apr 18, 2024 (2)", "image": "/media/resources/20240418_130339.JPG", "link": "#" },
