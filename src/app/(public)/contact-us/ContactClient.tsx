@@ -55,7 +55,7 @@ export default function ContactClient() {
 
   return (
     <section 
-        className="relative min-h-screen w-full flex flex-col items-center justify-center py-20 px-4 bg-fixed bg-cover bg-center bg-no-repeat"
+        className="relative min-h-screen w-full flex flex-col items-center justify-center py-12 md:py-20 px-4 bg-fixed bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/media/CONTACT US IMG.jpg')" }}
     >
         {/* 1. DARK OVERLAY */}
@@ -65,37 +65,37 @@ export default function ContactClient() {
         <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center">
             
             {/* Header */}
-            <div className="text-center mb-12">
-                <h1 className="text-white font-bold mb-4 drop-shadow-xl text-4xl md:text-6xl tracking-tight">
+            <div className="text-center mb-8 md:mb-12">
+                <h1 className="text-white font-bold mb-4 drop-shadow-xl text-3xl md:text-6xl tracking-tight">
                     Contact Us
                 </h1>
-                <p className="text-gray-200 text-lg max-w-2xl mx-auto font-light">
+                <p className="text-gray-200 text-base md:text-lg max-w-2xl mx-auto font-light px-4">
                     Reach out to our departments or visit our headquarters.
                 </p>
             </div>
 
             {/* --- THE HUB LAYOUT --- */}
-            <div className="w-full space-y-6 mb-16">
+            <div className="w-full space-y-6 mb-12 md:mb-16">
                 
-                {/* TOP SECTION */}
+                {/* TOP SECTION: Grid with Order Classes */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
                     
-                    {/* LEFT COLUMN */}
-                    <div className="flex flex-col gap-6 justify-center">
+                    {/* LEFT COLUMN (Mobile Order: 2 | Desktop Order: 1) */}
+                    <div className="flex flex-col gap-6 justify-center order-2 lg:order-1">
                         {leftColumn.map((dept, idx) => (
                             <ContactCard key={idx} {...dept} />
                         ))}
                     </div>
 
-                    {/* CENTER COLUMN (Head Office Hub) */}
-                    <div className="h-full min-h-[300px] lg:min-h-0">
-                        <div className="h-full bg-white/10 backdrop-blur-md border border-white/20 text-white p-8 rounded-3xl shadow-2xl flex flex-col justify-center relative overflow-hidden group">
+                    {/* CENTER COLUMN (Head Office) (Mobile Order: 1 | Desktop Order: 2) */}
+                    <div className="h-full min-h-[300px] lg:min-h-0 order-1 lg:order-2">
+                        <div className="h-full bg-white/10 backdrop-blur-md border border-white/20 text-white p-6 md:p-8 rounded-3xl shadow-2xl flex flex-col justify-center relative overflow-hidden group">
                             
                             <div className="absolute -top-12 -right-12 opacity-[0.07] rotate-12 group-hover:scale-125 transition-transform duration-700">
                                 <FaMapMarkerAlt size={250} />
                             </div>
 
-                            <div className="relative z-10 flex flex-col items-center text-center h-full justify-center">
+                            <div className="relative z-10 flex flex-col items-center text-center h-full justify-center py-4">
                                 <div className="p-4 bg-green-500 rounded-2xl shadow-lg shadow-green-500/30 mb-6 group-hover:rotate-6 transition-transform">
                                     <FaMapMarkerAlt className="text-white text-3xl" />
                                 </div>
@@ -103,7 +103,7 @@ export default function ContactClient() {
                                 <h2 className="text-2xl font-bold mb-2">Head Office</h2>
                                 <div className="w-12 h-1 bg-green-500 rounded-full mb-6"></div>
                                 
-                                <address className="not-italic text-gray-200 leading-loose text-lg mb-8">
+                                <address className="not-italic text-gray-200 leading-loose text-base md:text-lg mb-8">
                                     12 Richard Clapperton Street,<br/>
                                     Off Maman Nasir Street,<br/>
                                     Asokoro District,<br/>
@@ -122,8 +122,8 @@ export default function ContactClient() {
                         </div>
                     </div>
 
-                    {/* RIGHT COLUMN */}
-                    <div className="flex flex-col gap-6 justify-center">
+                    {/* RIGHT COLUMN (Mobile Order: 3 | Desktop Order: 3) */}
+                    <div className="flex flex-col gap-6 justify-center order-3 lg:order-3">
                         {rightColumn.map((dept, idx) => (
                             <ContactCard key={idx} {...dept} />
                         ))}
@@ -141,17 +141,17 @@ export default function ContactClient() {
 
             {/* --- IMPROVED SOCIAL SECTION --- */}
             <div className="flex flex-col items-center gap-4">
-                <span className="text-white/60 text-sm uppercase tracking-[0.2em] font-medium">Connect with us</span>
+                <span className="text-white/60 text-xs md:text-sm uppercase tracking-[0.2em] font-medium">Connect with us</span>
                 
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-4 justify-center">
                     {socialLinks.map((link) => (
                         <a 
                             key={link.name} 
                             href={link.href} 
-                            target="_blank"
+                            target="_blank" 
                             rel="noopener noreferrer"
                             className={`
-                                w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ease-out
+                                w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 ease-out
                                 bg-white text-gray-900 shadow-lg shadow-black/20
                                 hover:-translate-y-2 hover:text-white hover:shadow-2xl
                                 ${link.color}
@@ -178,7 +178,7 @@ function ContactCard({ title, phone, email, icon }: { title: string, phone?: str
                     <div className="p-2.5 bg-green-50 text-green-600 rounded-lg group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
                         {icon}
                     </div>
-                    <h3 className="font-bold text-gray-900 text-lg">{title}</h3>
+                    <h3 className="font-bold text-gray-900 text-base md:text-lg">{title}</h3>
                 </div>
                 <FaPaperPlane className="text-gray-300 group-hover:text-green-500 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
             </div>
@@ -187,7 +187,7 @@ function ContactCard({ title, phone, email, icon }: { title: string, phone?: str
                 {phone && (
                     <a 
                         href={`tel:${phone.replace(/\s/g, '')}`} 
-                        className="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-green-700 transition-colors w-fit"
+                        className="flex items-center gap-3 text-sm md:text-base lg:text-lg font-medium text-gray-800 hover:text-green-700 transition-colors w-fit"
                     >
                         <FaPhone className="w-3.5 h-3.5 text-gray-400 group-hover:text-green-800 transition-colors" /> 
                         {phone}
@@ -195,7 +195,7 @@ function ContactCard({ title, phone, email, icon }: { title: string, phone?: str
                 )}
                 <a 
                     href={`mailto:${email}`} 
-                    className="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-green-700 transition-colors break-all w-fit"
+                    className="flex items-center gap-3 text-sm md:text-base lg:text-lg font-medium text-gray-800 hover:text-green-700 transition-colors break-all w-fit"
                 >
                     <FaEnvelope className="w-3.5 h-3.5 text-gray-400 group-hover:text-green-800 transition-colors" /> 
                     {email}

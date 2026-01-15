@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, ChevronRight, FileText, Globe, Award } from 'lucide-react';
 
-// --- Types & Data ---
+// --- Types & Data (Strictly Preserved) ---
 interface CategoryItem {
   title: string;
   desc: string;
@@ -71,114 +71,97 @@ const categories: CategoryItem[] = [
     { 
         title: "Fellow/Honorary Membership", 
         desc: "For distinguished leaders and contributors.",
-        documents: [] // No documents listed for this type
+        documents: [] 
     },
-  ];
+];
 
-export default function ExpandableGrid() {
+export default function ExpandableGrid({ onApplyClick }: { onApplyClick: (item: CategoryItem) => void }) {
   return (
-    <div className="py-20 px-4 bg-gray-50">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-10 w-full">
-        {categories.map((item, idx) => (
-          <ExpandableCard key={idx} item={item} idx={idx} />
-        ))}
+    <section className="py-12 md:py-20 px-4 bg-gray-50">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full">
+          {categories.map((item, idx) => (
+            <ExpandableCard key={idx} item={item} idx={idx} onApply={onApplyClick}/>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
-function ExpandableCard({ item, idx }: { item: CategoryItem; idx: number }) {
-  const [isHovered, setIsHovered] = useState(false);
+function ExpandableCard({ item, idx, onApply }: { item: CategoryItem; idx: number ; onApply: (item: CategoryItem) => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Helper to get icon based on index (matching your original logic)
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const getCategoryIcon = (index: number) => {
-    if (index === 0) return <FileText className="w-6 h-6 text-white" />;
-    if (index === 1) return <Globe className="w-6 h-6 text-white" />;
-    return <Award className="w-6 h-6 text-white" />;
+    if (index === 0) return <FileText className="w-5 h-5 md:w-6 md:h-6 text-white" />;
+    if (index === 1) return <Globe className="w-5 h-5 md:w-6 md:h-6 text-white" />;
+    return <Award className="w-5 h-5 md:w-6 md:h-6 text-white" />;
+  };
+
+  const handleApplyClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onApply(item);
   };
 
   return (
-    // 1. THE GRID CELL WRAPPER
-    // This div stays static. It reserves the height in the grid so the row doesn't collapse.
-    // 'h-[400px]' is an estimated height for the collapsed card. Adjust as needed.
     <div 
-      className="relative h-[420px] w-full"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="relative min-h-[350px] md:h-[420px] w-full"
+      onMouseEnter={() => !isMobile && setIsOpen(true)}
+      onMouseLeave={() => !isMobile && setIsOpen(false)}
     >
-      
-      {/* 2. THE FLOATING CARD
-          - absolute: Breaks out of grid flow so it doesn't push neighbors.
-          - z-index: Increases on hover to sit on top of other rows.
-      */}
       <motion.div
         layout
-        initial={false}
-        animate={{
-          height: isHovered ? "auto" : "100%", // Expands to fit content on hover
-          zIndex: isHovered ? 50 : 10,         // Pops to front
-        }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className={`
-          absolute top-0 left-0 w-full
-          bg-white rounded-4xl p-8 
-          shadow-xl shadow-gray-200/40 border border-gray-100 
-          overflow-hidden flex flex-col
-          ${isHovered ? 'shadow-2xl shadow-green-900/10 border-green-500/30' : ''}
+          relative md:absolute top-0 left-0 w-full
+          bg-white rounded-3xl p-6 md:p-8 
+          shadow-lg shadow-gray-200/50 border border-gray-100 
+          flex flex-col transition-shadow
+          ${isOpen ? 'z-50 shadow-2xl border-green-500/30 ring-1 ring-green-500/10' : 'z-10'}
         `}
+        // Only toggle if clicking the card body, not the button
+        onClick={() => isMobile && setIsOpen(!isOpen)}
       >
-        {/* Hover Gradient Blob */}
-        <div 
-          className={`absolute -top-20 -right-20 w-40 h-40 bg-green-500/10 rounded-full blur-3xl transition-all duration-500 
-          ${isHovered ? 'bg-green-500/20' : ''}`} 
-        />
-
-        {/* Header Section */}
-        <div className="relative mb-6 shrink-0">
-          <div className="flex items-start justify-between mb-6">
-            <div className={`
-              p-4 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-sm
-              ${isHovered 
-                ? 'bg-green-600 text-white shadow-green-200 scale-110 rotate-3' 
-                : 'bg-green-400 text-white'}
-            `}>
-              {getCategoryIcon(idx)}
-            </div>
-            
-            <span className={`text-6xl font-bold select-none transition-colors ${isHovered ? 'text-green-50' : 'text-gray-100'}`}>
-              0{idx + 1}
-            </span>
+        <div className="flex items-start justify-between mb-4 md:mb-6">
+          <div className={`p-3 md:p-4 rounded-2xl flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-green-600 scale-110' : 'bg-green-400'}`}>
+            {getCategoryIcon(idx)}
           </div>
-          
-          <h3 className={`text-2xl font-bold mb-3 transition-colors ${isHovered ? 'text-green-700' : 'text-gray-900'}`}>
-            {item.title}
-          </h3>
-          <p className="text-gray-500 text-sm leading-relaxed">
-            {item.desc}
-          </p>
+          <span className={`text-4xl md:text-6xl font-bold transition-colors ${isOpen ? 'text-green-50' : 'text-gray-100'}`}>
+            0{idx + 1}
+          </span>
         </div>
 
-        {/* Divider */}
-        <div className={`w-full h-px mb-6 shrink-0 transition-colors ${isHovered ? 'bg-green-100' : 'bg-gray-100'}`}></div>
+        <h3 className={`text-xl md:text-2xl font-bold mb-2 transition-colors ${isOpen ? 'text-green-700' : 'text-gray-900'}`}>
+          {item.title}
+        </h3>
+        <p className="text-gray-500 text-sm mb-6">
+          {item.desc}
+        </p>
 
-        {/* HIDDEN CONTENT: Requirements List */}
+        <div className={`w-full h-px mb-6 ${isOpen ? 'bg-green-100' : 'bg-gray-100'}`}></div>
+
         <AnimatePresence>
-          {isHovered && item.documents.length > 0 && (
+          {isOpen && item.documents.length > 0 && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
               className="overflow-hidden mb-6"
             >
-              <h4 className="text-xs font-bold text-green-800 uppercase tracking-widest mb-4 flex items-center gap-2">
-                Requirements
-              </h4>
+              <h4 className="text-[10px] font-bold text-green-800 uppercase tracking-widest mb-4">Requirements</h4>
               <ul className="space-y-3">
                 {item.documents.map((doc, dIdx) => (
-                  <li key={dIdx} className="flex items-start gap-3 text-sm text-gray-600 leading-snug">
+                  <li key={dIdx} className="flex items-start gap-3 text-[13px] text-gray-700">
                     <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
-                    <span className="text-gray-900">{doc}</span>
+                    <span>{doc}</span>
                   </li>
                 ))}
               </ul>
@@ -186,22 +169,16 @@ function ExpandableCard({ item, idx }: { item: CategoryItem; idx: number }) {
           )}
         </AnimatePresence>
 
-        {/* Footer / Button Area */}
-        <div className="mt-auto pt-2 relative z-20">
+        <div className="mt-auto pt-2">
           {item.title !== "Fellow/Honorary Membership" ? (
-            <button
-              className={`
-                w-full py-4 rounded-xl font-bold text-white transition-all duration-300 shadow-lg flex items-center justify-center gap-2
-                ${isHovered ? 'bg-green-600 shadow-green-200' : 'bg-gray-900'}
-              `}
+            <button 
+              onClick={handleApplyClick}
+              className={`w-full py-3 md:py-4 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 relative z-30 ${isOpen ? 'bg-green-600 text-white shadow-lg shadow-green-200' : 'bg-gray-900 text-white'}`}
             >
-              <span className="flex items-center gap-2">
-                Apply Now 
-                <ChevronRight size={18} className={isHovered ? 'translate-x-1 transition-transform' : ''} />
-              </span>
+              Apply Now <ChevronRight size={18} />
             </button>
           ) : (
-            <div className="w-full py-4 rounded-xl font-bold bg-amber-50 border border-amber-100 text-amber-700/60 flex items-center justify-center gap-2 cursor-not-allowed text-sm uppercase tracking-wide">
+            <div className="w-full py-3 md:py-4 rounded-xl font-bold bg-amber-50 text-amber-700 border border-amber-100 flex items-center justify-center text-xs uppercase tracking-wide">
               By Nomination Only
             </div>
           )}

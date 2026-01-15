@@ -987,7 +987,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
 
                 {/* Cards Grid */}
                 <div className="w-full">
-                    <ExpandableGrid />
+                    <ExpandableGrid onApplyClick={handleApplyClick}/>
                 </div>
             </section>
             
@@ -1081,25 +1081,25 @@ export default function MembershipClient({ children }: { children: React.ReactNo
 
             <div  id="pioneer-members" className="scroll-mt-24"></div>
             <section className="py-20 px-4 md:px-6 bg-green-900">
-                <h2 className="text-3xl md:text-5xl font-bold text-gray-100 mb-6 leading-tight text-center">
+                <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-100 mb-6 leading-tight text-center">
                     Pioneer Members
                 </h2>
-                <div className="mt-16 max-w-5xl mx-auto flex flex-row gap-6 items-center">
+                <div className="mt-12 md:mt-16 max-w-5xl mx-auto flex flex-wrap gap-4 md:gap-6 items-center justify-center">
                     {pioneerMembers.map((m, i) => (
                         <div key={i} className="flex flex-col items-center relative">      
-                        <div className="flex flex-col items-center text-center w-40 group">
-                          <div className="relative w-32 h-32 mb-3 transition-transform duration-300 group-hover:scale-105">
+                        <div className="flex flex-col items-center text-center group">
+                          <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 md:mb-3 transition-transform duration-300 group-hover:scale-105">
                             <Image
                               src={m.photo}
                               alt={m.name}
                               fill
-                              className=" object-cover shadow-md border-4 border-white ring-1 ring-gray-100"
+                              className="object-cover shadow-md border-4 border-white ring-1 ring-gray-100"
                             />
                           </div>
-                          <h4 className="text-base font-bold text-gray-100 bellefair mb-0.5 group-hover:text-green-700 transition-colors">
+                          <h4 className="text-sm md:text-base font-bold text-gray-100 bellefair mb-0.5 group-hover:text-green-300 transition-colors px-2">
                             {m.name}
                           </h4>
-                          <p className="text-xs text-green-600 font-medium sen uppercase tracking-tight">
+                          <p className="text-[10px] md:text-xs text-green-300 font-medium sen uppercase tracking-tight">
                             {m.role}
                           </p>
                         </div>
@@ -1111,39 +1111,41 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             {/* ------------------------------------------------------------------ */}
             {/* ENHANCED WIZARD MODAL                                              */}
             {/* ------------------------------------------------------------------ */}
-            {isModalOpen && selectedCategory && (
-                <div 
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/80 p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200"
-                    onClick={handleCloseAppModal}
-                >
-                    <div 
-                        className="relative w-full max-w-lg bg-white shadow-2xl rounded-2xl flex flex-col max-h-[90vh] overflow-hidden"
-                        onClick={(e) => e.stopPropagation()} 
-                    >
-                        {/* Header with Visual Progress */}
-                        <div className="bg-gray-50 border-b border-gray-100">
-                            <div className="px-6 py-4 flex justify-between items-center">
+{isModalOpen && selectedCategory && (
+    <div 
+        className="fixed top-0 left-0 w-full h-full z-[9999] flex items-end sm:items-center justify-center bg-gray-900/80 backdrop-blur-sm m-0 p-4"
+        style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }} // Inline override to be safe
+        onClick={handleCloseAppModal}
+    >
+        <div 
+            className="relative w-full max-w-lg bg-white shadow-2xl rounded-t-3xl sm:rounded-2xl flex flex-col h-[92vh] sm:h-auto sm:max-h-[90vh] overflow-hidden"
+            onClick={(e) => e.stopPropagation()} 
+        >
+                        {/* STICKY HEADER */}
+                        <div className="sticky top-0 z-30 bg-gray-50/95 backdrop-blur-md border-b border-gray-100">
+                            <div className="px-5 py-4 flex justify-between items-center">
                                 <div>
-                                    <h3 className="text-lg font-bold text-gray-800">
+                                    <h3 className="text-base sm:text-lg font-bold text-gray-800 leading-tight">
                                         {isModalSubmitted ? "Application Received" : "Join GIFON"}
                                     </h3>
                                     {!isModalSubmitted && (
-                                        <p className="text-xs text-gray-500">
+                                        <p className="text-[11px] sm:text-xs text-gray-500 mt-0.5">
                                             Applying as: <span className="font-semibold text-green-600">{selectedCategory.title}</span>
                                         </p>
                                     )}
                                 </div>
                                 <button 
                                     onClick={handleCloseAppModal}
-                                    className="bg-white p-2 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition shadow-sm border border-gray-200"
+                                    className="p-2 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors border border-gray-200 bg-white"
+                                    aria-label="Close"
                                 >
                                     <X size={18} />
                                 </button>
                             </div>
                             
-                            {/* The Progress Bar */}
+                            {/* PROGRESS BAR */}
                             {!isModalSubmitted && (
-                                <div className="w-full bg-gray-200 h-1.5">
+                                <div className="w-full bg-gray-200 h-1">
                                     <div 
                                         className="h-full bg-green-600 transition-all duration-500 ease-out"
                                         style={{ width: `${(currentStep / 5) * 100}%` }}
@@ -1152,82 +1154,83 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                             )}
                         </div>
 
-                        {/* Body */}
-                        <div className="p-6 overflow-y-auto flex-1 bg-white">
+                        {/* SCROLLABLE BODY */}
+                        <div className="p-5 sm:p-8 overflow-y-auto flex-1 bg-white custom-scrollbar">
                             {isModalSubmitted ? (
-                                <div className="flex flex-col items-center justify-center text-center py-10">
-                                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 animate-in zoom-in duration-300">
-                                        <CheckCircle className="text-green-600 w-10 h-10" />
+                                <div className="flex flex-col items-center justify-center text-center py-6 sm:py-10">
+                                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 animate-in zoom-in duration-300">
+                                        <CheckCircle className="text-green-600 w-8 h-8 sm:w-10 sm:h-10" />
                                     </div>
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
-                                    <p className="text-gray-600 mb-8 max-w-xs mx-auto">
+                                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
+                                    <p className="text-sm sm:text-base text-gray-600 mb-8 max-w-[280px] mx-auto leading-relaxed">
                                         Your application has been submitted securely. We will review your documents and contact you shortly.
                                     </p>
-                                    <button onClick={handleCloseAppModal} className="w-full bg-gray-900 text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition font-bold">
+                                    <button 
+                                        onClick={handleCloseAppModal} 
+                                        className="w-full bg-gray-900 text-white px-6 py-3.5 rounded-xl hover:bg-gray-800 transition font-bold text-sm shadow-lg"
+                                    >
                                         Close Window
                                     </button>
                                 </div>
                             ) : (
                                 <form onSubmit={handleModalSubmit} className="flex flex-col h-full">
-                                    {/* Render the Active Step */}
                                     <div className="flex-1">
-                                        {currentStep === 1 && renderStep1()}
-                                        {currentStep === 2 && renderStep2()}
-                                        {currentStep === 3 && renderStep3()}
-                                        {currentStep === 4 && renderStep4()}
-                                        {currentStep === 5 && renderStep5()}
+                                        {/* Inner container to ensure form fields have enough space */}
+                                        <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-300">
+                                            {currentStep === 1 && renderStep1()}
+                                            {currentStep === 2 && renderStep2()}
+                                            {currentStep === 3 && renderStep3()}
+                                            {currentStep === 4 && renderStep4()}
+                                            {currentStep === 5 && renderStep5()}
+                                        </div>
                                     </div>
 
-                                    {/* Error Message */}
+                                    {/* ERROR MESSAGE (Floating or Fixed above buttons) */}
                                     {error && (
-                                        <div className="mt-4 flex items-center gap-2 text-red-600 text-xs font-semibold bg-red-50 p-3 rounded-lg border border-red-100 animate-in slide-in-from-bottom-2">
-                                            <AlertCircle size={16} /> {error}
+                                        <div className="mt-6 flex items-start gap-2 text-red-600 text-xs font-semibold bg-red-50 p-3 rounded-lg border border-red-100 animate-in slide-in-from-bottom-2">
+                                            <AlertCircle size={14} className="mt-0.5 shrink-0" /> 
+                                            <span>{error}</span>
                                         </div>
                                     )}
-
-                                    {/* Navigation Buttons */}
-                                    <div className="flex gap-3 mt-8 pt-4 border-t border-gray-100">
-                                        {currentStep > 1 && (
-                                          <button 
-                                            type="button" 
-                                            onClick={prevStep}
-                                            className="flex-1 py-3.5 rounded-xl font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition flex items-center justify-center gap-2"
-                                          >
-                                            <ChevronLeft size={18} /> Back
-                                          </button>
-                                        )}
-                                        
-                                        {currentStep < 5 ? (
-                                          <button 
-                                            type="button" 
-                                            onClick={nextStep}
-                                            className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg shadow-green-200 flex items-center justify-center gap-2 hover:-translate-y-0.5 active:translate-y-0"
-                                          >
-                                            Next <ChevronRight size={18} />
-                                          </button>
-                                        ) : (
-                                          <button 
-                                            type="submit"
-                                            disabled={isLoading || !formData.agreedToDeclaration}
-                                            className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                                          >
-                                             {isLoading ? 'Processing...' : 'Submit Application'}
-                                          </button>
-                                        )}
-                                    </div>
                                 </form>
                             )}
                         </div>
+
+                        {/* STICKY FOOTER NAVIGATION */}
+                        {!isModalSubmitted && (
+                            <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4 sm:p-6 flex gap-3 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
+                                {currentStep > 1 && (
+                                    <button 
+                                        type="button" 
+                                        onClick={prevStep}
+                                        className="flex-1 py-3.5 rounded-xl font-bold text-gray-600 bg-gray-50 hover:bg-gray-100 transition flex items-center justify-center gap-2 border border-gray-200 text-sm"
+                                    >
+                                        <ChevronLeft size={18} /> Back
+                                    </button>
+                                )}
+                                
+                                {currentStep < 5 ? (
+                                    <button 
+                                        type="button" 
+                                        onClick={nextStep}
+                                        className="flex-[2] bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg shadow-green-100 flex items-center justify-center gap-2 text-sm"
+                                    >
+                                        Next Step <ChevronRight size={18} />
+                                    </button>
+                                ) : (
+                                    <button 
+                                        type="submit"
+                                        disabled={isLoading || !formData.agreedToDeclaration}
+                                        className="flex-[2] bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg disabled:opacity-50 disabled:bg-gray-400 disabled:shadow-none flex items-center justify-center gap-2 text-sm"
+                                    >
+                                        {isLoading ? 'Processing...' : 'Submit Application'}
+                                    </button>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             )}
-
-            <Modal 
-                isOpen={modalData.isOpen} 
-                onClose={closeDocModal} 
-                title={modalData.title}
-                content={modalData.content}
-            />
 
             {/* Helper Styles for Input Fields to keep JSX clean */}
             <style jsx>{`

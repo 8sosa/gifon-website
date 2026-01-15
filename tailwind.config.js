@@ -13,6 +13,9 @@ const config = {
           cooper: ["var(--font-cooper)", "serif"],
           bellmt: ["var(--font-bellmt)", "serif"],
         },
+        screens: {
+          xs: "375px",
+        },
       },
     },
     plugins: [],

@@ -99,7 +99,6 @@ export default function PoliciesPage() {
             {policies.map((policy) => {
               const IconComponent = policy.icon || FileText; // Fallback icon just in case
               return (
-                <>
                   <div className='flex flex-col' key={policy.id}>
                     {/* Spacer div to create space before each section for anchor links */}
                     <div id={policy.id} className="pt-35 -mt-20"></div>
@@ -129,7 +128,6 @@ export default function PoliciesPage() {
                       </Button>
                     </div>
                   </div>
-                </>
               );
             })}
           </div>

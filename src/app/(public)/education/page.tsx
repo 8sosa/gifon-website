@@ -929,59 +929,64 @@ function EducationContent() {
             </div>
       )}
 
-      {/* === 2. TALENT DETAILS MODAL === */}
-      {activeTalentFeature && (
+        {/* === 2. TALENT DETAILS MODAL === */}
+        {activeTalentFeature && (
             <div 
-                className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/90 p-4 sm:p-6 backdrop-blur-md animate-in fade-in duration-300"
+                className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-gray-900/90 p-0 sm:p-6 backdrop-blur-md animate-in fade-in duration-300"
                 onClick={closeTalentModal}
             >
                 <div 
-                    className="relative w-full max-w-2xl bg-white shadow-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]"
+                    className="relative w-full max-w-2xl bg-white shadow-2xl rounded-t-3xl sm:rounded-3xl overflow-hidden flex flex-col max-h-[92vh] sm:max-h-[90vh]"
                     onClick={(e) => e.stopPropagation()}
                 >
-                    {/* Modal Header */}
-                    <div className="bg-gray-50 border-b border-gray-100 p-8 flex items-center gap-6">
-                    <div className={`${activeTalentFeature.colorClass} w-20 h-20 rounded-2xl flex items-center justify-center text-white shadow-xl shrink-0`}>
-                        <activeTalentFeature.icon size={40} />
-                    </div>
-                    <div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 text-center">
-                            {activeTalentFeature.title}
-                        </h3>
-                        <p className={`font-medium max-w-2xl italic ${activeTalentFeature.textClass} text-center`}>
-                            {activeTalentFeature.tagline}
-                        </p>
-                    </div>
-                    <button 
-                        onClick={closeTalentModal}
-                        className="absolute top-6 right-6 bg-white p-2 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition shadow-sm border border-gray-200"
-                    >
-                        <X size={20} />
-                    </button>
+                    {/* Modal Header - Responsive Flex Direction */}
+                    <div className="bg-gray-50 border-b border-gray-100 p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 relative">
+                        
+                        {/* Close Button - Moved for better mobile reach */}
+                        <button 
+                            onClick={closeTalentModal}
+                            className="absolute top-4 right-4 bg-white p-2 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition shadow-sm border border-gray-200 z-10"
+                        >
+                            <X size={18} />
+                        </button>
+
+                        {/* Icon - Scaled for mobile */}
+                        <div className={`${activeTalentFeature.colorClass} w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center text-white shadow-xl shrink-0`}>
+                            <activeTalentFeature.icon size={32} className="sm:w-10 sm:h-10" />
+                        </div>
+
+                        {/* Title and Tagline - Centered on mobile */}
+                        <div className="text-center sm:text-left mt-2 sm:mt-0 pr-0 sm:pr-8">
+                            <h3 className="text-xl md:text-3xl font-bold text-gray-900 mb-1">
+                                {activeTalentFeature.title}
+                            </h3>
+                            <p className={`text-sm sm:text-base font-medium italic ${activeTalentFeature.textClass}`}>
+                                {activeTalentFeature.tagline}
+                            </p>
+                        </div>
                     </div>
 
-                    {/* Modal Content Body */}
-                    <div className="p-8 overflow-y-auto">
-                        <div className="prose prose-lg text-gray-600 leading-relaxed text-justify">
+                    {/* Modal Content Body - Adjustable Padding */}
+                    <div className="p-6 sm:p-8 overflow-y-auto">
+                        <div className="prose prose-sm sm:prose-lg text-gray-600 leading-relaxed text-left sm:text-justify">
                             <p>{activeTalentFeature.description}</p>
                         </div>
                         
-                        {/* Footer with Conditional Buttons */}
-                        <div className="mt-8 pt-8 border-t border-gray-100 flex justify-end gap-4">
+                        {/* Footer Buttons - Full width on mobile */}
+                        <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4">
                             <button 
                                 onClick={closeTalentModal}
-                                className="bg-gray-100 text-gray-700 hover:bg-gray-200 px-6 py-3 rounded-xl font-bold transition"
+                                className="w-full sm:w-auto bg-gray-100 text-gray-700 hover:bg-gray-200 px-6 py-3.5 rounded-xl font-bold transition text-sm sm:text-base"
                             >
                                 Close
                             </button>
 
-                            {/* Renders ONLY if actionLink exists (e.g., for Career Services) */}
                             {activeTalentFeature.actionLink && (
                                 <a 
                                     href={activeTalentFeature.actionLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold transition flex items-center gap-2 shadow-lg shadow-blue-600/20"
+                                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3.5 rounded-xl font-bold transition flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20 text-sm sm:text-base"
                                 >
                                     {activeTalentFeature.actionLabel || 'Apply Now'} 
                                     <ArrowUpRight size={18} />
@@ -992,7 +997,6 @@ function EducationContent() {
                 </div>
             </div>
         )}
-
     </>
   );
 }

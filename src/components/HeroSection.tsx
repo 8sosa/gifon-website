@@ -9,14 +9,12 @@ type HeroSectionProps = {
   description?: string | React.ReactNode;
   description1?: string | React.ReactNode;
   tagline?: string | React.ReactNode;
-  // Now accepts a single string OR an array of strings
-  backgroundMedia?: string | string[]; 
+  backgroundMedia?: string | string[];
   cycleInterval?: number;
   ctaText?: string;
   ctaLink?: string;
 };
 
-// Helper to check if a file is a video based on extension
 const isVideo = (src: string) => {
   return src.match(/\.(mp4|webm|ogg|mov)$/i);
 };
@@ -26,33 +24,26 @@ export default function HeroSection({
   description = "",
   description1 = "",
   tagline = "",
-  backgroundMedia = [], // Default empty
+  backgroundMedia = [],
   cycleInterval = 5000,
   ctaText,
   ctaLink,
 }: HeroSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Normalize data: Ensure we always work with an array, even if a single string is passed
   const mediaItems = Array.isArray(backgroundMedia) ? backgroundMedia : [backgroundMedia];
 
-  // Cycle Logic
   useEffect(() => {
-    // If there is only 1 or 0 items, don't set up an interval
     if (mediaItems.length <= 1) return;
-
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % mediaItems.length);
     }, cycleInterval);
-
     return () => clearInterval(interval);
   }, [mediaItems.length, cycleInterval]);
 
-  // Don't render if no media provided (optional safety)
   if (mediaItems.length === 0) return null;
 
   return (
-    <section className="relative w-full h-[50vh] min-h-[500px] md:h-[80vh] overflow-hidden bg-black">
+    <section className="relative w-full h-[70vh] min-h-[500px] md:h-screen lg:h-[90vh] overflow-hidden bg-black">
       
       {/* --- BACKGROUND LAYER --- */}
       {mediaItems.map((src, index) => {
@@ -61,7 +52,7 @@ export default function HeroSection({
 
         return (
           <div
-            key={index}
+            key={src + index}
             className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
               isActive ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
@@ -73,64 +64,72 @@ export default function HeroSection({
                 muted
                 loop
                 playsInline
-                className="absolute top-0 left-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
               />
             ) : (
               <Image
                 src={src}
                 alt={`Slide ${index}`}
-                width={1000}
-                height={1000}
-                className="absolute top-0 left-0 w-full h-full object-cover"
+                fill // Use fill for responsive background coverage
+                priority={index === 0} // Load first image immediately
+                className="object-cover"
+                sizes="100vw"
               />
             )}
             
-            {/* Optional: Dark Overlay to make text pop */}
-            <div className="absolute inset-0 bg-[rgba(0,63,33,0.7)]"></div>
+            {/* Gradient Overlay for better text legibility */}
+            <div className="absolute inset-0 bg-black/40 bg-gradient-to-b from-black/60 via-transparent to-black/60 z-10"></div>
+            {/* Your specific green overlay */}
+            <div className="absolute inset-0 bg-[rgba(0,63,33,0.4)] z-11"></div>
           </div>
         );
       })}
 
-      {/* --- CONTENT LAYER (Z-Index higher than background) --- */}
-      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto -mt-16">
-        
-        {/* Title */}
-        {title && (
-          <h1 className="bellefair text-white font-bold mb-4 drop-shadow-lg text-xl sm:text-4xl md:text-5xl leading-tight -mt-1 max-w-7xl opacity-90">
-            {title}
-          </h1>
-        )}
-        
-        {/* TAGLINE: Now significantly bigger */}
-        {tagline && (
-          <h2 className="bellefair text-white font-bold mb-6 drop-shadow-2xl text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-none max-w-7xl tracking-wide">
-            {tagline}
-          </h2>
-        )}
+      {/* --- CONTENT LAYER --- */}
+      <div className="relative z-20 h-full w-full flex flex-col items-center justify-center text-center px-6 md:px-12">
+        <div className="max-w-6xl mx-auto flex flex-col items-center">
+          
+          {/* Title */}
+          {title && (
+            <div className="bellefair text-white font-bold mb-3 md:mb-6 uppercase tracking-[0.2em] text-xs sm:text-sm md:text-lg lg:text-xl opacity-90 drop-shadow-md">
+              {title}
+            </div>
+          )}
+          
+          {/* Tagline */}
+          {tagline && (
+            <h1 className="bellefair text-white font-bolder mb-6 md:mb-8 drop-shadow-2xl text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[1.1] sm:leading-none tracking-tight">
+              {tagline}
+            </h1>
+          )}
 
-        {/* Description */}
-        {description && (
-          <p className="sen text-gray-200 text-sm sm:text-xl md:text-2xl font-light text-justify mb-8 drop-shadow-md">
-            {description}
-          </p>
-        )}
-        
-        {/* Description 1 */}
-        {description1 && (
-          <p className="bellota text-gray-200 text-sm sm:text-xl md:text-xl font-light max-w-3xl text-justify drop-shadow-md">
-            {description1}
-          </p>
-        )}
+          {/* Descriptions Container */}
+          <div className="max-w-3xl space-y-4 md:space-y-6">
+            {description && (
+              <p className="sen text-gray-100 text-sm sm:text-lg md:text-xl lg:text-2xl font-light leading-relaxed drop-shadow-md">
+                {description}
+              </p>
+            )}
+            
+            {description1 && (
+              <p className="bellota text-gray-200 text-xs sm:text-base md:text-lg font-light italic opacity-80">
+                {description1}
+              </p>
+            )}
+          </div>
 
-        {/* CTA Button */}
-        {ctaText && ctaLink && (
-          <Link 
-            href={ctaLink} 
-            className="bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition transform hover:scale-105 shadow-lg mt-8"
-          >
-            {ctaText}
-          </Link>
-        )}
+          {/* CTA Button */}
+          {ctaText && ctaLink && (
+            <div className="mt-8 md:mt-12">
+              <Link 
+                href={ctaLink} 
+                className="inline-block bg-green-600 text-white px-8 md:px-12 py-3 md:py-5 rounded-full font-bold text-sm md:text-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(22,163,74,0.5)] active:scale-95"
+              >
+                {ctaText}
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

@@ -322,7 +322,7 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
   ];
 
   return (
-    <header className="fixed w-full min-h-max top-0 z-50 bg-white shadow-md font-sans" ref={navRef}>
+    <header className="fixed w-full min-h-max top-0 z-9999 bg-white shadow-md font-sans" ref={navRef}>
       {/* 1. TOP ROW */}
       <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 min-h-max">
         <div className="flex justify-between items-center">
