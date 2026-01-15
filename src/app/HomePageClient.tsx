@@ -44,23 +44,11 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
       <HeroSection
         title={<>Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>)</>}
         description='Mapping the future • Empowering the Nation'
+        description1={<>The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is dedicated to advancing the use of geospatial intelligence as a strategic tool for national security, informed governance, and sustainable development. By harnessing mapping technologies, location based data, and analytical insight, <span className="cooper">GIFON</span> supports decision makers with the intelligence required to anticipate challenges, protect critical assets, and plan for the future.</>}
         backgroundMedia={["/vids/globe.mp4"]}
       />
 
-      {/* --- Overview Section --- */}
-      <section id="overview" className="py-12 md:py-24 px-6 bg-gradient-to-br from-green-100 via-white to-green-100">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-4xl font-bold mb-6 md:mb-10 text-gray-800 bellefair leading-tight">
-            Mapping the future • Empowering the Nation
-          </h2>
-          <div className="text-gray-700 leading-relaxed text-base md:text-lg space-y-6">
-            <p className="text-justify">
-              The Geospatial Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) is dedicated to advancing the use of geospatial intelligence as a strategic tool for national security, informed governance, and sustainable development. By harnessing mapping technologies, location based data, and analytical insight, <span className="cooper">GIFON</span> supports decision makers with the intelligence required to anticipate challenges, protect critical assets, and plan for the future.
-            </p>
-          </div>
-        </div>
-      </section>
-
+      {/* --- PARTNERS CAROUSEL --- */}
       <div id='our-partners'></div>
       <PartnersCarousel />
 
@@ -218,7 +206,7 @@ export default function HomePageClient({ upcomingEvents }: HomePageClientProps) 
             </div>
           </div>
           <div className="w-full md:w-1/2 text-center md:text-left">
-            <h3 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 bellefair">Members Spotlight</h3>
+            <h3 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 bellefair"><span className='cooper'>GIFON</span> Members Spotlight</h3>
             <p className="text-gray-600 text-lg mb-8 leading-relaxed text-justify">
               Showcasing our members&apos; expertise, impact, and commitment to national geospatial advancement.
             </p>

@@ -83,15 +83,17 @@ export default function PoliciesPage() {
       <HeroSection
         title="Our Policies"
         description={<>Guiding our actions, upholding standards, and<br/> fostering excellence in geospatial intelligence.</>}
+        description1={
+          <>
+            <span className="cooper">GIFON</span> Policies provide the framework that guides the organization&apos;s operations, decision-making, and ethical standards. They reflect our commitment to transparency, accountability, integrity, and excellence across all areas of geospatial intelligence, research, capacity building, and national engagement. Our policies cover governance, operational procedures, human resource management, security, data protection, and stakeholder engagement, ensuring that <span className="cooper">GIFON's</span> programmes and services are delivered consistently, responsibly, and in alignment with national laws, international standards, and best practices. By codifying our principles and standards, <span className="cooper">GIFON</span> Policies ensure that all staff, partners, and participants operate within a clear, fair, and professional framework, fostering trust, credibility, and organizational excellence.
+          </>
+        }
         backgroundMedia={[
           "/media/POLICIES BACKGROUND.jpg"
         ]}
       />
 
       <main className="w-full bg-gray-50 py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-justify"><span className="cooper">GIFON</span> Policies provide the framework that guides the organization&apos;s operations, decision-making, and ethical standards. They reflect our commitment to transparency, accountability, integrity, and excellence across all areas of geospatial intelligence, research, capacity building, and national engagement. Our policies cover governance, operational procedures, human resource management, security, data protection, and stakeholder engagement, ensuring that <span className="cooper">GIFON's</span> programmes and services are delivered consistently, responsibly, and in alignment with national laws, international standards, and best practices. By codifying our principles and standards, <span className="cooper">GIFON</span> Policies ensure that all staff, partners, and participants operate within a clear, fair, and professional framework, fostering trust, credibility, and organizational excellence.</p>
-        </div>
         <div className="max-w-6xl mx-auto">
 
           {/* Grid layout for Policy Cards */}

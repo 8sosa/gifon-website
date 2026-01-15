@@ -324,38 +324,19 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
   return (
     <header className="fixed w-full min-h-max top-0 z-9999 bg-white shadow-md font-sans" ref={navRef}>
       {/* 1. TOP ROW */}
-      <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 min-h-max">
+      <div className="max-w-8xl mx-auto p-4 sm:p-6 lg:p-8 min-h-max">
         <div className="flex justify-between items-center">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-4 md:gap-6 group">
             {/* Logo Placeholder - replaces the globe/leaf icon */}
-            <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 transition-transform group-hover:scale-105">
+            <div className="relative w-45 h-15 md:w-75 md:h-25 shrink-0 transition-transform group-hover:scale-105">
                {/* Ensure you have your logo.png here, or use a placeholder icon */}
                <Image 
                  src="/logo.png" 
                  alt="GIFON Logo" 
                  fill 
-                 className="object-contain"
+                 className="object-cover"
                />
-            </div>
-
-            {/* Main Title Text */}
-            <div className="flex flex-col justify-center">
-              {/* The "GEOSPATIAL" line */}
-              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
-                Geospatial
-              </h1>
-              {/* The "INTELLIGENCE" line */}
-              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
-                Intelligence
-              </h1>
-              {/* The "FOUNDATION OF NIGERIA" line */}
-              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-green-800 leading-none tracking-wide bellefair drop-shadow-sm">
-                Foundation of Nigeria
-              </h1>
-              <h1 className="text-md md:text-3xl lg:text-xl font-extrabold text-black leading-none tracking-wide bellefair uppercase drop-shadow-sm">
-                (<span className="cooper">GIFON</span>)
-              </h1>
             </div>
           </Link>
 
