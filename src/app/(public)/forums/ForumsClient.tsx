@@ -60,7 +60,7 @@ export default function ForumsClient() {
       <HeroSection
         title="Groups & Forums"
         description="Connecting minds, building networks, and advancing geospatial intelligence together."
-        description1={<><span className="cooper">GIFON</span> Groups & Forums...</>} // (Abbreviated for brevity)
+        description1={<><span className="cooper">GIFON</span> Groups & Forums provide dynamic platforms for professionals, practitioners, policymakers, researchers, and enthusiasts to connect, collaborate, and share knowledge within the geospatial intelligence ecosystem. These platforms foster active engagement, peer learning, and multi stakeholder dialogue on key topics in GEOINT, STEM, innovation, national security, infrastructure, and sustainable development. Through structured groups, interest communities, and thematic forums, participants can exchange insights, discuss challenges, showcase innovations, and develop practical solutions for national and regional priorities. <span className="cooper">GIFON</span> Groups & Forums are designed to bridge gaps between academia, industry, government, and civil society, building a strong, informed, and collaborative GEOINT community.</>} // (Abbreviated for brevity)
         backgroundMedia={["/media/Background Groups and forums.jpg"]}
       />
 
@@ -79,6 +79,7 @@ export default function ForumsClient() {
               return (
                 <div 
                   key={forum.id} 
+                  id={forum.anchor}
                   // FIX: Dynamically change z-index based on active state.
                   // If active: z-50 (Forces it on top of everything).
                   // If inactive: z-0, but hover:z-30 so it pops slightly when mouseover.
@@ -120,7 +121,7 @@ export default function ForumsClient() {
                               <X size={20} />
                             </button>
 
-                            <div className="absolute top-4 bottom-4 left-0 w-1 bg-gradient-to-b from-green-500 to-transparent opacity-50"></div>
+                            <div className="absolute top-4 bottom-4 left-0 w-1 bg-linear-to-b from-green-500 to-transparent opacity-50"></div>
                             
                             <h4 className="text-xs font-bold text-green-400 uppercase tracking-widest mb-6 pl-4 mt-2">
                               Active Programs
@@ -148,7 +149,7 @@ export default function ForumsClient() {
                   {/* --- B. THE MAIN CARD --- */}
                   <div 
                       className={`
-                          relative z-10 h-full bg-white rounded-3xl shadow-lg border flex flex-col transition-all duration-300 cursor-pointer
+                          relative z-10 h-full scroll-mt-24 bg-white rounded-3xl shadow-lg border flex flex-col transition-all duration-300 cursor-pointer
                           ${isActive ? 'border-green-500 shadow-2xl ring-2 ring-green-100' : 'border-gray-100 hover:shadow-xl hover:-translate-y-1'}
                       `}
                       id={forum.id}

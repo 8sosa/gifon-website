@@ -43,7 +43,7 @@ export default function HeroSection({
   if (mediaItems.length === 0) return null;
 
   return (
-    <section className="relative w-full h-[70vh] min-h-[500px] md:h-screen lg:h-[90vh] overflow-hidden bg-black">
+    <section className="relative w-full h-[50vh] min-h-[500px] md:h-[60vh] lg:h-[70vh] overflow-hidden bg-black">
       
       {/* --- BACKGROUND LAYER --- */}
       {mediaItems.map((src, index) => {
@@ -70,15 +70,15 @@ export default function HeroSection({
               <Image
                 src={src}
                 alt={`Slide ${index}`}
-                fill // Use fill for responsive background coverage
-                priority={index === 0} // Load first image immediately
+                fill
+                priority={index === 0}
                 className="object-cover"
                 sizes="100vw"
               />
             )}
             
             {/* Gradient Overlay for better text legibility */}
-            <div className="absolute inset-0 bg-black/40 bg-gradient-to-b from-black/60 via-transparent to-black/60 z-10"></div>
+            <div className="absolute inset-0 bg-black/40 bg-linear-to-b from-black/60 via-transparent to-black/60 z-10"></div>
             {/* Your specific green overlay */}
             <div className="absolute inset-0 bg-[rgba(0,63,33,0.4)] z-11"></div>
           </div>
@@ -87,32 +87,35 @@ export default function HeroSection({
 
       {/* --- CONTENT LAYER --- */}
       <div className="relative z-20 h-full w-full flex flex-col items-center justify-center text-center px-6 md:px-12">
-        <div className="max-w-6xl mx-auto flex flex-col items-center">
+        <div className="max-w-5xl mx-auto flex flex-col items-center">
           
-          {/* Title */}
+          {/* Title - Bold 2x */}
           {title && (
-            <div className="bellefair text-white font-bold mb-3 md:mb-6 uppercase tracking-[0.2em] text-xs sm:text-sm md:text-lg lg:text-xl opacity-90 drop-shadow-md">
+            <div className="bellefair text-white font-bold mb-4 drop-shadow-md text-3xl sm:text-4xl md:text-5xl leading-tight">
               {title}
             </div>
           )}
           
-          {/* Tagline */}
+          {/* Tagline - Bold 3x */}
           {tagline && (
-            <h1 className="bellefair text-white font-bolder mb-6 md:mb-8 drop-shadow-2xl text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[1.1] sm:leading-none tracking-tight">
+            <h1 className="bellefair text-white font-bold mb-6 drop-shadow-2xl text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none">
               {tagline}
             </h1>
           )}
 
           {/* Descriptions Container */}
-          <div className="max-w-3xl space-y-4 md:space-y-6">
+          <div className="max-w-3xl space-y-4">
+            
+            {/* Description - Medium 1x */}
             {description && (
-              <p className="sen text-gray-100 text-sm sm:text-lg md:text-xl lg:text-2xl font-light leading-relaxed drop-shadow-md">
+              <p className="sen text-gray-100 font-medium drop-shadow-md text-base sm:text-lg md:text-xl leading-relaxed text-center">
                 {description}
               </p>
             )}
             
+            {/* Description 1 - Medium 1x */}
             {description1 && (
-              <p className="bellota text-gray-200 text-xs sm:text-base md:text-lg font-light italic opacity-80">
+              <p className="bellota text-gray-100 font-medium drop-shadow-md text-base sm:text-lg md:text-lg leading-relaxed text-justify">
                 {description1}
               </p>
             )}
@@ -120,10 +123,10 @@ export default function HeroSection({
 
           {/* CTA Button */}
           {ctaText && ctaLink && (
-            <div className="mt-8 md:mt-12">
+            <div className="mt-8 md:mt-10">
               <Link 
                 href={ctaLink} 
-                className="inline-block bg-green-600 text-white px-8 md:px-12 py-3 md:py-5 rounded-full font-bold text-sm md:text-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(22,163,74,0.5)] active:scale-95"
+                className="inline-block bg-green-600 text-white px-8 md:px-10 py-3 md:py-4 rounded-full font-bold text-base md:text-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(22,163,74,0.5)] active:scale-95"
               >
                 {ctaText}
               </Link>
