@@ -1,0 +1,55 @@
+{
+  "hero": {
+    "title": "Geospatial Intelligence Foundation of Nigeria ({GIFON})",
+    "description": "Mapping the future • Empowering the Nation",
+    "longDescription": "The Geospatial Intelligence Foundation of Nigeria ({GIFON}) is dedicated to advancing the use of geospatial intelligence as a strategic tool for national security, informed governance, and sustainable development. By harnessing mapping technologies, location based data, and analytical insight, {GIFON} supports decision makers with the intelligence required to anticipate challenges, protect critical assets, and plan for the future."
+  },
+  "sectors": {
+    "title": "Our Business Solutions",
+    "description": "{GIFON} Business Solutions provides cutting-edge geospatial intelligence (GEOINT) products, services, and advisory solutions to businesses, government agencies, and development partners.  Leveraging advanced location intelligence, spatial analytics, mapping technologies, and data driven insights, {GIFON} helps organizations make smarter decisions, optimize operations, and identify strategic opportunities. Our offerings span risk assessment, market analysis, infrastructure planning, environmental monitoring, and security support, delivering actionable insights that drive efficiency, innovation, and competitive advantage. By combining technical expertise, tailored solutions, and world class geospatial tools, {GIFON} empowers organizations to translate complex geospatial data into measurable business impact."
+  },
+  "newsletter": {
+    "title": "GEOINSIGHT",
+    "description": "GEOINSIGHT is {GIFON}'s flagship publication platform, delivering trusted geospatial intelligence through peer reviewed research, policy briefs, and timely bulletins that keep decision makers’ eyes on location.",
+    "cards": [
+      {
+        "title": "- Eyes on Location -",
+        "sub": "The GeoINSIGHT Bulletin",
+        "link": "/the-geoinsight-bulletin"
+      },
+      {
+        "title": "- GeoINSIGHT -",
+        "sub": "The Journal of Geospatial Intelligence",
+        "link": "/the-GeoINSIGHT-journal"
+      }
+    ],
+    "buttonText": "UNLOCK INSIGHT"
+  },
+  "getInvolved": {
+    "sectionLabel": "GIFON Community",
+    "title": "Get Involved",
+    "description": "Join a growing community of professionals, institutions and innovators advancing Geospatial Intelligence in support of Nigeria’s critical infrastructure, national security and sustainable development.",
+    "buttonText": "Join Us Today"
+  },
+  "communityHub": {
+    "title": "Community Hub",
+    "social": {
+      "title": "Connect",
+      "description": "Follow {GIFON} on social media for real-time updates."
+    },
+    "news": {
+      "title": "Latest News",
+      "emptyText": "No recent news available."
+    },
+    "events": {
+      "title": "Events",
+      "emptyText": "No upcoming events.",
+      "subEmptyText": "Join our mailing list to stay updated."
+    }
+  },
+  "spotlight": {
+    "title": "{GIFON} Members Spotlight",
+    "description": "Showcasing our members' expertise, impact, and commitment to national geospatial advancement.",
+    "buttonText": "Launch Spotlight"
+  }
+}
