@@ -328,17 +328,17 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
         <div className="flex justify-between items-center">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-4 md:gap-6 group">
-            {/* Logo Placeholder - replaces the globe/leaf icon */}
-            <div className="relative w-45 h-15 shrink-0 transition-transform group-hover:scale-105">
-               {/* Ensure you have your logo.png here, or use a placeholder icon */}
-               <Image 
-                 src="/logo.png" 
-                 alt="GIFON Logo" 
-                 fill 
-                 className="object-contain"
-               />
-            </div>
-          </Link>
+              {/* Logo Placeholder - replaces the globe/leaf icon */}
+              <div className="relative w-75 h-25 shrink-0 transition-transform group-hover:scale-105">
+                {/* Ensure you have your logo.png here, or use a placeholder icon */}
+                <Image 
+                  src="/logo.png" 
+                  alt="GIFON Logo" 
+                  fill 
+                  className="object-contain"
+                />
+              </div>
+            </Link>
 
             {/* Desktop Utilities */}
             <div className="hidden lg:flex items-center space-x-6">

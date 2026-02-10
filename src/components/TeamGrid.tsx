@@ -142,7 +142,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
       {/* --- TEAM MEMBER MODAL --- */}
       {selectedMember && (
         <div 
-          className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity"
+          className="fixed inset-0 z-99999 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity"
           onClick={() => setSelectedMember(null)}
         >
           <div 

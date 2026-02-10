@@ -43,6 +43,30 @@ const forumDetails: Record<string, any> = {
   }
 };
 
+const getGroupIcon = (id: string) => {
+  switch (id) {
+    case 'policy-governance-ethics': return <Award size={40} className="w-8 h-8 md:w-10 md:h-10" />;
+    case 'industry-private-sector': return <Cpu size={40} className="w-8 h-8 md:w-10 md:h-10" />;
+    // ... other cases
+    default: return <Globe size={40} className="w-8 h-8 md:w-10 md:h-10" />;
+  }
+};
+
+const allGroups = [
+  {
+    id: 'policy-governance-ethics',
+    title: 'Policy, Governance & Ethics Working Group (PGE-WG)',
+    description: 'The institutional mechanism established to uphold accountability, integrity, and transparency in all GIFON operations.',
+    color: 'bg-emerald-50 text-emerald-600',
+  },
+  {
+    id: 'industry-private-sector',
+    title: 'Industry and Private Sector Forum (IPSF)',
+    description: 'A strategic platform for driving innovation, investment, and sustainable applications of geospatial intelligence across national development and security priorities.',
+    color: 'bg-blue-50 text-blue-600',
+  },
+];
+
 export default function ForumsClient() {
   // STATE: Track which forum ID is currently active (clicked)
   const [activeForum, setActiveForum] = useState<string | null>(null);
@@ -218,6 +242,45 @@ export default function ForumsClient() {
               );
             })}
            </div>
+        </section>
+
+        {/* --- NEW SECTION: Explore Our Groups --- */}
+        <section className="py-16 md:py-24 px-4 md:px-6 bg-white border-t border-gray-100">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Explore Our Groups</h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {allGroups.map((group) => (
+                <div 
+                  key={group.id}
+                  id={group.id}
+                  className="group p-8 rounded-3xl bg-gray-50 border border-transparent hover:border-green-200 hover:bg-white hover:shadow-xl transition-all duration-300"
+                >
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 ${group.color}`}>
+                    {getGroupIcon(group.id)}
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    {group.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                    {group.description}
+                  </p>
+                  
+                  <Link 
+                    href={`/forums/${group.id}`}
+                    className="inline-flex items-center gap-2 text-sm font-bold text-green-600 hover:text-green-700 transition-colors"
+                  >
+                    Learn More
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* CTA Section (Unchanged) */}

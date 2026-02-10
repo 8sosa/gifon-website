@@ -47,7 +47,7 @@ export function PioneerGrid({ pioneers }: { pioneers: FlatPioneer[] }) {
       {/* --- PIONEER MODAL --- */}
       {selectedPioneer && (
         <div 
-          className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
+          className="fixed inset-0 z-99999 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
           onClick={() => setSelectedPioneer(null)}
         >
           <div 

@@ -10,7 +10,7 @@ export default function FoundingVision() {
     <>
     <section className="relative py-12 md:py-20 bg-white overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         
@@ -24,6 +24,11 @@ export default function FoundingVision() {
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 font-serif">
             Founding Vision
           </h2>
+          <blockquote className="text-xl md:text-4xl text-gray-900 font-serif leading-relaxed mb-8 italic">
+            "A Legacy written on Maps— <br className="hidden md:block" />
+            Building the Eyes of the Republic Through<br className="hidden md:block" />
+            Geospatial Intelligence"
+          </blockquote>
           <div className="w-16 md:w-24 h-1 bg-green-500 mx-auto mt-4 md:mt-6 rounded-full" />
         </motion.div>
 
@@ -55,10 +60,10 @@ export default function FoundingVision() {
             {/* Image & Ring Wrapper */}
             <div className="relative w-full max-w-[280px] md:max-w-sm mx-auto">
               {/* Decorative Ring */}
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-700 rounded-[2rem] md:rounded-[3rem] rotate-3 opacity-20 scale-105 blur-sm" />
+              <div className="absolute inset-0 bg-linear-to-br from-green-500 to-emerald-700 rounded-4xl md:rounded-[3rem] rotate-3 opacity-20 scale-105 blur-sm" />
               
               {/* The Image Container */}
-              <div className="relative aspect-[3/4] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-white">
+              <div className="relative aspect-3/4 rounded-4xl md:rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-white">
                 <Image 
                   src={Dr}
                   alt="Dr. AA Usman - Executive Chairman" 
@@ -112,11 +117,6 @@ export default function FoundingVision() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <blockquote className="text-xl md:text-4xl text-white font-serif leading-relaxed mb-8 italic">
-                "A Legacy written on Maps— <br className="hidden md:block" />
-                Building the Eyes of the Republic Through<br className="hidden md:block" />
-                Geospatial Intelligence"
-            </blockquote>
             <div className="flex flex-col items-center gap-1">
                 <p className="text-lg md:text-xl font-bold text-green-400">Dr. AA Usman</p>
                 <p className="text-green-200 uppercase tracking-widest text-[10px] md:text-xs font-medium">Founder & Executive Chairman</p>
