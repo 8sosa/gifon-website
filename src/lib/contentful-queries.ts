@@ -13,7 +13,9 @@ import type {
   MembershipTier,
   FlatMember,
   MentorSkeleton,
-  FlatMentor
+  FlatMentor,
+  FlatPioneer,
+  PioneerSkeleton,
 } from '@/types/types';
 import type { Document } from '@contentful/rich-text-types';
 
@@ -184,6 +186,38 @@ export async function getTeamMembers(): Promise<FlatMember[]> {
       email: f.email ? getString(f.email) : undefined,
       category: getString(f.category),
       photo,
+    };
+  });
+}
+
+export async function getPioneers(): Promise<FlatPioneer[]> {
+  const entries = await client.getEntries<PioneerSkeleton>({ 
+    content_type: 'pioneer',
+  });
+
+  return entries.items.map((item) => {
+    const f = item.fields;
+
+    // Handle Image (using your existing helper)
+    const rawUrl = getAssetUrl(f.picture);
+    const photo = rawUrl?.startsWith('//')
+      ? `https:${rawUrl}`
+      : rawUrl ?? '/ph.svg';
+
+    return {
+      id: item.sys.id,
+      name: getString(f.name),
+      mentor: !!f.mentor,
+      mentorshipFocusAreas: getStringArray(f.mentorshipFocusAreas),
+      quote: f.quote ? getDocument(f.quote) : undefined,
+      email: getString(f.email),
+      specialisations: getStringArray(f.areasOfSpecialisation),
+      photo: photo,
+      linkedIn: getString(f.linkedIn),
+      bio: f.bio ? getDocument(f.bio) : undefined,
+      // Logic for 'role': Since your UI uses 'm.role', 
+      // we can use the first specialization or a static tag
+      role: getStringArray(f.areasOfSpecialisation)[0] || 'Pioneer Member',
     };
   });
 }

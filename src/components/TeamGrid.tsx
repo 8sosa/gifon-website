@@ -142,7 +142,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
       {/* --- TEAM MEMBER MODAL --- */}
       {selectedMember && (
         <div 
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity"
+          className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity"
           onClick={() => setSelectedMember(null)}
         >
           <div 
@@ -187,7 +187,7 @@ export function TeamGrid({ members }: { members: FlatMember[]; }) {
                   </p>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center gap-2 mt-auto">
+                <div className="pt-6 border-t border-gray-100 flex items-center gap-2 mt-auto">
                    <div className="h-1 w-8 bg-green-500 rounded-full"></div>
                    <span className="text-[10px] md:text-xs font-bold text-green-800 uppercase tracking-widest italic">
                      {(selectedMember as any).quote || "GIFON Excellence"}

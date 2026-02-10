@@ -28,6 +28,8 @@ import {
 } from 'lucide-react';
 import { AiOutlineMail } from "react-icons/ai";
 import Modal from '@/components/Modal';
+import { FlatPioneer } from '@/types/types';
+import { PioneerGrid } from '@/components/PioneerGrid';
 import ExpandableGrid from '@/components/ExpandableCard';
 
 interface CategoryItem {
@@ -104,7 +106,7 @@ interface MembershipFormData {
 
 const pioneerMembers = [
     {
-        name: "Dr.",
+        name: "Dr. Daniel Gelleh",
         role: "Founder",
         photo: "/ph.svg"
     },
@@ -130,7 +132,13 @@ const pioneerMembers = [
     },
 ];
 
-export default function MembershipClient({ children }: { children: React.ReactNode }) {
+export default function MembershipClient({ 
+    children, 
+    pioneers 
+  }: { 
+    children: React.ReactNode; 
+    pioneers: FlatPioneer[]; 
+  }) {
     // UI States
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -1080,7 +1088,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
             </section>
 
             <div  id="pioneer-members" className="scroll-mt-24"></div>
-            <section className="py-20 px-4 md:px-6 bg-green-900">
+            {/* <section className="py-20 px-4 md:px-6 bg-green-900">
                 <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-100 mb-6 leading-tight text-center">
                     Pioneer Members
                 </h2>
@@ -1106,21 +1114,22 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                       </div>
                     ))}
                 </div>
-            </section>
+            </section> */}
+            <PioneerGrid pioneers={pioneers}/>
 
             {/* ------------------------------------------------------------------ */}
             {/* ENHANCED WIZARD MODAL                                              */}
             {/* ------------------------------------------------------------------ */}
-{isModalOpen && selectedCategory && (
-    <div 
-        className="fixed top-0 left-0 w-full h-full z-[9999] flex items-end sm:items-center justify-center bg-gray-900/80 backdrop-blur-sm m-0 p-4"
-        style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }} // Inline override to be safe
-        onClick={handleCloseAppModal}
-    >
-        <div 
-            className="relative w-full max-w-lg bg-white shadow-2xl rounded-t-3xl sm:rounded-2xl flex flex-col h-[92vh] sm:h-auto sm:max-h-[90vh] overflow-hidden"
-            onClick={(e) => e.stopPropagation()} 
-        >
+            {isModalOpen && selectedCategory && (
+                <div 
+                    className="fixed top-0 left-0 w-full h-full z-9999 flex items-end sm:items-center justify-center bg-gray-900/80 backdrop-blur-sm m-0 p-4"
+                    style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }} // Inline override to be safe
+                    onClick={handleCloseAppModal}
+                >
+                    <div 
+                        className="relative w-full max-w-lg bg-white shadow-2xl rounded-t-3xl sm:rounded-2xl flex flex-col h-[92vh] sm:h-auto sm:max-h-[90vh] overflow-hidden"
+                        onClick={(e) => e.stopPropagation()} 
+                    >
                         {/* STICKY HEADER */}
                         <div className="sticky top-0 z-30 bg-gray-50/95 backdrop-blur-md border-b border-gray-100">
                             <div className="px-5 py-4 flex justify-between items-center">
@@ -1213,7 +1222,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                                     <button 
                                         type="button" 
                                         onClick={nextStep}
-                                        className="flex-[2] bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg shadow-green-100 flex items-center justify-center gap-2 text-sm"
+                                        className="flex-2 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg shadow-green-100 flex items-center justify-center gap-2 text-sm"
                                     >
                                         Next Step <ChevronRight size={18} />
                                     </button>
@@ -1221,7 +1230,7 @@ export default function MembershipClient({ children }: { children: React.ReactNo
                                     <button 
                                         type="submit"
                                         disabled={isLoading || !formData.agreedToDeclaration}
-                                        className="flex-[2] bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg disabled:opacity-50 disabled:bg-gray-400 disabled:shadow-none flex items-center justify-center gap-2 text-sm"
+                                        className="flex-2 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg disabled:opacity-50 disabled:bg-gray-400 disabled:shadow-none flex items-center justify-center gap-2 text-sm"
                                     >
                                         {isLoading ? 'Processing...' : 'Submit Application'}
                                     </button>

@@ -1,6 +1,5 @@
-import type { Asset } from 'contentful';
+import type { EntrySkeletonType, EntryFieldTypes, Asset } from 'contentful';
 import { Document } from '@contentful/rich-text-types';
-import type { EntryFieldTypes } from 'contentful';
 
 /** Contentful “skeleton” types for getEntries<T> */
 
@@ -258,3 +257,32 @@ export type AreaOfInterest =
 export type IndividualMembershipType = "FreeTier" | "Professional" | "Student" | "Honorary";
 export type MembershipDuration = "OneYear" | "TwoYears" | "ThreeYears" | "Lifetime";
 export type ReferralSource = "Online" | "WordOfMouth" | "EventConference" | "Referral" | "Other";
+
+export interface PioneerSkeleton extends EntrySkeletonType {
+  contentTypeId: 'pioneer';
+  fields: {
+    name: string;
+    mentor: boolean;
+    mentorshipFocusAreas?: string[];
+    quote?: Document;
+    email?: string;
+    areasOfSpecialisation?: string[];
+    picture: Asset;
+    linkedIn?: string;
+    bio?: Document;
+  };
+}
+
+export type FlatPioneer = {
+  id: string;
+  name: string;
+  mentor: boolean;
+  mentorshipFocusAreas: string[];
+  quote?: Document;
+  email?: string;
+  specialisations: string[];
+  photo: string; // Matches 'm.photo' in your UI
+  linkedIn?: string;
+  bio?: Document;
+  role: string; // We'll derive this to satisfy your 'm.role' UI requirement
+};
