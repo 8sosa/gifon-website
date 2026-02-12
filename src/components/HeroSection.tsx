@@ -91,7 +91,7 @@ export default function HeroSection({
           
           {/* Title - Bold 2x */}
           {title && (
-            <div className="bellefair text-white font-bold mb-4 drop-shadow-md text-3xl sm:text-4xl md:text-5xl leading-tight">
+            <div className="bellefair text-white font-bold mb-4 drop-shadow-md text-3xl sm:text-4xl md:text-5xl leading-tight text-justify">
               {title}
             </div>
           )}
@@ -108,7 +108,7 @@ export default function HeroSection({
             
             {/* Description - Medium 1x */}
             {description && (
-              <p className="sen text-gray-100 font-medium drop-shadow-md text-base sm:text-lg md:text-xl leading-relaxed text-center">
+              <p className="sen text-gray-100 font-medium drop-shadow-md text-base sm:text-lg md:text-xl leading-snug text-justify">
                 {description}
               </p>
             )}

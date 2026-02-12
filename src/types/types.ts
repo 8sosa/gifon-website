@@ -261,28 +261,43 @@ export type ReferralSource = "Online" | "WordOfMouth" | "EventConference" | "Ref
 export interface PioneerSkeleton extends EntrySkeletonType {
   contentTypeId: 'pioneer';
   fields: {
-    name: string;
-    mentor: boolean;
-    mentorshipFocusAreas?: string[];
-    quote?: Document;
-    email?: string;
-    areasOfSpecialisation?: string[];
-    picture: Asset;
-    linkedIn?: string;
-    bio?: Document;
+    name: EntryFieldTypes.Symbol;
+    title: EntryFieldTypes.Symbol; // Section 1 [cite: 7]
+    nationality?: EntryFieldTypes.Symbol; // Section 1 [cite: 8]
+    gender?: EntryFieldTypes.Symbol; // Section 1 [cite: 9]
+    currentPosition?: EntryFieldTypes.Symbol; // Section 3 
+    organization?: EntryFieldTypes.Symbol; // Section 3 [cite: 19]
+    sector?: EntryFieldTypes.Symbol; // Section 3 [cite: 20]
+    picture: EntryFieldTypes.AssetLink; // Section 2 [cite: 13]
+    areasOfSpecialisation?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>; // Section 4 [cite: 29]
+    bio?: EntryFieldTypes.RichText; // Section 5 [cite: 35]
+    achievements?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>; // Section 6 [cite: 39]
+    mentor: EntryFieldTypes.Boolean; // Section 8 [cite: 46]
+    mentorshipFocusAreas?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>; // Section 8 [cite: 49]
+    email?: EntryFieldTypes.Symbol; // Section 9 [cite: 56]
+    linkedIn?: EntryFieldTypes.Symbol; // Section 9 [cite: 60]
+    quote?: EntryFieldTypes.RichText; // Section 10 [cite: 62]
+    accuracyConfirmation?: EntryFieldTypes.Boolean; // Section 11 [cite: 66]
+    declarationDate?: EntryFieldTypes.Date; // Section 11 [cite: 68]
   };
 }
 
 export type FlatPioneer = {
   id: string;
   name: string;
+  title: string;
+  nationality?: string;
+  gender?: string;
+  role: string; // Now maps to currentPosition
+  organization?: string;
+  sector?: string;
+  photo: string;
+  specialisations: string[];
+  bio?: Document;
+  achievements: string[];
   mentor: boolean;
   mentorshipFocusAreas: string[];
-  quote?: Document;
   email?: string;
-  specialisations: string[];
-  photo: string; // Matches 'm.photo' in your UI
   linkedIn?: string;
-  bio?: Document;
-  role: string; // We'll derive this to satisfy your 'm.role' UI requirement
+  quote?: Document;
 };

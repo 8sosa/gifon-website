@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import HeroSection from '@/components/HeroSection';
+import PageHero from '@/components/PageHero';
 import { LogoCarousel, CarouselItem } from '@/components/LogoCarousel';
 import PartnersCarousel from '@/components/PartnersCarousel';
 import { FlatEvent } from '@/types/types'; 
@@ -96,11 +96,16 @@ interface HomePageClientProps {
 export default function HomePageClient({ upcomingEvents }: HomePageClientProps) {
   return (
     <RevealProvider>
-      <HeroSection
+      <PageHero
         title={<>{renderText(content.hero.title)}</>}
-        description={content.hero.description}
+        description={
+          <>
+            {renderText("MAPPING THE FUTURE")}
+            <br />
+            {renderText("EMPOWERING THE NATION")}
+          </>}
         description1={<>{renderText(content.hero.longDescription)}</>}
-        backgroundMedia={["/vids/globe.mp4"]}
+        backgroundMedia={["/vids/home.mp4"]}
       />
 
       {/* --- PARTNERS CAROUSEL --- */}

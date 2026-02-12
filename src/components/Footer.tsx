@@ -58,26 +58,26 @@ export default function Footer() {
           
           {/* --- Col A: Brand & Socials --- */}
           <div className="space-y-6 flex flex-col items-center justify-center h-full">
-            <div className='flex flex-col items-center justify-center gap-4'>
+            <div className='flex flex-col items-center justify-center'>
             <Link href="/" className="flex items-center gap-4 md:gap-6 group">
-            {/* Logo Placeholder - replaces the globe/leaf icon */}
-            <div className="relative w-90 h-30 shrink-0 transition-transform group-hover:scale-105">
-               {/* Ensure you have your logo.png here, or use a placeholder icon */}
-               <Image 
-                 src="/logo.png" 
-                 alt="GIFON Logo" 
-                 fill 
-                 className="object-contain"
-               />
-            </div>
-          </Link>
+              {/* Logo Placeholder - replaces the globe/leaf icon */}
+              <div className="relative w-90 h-30 shrink-0 transition-transform group-hover:scale-105">
+                {/* Ensure you have your logo.png here, or use a placeholder icon */}
+                <Image 
+                  src="/logo.png" 
+                  alt="GIFON Logo" 
+                  fill 
+                  className="object-contain"
+                />
+              </div>
+            </Link>
 
               <div className='flex flex-col text-center pl-10'>
                 <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400 text-center">
-                  Mapping the Future
+                  MAPPING THE FUTURE
                 </p>
                 <p className="text-gray-500 text-sm leading-relaxed max-w-md hover:text-green-400 text-center -mt-1.5">
-                  Empowering the Nation.
+                  EMPOWERING THE NATION.
                 </p>
               </div>
 
@@ -108,6 +108,7 @@ export default function Footer() {
                         12 Richard Clapperton Street,<br />
                         Off Maman Nasir Street,<br />
                         Asokoro District,<br />
+                        900231,<br />
                         Abuja, Nigeria.
                     </address>
                 </div>

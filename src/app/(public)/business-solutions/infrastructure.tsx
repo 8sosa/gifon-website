@@ -199,6 +199,20 @@ export const sections: Record<string, Sector> = {
       'Support for industrial policy, investment planning, and innovation hubs',
     ],
   },
+  mines: {
+    id: 'mines',
+    title: 'Mines and Steel',
+    icon: <FaHammer size={24} />,
+    summary: 'Geospatial monitoring for mining operations, tailings dams, and steel plants.',
+    description: `Apply geospatial monitoring for mining operations, tailings dams, and steel plants. Support environmental safety and disaster preparedness for mining-related hazards. Provide location intelligence for supply chain risk management in mineral transport and processing.`,
+    images: '/media/mines.jpeg',
+    highlights: [
+      'Location and risk mapping of mines, steel plants, tailings dams, and hazardous industrial sites',
+	    'Disaster preparedness and environmental safety monitoring for mine collapses, tailings dam failures, flooding, and land degradation',
+      'Supply chain and logistics risk assessment for mineral transport corridors, processing hubs, and export routes',
+		  'Compliance support for national mining, safety, and environmental regulation'
+    ],
+  },
 
   
   // NOTE: 'IT' and 'Space' are kept as extra utilities but are outside the core list of 13.

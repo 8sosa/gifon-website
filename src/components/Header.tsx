@@ -323,32 +323,51 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
 
   return (
     <header className="fixed w-full min-h-max top-0 z-9999 bg-white shadow-md font-sans" ref={navRef}>
-      {/* 1. TOP ROW */}
-      <div className="max-w-8xl mx-auto p-4 sm:p-6 lg:p-8 min-h-max">
-        <div className="flex justify-between items-center">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-4 md:gap-6 group">
-              {/* Logo Placeholder - replaces the globe/leaf icon */}
-              <div className="relative w-75 h-25 shrink-0 transition-transform group-hover:scale-105">
-                {/* Ensure you have your logo.png here, or use a placeholder icon */}
-                <Image 
-                  src="/logo.png" 
-                  alt="GIFON Logo" 
-                  fill 
-                  className="object-contain"
-                />
-              </div>
-            </Link>
+      {/* 1. TOP ROW - Restructured for Center Search */}
+      <div className="max-w-8xl mx-auto p-1 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between gap-4">
+            
+            {/* LEFT: Logo Section */}
+            <div className="flex-1 flex justify-start">
+              <Link href="/" className="flex items-center group">
+                <div className="relative w-48 h-12 md:w-64 md:h-16 shrink-0 transition-transform group-hover:scale-105">
+                  <Image 
+                    src="/logo.png" 
+                    alt="GIFON Logo" 
+                    fill 
+                    className="object-contain object-left"
+                  />
+                </div>
+              </Link>
+            </div>
 
-            {/* Desktop Utilities */}
-            <div className="hidden lg:flex items-center space-x-6">
+            {/* CENTER: Search Bar (Desktop) */}
+            <div className="hidden lg:flex flex-1 justify-center">
+              <button 
+                onClick={() => setIsSearchOpen(true)} 
+                className="group flex items-center justify-between w-full max-w-md px-4 py-2 bg-gray-50 hover:bg-white border border-gray-200 hover:border-green-600 rounded-full text-gray-400 transition-all duration-300 shadow-sm"
+              >
+                <div className="flex items-center gap-3">
+                  <FaSearch size={14} className="group-hover:text-green-600 transition-colors" />
+                  <span className="text-sm font-medium bellefair text-gray-500">Search GIFON archives...</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-bold bg-gray-200 text-gray-500 px-1.5 py-0.5 rounded border border-gray-300">
+                    ⌘K
+                  </span>
+                </div>
+              </button>
+            </div>
+
+            {/* RIGHT: Desktop Utilities & Socials */}
+            <div className="hidden lg:flex flex-1 items-center justify-end space-x-6">
                 <div className="flex items-center space-x-4 text-sm font-medium text-gray-600 border-r border-gray-300 pr-4">
                     {topBarItems.map((item, idx) => (
                         <Link 
                             key={idx} 
                             href={item.href!} 
                             onClick={item.onClick} 
-                            className="hover:text-green-700 transition-colors bellefair"
+                            className="hover:text-green-700 transition-colors bellefair whitespace-nowrap"
                         >
                             {item.label}
                         </Link>
@@ -359,18 +378,13 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
                          <a key={idx} href={item.href} target="_blank" className={`${item.colorClass} ${item.hoverColorClass} transition-colors text-lg`}>{item.label}</a>
                     ))}
                 </div>
-                  <button 
-                  onClick={() => setIsSearchOpen(true)} 
-                  className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-500 transition-colors text-xs border border-transparent hover:border-gray-300"
-                >
-                  <FaSearch size={14} />
-                  <span className="hidden xl:inline">Search (⌘K)</span>
-                </button>
             </div>
 
             {/* Mobile Toggle */}
             <div className="flex items-center lg:hidden gap-4">
-                <button onClick={() => setIsSearchOpen(true)} className="text-gray-600 hover:text-green-700"><FaSearch size={20} /></button>
+                <button onClick={() => setIsSearchOpen(true)} className="text-gray-600 hover:text-green-700">
+                  <FaSearch size={20} />
+                </button>
                 <button className="text-gray-800 hover:text-green-700 focus:outline-none" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                     {mobileMenuOpen ? <FaTimes size={28} /> : <FaBars size={28} />}
                 </button>
@@ -419,6 +433,7 @@ export default function Header({ navItems }: { navItems: MenuItem[] }) {
             </nav>
         </div>
       </div>
+      {/* Rest of component remains the same */}
 
       <Breadcrumbs />
 

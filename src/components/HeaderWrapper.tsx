@@ -88,6 +88,7 @@ export default async function HeaderWrapper() {
             { label: 'Government Services', anchor: 'government' }, 
             { label: 'Chemical & Hazardous Materials', anchor: 'education' }, 
             { label: 'Critical Manufacturing & Industrial Facilities', anchor: 'manufacturing' }, 
+            { label: 'Mines and Steel', anchor: 'mines'}
         ]
     },
     { 
@@ -96,21 +97,21 @@ export default async function HeaderWrapper() {
         children: [ 
             { label: 'Young Professionals Forum', anchor: 'young-professionals' }, 
             { label: 'Women in GEOINT Forum', anchor: 'women-in-geoint' },
-            { label: 'Industry & Private Sector Forum', anchor: 'industry-private-sector' },
+            { label: 'Industry & Private Sector Group', anchor: 'industry-private-sector' },
             { label: 'Policy, Governance & Ethics Group', anchor: 'policy-governance-ethics' },
         ] 
     },
-    { 
-        label: 'Policies', 
-        href: '/policies', 
-        children: [ 
-            { label: 'Code of Ethics', anchor: 'ethics' }, 
-            { label: 'Anti-Corruption', anchor: 'anti-corruption' }, 
-            { label: 'Fund Raising', anchor: 'fund-raising' }, 
-            { label: 'Anti-Modern-Day Slavery', anchor: 'slavery' }, 
-            { label: 'Volunteer & Internship', anchor: 'volunteer' } 
-        ] 
-    },
+    // { 
+    //     label: 'Policies', 
+    //     href: '/policies', 
+    //     children: [ 
+    //         { label: 'Code of Ethics', anchor: 'ethics' }, 
+    //         { label: 'Anti-Corruption', anchor: 'anti-corruption' }, 
+    //         { label: 'Fund Raising', anchor: 'fund-raising' }, 
+    //         { label: 'Anti-Modern-Day Slavery', anchor: 'slavery' }, 
+    //         { label: 'Volunteer & Internship', anchor: 'volunteer' } 
+    //     ] 
+    // },
     // { 
     //     label: 'Get Involved', 
     //     href: '/get-involved', 

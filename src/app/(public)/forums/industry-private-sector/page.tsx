@@ -5,7 +5,7 @@ export default function IPSFPage() {
   return (
     <main className="bg-white">
       <HeroSection 
-        title="Industry and Private Sector Forum"
+        title="Industry and Private Sector Group"
         description="Driving innovation and investment through strategic geospatial partnerships."
         backgroundMedia={["/media/industry-bg.jpg"]}
       />
@@ -15,7 +15,7 @@ export default function IPSFPage() {
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Strategic Platform Objectives</h2>
             <p className="text-gray-600 mb-8 leading-relaxed">
-              GIFON recognizes the critical role of industry in driving innovation and sustainable applications of GEOINT for national security.
+            <span className="cooper">GIFON</span> recognizes the critical role of industry in driving innovation and sustainable applications of GEOINT for national security.
             </p>
             
             <ul className="space-y-6">
@@ -46,7 +46,7 @@ export default function IPSFPage() {
           <div className="bg-gray-50 p-8 md:p-12 rounded-3xl border border-gray-100">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Policy Commitment</h3>
             <p className="text-gray-700 italic mb-6">
-              "GIFON commits to institutionalizing the Industry and Private Sector Forum as a dynamic mechanism where the private sector is a key driver of Nigeria’s geospatial future."
+              "<span className="cooper">GIFON</span> commits to institutionalizing the Industry and Private Sector Forum as a dynamic mechanism where the private sector is a key driver of Nigeria’s geospatial future."
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-gray-700">

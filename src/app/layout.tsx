@@ -53,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <ScrollToTop />
         <HeaderWrapper />
-        <main className="grow min-h-1/2 flex flex-col justify-start pt-38 md:pt-[10.7rem] lg:pt-60 xl:pt-60">
+        <main className="grow min-h-1/2 flex flex-col justify-start pt-20 md:pt-28 lg:pt-40 xl:pt-40">
           {children}
         </main>
         

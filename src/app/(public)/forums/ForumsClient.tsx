@@ -47,7 +47,6 @@ const getGroupIcon = (id: string) => {
   switch (id) {
     case 'policy-governance-ethics': return <Award size={40} className="w-8 h-8 md:w-10 md:h-10" />;
     case 'industry-private-sector': return <Cpu size={40} className="w-8 h-8 md:w-10 md:h-10" />;
-    // ... other cases
     default: return <Globe size={40} className="w-8 h-8 md:w-10 md:h-10" />;
   }
 };
@@ -55,13 +54,13 @@ const getGroupIcon = (id: string) => {
 const allGroups = [
   {
     id: 'policy-governance-ethics',
-    title: 'Policy, Governance & Ethics Working Group (PGE-WG)',
+    title: 'Policy, Governance & Ethics Working Group',
     description: 'The institutional mechanism established to uphold accountability, integrity, and transparency in all GIFON operations.',
     color: 'bg-emerald-50 text-emerald-600',
   },
   {
     id: 'industry-private-sector',
-    title: 'Industry and Private Sector Forum (IPSF)',
+    title: 'Industry and Private Sector Group',
     description: 'A strategic platform for driving innovation, investment, and sustainable applications of geospatial intelligence across national development and security priorities.',
     color: 'bg-blue-50 text-blue-600',
   },

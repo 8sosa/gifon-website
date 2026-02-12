@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 
-// DATA UNTOUCHED AS REQUESTED
 const partners = [
   {
     name: "DGI London",
@@ -28,14 +27,50 @@ const partners = [
   },
   {
     name: "Reslarc",
-    logo: "/images/na.png",
+    logo: "/images/Reslarc-Logo.png",
+    width: 803,
+    height: 133,
+    website: "#",
+  },
+  {
+    name: "Reslarc Data Lab",
+    logo: "/images/reslarc-data-lab.png",
+    width: 803,
+    height: 133,
+    website: "#",
+  },
+  {
+    name: "Reslarc Cyber Int",
+    logo: "/images/reslarc-cyber-int.png",
+    width: 803,
+    height: 133,
+    website: "#",
+  },
+  {
+    name: "Reslarc Cast MP",
+    logo: "/images/reslarc-cast-mp.png",
+    width: 803,
+    height: 133,
+    website: "#",
+  },
+  {
+    name: "Reslarc Geolocate",
+    logo: "/images/reslarc-cast-mp.png",
     width: 803,
     height: 133,
     website: "#",
   },
 ];
 
+// Split partners for two rows
+const firstRow = partners.slice(0, Math.ceil(partners.length / 2));
+const secondRow = partners.slice(Math.ceil(partners.length / 2));
+
 export default function PartnersCarousel() {
+  // We divide the partners to create two distinct rows
+  const firstRow = partners.slice(0, Math.ceil(partners.length / 2));
+  const secondRow = partners.slice(Math.ceil(partners.length / 2));
+
   return (
     <section className="py-12 md:py-24 bg-gray-950 overflow-hidden relative">
       
@@ -49,50 +84,51 @@ export default function PartnersCarousel() {
       </div>
 
       {/* Carousel Container */}
-      <div className="relative w-full py-4">
+      <div className="relative w-full flex flex-col gap-6 md:gap-10">
         
-        {/* Dark Gradient Masks (Fade edges) - Adjusted width for mobile */}
-        <div className="absolute top-0 left-0 z-20 h-full w-16 md:w-48 bg-gradient-to-r from-gray-950 to-transparent pointer-events-none"></div>
-        <div className="absolute top-0 right-0 z-20 h-full w-16 md:w-48 bg-gradient-to-l from-gray-950 to-transparent pointer-events-none"></div>
+        {/* Row 1: Left Scrolling */}
+        <div className="group flex overflow-hidden w-full relative">
+           {/* Gradient Masks per row to prevent clipping at edges */}
+           <div className="absolute inset-y-0 left-0 z-20 w-16 md:w-48 bg-linear-to-r from-gray-950 to-transparent"></div>
+           <div className="absolute inset-y-0 right-0 z-20 w-16 md:w-48 bg-linear-to-l from-gray-950 to-transparent"></div>
 
-        {/* Scrolling Track */}
-        <div className="group flex overflow-hidden w-full">
-          
-          {/* List 1 */}
-          <div className="flex items-start animate-infinite-scroll group-hover:paused gap-4 md:gap-6 pr-4 md:pr-6">
-            {partners.map((partner, index) => (
-              <PartnerCard key={`p1-${index}`} partner={partner} />
-            ))}
+          {/* To prevent clipping, we render the list 3 times. 
+            The 'w-max' ensures the container is exactly as wide as its content.
+          */}
+          <div className="flex w-max animate-infinite-scroll group-hover:paused gap-4 md:gap-8">
+            <TrackItems items={firstRow} id="r1-a" />
+            <TrackItems items={firstRow} id="r1-b" />
+            <TrackItems items={firstRow} id="r1-c" />
           </div>
+        </div>
 
-          {/* List 2 */}
-          <div className="flex items-start animate-infinite-scroll group-hover:paused gap-4 md:gap-6 pr-4 md:pr-6" aria-hidden="true">
-            {partners.map((partner, index) => (
-              <PartnerCard key={`p2-${index}`} partner={partner} />
-            ))}
-          </div>
-          
-           {/* List 3 */}
-           <div className="flex items-start animate-infinite-scroll group-hover:paused gap-4 md:gap-6 pr-4 md:pr-6" aria-hidden="true">
-            {partners.map((partner, index) => (
-              <PartnerCard key={`p3-${index}`} partner={partner} />
-            ))}
+        {/* Row 2: Right Scrolling (Reverse) */}
+        <div className="group flex overflow-hidden w-full relative">
+           <div className="absolute inset-y-0 left-0 z-20 w-16 md:w-48 bg-linear-to-r from-gray-950 to-transparent"></div>
+           <div className="absolute inset-y-0 right-0 z-20 w-16 md:w-48 bg-linear-to-l from-gray-950 to-transparent"></div>
+
+          <div className="flex w-max animate-infinite-scroll-reverse group-hover:paused gap-4 md:gap-8">
+            <TrackItems items={secondRow} id="r2-a" />
+            <TrackItems items={secondRow} id="r2-b" />
+            <TrackItems items={secondRow} id="r2-c" />
           </div>
         </div>
       </div>
 
       <style jsx global>{`
         @keyframes infinite-scroll {
-          from { transform: translateX(0); }
-          to { transform: translateX(-100%); }
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-1/3 * 100%)); }
+        }
+        @keyframes infinite-scroll-reverse {
+          0% { transform: translateX(calc(-1/3 * 100%)); }
+          100% { transform: translateX(0); }
         }
         .animate-infinite-scroll {
           animation: infinite-scroll 40s linear infinite;
         }
-        @media (min-width: 768px) {
-          .animate-infinite-scroll {
-            animation: infinite-scroll 50s linear infinite;
-          }
+        .animate-infinite-scroll-reverse {
+          animation: infinite-scroll-reverse 40s linear infinite;
         }
         .group-hover\\:paused:hover {
           animation-play-state: paused;
@@ -102,7 +138,17 @@ export default function PartnersCarousel() {
   );
 }
 
-// --- Helper Component with Responsive Sizing ---
+// Sub-component to clean up the map logic
+function TrackItems({ items, id }: { items: typeof partners, id: string }) {
+  return (
+    <div className="flex gap-4 md:gap-8 pr-4 md:pr-8">
+      {items.map((partner, index) => (
+        <PartnerCard key={`${id}-${index}`} partner={partner} />
+      ))}
+    </div>
+  );
+}
+
 function PartnerCard({ partner }: { partner: typeof partners[0] }) {
   return (
     <a
@@ -114,37 +160,23 @@ function PartnerCard({ partner }: { partner: typeof partners[0] }) {
       <div 
         className="
           relative group/card
-          /* Responsive Widths */
-          w-[260px] sm:w-[320px] md:w-[432px] 
-          /* Responsive Heights */
-          h-[160px] sm:h-[200px] md:h-[264px]
-          shrink-0 
-          flex flex-col items-center justify-center 
-          bg-white/50 backdrop-blur-sm
-          border border-white/10 rounded-xl
-          group-hover/container:border-green-500/50 
-          group-hover/container:bg-white/95 
-          group-hover/container:shadow-[0_0_20px_-5px_rgba(34,197,94,0.2)]
-          transition-all duration-300
+          w-[200px] sm:w-[280px] md:w-[350px] 
+          h-[120px] sm:h-40 md:h-[200px]
+          shrink-0 flex items-center justify-center 
+          bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl
+          group-hover/container:bg-white/95 transition-all duration-300
         "
       >
-        {/* Image Container */}
-        <div className="w-full h-24 md:h-36 px-4 md:px-6 flex items-center justify-center grayscale group-hover/container:grayscale-0 transition-all duration-500">
+        <div className="w-full h-16 md:h-24 px-4 md:px-8 flex items-center justify-center grayscale group-hover/container:grayscale-0 transition-all duration-500">
           <Image 
             src={partner.logo} 
             alt={partner.name} 
             width={partner.width} 
             height={partner.height} 
-            className="object-contain w-full h-full drop-shadow-sm" 
+            className="object-contain w-full h-full" 
           />
         </div>
       </div>
-      
-      {partner.caption && (
-        <p className="mt-2 md:mt-3 text-sm md:text-xl text-gray-400 font-medium group-hover/container:text-green-400 transition-colors">
-          {partner.caption}
-        </p>
-      )}
     </a>
   );
 }

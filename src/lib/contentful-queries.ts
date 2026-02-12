@@ -198,7 +198,7 @@ export async function getPioneers(): Promise<FlatPioneer[]> {
   return entries.items.map((item) => {
     const f = item.fields;
 
-    // Handle Image (using your existing helper)
+    // Handle Image Logic
     const rawUrl = getAssetUrl(f.picture);
     const photo = rawUrl?.startsWith('//')
       ? `https:${rawUrl}`
@@ -207,17 +207,22 @@ export async function getPioneers(): Promise<FlatPioneer[]> {
     return {
       id: item.sys.id,
       name: getString(f.name),
+      title: getString(f.title) || '',
+      nationality: getString(f.nationality),
+      gender: getString(f.gender),
+      // Derived from Section 3: Current Position 
+      role: getString(f.currentPosition) || 'Pioneer Member', 
+      organization: getString(f.organization),
+      sector: getString(f.sector),
+      photo: photo,
+      specialisations: getStringArray(f.areasOfSpecialisation),
+      bio: f.bio ? getDocument(f.bio) : undefined,
+      achievements: getStringArray(f.achievements),
       mentor: !!f.mentor,
       mentorshipFocusAreas: getStringArray(f.mentorshipFocusAreas),
-      quote: f.quote ? getDocument(f.quote) : undefined,
       email: getString(f.email),
-      specialisations: getStringArray(f.areasOfSpecialisation),
-      photo: photo,
       linkedIn: getString(f.linkedIn),
-      bio: f.bio ? getDocument(f.bio) : undefined,
-      // Logic for 'role': Since your UI uses 'm.role', 
-      // we can use the first specialization or a static tag
-      role: getStringArray(f.areasOfSpecialisation)[0] || 'Pioneer Member',
+      quote: f.quote ? getDocument(f.quote) : undefined,
     };
   });
 }

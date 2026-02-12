@@ -106,28 +106,26 @@ function ExpandableCard({ item, idx, onApply }: { item: CategoryItem; idx: numbe
     return <Award className="w-5 h-5 md:w-6 md:h-6 text-white" />;
   };
 
-  const handleApplyClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onApply(item);
-  };
-
   return (
+    /* OUTER WRAPPER: This acts as the "Anchor" and "Spacer" */
     <div 
-      className="relative min-h-[350px] md:h-[420px] w-full"
+      className="relative w-full h-[380px] md:h-[420px]" 
       onMouseEnter={() => !isMobile && setIsOpen(true)}
       onMouseLeave={() => !isMobile && setIsOpen(false)}
     >
+      {/* THE ACTUAL CARD: Lifted out of flow only when open */}
       <motion.div
         layout
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className={`
-          relative md:absolute top-0 left-0 w-full
           bg-white rounded-3xl p-6 md:p-8 
           shadow-lg shadow-gray-200/50 border border-gray-100 
-          flex flex-col transition-shadow
-          ${isOpen ? 'z-50 shadow-2xl border-green-500/30 ring-1 ring-green-500/10' : 'z-10'}
+          flex flex-col transition-shadow w-full
+          ${isOpen 
+            ? 'md:absolute top-0 left-0 z-50 shadow-2xl border-green-500/30 ring-1 ring-green-500/10 min-h-max' 
+            : 'relative h-full z-10'
+          }
         `}
-        // Only toggle if clicking the card body, not the button
         onClick={() => isMobile && setIsOpen(!isOpen)}
       >
         <div className="flex items-start justify-between mb-4 md:mb-6">
@@ -142,7 +140,9 @@ function ExpandableCard({ item, idx, onApply }: { item: CategoryItem; idx: numbe
         <h3 className={`text-xl md:text-2xl font-bold mb-2 transition-colors ${isOpen ? 'text-green-700' : 'text-gray-900'}`}>
           {item.title}
         </h3>
-        <p className="text-gray-500 text-sm mb-6">
+        
+        {/* Ensures the description text doesn't cause height mismatch when closed */}
+        <p className="text-gray-500 text-sm mb-6 min-h-10">
           {item.desc}
         </p>
 
@@ -172,7 +172,7 @@ function ExpandableCard({ item, idx, onApply }: { item: CategoryItem; idx: numbe
         <div className="mt-auto pt-2">
           {item.title !== "Fellow/Honorary Membership" ? (
             <button 
-              onClick={handleApplyClick}
+              onClick={(e) => { e.stopPropagation(); onApply(item); }}
               className={`w-full py-3 md:py-4 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 relative z-30 ${isOpen ? 'bg-green-600 text-white shadow-lg shadow-green-200' : 'bg-gray-900 text-white'}`}
             >
               Apply Now <ChevronRight size={18} />
