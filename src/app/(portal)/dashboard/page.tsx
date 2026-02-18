@@ -65,6 +65,8 @@ type MentorProfile = {
 // --- Main Component ---
 export default function MembershipPortalPage() {
   const [user, setUser] = useState<User | null>(null);
+
+  const isCasualMember = user?.category?.toLowerCase() === 'casual';
   
   // Mentor State
   const [mentorDetails, setMentorDetails] = useState<MentorProfile | null>(null);
@@ -180,54 +182,63 @@ export default function MembershipPortalPage() {
     {
       id: "mentor", 
       title: user?.assignedMentor ? "Your Mentor" : "Mentorship Program", // Dynamic Title
-      description: user?.assignedMentor 
+      description: isCasualMember 
+      ? "Mentorship is reserved for Professional & Student tiers." 
+      : user?.assignedMentor 
         ? `Connect with ${user.assignedMentor.name}.` 
         : "You have not been assigned a mentor yet.",
       icon: <Diamond className="text-white" size={24} />,
-      color: user?.assignedMentor ? "bg-green-600" : "bg-gray-400", // Grey out if not assigned
-      action: handleOpenMentorModal, 
+      color: isCasualMember ? "bg-gray-300" : (user?.assignedMentor ? "bg-green-600" : "bg-gray-400"),
+      action: isCasualMember ? null : handleOpenMentorModal, 
+      locked: isCasualMember,
     },
     {
       title: "Publications Archive",
       description: "Access issues of the GeoINSIGHT Journal and Bulletin.",
       icon: <BookOpen className="text-white" size={24} />,
-      color: "bg-blue-600",
+      color: isCasualMember ? "bg-gray-300" :"bg-blue-600",
       href: "/dashboard/publications",
+      locked: isCasualMember,
     },
     {
       title: "Webinar Library",
       description: "Watch recordings of past masterclasses and sessions.",
       icon: <Video className="text-white" size={24} />,
-      color: "bg-purple-600",
+      color: isCasualMember ? "bg-gray-300" : "bg-purple-600",
       href: "/dashboard/webinar",
+      locked: isCasualMember,
     },
     {
       title: "Member Directory",
       description: "Connect with GIFON professionals and partners.",
       icon: <Users className="text-white" size={24} />,
-      color: "bg-teal-600",
+      color: isCasualMember ? "bg-gray-300" : "bg-teal-600",
       href: "/dashboard/directory", 
+      locked: isCasualMember,
     },
     {
       title: "Toolkits & Downloads",
       description: "Get policy briefs, reports, and project templates.",
       icon: <Download className="text-white" size={24} />,
-      color: "bg-orange-500",
+      color: isCasualMember ? "bg-gray-300" : "bg-orange-500",
       href: "/dashboard/downloads",
+      locked: isCasualMember,
     },
     {
       title: "Submit Research",
       description: "Submit a paper for the next GeoINSIGHT Journal.",
       icon: <FileText className="text-white" size={24} />,
-      color: "bg-red-500",
+      color: isCasualMember ? "bg-gray-300" : "bg-red-500",
       href: "/dashboard/submit",
+      locked: isCasualMember,
     },
     {
       title: "Account Settings",
       description: "Update your profile, password, and preferences.",
       icon: <Settings className="text-white" size={24} />,
-      color: "bg-slate-600",
+      color: isCasualMember ? "bg-gray-300" : "bg-slate-600",
       href: "/dashboard/settings",
+      locked: isCasualMember,
     },
   ];
 
@@ -373,49 +384,79 @@ export default function MembershipPortalPage() {
             <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
                 Member Resources
             </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {memberResources.map((resource, i) => {
-                  const innerContent = (
-                    <>
-                      <div>
-                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${resource.color} shadow-md group-hover:scale-110 transition-transform duration-300`}>
-                              {resource.icon}
+            {/* Place this above the Resources Grid in your JSX */}
+              {isCasualMember && (
+                  <div className="mb-8 p-4 bg-orange-50 border border-orange-200 rounded-2xl flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                          <div className="p-2 bg-orange-100 text-orange-600 rounded-full">
+                              <Diamond size={20} />
                           </div>
-                          <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">{resource.title}</h3>
-                          <p className="text-sm text-gray-500 leading-relaxed">
-                              {resource.description}
-                          </p>
+                          <div>
+                              <p className="text-sm font-bold text-orange-900">Casual Account Limitations</p>
+                              <p className="text-xs text-orange-700">Upgrade to a Professional or Student tier to unlock all member benefits.</p>
+                          </div>
                       </div>
-                      <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between text-sm font-semibold text-gray-400 group-hover:text-green-600 transition-colors">
-                          <span>Access Now</span>
-                          <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                      <Link href="/membership" className="px-4 py-2 bg-orange-600 text-white text-xs font-bold rounded-lg hover:bg-orange-700 transition">
+                          Upgrade Now
+                      </Link>
+                  </div>
+              )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {memberResources.map((resource, i) => {
+              // If locked, we intercept the click
+              const handleLockedClick = (e: React.MouseEvent) => {
+                if (resource.locked) {
+                  e.preventDefault();
+                  alert("This resource is restricted to Professional and Student members. Please upgrade your account to gain access.");
+                }
+              };
+
+              const innerContent = (
+                <div className={resource.locked ? "opacity-50 grayscale-[0.5]" : ""}>
+                  <div className="flex justify-between items-start mb-4">
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${resource.color} shadow-md`}>
+                          {resource.icon}
                       </div>
-                    </>
-                  );
+                      {resource.locked && (
+                        <span className="bg-gray-100 text-gray-500 p-1.5 rounded-lg border border-gray-200">
+                          <Settings size={14} className="animate-pulse" /> {/* Replace with Lock icon if you prefer */}
+                        </span>
+                      )}
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{resource.title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">
+                      {resource.description}
+                  </p>
+                  
+                  <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between text-sm font-semibold text-gray-400">
+                      <span>{resource.locked ? "Upgrade to Access" : "Access Now"}</span>
+                      <ChevronRight size={16} />
+                  </div>
+                </div>
+              );
 
-                  if (resource.action) {
-                    return (
-                      <button
-                        key={i}
-                        onClick={resource.action}
-                        className="group text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full w-full"
-                      >
-                        {innerContent}
-                      </button>
-                    );
-                  }
+              // Render logic
+              if (resource.action && !resource.locked) {
+                return (
+                  <button key={i} onClick={resource.action} className="group text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all">
+                    {innerContent}
+                  </button>
+                );
+              }
 
-                  return (
-                    <Link
-                      key={i}
-                      href={resource.href || '#'}
-                      className="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full"
-                    >
-                      {innerContent}
-                    </Link>
-                  );
-                })}
+              return (
+                <Link
+                  key={i}
+                  href={resource.locked ? "#" : (resource.href || '#')}
+                  onClick={handleLockedClick}
+                  className={`group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 transition-all ${
+                    resource.locked ? "cursor-not-allowed" : "hover:border-green-200 hover:shadow-lg"
+                  }`}
+                >
+                  {innerContent}
+                </Link>
+              );
+            })}
             </div>
           </div>
 

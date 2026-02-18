@@ -239,6 +239,8 @@ export default function AdminDashboard() {
       setPendingApps(prev => prev.map(p => p._id === updatedApp._id ? updatedApp : p));
       setApprovedApps(prev => prev.map(p => p._id === updatedApp._id ? updatedApp : p));
 
+      setSelectedApp(null);
+
     } catch (error) {
         alert("Failed to assign mentor. Please try again.");
     } finally {
