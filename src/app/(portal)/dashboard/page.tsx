@@ -396,7 +396,7 @@ export default function MembershipPortalPage() {
 
       {/* --- DYNAMIC MENTOR MODAL --- */}
       {isMentorModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-101 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
           <div 
             className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200 relative flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()} 

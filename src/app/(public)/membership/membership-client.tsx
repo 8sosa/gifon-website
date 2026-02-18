@@ -1195,24 +1195,40 @@ export default function MembershipClient({
                                 </div>
 
                                 {/* STICKY FOOTER (Inside Form) */}
-                                <div className="bg-white border-t border-gray-100 p-4 sm:p-6 flex gap-3">
+                                <div className="bg-white border-t border-gray-100 p-4 sm:p-6 flex items-center gap-3 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
                                     {currentStep > 1 && (
-                                        <button type="button" onClick={prevStep} className="flex-1 py-3.5 rounded-xl font-bold text-gray-600 bg-gray-50 border border-gray-200 text-sm">
-                                            <ChevronLeft size={18} /> Back
+                                        <button 
+                                            type="button" 
+                                            onClick={prevStep} 
+                                            /* Changed to w-1/3 to keep it smaller than the primary action */
+                                            className="w-1/3 py-3.5 rounded-xl font-bold text-gray-600 bg-gray-50 hover:bg-gray-100 transition border border-gray-200 text-sm flex items-center justify-center gap-1"
+                                        >
+                                            <ChevronLeft size={16} /> Back
                                         </button>
                                     )}
                                     
                                     {currentStep < 5 ? (
-                                        <button type="button" onClick={nextStep} className="flex-2 bg-green-600 text-white py-3.5 rounded-xl font-bold text-sm">
-                                            Next Step <ChevronRight size={18} />
+                                        <button 
+                                            type="button" 
+                                            onClick={nextStep} 
+                                            /* Changed to flex-1 to fill remaining space properly */
+                                            className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold text-sm hover:bg-green-700 transition shadow-lg shadow-green-200 flex items-center justify-center gap-1"
+                                        >
+                                            Next Step <ChevronRight size={16} />
                                         </button>
                                     ) : (
                                         <button 
                                             type="submit"
                                             disabled={isLoading || !formData.agreedToDeclaration}
-                                            className="flex-2 bg-green-600 text-white py-3.5 rounded-xl font-bold disabled:bg-gray-400 text-sm"
+                                            /* Consistently fills space */
+                                            className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold disabled:bg-gray-400 text-sm hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2"
                                         >
-                                            {isLoading ? 'Processing...' : 'Submit Application'}
+                                            {isLoading ? (
+                                                <span className="flex items-center gap-2">
+                                                    <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                                    Processing...
+                                                </span>
+                                            ) : 'Submit Application'}
                                         </button>
                                     )}
                                 </div>
