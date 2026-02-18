@@ -104,22 +104,19 @@ export default function HeroSection({
           )}
 
           {/* Descriptions Container */}
-          <div className="max-w-3xl space-y-4">
-            
-            {/* Description - Medium 1x */}
-            {description && (
-              <p className="font-mono text-gray-100 font-light drop-shadow-md text-base sm:text-lg md:text-xl leading-snug text-center italic">
-                {description}
-              </p>
-            )}
-            
-            {/* Description 1 - Medium 1x */}
-            {description1 && (
-              <p className="text-gray-100 font-medium drop-shadow-md text-base sm:text-lg md:text-lg leading-relaxed text-justify">
+          {description1 && (
+            <div className="inline-block px-4 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4">
+              <p className="text-white text-sm font-medium">
                 {description1}
               </p>
-            )}
-          </div>
+            </div>
+          )}
+
+          {description && (
+            <p className="text-gray-100 font-light text-lg text-justify leading-relaxed">
+              {description}
+            </p>
+          )}
 
           {/* CTA Button */}
           {ctaText && ctaLink && (

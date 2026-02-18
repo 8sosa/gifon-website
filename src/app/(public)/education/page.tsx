@@ -559,7 +559,7 @@ function EducationContent() {
     <>
       <HeroSection
         title="Education & Programs"
-        description1={
+        description={
           <>
             <span className="cooper">GIFON</span>&apos;s education and training programs are designed to equip professionals, institutions, and stakeholders with the skills and knowledge needed to excel in Geospatial Intelligence. Through hands-on training, advanced courses, and strategic learning initiatives, we build national capacity, foster innovation, and empower participants to apply geospatial insights in strengthening national security, enhancing governance, and driving sustainable development across Nigeria.
           </>

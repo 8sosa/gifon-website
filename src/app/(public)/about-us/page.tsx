@@ -81,7 +81,7 @@ export default async function AboutPage() {
     <>
       <HeroSection
         title={content.hero.title}
-        description1={<>{renderText(content.hero.description)}</>}
+        description={<>{renderText(content.hero.description)}</>}
         backgroundMedia={['/media/AIM copy 2.jpg']}
       />
       
