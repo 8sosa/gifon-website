@@ -91,7 +91,7 @@ type Submission = {
   submittedAt: string;
 };
 
-type ActiveTab = 'pending' | 'approved' | 'submissions';
+type ActiveTab = 'pending' | 'approved' | 'submissions' | 'mentor-requests';
 
 export default function AdminDashboard() {
   // 3. State
@@ -104,6 +104,21 @@ export default function AdminDashboard() {
   const [mentors, setMentors] = useState<MentorOption[]>([]);
   const [selectedMentorId, setSelectedMentorId] = useState<string>('');
   const [isAssigning, setIsAssigning] = useState(false);
+  const [mentorRequests, setMentorRequests] = useState<Application[]>([]);
+
+  const fetchMentorRequests = async () => {
+    setIsLoading(true); setError(null);
+    try {
+      const res = await fetch('/api/admin/mentor-requests');
+      if (!res.ok) throw new Error('Failed to fetch mentor requests');
+      const data = await res.json();
+      setMentorRequests(data.users || []);
+    } catch (err: unknown) { 
+      setError(err instanceof Error ? err.message : 'Error'); 
+    } finally { 
+      setIsLoading(false); 
+    }
+  };
 
   // UI State
   const [isLoading, setIsLoading] = useState(true);
@@ -167,6 +182,7 @@ export default function AdminDashboard() {
     if (tab === 'approved') fetchApproved();
     else if (tab === 'pending') fetchPending();
     else if (tab === 'submissions') fetchSubmissions();
+    else if (tab === 'mentor-requests') fetchMentorRequests();
   };
 
   const handleApprove = async (applicationId: string) => {
@@ -244,8 +260,11 @@ export default function AdminDashboard() {
   const renderTable = () => {
     if (isLoading) return <div className="text-center p-12 text-gray-500">Loading data...</div>;
 
-    if (activeTab === 'pending' || activeTab === 'approved') {
-      const data = activeTab === 'pending' ? pendingApps : approvedApps;
+    if (activeTab === 'pending' || activeTab === 'approved' || activeTab === 'mentor-requests') {
+      let data: Application[] = [];
+        if (activeTab === 'pending') data = pendingApps;
+        else if (activeTab === 'approved') data = approvedApps;
+        else if (activeTab === 'mentor-requests') data = mentorRequests;
       
       if (data.length === 0 && !error) {
         return <div className="bg-gray-50 p-12 rounded-xl text-center text-gray-500 border border-gray-100">No applications found in this category.</div>;
@@ -402,6 +421,7 @@ export default function AdminDashboard() {
           {[
               { id: 'pending', label: 'Pending Applications', count: pendingApps.length },
               { id: 'approved', label: 'Approved Members', count: approvedApps.length },
+              { id: 'mentor-requests', label: 'Mentor Requests', count: mentorRequests.length },
               { id: 'submissions', label: 'Journal Submissions', count: submissions.length }
           ].map((tab) => (
             <button
