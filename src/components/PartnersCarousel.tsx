@@ -159,7 +159,7 @@ function PartnerCard({ partner }: { partner: typeof partners[0] }) {
     >
       <div 
         className="
-          relative group/card
+          relative group/card flex-col gap-1
           w-[200px] sm:w-[280px] md:w-[350px] 
           h-[120px] sm:h-40 md:h-[200px]
           shrink-0 flex items-center justify-center 
@@ -176,6 +176,7 @@ function PartnerCard({ partner }: { partner: typeof partners[0] }) {
             className="object-contain w-full h-full" 
           />
         </div>
+        <p>{partner.caption}</p>
       </div>
     </a>
   );

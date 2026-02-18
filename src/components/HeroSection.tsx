@@ -43,7 +43,8 @@ export default function HeroSection({
   if (mediaItems.length === 0) return null;
 
   return (
-    <section className="relative w-full h-[50vh] min-h-[500px] md:h-[60vh] lg:h-[70vh] overflow-hidden bg-black">
+    /* 1. Responsive Height: Taller on mobile to prevent content clipping */
+    <section className="relative w-full h-[60vh] min-h-[550px] md:h-[60vh] lg:h-[75vh] overflow-hidden bg-black">
       
       {/* --- BACKGROUND LAYER --- */}
       {mediaItems.map((src, index) => {
@@ -64,12 +65,13 @@ export default function HeroSection({
                 muted
                 loop
                 playsInline
+                /* Use object-cover to ensure video fills the frame */
                 className="absolute inset-0 w-full h-full object-cover"
               />
             ) : (
               <Image
                 src={src}
-                alt={`Slide ${index}`}
+                alt={typeof title === 'string' ? title : `Slide ${index}`}
                 fill
                 priority={index === 0}
                 className="object-cover"
@@ -77,53 +79,54 @@ export default function HeroSection({
               />
             )}
             
-            {/* Gradient Overlay for better text legibility */}
             <div className="absolute inset-0 bg-black/40 bg-linear-to-b from-black/60 via-transparent to-black/60 z-10"></div>
-            {/* Your specific green overlay */}
             <div className="absolute inset-0 bg-[rgba(0,63,33,0.4)] z-11"></div>
           </div>
         );
       })}
 
       {/* --- CONTENT LAYER --- */}
-      <div className="relative z-20 h-full w-full flex flex-col items-center justify-center text-center pb-20 px-6 md:px-12">
-        <div className="max-w-5xl mx-auto flex flex-col items-center">
+      <div className="relative z-20 h-full w-full flex flex-col items-center justify-center text-center px-6 md:px-12">
+        {/* 2. Responsive Content Container: Added pb-10 on mobile, pb-20 on desktop to lift content up */}
+        <div className="max-w-5xl mx-auto flex flex-col items-center pb-10 md:pb-20">
           
-          {/* Title - Bold 2x */}
+          {/* Title - Scaling text from 2xl to 5xl */}
           {title && (
-            <div className="bellefair text-white font-bold mb-4 drop-shadow-md text-3xl sm:text-4xl md:text-5xl leading-tight text-justify">
+            <div className="bellefair text-white font-bold mb-3 md:mb-4 drop-shadow-md text-xl sm:text-3xl md:text-5xl leading-tight">
               {title}
             </div>
           )}
           
-          {/* Tagline - Bold 3x */}
+          {/* Tagline - Drastic scaling for impact. lg:h-8xl is huge, so we cap it on mobile */}
           {tagline && (
-            <h1 className="bellefair text-white font-bold mb-6 drop-shadow-2xl text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none">
+            <h1 className="bellefair text-white font-bold mb-4 md:mb-6 drop-shadow-2xl text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-none">
               {tagline}
             </h1>
           )}
 
-          {/* Descriptions Container */}
-          {description1 && (
-            <div className="inline-block px-4 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4">
-              <p className="text-white text-sm font-medium">
-                {description1}
+          {/* 3. Description Box: Centered text on mobile, justified on tablet+ */}
+          <div className="max-w-3xl space-y-4">
+            {description1 && (
+              <div className="inline-block px-3 py-1 md:px-4 md:py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-2">
+                <p className="text-white text-xs md:text-sm font-medium tracking-wide">
+                  {description1}
+                </p>
+              </div>
+            )}
+
+            {description && (
+              <p className="text-gray-100 font-light text-sm sm:text-base md:text-lg lg:text-xl text-center md:text-justify leading-relaxed opacity-90">
+                {description}
               </p>
-            </div>
-          )}
+            )}
+          </div>
 
-          {description && (
-            <p className="text-gray-100 font-light text-lg text-justify leading-relaxed">
-              {description}
-            </p>
-          )}
-
-          {/* CTA Button */}
+          {/* CTA Button - Larger tap target on mobile */}
           {ctaText && ctaLink && (
-            <div className="mt-8 md:mt-10">
+            <div className="mt-6 md:mt-10">
               <Link 
                 href={ctaLink} 
-                className="inline-block bg-green-600 text-white px-8 md:px-10 py-3 md:py-4 rounded-full font-bold text-base md:text-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(22,163,74,0.5)] active:scale-95"
+                className="inline-block bg-green-600 text-white px-7 py-3 md:px-10 md:py-4 rounded-full font-bold text-sm md:text-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg"
               >
                 {ctaText}
               </Link>
