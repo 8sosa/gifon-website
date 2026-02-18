@@ -12,7 +12,7 @@ export default function Footer() {
   const quickLinks = [
       { label: 'Education', href: '/education' },
       { label: 'Events', href: '/events' },
-      { label: 'Media Resources', href: '/resources' },
+      { label: 'Media Resources', href: '/media-resources' },
       { label: 'Groups & Forums', href: '/forums' },
       { label: 'Contact Us', href: '/contact-us' },
   ];
