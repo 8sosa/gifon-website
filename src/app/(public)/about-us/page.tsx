@@ -215,7 +215,7 @@ export default async function AboutPage() {
 
         {/* --- OBJECTIVES --- */}
         <div id="objectives" className="scroll-mt-24"></div>
-        <section className="py-24 px-4 md:px-6 bg-linear-to-b from-white to-gray-50">
+        <section className="py-16 px-4 md:px-6 bg-linear-to-b from-white to-gray-50">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 max-w-4xl mx-auto">
                 <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">{content.objectives.title}</h2>

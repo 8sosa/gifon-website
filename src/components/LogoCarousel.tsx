@@ -169,7 +169,7 @@ export function LogoCarousel({ items, speed = 1 }: InteractiveCarouselProps) {
               {/* Text Content */}
               <div className="flex flex-col items-center gap-1 w-full">
                 {item.title && (
-                  <p className="text-green-600 font-bold text-sm md:text-base text-center max-w-[200px] leading-tight group-hover:text-green-800 transition-colors">
+                  <p className="text-green-500 font-bold text-sm md:text-base text-center max-w-[200px] leading-tight group-hover:text-green-400 transition-colors">
                     {item.title}
                   </p>
                 )}
