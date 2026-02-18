@@ -55,8 +55,8 @@ export default function GeospatialHubPage() {
     <>
       <HeroSection
         title="National Geospatial Security & Intelligence Hub"
-        description='Source • Analyze • Automate • Share'
-        description1={<>The National Geospatial Security and Intelligence Hub is Nigeria&apos;s center of excellence for geospatial intelligence, providing critical insights to strengthen national security, protect infrastructure, and support strategic decision-making. By integrating advanced geospatial technologies, data analytics, and intelligence expertise, the Hub empowers government, security agencies, and private institutions to anticipate threats, respond effectively, and drive sustainable development. It serves as a national platform for innovation, collaboration, and capacity building, ensuring that geospatial intelligence translates into actionable solutions for a safer and more resilient Nigeria.</>}
+        description1='Source • Analyze • Automate • Share'
+        description={<>The National Geospatial Security and Intelligence Hub is Nigeria&apos;s center of excellence for geospatial intelligence, providing critical insights to strengthen national security, protect infrastructure, and support strategic decision-making. By integrating advanced geospatial technologies, data analytics, and intelligence expertise, the Hub empowers government, security agencies, and private institutions to anticipate threats, respond effectively, and drive sustainable development. It serves as a national platform for innovation, collaboration, and capacity building, ensuring that geospatial intelligence translates into actionable solutions for a safer and more resilient Nigeria.</>}
         backgroundMedia={[
           "/media/Geospatial Hub.JPG",
         ]}

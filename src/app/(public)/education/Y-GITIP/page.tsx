@@ -108,7 +108,7 @@ export default function GeoinnovationPage() {
     <>
       <HeroSection
         title={<><span className="cooper">GIFON</span> Youth GeoInnovation & Tech Incubation Program</>}
-        description1={<>
+        description={<>
                 The Y-GeoInnovation & Tech Incubation Programme is a
                 signature initiative of the Geospatial Intelligence Foundation
                 of Nigeria (<span className="cooper font-bold">GIFON</span>) aimed at nurturing young innovators,

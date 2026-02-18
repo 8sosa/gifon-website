@@ -100,8 +100,8 @@ export default function TrainingCertificationPage() {
     <>
       <HeroSection
         title={<><span className="cooper">GIFON</span>  Training & Certification Programmes</>}
-        description="“Building Skills. Certifying Excellence. Advancing GEOINT for Nigeria and Beyond.”"
-        description1={<>
+        description1="“Building Skills. Certifying Excellence. Advancing GEOINT for Nigeria and Beyond.”"
+        description={<>
                 The Training & Certification Programmes of the Geospatial
                 Intelligence Foundation of Nigeria (<span className="cooper">GIFON</span>) are designed to
                 provide standardized, high-quality, and industry-recognized

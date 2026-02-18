@@ -67,8 +67,8 @@ export default function ConferencesProceedingsPage() {
     <>
       <HeroSection
         title="Conferences & Workshop Proceedings"
-        description="“Documenting Dialogue. Preserving Knowledge. Shaping Policy.”"
-        description1={<> The Geospatial Intelligence Foundation of Nigeria (<span className="cooper font-bold">GIFON</span>)
+        description1="“Documenting Dialogue. Preserving Knowledge. Shaping Policy.”"
+        description={<> The Geospatial Intelligence Foundation of Nigeria (<span className="cooper font-bold">GIFON</span>)
         recognizes the value of knowledge-sharing, collaboration, and
         continuous learning in advancing the geospatial intelligence
         ecosystem.

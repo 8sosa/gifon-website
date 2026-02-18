@@ -106,8 +106,8 @@ export default function CommunityMappingPage() {
     <>
       <HeroSection
         title="Community Mapping for Development Program"
-        description="“Mapping Communities. Driving Development. Empowering People.”"
-        description1={<><span className="cooper font-bold">GIFON</span>&apos;s Community Mapping for Development initiative leverages geospatial intelligence to empower communities and drive local development. By mapping resources, infrastructure, and social assets, the program provides actionable insights that inform planning, improve service delivery, and foster sustainable growth. Through collaboration with local stakeholders, residents, and institutions, community mapping strengthens participation, transparency, and resilience, ensuring that development projects are targeted, effective, and inclusive for every Nigerian community.</>}
+        description1="“Mapping Communities. Driving Development. Empowering People.”"
+        description={<><span className="cooper font-bold">GIFON</span>&apos;s Community Mapping for Development initiative leverages geospatial intelligence to empower communities and drive local development. By mapping resources, infrastructure, and social assets, the program provides actionable insights that inform planning, improve service delivery, and foster sustainable growth. Through collaboration with local stakeholders, residents, and institutions, community mapping strengthens participation, transparency, and resilience, ensuring that development projects are targeted, effective, and inclusive for every Nigerian community.</>}
         backgroundMedia={[
           "/media/COMMUNITY MAPPING FOR DEVELOPMENT.jpg"
         ]}

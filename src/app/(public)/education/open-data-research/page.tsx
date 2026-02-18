@@ -152,8 +152,8 @@ export default function OpenDataResearchPage() {
     <>
       <HeroSection
         title={<>Open Data & Research Programme</>}
-        description="“Open Data • Open Research • Smarter Nigeria.”"
-        description1={<><span className="cooper font-bold">GIFON</span>&apos;s Open Data and Research Program is dedicated to advancing knowledge, transparency, and innovation in Geospatial Intelligence. By providing access to high-quality geospatial data, conducting rigorous research, and promoting evidence-based analysis, the program supports informed decision making across government, security, and development sectors. It fosters collaboration among researchers, institutions, and communities, driving innovative solutions that strengthen national security, enhance governance, and accelerate sustainable development in Nigeria.</>}
+        description1="“Open Data • Open Research • Smarter Nigeria.”"
+        description={<><span className="cooper font-bold">GIFON</span>&apos;s Open Data and Research Program is dedicated to advancing knowledge, transparency, and innovation in Geospatial Intelligence. By providing access to high-quality geospatial data, conducting rigorous research, and promoting evidence-based analysis, the program supports informed decision making across government, security, and development sectors. It fosters collaboration among researchers, institutions, and communities, driving innovative solutions that strengthen national security, enhance governance, and accelerate sustainable development in Nigeria.</>}
         backgroundMedia={[
           "/images/F.jpeg",
         ]}

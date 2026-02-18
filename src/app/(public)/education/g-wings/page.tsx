@@ -45,7 +45,7 @@ export default function WomenInGeointPage() {
     <>
       <HeroSection
         title={<><span className="cooper">GIFON</span> Women in GEOINT</>}
-        description1={<><span className="cooper">GIFON</span>&apos;s Women in GEOINT program is dedicated to empowering and amplifying the voices of women in the field of Geospatial Intelligence. Through mentorship, skills development, and leadership opportunities, the program fosters gender equity, nurtures talent, and builds a strong network of female professionals driving innovation, national security, and sustainable development in Nigeria. By supporting women to lead, innovate, and excel, <span className="cooper">GIFON</span> is shaping a more inclusive and impactful geospatial community.</>}
+        description={<><span className="cooper">GIFON</span>&apos;s Women in GEOINT program is dedicated to empowering and amplifying the voices of women in the field of Geospatial Intelligence. Through mentorship, skills development, and leadership opportunities, the program fosters gender equity, nurtures talent, and builds a strong network of female professionals driving innovation, national security, and sustainable development in Nigeria. By supporting women to lead, innovate, and excel, <span className="cooper">GIFON</span> is shaping a more inclusive and impactful geospatial community.</>}
         backgroundMedia={[
           "/media/wings.JPG",
         ]}

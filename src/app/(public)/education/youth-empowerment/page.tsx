@@ -99,8 +99,8 @@ export default function YetaPage() {
     <>
       <HeroSection
         title="Youth Empowerment & Talent Acceleration Program"
-        description="“Empowering Youth. Accelerating Talent. Building Nigeria’s Geospatial Future.”"
-        description1={<><span className="cooper font-bold">GIFON</span>&apos;s Youth Empowerment and Acceleration Program is designed to equip young Nigerians with the skills, knowledge, and opportunities to excel in Geospatial Intelligence and related technologies. Through mentorship, hands-on training, and innovation-driven projects, the program nurtures the next generation of leaders, innovators, and change-makers. By fostering creativity, leadership, and technical expertise, it empowers youth to contribute meaningfully to national security, sustainable development, and the technological advancement of Nigeria.</>}
+        description1="“Empowering Youth. Accelerating Talent. Building Nigeria’s Geospatial Future.”"
+        description={<><span className="cooper font-bold">GIFON</span>&apos;s Youth Empowerment and Acceleration Program is designed to equip young Nigerians with the skills, knowledge, and opportunities to excel in Geospatial Intelligence and related technologies. Through mentorship, hands-on training, and innovation-driven projects, the program nurtures the next generation of leaders, innovators, and change-makers. By fostering creativity, leadership, and technical expertise, it empowers youth to contribute meaningfully to national security, sustainable development, and the technological advancement of Nigeria.</>}
         backgroundMedia={[
           "/media/ye.jpg",
         ]}
