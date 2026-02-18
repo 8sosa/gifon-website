@@ -82,7 +82,7 @@ export default function ForumsClient() {
     <>
       <HeroSection
         title="Groups & Forums"
-        description="Connecting minds, building networks, and advancing geospatial intelligence together."
+        tagline="Connecting minds, building networks, and advancing geospatial intelligence together."
         description1={<><span className="cooper">GIFON</span> Groups & Forums provide dynamic platforms for professionals, practitioners, policymakers, researchers, and enthusiasts to connect, collaborate, and share knowledge within the geospatial intelligence ecosystem. These platforms foster active engagement, peer learning, and multi stakeholder dialogue on key topics in GEOINT, STEM, innovation, national security, infrastructure, and sustainable development. Through structured groups, interest communities, and thematic forums, participants can exchange insights, discuss challenges, showcase innovations, and develop practical solutions for national and regional priorities. <span className="cooper">GIFON</span> Groups & Forums are designed to bridge gaps between academia, industry, government, and civil society, building a strong, informed, and collaborative GEOINT community.</>} // (Abbreviated for brevity)
         backgroundMedia={["/media/Background Groups and forums.jpg"]}
       />
