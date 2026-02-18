@@ -441,6 +441,7 @@ export default function MembershipClient({
             }
             
             setIsModalSubmitted(true);
+            console.log('Application submitted successfully:', result);
             // --- REAL API CALL END ---
 
         } catch (err: unknown) {
@@ -1131,111 +1132,91 @@ export default function MembershipClient({
                         onClick={(e) => e.stopPropagation()} 
                     >
                         {/* STICKY HEADER */}
-                        <div className="sticky top-0 z-30 bg-gray-50/95 backdrop-blur-md border-b border-gray-100">
-                            <div className="px-5 py-4 flex justify-between items-center">
-                                <div>
-                                    <h3 className="text-base sm:text-lg font-bold text-gray-800 leading-tight">
-                                        {isModalSubmitted ? "Application Received" : "Join GIFON"}
-                                    </h3>
-                                    {!isModalSubmitted && (
-                                        <p className="text-[11px] sm:text-xs text-gray-500 mt-0.5">
-                                            Applying as: <span className="font-semibold text-green-600">{selectedCategory.title}</span>
-                                        </p>
-                                    )}
+                        <div className="sticky top-0 z-30 bg-gray-50/95 backdrop-blur-md border-b border-gray-100 px-5 py-4 flex justify-between items-center">
+                            <div>
+                                <h3 className="text-base sm:text-lg font-bold text-gray-800 leading-tight">
+                                    {isModalSubmitted ? "Application Received" : "Join GIFON"}
+                                </h3>
+                                {!isModalSubmitted && (
+                                    <p className="text-[11px] sm:text-xs text-gray-500 mt-0.5">
+                                        Applying as: <span className="font-semibold text-green-600">{selectedCategory.title}</span>
+                                    </p>
+                                )}
+                            </div>
+                            <button onClick={handleCloseAppModal} className="p-2 rounded-full text-gray-400 hover:text-red-500 transition-colors">
+                                <X size={18} />
+                            </button>
+                        </div>
+
+                        {isModalSubmitted ? (
+                            /* SUCCESS SCREEN */
+                            <div className="p-8 flex flex-col items-center justify-center text-center animate-in zoom-in duration-300">
+                                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                                    <CheckCircle className="text-green-600 w-10 h-10" />
                                 </div>
+                                <h3 className="text-2xl font-bold text-gray-900 mb-2">Success!</h3>
+                                <p className="text-gray-600 mb-8 max-w-[280px]">
+                                    Your application has been submitted securely. We will contact you shortly.
+                                </p>
                                 <button 
-                                    onClick={handleCloseAppModal}
-                                    className="p-2 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors border border-gray-200 bg-white"
-                                    aria-label="Close"
+                                    onClick={handleCloseAppModal} 
+                                    className="w-full bg-gray-900 text-white py-4 rounded-xl font-bold"
                                 >
-                                    <X size={18} />
+                                    Close Window
                                 </button>
                             </div>
-                            
-                            {/* PROGRESS BAR */}
-                            {!isModalSubmitted && (
+                        ) : (
+                            /* FORM FLOW */
+                            <form onSubmit={handleModalSubmit} className="flex flex-col flex-1 overflow-hidden">
+                                {/* PROGRESS BAR */}
                                 <div className="w-full bg-gray-200 h-1">
                                     <div 
-                                        className="h-full bg-green-600 transition-all duration-500 ease-out"
+                                        className="h-full bg-green-600 transition-all duration-500"
                                         style={{ width: `${(currentStep / 5) * 100}%` }}
                                     ></div>
                                 </div>
-                            )}
-                        </div>
 
-                        {/* SCROLLABLE BODY */}
-                        <div className="p-5 sm:p-8 overflow-y-auto flex-1 bg-white custom-scrollbar">
-                            {isModalSubmitted ? (
-                                <div className="flex flex-col items-center justify-center text-center py-6 sm:py-10">
-                                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 animate-in zoom-in duration-300">
-                                        <CheckCircle className="text-green-600 w-8 h-8 sm:w-10 sm:h-10" />
-                                    </div>
-                                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
-                                    <p className="text-sm sm:text-base text-gray-600 mb-8 max-w-[280px] mx-auto leading-relaxed">
-                                        Your application has been submitted securely. We will review your documents and contact you shortly.
-                                    </p>
-                                    <button 
-                                        onClick={handleCloseAppModal} 
-                                        className="w-full bg-gray-900 text-white px-6 py-3.5 rounded-xl hover:bg-gray-800 transition font-bold text-sm shadow-lg"
-                                    >
-                                        Close Window
-                                    </button>
-                                </div>
-                            ) : (
-                                <form onSubmit={handleModalSubmit} className="flex flex-col h-full">
-                                    <div className="flex-1">
-                                        {/* Inner container to ensure form fields have enough space */}
-                                        <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-300">
-                                            {currentStep === 1 && renderStep1()}
-                                            {currentStep === 2 && renderStep2()}
-                                            {currentStep === 3 && renderStep3()}
-                                            {currentStep === 4 && renderStep4()}
-                                            {currentStep === 5 && renderStep5()}
-                                        </div>
+                                {/* SCROLLABLE STEPS */}
+                                <div className="p-5 sm:p-8 overflow-y-auto flex-1 custom-scrollbar">
+                                    <div className="space-y-4">
+                                        {currentStep === 1 && renderStep1()}
+                                        {currentStep === 2 && renderStep2()}
+                                        {currentStep === 3 && renderStep3()}
+                                        {currentStep === 4 && renderStep4()}
+                                        {currentStep === 5 && renderStep5()}
                                     </div>
 
-                                    {/* ERROR MESSAGE (Floating or Fixed above buttons) */}
                                     {error && (
-                                        <div className="mt-6 flex items-start gap-2 text-red-600 text-xs font-semibold bg-red-50 p-3 rounded-lg border border-red-100 animate-in slide-in-from-bottom-2">
+                                        <div className="mt-6 flex items-start gap-2 text-red-600 text-xs font-semibold bg-red-50 p-3 rounded-lg border border-red-100">
                                             <AlertCircle size={14} className="mt-0.5 shrink-0" /> 
                                             <span>{error}</span>
                                         </div>
                                     )}
-                                </form>
-                            )}
-                        </div>
+                                </div>
 
-                        {/* STICKY FOOTER NAVIGATION */}
-                        {!isModalSubmitted && (
-                            <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4 sm:p-6 flex gap-3 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
-                                {currentStep > 1 && (
-                                    <button 
-                                        type="button" 
-                                        onClick={prevStep}
-                                        className="flex-1 py-3.5 rounded-xl font-bold text-gray-600 bg-gray-50 hover:bg-gray-100 transition flex items-center justify-center gap-2 border border-gray-200 text-sm"
-                                    >
-                                        <ChevronLeft size={18} /> Back
-                                    </button>
-                                )}
-                                
-                                {currentStep < 5 ? (
-                                    <button 
-                                        type="button" 
-                                        onClick={nextStep}
-                                        className="flex-2 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg shadow-green-100 flex items-center justify-center gap-2 text-sm"
-                                    >
-                                        Next Step <ChevronRight size={18} />
-                                    </button>
-                                ) : (
-                                    <button 
-                                        type="submit"
-                                        disabled={isLoading || !formData.agreedToDeclaration}
-                                        className="flex-2 bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition shadow-lg disabled:opacity-50 disabled:bg-gray-400 disabled:shadow-none flex items-center justify-center gap-2 text-sm"
-                                    >
-                                        {isLoading ? 'Processing...' : 'Submit Application'}
-                                    </button>
-                                )}
-                            </div>
+                                {/* STICKY FOOTER (Inside Form) */}
+                                <div className="bg-white border-t border-gray-100 p-4 sm:p-6 flex gap-3">
+                                    {currentStep > 1 && (
+                                        <button type="button" onClick={prevStep} className="flex-1 py-3.5 rounded-xl font-bold text-gray-600 bg-gray-50 border border-gray-200 text-sm">
+                                            <ChevronLeft size={18} /> Back
+                                        </button>
+                                    )}
+                                    
+                                    {currentStep < 5 ? (
+                                        <button type="button" onClick={nextStep} className="flex-2 bg-green-600 text-white py-3.5 rounded-xl font-bold text-sm">
+                                            Next Step <ChevronRight size={18} />
+                                        </button>
+                                    ) : (
+                                        <button 
+                                            type="submit"
+                                            disabled={isLoading || !formData.agreedToDeclaration}
+                                            className="flex-2 bg-green-600 text-white py-3.5 rounded-xl font-bold disabled:bg-gray-400 text-sm"
+                                        >
+                                            {isLoading ? 'Processing...' : 'Submit Application'}
+                                        </button>
+                                    )}
+                                </div>
+                            </form>
                         )}
                     </div>
                 </div>

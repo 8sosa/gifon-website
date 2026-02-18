@@ -195,23 +195,23 @@ function EducationContent() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Full Name</label>
+                <label className="text-xs font-bold text-gray-700">Full Name <span className='text-red-500'>*</span></label>
                 <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-green-500 outline-none" placeholder="Surname First" />
             </div>
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Date of Birth</label>
+                <label className="text-xs font-bold text-gray-700">Date of Birth <span className='text-red-500'>*</span></label>
                 <input type="date" name="dob" value={formData.dob} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-green-500 outline-none" />
             </div>
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Nationality</label>
+                <label className="text-xs font-bold text-gray-700">Nationality <span className='text-red-500'>*</span></label>
                 <input type="text" name="nationality" value={formData.nationality} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
             </div>
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Country of Residence</label>
+                <label className="text-xs font-bold text-gray-700">Country of Residence <span className='text-red-500'>*</span></label>
                 <input type="text" name="countryRes" value={formData.countryRes} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
             </div>
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Gender</label>
+                <label className="text-xs font-bold text-gray-700">Gender <span className='text-red-500'>*</span></label>
                 <select name="gender" value={formData.gender} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm bg-white outline-none">
                     <option value="">Select...</option>
                     <option value="Male">Male</option>
@@ -219,24 +219,24 @@ function EducationContent() {
                 </select>
             </div>
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Contact Number</label>
+                <label className="text-xs font-bold text-gray-700">Contact Number <span className='text-red-500'>*</span></label>
                 <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
             </div>
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Membership Number</label>
+                <label className="text-xs font-bold text-gray-700">Membership Number <span className='text-red-500'>*</span></label>
                 <input type="number" name="membershipNumber" value={formData.membershipNumber} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
             </div>
         </div>
         <div className="space-y-1">
-            <label className="text-xs font-bold text-gray-700">Email Address</label>
+            <label className="text-xs font-bold text-gray-700">Email Address <span className='text-red-500'>*</span></label>
             <input type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
         </div>
         <div className="space-y-1">
-            <label className="text-xs font-bold text-gray-700">Postal Address</label>
+            <label className="text-xs font-bold text-gray-700">Postal Address <span className='text-red-500'>*</span></label>
             <input type="text" name="address" value={formData.address} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
         </div>
         <div className="space-y-1">
-            <label className="text-xs font-bold text-gray-700">LinkedIn / Portfolio URL</label>
+            <label className="text-xs font-bold text-gray-700">LinkedIn / Portfolio URL <span className='text-red-500'>*</span></label>
             <input type="text" name="linkedin" value={formData.linkedin} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" placeholder="https://..." />
         </div>
     </div>
@@ -250,7 +250,7 @@ function EducationContent() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Highest Qualification</label>
+                <label className="text-xs font-bold text-gray-700">Highest Qualification <span className='text-red-500'>*</span></label>
                 <select name="qualification" value={formData.qualification} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm bg-white outline-none">
                     <option value="">Select...</option>
                     <option value="PhD">PhD</option>
@@ -260,26 +260,26 @@ function EducationContent() {
                 </select>
             </div>
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Year of Graduation</label>
+                <label className="text-xs font-bold text-gray-700">Year of Graduation <span className='text-red-500'>*</span></label>
                 <input type="number" name="gradYear" value={formData.gradYear} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" placeholder="YYYY" />
             </div>
         </div>
         <div className="space-y-1">
-            <label className="text-xs font-bold text-gray-700">Institution / University</label>
+            <label className="text-xs font-bold text-gray-700">Institution / University <span className='text-red-500'>*</span></label>
             <input type="text" name="institution" value={formData.institution} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Field of Study / Major</label>
+                <label className="text-xs font-bold text-gray-700">Field of Study / Major <span className='text-red-500'>*</span></label>
                 <input type="text" name="fieldStudy" value={formData.fieldStudy} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
             </div>
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">GPA (if applicable)</label>
+                <label className="text-xs font-bold text-gray-700">GPA (if applicable) <span className='text-red-500'>*</span></label>
                 <input type="text" name="gpa" value={formData.gpa} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
             </div>
         </div>
         <div className="space-y-1">
-            <label className="text-xs font-bold text-gray-700">Other Relevant Certifications</label>
+            <label className="text-xs font-bold text-gray-700">Other Relevant Certifications <span className='text-red-500'>*</span></label>
             <textarea name="certifications" value={formData.certifications} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none h-20" placeholder="List GEOINT, GIS, Security, Data Analytics certs..." />
         </div>
     </div>
@@ -292,25 +292,25 @@ function EducationContent() {
             <h4 className="text-lg font-bold text-gray-900">Section C: Professional Experience</h4>
         </div>
         <div className="space-y-1">
-            <label className="text-xs font-bold text-gray-700">Current Employer / Organization</label>
+            <label className="text-xs font-bold text-gray-700">Current Employer / Organization <span className='text-red-500'>*</span></label>
             <input type="text" name="employer" value={formData.employer} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Job Title</label>
+                <label className="text-xs font-bold text-gray-700">Job Title <span className='text-red-500'>*</span></label>
                 <input type="text" name="jobTitle" value={formData.jobTitle} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
             </div>
             <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-700">Years Experience</label>
+                <label className="text-xs font-bold text-gray-700">Years Experience <span className='text-red-500'>*</span></label>
                 <input type="number" name="experienceYears" value={formData.experienceYears} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
             </div>
         </div>
         <div className="space-y-1">
-            <label className="text-xs font-bold text-gray-700">Brief Description of Responsibilities</label>
+            <label className="text-xs font-bold text-gray-700">Brief Description of Responsibilities <span className='text-red-500'>*</span></label>
             <textarea name="responsibilities" value={formData.responsibilities} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none h-20" />
         </div>
         <div className="space-y-1">
-            <label className="text-xs font-bold text-gray-700">Relevant GEOINT / Spatial Analytics Experience</label>
+            <label className="text-xs font-bold text-gray-700">Relevant GEOINT / Spatial Analytics Experience <span className='text-red-500'>*</span></label>
             <textarea name="geointExperience" value={formData.geointExperience} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none h-20" placeholder="Detail your specific experience in this field..." />
         </div>
     </div>
@@ -372,24 +372,24 @@ function EducationContent() {
             <h4 className="text-lg font-bold text-gray-900">Section F: Additional Info</h4>
         </div>
         <div className="space-y-2">
-            <label className="text-sm font-bold text-gray-700">Are you able to participate in national and international training/exposure programs?</label>
+            <label className="text-sm font-bold text-gray-700">Are you able to participate in national and international training/exposure programs? <span className='text-red-500'>*</span></label>
             <div className="flex gap-6 mt-1">
                 <label className="flex items-center gap-2 cursor-pointer">
                     <input type="radio" name="canParticipate" value="Yes" checked={formData.canParticipate === 'Yes'} onChange={handleInputChange} className="accent-green-600" />
                     <span className="text-sm">Yes</span>
-                </label>
+                 <span className='text-red-500'>*</span></label>
                 <label className="flex items-center gap-2 cursor-pointer">
                     <input type="radio" name="canParticipate" value="No" checked={formData.canParticipate === 'No'} onChange={handleInputChange} className="accent-green-600" />
                     <span className="text-sm">No</span>
-                </label>
+                 <span className='text-red-500'>*</span></label>
             </div>
         </div>
         <div className="space-y-1 mt-4">
-            <label className="text-xs font-bold text-gray-700">Languages Spoken</label>
+            <label className="text-xs font-bold text-gray-700">Languages Spoken <span className='text-red-500'>*</span></label>
             <input type="text" name="languages" value={formData.languages} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
         </div>
         <div className="space-y-1">
-            <label className="text-xs font-bold text-gray-700">Any other relevant information or achievements</label>
+            <label className="text-xs font-bold text-gray-700">Any other relevant information or achievements <span className='text-red-500'>*</span></label>
             <textarea name="otherAchievements" value={formData.otherAchievements} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none h-24" />
         </div>
      </div>
@@ -450,7 +450,7 @@ function EducationContent() {
                                             className="cursor-pointer text-xs bg-white border border-gray-200 px-3 py-1.5 rounded shadow-sm text-gray-600 hover:text-green-600 hover:border-green-200 transition select-none"
                                         >
                                             Upload
-                                        </label>
+                                         <span className='text-red-500'>*</span></label>
                                     </>
                                 )}
                             </div>
@@ -485,11 +485,11 @@ function EducationContent() {
             </label>
             <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                    <label className="text-xs font-bold text-gray-700">Digital Signature (Full Name)</label>
+                    <label className="text-xs font-bold text-gray-700">Digital Signature (Full Name) <span className='text-red-500'>*</span></label>
                     <input type="text" name="signature" value={formData.signature} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm font-handwriting outline-none" placeholder="Type full name" />
                 </div>
                 <div className="space-y-1">
-                    <label className="text-xs font-bold text-gray-700">Date</label>
+                    <label className="text-xs font-bold text-gray-700">Date <span className='text-red-500'>*</span></label>
                     <input type="date" name="signDate" value={formData.signDate} onChange={handleInputChange} className="w-full p-2.5 border rounded-lg text-sm outline-none" />
                 </div>
             </div>
@@ -817,7 +817,7 @@ function EducationContent() {
       {/* === 1. SCHOLARSHIP MODAL === */}
       {isAppModalOpen && (
             <div 
-                className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/80 p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200"
+                className="fixed inset-0 z-101 flex items-center justify-center bg-gray-900/80 p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200"
                 onClick={handleCloseAppModal}
             >
                 <div 
@@ -932,7 +932,7 @@ function EducationContent() {
         {/* === 2. TALENT DETAILS MODAL === */}
         {activeTalentFeature && (
             <div 
-                className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-gray-900/90 p-0 sm:p-6 backdrop-blur-md animate-in fade-in duration-300"
+                className="fixed inset-0 z-101 flex items-end sm:items-center justify-center bg-gray-900/90 p-0 sm:p-6 backdrop-blur-md animate-in fade-in duration-300"
                 onClick={closeTalentModal}
             >
                 <div 
