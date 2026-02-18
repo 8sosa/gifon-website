@@ -89,77 +89,67 @@ export default function ExpandableGrid({ onApplyClick }: { onApplyClick: (item: 
   );
 }
 
-function ExpandableCard({ item, idx, onApply }: { item: CategoryItem; idx: number ; onApply: (item: CategoryItem) => void }) {
+function ExpandableCard({ item, idx, onApply }: { item: CategoryItem; idx: number; onApply: (item: CategoryItem) => void }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const getCategoryIcon = (index: number) => {
-    if (index === 0) return <FileText className="w-5 h-5 md:w-6 md:h-6 text-white" />;
-    if (index === 1) return <Globe className="w-5 h-5 md:w-6 md:h-6 text-white" />;
-    return <Award className="w-5 h-5 md:w-6 md:h-6 text-white" />;
-  };
+  // Toggle function for both Mobile and Tablet (Tap-based devices)
+  const handleToggle = () => setIsOpen(!isOpen);
 
   return (
-    /* OUTER WRAPPER: This acts as the "Anchor" and "Spacer" */
+    /* OUTER WRAPPER: Removed fixed height on mobile (h-auto), kept it on md for grid stability */
     <div 
-      className="relative w-full h-[380px] md:h-[420px]" 
-      onMouseEnter={() => !isMobile && setIsOpen(true)}
-      onMouseLeave={() => !isMobile && setIsOpen(false)}
+      className="relative w-full h-auto md:h-[420px]" 
+      onMouseEnter={() => window.innerWidth >= 1024 && setIsOpen(true)}
+      onMouseLeave={() => window.innerWidth >= 1024 && setIsOpen(false)}
+      onClick={handleToggle}
     >
-      {/* THE ACTUAL CARD: Lifted out of flow only when open */}
       <motion.div
         layout
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+        transition={{ duration: 0.4, type: "spring", bounce: 0.2 }}
         className={`
           bg-white rounded-3xl p-6 md:p-8 
           shadow-lg shadow-gray-200/50 border border-gray-100 
-          flex flex-col transition-shadow w-full
+          flex flex-col w-full cursor-pointer select-none
           ${isOpen 
             ? 'md:absolute top-0 left-0 z-50 shadow-2xl border-green-500/30 ring-1 ring-green-500/10 min-h-max' 
             : 'relative h-full z-10'
           }
         `}
-        onClick={() => isMobile && setIsOpen(!isOpen)}
       >
-        <div className="flex items-start justify-between mb-4 md:mb-6">
-          <div className={`p-3 md:p-4 rounded-2xl flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-green-600 scale-110' : 'bg-green-400'}`}>
-            {getCategoryIcon(idx)}
+        {/* TOP ROW: Icon and Number */}
+        <div className="flex items-start justify-between mb-4">
+          <div className={`p-3 md:p-4 rounded-2xl flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-green-600' : 'bg-green-500'}`}>
+            {idx === 0 ? <FileText className="text-white" /> : idx === 1 ? <Globe className="text-white" /> : <Award className="text-white" />}
           </div>
-          <span className={`text-4xl md:text-6xl font-bold transition-colors ${isOpen ? 'text-green-50' : 'text-gray-100'}`}>
+          <span className="text-5xl md:text-6xl font-bold text-gray-50 opacity-10">
             0{idx + 1}
           </span>
         </div>
 
-        <h3 className={`text-xl md:text-2xl font-bold mb-2 transition-colors ${isOpen ? 'text-green-700' : 'text-gray-900'}`}>
+        {/* TITLES */}
+        <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
           {item.title}
         </h3>
-        
-        {/* Ensures the description text doesn't cause height mismatch when closed */}
-        <p className="text-gray-500 text-sm mb-6 min-h-10">
+        <p className="text-gray-500 text-sm mb-6">
           {item.desc}
         </p>
 
-        <div className={`w-full h-px mb-6 ${isOpen ? 'bg-green-100' : 'bg-gray-100'}`}></div>
+        {/* SEPARATOR */}
+        <div className="w-full h-px bg-gray-100 mb-6"></div>
 
+        {/* EXPANDABLE CONTENT */}
         <AnimatePresence>
           {isOpen && item.documents.length > 0 && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="overflow-hidden mb-6"
+              className="overflow-hidden mb-8"
             >
-              <h4 className="text-[10px] font-bold text-green-800 uppercase tracking-widest mb-4">Requirements</h4>
-              <ul className="space-y-3">
+              <h4 className="text-[11px] font-bold text-green-700 uppercase tracking-widest mb-4">Requirements</h4>
+              <ul className="space-y-4">
                 {item.documents.map((doc, dIdx) => (
-                  <li key={dIdx} className="flex items-start gap-3 text-[13px] text-gray-700">
+                  <li key={dIdx} className="flex items-start gap-3 text-[14px] leading-snug text-gray-600">
                     <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
                     <span>{doc}</span>
                   </li>
@@ -169,16 +159,22 @@ function ExpandableCard({ item, idx, onApply }: { item: CategoryItem; idx: numbe
           )}
         </AnimatePresence>
 
-        <div className="mt-auto pt-2">
+        {/* BUTTON: Conditional style based on state */}
+        <div className="mt-auto">
           {item.title !== "Fellow/Honorary Membership" ? (
             <button 
-              onClick={(e) => { e.stopPropagation(); onApply(item); }}
-              className={`w-full py-3 md:py-4 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 relative z-30 ${isOpen ? 'bg-green-600 text-white shadow-lg shadow-green-200' : 'bg-gray-900 text-white'}`}
+              onClick={(e) => { 
+                e.stopPropagation(); // Prevents card from closing when clicking button
+                onApply(item); 
+              }}
+              className={`w-full py-4 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 ${
+                isOpen ? 'bg-green-600 text-white' : 'bg-gray-900 text-white'
+              }`}
             >
               Apply Now <ChevronRight size={18} />
             </button>
           ) : (
-            <div className="w-full py-3 md:py-4 rounded-xl font-bold bg-amber-50 text-amber-700 border border-amber-100 flex items-center justify-center text-xs uppercase tracking-wide">
+            <div className="w-full py-4 rounded-xl font-bold bg-amber-50 text-amber-700 border border-amber-100 text-center text-xs uppercase tracking-wide">
               By Nomination Only
             </div>
           )}

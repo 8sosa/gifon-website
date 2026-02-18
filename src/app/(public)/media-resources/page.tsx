@@ -75,15 +75,13 @@ const ResourceSection = ({
 };
 
 export default function ResourcesPage() {
-  // 1. State for the Lightbox
+
+  
   const [selectedImage, setSelectedImage] = useState<any | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const allMedia = resourcesData.gallery; 
 
-  const lightboxImages = resourcesData.gallery.filter(
-    (item) => item.type?.toLowerCase() !== 'video'
-);
-
-const currentImage = lightboxIndex !== null ? lightboxImages[lightboxIndex] : null;
+  const currentMedia = lightboxIndex !== null ? allMedia[lightboxIndex] : null;
 
 // 2. NAVIGATION HANDLERS
 const closeLightbox = () => setLightboxIndex(null);
@@ -93,18 +91,18 @@ const showNext = useCallback((e?: React.MouseEvent) => {
     setLightboxIndex((prev) => {
         if (prev === null) return null;
         // Loop back to 0 if at the end
-        return prev === lightboxImages.length - 1 ? 0 : prev + 1;
+        return prev === allMedia.length - 1 ? 0 : prev + 1;
     });
-}, [lightboxImages.length]);
+}, [allMedia.length]);
 
 const showPrev = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation();
     setLightboxIndex((prev) => {
         if (prev === null) return null;
         // Loop to last item if at 0
-        return prev === 0 ? lightboxImages.length - 1 : prev - 1;
+        return prev === 0 ? allMedia.length - 1 : prev - 1;
     });
-}, [lightboxImages.length]);
+}, [allMedia.length]);
 
 // 3. KEYBOARD SUPPORT (Arrow Keys)
 useEffect(() => {
@@ -371,18 +369,9 @@ useEffect(() => {
               return (
                 <div 
                   key={idx} 
-                  onClick={() => {
-                    if (isVideo) {
-                        if (item.link) window.open(item.link, "_blank");
-                    } else {
-                        // Find the index of this specific image inside our "Images Only" list
-                        const cleanIndex = lightboxImages.indexOf(item);
-                        if (cleanIndex !== -1) setLightboxIndex(cleanIndex);
-                    }
-                  }}
+                  onClick={() => setLightboxIndex(idx)}
                   className="relative w-full aspect-square bg-gray-900 rounded-xl overflow-hidden group cursor-pointer block border border-gray-100 shadow-sm hover:shadow-md transition-all"
                 >
-                  {/* ... (Your existing Image/Video Thumbnail JSX remains unchanged) ... */}
                   <Image 
                       src={item.image || "/ph.svg"} 
                       alt={item.id} 
@@ -436,66 +425,76 @@ useEffect(() => {
 
       </main>
       {/* 3. LIGHTBOX MODAL */}
-      {currentImage && (
-      <div 
-          className="fixed inset-0 z-100 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 animate-in fade-in duration-200"
-          onClick={closeLightbox}
-      >
-          {/* Close Button */}
-          <button 
-              onClick={closeLightbox}
-              className="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all z-50"
-          >
-              <X size={32} />
-          </button>
+      {currentMedia && (
+        <div 
+            className="fixed inset-0 z-101 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+            onClick={closeLightbox}
+        >
+            {/* Close Button */}
+            <button 
+                onClick={closeLightbox}
+                className="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all z-50"
+            >
+                <X size={32} />
+            </button>
 
-          {/* LEFT BUTTON (Previous) */}
-          <button 
-            onClick={showPrev}
-            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-50 hover:scale-110"
-          >
-            <FaChevronLeft size={24} />
-          </button>
+            {/* LEFT BUTTON (Previous) */}
+            <button 
+              onClick={showPrev}
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-50 hover:scale-110"
+            >
+              <FaChevronLeft size={24} />
+            </button>
 
-          {/* RIGHT BUTTON (Next) */}
-          <button 
-            onClick={showNext}
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-50 hover:scale-110"
-          >
-            <FaChevronRight size={24} />
-          </button>
+            {/* RIGHT BUTTON (Next) */}
+            <button 
+              onClick={showNext}
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-50 hover:scale-110"
+            >
+              <FaChevronRight size={24} />
+            </button>
 
-          {/* Image Container */}
-          <div 
-              className="relative w-full max-w-5xl h-auto max-h-[85vh] flex flex-col items-center"
-              onClick={(e) => e.stopPropagation()} 
-          >
-              {/* IMAGE DISPLAY */}
-              <div className="relative w-full h-[70vh] md:h-[80vh]">
-                  <Image 
-                      // Use Key to force re-render animation when image changes
-                      key={currentImage.id || lightboxIndex} 
-                      src={currentImage.image || "/ph.svg"} 
-                      alt={currentImage.id} 
-                      fill 
-                      className="object-contain"
-                      priority
-                  />
+            {/* Image Container */}
+            <div 
+                className="relative w-full max-w-5xl h-auto max-h-[85vh] flex flex-col items-center"
+                onClick={(e) => e.stopPropagation()} 
+            >
+              <div className="relative w-full h-[70vh] md:h-[80vh] flex items-center justify-center">
+                  
+                  {/* CONDITIONAL RENDERING: VIDEO VS IMAGE */}
+                  {currentMedia.type?.toLowerCase() === 'video' ? (
+                    <video 
+                      key={currentMedia.link} // Force re-render on source change
+                      src={currentMedia.link} 
+                      controls 
+                      autoPlay 
+                      className="max-w-full max-h-full rounded-lg shadow-2xl"
+                    />
+                  ) : (
+                    <Image 
+                        key={currentMedia.image || lightboxIndex} 
+                        src={currentMedia.image || "/ph.svg"} 
+                        alt={typeof currentMedia.title === 'string' ? currentMedia.title : "Gallery Image"}
+                        fill 
+                        className="object-contain"
+                        priority
+                    />
+                  )}
               </div>
-              
-              {/* CAPTION & COUNTER */}
-              <div className="mt-4 text-center">
-                  <h3 className="text-white text-lg font-bold">{currentImage.title}</h3>
-                  <div className="flex items-center justify-center gap-2 text-gray-400 text-sm mt-1">
-                      {currentImage.date && <span>{currentImage.date}</span>}
-                      {/* Optional: Show "1 of 5" counter */}
-                      <span className="text-gray-600">•</span>
-                      <span>{lightboxIndex! + 1} / {lightboxImages.length}</span>
-                  </div>
-              </div>
-          </div>
-      </div>
-    )}
+                
+                {/* CAPTION & COUNTER */}
+                <div className="mt-4 text-center">
+                    <h3 className="text-white text-lg font-bold">{currentMedia.title}</h3>
+                    <div className="flex items-center justify-center gap-2 text-gray-400 text-sm mt-1">
+                        {currentMedia.date && <span>{currentMedia.date}</span>}
+                        {/* Optional: Show "1 of 5" counter */}
+                        <span className="text-gray-600">•</span>
+                        <span>{lightboxIndex! + 1} / {allMedia.length}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+      )}
     </>
   );
 }

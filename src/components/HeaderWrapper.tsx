@@ -97,8 +97,8 @@ export default async function HeaderWrapper() {
         children: [ 
             { label: 'Young Professionals Forum', anchor: 'young-professionals' }, 
             { label: 'Women in GEOINT Forum', anchor: 'women-in-geoint' },
-            { label: 'Industry & Private Sector Group', anchor: 'industry-private-sector' },
-            { label: 'Policy, Governance & Ethics Group', anchor: 'policy-governance-ethics' },
+            { label: 'Industry & Private Sector Group', link: '/forums/industry-private-sector' },
+            { label: 'Policy, Governance & Ethics Group', link: '/forums/policy-governance-ethics' },
         ] 
     },
     // { 

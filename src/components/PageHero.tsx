@@ -60,7 +60,7 @@ export default function PageHero({
   };
 
   return (
-    <section className="relative w-full h-[60vh] min-h-[550px] overflow-hidden bg-black">
+    <section className="relative w-full h-[80vh] min-h-[550px] overflow-hidden bg-black">
       {/* --- BACKGROUND LAYER --- */}
       {mediaItems.map((src, index) => (
         <div key={src + index} className="absolute inset-0 w-full h-full">

@@ -6,6 +6,10 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 // import Breadcrumbs from "@/components/BreadCrumbs";
 
+export const metadata = {
+  title: 'GIFON - Geospatial Intelligence Foundation of Nigeria',
+};
+
 const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-montserrat',
@@ -30,6 +34,7 @@ const bellmt = localFont({
   variable: '--font-bellmt',
   display: 'swap',
 });
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

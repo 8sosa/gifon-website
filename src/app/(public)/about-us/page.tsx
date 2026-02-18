@@ -269,7 +269,7 @@ export default async function AboutPage() {
         </section>
 
         {/* Founding Vision */}
-        <div id="founding-vision" className='pt-20 -z-10 bg-gray-50'></div>
+        <div id="founding-vision" className='-z-10 bg-gray-50'></div>
         <FoundingVision />
         
         {/* --- SECTION 2: MANAGEMENT TEAM --- */}

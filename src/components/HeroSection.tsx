@@ -86,7 +86,7 @@ export default function HeroSection({
       })}
 
       {/* --- CONTENT LAYER --- */}
-      <div className="relative z-20 h-full w-full flex flex-col items-center justify-center text-center px-6 md:px-12">
+      <div className="relative z-20 h-full w-full flex flex-col items-center justify-center text-center pb-20 px-6 md:px-12">
         <div className="max-w-5xl mx-auto flex flex-col items-center">
           
           {/* Title - Bold 2x */}
