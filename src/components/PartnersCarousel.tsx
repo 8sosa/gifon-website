@@ -55,7 +55,7 @@ const partners = [
   },
   {
     name: "Reslarc Geolocate",
-    logo: "/images/reslarc-cast-mp.png",
+    logo: "/images/GeoLocate.png",
     width: 803,
     height: 133,
     website: "#",
