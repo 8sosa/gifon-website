@@ -108,7 +108,7 @@ export default function HeroSection({
             
             {/* Description - Medium 1x */}
             {description && (
-              <p className="sen text-gray-100 font-medium drop-shadow-md text-base sm:text-lg md:text-xl leading-snug text-justify">
+              <p className="font-sen text-gray-100 font-medium drop-shadow-md text-base sm:text-lg md:text-xl leading-snug text-justify italic">
                 {description}
               </p>
             )}
