@@ -15,7 +15,7 @@ export function PioneerGrid({ pioneers }: { pioneers: FlatPioneer[] }) {
         Pioneer <span className="text-green-400">Members</span>
       </h2>
 
-      <div className="mt-12 md:mt-16 max-w-6xl mx-auto flex flex-wrap gap-6 md:gap-10 items-center justify-center">
+      <div className="mt-12 md:mt-16 max-w-6xl mx-auto flex flex-wrap gap-6 md:gap-10 items-center justify-top">
         {pioneers.map((m) => (
           <div 
             key={m.id} 
@@ -33,17 +33,21 @@ export function PioneerGrid({ pioneers }: { pioneers: FlatPioneer[] }) {
             </div>
 
             {/* Name Section */}
-            <h4 className="text-sm md:text-lg font-bold text-gray-100 bellefair mb-1 line-clamp-2 min-h-[1.5rem] md:min-h-[2.5rem]">
-              {m.title} {m.name} 
+            <h4 className="text-sm md:text-lg font-bold text-gray-100 bellefair mb-1 line-clamp-2 min-h-6 md:min-h-10">
+              {m.name} 
             </h4>
 
             {/* Decorative Line */}
             <div className="h-0.5 w-12 group-hover:w-24 bg-green-400 transition-all duration-300 mb-2" />
 
             {/* Wrapped Role/Position Section */}
-            <p className="text-[10px] md:text-xs text-green-400 font-bold uppercase tracking-widest leading-relaxed px-2 max-w-full break-words">
+            <p className="text-[10px] md:text-xs text-green-400 font-bold uppercase tracking-widest leading-relaxed px-2 max-w-full wrap-break-word">
               {m.role}
             </p>
+            <p className="text-[10px] md:text-xs text-green-400 font-bold uppercase tracking-widest leading-relaxed px-2 max-w-full wrap-break-word">
+              {m.organization}
+            </p>
+            
           </div>
         ))}
       </div>
