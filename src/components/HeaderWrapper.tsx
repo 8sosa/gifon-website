@@ -29,8 +29,7 @@ export default async function HeaderWrapper() {
         href: '/membership', 
         children: [ 
             { label: 'Why Join GIFON', anchor: 'why-join' }, 
-            { label: 'How to Apply', anchor: 'apply' },
-            { label: 'Membership Categories', anchor: 'categories' }, 
+            { label: 'Membership Application', anchor: 'categories' }, 
             { label: 'Membership Benefits', anchor: 'benefits' }, 
             { label: 'Pioneer Members', anchor: 'pioneer-members' }, 
         ] 

@@ -273,7 +273,7 @@ export default async function AboutPage() {
         <FoundingVision />
         
         {/* --- SECTION 2: MANAGEMENT TEAM --- */}
-        <div id="management-team" className='pt-20 -z-10 bg-gray-50'></div>
+        <div id="management-team" className=' -z-10 bg-gray-50'></div>
         <TeamGrid members={mapMembersByCategory(members, 'Advisory')} />
         
         <div id='our-partners' className="scroll-mt-24"></div>
