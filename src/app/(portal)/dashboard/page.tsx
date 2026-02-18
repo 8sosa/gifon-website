@@ -260,7 +260,9 @@ export default function MembershipPortalPage() {
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div>
-                <h1 className="text-3xl md:text-4xl font-bold mb-2">Welcome back, {user.name.split(' ')[0]}!</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                Welcome back, {user?.email || 'Member'}!
+              </h1>
                 <p className="text-green-200 text-lg">Here is an overview of your membership status and resources.</p>
             </div>
             
