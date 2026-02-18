@@ -27,6 +27,8 @@ type Application = {
   submittedAt: string;
   approvedAt?: string;
   category: string;
+  mentorRequested?: boolean;
+  mentorRequestedAt?: string;
   
   // Assigned Mentor Field (New)
   assignedMentor?: {
@@ -272,14 +274,24 @@ export default function AdminDashboard() {
                               {app.companyName ? <Building2 size={16} /> : <User size={16} />}
                           </div>
                           <div>
-                              <div className="text-sm font-bold text-gray-900">{getAppName(app)}</div>
-                              <div className="text-xs text-gray-500">{app.cacNumber || app.occupation || 'N/A'}</div>
-                              {/* Show Mentor badge in table if assigned */}
+                            <div className="text-sm font-bold text-gray-900">{getAppName(app)}</div>
+                            <div className="text-xs text-gray-500">{app.cacNumber || app.occupation || 'N/A'}</div>
+                            
+                            <div className="flex gap-2 mt-1">
+                              {/* NEW: Mentor Request Badge */}
+                              {app.mentorRequested && !app.assignedMentor && (
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-orange-100 text-orange-700 border border-orange-200 animate-pulse">
+                                  <UserPlus size={10} /> MENTOR REQUESTED
+                                </span>
+                              )}
+
+                              {/* Existing Assigned Mentor Badge */}
                               {app.assignedMentor && (
-                                <div className="mt-1 inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium bg-purple-50 text-purple-700 border border-purple-100">
-                                    <UserPlus size={10} /> {app.assignedMentor.name}
+                                <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium bg-purple-50 text-purple-700 border border-purple-100">
+                                  <UserPlus size={10} /> {app.assignedMentor.name}
                                 </div>
                               )}
+                            </div>
                           </div>
                       </div>
                     </td>
@@ -332,7 +344,51 @@ export default function AdminDashboard() {
         </div>
       );
     }
-    // Submissions table remains same...
+    if (activeTab === 'submissions') {
+      if (submissions.length === 0) {
+        return <div className="p-12 text-center text-gray-500">No journal submissions found.</div>;
+      }
+  
+      return (
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase">Author / Title</th>
+                <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase">Abstract</th>
+                <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase">Date</th>
+                <th className="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase">File</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {submissions.map((sub) => (
+                <tr key={sub._id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4">
+                    <div className="text-sm font-bold text-gray-900">{sub.title}</div>
+                    <div className="text-xs text-gray-500">{sub.authorName} ({sub.email})</div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <p className="text-xs text-gray-500 line-clamp-2 max-w-xs">{sub.abstract}</p>
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500">
+                    {new Date(sub.submittedAt).toLocaleDateString()}
+                  </td>
+                  <td className="px-6 py-4 text-right">
+                    <a 
+                      href={sub.publicationUrl} 
+                      target="_blank" 
+                      className="text-blue-600 hover:underline text-sm font-medium flex items-center justify-end gap-1"
+                    >
+                      <Download size={14} /> View PDF
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
     return null;
   };
 
@@ -377,7 +433,7 @@ export default function AdminDashboard() {
 
       {/* --- APPLICATION DETAIL MODAL --- */}
       {selectedApp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm p-4" onClick={() => setSelectedApp(null)}>
+        <div className="fixed inset-0 z-101 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm p-4" onClick={() => setSelectedApp(null)}>
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
                 
                 {/* Header */}
@@ -430,12 +486,20 @@ export default function AdminDashboard() {
                             </div>
                         </div>
 
-                        {/* --- NEW MENTOR SECTION (STUDENTS ONLY) --- */}
-                        {selectedApp.category.includes('Student') && (
-                            <div className="md:col-span-2 space-y-3 p-4 bg-purple-50 rounded-lg border border-purple-100">
-                                <div className="flex items-center justify-between border-b border-purple-200 pb-2">
-                                    <h4 className="text-sm font-bold text-purple-900 flex items-center gap-2">
-                                        <UserPlus size={16} /> Mentorship Assignment
+
+                            <div className={`md:col-span-2 space-y-3 p-4 rounded-lg border ${
+                              selectedApp.mentorRequested && !selectedApp.assignedMentor 
+                                ? 'bg-orange-50 border-orange-200 shadow-sm' 
+                                : 'bg-purple-50 border-purple-100'
+                            }`}>
+                                <div className="flex items-center justify-between border-b pb-2">
+                                    <h4 className={`text-sm font-bold flex items-center gap-2 ${
+                                      selectedApp.mentorRequested && !selectedApp.assignedMentor ? 'text-orange-900' : 'text-purple-900'
+                                    }`}>
+                                        <UserPlus size={16} /> 
+                                        {selectedApp.mentorRequested && !selectedApp.assignedMentor 
+                                          ? "Priority: Mentorship Requested" 
+                                          : "Mentorship Assignment"}
                                     </h4>
                                     {selectedApp.assignedMentor && (
                                         <span className="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">
@@ -476,7 +540,7 @@ export default function AdminDashboard() {
                                     </p>
                                 )}
                             </div>
-                        )}
+      
                         {/* ------------------------------------------- */}
 
                         {/* Documents */}

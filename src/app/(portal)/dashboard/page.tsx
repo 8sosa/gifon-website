@@ -24,6 +24,7 @@ import {
   Clock,
   MessageCircle,
   MapPin,
+  UserPlus,
   CalendarCheck,
   Loader2
 } from 'lucide-react';
@@ -39,6 +40,7 @@ type User = {
   category: string;
   role: string;
   createdAt?: string;
+  mentorRequested?: boolean;
   // New Field from DB
   assignedMentor?: {
     id: string;
@@ -134,6 +136,30 @@ export default function MembershipPortalPage() {
         setIsMentorLoading(false);
     }
   };
+
+  const handleRequestMentor = async () => {
+    setIsMentorLoading(true);
+    try {
+        const res = await fetch('/api/users/me', { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId: user?._id })
+        });
+
+        if (!res.ok) throw new Error("Failed to send request");
+
+        // Update local state immediately
+        const updatedUser = { ...user!, mentorRequested: true };
+        setUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        
+        alert("Your request has been sent to the GIFON Admin team!");
+    } catch (err) {
+        alert("Could not process request. Please try again later.");
+    } finally {
+        setIsMentorLoading(false);
+    }
+};
 
   // --- Handlers ---
   const handleLogout = async (e: React.MouseEvent) => {
@@ -263,7 +289,7 @@ export default function MembershipPortalPage() {
               <h1 className="text-3xl md:text-4xl font-bold mb-2">
                 Welcome back, {user?.email || 'Member'}!
               </h1>
-                <p className="text-green-200 text-lg">Here is an overview of your membership status and resources.</p>
+                {/* <p className="text-green-200 text-lg">Here is an overview of your membership status and resources.</p> */}
             </div>
             
             <div className="flex flex-wrap gap-3">
@@ -414,18 +440,36 @@ export default function MembershipPortalPage() {
             {/* Case 2: No Mentor Assigned yet */}
             {!isMentorLoading && !mentorDetails && (
                 <div className="p-8 text-center flex flex-col items-center">
-                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-gray-400">
+                    <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 text-orange-600">
                         <Diamond size={32} />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900">Mentorship Pending</h3>
+                    <h3 className="text-xl font-bold text-gray-900">
+                        {user?.mentorRequested ? "Request Received" : "Mentorship Program"}
+                    </h3>
                     <p className="text-gray-500 text-sm mt-2 mb-6">
-                        You have not been assigned a specific mentor yet. The GIFON team reviews student profiles and assigns mentors based on career goals.
+                        {user?.mentorRequested 
+                            ? "The GIFON team has received your request and is currently matching you with a professional mentor."
+                            : "You haven't been assigned a mentor yet. Click the button below to request guidance from a industry professional."}
                     </p>
+                    
+                    {!user?.mentorRequested ? (
+                        <button 
+                            onClick={handleRequestMentor}
+                            className="w-full bg-green-600 text-white font-bold py-3 px-6 rounded-xl hover:bg-green-700 transition shadow-lg shadow-green-100 flex items-center justify-center gap-2"
+                        >
+                            <UserPlus size={18} /> Request a Mentor
+                        </button>
+                    ) : (
+                        <div className="flex items-center gap-2 text-orange-600 font-bold text-sm bg-orange-50 px-4 py-2 rounded-lg border border-orange-100">
+                            <Clock size={16} /> Pending Admin Review
+                        </div>
+                    )}
+                    
                     <button 
                         onClick={() => setIsMentorModalOpen(false)}
-                        className="bg-gray-100 text-gray-700 font-bold py-2 px-6 rounded-lg hover:bg-gray-200"
+                        className="mt-4 text-gray-400 text-xs font-medium hover:underline"
                     >
-                        Close
+                        Dismiss
                     </button>
                 </div>
             )}

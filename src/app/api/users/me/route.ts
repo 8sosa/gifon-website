@@ -154,3 +154,50 @@ export async function PATCH(req: NextRequest) {
     );
   }
 }
+
+// --- POST: Request a Mentor ---
+export async function POST(req: NextRequest) {
+  try {
+    // 1. Authenticate using your existing helper
+    const payload = await getJwtPayload(req);
+    if (!payload) {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    }
+
+    const client = await clientPromise;
+    const db = client.db(DB_NAME);
+
+    // 2. Update the user document
+    // We set mentorRequested to true and record the timestamp
+    const result = await db.collection(USERS_COLLECTION).findOneAndUpdate(
+      { _id: new ObjectId(payload.userId) },
+      { 
+        $set: { 
+          mentorRequested: true,
+          mentorRequestedAt: new Date().toISOString() 
+        } 
+      },
+      { returnDocument: 'after' }
+    );
+
+    const updatedUser = (result && (result as any).value) ? (result as any).value : result;
+
+    if (!updatedUser) {
+      return NextResponse.json({ message: 'User not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(
+      { 
+        message: 'Mentorship request submitted successfully', 
+        user: updatedUser 
+      },
+      { status: 200 }
+    );
+  } catch (error: unknown) {
+    console.error('Error in POST /api/users/me (Mentor Request):', error);
+    return NextResponse.json(
+      { message: 'Internal Server Error' }, 
+      { status: 500 }
+    );
+  }
+}
