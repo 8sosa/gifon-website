@@ -28,7 +28,7 @@ export function PioneerGrid({ pioneers }: { pioneers: FlatPioneer[] }) {
         Pioneer <span className="text-green-400">Members</span>
       </h2>
 
-      <div className="mt-12 md:mt-16 max-w-6xl mx-auto flex flex-wrap gap-6 md:gap-10 items-start justify-top">
+      <div className="mt-12 md:mt-16 max-w-6xl mx-auto flex flex-wrap gap-6 md:gap-10 items-start justify-center">
         {arrangedPioneers.map((m) => (
           <div 
             key={m.id} 
