@@ -9,6 +9,19 @@ import type { FlatPioneer } from '@/types/types';
 export function PioneerGrid({ pioneers }: { pioneers: FlatPioneer[] }) {
   const [selectedPioneer, setSelectedPioneer] = useState<FlatPioneer | null>(null);
 
+  // 1. Separate the pioneers by gender
+  const males = pioneers.filter(p => p.gender?.toLowerCase() === 'male');
+  const females = pioneers.filter(p => p.gender?.toLowerCase() === 'female');
+
+  // 2. Arrange them in the specific order: M, F, M, F, M
+  const arrangedPioneers: FlatPioneer[] = [];
+  const maxLength = Math.max(males.length, females.length);
+
+  for (let i = 0; i < maxLength; i++) {
+    if (males[i]) arrangedPioneers.push(males[i]);
+    if (females[i]) arrangedPioneers.push(females[i]);
+  }
+
   return (
     <section className="py-20 px-4 md:px-6 bg-green-950">
       <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-100 mb-6 leading-tight text-center">
@@ -16,7 +29,7 @@ export function PioneerGrid({ pioneers }: { pioneers: FlatPioneer[] }) {
       </h2>
 
       <div className="mt-12 md:mt-16 max-w-6xl mx-auto flex flex-wrap gap-6 md:gap-10 items-start justify-top">
-        {pioneers.map((m) => (
+        {arrangedPioneers.map((m) => (
           <div 
             key={m.id} 
             className="flex flex-col items-center text-center group w-48 md:w-64"
