@@ -382,9 +382,9 @@ export default function MembershipPortalPage() {
 
           {/* --- RIGHT: Resources Grid --- */}
           <div className="lg:col-span-2">
-            <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+            {/* <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
                 Member Resources
-            </h2>
+            </h2> */}
             {/* Place this above the Resources Grid in your JSX */}
               {isCasualMember && (
                   <div className="mb-8 p-4 bg-orange-50 border border-orange-200 rounded-2xl flex items-center justify-between">
