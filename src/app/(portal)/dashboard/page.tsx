@@ -26,7 +26,7 @@ import {
   MapPin,
   UserPlus,
   CalendarCheck,
-  Loader2
+  Loader2,
 } from 'lucide-react';
 
 // --- Types ---

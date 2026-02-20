@@ -10,7 +10,8 @@ import {
   Building2, 
   User,
   UserPlus, // Added Icon
-  Save      // Added Icon
+  Save,
+  ArrowRight      // Added Icon
 } from 'lucide-react';
 
 // --- 1. TYPE DEFINITIONS ---
@@ -29,6 +30,9 @@ type Application = {
   category: string;
   mentorRequested?: boolean;
   mentorRequestedAt?: string;
+  pendingUpgrade?: boolean;
+  requestedCategory?: string;
+  upgradeRequestedAt?: string;
   
   // Assigned Mentor Field (New)
   assignedMentor?: {
@@ -91,11 +95,12 @@ type Submission = {
   submittedAt: string;
 };
 
-type ActiveTab = 'pending' | 'approved' | 'submissions' | 'mentor-requests';
+type ActiveTab = 'pending' | 'approved' | 'submissions' | 'mentor-requests' | 'upgrades';
 
 export default function AdminDashboard() {
   // 3. State
   const [activeTab, setActiveTab] = useState<ActiveTab>('pending');
+  const [upgradeRequests, setUpgradeRequests] = useState<Application[]>([]);
   const [pendingApps, setPendingApps] = useState<Application[]>([]);
   const [approvedApps, setApprovedApps] = useState<Application[]>([]);
   const [submissions, setSubmissions] = useState<Submission[]>([]);
@@ -126,6 +131,16 @@ export default function AdminDashboard() {
   const [submittingId, setSubmittingId] = useState<string | null>(null);
   const [selectedApp, setSelectedApp] = useState<Application | null>(null); 
 
+  const fetchUpgrades = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch('/api/admin/upgrades'); // You'll need this endpoint
+      const data = await res.json();
+      setUpgradeRequests(data.upgrades || []);
+    } catch (err) { setError("Failed to fetch upgrades"); }
+    finally { setIsLoading(false); }
+  };
+  
   // 4. Fetch functions
   const fetchPending = async () => {
     setIsLoading(true); setError(null);
@@ -171,35 +186,87 @@ export default function AdminDashboard() {
     } catch (e) { console.error("Could not load mentors", e); }
   };
 
-  // Initial Load
-  useEffect(() => { 
-    fetchPending(); 
-    fetchMentors(); // Load mentors in background
-  }, []);
-
   const handleTabChange = (tab: ActiveTab) => {
     setActiveTab(tab);
     if (tab === 'approved') fetchApproved();
     else if (tab === 'pending') fetchPending();
     else if (tab === 'submissions') fetchSubmissions();
     else if (tab === 'mentor-requests') fetchMentorRequests();
+    else if (tab === 'upgrades') fetchUpgrades();
   };
 
   const handleApprove = async (applicationId: string) => {
-    setSubmittingId(applicationId); setError(null);
+    setSubmittingId(applicationId);
+    setError(null);
     try {
       const res = await fetch('/api/admin/approve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ applicationId }),
       });
-      const result = await res.json();
-      if (!res.ok) throw new Error(result.message || 'Failed to approve');
-
+      
+      if (!res.ok) throw new Error('Failed to approve');
+  
+      // Remove from pending list immediately
       setPendingApps((prev) => prev.filter((app) => app._id !== applicationId));
+      
+      // Clear the modal if it's open
       setSelectedApp(null); 
-    } catch (err: unknown) { setError(err instanceof Error ? err.message : 'Error'); } 
-    finally { setSubmittingId(null); }
+      
+      // Optional: Refresh approved list in background if needed
+      // fetchApproved(); 
+      
+    } catch (err: unknown) { 
+      setError(err instanceof Error ? err.message : 'Error'); 
+    } finally { 
+      setSubmittingId(null); 
+    }
+  };
+
+  const handleDecline = async (applicationId: string) => {
+    const reason = window.prompt("Please provide a reason for declining (this will be emailed to the applicant):");
+    
+    if (reason === null) return; // Admin clicked cancel
+  
+    try {
+      const res = await fetch('/api/admin/decline', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ applicationId, reason }),
+      });
+  
+      if (res.ok) {
+        alert("Application successfully declined.");
+        fetchAllData(); // Refresh the counts and lists
+      } else {
+        const err = await res.json();
+        alert(`Error: ${err.message}`);
+      }
+    } catch (err) {
+      alert("Failed to decline application.");
+    }
+  };
+
+  const handleApproveUpgrade = async (userId: string) => {
+    setSubmittingId(userId);
+    try {
+      const res = await fetch('/api/admin/approve-upgrade', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId }),
+      });
+  
+      if (res.ok) {
+        // Remove the user from the local upgradeRequests state
+        setUpgradeRequests((prev) => prev.filter((u) => u._id !== userId));
+        setSelectedApp(null);
+        alert("Membership upgraded successfully!");
+      }
+    } catch (err) {
+      setError("Failed to approve upgrade");
+    } finally {
+      setSubmittingId(null);
+    }
   };
 
   // --- MENTOR ASSIGNMENT LOGIC ---
@@ -258,16 +325,34 @@ export default function AdminDashboard() {
   const getAppEmail = (app: Application) => app.companyEmail || app.email || app.repEmail || 'N/A';
   const getAppPhone = (app: Application) => app.companyPhone || app.phone || app.repPhone || 'N/A';
 
+  const fetchAllData = () => {
+    // This helper triggers the correct fetch based on what the admin is looking at
+    if (activeTab === 'pending') fetchPending();
+    else if (activeTab === 'approved') fetchApproved();
+    else if (activeTab === 'submissions') fetchSubmissions();
+    else if (activeTab === 'mentor-requests') fetchMentorRequests();
+    else if (activeTab === 'upgrades') fetchUpgrades();
+  };
+  
+  useEffect(() => { 
+    fetchPending(); 
+    fetchMentors(); // Load mentors in background
+  }, []);
+
   // --- RENDER TABLE ---
   const renderTable = () => {
     if (isLoading) return <div className="text-center p-12 text-gray-500">Loading data...</div>;
 
-    if (activeTab === 'pending' || activeTab === 'approved' || activeTab === 'mentor-requests') {
+    if (activeTab === 'pending' || activeTab === 'approved' || activeTab === 'mentor-requests' || activeTab === 'upgrades') {
       let data: Application[] = [];
         if (activeTab === 'pending') data = pendingApps;
         else if (activeTab === 'approved') data = approvedApps;
         else if (activeTab === 'mentor-requests') data = mentorRequests;
+        else if (activeTab === 'upgrades') data = upgradeRequests;
       
+      if (activeTab === 'pending') {
+        data = data.filter(app => app.status !== 'approved');
+      }
       if (data.length === 0 && !error) {
         return <div className="bg-gray-50 p-12 rounded-xl text-center text-gray-500 border border-gray-100">No applications found in this category.</div>;
       }
@@ -280,7 +365,9 @@ export default function AdminDashboard() {
                 <tr>
                   <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Applicant</th>
                   <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Contact</th>
-                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Category</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                    {activeTab === 'upgrades' ? 'Current / Target Tier' : 'Category'}
+                  </th>
                   <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Submitted</th>
                   <th className="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
@@ -289,6 +376,7 @@ export default function AdminDashboard() {
                 {data.map((app) => (
                   <tr key={app._id} className="block md:table-row hover:bg-gray-50/50 transition-colors border-b border-gray-200 md:border-none last:border-b-0">
                     <td className="block md:table-cell px-6 py-4 whitespace-nowrap">
+                      {/* ... Applicant Column remains same ... */}
                       <span className="md:hidden text-xs font-bold text-gray-500 uppercase tracking-wider block mb-1">Applicant</span>
                       <div className="flex items-center">
                           <div className={`p-2 rounded-full mr-3 ${app.companyName ? 'bg-blue-100 text-blue-600' : 'bg-green-100 text-green-600'}`}>
@@ -297,16 +385,12 @@ export default function AdminDashboard() {
                           <div>
                             <div className="text-sm font-bold text-gray-900">{getAppName(app)}</div>
                             <div className="text-xs text-gray-500">{app.cacNumber || app.occupation || 'N/A'}</div>
-                            
                             <div className="flex gap-2 mt-1">
-                              {/* NEW: Mentor Request Badge */}
                               {app.mentorRequested && !app.assignedMentor && (
                                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-orange-100 text-orange-700 border border-orange-200 animate-pulse">
                                   <UserPlus size={10} /> MENTOR REQUESTED
                                 </span>
                               )}
-
-                              {/* Existing Assigned Mentor Badge */}
                               {app.assignedMentor && (
                                 <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium bg-purple-50 text-purple-700 border border-purple-100">
                                   <UserPlus size={10} /> {app.assignedMentor.name}
@@ -316,44 +400,86 @@ export default function AdminDashboard() {
                           </div>
                       </div>
                     </td>
+
                     <td className="block md:table-cell px-6 py-4 whitespace-nowrap">
                       <span className="md:hidden text-xs font-bold text-gray-500 uppercase tracking-wider block mb-1">Contact Details</span>
                       <div className="text-sm text-gray-900">{getAppEmail(app)}</div>
                       <div className="text-xs text-gray-500">{getAppPhone(app)}</div>
                     </td>
+
                     <td className="block md:table-cell px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center justify-between md:block">
-                          <span className="md:hidden text-xs font-bold text-gray-500 uppercase tracking-wider">Category: </span>
-                          <span className="px-2.5 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800 border border-gray-200">
-                              {app.category}
+                        <span className="md:hidden text-xs font-bold text-gray-500 uppercase tracking-wider">Tier: </span>
+                        <div className="flex flex-col gap-1">
+                          <span className="px-2.5 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800 border border-gray-200 w-fit">
+                            {app.category}
                           </span>
+                          {/* ArrowRight is now available from your imports */}
+                          {activeTab === 'upgrades' && app.requestedCategory && (
+                            <div className="flex items-center gap-1 text-[10px] font-bold text-green-600">
+                              <ArrowRight size={10} /> 
+                              <span className="bg-green-50 px-2 py-0.5 rounded border border-green-200">
+                                {app.requestedCategory}
+                              </span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </td>
+
                     <td className="block md:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <div className="flex items-center justify-between md:block">
-                          <span className="md:hidden text-xs font-bold text-gray-500 uppercase tracking-wider">Submitted: </span>
-                          <span>{new Date(app.submittedAt).toLocaleDateString()}</span>
+                        <span className="md:hidden text-xs font-bold text-gray-500 uppercase tracking-wider">Submitted: </span>
+                        {/* Use an empty string fallback to prevent the TypeScript overload error */}
+                        <span>{new Date(app.submittedAt || app.upgradeRequestedAt || "").toLocaleDateString()}</span>
                       </div>
                     </td>
+
                     <td className="block md:table-cell px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end gap-2 mt-2 md:mt-0">
                         <button 
                           onClick={() => {
                               setSelectedApp(app);
-                              setSelectedMentorId(app.assignedMentor?.id || ""); // Reset selection when opening
+                              setSelectedMentorId(app.assignedMentor?.id || "");
                           }}
                           className="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-md transition-colors inline-flex items-center gap-1"
                         >
-                          <Eye size={14} /> View Details
+                          <Eye size={14} /> View
                         </button>
+
                         {activeTab === 'pending' && (
-                          <button 
-                              onClick={() => handleApprove(app._id)} 
-                              disabled={submittingId === app._id}
-                              className="text-green-600 hover:text-green-900 bg-green-50 hover:bg-green-100 px-3 py-1.5 rounded-md transition-colors inline-flex items-center gap-1 disabled:opacity-50"
-                          >
-                              <CheckCircle size={14} /> {submittingId === app._id ? '...' : 'Approve'}
-                          </button>
+                          <>
+                            <button 
+                                onClick={() => handleApprove(app._id)} 
+                                disabled={submittingId === app._id}
+                                className="text-green-600 hover:text-green-900 bg-green-50 hover:bg-green-100 px-3 py-1.5 rounded-md transition-colors inline-flex items-center gap-1 disabled:opacity-50"
+                            >
+                                <CheckCircle size={14} /> {submittingId === app._id ? '...' : 'Approve'}
+                            </button>
+                            <button 
+                                onClick={() => handleDecline(app._id)} 
+                                className="text-red-600 hover:text-red-900 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-md transition-colors inline-flex items-center gap-1"
+                            >
+                                <X size={14} /> Decline
+                            </button>
+                          </>
+                        )}
+
+                        {activeTab === 'upgrades' && (
+                          <>
+                            <button 
+                              onClick={() => handleApproveUpgrade(app._id)} 
+                              className="text-green-600 bg-green-50 hover:bg-green-100 px-3 py-1.5 rounded-md flex items-center gap-1"
+                            >
+                              <CheckCircle size={14} /> Approve
+                            </button>
+                            <button 
+                              onClick={() => handleDecline(app._id)} 
+                              className="text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-md flex items-center gap-1"
+                            >
+                              <X size={14} /> Decline
+                            </button>
+                          </>
                         )}
                       </div>
                     </td>
@@ -422,6 +548,7 @@ export default function AdminDashboard() {
         <nav className="-mb-px flex space-x-8">
           {[
               { id: 'pending', label: 'Pending Applications', count: pendingApps.length },
+              { id: 'upgrades', label: 'Tier Upgrades', count: upgradeRequests.length },
               { id: 'approved', label: 'Approved Members', count: approvedApps.length },
               { id: 'mentor-requests', label: 'Mentor Requests', count: mentorRequests.length },
               { id: 'submissions', label: 'Journal Submissions', count: submissions.length }
@@ -613,6 +740,14 @@ export default function AdminDashboard() {
                         >
                             {submittingId === selectedApp._id ? 'Approving...' : 'Approve Application'}
                         </button>
+                    )}
+                    {activeTab === 'upgrades' && (
+                      <button 
+                          onClick={() => handleApproveUpgrade(selectedApp._id)}
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold text-sm shadow-md transition-colors"
+                      >
+                          {submittingId === selectedApp._id ? 'Upgrading...' : 'Approve Upgrade'}
+                      </button>
                     )}
                 </div>
             </div>

@@ -15,18 +15,23 @@ import {
   ArrowLeft,
   Loader2,
   Camera, // New icon for upload
-  Upload
+  Upload,
+  ChevronDown
 } from 'lucide-react';
 
 type User = {
-  _id: string;
-  name: string;
-  email: string;
-  organization: string;
-  category: string;
-  passportUrl?: string; // Add this field to match your DB schema
-  createdAt?: string;
-};
+    _id: string;
+    name: string;
+    email: string;
+    organization: string;
+    category: string;
+    passportUrl?: string;
+    createdAt?: string;
+    // --- Upgrade Fields ---
+    pendingUpgrade?: boolean;       // True if a request is active
+    requestedCategory?: string;    // The tier they want to move to
+    upgradeRequestedAt?: string;   // Timestamp for admin sorting
+  };
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -35,6 +40,8 @@ export default function SettingsPage() {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [selectedTier, setSelectedTier] = useState('');
 
   // Profile Form State
   const [profile, setProfile] = useState({ name: '', organization: '' });
@@ -160,7 +167,6 @@ export default function SettingsPage() {
         return;
     }
     setPasswordLoading(true);
-    // ... existing password logic (keep as JSON since no file involved)
     try {
         const res = await fetch('/api/auth/change-password', {
             method: 'POST',
@@ -175,6 +181,33 @@ export default function SettingsPage() {
         setPasswordStatus({ type: 'error', msg: err instanceof Error ? err.message : 'Error' });
     } finally {
         setPasswordLoading(false);
+    }
+  };
+
+  const tiers = [
+    'Student Member',
+    'Professional Member',
+    'Corporate Member',
+    'Fellow'
+  ].filter(t => t !== user?.category);
+
+  const handleUpgrade = async () => {
+    if (!selectedTier) return;
+    setIsUpdating(true);
+    try {
+      const res = await fetch('/api/users/me', {
+        method: 'PUT',
+        body: JSON.stringify({ requestedCategory: selectedTier }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      if (res.ok) {
+        alert("Request sent! An admin will review your upgrade.");
+        window.location.reload(); // Refresh to show pending status
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsUpdating(false);
     }
   };
 
@@ -333,9 +366,6 @@ export default function SettingsPage() {
                 </div>
             </form>
         </div>
-
-        {/* Password and Membership Cards remain the same... */}
-        {/* You can paste the rest of your existing component here */}
         
         <div className="bg-white shadow-sm border border-gray-200 rounded-2xl p-8">
             <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
@@ -407,28 +437,53 @@ export default function SettingsPage() {
         <div className="bg-linear-to-r from-green-50 to-white shadow-sm border border-green-100 rounded-2xl p-8 flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
                 <h2 className="text-lg font-bold text-green-900 flex items-center gap-2 mb-1">
-                    <BadgeCheck className="text-green-600" size={20} /> Membership Status
+                <BadgeCheck className="text-green-600" size={20} /> Membership Status
                 </h2>
-                <p className="text-sm text-green-700">Your membership is currently active.</p>
+                <p className="text-sm text-green-700">
+                {user.pendingUpgrade ? "Upgrade request pending approval." : "Your membership is currently active."}
+                </p>
                 
                 <div className="mt-4 flex gap-6 text-sm">
-                    <div>
-                        <span className="block text-xs font-bold text-green-600 uppercase tracking-wider">Level</span>
-                        <span className="font-semibold text-gray-800">{user.category}</span>
-                    </div>
-                    <div>
-                        <span className="block text-xs font-bold text-green-600 uppercase tracking-wider">Expires</span>
-                        <span className="font-semibold text-gray-800">Dec 31, {new Date().getFullYear()}</span>
-                    </div>
+                <div>
+                    <span className="block text-xs font-bold text-green-600 uppercase tracking-wider">Level</span>
+                    <span className="font-semibold text-gray-800">{user.category}</span>
+                </div>
+                <div>
+                    <span className="block text-xs font-bold text-green-600 uppercase tracking-wider">Expires</span>
+                    <span className="font-semibold text-gray-800">Dec 31, 2026</span>
+                </div>
                 </div>
             </div>
-            
-            <Link
-                href="/membership#apply"
-                className="whitespace-nowrap px-6 py-3 bg-white text-green-700 border border-green-200 rounded-xl font-bold hover:bg-green-50 transition shadow-sm"
-            >
-                Manage Membership
-            </Link>
+
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                {!user.pendingUpgrade ? (
+                <>
+                    <div className="relative">
+                    <select 
+                        value={selectedTier}
+                        onChange={(e) => setSelectedTier(e.target.value)}
+                        className="appearance-none bg-white border border-green-200 text-gray-700 py-3 px-4 pr-10 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-green-500 text-sm cursor-pointer w-full"
+                    >
+                        <option value="">Select Tier to Upgrade...</option>
+                        {tiers.map(tier => <option key={tier} value={tier}>{tier}</option>)}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-3.5 text-green-600 pointer-events-none" size={16} />
+                    </div>
+
+                    <button
+                    onClick={handleUpgrade}
+                    disabled={!selectedTier || isUpdating}
+                    className="px-6 py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition shadow-md disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                    {isUpdating ? <Loader2 className="animate-spin" size={18} /> : "Request Upgrade"}
+                    </button>
+                </>
+                ) : (
+                <div className="px-6 py-3 bg-orange-50 text-orange-700 border border-orange-100 rounded-xl font-bold text-sm">
+                    Request Pending: {user.requestedCategory}
+                </div>
+                )}
+            </div>
         </div>
 
       </main>

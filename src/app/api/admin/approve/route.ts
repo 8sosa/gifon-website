@@ -1,140 +1,95 @@
-// src/app/api/admin/approve/route.ts
-
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import { transporter, emailFrom } from '@/lib/nodemailer';
 import bcrypt from 'bcryptjs';
-import crypto from 'crypto'; // Built-in Node.js module
-import { ObjectId } from 'mongodb'; // To correctly find by _id
+import crypto from 'crypto'; 
+import { ObjectId } from 'mongodb';
+import { getSession } from '@/lib/auth'; // Ensure you have your auth check!
 
-const DB_NAME = 'test-db'; // Change this!
-const APPS_COLLECTION = 'applications';
-const USERS_COLLECTION = 'users';
+const DB_NAME = 'test-db';
+const USERS_COLLECTION = 'users'; // We only need this one now
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
 
 export async function POST(req: NextRequest) {
-  // TODO: Add authentication here!
-  // You MUST protect this endpoint so only a super admin can call it.
-  // We'll skip that for now, but it's critical.
+  // 1. SECURITY CHECK
+  const session = await getSession();
+  if (!session || session.role !== 'admin') {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
 
   try {
-    const { applicationId } = await req.json();
+    const { applicationId } = await req.json(); // This is now the User's _id
     if (!applicationId) {
-      return NextResponse.json(
-        { message: 'Application ID is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'User ID is required' }, { status: 400 });
     }
 
     const client = await clientPromise;
     const db = client.db(DB_NAME);
-    const applicationsCollection = db.collection(APPS_COLLECTION);
     const usersCollection = db.collection(USERS_COLLECTION);
 
-    // 1. Find the application
-    const application = await applicationsCollection.findOne({
+    // 2. Find the existing pending user
+    const user = await usersCollection.findOne({
       _id: new ObjectId(applicationId),
     });
 
-    if (!application) {
-      return NextResponse.json(
-        { message: 'Application not found' },
-        { status: 404 }
-      );
-    }
-    if (application.status === 'approved') {
-      return NextResponse.json(
-        { message: 'Application already approved' },
-        { status: 400 }
-      );
+    if (!user) {
+      return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
 
-    // 2. Check if a user with this email already exists
-    const existingUser = await usersCollection.findOne({ email: application.email });
-    if (existingUser) {
-      console.log(`User with email ${application.email} already exists. as ${existingUser}`);
-      return NextResponse.json(
-        { message: 'A user with this email already exists' },
-        { status: 409 }
-      );
+    // 3. Prevent double approval
+    if (user.registrationStatus === 'active') {
+      return NextResponse.json({ message: 'User is already active' }, { status: 400 });
     }
 
-    // 3. Generate a secure random password
+    // 4. Generate Temporary Password
+    // Since they are pending, they might not have a password yet, 
+    // or you might want to reset it upon approval.
     const randomPassword = crypto.randomBytes(10).toString('hex');
     const hashedPassword = await bcrypt.hash(randomPassword, 10);
 
-    // 4. Create the new user in the 'users' collection
-    const newUser = {
-      email: application.email,
-      password: hashedPassword,
-      name: application.name,
-      phone: application.phone,
-      organization: application.organization,
-      category: application.category,
-      role: 'user',
-      createdAt: new Date(),
-      // You might want a 'role' field here
-      // role: 'user', 
-    };
-    await usersCollection.insertOne(newUser);
-
-    // 5. Update the application status
-    await applicationsCollection.updateOne(
+    // 5. ACTIVATE the user
+    // We update the existing document instead of inserting a new one.
+    await usersCollection.updateOne(
       { _id: new ObjectId(applicationId) },
-      { $set: { status: 'approved', approvedAt: new Date() } }
+      { 
+        $set: { 
+          registrationStatus: 'active',
+          password: hashedPassword, // Set their initial login password
+          approvedAt: new Date(),
+          role: 'user' // Ensure they have a role
+        } 
+      }
     );
 
-    // 6. Send the approval email
+    // 6. Send the welcome email
     try {
+      const userName = user.companyName || user.fullName || `${user.firstName} ${user.surname}`;
+      
       await transporter.sendMail({
         from: emailFrom,
-        to: application.email,
-        subject: 'Your Application has been Approved!',
+        to: user.email,
+        subject: 'Welcome to GIFON - Your Account is Active!',
         html: `
-          <h1>Welcome, ${application.name}!</h1>
-          <p>Your application to join has been approved.</p>
-          <p>You can now log in using these credentials:</p>
+          <h1>Welcome, ${userName}!</h1>
+          <p>Your membership application has been approved.</p>
+          <p>You can now log in to your dashboard using these credentials:</p>
           <ul>
-            <li><strong>Email:</strong> ${application.email}</li>
+            <li><strong>Email:</strong> ${user.email}</li>
             <li><strong>Temporary Password:</strong> ${randomPassword}</li>
           </ul>
-          <p>Please log in and change your password immediately.</p>
-          <a href="${baseUrl}/login" style="padding: 10px 20px; background-color: #16a34a; color: white; text-decoration: none; border-radius: 5px;">Click here to Login</a>
+          <p><strong>Note:</strong> For security, please change your password immediately after logging in.</p>
+          <a href="${baseUrl}/login" style="padding: 12px 24px; background-color: #16a34a; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Login to Dashboard</a>
         `,
       });
     } catch (emailError) {
-      console.error('Email failed to send:', emailError);
-      // Don't fail the whole request, but log the error
-      return NextResponse.json(
-        { message: 'User created, but failed to send email.' },
-        { status: 201 } // 201 because the user *was* created
-      );
+      console.error('Email failed:', emailError);
+      return NextResponse.json({ message: 'User activated, but welcome email failed.' }, { status: 201 });
     }
 
-    // 7. Send final success response
-    return NextResponse.json(
-      { message: 'User approved and email sent' },
-      { status: 200 }
-    );
-  } catch (error: unknown) { // <--- Step 1: Catch as 'unknown'
-    console.error(error);
-    
-    let errorMessage = 'Internal Server Error';
-    if (error instanceof Error) {
-      errorMessage = error.message; // More specific error
-    }
-  
-    // Handle specific BSON/Mongo errors if you want, like in the 'approve' route
-    if (error instanceof Error && error.name === 'BSONError') {
-      return NextResponse.json(
-        { message: 'Invalid Application ID format' },
-        { status: 400 }
-      );
-    }
-  
-    return NextResponse.json(
-      { message: errorMessage },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: 'User approved and activated successfully' }, { status: 200 });
+
+  } catch (error: unknown) {
+    console.error('Approval Error:', error);
+    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }

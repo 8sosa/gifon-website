@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
+import { getSession } from '@/lib/auth';
 
-const DB_NAME = process.env.MONGODB_DB || 'test-db';
+const DB_NAME = 'test-db';
+const USERS_COLLECTION = 'users';
 
 export async function POST(req: NextRequest) {
+  // 1. SECURITY CHECK
+  const session = await getSession();
+  if (!session || session.role !== 'admin') {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const { applicationId, mentorName, mentorId } = await req.json();
 
@@ -15,38 +23,27 @@ export async function POST(req: NextRequest) {
     const client = await clientPromise;
     const db = client.db(DB_NAME);
 
-    // 1. Attempt to find in Applications or Users
-    // NOTE: In Option 2, the 'applicationId' sent from the Mentor Requests tab 
-    // is actually the User's _id.
-    const objId = new ObjectId(applicationId);
-
     // 2. Prepare the mentor data object
     const mentorData = {
         id: mentorId,
         name: mentorName,
-        assignedAt: new Date()
+        assignedAt: new Date().toISOString()
     };
 
-    // 3. Update the User Document
-    // We update the mentor AND set mentorRequested to false to clear the "notification"
-    const userUpdateResult = await db.collection('users').updateOne(
-      { _id: objId }, 
+    // 3. Update the Unified User Document
+    // We target the 'users' collection exclusively. 
+    const result = await db.collection(USERS_COLLECTION).updateOne(
+      { _id: new ObjectId(applicationId) }, 
       { 
         $set: { 
           assignedMentor: mentorData,
-          mentorRequested: false // Clear the request flag
+          mentorRequested: false // Clear the request flag so it leaves the Mentor Requests tab
         } 
       }
     );
 
-    // 4. Update the Application Document (Optional - for history)
-    // If you keep the original application record, we sync the mentor there too.
-    const user = await db.collection('users').findOne({ _id: objId });
-    if (user?.email) {
-        await db.collection('applications').updateOne(
-            { $or: [{ email: user.email }, { companyEmail: user.email }, { repEmail: user.email }] },
-            { $set: { assignedMentor: mentorData } }
-        );
+    if (result.matchedCount === 0) {
+      return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
 
     return NextResponse.json({ 

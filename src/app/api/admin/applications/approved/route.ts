@@ -1,48 +1,39 @@
-// src/app/api/admin/applications/approved/route.ts
-
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 
-const DB_NAME = 'test-db'; // !! Change this
-const APPS_COLLECTION = 'applications';
+const DB_NAME = 'test-db'; 
+const USERS_COLLECTION = 'users'; // Changed from applications
 
 export async function GET() {
-  // -----------------------------------------------------------------
-  //   !! SECURITY !!
-  //   This route is protected by your middleware's 'matcher'
-  //   (e.g., '/admin/:path*'), so we're good to go.
-  // -----------------------------------------------------------------
-  // console.warn(
-  //   'SECURITY WARNING: The /api/admin/applications/approved endpoint is not protected.'
-  // );
-
   try {
     const client = await clientPromise;
     const db = client.db(DB_NAME);
-    const applicationsCollection = db.collection(APPS_COLLECTION);
+    const usersCollection = db.collection(USERS_COLLECTION);
 
-    // 1. Find all applications where status is 'approved'
-    const approvedApplications = await applicationsCollection
+    // 1. Find all users who are active members
+    // We check for 'active' status or the legacy 'approved' status 
+    // to ensure no one was lost during the migration.
+    const approvedMembers = await usersCollection
       .find({
-        status: 'approved',
+        $or: [
+          { registrationStatus: 'active' },
+          { status: 'approved' }
+        ]
       })
-      .sort({ approvedAt: -1 }) // Show newest approved first
+      .sort({ approvedAt: -1, createdAt: -1 }) 
       .toArray();
 
-    // 2. Send the data back
     return NextResponse.json(
       { 
-        message: 'Approved applications fetched successfully',
-        applications: approvedApplications 
+        message: 'Approved members fetched successfully',
+        applications: approvedMembers // Keeping the key as 'applications' so your frontend doesn't break
       },
       { status: 200 }
     );
   } catch (error: unknown) {
     console.error(error);
-    let errorMessage = 'Internal Server Error';
-    if (error instanceof Error) errorMessage = error.message;
     return NextResponse.json(
-      { message: errorMessage },
+      { message: error instanceof Error ? error.message : 'Internal Server Error' },
       { status: 500 }
     );
   }

@@ -71,6 +71,41 @@ export async function GET(req: NextRequest) {
   }
 }
 
+export async function PUT(req: NextRequest) {
+  try {
+    const payload = await getJwtPayload(req);
+    if (!payload) return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+
+    const { requestedCategory } = await req.json();
+
+    if (!requestedCategory) {
+      return NextResponse.json({ message: 'Target category is required' }, { status: 400 });
+    }
+
+    const client = await clientPromise;
+    const db = client.db(DB_NAME);
+
+    const result = await db.collection(USERS_COLLECTION).findOneAndUpdate(
+      { _id: new ObjectId(payload.userId) },
+      { 
+        $set: { 
+          pendingUpgrade: true,
+          requestedCategory: requestedCategory,
+          upgradeRequestedAt: new Date().toISOString()
+        } 
+      },
+      { returnDocument: 'after' }
+    );
+
+    return NextResponse.json({ 
+      message: 'Upgrade request sent to admin', 
+      user: result 
+    }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: 'Error processing upgrade' }, { status: 500 });
+  }
+}
+
 // --- PATCH: Update Profile & Upload Image ---
 export async function PATCH(req: NextRequest) {
   try {

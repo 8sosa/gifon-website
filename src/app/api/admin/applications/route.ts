@@ -1,15 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
-import { getSession } from '@/lib/auth'; // Import our new auth helper
+import { getSession } from '@/lib/auth'; 
 
 const DB_NAME = 'test-db';
-const APPS_COLLECTION = 'applications';
+const USERS_COLLECTION = 'users'; // Changed from applications
 
 export async function GET(req: NextRequest) {
-  // 1. SECURITY CHECK: Authenticate the user before anything else
+  // 1. SECURITY CHECK
   const session = await getSession();
 
-  // If no session exists, or the user is not an admin, block the request immediately.
   if (!session || session.role !== 'admin') {
     return NextResponse.json(
       { message: 'Unauthorized: Admin access required.' },
@@ -20,14 +19,18 @@ export async function GET(req: NextRequest) {
   try {
     const client = await clientPromise;
     const db = client.db(DB_NAME);
-    const applicationsCollection = db.collection(APPS_COLLECTION);
+    const usersCollection = db.collection(USERS_COLLECTION);
 
-    // 2. Fetch Data (Only runs if the check above passes)
-    const pendingApplications = await applicationsCollection
+    // 2. Fetch Pending Users
+    // We look for users who are in the 'pending' stage of registration.
+    // We also exclude anyone who is an 'active' user just requesting an upgrade
+    // to keep this tab focused only on new sign-ups.
+    const pendingApplications = await usersCollection
       .find({
-        status: 'pending',
+        registrationStatus: 'pending',
+        pendingUpgrade: { $ne: true } // Don't show upgrade requests here
       })
-      .sort({ submittedAt: 1 }) // Show oldest first
+      .sort({ createdAt: 1 }) // Oldest first so they don't wait too long
       .toArray();
 
     return NextResponse.json(
