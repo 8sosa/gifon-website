@@ -24,7 +24,8 @@ type MentorOption = {
 
 type Application = {
   _id: string;
-  status: 'pending' | 'approved';
+  registrationStatus: 'pending' | 'active' | 'rejected'; // The primary key
+  status: 'pending' | 'approved' | 'rejected';
   submittedAt: string;
   approvedAt?: string;
   category: string;
