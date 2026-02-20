@@ -33,6 +33,7 @@ import {
 type User = {
   _id: string;
   name: string;
+  fullName: string;
   email: string;
   organization: string;
   passportUrl?: string;
@@ -298,7 +299,7 @@ export default function MembershipPortalPage() {
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div>
               <h1 className="text-3xl md:text-4xl font-bold mb-2">
-                Welcome back, {user?.email || 'Member'}!
+                Welcome back, {user?.name || user?.fullName ||user?.email || 'Member'}!
               </h1>
                 {/* <p className="text-green-200 text-lg">Here is an overview of your membership status and resources.</p> */}
             </div>

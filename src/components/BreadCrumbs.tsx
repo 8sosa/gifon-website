@@ -15,7 +15,7 @@ export default function Breadcrumbs() {
   const pathSegments = pathname.split("/").filter((segment) => segment !== "");
 
   return (
-    <nav aria-label="Breadcrumb" className="w-full bg-gray-50 border-b border-gray-100 py-2">
+    <nav aria-label="Breadcrumb" className="w-full bg-gray-50 border-b border-gray-100 py-2 z-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ol className="flex items-center space-x-2">
           

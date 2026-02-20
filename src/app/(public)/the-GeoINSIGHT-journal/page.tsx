@@ -444,7 +444,7 @@ export default function PublicationsPage() {
       {/* --- MODAL: Manuscript Structure --- */}
       {showStructureModal && (
         <div 
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-all"
+            className="fixed inset-0 z-101 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-all"
             onClick={() => setShowStructureModal(false)}
         >
             <div 

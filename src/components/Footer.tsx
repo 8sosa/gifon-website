@@ -17,10 +17,10 @@ export default function Footer() {
       { label: 'Contact Us', href: '/contact-us' },
   ];
 
-  const legalLinks = [
-      { label: 'Policies', href: '/policies' },
-      { label: 'Code of Ethics', href: '/policies#ethics' },
-  ];
+  // const legalLinks = [
+  //     { label: 'Policies', href: '/policies' },
+  //     { label: 'Code of Ethics', href: '/policies#ethics' },
+  // ];
 
   const socialLinks = [
     // { name: 'X', icon: <FaXTwitter />, href: '#', hover: 'hover:bg-black hover:text-white' },
@@ -153,11 +153,11 @@ export default function Footer() {
         <div className="mt-16 pt-8 border-t border-gray-900 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
           <p>&copy; {new Date().getFullYear()} Geospatial Intelligence Foundation of Nigeria. All rights reserved.</p>
           <div className="flex gap-6">
-            {legalLinks.map(link => (
+            {/* {legalLinks.map(link => (
                 <Link key={link.label} href={link.href} className="hover:text-green-500 transition-colors">
                     {link.label}
                 </Link>
-            ))}
+            ))} */}
           </div>
         </div>
 

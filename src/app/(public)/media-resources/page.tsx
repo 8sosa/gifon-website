@@ -433,7 +433,7 @@ useEffect(() => {
             {/* Close Button */}
             <button 
                 onClick={closeLightbox}
-                className="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all z-50"
+                className="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all z-101"
             >
                 <X size={32} />
             </button>
@@ -441,7 +441,7 @@ useEffect(() => {
             {/* LEFT BUTTON (Previous) */}
             <button 
               onClick={showPrev}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-50 hover:scale-110"
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-101 hover:scale-110"
             >
               <FaChevronLeft size={24} />
             </button>

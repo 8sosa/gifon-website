@@ -224,7 +224,7 @@ export default function DirectoryClient() {
       )}
 
       {modalData.type === 'join' && modalData.isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-101 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm animate-in fade-in duration-200">
             <div className="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200">
                 <div className="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-blue-500 to-green-500"></div>
                 

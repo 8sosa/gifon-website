@@ -27,9 +27,9 @@ const staticPages: SearchItem[] = [
   { id: 'page-education', title: 'Education', description: 'Training, Workshops, and Capacity Building', category: 'Page', href: '/education' },
   { id: 'page-events', title: 'Events', description: 'Upcoming summits and conferences', category: 'Page', href: '/events' },
   { id: 'page-resources', title: 'Media Resources', description: 'News, Publications, and Downloads', category: 'Page', href: '/resources' },
-  { id: 'page-donate', title: 'Get Involved', description: 'Donate, Volunteer, or Sponsor', category: 'Page', href: '/get-involved' },
+  // { id: 'page-donate', title: 'Get Involved', description: 'Donate, Volunteer, or Sponsor', category: 'Page', href: '/get-involved' },
   { id: 'page-contact', title: 'Contact Us', description: 'Get in touch with us', category: 'Page', href: '/contact-us' },
-  { id: 'page-policies', title: 'Policies', description: 'Ethics, Anti-Corruption, and Governance', category: 'Page', href: '/policies' },
+  // { id: 'page-policies', title: 'Policies', description: 'Ethics, Anti-Corruption, and Governance', category: 'Page', href: '/policies' },
 ];
 
 // --- 2. Infrastructure Sectors (Dynamic) ---
